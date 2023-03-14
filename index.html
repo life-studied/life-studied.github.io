@@ -283,52 +283,6 @@
     <header class="title">
       
         <h1>
-          <a href="/2023/03/13/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-03-13_1-8%20%E5%BC%82%E5%B8%B8%E5%AE%89%E5%85%A8/">1-8 异常安全</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2023-03-12T16:00:00.000Z" itemprop="datePublished">
-    2023-03-13
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h2 id="1-8-异常安全">1.8 异常安全</h2>
-<blockquote>
-<p>异常安全的代码能够保持一致性并能避免资源泄露。</p>
-</blockquote>
-<p>例如：new运算符可能会抛出bad_alloc的异常，那会不能正常返回一个地址，因此在修改源对象状态前确保没有异常。</p>
-<p>另外，不对delete运算符进行异常检测，这并不是事实，而只是尽可能的假设。不要让析构函数抛出异常是设计异常安全代码的保障。</p>
-
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
           <a href="/2023/03/13/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-03-13_1-9%20%E5%9C%A8%E7%BC%96%E7%A8%8B%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%BC%82%E5%B8%B8/">1-9 在编程中使用异常</a>
         </h1>
       
@@ -442,6 +396,52 @@
 <p>如果析构函数调用的函数可能抛出异常，那么在析构函数中使用try块来保证异常不会泄露出去。</p>
 </li>
 </ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/13/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-03-13_1-8%20%E5%BC%82%E5%B8%B8%E5%AE%89%E5%85%A8/">1-8 异常安全</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-12T16:00:00.000Z" itemprop="datePublished">
+    2023-03-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-8-异常安全">1.8 异常安全</h2>
+<blockquote>
+<p>异常安全的代码能够保持一致性并能避免资源泄露。</p>
+</blockquote>
+<p>例如：new运算符可能会抛出bad_alloc的异常，那会不能正常返回一个地址，因此在修改源对象状态前确保没有异常。</p>
+<p>另外，不对delete运算符进行异常检测，这并不是事实，而只是尽可能的假设。不要让析构函数抛出异常是设计异常安全代码的保障。</p>
 
       
     </div>

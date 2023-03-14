@@ -68,6 +68,68 @@
     <header class="title">
       
         <h1>
+          <a href="/2022/05/17/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/2022-05-17_7%E5%88%9B%E5%BB%BA%E8%AE%A1%E7%AE%97%E5%AD%97%E6%AE%B5/">7创建计算字段</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-16T16:00:00.000Z" itemprop="datePublished">
+    2022-05-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/">SELECT语句</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="创建计算字段">创建计算字段</h2>
+<h4 id="1-字段">1.字段</h4>
+<blockquote>
+<p>检索出的值以一种格式化形式输出</p>
+</blockquote>
+<h5 id="1-1拼接字段">1.1拼接字段</h5>
+<blockquote>
+<p>使用concat函数，参数为拼接的部分字段</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT CONCAT(stu_name,stu_id) as name_id, stu_status</span><br><span class="line">From student</span><br><span class="line">order by stu_id;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用as别名来创建对应的结果列名</p>
+</blockquote>
+<h5 id="1-2算术计算">1.2算术计算</h5>
+<blockquote>
+<p>使用算术运算符</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT stu_id, gra_score*2 as grade</span><br><span class="line">From student</span><br><span class="line">order by stu_id;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
           <a href="/2022/05/17/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/2022-05-17_6%E7%94%A8%E9%80%9A%E9%85%8D%E7%AC%A6%E8%BF%9B%E8%A1%8C%E8%BF%87%E6%BB%A4/">6用通配符进行过滤</a>
         </h1>
       
@@ -124,68 +186,6 @@
 <p>[]最前面使用脱字符^来表示否定</p>
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT cust_name</span><br><span class="line">FROM Customers</span><br><span class="line">WHERE cust_name LIKE &#x27;[^JM]%&#x27;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2022/05/17/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/2022-05-17_7%E5%88%9B%E5%BB%BA%E8%AE%A1%E7%AE%97%E5%AD%97%E6%AE%B5/">7创建计算字段</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2022-05-16T16:00:00.000Z" itemprop="datePublished">
-    2022-05-17
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/MySql/">MySql</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/">SELECT语句</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h2 id="创建计算字段">创建计算字段</h2>
-<h4 id="1-字段">1.字段</h4>
-<blockquote>
-<p>检索出的值以一种格式化形式输出</p>
-</blockquote>
-<h5 id="1-1拼接字段">1.1拼接字段</h5>
-<blockquote>
-<p>使用concat函数，参数为拼接的部分字段</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT CONCAT(stu_name,stu_id) as name_id, stu_status</span><br><span class="line">From student</span><br><span class="line">order by stu_id;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>使用as别名来创建对应的结果列名</p>
-</blockquote>
-<h5 id="1-2算术计算">1.2算术计算</h5>
-<blockquote>
-<p>使用算术运算符</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT stu_id, gra_score*2 as grade</span><br><span class="line">From student</span><br><span class="line">order by stu_id;</span><br></pre></td></tr></table></figure>
 
       
     </div>

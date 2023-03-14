@@ -646,7 +646,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2022/03/26/MATLAB/2022-03-26_2-3%E8%BE%93%E5%85%A5%E5%91%BD%E4%BB%A4/">2-3输入命令</a>
+          <a href="/2022/03/26/MATLAB/2022-03-26_2-4%E7%B4%A2%E5%BC%95/">2-4索引</a>
         </h1>
       
       <div class='ListMeta'>
@@ -670,27 +670,16 @@
     </header>
     <div>
       
-        <h2 id="输入命令">输入命令</h2>
-<h4 id="format函数">format函数</h4>
+        <h2 id="索引">索引</h2>
+<h4 id="下标">下标</h4>
 <blockquote>
-<p>控制显示数字的格式，不改变数字实际值</p>
+<p><strong>A</strong> 的行 <strong>i</strong> 和列 <strong>j</strong> 中的元素通过 <strong>A(i,j)</strong> 表示。</p>
 </blockquote>
-<p>format short   		 5字长定点数，显示5位<br>
-format long   		  15字长定点数，显示15位双精度，7位单精度<br>
-format short e   	  5字长浮点数<br>
-format long e   	   15字长浮点数<br>
-format hex      		 16进制<br>
-format bank     		定点货币形式<br>
-format rat   			 小数分数表示</p>
-<h4 id="输入长语句">输入长语句</h4>
+<h4 id="冒号运算符">冒号运算符</h4>
 <blockquote>
-<p>如果语句无法容纳在一行中，请使用省略号（三个句点）<strong>…</strong>，后跟 <strong>Return</strong> 或 <strong>Enter</strong> 以指示该语句在下一行继续。例如，</p>
+<p>冒号运算符用以指定一个迭代对象的起始与结束</p>
 </blockquote>
-<p><strong>s = 1 -1/2 + 1/3 -1/4 + 1/5 - 1/6 + 1/7 …</strong></p>
-<p><strong>- 1/8 + 1/9 - 1/10 + 1/11 - 1/12;</strong></p>
-<blockquote>
-<p><strong>=</strong>、<strong>+</strong> 和 - 符号周围的空白是可选的，但可提高可读性。</p>
-</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>:<span class="number">10</span></span><br></pre></td></tr></table></figure>
 
       
     </div>

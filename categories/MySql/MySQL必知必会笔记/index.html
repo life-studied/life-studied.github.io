@@ -482,80 +482,6 @@
     <header class="title">
       
         <h1>
-          <a href="/2022/05/18/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/2022-05-18_14%E7%BB%84%E5%90%88%E6%9F%A5%E8%AF%A2/">14组合查询</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2022-05-17T16:00:00.000Z" itemprop="datePublished">
-    2022-05-18
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/MySql/">MySql</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/">SELECT语句</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h2 id="组合查询">组合查询</h2>
-<blockquote>
-<p>SELECT语句可以多条一起执行，并返回一个结果集。这被称为组合查询。</p>
-</blockquote>
-<h4 id="1-创建组合查询">1.创建组合查询</h4>
-<h5 id="1-1使用UNION语句">1.1使用UNION语句</h5>
-<blockquote>
-<p>使用UNION操作符创建多条查询语句。</p>
-<p>注：两条查询语句的返回结果应当有相同的列</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT cust_name, cust_contact， cust_email</span><br><span class="line">From Customers</span><br><span class="line">Where cust_state IN (&#x27;IL&#x27;,&#x27;IN&#x27;,&#x27;MI&#x27;)</span><br><span class="line">UNION</span><br><span class="line">SELECT cust_name, cust_contact， cust_email</span><br><span class="line">From Customers</span><br><span class="line">Where cust_name = &#x27;Fun4All&#x27;;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>对于单个表的组合查询，使用where语句的组合方式更简单。</p>
-</blockquote>
-<h5 id="1-2UNION使用的规则">1.2UNION使用的规则</h5>
-<blockquote>
-<p>1.必须有两条以上的SELECT语句组成，并且之间用UNION连接。</p>
-<p>2.每个查询应当由相同的列组成（列名，表达式，聚集函数）</p>
-<p>3.列数据类型应当兼容。</p>
-</blockquote>
-<h5 id="1-3包含或取消重复的行">1.3包含或取消重复的行</h5>
-<blockquote>
-<p>UNION关键字连接的多条查询默认去除重复的行。</p>
-<p>如果想做到包含重复的行，应当使用UNION ALL关键字。</p>
-</blockquote>
-<h5 id="1-4对组合查询结果进行排序">1.4对组合查询结果进行排序</h5>
-<blockquote>
-<p>使用order by语句，但必须只在最后一个SELECT中使用。</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT cust_name, cust_contact， cust_email</span><br><span class="line">From Customers</span><br><span class="line">Where cust_state IN (&#x27;IL&#x27;,&#x27;IN&#x27;,&#x27;MI&#x27;)</span><br><span class="line">UNION</span><br><span class="line">SELECT cust_name, cust_contact， cust_email</span><br><span class="line">From Customers</span><br><span class="line">Where cust_name = &#x27;Fun4All&#x27;</span><br><span class="line">Order by cust_name;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
           <a href="/2022/05/18/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/2022-05-18_13%E5%88%9B%E5%BB%BA%E9%AB%98%E7%BA%A7%E8%BF%9E%E7%BB%93/">13创建高级连结</a>
         </h1>
       
@@ -634,6 +560,80 @@
 <p>聚集函数可以从单个表汇集数据，也可以和连结一起使用。</p>
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT Customers.cust_id, COUNT(Orders.order_num) AS num_order</span><br><span class="line">From Customers INNER JOIN Orders </span><br><span class="line">	ON Customers.cust_id = Orders.cust_id</span><br><span class="line">Group by Customers.cust_id;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/18/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/2022-05-18_14%E7%BB%84%E5%90%88%E6%9F%A5%E8%AF%A2/">14组合查询</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-17T16:00:00.000Z" itemprop="datePublished">
+    2022-05-18
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/">SELECT语句</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="组合查询">组合查询</h2>
+<blockquote>
+<p>SELECT语句可以多条一起执行，并返回一个结果集。这被称为组合查询。</p>
+</blockquote>
+<h4 id="1-创建组合查询">1.创建组合查询</h4>
+<h5 id="1-1使用UNION语句">1.1使用UNION语句</h5>
+<blockquote>
+<p>使用UNION操作符创建多条查询语句。</p>
+<p>注：两条查询语句的返回结果应当有相同的列</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT cust_name, cust_contact， cust_email</span><br><span class="line">From Customers</span><br><span class="line">Where cust_state IN (&#x27;IL&#x27;,&#x27;IN&#x27;,&#x27;MI&#x27;)</span><br><span class="line">UNION</span><br><span class="line">SELECT cust_name, cust_contact， cust_email</span><br><span class="line">From Customers</span><br><span class="line">Where cust_name = &#x27;Fun4All&#x27;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>对于单个表的组合查询，使用where语句的组合方式更简单。</p>
+</blockquote>
+<h5 id="1-2UNION使用的规则">1.2UNION使用的规则</h5>
+<blockquote>
+<p>1.必须有两条以上的SELECT语句组成，并且之间用UNION连接。</p>
+<p>2.每个查询应当由相同的列组成（列名，表达式，聚集函数）</p>
+<p>3.列数据类型应当兼容。</p>
+</blockquote>
+<h5 id="1-3包含或取消重复的行">1.3包含或取消重复的行</h5>
+<blockquote>
+<p>UNION关键字连接的多条查询默认去除重复的行。</p>
+<p>如果想做到包含重复的行，应当使用UNION ALL关键字。</p>
+</blockquote>
+<h5 id="1-4对组合查询结果进行排序">1.4对组合查询结果进行排序</h5>
+<blockquote>
+<p>使用order by语句，但必须只在最后一个SELECT中使用。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT cust_name, cust_contact， cust_email</span><br><span class="line">From Customers</span><br><span class="line">Where cust_state IN (&#x27;IL&#x27;,&#x27;IN&#x27;,&#x27;MI&#x27;)</span><br><span class="line">UNION</span><br><span class="line">SELECT cust_name, cust_contact， cust_email</span><br><span class="line">From Customers</span><br><span class="line">Where cust_name = &#x27;Fun4All&#x27;</span><br><span class="line">Order by cust_name;</span><br></pre></td></tr></table></figure>
 
       
     </div>

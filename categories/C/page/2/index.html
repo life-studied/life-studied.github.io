@@ -358,6 +358,53 @@
     <header class="title">
       
         <h1>
+          <a href="/2023/02/26/C++/GDB/2023-02-26_GDB%E8%B0%83%E8%AF%95%E6%AD%A3%E5%9C%A8%E8%BF%90%E8%A1%8C%E7%9A%84%E7%A8%8B%E5%BA%8F%EF%BC%88%E9%99%84%E5%8A%A0%EF%BC%89/">GDB调试正在运行的程序（附加）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-25T16:00:00.000Z" itemprop="datePublished">
+    2023-02-26
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/GDB/">GDB</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="GDB调试正在运行的程序（附加）">GDB调试正在运行的程序（附加）</h2>
+<h4 id="1-查看进程pid">1.查看进程pid</h4>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ps -ef | grep test		#process status</span><br></pre></td></tr></table></figure>
+<h4 id="2-将gdb附加到进程上">2.将gdb附加到进程上</h4>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">gdb test -p 进程编号</span><br></pre></td></tr></table></figure>
+<h4 id="3-调试-使用调试命令">3.调试(使用调试命令)</h4>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">bt</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
           <a href="/2023/02/26/C++/GDB/2023-02-26_%E8%B0%83%E8%AF%95core%E6%96%87%E4%BB%B6/">调试core文件</a>
         </h1>
       
@@ -411,53 +458,6 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ulimit -a	#查看</span><br><span class="line">ulimit -c unlimited	#更改</span><br></pre></td></tr></table></figure>
 <h5 id="4-2-保存位置问题">4.2 保存位置问题</h5>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat /proc/sys/kernel/core_pattern	#查看保存位置</span><br><span class="line">echo  &quot;core-%e-%p-%t&quot; &gt; /proc/sys/kernel/core_pattern	#更改保存位置</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">		#</span><span class="language-bash">vim /etc/sysctl.conf</span></span><br><span class="line"><span class="meta prompt_">		#</span><span class="language-bash">添加一行：kernel.core_pattern=core-%e-%p-%t</span></span><br><span class="line">echo &quot;kernel.core_pattern=core-%e-%p-%t&quot; &gt;&gt; /etc/sysctl.conf	#使永久生效</span><br><span class="line"></span><br><span class="line">sysctl -p 	#让配置立刻生效</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2023/02/26/C++/GDB/2023-02-26_GDB%E8%B0%83%E8%AF%95%E6%AD%A3%E5%9C%A8%E8%BF%90%E8%A1%8C%E7%9A%84%E7%A8%8B%E5%BA%8F%EF%BC%88%E9%99%84%E5%8A%A0%EF%BC%89/">GDB调试正在运行的程序（附加）</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2023-02-25T16:00:00.000Z" itemprop="datePublished">
-    2023-02-26
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/GDB/">GDB</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h2 id="GDB调试正在运行的程序（附加）">GDB调试正在运行的程序（附加）</h2>
-<h4 id="1-查看进程pid">1.查看进程pid</h4>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ps -ef | grep test		#process status</span><br></pre></td></tr></table></figure>
-<h4 id="2-将gdb附加到进程上">2.将gdb附加到进程上</h4>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">gdb test -p 进程编号</span><br></pre></td></tr></table></figure>
-<h4 id="3-调试-使用调试命令">3.调试(使用调试命令)</h4>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">bt</span><br></pre></td></tr></table></figure>
 
       
     </div>
