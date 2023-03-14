@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/30/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x/%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5/2022-05-30_cocos2d-x%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5/">cocos2d-x教程链接</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-29T16:00:00.000Z" itemprop="datePublished">
+    2022-05-30
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x/">cocos2d-x</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x/%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5/">教程链接</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Px411v7u8?p=164">【极客学院】Cocos2d-x游戏开发全套教学_哔哩哔哩_bilibili</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/xingboss3/article/details/8143487">cocos2d类图</a></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/29/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/2022-05-29_1%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">1简单工厂模式</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-28T16:00:00.000Z" itemprop="datePublished">
+    2022-05-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="简单工厂模式">简单工厂模式</h2>
+<h4 id="1-介绍">1.介绍</h4>
+<blockquote>
+<p>把被创建的对象称为“产品”，把创建产品的对象称为“工厂”。如果要创建的产品不多，只要一个工厂类就可以完成，这种模式叫简单工厂模式。</p>
+<p>在简单工厂模式中创建实例的方法通常为静态（static）方法，因此简单工厂模式（Simple Factory Pattern）又叫作静态工厂方法模式（Static Factory Method Pattern）。</p>
+</blockquote>
+<h4 id="2-意图：">2.意图：</h4>
+<p>简单工厂模式(Simple Factory Pattern)：定义一个工厂类，它可以根据参数的不同返回不同类的实例，被创建的实例通常都具有共同的父类。</p>
+<h4 id="3-解决问题：">3.解决问题：</h4>
+<p>主要解决接口选择的问题。(免得想用那个接口了，偷懒必备，同时提高工程效率)</p>
+<h4 id="4-实现概述：">4.实现概述：</h4>
+<p>将需要创建的各种不同对象的相关代码封装到不同的类中，这些类称为具体产品类。将它们公共的代码进行抽象和提取后封装在一个抽象产品类，每一个具体产品类都是抽象产品类的子类提供一个工厂类用于创建各种产品，工厂类中提供一个创建产品的工厂方法，该方法可以根据所传入的参数不同创建不同的具体产品对象要点：当你需要什么，只需要传入一个正确的参数，就可以获取你所需要的对象，而无须知道其创建细节。</p>
+<h4 id="5-应用场景：">5.应用场景：</h4>
+<p>在以下情况下可以考虑使用简单工厂模式：</p>
+<p>(1) 工厂类负责创建的对象比较少，由于创建的对象较少，不会造成工厂方法中的业务逻辑太过复杂。</p>
+<p>(2) 客户端只知道传入工厂类的参数，对于如何创建对象并不关心。</p>
+<p><strong>生活中场景</strong><br>
+不同工厂生产不同的产品。比如不同的球类工厂生产不同的球类。</p>
+<p><strong>软件中场景</strong><br>
+1、日志记录器：记录可能记录到本地硬盘、系统事件、远程服务器等，用户可以选择记录日志到什么地方。</p>
+<p>2、数据库访问，当用户不知道最后系统采用哪一类数据库，以及数据库可能有变化时。</p>
+<blockquote>
+<p>优点：工厂类包含必要的逻辑判断，可以决定在什么时候创建哪一个产品的实例。客户端无需知道所创建具体产品的类名，只需知道参数即可。缺点：简单工厂模式的工厂类单一，负责所有产品的创建，职责过重，一旦异常，整个系统将受影响。且工厂类代码会非常臃肿，违背高聚合原则。系统扩展困难，一旦增加新产品不得不修改工厂逻辑，在产品类型较多时，可能造成逻辑过于复杂简单工厂模式使用了 static 工厂方法，造成工厂角色无法形成基于继承的等级结构。</p>
+</blockquote>
+<h4 id="6-案例">6.案例</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> <span class="title class_">ProductTypeTag</span>				<span class="comment">//Here create the enumerate for products</span></span><br><span class="line">&#123;</span><br><span class="line">    TypeA,</span><br><span class="line">    TypeB,</span><br><span class="line">    TypeC</span><br><span class="line">&#125;PRODUCTTYPE;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// Here is the product class</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Product</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Here are the derived classes of product</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ProductA</span> : <span class="keyword">public</span> Product</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout&lt;&lt;<span class="string">&quot;I&#x27;m ProductA&quot;</span>&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ProductB</span> : <span class="keyword">public</span> Product</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout&lt;&lt;<span class="string">&quot;I&#x27;m ProductB&quot;</span>&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ProductC</span> : <span class="keyword">public</span> Product</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout&lt;&lt;<span class="string">&quot;I&#x27;m ProductC&quot;</span>&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// Here is the Factory class</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Factory</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Product* <span class="title">CreateProduct</span><span class="params">(PRODUCTTYPE type)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (type)</span><br><span class="line">        &#123;</span><br><span class="line">        <span class="keyword">case</span> TypeA:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">ProductA</span>();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">case</span> TypeB:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">ProductB</span>();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">case</span> TypeC:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">ProductC</span>();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// First, create a factory object</span></span><br><span class="line">    Factory *ProductFactory = <span class="keyword">new</span> <span class="built_in">Factory</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//using product point to get the object&#x27;s memory</span></span><br><span class="line">    Product *productObjA = ProductFactory-&gt;<span class="built_in">CreateProduct</span>(TypeA);</span><br><span class="line">    <span class="keyword">if</span> (productObjA != <span class="literal">NULL</span>)</span><br><span class="line">        productObjA-&gt;<span class="built_in">Show</span>();</span><br><span class="line"> </span><br><span class="line">    Product *productObjB = ProductFactory-&gt;<span class="built_in">CreateProduct</span>(TypeB);</span><br><span class="line">    <span class="keyword">if</span> (productObjB != <span class="literal">NULL</span>)</span><br><span class="line">        productObjB-&gt;<span class="built_in">Show</span>();</span><br><span class="line"> </span><br><span class="line">    Product *productObjC = ProductFactory-&gt;<span class="built_in">CreateProduct</span>(TypeC);</span><br><span class="line">    <span class="keyword">if</span> (productObjC != <span class="literal">NULL</span>)</span><br><span class="line">        productObjC-&gt;<span class="built_in">Show</span>();</span><br><span class="line"> </span><br><span class="line"> <span class="comment">//delete the memory and set the point to NULL</span></span><br><span class="line">    <span class="keyword">delete</span> ProductFactory;</span><br><span class="line">    ProductFactory = <span class="literal">NULL</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">delete</span> productObjA;</span><br><span class="line">    productObjA = <span class="literal">NULL</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">delete</span> productObjB;</span><br><span class="line">    productObjB = <span class="literal">NULL</span>;        </span><br><span class="line"> </span><br><span class="line">    <span class="keyword">delete</span> productObjC;</span><br><span class="line">    productObjC = <span class="literal">NULL</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/29/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/2022-05-29_2%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">2策略模式</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-28T16:00:00.000Z" itemprop="datePublished">
+    2022-05-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="策略模式">策略模式</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//策略类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Strategy</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">     <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">DoSomething</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MethodA</span> : <span class="keyword">public</span> Strategy</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">     <span class="function"><span class="type">void</span> <span class="title">DoSomething</span><span class="params">()</span></span></span><br><span class="line"><span class="function">     </span>&#123;</span><br><span class="line">          cout&lt;&lt;<span class="string">&quot;this is MethodA.&quot;</span>&lt;&lt;endl;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MethodB</span> : <span class="keyword">public</span> Strategy</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">     <span class="function"><span class="type">void</span> <span class="title">DoSomething</span><span class="params">()</span></span></span><br><span class="line"><span class="function">     </span>&#123;</span><br><span class="line">          cout&lt;&lt;<span class="string">&quot;this is MethodB.&quot;</span>&lt;&lt;endl;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MethodC</span> : <span class="keyword">public</span> Strategy</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">     <span class="function"><span class="type">void</span> <span class="title">DoSomething</span><span class="params">()</span></span></span><br><span class="line"><span class="function">     </span>&#123;</span><br><span class="line">          cout&lt;&lt;<span class="string">&quot;this is MethodC.&quot;</span>&lt;&lt;endl;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//上下文类，根据得到的对象匹配对应的策略类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Context</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">     <span class="built_in">Context</span>(Strategy *pStrategy) : <span class="built_in">m_pStrategy</span>(pStrategy)	<span class="comment">//构造函数，给m_pStrategy赋值为对应的策略类指针</span></span><br><span class="line">     &#123;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="function"><span class="type">void</span> <span class="title">Execute</span><span class="params">()</span>		<span class="comment">//封装了对应对象的调用</span></span></span><br><span class="line"><span class="function">     </span>&#123;</span><br><span class="line">          m_pStrategy-&gt;<span class="built_in">DoSomething</span>();</span><br><span class="line">     &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">     Strategy *m_pStrategy;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">     <span class="comment">//创建具体的策略对象</span></span><br><span class="line">     Strategy *pStrategy = <span class="keyword">new</span> MethodA;</span><br><span class="line">     <span class="comment">//创建调用策略的对象</span></span><br><span class="line">     Context *pContext = <span class="keyword">new</span> <span class="built_in">Context</span>(pStrategy);</span><br><span class="line">     <span class="comment">//调用策略的方法</span></span><br><span class="line">     pContext-&gt;<span class="built_in">Execute</span>();<span class="comment">//打印 this is MethodA</span></span><br><span class="line">   </span><br><span class="line">   rerurn <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/29/C++/C++%E5%9F%BA%E7%A1%80/2022-05-29_16-1string%E7%B1%BB/">16-1string类</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-28T16:00:00.000Z" itemprop="datePublished">
+    2022-05-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="string类">string类</h2>
+<h4 id="16-1-1构造字符串">16.1.1构造字符串</h4>
+<blockquote></blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/29/C++/C++%E5%9F%BA%E7%A1%80/2022-05-29_16-2%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF%E7%B1%BB/">16-2智能指针模板类</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-28T16:00:00.000Z" itemprop="datePublished">
+    2022-05-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="智能指针模板类">智能指针模板类</h2>
+<blockquote>
+<p>智能指针是一个类，因此可以在其中定义析构函数，以保证在对象过期时自动调用析构函数（析构函数中释放了空间），以防空间泄露。</p>
+<p>空间可能会泄露的几个原因：1.没有delete	2.异常跳出函数，delete被跳过了</p>
+</blockquote>
+<p><strong>以下为三种智能指针</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">auto_ptr;	<span class="comment">//C++98</span></span><br><span class="line">unique_ptr;	<span class="comment">//C++11</span></span><br><span class="line">shared_ptr;	<span class="comment">//C++11</span></span><br></pre></td></tr></table></figure>
+<h4 id="16-2-1使用智能指针">16.2.1使用智能指针</h4>
+<blockquote>
+<p>创建需要包含memory头文件。</p>
+</blockquote>
+<p><strong>智能指针的模板定义如下</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">X</span>&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">auto_ptr</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">auto_ptr</span><span class="params">(X* p = <span class="number">0</span>)</span> <span class="title">throw</span><span class="params">()</span></span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h5 id="使用"><strong>使用</strong></h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">auto_ptr&lt;<span class="type">double</span>&gt; <span class="title">pd</span><span class="params">(<span class="keyword">new</span> <span class="type">double</span>)</span></span>;</span><br><span class="line"><span class="function">auto_ptr&lt;string&gt; <span class="title">ps</span><span class="params">(<span class="keyword">new</span> string)</span></span>;</span><br><span class="line"><span class="function">unique_ptr&lt;<span class="type">double</span>&gt; <span class="title">pdu</span><span class="params">(<span class="keyword">new</span> <span class="type">double</span>)</span></span>;</span><br><span class="line"><span class="function">shared_ptr&lt;string&gt; <span class="title">pss</span><span class="params">(<span class="keyword">new</span> string)</span></span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：使用智能指针之后就无需使用delete删除</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/29/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5/2022-05-29_%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5/">教程链接</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-28T16:00:00.000Z" itemprop="datePublished">
+    2022-05-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5/">教程链接</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/leacock1991/article/details/111713017">(14条消息) 一文打尽设计模式(C<ins>实现)_墨1024的博客-CSDN博客_c</ins> 设计模式</a></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/28/C++/C++%E5%9F%BA%E7%A1%80/2022-05-28_15-2%E5%B5%8C%E5%A5%97%E7%B1%BB/">15-2嵌套类</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-27T16:00:00.000Z" itemprop="datePublished">
+    2022-05-28
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="嵌套类">嵌套类</h2>
+<blockquote>
+<p>在C++中，在一个类中声明另一个类，被称为嵌套类。</p>
+<p>这不意味着创建一个成员，而是定义一个在该类中有效的类型。</p>
+</blockquote>
+<p><strong>案例</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Queue</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Node</span>&#123;</span><br><span class="line">        <span class="keyword">public</span>:</span><br><span class="line">        Item item;</span><br><span class="line">        Node* next;</span><br><span class="line">        <span class="built_in">Node</span>(<span class="type">const</span> Item &amp; i) : <span class="built_in">item</span>(i), <span class="built_in">next</span>(<span class="number">0</span>) &#123; &#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这使得在访问Node类时，需要使用作用域解析符，因为其在Queue类中是公有部分。</p>
+</blockquote>
+<h4 id="15-2-1嵌套类的访问权限">15.2.1嵌套类的访问权限</h4>
+<h5 id="1-作用域">1.作用域</h5>
+<blockquote>
+<p>根据嵌套类在原始类的声明区域，访问权限也不同。</p>
+</blockquote>
+<p><img src="picture/%E5%B5%8C%E5%A5%97%E7%B1%BB%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90.jpg" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/28/C++/C++%E5%9F%BA%E7%A1%80/2022-05-28_15-5%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E8%BF%90%E7%AE%97%E7%AC%A6/">15-5类型转换运算符</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-27T16:00:00.000Z" itemprop="datePublished">
+    2022-05-28
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="类型转换运算符">类型转换运算符</h2>
+<blockquote>
+<p>为了阻止C语言无意义的类型转换，C++制订了更严格的转换方式。</p>
+<p>并添加了四种类型转换符</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">dynamic_cast</span>;</span><br><span class="line"><span class="keyword">const_cast</span>;</span><br><span class="line"><span class="keyword">static_cast</span>;</span><br><span class="line"><span class="keyword">reinterpret_cast</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="15-5-1dynamic-cast">15.5.1dynamic_cast</h4>
+<blockquote>
+<p>检测类型转换是否可行（派生类与基类）</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">dynamic_cast</span>&lt;type-name&gt;(expression)</span><br></pre></td></tr></table></figure>
+<h4 id="15-5-2const-cast">15.5.2const_cast</h4>
+<blockquote>
+<p>改变值为const类型或volatile类型</p>
+<p>用途：一个值在大多数情况下是常量，但某些情况下需要被修改。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">const_cast</span>&lt;type-name&gt;(expression)</span><br><span class="line"><span class="comment">//表达式与type-name之间除了const或volatile属性可以不同之外，其余如果不同则会出错</span></span><br></pre></td></tr></table></figure>
+<p><strong>案例</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">High bar;</span><br><span class="line"><span class="type">const</span> High* pbar = &amp;bar;</span><br><span class="line">High* pb = <span class="built_in">const_cast</span>&lt;High *&gt;(pbar);		<span class="comment">//有效，因为pbar与High*类型一致，表达式转换为非const</span></span><br><span class="line"><span class="type">const</span> Low* pl = <span class="built_in">const_cast</span>&lt;<span class="type">const</span> Low*&gt;(pbar);	<span class="comment">//无效，因为pbar与Low*类型不一致</span></span><br></pre></td></tr></table></figure>
+<h4 id="15-5-3static-cast">15.5.3static_cast</h4>
+<blockquote>
+<p>将允许隐式转换的表达式转换为对应的类型</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">static_cast</span>&lt;type-name&gt;(expression)</span><br></pre></td></tr></table></figure>
+<h4 id="15-5-4reinterpret-cast">15.5.4reinterpret_cast</h4>
+<blockquote>
+<p>用于危险的类型转换</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">reinterpret_cast</span>&lt;type-name&gt;(expression)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/27/C++/C++%E5%9F%BA%E7%A1%80/2022-05-27_8-5%20%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/">8-5 函数模板</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-26T16:00:00.000Z" itemprop="datePublished">
+    2022-05-27
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="8-5-函数模板">8.5 函数模板</h2>
+<h4 id="8-5-1介绍">8.5.1介绍</h4>
+<p>通过将类型隐式传入函数，编译器自动生成该类型的函数</p>
+<h4 id="8-5-2使用案例">8.5.2使用案例</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Anytype&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Swap</span><span class="params">(Anytype &amp;a,Anytype &amp;b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Anytype temp;</span><br><span class="line">    temp=a;</span><br><span class="line">    a=b;</span><br><span class="line">    b=temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//格式：template &lt;typename 使用的模板参数名称&gt;</span></span><br><span class="line"><span class="comment">//参数列表(使用的模板参数名称 形参...)</span></span><br></pre></td></tr></table></figure>
+<h4 id="8-5-3模板的局限性">8.5.3模板的局限性</h4>
+<p>如果某些类型不支持某些运算，则模板将无法使用</p>
+<p>例如：</p>
+<p>对数组进行=赋值</p>
+<p>对结构进行&gt;比较</p>
+<h4 id="8-5-4显式具体化">8.5.4显式具体化</h4>
+<p>在模板之外，针对某些特定类型的匹配的函数时，将直接选用该函数。</p>
+<h5 id="优先级">优先级</h5>
+<p>常规函数&gt;具体化函数&gt;模板函数</p>
+<h5 id="语法">语法</h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="function"><span class="type">void</span> <span class="title">Swap</span><span class="params">(<span class="type">int</span>,<span class="type">int</span>)</span></span>;</span><br><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="type">void</span> <span class="built_in">Swap</span>&lt;<span class="type">int</span>&gt;(<span class="type">int</span>,<span class="type">int</span>);		<span class="comment">//声明模板参数为int</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>等价的写法，<int>只是便于阅读，可省略</p>
+</blockquote>
+<h5 id="用法案例">用法案例</h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Swap</span><span class="params">(T &amp;a,T &amp;b)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="function"><span class="type">void</span> <span class="title">Swap</span><span class="params">(job &amp;a,job &amp;b)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Swap</span><span class="params">(T &amp;a,T &amp;b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    T temp;</span><br><span class="line">    temp=a;</span><br><span class="line">    a=b;</span><br><span class="line">    b=temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="function"><span class="type">void</span> <span class="title">Swap</span><span class="params">(job &amp;a,job &amp;b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> temp;</span><br><span class="line">    temp=a.money;</span><br><span class="line">    a.money=b.money;</span><br><span class="line">    b.money=temp;</span><br><span class="line">    <span class="type">double</span> temp2;</span><br><span class="line">    temp2=a.floor;</span><br><span class="line">    a.floor=b.floor;</span><br><span class="line">    b.floor=temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="8-5-5显式实例化">8.5.5显式实例化</h4>
+<p>根据参数类型进行实例化称为隐式实例化</p>
+<p>而显式实例化是指将模板的参数类型指定</p>
+<h5 id="语法-2">语法</h5>
+<p>在声明所需的种类——用&lt;&gt;指示类型，并在声明前加上关键字template：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> <span class="type">void</span> <span class="built_in">Swap</span>&lt;<span class="type">int</span>&gt;(<span class="type">int</span>,<span class="type">int</span>);<span class="comment">//template后无&lt;&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="使用">使用</h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Swap</span>&lt;<span class="type">int</span>&gt;(i,j);</span><br></pre></td></tr></table></figure>
+<h4 id="8-5-6一些问题的解决">8.5.6一些问题的解决</h4>
+<h5 id="函数中变量类型不定">函数中变量类型不定</h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T1,<span class="keyword">class</span> T2&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ft</span><span class="params">(T1 x,T2 y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    ?type? xpy=x+y;<span class="comment">//xpy的类型不能确定</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解决办法（c++11）:关键字decltype</p>
+<h6 id="语法-3">语法</h6>
+<p>decltype(expression) var</p>
+<blockquote>
+<p>注：</p>
+<p>1.expression可以为变量、表达式、函数返回类型（不会实际调用函数）</p>
+<p>2.decltype(expression)代表一个类型声明符，可用typedef来简写，例如：typedef decltype(x+y) xytype;</p>
+</blockquote>
+<h6 id="例子">例子</h6>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T1,<span class="keyword">class</span> T2&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ft</span><span class="params">(T1 x,T2 y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">decltype</span>(x+y) xpy=x+y;<span class="comment">//xpy的类型不能确定</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="函数返回值不确定">函数返回值不确定</h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T1</span>,<span class="keyword">class</span> <span class="title class_">T2</span>&gt;</span><br><span class="line">?type? <span class="built_in">gt</span>(T1 x,T2 y)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> x+y;<span class="comment">//返回值的类型不确定</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解决办法（c++11）:后置返回值类型并配合decltype使用</p>
+<p>（aoto新的用法）</p>
+<h6 id="语法-4">语法</h6>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">h</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span>-&gt;<span class="type">double</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="例子-2">例子</h6>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T1,<span class="keyword">class</span> T2&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">gt</span><span class="params">(T1 x,T2 y)</span>-&gt;<span class="title">decltype</span><span class="params">(x+y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> x+y;<span class="comment">//返回值的类型不确定</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/26/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x/2022-05-26_1%E7%B2%BE%E7%81%B5%E7%9A%84%E5%88%9B%E5%BB%BA/">1精灵的创建</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-25T16:00:00.000Z" itemprop="datePublished">
+    2022-05-26
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x/">cocos2d-x</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>精灵的创建</h1>
+<p>可以使用一张图像来创建精灵，<em>PNG, JPEG, TIFF, WebP</em>, 这几个格式都可以。当然也有一些其它的方式可以创建精灵，如使用 <strong>图集</strong> 创建，通过 <strong>精灵缓存</strong> 创建，我们会一个一个的讨论。本节介绍通过图像创建精灵。</p>
+<h2 id="使用图像创建">使用图像创建</h2>
+<p><code>Sprite</code> 能用一个特定的图像去创建:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> mySprite = Sprite::<span class="built_in">create</span>(<span class="string">&quot;mysprite.png&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="https://docs.cocos.com/cocos2d-x/manual/en/sprites/sprites-img/i1.png" alt="img"></p>
+<p>上面直接使用了 <strong>mysprite.png</strong> 图像来创建精灵。精灵会使用整张图像，图像是多少的分辨率，创建出来的精灵就是多少的分辨率。比如图像是 200 x 200，<code>Sprite</code> 也是 200 x 200。</p>
+<h3 id="使用矩形">使用矩形</h3>
+<p>上一个例子，精灵和原始图像的尺寸一致。但是如果你想创建一个尺寸只有原始图像一部分的精灵，那你可以在创建的时候指定一个矩形，指定矩形需要四个值，初始 x 坐标，初始 y 坐标，矩形宽，矩形高。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> mySprite = Sprite::<span class="built_in">create</span>(<span class="string">&quot;mysprite.png&quot;</span>, <span class="built_in">Rect</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">40</span>,<span class="number">40</span>));</span><br></pre></td></tr></table></figure>
+<p><img src="https://docs.cocos.com/cocos2d-x/manual/en/sprites/sprites-img/i4.png" alt="img"></p>
+<p>矩形的初始坐标，从图形的左上角开始算，即左上角的坐标是 (0, 0)，不是从左下角。因此结果精灵是图像左上角的一小块，从左上角开始算起，40 x 40 的大小。</p>
+<p>如果你没指定一个矩形，Cocos2d-x 引擎就会自动使用这个图像全部的宽和高，看下面的例子，如果你把矩形的宽高指定为图像的宽高，矩形的初始坐标指定为 (0, 0)，那这就和第一种情况的效果是完全一样的。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> mySprite = Sprite::<span class="built_in">create</span>(<span class="string">&quot;mysprite.png&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> mySprite = Sprite::<span class="built_in">create</span>(<span class="string">&quot;mysprite.png&quot;</span>, <span class="built_in">Rect</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">200</span>,<span class="number">200</span>));</span><br></pre></td></tr></table></figure>
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/29/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="page-number" href="/page/29/">29</a><span class="page-number current">30</span><a class="page-number" href="/page/31/">31</a><a class="page-number" href="/page/32/">32</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/31/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

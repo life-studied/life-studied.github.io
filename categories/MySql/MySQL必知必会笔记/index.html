@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ MySQL必知必会笔记 }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/23/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/CREATE%E8%AF%AD%E5%8F%A5/2022-07-23_17%E5%88%9B%E5%BB%BA%E5%92%8C%E6%93%8D%E7%BA%B5%E8%A1%A8/">17创建和操纵表</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-22T16:00:00.000Z" itemprop="datePublished">
+    2022-07-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/CREATE%E8%AF%AD%E5%8F%A5/">CREATE语句</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="创建和操纵表">创建和操纵表</h2>
+<h4 id="1-创建表">1.创建表</h4>
+<h5 id="1-1表创建基础">1.1表创建基础</h5>
+<blockquote>
+<p>使用CREATE TABLE创建表</p>
+<p>满足条件：</p>
+<p>1.新表的名字</p>
+<p>2.表列的名字和定义</p>
+<p>3.可能需要表的位置</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE TABLE Products</span><br><span class="line">(</span><br><span class="line">    prod_id 	CHAR(10)	NOT NULL,</span><br><span class="line">    vend_id		CHAR(10)	NOT NULL,</span><br><span class="line">    prod_name	CHAR(254)	NOT NULL,</span><br><span class="line">    prod_price	DECIMAL(8,2)	NOT NULL,</span><br><span class="line">    prod_desc	VARCHAR(1000)	NULL</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h5 id="1-2使用NULL值">1.2使用NULL值</h5>
+<blockquote>
+<p>对创建表时的指定列，如果设定使用NULL值，则可以在初始化行时不输入值，否则必须输入值。</p>
+</blockquote>
+<p><strong>注：默认NULL</strong></p>
+<h5 id="1-3指定默认值">1.3指定默认值</h5>
+<blockquote>
+<p>对一个列可以使用DEFAULT关键字加上默认值来指定如果插入时没输入值的情况。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE TABLE Products</span><br><span class="line">(</span><br><span class="line">    prod_id 	CHAR(10)	NOT NULL,</span><br><span class="line">    vend_id		CHAR(10)	NOT NULL,</span><br><span class="line">    prod_name	CHAR(254)	NOT NULL,</span><br><span class="line">    prod_price	DECIMAL(8,2)	NOT NULL	DEFAULT 100,</span><br><span class="line">    prod_desc	VARCHAR(1000)	NULL</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>常用来对日期进行默认当前值的设定，使用CURRENT_DATE()函数</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE TABLE IF NOT EXISTS tasks (</span><br><span class="line">  task_id INT(11) NOT NULL AUTO_INCREMENT,	#自增</span><br><span class="line">  subject VARCHAR(45) DEFAULT NULL,</span><br><span class="line">  start_date DATE DEFAULT NULL,</span><br><span class="line">  end_date DATE DEFAULT NULL,</span><br><span class="line">  description VARCHAR(200) DEFAULT NULL,</span><br><span class="line">  PRIMARY KEY (task_id)		#主键</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="2-更新表">2.更新表</h4>
+<blockquote>
+<p>ALTER TABLE语句</p>
+</blockquote>
+<blockquote>
+<p>一般支持增加列，使用ADD子句</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ALTER TABLE Vendors</span><br><span class="line">ADD vend_phone CHAR(20);</span><br></pre></td></tr></table></figure>
+<h4 id="3-删除表">3.删除表</h4>
+<blockquote>
+<p>使用DROP TABLE语句</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DROP TABLE Ventors;</span><br></pre></td></tr></table></figure>
+<h4 id="4-重命名表">4.重命名表</h4>
+<blockquote>
+<p>RENAME TABLE语句</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">RENAME TABLE old_table_name TO new_table_name;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/22/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/OTHER/2022-05-22_19%E4%BD%BF%E7%94%A8%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/">19使用存储过程</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-21T16:00:00.000Z" itemprop="datePublished">
+    2022-05-22
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/OTHER/">OTHER</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="使用存储过程">使用存储过程</h2>
+<h4 id="1-执行存储过程">1.执行存储过程</h4>
+<blockquote>
+<p>使用EXECUTE关键字</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">EXECUTE AddNewProducts(&#x27;JTS01&#x27;,</span><br><span class="line">                      &#x27;Stuffed Eiffal Tower&#x27;,</span><br><span class="line">                      6.49,</span><br><span class="line">                      &#x27;&#x27;);</span><br></pre></td></tr></table></figure>
+<h4 id="2">2</h4>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/19/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/CREATE%E8%AF%AD%E5%8F%A5/2022-05-19_18%E8%A7%86%E5%9B%BE/">18视图</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-18T16:00:00.000Z" itemprop="datePublished">
+    2022-05-19
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/CREATE%E8%AF%AD%E5%8F%A5/">CREATE语句</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="视图">视图</h2>
+<blockquote>
+<p>视图中包含一个查询，在对外看作一个部分表。每次被调用时临时查询数据并构造成视图。</p>
+</blockquote>
+<h4 id="1-视图">1.视图</h4>
+<h5 id="1-1视图的规则与限制">1.1视图的规则与限制</h5>
+<blockquote>
+<p>视图不能用order by语句</p>
+<p>视图创建只读的查询</p>
+</blockquote>
+<h4 id="2-创建视图">2.创建视图</h4>
+<blockquote>
+<p>使用CREATE VIEW语句创建</p>
+<p>使用DROP VIEW语句删除</p>
+</blockquote>
+<h5 id="2-1用视图简化复杂的连结">2.1用视图简化复杂的连结</h5>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE VIEW ProductCustomers AS</span><br><span class="line">SELECT cust_name, cust_contact, prod_id</span><br><span class="line">From Customers, Orders, OrderItems</span><br><span class="line">Where Customers.cust_id = Orders.cust_id</span><br><span class="line">	AND Orders.order_num = OrderItems.order_num;</span><br></pre></td></tr></table></figure>
+<h5 id="2-2用视图重新格式化检索出的数据">2.2用视图重新格式化检索出的数据</h5>
+<blockquote>
+<p>在需要多次使用格式化检索的内容时，可以用视图做好封装。</p>
+</blockquote>
+<h5 id="2-3用视图过滤数据">2.3用视图过滤数据</h5>
+<blockquote>
+<p>在创建视图时用where过滤数据</p>
+</blockquote>
+<h5 id="2-4使用视图与计算字段">2.4使用视图与计算字段</h5>
+<blockquote>
+<p>使用视图创建合适的封装字段，在需要时调用。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/18/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/INSERT%E8%AF%AD%E5%8F%A5/2022-05-18_15%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE/">15插入数据</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-17T16:00:00.000Z" itemprop="datePublished">
+    2022-05-18
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/INSERT%E8%AF%AD%E5%8F%A5/">INSERT语句</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="插入数据">插入数据</h2>
+<blockquote>
+<p>插入行到数据库表中。</p>
+</blockquote>
+<h4 id="1-数据插入">1.数据插入</h4>
+<blockquote>
+<p>插入有几种方式</p>
+<p>1.插入完整的行</p>
+<p>2.插入行的一部分</p>
+<p>3.插入某些查询的结果</p>
+</blockquote>
+<h5 id="1-1插入完整的行">1.1插入完整的行</h5>
+<blockquote>
+<p>要求指定表名和插入行中的值。使用INSERT INTO指出表名，用values子句给出值。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">INSERT INTO Customers(cust_id,</span><br><span class="line">                     cust_contact,</span><br><span class="line">                     cust_email,</span><br><span class="line">                     cust_name,</span><br><span class="line">                     cust_adress,</span><br><span class="line">                     cust_city,</span><br><span class="line">                     cust_state,</span><br><span class="line">                     cust_zip)</span><br><span class="line">Values(&#x27;10000001&#x27;,</span><br><span class="line">      NULL,</span><br><span class="line">      NULL,</span><br><span class="line">      &#x27;Toy Land&#x27;,</span><br><span class="line">      &#x27;123 Any Street&#x27;,</span><br><span class="line">      &#x27;New York&#x27;,</span><br><span class="line">      &#x27;NY&#x27;,</span><br><span class="line">      &#x27;1111&#x27;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可以省略Custmers中的列名，但那样必须按照表的顺序填写value值。而写明列名可以不按照表顺序来。</p>
+</blockquote>
+<p><strong>注：如果不给出列名，都必须给出所有列的值</strong></p>
+<p>（如果主键是自增的，则可以省略主键值）</p>
+<h5 id="1-2插入检索出的数据">1.2插入检索出的数据</h5>
+<blockquote>
+<p>INSERT INTO</p>
+<p>SELECT关键字</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">INSERT INTO Customers(cust_id,</span><br><span class="line">                     cust_contact,</span><br><span class="line">                     cust_email,</span><br><span class="line">                     cust_name,</span><br><span class="line">                     cust_adress,</span><br><span class="line">                     cust_city,</span><br><span class="line">                     cust_state,</span><br><span class="line">                     cust_zip)</span><br><span class="line">SELECT cust_id,</span><br><span class="line">					 cust_contact,</span><br><span class="line">                     cust_email,</span><br><span class="line">                     cust_name,</span><br><span class="line">                     cust_adress,</span><br><span class="line">                     cust_city,</span><br><span class="line">                     cust_state,</span><br><span class="line">                     cust_zip</span><br><span class="line">From CustNew;</span><br></pre></td></tr></table></figure>
+<h4 id="2-从一个表复制到另一个表">2.从一个表复制到另一个表</h4>
+<blockquote>
+<p>SELECT INTO语句</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">INTO CustCopy</span><br><span class="line">From Customers;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/18/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/2022-05-18_11%E5%AD%90%E6%9F%A5%E8%AF%A2/">11子查询</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-17T16:00:00.000Z" itemprop="datePublished">
+    2022-05-18
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/">SELECT语句</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="子查询">子查询</h2>
+<blockquote>
+<p>嵌套在查询中的查询</p>
+</blockquote>
+<h4 id="1-利用子查询进行过滤">1.利用子查询进行过滤</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT cust_name, cust_contact</span><br><span class="line">From Customers</span><br><span class="line">Where cust_id IN (SELECT cust_id</span><br><span class="line">                 FROM Orders</span><br><span class="line">                 Where order_num IN (SELECT order_num</span><br><span class="line">                                    From order_Items</span><br><span class="line">                                    Where prod_id = &#x27;RGAN01&#x27;));</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>子查询的SELECT只能查询单列</p>
+</blockquote>
+<h4 id="2-作为计算字段使用子查询">2.作为计算字段使用子查询</h4>
+<blockquote>
+<p>将子查询作为一列需要显示的内容（即计算字段），来与另一张表联动</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT cust_name,cust_status,</span><br><span class="line">		(SELECT COUNT(*) </span><br><span class="line">        FROM Orders </span><br><span class="line">        Where Orders.cust_id = Customers.cust_id) AS orders</span><br><span class="line">From Customers</span><br><span class="line">Order by cust_name;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/18/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/2022-05-18_12%E8%BF%9E%E7%BB%93%E8%A1%A8/">12连结表</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-17T16:00:00.000Z" itemprop="datePublished">
+    2022-05-18
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/">SELECT语句</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="连结表">连结表</h2>
+<h4 id="1-创建连结">1.创建连结</h4>
+<blockquote>
+<p>主要用where语句来创建连结关系，在SELECT和FROM中注明需要的列和来源表</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT vend_name, prod_name, prod_price</span><br><span class="line">From Vendors, Products</span><br><span class="line">Where Products.vend_id = Vendors.vend_id;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在此处，where语句筛选出符合连结条件的数据并输出，如果没有，则会将两个表中的每一条数据没有意义的两两匹配组合（笛卡尔积）。</p>
+</blockquote>
+<h4 id="2-内部连结">2.内部连结</h4>
+<blockquote>
+<p>另一种连结语法，和上面的结果相同。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT vend_name, prod_name, prod_price</span><br><span class="line">From Vendors INNER JOIN Products </span><br><span class="line">ON Vendors.vend_id = Products.vend_id;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用INNER JOIN指定两个表的关系时使用特定的ON语句</p>
+</blockquote>
+<h4 id="3-连结多个表">3.连结多个表</h4>
+<blockquote>
+<p>对于多个表，创建规则相同：先列出所有表，再定义表之间的关系。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT prod_name, vend_name, prod_price, quantity</span><br><span class="line">From OrderItems,Products,Vendors</span><br><span class="line">Where Products.vend_id = Vendors.vend_id </span><br><span class="line">	AND OrderItems.prod_id = Products.prod_id</span><br><span class="line">	AND order_num = &#x27;20007&#x27;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在where中给出两个连结条件与一个过滤条件</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/18/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/2022-05-18_14%E7%BB%84%E5%90%88%E6%9F%A5%E8%AF%A2/">14组合查询</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-17T16:00:00.000Z" itemprop="datePublished">
+    2022-05-18
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/">SELECT语句</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="组合查询">组合查询</h2>
+<blockquote>
+<p>SELECT语句可以多条一起执行，并返回一个结果集。这被称为组合查询。</p>
+</blockquote>
+<h4 id="1-创建组合查询">1.创建组合查询</h4>
+<h5 id="1-1使用UNION语句">1.1使用UNION语句</h5>
+<blockquote>
+<p>使用UNION操作符创建多条查询语句。</p>
+<p>注：两条查询语句的返回结果应当有相同的列</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT cust_name, cust_contact， cust_email</span><br><span class="line">From Customers</span><br><span class="line">Where cust_state IN (&#x27;IL&#x27;,&#x27;IN&#x27;,&#x27;MI&#x27;)</span><br><span class="line">UNION</span><br><span class="line">SELECT cust_name, cust_contact， cust_email</span><br><span class="line">From Customers</span><br><span class="line">Where cust_name = &#x27;Fun4All&#x27;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>对于单个表的组合查询，使用where语句的组合方式更简单。</p>
+</blockquote>
+<h5 id="1-2UNION使用的规则">1.2UNION使用的规则</h5>
+<blockquote>
+<p>1.必须有两条以上的SELECT语句组成，并且之间用UNION连接。</p>
+<p>2.每个查询应当由相同的列组成（列名，表达式，聚集函数）</p>
+<p>3.列数据类型应当兼容。</p>
+</blockquote>
+<h5 id="1-3包含或取消重复的行">1.3包含或取消重复的行</h5>
+<blockquote>
+<p>UNION关键字连接的多条查询默认去除重复的行。</p>
+<p>如果想做到包含重复的行，应当使用UNION ALL关键字。</p>
+</blockquote>
+<h5 id="1-4对组合查询结果进行排序">1.4对组合查询结果进行排序</h5>
+<blockquote>
+<p>使用order by语句，但必须只在最后一个SELECT中使用。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT cust_name, cust_contact， cust_email</span><br><span class="line">From Customers</span><br><span class="line">Where cust_state IN (&#x27;IL&#x27;,&#x27;IN&#x27;,&#x27;MI&#x27;)</span><br><span class="line">UNION</span><br><span class="line">SELECT cust_name, cust_contact， cust_email</span><br><span class="line">From Customers</span><br><span class="line">Where cust_name = &#x27;Fun4All&#x27;</span><br><span class="line">Order by cust_name;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/18/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/2022-05-18_13%E5%88%9B%E5%BB%BA%E9%AB%98%E7%BA%A7%E8%BF%9E%E7%BB%93/">13创建高级连结</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-17T16:00:00.000Z" itemprop="datePublished">
+    2022-05-18
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/">SELECT语句</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="创建高级连结">创建高级连结</h2>
+<h4 id="1-使用表别名">1.使用表别名</h4>
+<blockquote>
+<p>理由：</p>
+<p>1.缩短SQL语句</p>
+<p>2.允许在单条SQL语句中使用多次相同的表</p>
+</blockquote>
+<h5 id="1-1创建方法">1.1创建方法</h5>
+<blockquote>
+<p>使用AS关键字</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT cust_name, cust_contacts</span><br><span class="line">From Customers as C, Orders as O, OrderItems as OI</span><br><span class="line">Where C.cust_id = O.cust_id</span><br><span class="line">	AND OI.order_name = O.order_name</span><br><span class="line">	AND prod_id = &#x27;RGAN01&#x27;;</span><br></pre></td></tr></table></figure>
+<h4 id="2-使用不同类型的连结">2.使用不同类型的连结</h4>
+<h5 id="2-1自连结">2.1自连结</h5>
+<blockquote>
+<p>对同一张表进行两次嵌套查询时，可以使用子查询，也可以使用给每次查询的表起别名的自连结来防止二义性。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT c1.cust_id, c1.cust_name, c1.cust_contact</span><br><span class="line">From Customers as c1, Customers as c2</span><br><span class="line">Where c1.cust_name = c2.cust_name</span><br><span class="line">	AND c2.cust_contact = &#x27;Jim Jones&#x27;;</span><br></pre></td></tr></table></figure>
+<h5 id="2-2自然连结">2.2自然连结</h5>
+<blockquote>
+<p>无论何时对表进行连结，至少有一个列出现在不止一个表中（被连结的列）。</p>
+<p>然而检索结果中，相同的列只出现一次，这就是自然连结，由SELECT语句选择时用户自主完成。（即每一列都是唯一的，不允许第二次出现）</p>
+</blockquote>
+<h5 id="2-3外部连结">2.3外部连结</h5>
+<blockquote>
+<p>在两个表的关联列内容并不完全一致时，即其中一个列有另一个没有的内容时，使用外部连结来使其显示而不是忽略。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT Customers.cust_id, Orders.order_num</span><br><span class="line">From Customers LEFT OUTER JOIN Orders</span><br><span class="line">	ON Customers.cust_id = Orders.cust_id;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在From子句中使用关键字OUTER JOIN。使用LEFT或RIGHT来注明以哪一张表为基准。（即确定显示哪一张表的所有信息）。</p>
+</blockquote>
+<p><strong>另一种简化语法</strong></p>
+<blockquote>
+<p>在where中使用<code>*=</code>或<code>=*</code>注明外部连结的左右基准</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT Customers.cust_id, Orders.order_num</span><br><span class="line">From Customers Orders</span><br><span class="line">where Customers.cust_id *= Orders.cust_id;</span><br></pre></td></tr></table></figure>
+<p><strong>全外部连结</strong></p>
+<blockquote>
+<p>找出两张表中的所有信息，即使在另一张表中不存在。</p>
+<p>方法：将关键字中的LEFT或RIGHT改为FULL。</p>
+</blockquote>
+<h4 id="3-使用带聚集的连结">3.使用带聚集的连结</h4>
+<blockquote>
+<p>聚集函数可以从单个表汇集数据，也可以和连结一起使用。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT Customers.cust_id, COUNT(Orders.order_num) AS num_order</span><br><span class="line">From Customers INNER JOIN Orders </span><br><span class="line">	ON Customers.cust_id = Orders.cust_id</span><br><span class="line">Group by Customers.cust_id;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/18/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/UPDATE&amp;DELETE%E8%AF%AD%E5%8F%A5/2022-05-18_16%E6%9B%B4%E6%96%B0%E5%92%8C%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE/">16更新和删除数据</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-17T16:00:00.000Z" itemprop="datePublished">
+    2022-05-18
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/UPDATE-DELETE%E8%AF%AD%E5%8F%A5/">UPDATE&amp;DELETE语句</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="更新和删除数据">更新和删除数据</h2>
+<h4 id="1-更新数据">1.更新数据</h4>
+<blockquote>
+<p>使用UPDATE语句更新表中数据。</p>
+</blockquote>
+<h5 id="1-1更新单列">1.1更新单列</h5>
+<blockquote>
+<p>语句由三部分组成</p>
+<p>1.要更新的表名</p>
+<p>2.列名与它的新值</p>
+<p>3.更新列的过滤条件</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UPDATE Customers</span><br><span class="line">SET cust_email = &#x27;my@s.com&#x27;</span><br><span class="line">Where cust_id = &#x27;00000001&#x27;;</span><br></pre></td></tr></table></figure>
+<p><strong>注：如果没有where过滤，则对象为所有行</strong></p>
+<h5 id="1-2更新多列">1.2更新多列</h5>
+<blockquote>
+<p>SET语句中使用逗号分隔条件</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UPDATE Customers</span><br><span class="line">SET cust_email = &#x27;my@s.com&#x27;,</span><br><span class="line">	cust_name = &#x27;Jay&#x27;</span><br><span class="line">Where cust_id = &#x27;00000001&#x27;;</span><br></pre></td></tr></table></figure>
+<h5 id="1-3删除某个列">1.3删除某个列</h5>
+<blockquote>
+<p>将值设置成NULL即可。</p>
+</blockquote>
+<h4 id="2-删除数据">2.删除数据</h4>
+<blockquote>
+<p>使用DELETE FROM语句删除</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DELETE FROM Customers</span><br><span class="line">Where cust_id = &#x27;00000001&#x27;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/17/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/2022-05-17_10%E5%88%86%E7%BB%84%E6%95%B0%E6%8D%AE/">10分组数据</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-16T16:00:00.000Z" itemprop="datePublished">
+    2022-05-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/">SELECT语句</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="分组数据">分组数据</h2>
+<h4 id="1-创建分组——group-by子句">1.创建分组——group by子句</h4>
+<blockquote>
+<p>group by用来筛选不同值，并按照这些不同值进行分组。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select cust_id, sum(price) as sum_price</span><br><span class="line">from Customers</span><br><span class="line">group by cust_id;</span><br></pre></td></tr></table></figure>
+<h4 id="2-过滤分组——having子句">2.过滤分组——having子句</h4>
+<blockquote>
+<p>用于group by之后筛选分组的数据</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select cust_id, sum(price) as sum_price</span><br><span class="line">from Customers</span><br><span class="line">group by cust_id</span><br><span class="line">Having cust_id BETWEEN &#x27;0001&#x27; AND &#x27;0009&#x27;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/page/2/">2</a><a class="extend next" rel="next" href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/page/2/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

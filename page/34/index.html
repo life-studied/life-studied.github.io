@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-04-24_19%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">19插入排序</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-23T16:00:00.000Z" itemprop="datePublished">
+    2022-04-24
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="插入排序">插入排序</h2>
+<h4 id="一些概念">一些概念</h4>
+<blockquote>
+<p>就地排序：使用恒定的额外空间，即给定数组</p>
+<p>内部排序：待排序数据能一次性载入内存</p>
+<p>外部排序：待排序数据不能一次性载入内存</p>
+</blockquote>
+<blockquote>
+<p>”稳定“的排序：看相同的关键字在排序前后相对位置的变化</p>
+<p>处理键值对的时候（一级排序与二级排序等等）</p>
+</blockquote>
+<h4 id="直接插入排序">直接插入排序</h4>
+<blockquote>
+<p>将待排序数组分成两个序列，一个有序一个无序，依次选择后者插入前者</p>
+<p>注：并不是两个数组，而是一个数组在就地排序</p>
+<p>时间复杂度O(n)，最坏情况下是O(n^2)</p>
+<p>8个数据以下使用</p>
+</blockquote>
+<h4 id="二分插入排序">二分插入排序</h4>
+<blockquote>
+<p>顺序地将待排序的序列中各个元素按照关键字的大小，通过二分查找插入到序列中</p>
+<p>就地排序</p>
+<p>时间复杂度为O(n)，最坏情况是O(n^2)</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">BInsertSort</span><span class="params">(<span class="type">int</span> a[], <span class="type">int</span> size)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> low,high,mid;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;size;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        low=<span class="number">0</span>;</span><br><span class="line">        high=i<span class="number">-1</span>;</span><br><span class="line">        <span class="type">int</span> temp=a[i];</span><br><span class="line">        <span class="keyword">while</span>(low&lt;=high)		<span class="comment">//找到插入的位置</span></span><br><span class="line">        &#123;</span><br><span class="line">            mid=(low+high)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(a[mid]&gt;temp)</span><br><span class="line">                high = mid<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                low = mid+<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=i;j&lt;low;j--)	<span class="comment">//从最后一个向前移动</span></span><br><span class="line">        &#123;</span><br><span class="line">            a[j]=a[j<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        a[low]=temp;			<span class="comment">//插入(low就是插入的位置)</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-路插入排序">2-路插入排序</h4>
+<blockquote>
+<p>在二分插入的基础上另外设置一个大小相同的数组，将无序表中第一个记录加入到d[0]中，从第二个数据开始和d[0]比较，如果大于，在右边（数组开头）进行插入排序，否则在左边（数组尾端）。</p>
+<p>（数据存储形式：环形数组）</p>
+</blockquote>
+<blockquote>
+<p>减少移动的次数</p>
+<p>极端情况下退化成二分插入排序</p>
+</blockquote>
+<h4 id="希尔排序（缩小增量排序）">希尔排序（缩小增量排序）</h4>
+<blockquote>
+<p>把待排序数组按照下标记录的一些增量进行分组，对于每组进行直接插入排序随着增量逐渐减少，每组包含的关键组逐渐增加，当增量减少到1时完成排序</p>
+</blockquote>
+<blockquote>
+<p>增量可以自定义，例如：</p>
+<p>gap=length/2 (增量 = 数组长度 / 2)</p>
+<p>gap=gap/2</p>
+</blockquote>
+<blockquote>
+<p>增量元素不互质的情况下，可能会有最坏情况出现</p>
+<p>选取的增量不同，复杂度也不同，需要数学推导，最坏情况依然是O(n^2)，增量优化后为3/2*n</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">shellsort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> gap;		<span class="comment">//步长</span></span><br><span class="line">    <span class="type">int</span> k;			<span class="comment">//记录范围</span></span><br><span class="line">    <span class="keyword">for</span>(gap = n/<span class="number">2</span>;gap&gt;<span class="number">0</span>;gap/=<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//直接插入排序</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;gap;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//每一次加上步长，按列排序</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=i+gap;j&lt;n;j+=gap)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(arr[j]&lt;arr[j-gap])</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="type">int</span> temp = arr[j];</span><br><span class="line">                    k = j-gap;</span><br><span class="line">                    <span class="keyword">while</span>(k&gt;=<span class="number">0</span>; &amp;&amp; arr[k]&gt;temp)</span><br><span class="line">                    &#123;</span><br><span class="line">                        arr[k+gap] = arr[k];</span><br><span class="line">                        k = k-gap;</span><br><span class="line">                    &#125;</span><br><span class="line">                    arr[k+gap] = temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-04-24_20%E4%BA%A4%E6%8D%A2%E6%8E%92%E5%BA%8F/">20交换排序</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-23T16:00:00.000Z" itemprop="datePublished">
+    2022-04-24
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="交换排序">交换排序</h2>
+<h4 id="冒泡排序">冒泡排序</h4>
+<p>过程略</p>
+<blockquote>
+<p>时间复杂度O(n^2)</p>
+<p>空间复杂度O(1)</p>
+</blockquote>
+<p><strong>优化</strong></p>
+<p>1.添加一个标志，标识当前轮是否数组有序，如果有则结束冒泡</p>
+<p>2.判断部分有序：前一趟冒泡排序中最后一次发生交换的地方作为下一次冒泡的终点</p>
+<h4 id="快速排序">快速排序</h4>
+<blockquote>
+<p>选择一个基准（放在排序后数组正确位置的元素），（第一个/最后一个/中间一个/随机一个）。关键在于做一个划分，每一次划分都将基准x放到正确的位置，将所有比x小的放在左边，比x大的放在右边。</p>
+<p>复杂度：O(nlogn)</p>
+</blockquote>
+<p><strong>注</strong>：如果是一个有序数组，出现最坏情况</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">QuickSort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> low, <span class="type">int</span> high)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(low&lt;high)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> i=low;</span><br><span class="line">        <span class="type">int</span> j=high;</span><br><span class="line">        <span class="type">int</span> k = arr[low];</span><br><span class="line">        <span class="keyword">while</span>(i&lt;j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//从右向左找第一个小于k的数字</span></span><br><span class="line">            <span class="keyword">while</span>(i&lt;j &amp;&amp; arr[j]  &gt;=k)</span><br><span class="line">            &#123;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i&lt;j)</span><br><span class="line">                arr[i++]=arr[j];</span><br><span class="line">            <span class="keyword">while</span>(i&lt;j &amp;&amp; arr[i] &lt;k)</span><br><span class="line">            &#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i&lt;j)</span><br><span class="line">                arr[j--] = arr[i];</span><br><span class="line">            </span><br><span class="line">		&#125;</span><br><span class="line">        arr[i] = k;</span><br><span class="line">        QuickSort(arr,low,i<span class="number">-1</span>);</span><br><span class="line">        QuickSort(arr,i+<span class="number">1</span>,high);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/23/C++/C++%E5%9F%BA%E7%A1%80/2022-04-23_14-1%E5%8C%85%E5%90%AB%E5%AF%B9%E8%B1%A1%E6%88%90%E5%91%98%E7%9A%84%E7%B1%BB/">14-1包含对象成员的类</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-22T16:00:00.000Z" itemprop="datePublished">
+    2022-04-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="包含对象成员的类">包含对象成员的类</h2>
+<h4 id="14-1-1-valarray类简介">14.1.1 valarray类简介</h4>
+<blockquote>
+<p>在头文件valarray中，用于处理数值的类。</p>
+</blockquote>
+<p><strong>声明一个valarray对象</strong></p>
+<blockquote>
+<p>在标识符valarray后加上一对&lt;&gt;，中间写上所需处理的数据类型，后面补上对象名。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">valarray&lt;<span class="type">int</span>&gt; v1;			<span class="comment">//创建一个int型的valarray对象</span></span><br><span class="line"><span class="function">valarray&lt;<span class="type">double</span>&gt; <span class="title">v2</span><span class="params">(<span class="number">5</span>)</span></span>;		<span class="comment">//创建一个double型的长度为5的对象</span></span><br><span class="line"><span class="function">valarray&lt;<span class="type">int</span>&gt; <span class="title">v2</span><span class="params">(gpa,<span class="number">4</span>)</span></span>;	<span class="comment">//创建一个int型的对象并导入gpa数组，长度为4</span></span><br></pre></td></tr></table></figure>
+<p><strong>方法</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">operator</span>[]()	<span class="comment">//访问元素</span></span><br><span class="line"><span class="built_in">size</span>()			<span class="comment">//返回元素数</span></span><br><span class="line"><span class="built_in">sum</span>()			<span class="comment">//返回元素总和</span></span><br><span class="line"><span class="built_in">max</span>()			<span class="comment">//返回最大元素</span></span><br><span class="line"><span class="built_in">min</span>()			<span class="comment">//返回最小元素</span></span><br></pre></td></tr></table></figure>
+<h4 id="14-1-2-Student类的设计">14.1.2 Student类的设计</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;valarray&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">typedef</span> std::valarray&lt;<span class="type">double</span>&gt; ArrayDb;		<span class="comment">//在类方法和友元函数中可以使用，外部不能使用</span></span><br><span class="line">    std::string name;</span><br><span class="line">    ArrayDb scores;</span><br><span class="line">    <span class="function">std::ostream &amp; <span class="title">arr_out</span><span class="params">(std::ostream &amp; os)</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Student</span>() : <span class="built_in">name</span>(<span class="string">&quot;Null Student&quot;</span>), <span class="built_in">scores</span>()&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Student</span><span class="params">(<span class="type">const</span> std::string &amp; s)</span>		<span class="comment">//关闭隐式转换</span></span></span><br><span class="line"><span class="function">        : name(s), scores()&#123;</span>&#125;</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Student</span><span class="params">(<span class="type">int</span> n)</span> : name(<span class="string">&quot;Nully&quot;</span>), scores(n) &#123;</span>&#125;</span><br><span class="line">    <span class="built_in">Student</span>(<span class="type">const</span> std::string &amp; s, <span class="type">int</span> n) </span><br><span class="line">        : <span class="built_in">name</span>(s), <span class="built_in">scores</span>(n)&#123;&#125;</span><br><span class="line">    <span class="built_in">Student</span>(<span class="type">const</span> std::string &amp; s, <span class="type">const</span> ArrayDb &amp; a)</span><br><span class="line">        : <span class="built_in">name</span>(s), <span class="built_in">scores</span>(a)&#123;&#125;</span><br><span class="line">    <span class="built_in">Student</span>(<span class="type">const</span> <span class="type">char</span> * str, <span class="type">const</span> <span class="type">double</span> * pd, <span class="type">int</span> n)</span><br><span class="line">        : <span class="built_in">name</span>(s), <span class="built_in">scores</span>(pd, n)&#123;&#125;</span><br><span class="line">    ~<span class="built_in">Student</span>()&#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">double</span> <span class="title">Average</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">    <span class="function"><span class="type">const</span> std::string &amp; <span class="title">Name</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">    <span class="type">double</span> &amp; <span class="keyword">operator</span>[](<span class="type">int</span> i);</span><br><span class="line">    <span class="type">double</span> <span class="keyword">operator</span>[](<span class="type">int</span> i) <span class="type">const</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">friend</span> std::istream &amp; <span class="keyword">operator</span>&gt;&gt;(std::istream &amp; is,</span><br><span class="line">                                    Student &amp; stu);</span><br><span class="line">    <span class="function"><span class="keyword">friend</span> std::istream &amp; <span class="title">getline</span><span class="params">(std::istream &amp; is,</span></span></span><br><span class="line"><span class="params"><span class="function">                                    Student &amp; stu)</span></span>;</span><br><span class="line">    <span class="keyword">friend</span> std::ostream &amp; <span class="keyword">operator</span>&lt;&lt;(std::ostream &amp; os,</span><br><span class="line">                                    Student &amp; stu);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/23/%E4%B8%8A%E8%AF%BE/%E9%97%AE%E5%8D%B7%E5%8F%8D%E9%A6%88/2022-04-23_something%20and%20everything/">something and everything</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-22T16:00:00.000Z" itemprop="datePublished">
+    2022-04-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E4%B8%8A%E8%AF%BE/">上课</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E4%B8%8A%E8%AF%BE/%E9%97%AE%E5%8D%B7%E5%8F%8D%E9%A6%88/">问卷反馈</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <p>关于学习编程，我想聊一聊我的一些想法。</p>
+<p>在很久之前，我和你一样，对编程充满了向往，希望能像很多书籍、视频中那样，敲着几句代码，电脑上便能出现种种非常厉害的代码。我看过很多书，青幕山当年写的网文《黑客》，是我一直以来向往的，至少在当年让我知道了很多之前未曾想过的事。</p>
+<p>在上高中的时候，我曾短暂地接触过编程。那并不是很高级，没有体系，也没有老师。我不懂该从哪里找教程，也不知道学哪本书。当时我买了三本书，回头看，都并不适合入门。只是当时的我时间比较多，也不喜欢浪费时间在一些无效作业上。就大致算是入了个门，懂了一些基础。但深入，却无从下手，毕竟当时能接触的太少。</p>
+<p>在高三最后那段时间，我在考虑选专业的时候，我在知乎上认真看了很多有一定深度的文章，都是在讲编程。那时候，我确信了，编程，或者说计算机，是现在以及未来多年的趋势。这是大环境的事，它不会如当年土木工程一样，逐渐走向没落。也不会如生物科学一样，走向世界的同时将底层的学生抛弃。</p>
+<p>同时，我也找到了学习的正确路径。这不是一下子的事，而是看了很多文章之后确立的。在高中毕业之后，我并没有和其他人一样玩一个假期，而是自己学完了c语言，这为我之后打下了深厚的基础。你要知道，很多学生在大一都是在浪费时间度过的，而我这条路一直规划到我大学本科毕业。同时我也在不停试错与修正。</p>
+<hr>
+<p>以上是我的经历。下面是我的一些思考和感悟。</p>
+<p>编程难嘛？毫无疑问，难。但是又没有数学那般本质上的难。所以无论是哪个人，都一定能学会编程，区别在于时间与理解。但是，不要因此感到灰心。编程的难度为其本身增加了门槛，这意味着不是每一个人都有毅力去学的。同时，学习它需要很长的周期。你可能又有一些灰心。但这说明这个学科的潜力很大。试想，如果你能在短短几个月就轻而易举的学会这个学科，那也意味着换一个人也能轻而易举地将你取代。所以长周期往往意味着你有更长时间去发育，并且拥有更高的上限与他人难以取代的权利。另外有我在，所以你完全没有机会出现学不懂的可能。</p>
+<p>同时，你也不需要担心这个学科没有数学那么有逼格。从这个学科本身来看，学到半山腰的人就已经能和做基础学科研究的人受到同等的尊敬，同时相比其它学科，编程能保证你未来至少不会失去接触数学的机会。另一方面，它比基础学科更贴近实践，这意味着你的任何想法都能很快投入现实，只要你想。最重要的是，在经过大量学习之后，这比其它学科帅很多，不是吗？</p>
+<hr>
+<p>关于教你学编程的事，我一直在思考对你的影响。</p>
+<p>总体上来看，一定是益处远大于弊端的。因为这条路远远长于高考，同时它的影响是潜移默化而意义深远的。但是，你是否有时间，有意愿去真正接触它呢？这是我所担心的。</p>
+<p>这个问题并不是一时能说清的。随着课业压力增大，时间分流会更加明显。毕竟我当时深刻感受过，如果想面面俱到，必须将所有时间都花在学校的课业上。然而，这并不是我非常认可的。虽然你才高一，距离高考还有两年。但是我还是想讲一讲，高考并不是高中的意义。你确实应该在高中好好学习知识，但同时不能绝对的说把所有的精力都放在这上面。我更希望你能在这个阶段，多接触一些文学，经济学，心理学等等的内容，或是接触更多人与事并深入思考一些命题。也许这看起来很奇怪，但是在人的初期养成一个优秀的世界观，价值观或是金钱观，远比单纯的成绩重要的多。毕竟后者终将被淡忘，而前者会在更长的岁月中愈发深刻。幸好当时我是这么做的，回过头来看，很多不起眼的小事都决定了我命运的转折。</p>
+<p>也许你没有意识到，但是现在，从我准备教你学编程开始，一定是你命运的一个转折点。你的任何一个微小的思考与决定都会深刻地影响未来，但不用担心，大胆选择应当是一个少年应有的自信，毕竟相比于玩游戏而荒废学业乃至影响到世界观而言，即使结果再差也不会糟糕到比这个更差了。学编程只是一个方向，是我认可的，相比于其它能力有用的多，也上限高得多的能力。它的作用随着时间往往呈现指数增长，学的时间越长，用处增长的越快。所以，你，做好长时间学习的准备了嘛？</p>
+<p>最后，放心，我会考虑你的学业与其它事宜的。这些都应该被考虑进去，但不需要太害怕对课业的影响。每一次选择都一定带来一个好果子和一个坏果子。不要害怕得到两个坏果汁，不要贪婪于两个好果汁。不论如何选择，都是如此。（笑）</p>
+<p>如果没有意外，我会继续一点一点的更新课程，并准备好你学习所需要的资料。这是一个漫长的周期，所以我不急，你也是。</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E6%AF%94%E8%B5%9B%E6%8A%80%E5%B7%A7/2022-04-23_%E5%BF%AB%E8%AF%BB%E5%BF%AB%E5%86%99/">快读快写</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-22T16:00:00.000Z" itemprop="datePublished">
+    2022-04-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E6%AF%94%E8%B5%9B%E6%8A%80%E5%B7%A7/">比赛技巧</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h4 id="字符串和字符">字符串和字符</h4>
+<blockquote>
+<p>1.cin/cout别用，太慢！</p>
+</blockquote>
+<blockquote>
+<p>2.scanf/printf不要用%c，太危险！同理也不要想着利用C里scanf的语言特性进行过滤那怎么办呢？用%s！<br>
+%s是处理数组的，当然也可以处理字符数组，但是他可以想读取int一样遇到空格,回车,换行就停下来，就像scanf%d一样稳！于是对数组进行一个解析即可</p>
+</blockquote>
+<blockquote>
+<p>3.用%c的地方getchar就行</p>
+</blockquote>
+<p><strong>快读</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//字符串</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> string <span class="title">rd</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	string str=<span class="string">&quot;&quot;</span>;</span><br><span class="line">	<span class="type">char</span> ch=<span class="built_in">getchar</span>();</span><br><span class="line">	<span class="comment">//处理空格或回车 </span></span><br><span class="line">	<span class="keyword">while</span>(ch==<span class="string">&#x27; &#x27;</span> || ch==<span class="string">&#x27;\n&#x27;</span> || ch==<span class="string">&#x27;\r&#x27;</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		ch=<span class="built_in">getchar</span>(); </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//读入</span></span><br><span class="line">	<span class="keyword">while</span>(ch!=<span class="string">&#x27; &#x27;</span> &amp;&amp; ch!=<span class="string">&#x27;\n&#x27;</span> &amp;&amp; ch!=<span class="string">&#x27;\r&#x27;</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		str+=ch;</span><br><span class="line">		ch=<span class="built_in">getchar</span>();</span><br><span class="line">	 &#125; </span><br><span class="line">	<span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>快写</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">print</span><span class="params">(string s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; s[i]!=<span class="string">&#x27;\0&#x27;</span>; i++) <span class="built_in">putchar</span>(s[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="数字">数字</h4>
+<p><strong>快读</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//int型数据，longlong或其它改一下数据类型就行</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">rd</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">char</span> ch=<span class="built_in">getchar</span>();</span><br><span class="line">	 <span class="type">int</span> x=<span class="number">0</span>,w=<span class="number">1</span>;</span><br><span class="line">	<span class="comment">//过滤掉其他字符 </span></span><br><span class="line">	<span class="keyword">while</span>(ch&lt;<span class="string">&#x27;0&#x27;</span>|| ch&gt;<span class="string">&#x27;9&#x27;</span>) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(ch==<span class="string">&#x27;-&#x27;</span>) w=<span class="number">-1</span>;</span><br><span class="line">		ch=<span class="built_in">getchar</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(ch&gt;=<span class="string">&#x27;0&#x27;</span> &amp;&amp; ch&lt;=<span class="string">&#x27;9&#x27;</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//代替x=x*10+ch-&#x27;0&#x27;; </span></span><br><span class="line">		x=(x&lt;&lt;<span class="number">1</span>) + (x&lt;&lt;<span class="number">3</span>) +(ch^<span class="number">48</span>);</span><br><span class="line">		ch=<span class="built_in">getchar</span>();</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">return</span> x*w;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>快写</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x&lt;<span class="number">0</span>) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">putchar</span>(<span class="string">&#x27;-&#x27;</span>);</span><br><span class="line">		x=-x;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(x&gt;<span class="number">9</span>) <span class="built_in">print</span>(x/<span class="number">10</span>);</span><br><span class="line">	<span class="built_in">putchar</span>(x%<span class="number">10</span>+<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-04-22_23%E5%93%88%E5%B8%8C/">23哈希</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-21T16:00:00.000Z" itemprop="datePublished">
+    2022-04-22
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="哈希">哈希</h2>
+<blockquote>
+<p>降低数据复杂度，对直接访问进行改进</p>
+</blockquote>
+<blockquote>
+<p>实现方式：用哈希函数将长数据映射成一个短值</p>
+</blockquote>
+<p><strong>特性</strong></p>
+<blockquote>
+<p>1.执行效率高，对于二进制文本尽可能快计算出哈希值</p>
+<p>2.结果尽可能具有同一性，输出的值尽可能均匀分布</p>
+<p>3.存在雪崩效应：任何一个微小数值的变化都能使输出产生巨大变化</p>
+<p>4.哈希函数不能反向推导</p>
+</blockquote>
+<p><strong>哈希碰撞</strong></p>
+<blockquote>
+<p>对两个不同的值映射成同一个输出</p>
+<p>这个情况不能避免，只能缓解</p>
+</blockquote>
+<p><strong>缓解方式</strong></p>
+<blockquote>
+<p>1.链地址法（对哈希函数要求较低）</p>
+<p>数组加链表存储同一哈希值的不同数据</p>
+<p>优点：</p>
+<p>容错率高</p>
+<p>不会溢出</p>
+<p>缺点：</p>
+<p>链表过长</p>
+<p>浪费原有空间，同时需要额外的空间存储指针</p>
+<p>缓存性能不好</p>
+<p>2.开放地址法</p>
+<p>将所有数据存储在哈希表中，同一哈希值的不同数据相邻放置</p>
+<p>问题：可能需要扩容</p>
+<p>解决方法：</p>
+<p>线性探测法：不断向下一个一个找空间存储</p>
+<p>缺点：可能出现大规模聚集导致时间浪费</p>
+<p>平方探测法：不断向下探测i^2个空间（i不断递增，直到有存储空间）</p>
+<p>双重哈希法：再定义一个哈希函数，使用：原本的哈希值+i*新的哈希值（i不断递增，直到有存储空间）</p>
+<p>3.再哈希</p>
+<p>装填因子：n个数据/m个存储空间（已存的数据占当前存储空间的比例）</p>
+<p>将装填因子设置为0.75，一旦哈希表达到0.75，就扩容这个哈希表，并重新进行另一个哈希映射（这个新的哈希函数与空间量有公式挂钩）</p>
+</blockquote>
+<p><strong>哈希应用</strong></p>
+<p>密码校验，编译，编程语言，模式匹配算法，负载均衡</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/22/C++/C++%E5%9F%BA%E7%A1%80/2022-04-22_13-6%E6%8A%BD%E8%B1%A1%E5%9F%BA%E7%B1%BB%EF%BC%88ABC%EF%BC%89/">13-6抽象基类（ABC）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-21T16:00:00.000Z" itemprop="datePublished">
+    2022-04-22
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="抽象基类（ABC）">抽象基类（ABC）</h2>
+<blockquote>
+<p>对于两个类，一个可以作为基类，但使得派生类显得数据冗余的情况下，可以创建一个抽象基类来使这两个类都成为派生类。</p>
+</blockquote>
+<p><strong>创建方法</strong></p>
+<blockquote>
+<p>在基类中至少存在一个纯虚方法，则是抽象基类。抽象基类不能创建该类的对象。</p>
+</blockquote>
+<p><strong>纯虚方法</strong></p>
+<blockquote>
+<p>C++使用纯虚方法提供未实现的函数。一般纯虚函数不定义，但允许有定义。</p>
+<p>在原型中的方法末尾加=0来指出这是一个抽象基类，在类中可以不定义这个函数。并在派生类中使用虚函数来实现这个接口。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="type">int</span> <span class="title">test</span><span class="params">()</span> <span class="type">const</span> </span>=<span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/21/C++/C++%E5%9F%BA%E7%A1%80/2022-04-21_13-4%E9%9D%99%E6%80%81%E8%81%94%E7%BC%96%E4%B8%8E%E5%8A%A8%E6%80%81%E8%81%94%E7%BC%96/">13-4静态联编与动态联编</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-20T16:00:00.000Z" itemprop="datePublished">
+    2022-04-21
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="静态联编与动态联编">静态联编与动态联编</h2>
+<blockquote>
+<p>在C++中，一个函数名对应哪一个函数代码块会因为函数重载而产生问题。为了解决这个问题，在函数编译时会对函数名进行修饰，来保证函数重载后的每一个函数的独立性。这称为静态联编。</p>
+<p>然而，虚函数的出现使静态联编不能在编译时识别对应函数，因此必须在程序运行时选择正确的函数代码。这称为动态联编。</p>
+</blockquote>
+<blockquote>
+<p>按值传递的函数将派生类的部分数据转化为基类给函数使用</p>
+</blockquote>
+<h4 id="13-4-1指针和引用类型的兼容性">13.4.1指针和引用类型的兼容性</h4>
+<h5 id="向上强制转换和向下强制转换">向上强制转换和向下强制转换</h5>
+<blockquote>
+<p>向上强制转换：将派生类转换成基类，无需显式类型转换</p>
+<p>向下强制转换：将基类转换为派生类，必须显式类型转换，否则不被允许</p>
+</blockquote>
+<p>为了保证隐式向上强制转换，需要使用动态联编</p>
+<h4 id="13-4-2虚成员函数和动态联编">13.4.2虚成员函数和动态联编</h4>
+<h5 id="默认静态联编的原因">默认静态联编的原因</h5>
+<blockquote>
+<p>效率更高、一些基类的函数没必要重新定义增加工作量</p>
+</blockquote>
+<h5 id="虚函数的工作原理">虚函数的工作原理</h5>
+<blockquote>
+<p>编译器给每个对象添加一个隐藏成员，里面保存了一个指向函数地址数组的指针（即一个指针，指向一系列函数），这被称为虚函数表。里面存储了虚函数的地址。</p>
+<p>一般基类声明中带有virtual关键字的函数地址被存入数组，如果派生类提供了虚函数的新定义，则将取代这个函数地址。如果派生类并没有提供虚函数定义，则使用原始版本的函数。</p>
+</blockquote>
+<h5 id="虚函数的成本">虚函数的成本</h5>
+<p>1.对象空间增大，增加量为存储函数的空间</p>
+<p>2.对于每个类，编译器创建一个虚函数地址表</p>
+<p>3.对于每个函数调用，都需要进行一个额外操作，即在表中查找地址。</p>
+<h4 id="13-4-3虚函数的注意事项">13.4.3虚函数的注意事项</h4>
+<p>1.构造函数不能是虚函数</p>
+<p>2.析构函数应当是虚函数</p>
+<p>3.友元不能是虚函数，但可以通过调用虚函数来实现</p>
+<p>4.重新定义将<strong>隐藏</strong>基类原方法（包含多个重载版本的同名方法），而不是生成两个（根据参数判断的）重载版本</p>
+<blockquote>
+<p>这引出两个注意点：</p>
+<p>1.尽量保证继承的虚方法与原方法原型一致</p>
+<p>2.如果基类有多个版本的重载虚函数，应当在派生类中定义相同数量对应版本的虚函数，防止一个派生虚函数隐藏所有基类版本引发的问题。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/21/C++/C++%E5%9F%BA%E7%A1%80/2022-04-21_13-5%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%EF%BC%9Aprotected/">13-5访问控制：protected</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-20T16:00:00.000Z" itemprop="datePublished">
+    2022-04-21
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="访问控制：protected">访问控制：protected</h2>
+<blockquote>
+<p>private和protected之间的区别只有在基类和派生类中才会体现。</p>
+<p>派生类能直接访问基类protected中的成员，相当于public。外部不能直接访问protected中的成员，相当于private。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/21/%E4%B8%8A%E8%AF%BE/%E9%97%AE%E5%8D%B7%E5%8F%8D%E9%A6%88/2022-04-21_%E9%97%AE%E5%8D%B7%E8%B0%83%E6%9F%A51/">问卷调查1</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-20T16:00:00.000Z" itemprop="datePublished">
+    2022-04-21
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E4%B8%8A%E8%AF%BE/">上课</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E4%B8%8A%E8%AF%BE/%E9%97%AE%E5%8D%B7%E5%8F%8D%E9%A6%88/">问卷反馈</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="问卷调查">问卷调查</h2>
+<blockquote>
+<p>做老师并非一件非常简单的事。这不是把课件与作业一丢就能行的，更需要一些交流与反馈。因此这是一个调查问卷，从尽可能多方面对你的情况进行了解。</p>
+</blockquote>
+<h4 id="1-学习">1.学习</h4>
+<p><strong>你觉得每天的学习量是否太多？提出建议</strong></p>
+<p>Ans：</p>
+<p><strong>你觉得学习过程中是否有不能理解的地方？尽可能描述出来</strong></p>
+<p>Ans：</p>
+<p><strong>你对当前学习的方向是否清晰？需要我找一些文章来描述或阐明？</strong></p>
+<p>Ans：</p>
+<p><strong>你是否需要我每日在线答疑？</strong></p>
+<p>Ans：</p>
+<h4 id="2-看法">2.看法</h4>
+<p><strong>能不能讲一讲你对编程目前的认识</strong></p>
+<p>Ans：</p>
+<p><strong>你觉得编程与你想象中的是否一致？</strong></p>
+<p>Ans：</p>
+<p><strong>你是否反对长时间在这个学科投入时间与精力</strong></p>
+<p>Ans：</p>
+<h4 id="3-其它">3.其它</h4>
+<p><strong>你是否会有效使用搜索引擎？</strong></p>
+<p>Ans：</p>
+<p><strong>你是否会用b站找需要的教程？</strong></p>
+<p>Ans：</p>
+<p><strong>你是否用过其它的学习网站？</strong></p>
+<p>Ans：</p>
+<p><strong>对一些不懂的问题，你是否知道如何找到一些有价值的参考？</strong></p>
+<p>Ans：</p>
+<h4 id="4-未来">4.未来</h4>
+<p><strong>你认为高中最重要的是什么？</strong></p>
+<p>Ans：</p>
+<p><strong>你是否清晰的认识到你在做什么？</strong></p>
+<p>Ans：</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/33/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="page-number" href="/page/33/">33</a><span class="page-number current">34</span><a class="page-number" href="/page/35/">35</a><a class="page-number" href="/page/36/">36</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/35/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

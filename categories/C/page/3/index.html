@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ C++ }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/08/C++/Linux%E7%9B%B8%E5%85%B3/2023-01-08_5-Makefile%E8%AF%A6%E8%A7%A3/">5-Makefile详解</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-07T16:00:00.000Z" itemprop="datePublished">
+    2023-01-08
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Linux%E7%9B%B8%E5%85%B3/">Linux相关</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="Makefile详解">Makefile详解</h2>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/23/C++/%E9%AB%98%E8%B4%A8%E9%87%8F%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0/2022-12-23_1-2%E5%A4%B4%E6%96%87%E4%BB%B6%E7%9A%84%E7%BB%93%E6%9E%84/">1-2头文件的结构</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-22T16:00:00.000Z" itemprop="datePublished">
+    2022-12-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E9%AB%98%E8%B4%A8%E9%87%8F%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0/">高质量编程指南笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="头文件的结构">头文件的结构</h2>
+<p>头文件由三部分组成：</p>
+<ol>
+<li class="lvl-3">
+<p>版权和声明</p>
+</li>
+<li class="lvl-3">
+<p>预处理块</p>
+</li>
+<li class="lvl-3">
+<p>函数和类结构声明等</p>
+</li>
+</ol>
+<p><strong>案例</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 版权和版本声明见示例 1-1，此处省略。</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> GRAPHICS_H <span class="comment">// 防止 graphics.h 被重复引用 </span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GRAPHICS_H </span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span> <span class="comment">// 引用标准库的头文件 </span></span></span><br><span class="line">…</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> “myheader.h” <span class="comment">// 引用非标准库的头文件 </span></span></span><br><span class="line">… </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Function1</span><span class="params">(…)</span></span>; <span class="comment">// 全局函数声明 </span></span><br><span class="line">… </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Box</span> <span class="comment">// 类结构声明 </span></span><br><span class="line">&#123; </span><br><span class="line">… </span><br><span class="line">&#125;; </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/22/C++/%E9%AB%98%E8%B4%A8%E9%87%8F%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0/2022-12-22_1-1%E7%89%88%E6%9D%83%E5%92%8C%E5%A3%B0%E6%98%8E/">1-1版权和声明</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-21T16:00:00.000Z" itemprop="datePublished">
+    2022-12-22
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E9%AB%98%E8%B4%A8%E9%87%8F%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0/">高质量编程指南笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="版权和声明">版权和声明</h2>
+<blockquote>
+<p>位置：头文件和定义文件的开头</p>
+</blockquote>
+<p>内容：</p>
+<ol>
+<li class="lvl-3">
+<p>版权信息</p>
+</li>
+<li class="lvl-3">
+<p>文件名称，标识符，摘要</p>
+</li>
+<li class="lvl-3">
+<p>当前版本号，作者/修改者，完成日期</p>
+</li>
+<li class="lvl-3">
+<p>版本历史信息</p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">* Copyright (c) 2001,上海贝尔有限公司网络应用事业部 </span></span><br><span class="line"><span class="comment">* All rights reserved. </span></span><br><span class="line"><span class="comment">* </span></span><br><span class="line"><span class="comment">* 文件名称：filename.h </span></span><br><span class="line"><span class="comment">* 文件标识：见配置管理计划书 </span></span><br><span class="line"><span class="comment">* 摘 要：简要描述本文件的内容 </span></span><br><span class="line"><span class="comment">* </span></span><br><span class="line"><span class="comment">* 当前版本：1.1 </span></span><br><span class="line"><span class="comment">* 作 者：输入作者（或修改者）名字 </span></span><br><span class="line"><span class="comment">* 完成日期：2001年7月20日 </span></span><br><span class="line"><span class="comment">* </span></span><br><span class="line"><span class="comment">* 取代版本：1.0 </span></span><br><span class="line"><span class="comment">* 原作者 ：输入原作者（或修改者）名字 </span></span><br><span class="line"><span class="comment">* 完成日期：2001年5月10日 </span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/17/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2022-12-17_CC++%E5%9C%A8%E4%B8%8D%E5%90%8C%E5%B9%B3%E5%8F%B0%E4%B8%8B%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89/">CC++在不同平台下的宏定义</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-16T16:00:00.000Z" itemprop="datePublished">
+    2022-12-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="C-C-在不同平台下的宏定义">C/C++在不同平台下的宏定义</h2>
+<blockquote>
+<p>如何检测不同平台并保证代码的健壮性</p>
+</blockquote>
+<h4 id="1-Windows平台">1.Windows平台</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> _WIN32</span></span><br><span class="line"><span class="comment">//define something for Windows (32-bit and 64-bit, this part is common)</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> _WIN64</span></span><br><span class="line">   <span class="comment">//define something for Windows (64-bit only)</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">   <span class="comment">//define something for Windows (32-bit only)</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="2-Linux平台">2.Linux平台</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __linux__</span></span><br><span class="line"><span class="comment">//define something for linux</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="3-其它平台">3.其它平台</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __APPLE__</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> TARGET_IPHONE_SIMULATOR</span></span><br><span class="line"><span class="comment">// iOS Simulator</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">elif</span> TARGET_OS_IPHONE</span></span><br><span class="line"><span class="comment">// iOS device</span></span><br><span class="line"><span class="meta">#<span class="keyword">elif</span> TARGET_OS_MAC</span></span><br><span class="line"><span class="comment">// Other kinds of Mac OS</span></span><br><span class="line"><span class="meta">#<span class="keyword">elif</span> __ANDROID__</span></span><br><span class="line"><span class="comment">// android</span></span><br><span class="line"><span class="meta">#<span class="keyword">elif</span> __unix__ <span class="comment">// all unices not caught above</span></span></span><br><span class="line"><span class="comment">// Unix</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/04/C++/Linux%E7%9B%B8%E5%85%B3/4CMake/2022-12-04_1-CMake%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/">1-CMake初次使用</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-03T16:00:00.000Z" itemprop="datePublished">
+    2022-12-04
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Linux%E7%9B%B8%E5%85%B3/">Linux相关</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Linux%E7%9B%B8%E5%85%B3/4CMake/">4CMake</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="CMake初次使用">CMake初次使用</h2>
+<h4 id="1-构建CMakeLists-txt">1.构建CMakeLists.txt</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>vim CMakeLists.txt</p>
+<ul class="lvl-2">
+<li class="lvl-6">注意：文件名必须一致，大小写也是</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>增加文件内容</p>
+</li>
+</ul>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">PROJECT</span>(HELLO)</span><br><span class="line"></span><br><span class="line"><span class="keyword">SET</span>(SRC_LIST main.cpp)</span><br><span class="line"></span><br><span class="line"><span class="keyword">MESSAGE</span>(STATUS <span class="string">&quot;this is binary dir&quot;</span> <span class="variable">$&#123;HELLO_BINARY_DIR&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">MESSAGE</span>(STATUS <span class="string">&quot;this is source dir&quot;</span> <span class="variable">$&#123;HELLO_SOURCE_DIR&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">ADD_EXECUTABLE</span>(hello <span class="variable">$&#123;SRC_LIST&#125;</span>)</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>保存退出</p>
+</li>
+<li class="lvl-2">
+<p>cmake .</p>
+<ul class="lvl-2">
+<li class="lvl-6">表示在当前目录下执行cmake命令</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>make</p>
+<ul class="lvl-2">
+<li class="lvl-6">cmake只生成makefile文件，还需使用makefile的make命令去编译</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/03/C++/Linux%E7%9B%B8%E5%85%B3/2022-12-03_3-makefile%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99/">3-makefile文件编写</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-02T16:00:00.000Z" itemprop="datePublished">
+    2022-12-03
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Linux%E7%9B%B8%E5%85%B3/">Linux相关</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="makefile文件编写">makefile文件编写</h2>
+<h5 id="1-格式">1.格式</h5>
+<blockquote>
+<p>自上而下地完成整个项目的编译</p>
+</blockquote>
+<p>目标文件:需要文件</p>
+<p>​	command</p>
+<h5 id="2-案例">2.案例</h5>
+<blockquote>
+<p>自上而下地完成</p>
+</blockquote>
+<p>首先创建文件makefile</p>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="section">math.exe:main.o add.o sub.o</span></span><br><span class="line">	g++ main.o add.o sub.o -o math.exe</span><br><span class="line"><span class="section">main.o:main.c</span></span><br><span class="line">	g++ -c main.c -o main.o</span><br><span class="line"><span class="section">add.o:add.c</span></span><br><span class="line">	g++ -c add.c -o add.o</span><br><span class="line"><span class="section">sub.o:sub.c</span></span><br><span class="line">	g++ -c sub.c -o sub.o</span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	rm -f *.o math.exe</span><br></pre></td></tr></table></figure>
+<h5 id="3-使用makefile">3.使用makefile</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make		#自下而上地执行makefile命令</span><br><span class="line">make clean	#执行clean标签命令</span><br></pre></td></tr></table></figure>
+<h5 id="4-简化写法">4.简化写法</h5>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="section">math.exe:main.o add.o sub.o</span></span><br><span class="line">	g++ *.o -o <span class="variable">$@</span></span><br><span class="line"><span class="section">%.o:%.c</span></span><br><span class="line">	g++ -c <span class="variable">$&lt;</span> -o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	rm -f *.o math.exe</span><br></pre></td></tr></table></figure>
+<p>说明：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>$@代指目标文件名</p>
+</li>
+<li class="lvl-2">
+<p>*.o代指所有.o文件</p>
+</li>
+<li class="lvl-2">
+<p>$&lt;代指对每一个需要的文件进行遍历命令</p>
+</li>
+</ul>
+<h5 id="5-创建变量与使用变量">5.创建变量与使用变量</h5>
+<blockquote>
+<p>好处，便于修改（本例可以将gcc修改为g++）</p>
+</blockquote>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line">CC = gcc</span><br><span class="line"></span><br><span class="line"><span class="section">math.exe:main.o add.o sub.o</span></span><br><span class="line">	<span class="variable">$(CC)</span> main.o add.o sub.o -o math.exe</span><br><span class="line"><span class="section">main.o:main.c</span></span><br><span class="line">	<span class="variable">$(CC)</span> -c main.c -o main.o</span><br><span class="line"><span class="section">add.o:add.c</span></span><br><span class="line">	<span class="variable">$(CC)</span> -c add.c -o add.o</span><br><span class="line"><span class="section">sub.o:sub.c</span></span><br><span class="line">	<span class="variable">$(CC)</span> -c sub.c -o sub.o</span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	rm -f *.o math.exe</span><br></pre></td></tr></table></figure>
+<h5 id="6-makefile编译多个可执行文件">6.makefile编译多个可执行文件</h5>
+<blockquote>
+<p>makefile只执行第一条语句，并根据第一条语句的依赖，执行后续生成这些依赖的语句。</p>
+</blockquote>
+<p>如下语句，只会生成main_max，不会生成main_min</p>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="section">main_max:main_max.o find_max.o				#执行</span></span><br><span class="line">	gcc main_max.o find_max.o -o main_max</span><br><span class="line"></span><br><span class="line"><span class="section">main_min:main_min.o find_min.o				#不执行</span></span><br><span class="line">	gcc main_min.o find_min.o -o main_min</span><br><span class="line">	</span><br><span class="line"><span class="section">main_max.o:main_max.c						#执行</span></span><br><span class="line">	gcc -c main_max.c -o main_max.o</span><br><span class="line"></span><br><span class="line"><span class="section">find_max.o:find_max.c						#执行	</span></span><br><span class="line">	gcc -c find_max.c -o find_max.o</span><br><span class="line">	</span><br><span class="line"><span class="section">main_min.o:main_min.c						#不执行</span></span><br><span class="line">	gcc -c main_min.c -o main_min.o</span><br><span class="line">	</span><br><span class="line"><span class="section">find_min.o:find_min.c						#不执行</span></span><br><span class="line">	gcc -c find_min.c -o find_min.o</span><br></pre></td></tr></table></figure>
+<p>解决方法：使用<strong>all</strong>指令，将两个最终可执行文件作为all的依赖</p>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="section">all:main_max main_min						#第一步执行</span></span><br><span class="line"></span><br><span class="line"><span class="section">main_max:main_max.o find_max.o				#执行</span></span><br><span class="line">	gcc main_max.o find_max.o -o main_max</span><br><span class="line"></span><br><span class="line"><span class="section">main_min:main_min.o find_min.o				#执行</span></span><br><span class="line">	gcc main_min.o find_min.o -o main_min</span><br><span class="line">	</span><br><span class="line"><span class="section">main_max.o:main_max.c						#执行</span></span><br><span class="line">	gcc -c main_max.c -o main_max.o</span><br><span class="line"></span><br><span class="line"><span class="section">find_max.o:find_max.c						#执行	</span></span><br><span class="line">	gcc -c find_max.c -o find_max.o</span><br><span class="line">	</span><br><span class="line"><span class="section">main_min.o:main_min.c						#执行</span></span><br><span class="line">	gcc -c main_min.c -o main_min.o</span><br><span class="line">	</span><br><span class="line"><span class="section">find_min.o:find_min.c						#执行</span></span><br><span class="line">	gcc -c find_min.c -o find_min.o</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/02/C++/Linux%E7%9B%B8%E5%85%B3/2022-12-02_1-%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%85%B1%E4%BA%ABWindows%E6%96%87%E4%BB%B6%E5%A4%B9/">1-虚拟机共享Windows文件夹</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-01T16:00:00.000Z" itemprop="datePublished">
+    2022-12-02
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Linux%E7%9B%B8%E5%85%B3/">Linux相关</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="虚拟机共享Windows文件夹">虚拟机共享Windows文件夹</h2>
+<h4 id="1-设置">1.设置</h4>
+<p>VMWare中，虚拟机——设置——选项——共享文件夹</p>
+<h4 id="2-共享文件夹在LInux下的路径">2.共享文件夹在LInux下的路径</h4>
+<p>/mnt/hgfs/</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/02/C++/Linux%E7%9B%B8%E5%85%B3/2022-12-02_2-gcc%E3%80%81g++%E5%91%BD%E4%BB%A4/">2-gcc、g++命令</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-01T16:00:00.000Z" itemprop="datePublished">
+    2022-12-02
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Linux%E7%9B%B8%E5%85%B3/">Linux相关</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="gcc、g-命令">gcc、g++命令</h2>
+<h4 id="1-直接生成最终文件">1.直接生成最终文件</h4>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">gcc 文件名		#生成默认文件a.out，能直接被运行</span><br><span class="line">gcc main.c</span><br></pre></td></tr></table></figure>
+<p>注意：使用生成的文件方法：./a.out</p>
+<h4 id="2-预处理文件">2.预处理文件</h4>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">gcc -E 文件名	#不生成文件，只输出内容</span><br><span class="line">gcc -E main.c</span><br><span class="line">gcc -E main.c &gt; main,txt	#将输出内容重定向到main.txt内</span><br></pre></td></tr></table></figure>
+<p>预处理：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>头文件引入</p>
+</li>
+<li class="lvl-2">
+<p>宏的展开</p>
+</li>
+<li class="lvl-2">
+<p>指令的处理</p>
+</li>
+</ul>
+<h4 id="3-编译">3.编译</h4>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">gcc -c 文件名		#生成目标文件.o</span><br><span class="line">gcc -c main.c				</span><br></pre></td></tr></table></figure>
+<h4 id="4-链接（将所有的目标文件链接exe）">4.链接（将所有的目标文件链接exe）</h4>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">gcc 文件1.o 文件2.o ... -o 目标文件名</span><br><span class="line">gcc main.o add.o -o count.exe	</span><br></pre></td></tr></table></figure>
+<h4 id="5-创建静态库">5.创建静态库</h4>
+<blockquote>
+<p>假设将add.c创建为静态库libAdd.a</p>
+</blockquote>
+<h5 id="1-生成目标文件">1.生成目标文件</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">g++ -c add.c -o add.o</span><br></pre></td></tr></table></figure>
+<h5 id="2-将目标文件整合为静态库（命名为lib库名-a）">2.将目标文件整合为静态库（命名为lib库名.a）</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ar crv 静态库名.a 文件1.o 文件2.o ... </span><br><span class="line">ar crv libAdd.a add.o</span><br></pre></td></tr></table></figure>
+<h4 id="6-使用静态库">6.使用静态库</h4>
+<h5 id="1-在main里使用该库内的函数">1.在main里使用该库内的函数</h5>
+<blockquote>
+<p>#include“库名.h”</p>
+</blockquote>
+<h5 id="2-将main-c编译为main-o">2.将main.c编译为main.o</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">g++ -c main.c -o main.o</span><br></pre></td></tr></table></figure>
+<h5 id="3-将main-o与静态库链接exe">3.将main.o与静态库链接exe</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">g++ main.o libAdd.a -o count</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/11/11/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2022-11-11_move%E8%AF%AD%E4%B9%89+%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8+%E5%AE%8C%E7%BE%8E%E8%BD%AC%E5%8F%91/">move语义+右值引用+完美转发</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-11-10T16:00:00.000Z" itemprop="datePublished">
+    2022-11-11
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="move语义-右值引用-完美转发">move语义+右值引用+完美转发</h2>
+<h4 id="1-Move语义">1.Move语义</h4>
+<blockquote>
+<p>move语义代表所有符合这种意思的行为：将一个对象的所有权转交给另一个对象，源对象失去所有权。</p>
+</blockquote>
+<p>例如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> *p = &amp;a;</span><br><span class="line"><span class="type">int</span> *q;</span><br><span class="line"></span><br><span class="line">q = p;</span><br><span class="line">p = <span class="literal">nullptr</span>;		<span class="comment">//所有权必须转交完全</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-右值引用">2.右值引用</h4>
+<blockquote>
+<p>一般move语义用于赋值运算符的重载上，其它函数很少能用到move语义。</p>
+<p>为了更好的实现move语义，C++对函数参数进行判断，如果是右值引用，则应该为move语义，应该调用移动构造函数。否则是左值引用，推断为复制语义，应该调用拷贝构造函数。</p>
+<p>移动构造函数和拷贝构造函数的区别就在于函数参数是左值引用还是右值引用。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/11/09/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2022-11-09_C++%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/">C++ 多线程</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-11-08T16:00:00.000Z" itemprop="datePublished">
+    2022-11-09
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="C-多线程">C++ 多线程</h2>
+<h4 id="1-线程">1.线程</h4>
+<h5 id="1-库-Thread">1.库<code>&lt;Thread&gt;</code></h5>
+<h5 id="2-对象std-thread">2.对象std::thread</h5>
+<blockquote>
+<p>在对象创建时，线程就开始执行，使用join或detach来确认主线程和子线程之间的关系。</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>thread()</p>
+<ul class="lvl-2">
+<li class="lvl-6">默认构造函数</li>
+<li class="lvl-6">创建一个线程，什么都不做</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>template&lt;class Fn, class … Arg&gt; thread(Fn &amp;&amp; fn,Args &amp;&amp; … args)</p>
+<ul class="lvl-2">
+<li class="lvl-6">初始化构造函数</li>
+<li class="lvl-6">创建一个线程，以args为参数，执行fn函数</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-常用成员函数">3.常用成员函数</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>void join()</p>
+<ul class="lvl-2">
+<li class="lvl-6">阻塞等待线程结束并清理资源</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>void detach()</p>
+<ul class="lvl-2">
+<li class="lvl-6">将线程与调用其的线程分离，彼此独立执行</li>
+<li class="lvl-6">注意：如果需要该函数，必须在线程被创建时立刻调用。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>bool joinable()</p>
+<ul class="lvl-2">
+<li class="lvl-6">返回线程是否能执行join函数</li>
+<li class="lvl-6">当线程执行过join或者detach，则不能再次被执行</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>std:🧵:id get_id()</p>
+<ul class="lvl-2">
+<li class="lvl-6">获取线程id</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/categories/C/page/2/">« prev</a><a class="page-number" href="/categories/C/">1</a><a class="page-number" href="/categories/C/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/categories/C/page/4/">4</a><a class="page-number" href="/categories/C/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/categories/C/page/8/">8</a><a class="extend next" rel="next" href="/categories/C/page/4/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

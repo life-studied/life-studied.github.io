@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ Docker }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/19/Docker/2022-12-19_3-Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">3-Docker常用命令</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-18T16:00:00.000Z" itemprop="datePublished">
+    2022-12-19
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Docker/">Docker</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="Docker常用命令">Docker常用命令</h2>
+<h4 id="1-帮助启动类命令">1.帮助启动类命令</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>启动</strong>docker: systemctl start docker</p>
+</li>
+<li class="lvl-2">
+<p><strong>停止</strong>docker: systemctl stop docker</p>
+</li>
+<li class="lvl-2">
+<p>重启docker: systemctl restart docker</p>
+</li>
+<li class="lvl-2">
+<p><strong>查看</strong>docker状态: systemctl status docker</p>
+</li>
+<li class="lvl-2">
+<p>开机启动: systemctl enable docker</p>
+</li>
+<li class="lvl-2">
+<p>查看docker概要信息:dockerinfo</p>
+</li>
+<li class="lvl-2">
+<p>查看docker总体帮助文档: docker --help</p>
+</li>
+<li class="lvl-2">
+<p>查看docker命令帮助文档:docker具体命令–help</p>
+</li>
+</ul>
+<h4 id="2-镜像命令">2.镜像命令</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>查看本地镜像：<code>docker images</code></p>
+<ul class="lvl-2">
+<li class="lvl-6">参数：
+<ul class="lvl-4">
+<li class="lvl-10">-a：列出所有镜像（含历史）</li>
+<li class="lvl-10">-q：只显示镜像ID</li>
+</ul>
+</li>
+<li class="lvl-6">选项意义
+<ul class="lvl-4">
+<li class="lvl-10">REPOSITORY:表示镜像的仓库源</li>
+<li class="lvl-10">TAG:镜像的标签版本号</li>
+<li class="lvl-10">IMAGE ID:镜像ID</li>
+<li class="lvl-10">CREATED:镜像创建时间</li>
+<li class="lvl-10">SIZE:镜像大小</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>在远程仓库搜索镜像：<code>docker search 镜像名</code></p>
+</li>
+<li class="lvl-2">
+<p>拉取镜像：<code>docker pull 镜像名[:TAG]</code></p>
+<ul class="lvl-2">
+<li class="lvl-6">不加TAG默认latest</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>查看镜像/容器/数据卷所占的空间：<code>docker system df</code></p>
+</li>
+<li class="lvl-2">
+<p>删除镜像：<code>docker rmi 镜像ID</code>或者<code>docker rmi 镜像名</code></p>
+<ul class="lvl-2">
+<li class="lvl-6">先docker images查看，再docker rmi</li>
+<li class="lvl-6">强制删除加参数-f</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-容器命令">3.容器命令</h4>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/17/Docker/2022-12-17_1-Docker%E4%B8%89%E8%A6%81%E7%B4%A0/">1-Docker三要素</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-16T16:00:00.000Z" itemprop="datePublished">
+    2022-12-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Docker/">Docker</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="Docker三要素">Docker三要素</h2>
+<blockquote>
+<p>类似于C++从类声明获取类对象一样。</p>
+</blockquote>
+<h4 id="1-镜像（image）">1.镜像（image）</h4>
+<blockquote>
+<p>一个程序的模板，允许使用其生成多个相同的容器实例。其本质是程序的源代码。</p>
+</blockquote>
+<h4 id="2-容器（container）">2.容器（container）</h4>
+<blockquote>
+<p>使用镜像产生的实例。其包含需要的最小环境与运行在其中的程序。</p>
+</blockquote>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="language-bash"> 镜像</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-仓库（responsibility）">3.仓库（responsibility）</h4>
+<blockquote>
+<p>存放镜像文件的地方。</p>
+</blockquote>
+<p>国外为docker hub</p>
+<p>国内为阿里云，网易云等</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/15/Docker/2022-12-15_2-CentOS%E5%AE%89%E8%A3%85docker/">2-CentOS安装docker</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-14T16:00:00.000Z" itemprop="datePublished">
+    2022-12-15
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Docker/">Docker</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="CentOS安装docker">CentOS安装docker</h2>
+<h4 id="1-进入官网docker">1.进入官网docker</h4>
+<p><a target="_blank" rel="noopener" href="https://docs.docker.com/get-started/">https://docs.docker.com/get-started/</a></p>
+<h4 id="2-在安装中跟着做">2.在安装中跟着做</h4>
+<h4 id="3-使用阿里云镜像加速器">3.使用阿里云镜像加速器</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>登录</p>
+</li>
+<li class="lvl-2">
+<p>进入控制台</p>
+</li>
+<li class="lvl-2">
+<p>找到容器镜像服务</p>
+</li>
+<li class="lvl-2">
+<p>找到镜像加速器</p>
+</li>
+<li class="lvl-2">
+<p>跟着做</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

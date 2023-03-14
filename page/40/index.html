@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/07/C++/C++%E5%9F%BA%E7%A1%80/2022-03-07_10-3-5%20const%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/">10-3-5 const成员函数</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-06T16:00:00.000Z" itemprop="datePublished">
+    2022-03-07
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="10-3-5-const成员函数">10.3.5 const成员函数</h2>
+<blockquote>
+<p>如果一个类被创建时就是const类型，则类函数因不能保证不修改类的成员而报错，此时就需要const成员函数来解决这种问题</p>
+</blockquote>
+<h4 id="创建">创建</h4>
+<blockquote>
+<p>在函数参数列表后加const即可</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span> <span class="type">const</span></span>;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/07/C++/C++%E5%9F%BA%E7%A1%80/2022-03-07_10-4%20this%E6%8C%87%E9%92%88/">10-4 this指针</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-06T16:00:00.000Z" itemprop="datePublished">
+    2022-03-07
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="10-4-this指针">10.4 this指针</h2>
+<h5 id="介绍">介绍</h5>
+<blockquote>
+<p>当涉及两个同类对象时，对于本对象该用什么方式表示而定义的指针</p>
+</blockquote>
+<h4 id="10-4-1如何涉及两个对象">10.4.1如何涉及两个对象</h4>
+<blockquote>
+<p>在一个对象的成员函数中提供一个其他对象的参数，从而显式的访问这个对象并隐式的访问自己。</p>
+</blockquote>
+<p><strong>案例</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">const</span> Stock &amp; <span class="title">Stock::topval</span><span class="params">(<span class="type">const</span> Stock &amp; s)</span><span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.top_val&gt;top_val)</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;<span class="comment">//this为本对象的地址，即指向它的指针</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/07/C++/C++%E5%9F%BA%E7%A1%80/2022-03-07_10-5%20%E5%AF%B9%E8%B1%A1%E6%95%B0%E7%BB%84/">10-5 对象数组</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-06T16:00:00.000Z" itemprop="datePublished">
+    2022-03-07
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="10-5-对象数组">10.5 对象数组</h2>
+<h4 id="10-5-1创建对象数组并赋值">10.5.1创建对象数组并赋值</h4>
+<blockquote>
+<p>可以使用构造函数来初始化数组元素</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> STKS=<span class="number">3</span>;</span><br><span class="line">Stock stocks[STKS]=&#123;</span><br><span class="line">    <span class="built_in">Stock</span>(<span class="string">&quot;1&quot;</span>,<span class="number">1</span>,<span class="number">1</span>);<span class="comment">//调用构造函数，每次构造函数调用都表示一个值</span></span><br><span class="line">    <span class="built_in">Stock</span>(<span class="string">&quot;2&quot;</span>,<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line">    <span class="built_in">Stock</span>(<span class="string">&quot;3&quot;</span>,<span class="number">3</span>,<span class="number">3</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：如果没有调用构造函数，系统会使用默认构造函数来初始化其余元素</strong></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/07/C++/C++%E5%9F%BA%E7%A1%80/2022-03-07_10-6%20%E7%B1%BB%E4%BD%9C%E7%94%A8%E5%9F%9F/">10-6 类作用域</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-06T16:00:00.000Z" itemprop="datePublished">
+    2022-03-07
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="10-6-类作用域">10.6 类作用域</h2>
+<blockquote>
+<p>在类中定义的名称的作用域是整个类，只在该类中是已知的。</p>
+</blockquote>
+<h4 id="10-6-1作用域为类的常量">10.6.1作用域为类的常量</h4>
+<p>例如：类声明可能需要使用字面值30来指定数组的长度。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Brakery</span>&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> MONTHS=<span class="number">12</span>;<span class="comment">//不可行！！</span></span><br><span class="line">    <span class="type">double</span> costs[MONTHS];</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是，因为声明只是描述了对象的形式，并没有创建变量，因此<strong>类声明中没有存储值的空间</strong>。所以常量不能被赋值</p>
+<h5 id="处理方法">处理方法</h5>
+<p>1.使用枚举</p>
+<blockquote>
+<p>注意：因为枚举并不创建类数据成员，所以在类中声明的枚举不会在对象中出现。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Brakery</span>&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">enum</span> &#123;MONTHS=<span class="number">12</span>&#125;;<span class="comment">//使用枚举</span></span><br><span class="line">    <span class="type">double</span> costs[MONTHS];</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.使用static</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Brakery</span>&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">static</span> <span class="type">const</span> <span class="type">int</span> MONTHS=<span class="number">12</span>;</span><br><span class="line">    <span class="type">double</span> costs[MONTHS];</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>该常量将与所有静态变量存储在一起，而不是存储在类中，所以能做到</p>
+</blockquote>
+<h4 id="10-6-2作用域内枚举（c-11）">10.6.2作用域内枚举（c++11）</h4>
+<blockquote>
+<p>传统枚举会因为两个枚举内的常量名称一致而引发冲突</p>
+<p>作用域内枚举可以有效避免这个问题</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum class</span> <span class="title class_">egg</span> &#123;Small,Medium,Large&#125;;<span class="comment">//作用域egg</span></span><br><span class="line"><span class="keyword">enum class</span> <span class="title class_">t_shirt</span> &#123;Small,Medium,Large&#125;;<span class="comment">//作用域t_shirt</span></span><br><span class="line">egg choose = egg::Large;<span class="comment">//注意加上作用域解析符::</span></span><br><span class="line">t_shirt T=t_shirt::Large;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>作用域内枚举不能隐式转化为整形</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/07/C++/C++%E5%9F%BA%E7%A1%80/2022-03-07_10-7%20%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">10-7 抽象数据类型</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-06T16:00:00.000Z" itemprop="datePublished">
+    2022-03-07
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="10-7抽象数据类型">10.7抽象数据类型</h2>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/07/C++/C++%E5%9F%BA%E7%A1%80/2022-03-07_9-1/">9-1</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-06T16:00:00.000Z" itemprop="datePublished">
+    2022-03-07
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="9-1">9.1</h2>
+<h4 id="动态分配new">动态分配new</h4>
+<h5 id="1-内置标量初始化">1.内置标量初始化</h5>
+<p>在类型名后加上初始值并用（）括起</p>
+<p>例如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> *pi=<span class="keyword">new</span> <span class="built_in">int</span> (<span class="number">6</span>);</span><br><span class="line"><span class="type">double</span> *pd=<span class="keyword">new</span> <span class="built_in">double</span> (<span class="number">99.99</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="2-初始化结构或数组（c-11）">2.初始化结构或数组（c++11）</h5>
+<p>使用大括号的列表初始化</p>
+<p>例如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">where</span>&#123;<span class="type">double</span> x;<span class="type">double</span> y;<span class="type">double</span> z;&#125;;</span><br><span class="line">where * one=<span class="keyword">new</span> where &#123;<span class="number">2.5</span>,<span class="number">5.3</span>,<span class="number">7.2</span>&#125;;</span><br><span class="line"><span class="type">int</span> *ar=<span class="keyword">new</span> <span class="type">int</span> [<span class="number">4</span>] &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br></pre></td></tr></table></figure>
+<h5 id="3-运算符、函数、替换函数">3.运算符、函数、替换函数</h5>
+<p>运算符new和new []分别调用下面函数：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> * <span class="keyword">operator</span> <span class="title">new</span><span class="params">(std::<span class="type">size_t</span>)</span></span>;</span><br><span class="line"><span class="type">void</span> * <span class="keyword">operator</span> <span class="keyword">new</span>[](std::<span class="type">size_t</span>);</span><br></pre></td></tr></table></figure>
+<p>delete类似</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-03-06_8%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91/">8二叉平衡树</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-05T16:00:00.000Z" itemprop="datePublished">
+    2022-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="二叉平衡树">二叉平衡树</h2>
+<h4 id="平衡二叉树">平衡二叉树</h4>
+<h6 id="由来：">由来：</h6>
+<blockquote>
+<p>为了防止二叉排序树中斜树的出现，影响查找效率</p>
+</blockquote>
+<h6 id="性质：">性质：</h6>
+<blockquote>
+<p>1.可以是空树</p>
+</blockquote>
+<blockquote>
+<p>2.任一结点的左右子树高度之差&lt;=1</p>
+</blockquote>
+<h5 id="调整失衡操作">调整失衡操作</h5>
+<blockquote>
+<p>旋转</p>
+<p>左旋</p>
+<p>步骤：</p>
+<p>1.结点的右孩子代替失衡结点的位置</p>
+<p>2.如果右孩子有左子树，变成失衡结点的右子树</p>
+<p>3.失衡结点本身变成右孩子的左子树</p>
+<p>右旋类似</p>
+</blockquote>
+<p><img src="picture/%E6%97%8B%E8%BD%AC%E6%93%8D%E4%BD%9C%E5%8E%9F%E5%9B%BE.png" alt=""></p>
+<p><img src="picture/%E6%97%8B%E8%BD%AC%E6%93%8D%E4%BD%9C%E5%90%8E.png" alt=""></p>
+<p><strong>注：这是在左子树的左孩子失衡或右子树的右孩子失衡下进行的基础操作。如果出现的情况与之不符，则应先对左子树左旋或右子树右旋，再进行上述基本操作</strong></p>
+<blockquote>
+<p>总结：</p>
+<p>LL 单一右旋</p>
+<p>RR 单一左旋</p>
+<p>LR 先左后右</p>
+<p>RL 先右后左</p>
+</blockquote>
+<h5 id="删除操作">删除操作</h5>
+<blockquote>
+<p>与二叉排序树一致</p>
+<p>唯一问题在于删除后是否平衡</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> HEIGHT(node) (node==NULL)?0:((avlnode*)(node)-&gt;height)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX(a,b) ((a)&gt;(b)?(a):(b))</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> key;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">left</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">right</span>;</span></span><br><span class="line">    <span class="type">int</span> height;</span><br><span class="line">&#125;avlnode, * avltree;</span><br><span class="line"></span><br><span class="line">avltree <span class="title function_">left_left_rotation</span><span class="params">(avltree tree)</span></span><br><span class="line">&#123;</span><br><span class="line">    avlnode* k2 = tree-&gt;left;</span><br><span class="line">    tree-&gt;left = k2-&gt;right;</span><br><span class="line">    k2-&gt;right = tree;</span><br><span class="line">    <span class="comment">//注：旋转操作改变了树的高度</span></span><br><span class="line">    tree-&gt;height = MAX(getNode_height(tree-&gt;left), getNode_height(tree-&gt;right)) + <span class="number">1</span>;</span><br><span class="line">    k2-&gt;height = MAX(getNode_height(tree-&gt;left), getNode_height(tree-&gt;right)) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> k2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">avltree <span class="title function_">right_right_rotation</span><span class="params">(avltree tree)</span></span><br><span class="line">&#123;</span><br><span class="line">    avlnode* k2 = tree-&gt;right;</span><br><span class="line">    tree-&gt;right = k2-&gt;left;</span><br><span class="line">    k2-&gt;left = tree;</span><br><span class="line">    <span class="comment">//注：旋转操作改变了树的高度</span></span><br><span class="line">    <span class="comment">//底层的高度是没有变化的，而顶层的失衡结点和替代结点高度发生了变化</span></span><br><span class="line">    tree-&gt;height = MAX(getNode_height(tree-&gt;left), getNode_height(tree-&gt;right)) + <span class="number">1</span>;</span><br><span class="line">    k2-&gt;height = MAX(getNode_height(tree-&gt;left), getNode_height(tree-&gt;right)) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> k2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">avltree <span class="title function_">left_right_rotation</span><span class="params">(avltree tree)</span></span><br><span class="line">&#123;</span><br><span class="line">    tree-&gt;left = right_right_rotation(tree-&gt;left);</span><br><span class="line">    tree = left_left_rotation(tree);</span><br><span class="line">    <span class="comment">//在调用的函数中树的高度已经调整，此处就无需调整</span></span><br><span class="line">    <span class="keyword">return</span> tree;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">avltree <span class="title function_">right_left_rotation</span><span class="params">(avltree tree)</span></span><br><span class="line">&#123;</span><br><span class="line">    tree-&gt;right = left_left_rotation(tree-&gt;right);</span><br><span class="line">    tree = right_right_rotation(tree);</span><br><span class="line">    <span class="comment">//在调用的函数中树的高度已经调整，此处就无需调整</span></span><br><span class="line">    <span class="keyword">return</span> tree;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//插入结点</span></span><br><span class="line">avltree <span class="title function_">insert</span><span class="params">(avltree tree, <span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (tree == <span class="literal">NULL</span>)<span class="comment">//找到可以插入的位置了</span></span><br><span class="line">    &#123;</span><br><span class="line">        avlnode* node = create_node(key, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">        tree = node;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (key &lt; tree-&gt;key)<span class="comment">//左子树中插入结点</span></span><br><span class="line">    &#123;</span><br><span class="line">        tree-&gt;left = insert(tree-&gt;left, key);<span class="comment">//递归查找应该插入的位置</span></span><br><span class="line">        <span class="keyword">if</span> (HEIGHT(tree-&gt;left) - HEIGHT(tree-&gt;right) == <span class="number">2</span>)<span class="comment">//从最底层开始判断是否失衡（递归层层向上判断）</span></span><br><span class="line">            <span class="comment">//注：大前提是左插，所以只可能左边的高度大于右边高度引起的失衡</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (key &lt; tree-&gt;left-&gt;key)<span class="comment">//如果当前树的左子树的key小于插入值</span></span><br><span class="line">            &#123;</span><br><span class="line">                tree = left_left_rotation(tree);</span><br><span class="line">                <span class="comment">//说明当前树是左左型失衡，使用左左旋调整，同时将当前最顶端的结点赋值给树，在最后返回</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                tree = left_right_rotation(tree);</span><br><span class="line">                <span class="comment">//说明当前树是左右型失衡，使用左右旋调整，同时将当前最顶端的结点赋值给树，在最后返回</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span><span class="comment">//在右子树中插入结点</span></span><br><span class="line">    &#123;</span><br><span class="line">        tree-&gt;right = insert(tree-&gt;right, key);<span class="comment">//递归查找应该插入的位置</span></span><br><span class="line">        <span class="keyword">if</span> (HEIGHT(tree-&gt;right) - HEIGHT(tree-&gt;left) == <span class="number">2</span>)<span class="comment">//从最底层开始判断是否失衡（递归层层向上判断）</span></span><br><span class="line">            <span class="comment">//注：大前提是右插，所以只可能右边的高度大于左边高度引起的失衡</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (key &lt; tree-&gt;right-&gt;key)<span class="comment">//如果当前树的右子树的key小于插入值</span></span><br><span class="line">            &#123;</span><br><span class="line">                tree = right_left_rotation(tree);</span><br><span class="line">                <span class="comment">//说明当前树是右左型失衡，使用右左旋调整</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                tree = right_right_rotation(tree);</span><br><span class="line">                <span class="comment">//说明当前树是右右型失衡，使用右右旋调整</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//重新调整二叉树的深度</span></span><br><span class="line">    tree-&gt;height = MAX(getNode_height(tree-&gt;left), getNode_height(tree-&gt;right)) + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> tree;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建新节点</span></span><br><span class="line">avlnode* <span class="title function_">create_node</span><span class="params">(<span class="type">int</span> key, avlnode* left, avlnode* right)</span></span><br><span class="line">&#123;</span><br><span class="line">    avlnode* node = (avlnode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(avlnode));</span><br><span class="line">    node-&gt;key = key;</span><br><span class="line">    node-&gt;left = left;</span><br><span class="line">    node-&gt;right = right;</span><br><span class="line">    node-&gt;height = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//计算当前树的高度</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">getNode_height</span><span class="params">(avlnode* node)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> HEIGHT(node);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">avlnode* <span class="title function_">search_node</span><span class="params">(avltree tree, <span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (tree == <span class="literal">NULL</span> || key == tree-&gt;key)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> tree;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (key &lt; tree-&gt;key)</span><br><span class="line">    &#123;</span><br><span class="line">        search_node(tree-&gt;left, key);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        search_node(tree-&gt;right, key);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">avlnode* <span class="title function_">minimun</span><span class="params">(avltree tree)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (tree == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span> (tree-&gt;right)</span><br><span class="line">        &#123;</span><br><span class="line">            tree = tree-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tree;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">avlnode* <span class="title function_">avltree_deleteNode</span><span class="params">(avltree tree, <span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    avlnode* node = search_node(tree, key);</span><br><span class="line">    <span class="keyword">if</span> (node == <span class="literal">NULL</span> || tree == <span class="literal">NULL</span>)<span class="comment">//如果node定位结果NULL</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> tree;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span><span class="comment">//node定位到了</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (key &lt; tree-&gt;key)<span class="comment">//删除的结点在当前树的左子树</span></span><br><span class="line">        &#123;</span><br><span class="line">            tree-&gt;left = avltree_deleteNode(tree-&gt;left, key);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//检查高度的代码,因为删除的是左子树上的结点，所以右子树可能比左子树高，所以使用右减左</span></span><br><span class="line">            <span class="keyword">if</span> (HEIGHT(tree-&gt;right) - HEIGHT(tree-&gt;left) == <span class="number">2</span>)<span class="comment">//从最底层开始判断是否失衡（递归层层向上判断）</span></span><br><span class="line">            &#123;                                                 </span><br><span class="line">                <span class="keyword">if</span> (tree-&gt;right-&gt;left)<span class="comment">//当前结点的右结点的左结点是否存在</span></span><br><span class="line">                &#123;<span class="comment">//存在</span></span><br><span class="line">                    tree = right_left_rotation(tree);</span><br><span class="line">                    <span class="comment">//说明当前树是右左型失衡，使用右左旋调整</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span><span class="comment">//不存在</span></span><br><span class="line">                &#123;</span><br><span class="line">                    tree = right_right_rotation(tree);</span><br><span class="line">                    <span class="comment">//说明当前树是右右型失衡，使用右右旋调整</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(key &gt; tree-&gt;key)<span class="comment">//删除的结点在右子树</span></span><br><span class="line">        &#123;</span><br><span class="line">            tree-&gt;right = avltree_deleteNode(tree-&gt;right, key);</span><br><span class="line">            <span class="keyword">if</span> (HEIGHT(tree-&gt;left) - HEIGHT(tree-&gt;right) == <span class="number">2</span>)<span class="comment">//从最底层开始判断是否失衡（递归层层向上判断）</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (key &lt; tree-&gt;left-&gt;key)</span><br><span class="line">                &#123;</span><br><span class="line">                    tree = left_left_rotation(tree);</span><br><span class="line">                    <span class="comment">//说明当前树是左左型失衡，使用左左旋调整</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    tree = left_right_rotation(tree);</span><br><span class="line">                    <span class="comment">//说明当前树是左右型失衡，使用左右旋调整</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span><span class="comment">//待删除的结点就是当前树，即递归定位到了当前树==删除结点</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (tree-&gt;left &amp;&amp; tree-&gt;right)<span class="comment">//左右都不为NULL</span></span><br><span class="line">            &#123;</span><br><span class="line">                avlnode* min_node = minimun(tree-&gt;left);<span class="comment">//找到适合取代该结点的结点</span></span><br><span class="line">                tree-&gt;key = min_node-&gt;key;<span class="comment">//把找到的值放入当前结点</span></span><br><span class="line">                tree-&gt;left = avltree_deleteNode(tree-&gt;left, min_node-&gt;key);</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span><span class="comment">//左右至少有一个NULL</span></span><br><span class="line">            &#123;</span><br><span class="line">                tree = (tree-&gt;left ? tree-&gt;left : tree-&gt;right);</span><br><span class="line">                <span class="comment">//独子或无子</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (tree)<span class="comment">//整理高度</span></span><br><span class="line">        &#123;</span><br><span class="line">            tree-&gt;height = MAX(getNode_height(tree-&gt;left), getNode_height(tree-&gt;right)) + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> tree;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：递归这样理解：</p>
+<p>在这个树中，如果结点一下子看不到，就深入一层，直到找到，在当前这个局部树中删除这个结点并消除影响</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/06/C++/C++%E5%9F%BA%E7%A1%80/2022-03-06_8-3%20%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0/">8-3 默认参数</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-05T16:00:00.000Z" itemprop="datePublished">
+    2022-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="8-3-默认参数">8.3 默认参数</h2>
+<p>介绍：函数省略实参时默认使用的值</p>
+<h5 id="设置方法及要求">设置方法及要求</h5>
+<p>设置方法：仅在<strong>函数原型</strong>的参数列表中赋值</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">char</span> * <span class="title">left</span><span class="params">(<span class="type">const</span> <span class="type">char</span> * str, <span class="type">int</span> n=<span class="number">1</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">char</span> * <span class="title">left</span><span class="params">(<span class="type">const</span> <span class="type">char</span> * str, <span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要求：默认参数必须从右往左添至参数列表</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">harpo</span><span class="params">(<span class="type">int</span> n,<span class="type">int</span> m=<span class="number">4</span>,<span class="type">int</span> j=<span class="number">5</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<h5 id="使用说明">使用说明</h5>
+<p>对于带n个默认参数的共m个参数的函数，使用时参数列表中可有[m-n,m]个参数，根据情况使用</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/06/C++/C++%E5%9F%BA%E7%A1%80/2022-03-06_8-4%20%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD/">8-4 函数重载</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-05T16:00:00.000Z" itemprop="datePublished">
+    2022-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="8-4-函数重载">8.4 函数重载</h2>
+<h4 id="介绍">介绍</h4>
+<blockquote>
+<p>允许使用多个同名的不同功能的函数</p>
+<p>编译器辨别的方法仅为<strong>参数列表</strong>，与返回值<strong>无关</strong>！</p>
+</blockquote>
+<h4 id="使用说明">使用说明</h4>
+<blockquote>
+<p>直接定义多个相同名字但是参数不同的函数即可，记得保证传入参数时编译器不会无法确认</p>
+</blockquote>
+<h4 id="注意事项">注意事项</h4>
+<p>1.如果没有任何一个函数完全匹配实参，编译器将尝试强制类型转换</p>
+<p>2.如果多个函数匹配实参，编译器会报错</p>
+<p>3.引用和同类型不引用的参数会引起编译器无法确认</p>
+<p>4.非const实参可以传入const和非const，而const实参只能作用于const</p>
+<p>5.编译器辨别的方法仅为<strong>参数列表</strong>，与返回值<strong>无关</strong>！</p>
+<h4 id="何时使用">何时使用</h4>
+<p>有些可以通过默认参数来避免，但如果类型不同的参数，就需要使用函数重载</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-03-05_5%E6%A0%91%E7%9A%84%E9%80%92%E5%BD%92/">5树的递归</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-04T16:00:00.000Z" itemprop="datePublished">
+    2022-03-05
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="树的递归">树的递归</h2>
+<h4 id="尾递归">尾递归</h4>
+<blockquote>
+<p>递归的优化</p>
+</blockquote>
+<blockquote>
+<p>原理：递归本身会创造一个副本，但原先的副本未被释放，导致堆空间占用过多。</p>
+<p>尾递归在递归的尾部调用自己，但原本函数已经结束，无需等待计算。最后一次调用的结果直接返回给初始调用。</p>
+</blockquote>
+<blockquote>
+<p>即当递归调用是整个函数体中<strong>最后执行的语句</strong>且<strong>它的返回值不属于表达式的一部分</strong></p>
+</blockquote>
+<blockquote>
+<p>特点是在回归过程中不用做任何操作。</p>
+</blockquote>
+<h5 id="例子：">例子：</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> sum)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(x==<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        add(x<span class="number">-1</span>,sum+x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：尾递归是编译器的优化</p>
+</blockquote>
+<h3 id="之前的代码补全">之前的代码补全</h3>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ChildBro</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> key;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ChildBro</span> *<span class="title">child</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ChildBro</span> *<span class="title">sibling</span>;</span></span><br><span class="line">&#125;Node;</span><br><span class="line"></span><br><span class="line">Node *root;		<span class="comment">//根指针</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Init</span><span class="params">(<span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    root=(Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">    root-&gt;key=key;</span><br><span class="line">    root-&gt;child=<span class="literal">NULL</span>;</span><br><span class="line">    root-&gt;silbing=<span class="literal">NULL</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">insert</span><span class="params">(<span class="type">int</span> key,<span class="type">int</span> parent)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//定位结点</span></span><br><span class="line">    </span><br><span class="line">    Node* temp=get_node(parent,root);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(temp==<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        Node*node=(Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">        node-&gt;key=key;</span><br><span class="line">        node-&gt;child=<span class="literal">NULL</span>;</span><br><span class="line">        node-&gt;sibling=<span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">if</span>(temp-&gt;child==<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            temp-&gt;child=node;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            node-&gt;sibling=temp-&gt;child;</span><br><span class="line">            temp-&gt;child=node;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//递归核心代码</span></span><br><span class="line">Node* <span class="title function_">get_node</span><span class="params">(Node* node,<span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    Node* temp=<span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span>(node-&gt;key==key)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">if</span>(node-&gt;sibling!=<span class="literal">NULL</span>)</span><br><span class="line">        get_node(node-&gt;sibling,key);</span><br><span class="line">    <span class="keyword">if</span>(node-&gt;child!=<span class="literal">NULL</span>)</span><br><span class="line">        gen_node(node-&gt;child,key);</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/39/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/38/">38</a><a class="page-number" href="/page/39/">39</a><span class="page-number current">40</span><a class="page-number" href="/page/41/">41</a><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/41/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

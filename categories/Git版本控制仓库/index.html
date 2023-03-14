@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ Git版本控制仓库 }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/16/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/%E4%B8%8E%E8%BF%9C%E7%AB%AF%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4/2023-01-16_%E6%AD%A5%E9%AA%A4/">步骤</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-15T16:00:00.000Z" itemprop="datePublished">
+    2023-01-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/">Git版本控制仓库</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/%E4%B8%8E%E8%BF%9C%E7%AB%AF%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4/">与远端连接的具体步骤</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="步骤">步骤</h2>
+<p><strong>仅在github上使用</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>在当前目录下创建版本仓库</p>
+</li>
+<li class="lvl-2">
+<p>使用git add .</p>
+</li>
+<li class="lvl-2">
+<p>使用git commit -m 提交信息</p>
+</li>
+<li class="lvl-2">
+<p>在远端创建仓库，并复制URL</p>
+</li>
+<li class="lvl-2">
+<p>如果没有创建personal access token，创建一个</p>
+</li>
+<li class="lvl-2">
+<p>git remote add <name> <url></p>
+</li>
+<li class="lvl-2">
+<p>使用git push --set-upstream &lt;远程仓库名，一般设为origin&gt; &lt;远程分支名&gt;</p>
+</li>
+<li class="lvl-2">
+<p>使用git push</p>
+</li>
+<li class="lvl-2">
+<p>如果需要personal access token，将上述的token输入给git</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/02/26/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/2022-02-26_7%E8%BF%9C%E7%A8%8B%E6%93%8D%E4%BD%9C/">7远程操作</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-02-25T16:00:00.000Z" itemprop="datePublished">
+    2022-02-26
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/">Git版本控制仓库</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="远程操作">远程操作</h2>
+<h4 id="1-查看已配置的仓库">1.查看已配置的仓库</h4>
+<h5 id="命令">命令</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git remote -v	<span class="comment">//查看已配置的仓库</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-添加远程仓库">2.添加远程仓库</h4>
+<h5 id="命令-2">命令</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git remote add &lt;sname&gt; &lt;url&gt;	</span><br><span class="line">    <span class="comment">//参数：标识仓库名与其地址</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-重命名远程仓库">3.重命名远程仓库</h4>
+<h5 id="命令-3">命令</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git remote rename &lt;oname&gt; &lt;nname&gt;</span><br><span class="line">    <span class="comment">//参数：旧名 新名</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-查看远程仓库">4.查看远程仓库</h4>
+<h5 id="命令-4">命令</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git remote show &lt;sname&gt;</span><br><span class="line">    <span class="comment">//参数：仓库名</span></span><br></pre></td></tr></table></figure>
+<h4 id="5-推送内容">5.推送内容</h4>
+<h5 id="命令-5">命令</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git push &lt;remote&gt; &lt;branch&gt;</span><br><span class="line">    <span class="comment">//参数：仓库名 分支名</span></span><br></pre></td></tr></table></figure>
+<h4 id="6-拉取内容">6.拉取内容</h4>
+<h5 id="命令-6">命令</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git fetch &lt;remote&gt;<span class="comment">//抓取远程仓库，不影响工作目录</span></span><br><span class="line">git pull &lt;remote&gt; &lt;branch&gt;	<span class="comment">//抓取远程仓库，并放入工作目录</span></span><br><span class="line">    <span class="comment">//参数：仓库名 分支名</span></span><br></pre></td></tr></table></figure>
+<h4 id="7-移除远程仓库">7.移除远程仓库</h4>
+<h5 id="命令-7">命令</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git remote remove &lt;sname&gt;</span><br><span class="line">    <span class="comment">//参数：仓库名</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/02/20/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/2022-02-20_4%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E5%90%8E%E6%89%BE%E5%9B%9E/">4删除文件后找回</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-02-19T16:00:00.000Z" itemprop="datePublished">
+    2022-02-20
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/">Git版本控制仓库</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="删除文件后找回">删除文件后找回</h2>
+<blockquote>
+<p>先将文件提交到本地库，后删除工作区的文件，再找回的操作</p>
+</blockquote>
+<blockquote>
+<p>注：文件删除命令：rm 文件名</p>
+</blockquote>
+<h4 id="方法：">方法：</h4>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git reset --hard 		<span class="comment">//从本地库找回文件到工作区</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/02/20/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/2022-02-20_5%E6%AF%94%E8%BE%83%E6%96%87%E4%BB%B6/">5比较文件</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-02-19T16:00:00.000Z" itemprop="datePublished">
+    2022-02-20
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/">Git版本控制仓库</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="比较文件">比较文件</h2>
+<h4 id="命令">命令</h4>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git diff 文件名		<span class="comment">//和暂存区进行比较</span></span><br><span class="line">git diff 版本指针 文件名	<span class="comment">//和历史记录进行比较（本地库）</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git diff （版本指针）	<span class="comment">//比较多个工作区文件（不指定文件名）</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/02/20/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/2022-02-20_6Git%E5%88%86%E6%94%AF/">6Git分支</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-02-19T16:00:00.000Z" itemprop="datePublished">
+    2022-02-20
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/">Git版本控制仓库</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="Git分支">Git分支</h2>
+<h4 id="1-查看分支">1.查看分支</h4>
+<h5 id="命令">命令</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git branch -v	<span class="comment">//带参数-v</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-创建分支">2.创建分支</h4>
+<h5 id="命令-2">命令</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git branch 分支名	<span class="comment">//创建一个分支</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-切换分支">3.切换分支</h4>
+<h5 id="命令-3">命令</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git checkout 分支名	<span class="comment">//切换一个分支</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-合并分支">4.合并分支</h4>
+<blockquote>
+<p>先切换到主分支</p>
+<p>再将内容合并进来</p>
+</blockquote>
+<h5 id="命令-4">命令</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git merge 分支名	<span class="comment">//将另一个分支内容合并进当前分支</span></span><br></pre></td></tr></table></figure>
+<h4 id="5-解决冲突">5.解决冲突</h4>
+<blockquote>
+<p>先合并分支</p>
+</blockquote>
+<blockquote>
+<p>进入冲突解决状态</p>
+</blockquote>
+<blockquote>
+<p>编辑文件中删去多余符号后编辑至所需状态</p>
+</blockquote>
+<blockquote>
+<p>提交文件至工作区以结束冲突状态</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;fix the bug&quot;</span>	<span class="comment">//提交分支</span></span><br></pre></td></tr></table></figure>
+<h6 id="注：此处提交不能带文件名，但需要提交修改日志">注：此处提交不能带文件名，但需要提交修改日志</h6>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/02/19/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/2022-02-19_1%E8%AE%BE%E7%BD%AE%E7%AD%BE%E5%90%8D/">1设置签名</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-02-18T16:00:00.000Z" itemprop="datePublished">
+    2022-02-19
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/">Git版本控制仓库</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>设置签名</h1>
+<h3 id="形式">形式</h3>
+<p>用户名：tom</p>
+<p>email地址：71111@qq.com</p>
+<p>作用：区分不同开发人员的身份</p>
+<h2 id="级别">级别</h2>
+<p>项目级别/仓库级别：仅在本地仓库有效</p>
+<p>系统用户级别：在操作系统中所有仓库有效</p>
+<h5 id="注：优先级：仓库级别更高，会覆盖系统用户级别">注：优先级：仓库级别更高，会覆盖系统用户级别</h5>
+<h2 id="命令">命令</h2>
+<h5 id="仓库级别">仓库级别</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git config user.name tom</span><br><span class="line">git config user.email <span class="number">71111</span>@qq.com</span><br></pre></td></tr></table></figure>
+<h5 id="系统用户级别">系统用户级别</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git config --global user.name tom_glo</span><br><span class="line">git config --global user.email <span class="number">666666</span>@qq.com</span><br></pre></td></tr></table></figure>
+<h2 id="查看">查看</h2>
+<h5 id="仓库级别-2">仓库级别</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">cat .git/config    <span class="comment">//查看隐藏文件.git下config的配置</span></span><br></pre></td></tr></table></figure>
+<h5 id="系统用户级别-2">系统用户级别</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">cd ~				<span class="comment">//进入家目录</span></span><br><span class="line">cat .gitconfig		<span class="comment">//查看隐藏文件.gitconfig</span></span><br><span class="line">    	<span class="comment">//即在~/.gitconfig</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/02/19/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/2022-02-19_2%E6%B7%BB%E5%8A%A0%E6%8F%90%E4%BA%A4%E6%9F%A5%E7%9C%8B%E7%8A%B6%E6%80%81/">2添加提交查看状态</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-02-18T16:00:00.000Z" itemprop="datePublished">
+    2022-02-19
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/">Git版本控制仓库</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>添加提交/查看状态</h1>
+<h2 id="查看状态">查看状态</h2>
+<h4 id="命令">命令</h4>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git status	<span class="comment">//查看当前git的状态（工作区和暂存区）</span></span><br></pre></td></tr></table></figure>
+<h3 id="vim编辑器">vim编辑器</h3>
+<h5 id="命令-2">命令</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">vim good.txt	<span class="comment">//打开good.txt，没有则新建</span></span><br></pre></td></tr></table></figure>
+<h5 id="vim编辑器的指令">vim编辑器的指令</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">:q		<span class="comment">//退出并保存</span></span><br><span class="line">:<span class="built_in">set</span> nu	<span class="comment">//显示行号</span></span><br><span class="line">:wq		<span class="comment">//写入退出</span></span><br></pre></td></tr></table></figure>
+<h2 id="提交文件">提交文件</h2>
+<h4 id="命令（第一次提交）">命令（第一次提交）</h4>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git add good.txt	<span class="comment">//提交文件到暂存区</span></span><br><span class="line">git rm --cashed good.txt<span class="comment">//撤回暂存区文件</span></span><br><span class="line">git commit good.txt	<span class="comment">//提交暂存区文件到本地库</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：提交本地库需要输入提交信息，是在vim编辑器中进行编辑，直接写入信息后输入:wq就能完成</p>
+</blockquote>
+<h4 id="拓展命令">拓展命令</h4>
+<h6 id="（后续提交）">（后续提交）</h6>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git commit -a	<span class="comment">//直接跳过暂存区提交到本地库</span></span><br></pre></td></tr></table></figure>
+<h6 id="提交不进vim">提交不进vim</h6>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;这是第二次提交&quot;</span> good.txt</span><br><span class="line">    <span class="comment">//参数：-m	&quot;提交信息&quot; 文件名</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/02/19/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/2022-02-19_3%E7%89%88%E6%9C%AC%E7%A9%BF%E6%A2%AD/">3版本穿梭</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-02-18T16:00:00.000Z" itemprop="datePublished">
+    2022-02-19
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/">Git版本控制仓库</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>版本穿梭</h1>
+<h3 id="版本查看">版本查看</h3>
+<h4 id="命令">命令</h4>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">log</span>		<span class="comment">//查看提交记录详细信息</span></span><br></pre></td></tr></table></figure>
+<h4 id="拓展命令">拓展命令</h4>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">log</span> --pretty=oneline</span><br><span class="line">    <span class="comment">//以一行格式显示提交记录</span></span><br><span class="line">git <span class="built_in">log</span> --oneline</span><br><span class="line">    <span class="comment">//以一行最简格式显示记录</span></span><br><span class="line">    <span class="comment">//只有后退的记录</span></span><br><span class="line">git reflog</span><br><span class="line">    <span class="comment">//一行显示，有参考记录移动步数（推荐）</span></span><br><span class="line">    <span class="comment">//HEAD@&#123;移动步数&#125;</span></span><br><span class="line">    <span class="comment">//前进与后退都有</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：多屏显示控制方式</p>
+<p>空格向下翻页</p>
+<p>b 向上翻页</p>
+<p>q 退出</p>
+</blockquote>
+<h3 id="版本移动">版本移动</h3>
+<blockquote>
+<p>方式如下：</p>
+</blockquote>
+<ol>
+<li class="lvl-3">
+<p>基于索引值（都可）</p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git reset --hard 索引值</span><br><span class="line">    <span class="comment">//所有的都回到该版本</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li class="lvl-3">
+<p>使用^符号(只能后退)</p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git reset --hard HEAD^</span><br><span class="line">    <span class="comment">//后退一步（一个^）</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li class="lvl-3">
+<p>使用~符号(只能后退)</p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git reset --hard HEAD~<span class="number">3</span></span><br><span class="line">    <span class="comment">//后退3步</span></span><br></pre></td></tr></table></figure>
+<h4 id="基于索引值的参数问题">基于索引值的参数问题</h4>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git help 命令名</span><br><span class="line">    <span class="comment">//查看命令的详细文档</span></span><br><span class="line">    <span class="comment">//例如：git help reset</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">--hard		<span class="comment">//改本地库，暂存区，工作区</span></span><br><span class="line">--soft		<span class="comment">//只改本地库</span></span><br><span class="line">--mixed		<span class="comment">//改本地库，暂存区</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

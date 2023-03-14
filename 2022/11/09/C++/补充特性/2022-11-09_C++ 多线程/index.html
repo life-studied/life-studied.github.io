@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>C++ 多线程 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>C++ 多线程</h1>
+    </header>
+
+    <section>
+      <h2 id="C-多线程">C++ 多线程</h2>
+<h4 id="1-线程">1.线程</h4>
+<h5 id="1-库-Thread">1.库<code>&lt;Thread&gt;</code></h5>
+<h5 id="2-对象std-thread">2.对象std::thread</h5>
+<blockquote>
+<p>在对象创建时，线程就开始执行，使用join或detach来确认主线程和子线程之间的关系。</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>thread()</p>
+<ul class="lvl-2">
+<li class="lvl-6">默认构造函数</li>
+<li class="lvl-6">创建一个线程，什么都不做</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>template&lt;class Fn, class … Arg&gt; thread(Fn &amp;&amp; fn,Args &amp;&amp; … args)</p>
+<ul class="lvl-2">
+<li class="lvl-6">初始化构造函数</li>
+<li class="lvl-6">创建一个线程，以args为参数，执行fn函数</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-常用成员函数">3.常用成员函数</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>void join()</p>
+<ul class="lvl-2">
+<li class="lvl-6">阻塞等待线程结束并清理资源</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>void detach()</p>
+<ul class="lvl-2">
+<li class="lvl-6">将线程与调用其的线程分离，彼此独立执行</li>
+<li class="lvl-6">注意：如果需要该函数，必须在线程被创建时立刻调用。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>bool joinable()</p>
+<ul class="lvl-2">
+<li class="lvl-6">返回线程是否能执行join函数</li>
+<li class="lvl-6">当线程执行过join或者detach，则不能再次被执行</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>std:🧵:id get_id()</p>
+<ul class="lvl-2">
+<li class="lvl-6">获取线程id</li>
+</ul>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2022-11-08T16:00:00.000Z" itemprop="datePublished">
+              2022-11-09
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

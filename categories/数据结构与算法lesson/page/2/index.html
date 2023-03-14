@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ 数据结构与算法lesson }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-05-06_2-3%E9%9D%9E%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95%E7%9A%84%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/">2-3非递归算法的数学分析</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-05T16:00:00.000Z" itemprop="datePublished">
+    2022-05-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">算法设计与分析</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="非递归算法的数学分析">非递归算法的数学分析</h2>
+<blockquote>
+<p>根据2.1的通用框架来分析非递归算法</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-04-28_2-1%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/">2-1分析框架</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-27T16:00:00.000Z" itemprop="datePublished">
+    2022-04-28
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">算法设计与分析</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="分析框架">分析框架</h2>
+<h4 id="2-1-1输入规模的度量">2.1.1输入规模的度量</h4>
+<blockquote>
+<p>几乎所有的算法对于规模更大的输入都需要运行更长的时间。所有在研究算法效率的时候，把它作为一个算法输入规模n为参数的函数。</p>
+</blockquote>
+<h4 id="2-1-2运行时间的度量单位">2.1.2运行时间的度量单位</h4>
+<blockquote>
+<p>对于算法运行时间的度量单位，尽管可以采用时间的标准单位来衡量，但这种方式往往取决于硬件与其它一些问题，因此不采用。我们也可以统计每一步消耗的时间，但这没有必要。我们关注的是一个算法中对总时间贡献最大的，最重要的操作，并计算运行次数。</p>
+</blockquote>
+<p><strong>公式</strong></p>
+<p>T(n)=copC(n)</p>
+<blockquote>
+<p>cop是一个常数，C(n)是执行次数，这个结果往往是一个近似值</p>
+</blockquote>
+<h4 id="2-1-3增长次数">2.1.3增长次数</h4>
+<blockquote>
+<p>对于小规模输入而言，无需区分算法之间的效率区别。对于n较大时，有意义的是函数的增长次数。</p>
+</blockquote>
+<p><img src="picture/%E5%A2%9E%E9%95%BF%E6%AC%A1%E6%95%B0%E8%A1%A8.png" alt=""></p>
+<blockquote>
+<p>如果一个算法具有对数级增长次数，我们可以认为它对于任何实际规模的输入几乎都会在瞬间完成。</p>
+</blockquote>
+<h4 id="2-1-4算法的最优、最差和平均效率">2.1.4算法的最优、最差和平均效率</h4>
+<h5 id="最坏">最坏</h5>
+<blockquote>
+<p>一个算法的最差效率是指当输入规模为n时算法在最坏情况下的效率。</p>
+</blockquote>
+<p><strong>确定方法</strong></p>
+<blockquote>
+<p>在算法的所有可能输入中，哪种类型的输入会导致基本操作数次数达到最大，再计算这个最差值Cworst(n).</p>
+</blockquote>
+<h5 id="最优">最优</h5>
+<blockquote>
+<p>指当输入规模为n时，算法在最优情况下的效率。</p>
+</blockquote>
+<p><strong>确定方法</strong></p>
+<blockquote>
+<p>在算法可能的规模为n的输入中，找到输入对应最小C(n)值</p>
+</blockquote>
+<h5 id="平均效率">平均效率</h5>
+<blockquote>
+<p>在随机输入的情况下，一个算法具有怎样的行为。</p>
+</blockquote>
+<h3 id="总结">总结</h3>
+<p><img src="picture/2.1%E6%80%BB%E7%BB%93.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-04-28_2-2%E6%B8%90%E8%BF%9B%E7%AC%A6%E5%8F%B7%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%95%88%E7%8E%87%E7%B1%BB%E5%9E%8B/">2-2渐进符号和基本效率类型</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-27T16:00:00.000Z" itemprop="datePublished">
+    2022-04-28
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">算法设计与分析</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="渐进符号和基本效率类型">渐进符号和基本效率类型</h2>
+<blockquote>
+<p>在n趋近于无穷的情况下：</p>
+<p>O(g(n))表示增长次数小于等于cg(n)的函数集合</p>
+<p>omega(g(n))表示增长次数大于等于cg(n)的函数集合</p>
+<p>theta(g(n))表示增长次数等于cg(n)的函数集合</p>
+</blockquote>
+<h4 id="2-2-2符号O">2.2.2符号O</h4>
+<p><img src="picture/%E7%AC%A6%E5%8F%B7O%E7%9A%84%E5%AE%9A%E4%B9%89.png" alt=""></p>
+<h4 id="2-2-3符号omega">2.2.3符号omega</h4>
+<p><img src="picture/%E7%AC%A6%E5%8F%B7omega%E7%9A%84%E5%AE%9A%E4%B9%89.png" alt=""></p>
+<h4 id="2-2-4符号theta">2.2.4符号theta</h4>
+<p><img src="picture/%E7%AC%A6%E5%8F%B7theta%E7%9A%84%E5%AE%9A%E4%B9%89.png" alt=""></p>
+<h4 id="2-2-5渐进符号的有用特性">2.2.5渐进符号的有用特性</h4>
+<p><img src="picture/%E5%AE%9A%E7%90%86O%E7%9A%84%E4%B8%80%E8%88%AC%E7%89%B9%E6%80%A7.png" alt=""></p>
+<blockquote>
+<p>这意味着在同一算法时间函数中，效率取决于最高次项。在两个连续算法中，总效率取决于最慢的那一个。</p>
+</blockquote>
+<h4 id="2-2-6利用极限比较增长次数">2.2.6利用极限比较增长次数</h4>
+<blockquote>
+<p>基于定义比较增长次数虽然更通用，但不简便。因此采用基于极限的比较方法。</p>
+</blockquote>
+<p><img src="picture/%E5%9F%BA%E4%BA%8E%E6%9E%81%E9%99%90%E7%9A%84%E6%AF%94%E8%BE%83%E6%96%B9%E6%B3%95.png" alt=""></p>
+<h4 id="2-2-7基本的效率类型">2.2.7基本的效率类型</h4>
+<blockquote>
+<p>大多数算法可以分成为数不多的几种类型。</p>
+</blockquote>
+<p><img src="picture/%E5%9F%BA%E6%9C%AC%E6%95%88%E7%8E%87%E7%B1%BB%E5%9E%8B.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/25/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-04-25_21%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E3%80%81%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E6%A1%B6%E6%8E%92%E5%BA%8F%E3%80%81%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/">21归并排序、计数排序、桶排序、基数排序</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-24T16:00:00.000Z" itemprop="datePublished">
+    2022-04-25
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="归并排序、计数排序、桶排序、基数排序">归并排序、计数排序、桶排序、基数排序</h2>
+<h4 id="归并排序（分治思想）">归并排序（分治思想）</h4>
+<blockquote>
+<p>递归，将数组拆分成子数组，不断递下去直到拆分成1的数组，再归时排序</p>
+</blockquote>
+<p><strong>时间复杂度</strong></p>
+<blockquote>
+<p>时间：排序时间+合并时间</p>
+<p>空间复杂度：O(n)</p>
+<p>空间换时间</p>
+</blockquote>
+<p><img src="picture/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E5%9B%BE%E8%A7%A3.png" alt=""></p>
+<p><strong>稳定性</strong></p>
+<p>稳定，不破坏原有的排序规则</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">merge_sort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> first, <span class="type">int</span> last)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> mid= <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(first&lt;last)</span><br><span class="line">    &#123;</span><br><span class="line">        mid = (first+last)/<span class="number">2</span>;</span><br><span class="line">        <span class="comment">//分下标</span></span><br><span class="line">        merge_sort(arr,first,mid);</span><br><span class="line">        merge_sort(arr,mid+<span class="number">1</span>,last);</span><br><span class="line">        <span class="comment">//对于分开的元素做处理</span></span><br><span class="line">        merge(arr,first,mid,last);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">merge</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> first, <span class="type">int</span> mid, <span class="type">int</span> last)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> k=<span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> *temp=(<span class="type">int</span> *)<span class="built_in">malloc</span>((high-low+<span class="number">1</span>)*<span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="comment">//申请空间用来存放之后排序的内容</span></span><br><span class="line">    <span class="type">int</span> left_low = low;</span><br><span class="line">    <span class="type">int</span> left_high = mid;</span><br><span class="line">    <span class="type">int</span> right_low = mid+<span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> right_high = high;</span><br><span class="line">    <span class="comment">//记录左右的头尾</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;left_low&lt;=left_high &amp;&amp; right_low&lt;=right_high;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[left_low]&lt;=arr[right_low])</span><br><span class="line">            temp[i]=arr[left_low++];	<span class="comment">//排序并存入数组</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            temp[i]=arr[right_low++];</span><br><span class="line">        k++;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">//三种情况：正好全部跑完、左边结束、右边结束</span></span><br><span class="line">    <span class="keyword">if</span>(left_low&lt;=left_high)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=left_low;i&lt;left_high;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            temp[k]=arr[i];</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(right_low&lt;=right_high)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=right_low;i&lt;right_high;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            temp[k]=arr[i];</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//将新数组的内容放回原数组</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;high-low+<span class="number">1</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        arr[low+<span class="number">1</span>] = temp[i++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>(temp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="计数排序">计数排序</h4>
+<blockquote>
+<p>针对于特定范围（数据跨度小）内的整数进行排序，不能用于小数</p>
+<p>使用一个新数组（大小为最小值到最大值）统计给定数组中不同元素的数量，再遍历这个数组输出</p>
+</blockquote>
+<p><strong>时间复杂度</strong></p>
+<blockquote>
+<p>如果待排序数据的范围不明显大于待排序数组的长度，效率高于快排和归并排序，O(n)+k</p>
+</blockquote>
+<p><strong>稳定性</strong></p>
+<p>不稳定，会破坏原有排序规则</p>
+<blockquote>
+<p>优化方案</p>
+<p>1.更新建立的新数组，规则是count[i]=count[i]+count[i-1]，用于存储下标代表的数字在排序之后的位置范围</p>
+<p>2.原数组从后往前遍历，count[arr[i]]-1就是这个arr[i]排序之后的位置，同时count[arr[i]]要减去1，来保证下一个相同的数组的位置范围不重复。</p>
+</blockquote>
+<p><img src="picture/%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E4%BC%98%E5%8C%96%E5%9B%BE%E8%A7%A3.png" alt=""></p>
+<h4 id="桶排序">桶排序</h4>
+<blockquote>
+<p>有若干个桶，将数据尽量均匀地分到桶中</p>
+<p>在桶中进行排序，并合并</p>
+</blockquote>
+<p><strong>时间复杂度</strong></p>
+<p>遍历数组的时间+对每个桶内的元素排序的时间</p>
+<p><strong>适用场景</strong></p>
+<p>数据跨度不大且范围不大</p>
+<h4 id="基数排序（位数）">基数排序（位数）</h4>
+<blockquote>
+<p>对元素最低有效位到最高有效位逐位排序（先个位，后十位，再百位）</p>
+</blockquote>
+<p><strong>案例</strong></p>
+<p><img src="picture/%E6%A1%B6%E6%8E%92%E5%BA%8F%E5%9B%BE%E8%A7%A31.png" alt=""></p>
+<p><img src="picture/%E6%A1%B6%E6%8E%92%E5%BA%8F%E5%9B%BE%E8%A7%A32.png" alt=""></p>
+<p><img src="picture/%E6%A1%B6%E6%8E%92%E5%BA%8F%E5%9B%BE%E8%A7%A33.png" alt=""></p>
+<p><strong>时间复杂度</strong></p>
+<p>O（(n+b)*d）</p>
+<p>(n-数组长度)</p>
+<p>(b-一个数的基础 十进制b=10)</p>
+<p>(k-计算机表示的最大整数)</p>
+<p>(d-logbK)</p>
+<p><strong>应用场景</strong></p>
+<p>日期(先日再月最后年)</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-04-24_19%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">19插入排序</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-23T16:00:00.000Z" itemprop="datePublished">
+    2022-04-24
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="插入排序">插入排序</h2>
+<h4 id="一些概念">一些概念</h4>
+<blockquote>
+<p>就地排序：使用恒定的额外空间，即给定数组</p>
+<p>内部排序：待排序数据能一次性载入内存</p>
+<p>外部排序：待排序数据不能一次性载入内存</p>
+</blockquote>
+<blockquote>
+<p>”稳定“的排序：看相同的关键字在排序前后相对位置的变化</p>
+<p>处理键值对的时候（一级排序与二级排序等等）</p>
+</blockquote>
+<h4 id="直接插入排序">直接插入排序</h4>
+<blockquote>
+<p>将待排序数组分成两个序列，一个有序一个无序，依次选择后者插入前者</p>
+<p>注：并不是两个数组，而是一个数组在就地排序</p>
+<p>时间复杂度O(n)，最坏情况下是O(n^2)</p>
+<p>8个数据以下使用</p>
+</blockquote>
+<h4 id="二分插入排序">二分插入排序</h4>
+<blockquote>
+<p>顺序地将待排序的序列中各个元素按照关键字的大小，通过二分查找插入到序列中</p>
+<p>就地排序</p>
+<p>时间复杂度为O(n)，最坏情况是O(n^2)</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">BInsertSort</span><span class="params">(<span class="type">int</span> a[], <span class="type">int</span> size)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> low,high,mid;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;size;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        low=<span class="number">0</span>;</span><br><span class="line">        high=i<span class="number">-1</span>;</span><br><span class="line">        <span class="type">int</span> temp=a[i];</span><br><span class="line">        <span class="keyword">while</span>(low&lt;=high)		<span class="comment">//找到插入的位置</span></span><br><span class="line">        &#123;</span><br><span class="line">            mid=(low+high)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(a[mid]&gt;temp)</span><br><span class="line">                high = mid<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                low = mid+<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=i;j&lt;low;j--)	<span class="comment">//从最后一个向前移动</span></span><br><span class="line">        &#123;</span><br><span class="line">            a[j]=a[j<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        a[low]=temp;			<span class="comment">//插入(low就是插入的位置)</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-路插入排序">2-路插入排序</h4>
+<blockquote>
+<p>在二分插入的基础上另外设置一个大小相同的数组，将无序表中第一个记录加入到d[0]中，从第二个数据开始和d[0]比较，如果大于，在右边（数组开头）进行插入排序，否则在左边（数组尾端）。</p>
+<p>（数据存储形式：环形数组）</p>
+</blockquote>
+<blockquote>
+<p>减少移动的次数</p>
+<p>极端情况下退化成二分插入排序</p>
+</blockquote>
+<h4 id="希尔排序（缩小增量排序）">希尔排序（缩小增量排序）</h4>
+<blockquote>
+<p>把待排序数组按照下标记录的一些增量进行分组，对于每组进行直接插入排序随着增量逐渐减少，每组包含的关键组逐渐增加，当增量减少到1时完成排序</p>
+</blockquote>
+<blockquote>
+<p>增量可以自定义，例如：</p>
+<p>gap=length/2 (增量 = 数组长度 / 2)</p>
+<p>gap=gap/2</p>
+</blockquote>
+<blockquote>
+<p>增量元素不互质的情况下，可能会有最坏情况出现</p>
+<p>选取的增量不同，复杂度也不同，需要数学推导，最坏情况依然是O(n^2)，增量优化后为3/2*n</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">shellsort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> gap;		<span class="comment">//步长</span></span><br><span class="line">    <span class="type">int</span> k;			<span class="comment">//记录范围</span></span><br><span class="line">    <span class="keyword">for</span>(gap = n/<span class="number">2</span>;gap&gt;<span class="number">0</span>;gap/=<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//直接插入排序</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;gap;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//每一次加上步长，按列排序</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=i+gap;j&lt;n;j+=gap)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(arr[j]&lt;arr[j-gap])</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="type">int</span> temp = arr[j];</span><br><span class="line">                    k = j-gap;</span><br><span class="line">                    <span class="keyword">while</span>(k&gt;=<span class="number">0</span>; &amp;&amp; arr[k]&gt;temp)</span><br><span class="line">                    &#123;</span><br><span class="line">                        arr[k+gap] = arr[k];</span><br><span class="line">                        k = k-gap;</span><br><span class="line">                    &#125;</span><br><span class="line">                    arr[k+gap] = temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-04-24_20%E4%BA%A4%E6%8D%A2%E6%8E%92%E5%BA%8F/">20交换排序</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-23T16:00:00.000Z" itemprop="datePublished">
+    2022-04-24
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="交换排序">交换排序</h2>
+<h4 id="冒泡排序">冒泡排序</h4>
+<p>过程略</p>
+<blockquote>
+<p>时间复杂度O(n^2)</p>
+<p>空间复杂度O(1)</p>
+</blockquote>
+<p><strong>优化</strong></p>
+<p>1.添加一个标志，标识当前轮是否数组有序，如果有则结束冒泡</p>
+<p>2.判断部分有序：前一趟冒泡排序中最后一次发生交换的地方作为下一次冒泡的终点</p>
+<h4 id="快速排序">快速排序</h4>
+<blockquote>
+<p>选择一个基准（放在排序后数组正确位置的元素），（第一个/最后一个/中间一个/随机一个）。关键在于做一个划分，每一次划分都将基准x放到正确的位置，将所有比x小的放在左边，比x大的放在右边。</p>
+<p>复杂度：O(nlogn)</p>
+</blockquote>
+<p><strong>注</strong>：如果是一个有序数组，出现最坏情况</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">QuickSort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> low, <span class="type">int</span> high)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(low&lt;high)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> i=low;</span><br><span class="line">        <span class="type">int</span> j=high;</span><br><span class="line">        <span class="type">int</span> k = arr[low];</span><br><span class="line">        <span class="keyword">while</span>(i&lt;j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//从右向左找第一个小于k的数字</span></span><br><span class="line">            <span class="keyword">while</span>(i&lt;j &amp;&amp; arr[j]  &gt;=k)</span><br><span class="line">            &#123;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i&lt;j)</span><br><span class="line">                arr[i++]=arr[j];</span><br><span class="line">            <span class="keyword">while</span>(i&lt;j &amp;&amp; arr[i] &lt;k)</span><br><span class="line">            &#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i&lt;j)</span><br><span class="line">                arr[j--] = arr[i];</span><br><span class="line">            </span><br><span class="line">		&#125;</span><br><span class="line">        arr[i] = k;</span><br><span class="line">        QuickSort(arr,low,i<span class="number">-1</span>);</span><br><span class="line">        QuickSort(arr,i+<span class="number">1</span>,high);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E6%AF%94%E8%B5%9B%E6%8A%80%E5%B7%A7/2022-04-23_%E5%BF%AB%E8%AF%BB%E5%BF%AB%E5%86%99/">快读快写</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-22T16:00:00.000Z" itemprop="datePublished">
+    2022-04-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E6%AF%94%E8%B5%9B%E6%8A%80%E5%B7%A7/">比赛技巧</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h4 id="字符串和字符">字符串和字符</h4>
+<blockquote>
+<p>1.cin/cout别用，太慢！</p>
+</blockquote>
+<blockquote>
+<p>2.scanf/printf不要用%c，太危险！同理也不要想着利用C里scanf的语言特性进行过滤那怎么办呢？用%s！<br>
+%s是处理数组的，当然也可以处理字符数组，但是他可以想读取int一样遇到空格,回车,换行就停下来，就像scanf%d一样稳！于是对数组进行一个解析即可</p>
+</blockquote>
+<blockquote>
+<p>3.用%c的地方getchar就行</p>
+</blockquote>
+<p><strong>快读</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//字符串</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> string <span class="title">rd</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	string str=<span class="string">&quot;&quot;</span>;</span><br><span class="line">	<span class="type">char</span> ch=<span class="built_in">getchar</span>();</span><br><span class="line">	<span class="comment">//处理空格或回车 </span></span><br><span class="line">	<span class="keyword">while</span>(ch==<span class="string">&#x27; &#x27;</span> || ch==<span class="string">&#x27;\n&#x27;</span> || ch==<span class="string">&#x27;\r&#x27;</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		ch=<span class="built_in">getchar</span>(); </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//读入</span></span><br><span class="line">	<span class="keyword">while</span>(ch!=<span class="string">&#x27; &#x27;</span> &amp;&amp; ch!=<span class="string">&#x27;\n&#x27;</span> &amp;&amp; ch!=<span class="string">&#x27;\r&#x27;</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		str+=ch;</span><br><span class="line">		ch=<span class="built_in">getchar</span>();</span><br><span class="line">	 &#125; </span><br><span class="line">	<span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>快写</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">print</span><span class="params">(string s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; s[i]!=<span class="string">&#x27;\0&#x27;</span>; i++) <span class="built_in">putchar</span>(s[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="数字">数字</h4>
+<p><strong>快读</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//int型数据，longlong或其它改一下数据类型就行</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">rd</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">char</span> ch=<span class="built_in">getchar</span>();</span><br><span class="line">	 <span class="type">int</span> x=<span class="number">0</span>,w=<span class="number">1</span>;</span><br><span class="line">	<span class="comment">//过滤掉其他字符 </span></span><br><span class="line">	<span class="keyword">while</span>(ch&lt;<span class="string">&#x27;0&#x27;</span>|| ch&gt;<span class="string">&#x27;9&#x27;</span>) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(ch==<span class="string">&#x27;-&#x27;</span>) w=<span class="number">-1</span>;</span><br><span class="line">		ch=<span class="built_in">getchar</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(ch&gt;=<span class="string">&#x27;0&#x27;</span> &amp;&amp; ch&lt;=<span class="string">&#x27;9&#x27;</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//代替x=x*10+ch-&#x27;0&#x27;; </span></span><br><span class="line">		x=(x&lt;&lt;<span class="number">1</span>) + (x&lt;&lt;<span class="number">3</span>) +(ch^<span class="number">48</span>);</span><br><span class="line">		ch=<span class="built_in">getchar</span>();</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">return</span> x*w;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>快写</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x&lt;<span class="number">0</span>) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">putchar</span>(<span class="string">&#x27;-&#x27;</span>);</span><br><span class="line">		x=-x;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(x&gt;<span class="number">9</span>) <span class="built_in">print</span>(x/<span class="number">10</span>);</span><br><span class="line">	<span class="built_in">putchar</span>(x%<span class="number">10</span>+<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-04-22_23%E5%93%88%E5%B8%8C/">23哈希</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-21T16:00:00.000Z" itemprop="datePublished">
+    2022-04-22
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="哈希">哈希</h2>
+<blockquote>
+<p>降低数据复杂度，对直接访问进行改进</p>
+</blockquote>
+<blockquote>
+<p>实现方式：用哈希函数将长数据映射成一个短值</p>
+</blockquote>
+<p><strong>特性</strong></p>
+<blockquote>
+<p>1.执行效率高，对于二进制文本尽可能快计算出哈希值</p>
+<p>2.结果尽可能具有同一性，输出的值尽可能均匀分布</p>
+<p>3.存在雪崩效应：任何一个微小数值的变化都能使输出产生巨大变化</p>
+<p>4.哈希函数不能反向推导</p>
+</blockquote>
+<p><strong>哈希碰撞</strong></p>
+<blockquote>
+<p>对两个不同的值映射成同一个输出</p>
+<p>这个情况不能避免，只能缓解</p>
+</blockquote>
+<p><strong>缓解方式</strong></p>
+<blockquote>
+<p>1.链地址法（对哈希函数要求较低）</p>
+<p>数组加链表存储同一哈希值的不同数据</p>
+<p>优点：</p>
+<p>容错率高</p>
+<p>不会溢出</p>
+<p>缺点：</p>
+<p>链表过长</p>
+<p>浪费原有空间，同时需要额外的空间存储指针</p>
+<p>缓存性能不好</p>
+<p>2.开放地址法</p>
+<p>将所有数据存储在哈希表中，同一哈希值的不同数据相邻放置</p>
+<p>问题：可能需要扩容</p>
+<p>解决方法：</p>
+<p>线性探测法：不断向下一个一个找空间存储</p>
+<p>缺点：可能出现大规模聚集导致时间浪费</p>
+<p>平方探测法：不断向下探测i^2个空间（i不断递增，直到有存储空间）</p>
+<p>双重哈希法：再定义一个哈希函数，使用：原本的哈希值+i*新的哈希值（i不断递增，直到有存储空间）</p>
+<p>3.再哈希</p>
+<p>装填因子：n个数据/m个存储空间（已存的数据占当前存储空间的比例）</p>
+<p>将装填因子设置为0.75，一旦哈希表达到0.75，就扩容这个哈希表，并重新进行另一个哈希映射（这个新的哈希函数与空间量有公式挂钩）</p>
+</blockquote>
+<p><strong>哈希应用</strong></p>
+<p>密码校验，编译，编程语言，模式匹配算法，负载均衡</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-04-20_22%E4%BA%8C%E5%8F%89%E5%A0%86%E3%80%81%E5%A0%86%E6%8E%92%E5%BA%8F/">22二叉堆、堆排序</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-19T16:00:00.000Z" itemprop="datePublished">
+    2022-04-20
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="二叉堆、堆排序">二叉堆、堆排序</h2>
+<h4 id="二叉堆">二叉堆</h4>
+<blockquote>
+<p>堆是基于完全二叉树的数据结构</p>
+</blockquote>
+<p>堆分为大顶堆和小顶堆</p>
+<p>大顶堆：根节点值大于孩子</p>
+<p>小顶堆：根节点值小于孩子</p>
+<p><strong>实现结构：数组</strong></p>
+<blockquote>
+<p>结点的父节点：arr[(x-1)/2]</p>
+<p>左孩子：arr[2*x+1]</p>
+<p>右孩子：arr[2*x+2]</p>
+</blockquote>
+<h5 id="堆化处理">堆化处理</h5>
+<blockquote>
+<p>删除根节点的操作</p>
+</blockquote>
+<p>步骤：</p>
+<p>1.找最后一个元素替换根节点，删除这个叶子结点</p>
+<p>2.一直将这个与左右子树比较，与较小的交换，直到这个元素到达叶子结点</p>
+<h5 id="更新操作">更新操作</h5>
+<blockquote>
+<p>反向堆化处理</p>
+</blockquote>
+<p>步骤：</p>
+<p>1.将结点存储的值更新</p>
+<p>2.将这个元素与父节点比较，小于父节点就交换，直到不满足条件（没有父结点或大于父结点）</p>
+<h5 id="插入操作">插入操作</h5>
+<blockquote>
+<p>插入到末尾结点，进行反向堆化处理，与更新操作一致</p>
+</blockquote>
+<h4 id="堆排序">堆排序</h4>
+<blockquote>
+<p>进行堆化操作</p>
+</blockquote>
+<h4 id="应用场景">应用场景</h4>
+<p>优先级队列</p>
+<blockquote>
+<p>队列中的每一个元素都具有优先级，优先级高的先出队，优先级相同的按照顺序依次出队</p>
+</blockquote>
+<p><strong>案例</strong></p>
+<p>1.线程</p>
+<p>2.迪杰斯特拉算法或者普林姆算法的优化</p>
+<blockquote>
+<p>基本步骤</p>
+<p>1.初始化结点（将结点路径值设为最大，源点为0）</p>
+<p>2.定义一个优先级队列，队列中的元素记录结点的编号和最短路径值</p>
+<p>3.遍历队顶结点的邻接结点，如果找到一个小于当前最短路径，更新最短路径并将这个结点入队</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/A%E6%98%9F%E5%AF%BB%E8%B7%AF%E7%AE%97%E6%B3%95/2022-04-16_A%E5%AF%BB%E8%B7%AF%E7%AE%97%E6%B3%95/">A寻路算法</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-15T16:00:00.000Z" itemprop="datePublished">
+    2022-04-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/A%E6%98%9F%E5%AF%BB%E8%B7%AF%E7%AE%97%E6%B3%95/">A星寻路算法</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h4 id="广度优先搜索">广度优先搜索</h4>
+<p>平等的探索各个方向</p>
+<h4 id="Dijkstra算法">Dijkstra算法</h4>
+<p>确定道路的权值，有区别的探索更好的方向（代价）</p>
+<p>优点：很好的找到最短路径</p>
+<p>缺点：浪费大量资源在探索各个没有可能的方向上</p>
+<h4 id="贪心最佳优先搜索">贪心最佳优先搜索</h4>
+<p>优点：在最可能的方向上进行探索</p>
+<p>缺点：找到的可能不是最短路径</p>
+<h4 id="A-算法">A*算法</h4>
+<h2 id="A-寻路算法">A*寻路算法</h2>
+<p>思路：在当前路径邻接点中选出最优点，来最终组成所有路径</p>
+<p>方法：</p>
+<p>启发性搜索</p>
+<p>公式：F=G+H(代价=已经付出的代价+剩余预计代价)</p>
+<p>每步代价分为直线与斜线，其比值为1：根号2</p>
+<p><strong>数据结构</strong></p>
+<blockquote>
+<p>八叉树：8个方向</p>
+<p>辅助结构：队列（使用广度优先的策略优化，选择方向减少资源利用成本）</p>
+<p>辅助地图：记录走过的路径，优化计算成本</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">« prev</a><a class="page-number" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">1</a><span class="page-number current">2</span><a class="page-number" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/page/3/">3</a><a class="page-number" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/page/4/">4</a><a class="extend next" rel="next" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/page/3/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

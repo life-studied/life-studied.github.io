@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ 书本：计算机网络：自顶向下方法笔记 }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/2022-12-14_4-2IP%20Network%20Protocol/">4-2IP Network Protocol</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-13T16:00:00.000Z" itemprop="datePublished">
+    2022-12-14
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">书本：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="4-2IP-Network-Protocol">4.2IP Network Protocol</h2>
+<h4 id="4-2-1数据报格式">4.2.1数据报格式</h4>
+<blockquote>
+<p>网络层分组称为数据报。</p>
+</blockquote>
+<h5 id="1-IPv4格式">1.IPv4格式</h5>
+<blockquote>
+<p>格式如下图：</p>
+</blockquote>
+<p><img src="picture/IPv4%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%A0%BC%E5%BC%8F.png" alt=""></p>
+<p><strong>解释：</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>**版本号：**4bit，规定了IP协议版本。</p>
+</li>
+<li class="lvl-2">
+<p>**首部长度：**4bit，标注实际数据从哪里开始，即首部的长度。（由于IP数据报允许包含可变数量的选项）</p>
+<ul class="lvl-2">
+<li class="lvl-6">如果没有选项，则一般的数据报首部是20字节的长度</li>
+<li class="lvl-6">最大首部长度为60字节</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>**服务类型：**8bit，用于将一些不同类型的IP数据报区分开来（低延迟、高吞吐量、可靠性等）。</p>
+</li>
+<li class="lvl-2">
+<p>**数据报长度：**16bit，表示IP数据报的总长度（首部+数据），以字节为单位。理论最大值为65535。</p>
+</li>
+<li class="lvl-2">
+<p>**标识、标志与片偏移：**16+3+13bit，这三个字段与IP分片有关。</p>
+</li>
+<li class="lvl-2">
+<p>**寿命：**8bit，TTL字段保证数据报不会永远在网络中循环。每经过一台路由器，该字段的值减1。</p>
+<ul class="lvl-2">
+<li class="lvl-6">最大寿命255</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>**协议：**8bit，用于指示IP数据报的数据部分交付给哪个运输层协议。</p>
+<ul class="lvl-2">
+<li class="lvl-6">6代表TCP</li>
+<li class="lvl-6">17代表UDP</li>
+<li class="lvl-6">1代表ICMP</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>**首部检验和：**16bit，对首部中每2字节进行加和，最终结果取反。</p>
+<ul class="lvl-2">
+<li class="lvl-6">注意：每经过一次路由器都要重算，因为TTL字段变化了。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>**源IP和目标IP地址：**各占32bit。</p>
+</li>
+<li class="lvl-2">
+<p>**选项：**允许IP首部被扩展。该字段用于一些可选的报头设置，主要用于测试、调试和安全的目的。这些选项包括严格源路由（数据报必须经过指定的路由）、网际时间戳（经过每个路由器时的时间戳记录）和安全限制。</p>
+<ul class="lvl-2">
+<li class="lvl-6">使用0填充末尾保证报头长度是32位的整数倍。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>**数据：**用于存储TCP、UDP、IMCP等协议的数据。</p>
+</li>
+</ul>
+<h5 id="2-IP数据报分片">2.IP数据报分片</h5>
+<blockquote>
+<p>底层链路层协议可能不能发送过大的IP数据报，因此需要对数据报进行分片。</p>
+</blockquote>
+<h4 id="4-2-2IPv4编址">4.2.2IPv4编址</h4>
+<blockquote>
+<p>IP地址具有32位，形式为a.b.c.d/x。其中a，b，c，d代表IP地址，/x代表子网掩码的位数。</p>
+</blockquote>
+<h5 id="1-IP地址的分类">1.IP地址的分类</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>a类：以0开头，后面跟着7为作为网络地址，剩下的24位作为主机地址</p>
+</li>
+<li class="lvl-2">
+<p>b类：以10开头，后面跟着14位作为网络地址，剩下的16位作为主机地址</p>
+</li>
+<li class="lvl-2">
+<p>c类：以110开头，后面跟着21位作为网络地址，剩下的8位作为主机地址</p>
+</li>
+<li class="lvl-2">
+<p>d类：广播地址</p>
+</li>
+<li class="lvl-2">
+<p>e类：保留地址</p>
+</li>
+</ul>
+<h5 id="2-特殊地址">2.特殊地址</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>网络部分全0：表示当前网络</p>
+</li>
+<li class="lvl-2">
+<p>主机部分全0：表示当前主机</p>
+</li>
+<li class="lvl-2">
+<p>主机部分全1：向网络的所有主机广播</p>
+</li>
+<li class="lvl-2">
+<p>127.x.x.x：回环地址，从本机应用层下至IP层就回来了。用于测试</p>
+</li>
+</ul>
+<h5 id="3-内网专用IP地址">3.内网专用IP地址</h5>
+<blockquote>
+<p>一些地址在每一个内网中都有，但不会出现在公网里。路由器不对目标地址是专用地址的分组进行转发。</p>
+</blockquote>
+<p>a类：10.0.0.0~10.255.255.255						/8</p>
+<p>b类：172.16.0.0~172.31.255.255					/16</p>
+<p>c类：192.168.0.0~192.168.255.255				/24</p>
+<h5 id="4-CIDR">4.CIDR</h5>
+<blockquote>
+<p>将子网一般化，允许出现任意位数的网络地址。其实质是在大网络下划出子网。因此需要子网掩码来确认子网的网络地址。（大网络仍然根据a，b，c类划分）</p>
+</blockquote>
+<h5 id="5-DHCP（动态主机配置协议）">5.DHCP（动态主机配置协议）</h5>
+<blockquote>
+<p>用于动态配置主机的IP地址和子网掩码。要求所在网络拥有一个DHCP服务器。</p>
+</blockquote>
+<p><strong>配置过程：</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>主机广播是否存在DHCP服务器</p>
+</li>
+<li class="lvl-2">
+<p>DHCP服务器（可能存在多个）收到并广播推荐的IP地址</p>
+</li>
+<li class="lvl-2">
+<p>主机选择一个DHCP服务器，发送请求报文。（同时配置好了自己的地址）</p>
+</li>
+<li class="lvl-2">
+<p>服务器发送Ack</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/2022-12-13_3-5%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E8%BF%90%E8%BE%93%EF%BC%9ATCP/">3-5面向连接的运输：TCP</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-12T16:00:00.000Z" itemprop="datePublished">
+    2022-12-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">书本：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="3-5面向连接的运输：TCP">3.5面向连接的运输：TCP</h2>
+<blockquote>
+<p>TCP建立在可靠数据传输原理之上。</p>
+<p>同时依赖原理：差错检测、重传、累积确认、定时器、首部字段。</p>
+</blockquote>
+<h4 id="3-5-1-TCP连接">3.5.1 TCP连接</h4>
+<blockquote>
+<p>TCP协议的连接状态只保留在两个端系统中，而不在中间的网络元素运行。</p>
+</blockquote>
+<p>1.TCP提供<strong>全双工服务</strong>：两个进程之间可以在同时双向发送信息。</p>
+<p>2.建立TCP连接的过程：（<strong>三次握手</strong>）</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>客户端发送一个特殊的TCP报文段（不含应用层信息）</p>
+</li>
+<li class="lvl-2">
+<p>服务器响应一个特殊的TCP报文段（不含应用层信息）</p>
+</li>
+<li class="lvl-2">
+<p>客户端响应一个特殊的TCP报文段（可以有应用层信息）</p>
+</li>
+</ul>
+<p>3.最大报文段长度（MSS）：报文段中应用层数据的最大长度。</p>
+<p>4.TCP连接的组成包括：两台主机上的缓存，变量和与进程连接的socket</p>
+<h4 id="3-5-2-TCP报文段结构（如图）">3.5.2 TCP报文段结构（如图）</h4>
+<p><img src="picture/TCP%E6%8A%A5%E6%96%87%E6%AE%B5%E7%BB%93%E6%9E%84.png" alt=""></p>
+<p><strong>简介</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>源端口号和目的端口号：各占16bit</p>
+</li>
+<li class="lvl-2">
+<p>序号和确认号字段：各占32bit，用于实现可靠数据传输服务（详见下方）</p>
+</li>
+<li class="lvl-2">
+<p>接收窗口字段：16bit，用于流量控制，指示接收方愿意接收的字节数量</p>
+</li>
+<li class="lvl-2">
+<p>首部长度字段：4bit，指示了TCP首部长度（单位：32bit的字）注：TCP首部长度可变</p>
+</li>
+<li class="lvl-2">
+<p>选项字段：可变长度，用于发送方和接收方协商最大报文段长度（MSS）。</p>
+</li>
+<li class="lvl-2">
+<p>标识字段：6bit。</p>
+<ul class="lvl-2">
+<li class="lvl-6">ACK：对上一报文段有效的确认。</li>
+<li class="lvl-6">RST、SYN、FIN：用于连接的建立与拆除。</li>
+<li class="lvl-6">PSH：指示立即将数据交付给上层。</li>
+<li class="lvl-6">URG：指示报文段中存在紧急数据。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>紧急数据指针：16bit，当URG的bit有效时，指向紧急数据的最后一个字节。（即紧急数据尾）</p>
+</li>
+</ul>
+<h5 id="1-序号与确认号">1.序号与确认号</h5>
+<p>1.序号：序号是以字节为单位的，指的是报文段数据的首字节编号。假如MSS为1000，则第一个报文段序号为0，第二个报文段序号为1000。</p>
+<p>2.确认号：期望收到的下一报文段的序号。例如已经收到0-535字节的数据，则应该发536的确认号。</p>
+<p>3.<strong>累计确认</strong>：TCP只确认流中第一个丢失的字节。例如已经收到0-535和900-1000字节，则应该发536的确认号。</p>
+<h5 id="2-Telnet学习案例：序号与确认号">2.Telnet学习案例：序号与确认号</h5>
+<blockquote>
+<p>Telnet将数据发送给服务器后，服务器会将数据发回来，以表示成功发送。数据会显示在Telnet的屏幕上，称为”回显“。</p>
+</blockquote>
+<h4 id="3-5-3往返时间的估计与超时（略）">3.5.3往返时间的估计与超时（略）</h4>
+<h4 id="3-5-4可靠数据传输（略）">3.5.4可靠数据传输（略）</h4>
+<h4 id="3-5-5流量控制">3.5.5流量控制</h4>
+<blockquote>
+<p>TCP的接收方使用一个缓存来存储收到的数据报，如果发送方的发送速度大于接收方的上层应用的读取速度，接收缓冲就会溢出。因此TCP提供<strong>流量控制服务</strong>。</p>
+</blockquote>
+<p>流量控制服务的实现是：发送方维护一个<strong>接收窗口</strong>的变量（rwnd），该变量告知发送方：接收方剩余可用缓冲空间数量。</p>
+<p><strong>公式：</strong><br>
+$$<br>
+rwnd = RcvBuffer - (LastByteRcvd - LastByteRead)<br>
+$$<br>
+<strong>解释：</strong><br>
+$$<br>
+接收窗口的大小 = 缓冲区大小 - （缓冲区中最后一个字节编号 - 缓冲区已读的字节编号）<br>
+$$</p>
+<p><img src="picture/%E6%8E%A5%E6%94%B6%E7%AA%97%E5%8F%A3%E5%A4%A7%E5%B0%8F.png" alt=""></p>
+<blockquote>
+<p>由于TCP是全双工的，接收方会将自己当前rwnd的值放入报文段的接收窗口字段中。</p>
+</blockquote>
+<h4 id="3-5-6TCP连接管理">3.5.6TCP连接管理</h4>
+<h5 id="1-建立连接：（三步）">1.建立连接：（三步）</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>一：客户端TCP向服务器TCP发送一个特殊报文段。</p>
+<ul class="lvl-2">
+<li class="lvl-6">不含应用层数据</li>
+<li class="lvl-6">SYN标识位置1</li>
+<li class="lvl-6">随机选择一个初始编号client_isn，写入序号字段</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>二：服务器从该报文段中取出SYN报文段，为该TCP连接分配缓存和变量，并发送允许连接的报文段。</p>
+<ul class="lvl-2">
+<li class="lvl-6">不含应用层数据</li>
+<li class="lvl-6">SYN标志位置1</li>
+<li class="lvl-6">确认号字段设置为client_isn+1</li>
+<li class="lvl-6">随机选择一个初始编号server_isn，写入序号字段</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>三：客户接收SYNACK报文段，为该连接分配缓存和变量。并发送一个报文段给服务器。</p>
+<ul class="lvl-2">
+<li class="lvl-6">可以发送应用层数据</li>
+<li class="lvl-6">SYN标志位置0</li>
+<li class="lvl-6">确认号字段设置为server_isn+1</li>
+<li class="lvl-6">序号字段为client_isn+1</li>
+</ul>
+</li>
+</ul>
+<p><img src="picture/TCP%E8%BF%9E%E6%8E%A5.png" alt=""></p>
+<h5 id="2-关闭连接：（四步）">2.关闭连接：（四步）</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>一：客户向服务器发送一个特殊的TCP报文段</p>
+<ul class="lvl-2">
+<li class="lvl-6">FIN标志位置1</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>二：服务器向客户回送一个确认ACK报文段</p>
+</li>
+<li class="lvl-2">
+<p>三：服务器发送自己的终止报文段</p>
+<ul class="lvl-2">
+<li class="lvl-6">FIN标志位置1</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>四：客户向服务器回送一个确认ACK报文段</p>
+</li>
+</ul>
+<p><img src="picture/%E5%85%B3%E9%97%ADTCP%E8%BF%9E%E6%8E%A5.png" alt=""></p>
+<h5 id="3-客户的TCP连接状态（对应上面的连接的三步与关闭的四步）">3.客户的TCP连接状态（对应上面的连接的三步与关闭的四步）</h5>
+<p>建立连接过程：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>一：CLOSED-&gt;SYN_SENT</p>
+</li>
+<li class="lvl-2">
+<p>二：SYN_SENT-&gt;ESTABLISHED</p>
+</li>
+<li class="lvl-2">
+<p>三：ESTABLISHED</p>
+</li>
+</ul>
+<p>关闭连接过程：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>一：ESTABLISHED-&gt;FIN_WAIT1</p>
+</li>
+<li class="lvl-2">
+<p>二：FIN_WAIT1-&gt;FIN_WAIT2</p>
+</li>
+<li class="lvl-2">
+<p>三、四：FIN_WAIT2-&gt;TIME_WAIT</p>
+</li>
+<li class="lvl-2">
+<p>等待30s：TIME_WAIT-&gt;CLOSED</p>
+</li>
+</ul>
+<p><img src="picture/TCP%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81%E5%8F%98%E5%8C%96%E5%9B%BE.png" alt=""></p>
+<blockquote>
+<p>对应的服务器TCP连接状态变化图：</p>
+</blockquote>
+<p><img src="picture/%E6%9C%8D%E5%8A%A1%E5%99%A8TCP%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81%E5%8F%98%E5%8C%96%E5%9B%BE.png" alt=""></p>
+<h5 id="4-服务器端口不接受连接（端口没被使用）">4.服务器端口不接受连接（端口没被使用）</h5>
+<blockquote>
+<p>当服务器端口收到TCP连接，但该端口并无socket时，主机将回送一个特殊重置报文段，该报文段将RST标志位置1。</p>
+<p>在UDP的情况下，主机将发送一个特殊的ICMP数据报。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/2022-12-13_3-6%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E5%8E%9F%E7%90%86/">3-6拥塞控制原理</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-12T16:00:00.000Z" itemprop="datePublished">
+    2022-12-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">书本：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="3-6拥塞控制原理">3.6拥塞控制原理</h2>
+<h4 id="3-6-1拥塞原因与代价">3.6.1拥塞原因与代价</h4>
+<h5 id="1-情况1：两个发送方和一台具有无限大缓存的路由器">1.情况1：两个发送方和一台具有无限大缓存的路由器</h5>
+<p><img src="D:%5C%E6%96%87%E4%BB%B6%E5%90%88%E9%9B%86%5Cmarkdown%E5%90%88%E9%9B%86%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%5C%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0%5Cpicture%5C%E6%83%85%E5%86%B51.png" alt=""></p>
+<blockquote>
+<p>由图可知，虽然吞吐量能在发出R/2时得到最大利用，但是排队时延却以指数增长至几乎不能忍受。</p>
+</blockquote>
+<h5 id="2-情况2：两个发送方和一台具有有限缓存的路由器">2.情况2：两个发送方和一台具有有限缓存的路由器</h5>
+<p><img src="D:%5C%E6%96%87%E4%BB%B6%E5%90%88%E9%9B%86%5Cmarkdown%E5%90%88%E9%9B%86%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%5C%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0%5Cpicture%5C%E6%83%85%E5%86%B52.png" alt=""></p>
+<blockquote>
+<p>虽然能比较好的利用吞吐量，但是每一个包在网络拥塞的情况下都被发送了多次副本，导致不必要的重传。</p>
+</blockquote>
+<h5 id="3-情况3：四个发送方和具有有限缓存的多台路由器">3.情况3：四个发送方和具有有限缓存的多台路由器</h5>
+<p><img src="D:%5C%E6%96%87%E4%BB%B6%E5%90%88%E9%9B%86%5Cmarkdown%E5%90%88%E9%9B%86%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%5C%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0%5Cpicture%5C%E6%83%85%E5%86%B53.png" alt=""></p>
+<blockquote>
+<p>在该情况下，由于路由器对最近的主机流量大，接收概率高，而放弃其它已经经过一跳的主机流量，导致每个数据包在经过第二跳时大概率被其它主机的第一跳所挤走，形成死锁。</p>
+</blockquote>
+<h4 id="3-6-2拥塞控制方法">3.6.2拥塞控制方法</h4>
+<h5 id="1-端到端拥塞控制">1.端到端拥塞控制</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>没有来自网络的显式反馈</p>
+</li>
+<li class="lvl-2">
+<p>端系统根据延迟和丢失事件判断是否有拥塞</p>
+</li>
+<li class="lvl-2">
+<p>TCP采用的方法</p>
+</li>
+</ul>
+<h5 id="2-网络辅助的拥塞控制">2.网络辅助的拥塞控制</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>路由器提供给端系统以反馈信息</p>
+<ul class="lvl-2">
+<li class="lvl-6">单个bit置位，显示有拥塞</li>
+<li class="lvl-6">显式提供发送端可以采用的速率</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/2022-12-13_3-7TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/">3-7TCP拥塞控制</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-12T16:00:00.000Z" itemprop="datePublished">
+    2022-12-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">书本：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="3-7TCP拥塞控制">3.7TCP拥塞控制</h2>
+<blockquote>
+<p>方法：通过发送方所感知的网络拥塞程度来限制发送速率。</p>
+</blockquote>
+<p>需要解决三个问题：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如何限制发送速率</p>
+</li>
+<li class="lvl-2">
+<p>如何感知拥塞</p>
+</li>
+<li class="lvl-2">
+<p>采用何种算法来限制</p>
+</li>
+</ul>
+<h5 id="1-如何限制">1.如何限制</h5>
+<blockquote>
+<p>TCP的每一端都由</p>
+<ul class="lvl-1">
+<li class="lvl-2">发送缓存</li>
+<li class="lvl-2">接收缓存</li>
+<li class="lvl-2">公式rwnd = RcvBuffer - (LastByteRcvd - LastByteRead)里的变量</li>
+</ul>
+<p>组成。</p>
+</blockquote>
+<p>拥塞控制机制监视一个新变量：拥塞窗口（cwnd）：<br>
+$$<br>
+LastByteSent - LastByteAcked \leq min(cwnd,rwnd)<br>
+$$</p>
+<p>$$<br>
+rate = cwnd/RTT<br>
+$$</p>
+<blockquote>
+<p>发送速率 = 拥塞窗口 / 往返延迟</p>
+</blockquote>
+<h5 id="2-如何感知">2.如何感知</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>超时</p>
+</li>
+<li class="lvl-2">
+<p>收到3个冗余Ack</p>
+</li>
+</ul>
+<h5 id="3-采用算法">3.采用算法</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>慢启动</p>
+</li>
+<li class="lvl-2">
+<p>AIMD</p>
+</li>
+<li class="lvl-2">
+<p>超时事件后的保守策略</p>
+</li>
+</ul>
+<p><img src="picture/TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E7%9A%84FSM%E6%8F%8F%E8%BF%B0.png" alt="TCP拥塞控制的FSM描述"></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/2022-12-13_4-1%E5%AF%BC%E8%AE%BA/">4-1导论</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-12T16:00:00.000Z" itemprop="datePublished">
+    2022-12-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">书本：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="4-1导论">4.1导论</h2>
+<h4 id="4-1-1-一些概念">4.1.1.一些概念</h4>
+<p>1.网络层的两个功能：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>转发：将一个分组从一个输入链路接口转移到一个合适的输出链路接口上</p>
+</li>
+<li class="lvl-2">
+<p>路由选择：决定分组从源到目的地所采取的端到端的路径</p>
+</li>
+</ul>
+<p>2.转发表：每台路由器拥有的一张本地表。在接收到分组时，根据分组首部首部字段的值在表中进行查询。</p>
+<p><img src="picture/%E8%BD%AC%E5%8F%91%E8%A1%A8.png" alt=""></p>
+<p>3.连接建立：某些网络层体系要求在源到目的地之间所选择的路径彼此握手，以便在分组交换前建立起状态。</p>
+<h4 id="4-1-2网络服务模型">4.1.2网络服务模型</h4>
+<blockquote>
+<p>不同的网络层模型提供不同的服务，可能拥有的服务有：</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>确保交付</p>
+</li>
+<li class="lvl-2">
+<p>具有时延上界的确保交付</p>
+</li>
+<li class="lvl-2">
+<p>有序分组交付</p>
+</li>
+<li class="lvl-2">
+<p>确保最小带宽</p>
+</li>
+<li class="lvl-2">
+<p>确保最大时延抖动</p>
+</li>
+<li class="lvl-2">
+<p>安全性服务</p>
+</li>
+</ul>
+<h4 id="4-1-3路由表的配置方式">4.1.3路由表的配置方式</h4>
+<h5 id="1-传统方式（分布式）">1.传统方式（分布式）</h5>
+<p>由每台路由器自己根据提前装载好的路由选择算法配置路由表。</p>
+<h5 id="2-SDN-software-define-network-方式（集中式）">2.SDN(software define network)方式（集中式）</h5>
+<p>由一个远程服务器连接所有路由器，根据服务器上当前装载的路由选择算法来配置每个路由器的流表。</p>
+<p><strong>优点：</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>耦合度低，便于更换算法重新配置</p>
+</li>
+<li class="lvl-2">
+<p>流表比路由表更灵活</p>
+<ul class="lvl-2">
+<li class="lvl-6">允许解析更上层的多个协议字段
+<ul class="lvl-4">
+<li class="lvl-10">TCP的字段</li>
+<li class="lvl-10">UDP的字段</li>
+</ul>
+</li>
+<li class="lvl-6">允许进行更多样的动作
+<ul class="lvl-4">
+<li class="lvl-10">转发</li>
+<li class="lvl-10">泛洪</li>
+<li class="lvl-10">丢弃</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/2022-12-12_3-3%E6%97%A0%E8%BF%9E%E6%8E%A5%E8%BF%90%E8%BE%93%EF%BC%9AUDP/">3-3无连接运输：UDP</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-11T16:00:00.000Z" itemprop="datePublished">
+    2022-12-12
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">书本：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="3-3无连接运输：UDP">3.3无连接运输：UDP</h2>
+<blockquote>
+<p>UDP仅在IP协议的基础上提供多路复用、多路分解的服务和少量的差错检测。</p>
+</blockquote>
+<p>使用UDP的原因：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>应用层能更精细地控制发送：</p>
+<ul class="lvl-2">
+<li class="lvl-6">UDP没有拥塞控制机制，因此发送时间和数据量大小完全由应用层来决定。而TCP中，应用层发送数据，TCP会根据不同实际情况来决定发送时间和每次数据大小，应用层的控制少。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>无需建立连接：</p>
+<ul class="lvl-2">
+<li class="lvl-6">TCP在开始传输数据之前要进行三次握手。UDP没有建立连接的时延。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>无连接状态：</p>
+<ul class="lvl-2">
+<li class="lvl-6">TCP需要在端系统中维护连接状态，因此在TCP传输中会有状态参数。UDP没有这些参数。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>分组首部开销少：</p>
+<ul class="lvl-2">
+<li class="lvl-6">TCP首部20字节</li>
+<li class="lvl-6">UDP首部8字节</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-3-1-UDP报文段结构">3.3.1 UDP报文段结构</h4>
+<blockquote>
+<p>UDP首部仅有四个字段，每个字段两个字节，如图：</p>
+</blockquote>
+<p><img src="picture/UDP%E6%8A%A5%E6%96%87%E6%AE%B5%E7%BB%93%E6%9E%84.png" alt=""></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>端口号：2字节，16位，0~65535</p>
+</li>
+<li class="lvl-2">
+<p>长度：指明报文段字节数（首部+数据）</p>
+</li>
+<li class="lvl-2">
+<p>校验和：接收方用于检测该报文段是否出现差错（计算公式如下）</p>
+</li>
+</ul>
+<h4 id="3-3-2-UDP校验和">3.3.2 UDP校验和</h4>
+<p>计算方法：每16位进行一次加和（除了校验和部分），如果溢出则回卷（最低位进1）。最终结果再进行反码运算，存入校验和中。</p>
+<p><strong>案例</strong></p>
+<p><img src="picture/%E6%A0%A1%E9%AA%8C%E5%92%8C%E6%A1%88%E4%BE%8B.png" alt=""></p>
+<p>在接收方，将所有的16位进行加和（包括校验和），得到的结果如果不是全1，则出错。（校验和 = 所有加和取反码，所以其它加和再次加上校验和应该为16个1）</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/11/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/2022-12-11_2-7socket%E7%BC%96%E7%A8%8B/">2-7socket编程</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-10T16:00:00.000Z" itemprop="datePublished">
+    2022-12-11
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">书本：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="2-7socket编程">2.7socket编程</h2>
+<blockquote>
+<p>详见Windows API课程笔记</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/11/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/2022-12-11_3-4%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8E%9F%E7%90%86/">3-4可靠数据传输原理</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-10T16:00:00.000Z" itemprop="datePublished">
+    2022-12-11
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">书本：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="3-4可靠数据传输原理">3.4可靠数据传输原理</h2>
+<p>根据双方缓冲区大小，可分为：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>stop and wait 协议：发送缓冲区 = 1，接收缓冲区 = 1</p>
+</li>
+<li class="lvl-2">
+<p>GBN(go back N)协议：发送缓冲区 &gt; 1，接收缓冲区 = 1</p>
+</li>
+<li class="lvl-2">
+<p>SR(selective receive)协议：发送缓冲区 &gt; 1，接收缓冲区 &gt; 1</p>
+</li>
+</ul>
+<h4 id="1-stop-and-wait协议">1.stop and wait协议</h4>
+<p>最简单的协议，用于短距离局域网。在发送一个分组之后一直等待ACK，直到Timer结束。</p>
+<h4 id="2-GBN协议">2.GBN协议</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>一次发送k个包，要求必须按顺序到达接收缓冲区。只设置一个Timer。</p>
+</li>
+<li class="lvl-2">
+<p>如果接收缓冲区收到的不是顺序到达的第一个包，则丢掉并回复已经完成的上一个ACK。</p>
+</li>
+<li class="lvl-2">
+<p>Timer结束未收到下一个ACK，则缓冲区所有的包重发。</p>
+</li>
+<li class="lvl-2">
+<p>正常则移动缓冲区。</p>
+</li>
+</ul>
+<h4 id="3-SR协议">3.SR协议</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>一次发送k个包。对每个包设置一个Timer。</p>
+</li>
+<li class="lvl-2">
+<p>接收缓冲区收到一个包，返回当前包的ACK。发送缓冲区取消对应包的Timer。</p>
+</li>
+<li class="lvl-2">
+<p>Timer结束，再次发送对应的包。并移动缓冲区。</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/08/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/2022-08-17_2-4%E5%9B%A0%E7%89%B9%E7%BD%91%E4%B8%AD%E7%9A%84%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6/">2-4因特网中的电子邮件</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-08-16T16:00:00.000Z" itemprop="datePublished">
+    2022-08-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">书本：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="2-4因特网中的电子邮件">2.4因特网中的电子邮件</h2>
+<p>因特网电子邮件系统和它的关键组件：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>用户代理</p>
+</li>
+<li class="lvl-2">
+<p>邮件服务器</p>
+</li>
+<li class="lvl-2">
+<p>简单邮件传输协议</p>
+</li>
+</ul>
+<hr>
+<p>过程如下：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>发送方写好邮件，交付给本地用户代理</p>
+</li>
+<li class="lvl-2">
+<p>用户代理传送给发送方的邮件服务器</p>
+</li>
+<li class="lvl-2">
+<p>再传送到接收方的邮件服务器</p>
+</li>
+<li class="lvl-2">
+<p>最后分发到接收方的邮箱中</p>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>电子邮件使用SMTP协议，建立在TCP协议之上，从发送方的邮件服务器向接收方的邮件服务器。</p>
+</blockquote>
+<p>SMTP有两部分：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>运行在发送方邮件服务器上的客户端</p>
+</li>
+<li class="lvl-2">
+<p>运行在接收方邮件服务器的服务器端</p>
+</li>
+</ul>
+<p>注意：每台服务器上这两部分都同时运行</p>
+<hr>
+<h4 id="2-4-1SMTP">2.4.1SMTP</h4>
+<blockquote>
+<p>SMTP是因特网电子邮件应用的核心，用于从发送方的邮件服务器发送报文到接收方的邮件服务器</p>
+</blockquote>
+<p>执行过程：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>客户SMTP在25号端口建立一个到服务器的TCP连接</p>
+</li>
+<li class="lvl-2">
+<p>连接建立，服务器与客户执行应用层的握手（向服务器提供双方的邮件地址）</p>
+</li>
+<li class="lvl-2">
+<p>客户发送报文</p>
+</li>
+<li class="lvl-2">
+<p>关闭TCP连接</p>
+</li>
+</ul>
+<p>**注意：**SMTP是持续连接的，所有报文都是在同一个TCP上发送</p>
+<h4 id="2-4-2与HTTP的对比">2.4.2与HTTP的对比</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>HTTP是一个拉协议（pull protocol），SMTP是一个推协议（push protocol）</p>
+</li>
+<li class="lvl-2">
+<p>SMTP要求每个报文都以7比特ASCII格式，如果包含其他字符或者二进制数据，必须按照该格式进行编码，HTTP无限制</p>
+</li>
+<li class="lvl-2">
+<p>HTTP将对象封装到每一个响应报文中，而SMTP则将所有对象放在一个报文中</p>
+</li>
+</ul>
+<h4 id="2-4-3邮件报文格式与MIME">2.4.3邮件报文格式与MIME</h4>
+<p>格式：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>首部行</p>
+<ul class="lvl-2">
+<li class="lvl-6">必须有一个From：首部行</li>
+<li class="lvl-6">必须有一个To：首部行</li>
+<li class="lvl-6">也许包含一个Subject：首部行</li>
+<li class="lvl-6">也许包含其他首部行</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>空白行（一行）</p>
+</li>
+<li class="lvl-2">
+<p>报文体（ASCII格式）</p>
+</li>
+</ul>
+<h4 id="2-4-4邮件访问协议">2.4.4邮件访问协议</h4>
+<blockquote>
+<p>SMTP用于将邮件从发送方服务器传输到接收方服务器；从用户代理传输到发送方的邮件服务器；POP3用来将邮件从接收方的邮件服务器传送到接收方的用户代理（这是一个用户代理发起的拉协议）；</p>
+</blockquote>
+<h5 id="1-POP3">1.POP3</h5>
+<blockquote>
+<p>一个简单的邮件访问协议</p>
+</blockquote>
+<p>过程：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>用户代理打开一个到邮件服务器端口110上的TCP连接，POP3开始工作</p>
+</li>
+<li class="lvl-2">
+<p>第一阶段：特许</p>
+<ul class="lvl-2">
+<li class="lvl-6">用户代理发送用户名和口令鉴别用户</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>第二阶段：事物处理</p>
+<ul class="lvl-2">
+<li class="lvl-6">用户代理取回报文</li>
+<li class="lvl-6">可选
+<ul class="lvl-4">
+<li class="lvl-10">对报文做删除标记</li>
+<li class="lvl-10">取消报文删除标记</li>
+<li class="lvl-10">获取邮件的统计信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>第三阶段：更新阶段</p>
+<ul class="lvl-2">
+<li class="lvl-6">结束POP3会话</li>
+<li class="lvl-6">邮件服务器删除被标记为删除的报文</li>
+</ul>
+</li>
+</ul>
+<p>注意：标记删除还会区分设备</p>
+<h5 id="2-IMAP">2.IMAP</h5>
+<blockquote>
+<p>为了解决POP3能在远程创建邮件文件夹并为报文指派文件夹的方法，IMAP出现了</p>
+</blockquote>
+<p>IMAP服务器把每个报文与一个文件夹联系起来</p>
+<p>过程：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>报文到达服务器，与收件人INBOX文件夹相关联</p>
+</li>
+<li class="lvl-2">
+<p>用户能</p>
+<ul class="lvl-2">
+<li class="lvl-6">创建文件夹</li>
+<li class="lvl-6">移动邮件到另一个文件夹</li>
+<li class="lvl-6">查询邮件</li>
+</ul>
+</li>
+</ul>
+<p>注意：</p>
+<p>IMAP服务器维护了IMAP会话的用户状态信息</p>
+<p>用户能自主选择接收报文的一部分</p>
+<h5 id="3-基于Web的电子邮件">3.基于Web的电子邮件</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>用户代理是浏览器</p>
+</li>
+<li class="lvl-2">
+<p>邮件服务器与浏览器之间使用HTTP协议</p>
+</li>
+<li class="lvl-2">
+<p>邮件服务器之间使用SMTP协议</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/08/16/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/2022-08-16_2-3%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%EF%BC%9AFTP/">2-3文件传输协议：FTP</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-08-15T16:00:00.000Z" itemprop="datePublished">
+    2022-08-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">书本：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="2-3文件传输协议：FTP">2.3文件传输协议：FTP</h2>
+<p>传输过程：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>用户向FTP用户代理提供远程主机的主机名</p>
+</li>
+<li class="lvl-2">
+<p>FTP用户代理向远程主机文件系统发起TCP连接</p>
+</li>
+<li class="lvl-2">
+<p>用户接着提供用户标识和口令，作为FTP命令的一部分在连接上传送</p>
+</li>
+<li class="lvl-2">
+<p>服务器向该用户授权（允许用户上传文件或下载文件）</p>
+</li>
+</ul>
+<h4 id="FTP与HTTP的区别">FTP与HTTP的区别</h4>
+<blockquote>
+<p>FTP使用了两个并行的TCP连接来传输文件，一个是<strong>控制连接</strong>，一个是<strong>数据连接</strong>。</p>
+<p>控制连接用于两主机之间传输<strong>控制信息</strong>，例如：用户标识，口令，改变远程目录的命令以及“存放”和“获取”文件的命令。</p>
+<p>数据连接用于实际发送一个文件。</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>由于FTP协议使用一个独立的控制连接，所以称控制信息是<strong>带外连接</strong></p>
+</li>
+<li class="lvl-2">
+<p>HTTP可以说是<strong>带内</strong>发送控制信息</p>
+</li>
+</ul>
+<p>注意：控制连接贯穿了整个用户会话期间，但对会话中的每一次文件传输都需要建立一个新的数据连接。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>HTTP是无状态的，服务器无需对用户状态进行追踪</p>
+</li>
+<li class="lvl-2">
+<p>FTP服务器必须在整个会话期间保留用户的状态，追踪用户在远程目录树上的当前位置。</p>
+</li>
+</ul>
+<h4 id="FTP命令和回答">FTP命令和回答</h4>
+<blockquote>
+<p>命令与回答都是以7比特ASCII格式在控制连接上传送。每个命令由四个大写字母的ASCII字符组成，加可选参数，后跟回车换行符。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/page/2/">2</a><a class="extend next" rel="next" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/page/2/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

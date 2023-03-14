@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ Qt }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/22/Qt/2022-07-22_2-4%E9%BC%A0%E6%A0%87%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6/">2-4鼠标键盘事件</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-21T16:00:00.000Z" itemprop="datePublished">
+    2022-07-22
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Qt/">Qt</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="鼠标键盘事件">鼠标键盘事件</h2>
+<h4 id="一些概念">一些概念</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>QMainWindow派生至QWidget</p>
+<ul class="lvl-2">
+<li class="lvl-6">QMainWindow内置quit函数</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>按钮QPushButton</p>
+<ul class="lvl-2">
+<li class="lvl-6">初始化需要文字内容和父对象指针</li>
+<li class="lvl-6">需要设置长宽和坐标</li>
+<li class="lvl-6">内置clicked函数</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/22/Qt/2022-07-22_2-5%E5%86%85%E7%BD%AE%E4%BF%A1%E5%8F%B7%E8%BF%9E%E6%8E%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A7%BD/">2-5内置信号连接自定义槽</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-21T16:00:00.000Z" itemprop="datePublished">
+    2022-07-22
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Qt/">Qt</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="内置信号连接自定义槽">内置信号连接自定义槽</h2>
+<p><strong>案例</strong></p>
+<blockquote>
+<p>mainwindow.h</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> MAINWINDOW_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAINWINDOW_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QMainWindow&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QtWidgets&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MainWindow</span> : <span class="keyword">public</span> QMainWindow</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">MainWindow</span>(QWidget *parent = <span class="literal">nullptr</span>);</span><br><span class="line">    ~<span class="built_in">MainWindow</span>();</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">onClick</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">onCheck</span><span class="params">(<span class="type">int</span> state)</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    QPushButton* clickBtn;</span><br><span class="line">    QLabel* label;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// QObject interface</span></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">timerEvent</span><span class="params">(QTimerEvent *event)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// MAINWINDOW_H</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>mainwindow.cpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;mainwindow.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">MainWindow::<span class="built_in">MainWindow</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QMainWindow</span>(parent)</span><br><span class="line">&#123;</span><br><span class="line">    QWidget* widget = <span class="keyword">new</span> <span class="built_in">QWidget</span>(<span class="keyword">this</span>);</span><br><span class="line">    <span class="built_in">setCentralWidget</span>(widget);</span><br><span class="line">    clickBtn = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;点击&quot;</span>,widget);</span><br><span class="line">    QCheckBox* cd = <span class="keyword">new</span> <span class="built_in">QCheckBox</span>(<span class="string">&quot;connect&quot;</span>,widget);</span><br><span class="line">    cd-&gt;<span class="built_in">setCheckState</span>(Qt::Checked);</span><br><span class="line">    label = <span class="keyword">new</span> <span class="built_in">QLabel</span>(QTime::<span class="built_in">currentTime</span>().<span class="built_in">toString</span>(),widget);</span><br><span class="line"></span><br><span class="line">    QHBoxLayout* hbox = <span class="keyword">new</span> <span class="built_in">QHBoxLayout</span>(widget);</span><br><span class="line">    hbox-&gt;<span class="built_in">addWidget</span>(clickBtn);</span><br><span class="line">    hbox-&gt;<span class="built_in">addWidget</span>(cd);</span><br><span class="line">    hbox-&gt;<span class="built_in">addWidget</span>(label);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">startTimer</span>(<span class="number">1000</span>);</span><br><span class="line">    <span class="built_in">connect</span>(clickBtn,&amp;QPushButton::clicked,<span class="keyword">this</span>,&amp;MainWindow::onClick);</span><br><span class="line">    <span class="built_in">connect</span>(cd,&amp;QCheckBox::stateChanged,<span class="keyword">this</span>,&amp;MainWindow::onCheck);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MainWindow::~<span class="built_in">MainWindow</span>()</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MainWindow::onClick</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">statusBar</span>()-&gt;<span class="built_in">showMessage</span>(<span class="string">&quot;按钮被点击&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MainWindow::onCheck</span><span class="params">(<span class="type">int</span> state)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">statusBar</span>()-&gt;<span class="built_in">showMessage</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(state)</span><br><span class="line">        <span class="built_in">connect</span>(clickBtn,&amp;QPushButton::clicked,<span class="keyword">this</span>,&amp;MainWindow::onClick);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">disconnect</span>(clickBtn,&amp;QPushButton::clicked,<span class="keyword">this</span>,&amp;MainWindow::onClick);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MainWindow::timerEvent</span><span class="params">(QTimerEvent *event)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    label-&gt;<span class="built_in">setText</span>(QTime::<span class="built_in">currentTime</span>().<span class="built_in">toString</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/21/Qt/%E8%A1%A5%E5%85%85/2022-07-21_Qt%E8%BF%9E%E6%8E%A5Mysql%E6%95%B0%E6%8D%AE%E5%BA%93/">Qt连接Mysql数据库</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-20T16:00:00.000Z" itemprop="datePublished">
+    2022-07-21
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Qt/">Qt</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Qt/%E8%A1%A5%E5%85%85/">补充</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="Qt连接Mysql数据库">Qt连接Mysql数据库</h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Cappuccino_jay/article/details/125652678">(19条消息) 【QT】Qt creator连接MySQL数据库 - 增删改查_Cappuccino-jay的博客-CSDN博客</a></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/20/Qt/2022-07-20_1Qt%E4%B8%BB%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">1Qt主事件循环</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-19T16:00:00.000Z" itemprop="datePublished">
+    2022-07-20
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Qt/">Qt</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="Qt主事件循环">Qt主事件循环</h2>
+<h3 id="继承结构">继承结构</h3>
+<p><img src="picture/%E7%BB%A7%E6%89%BF%E7%BB%93%E6%9E%842.png" alt=""></p>
+<h4 id="QCoreApplication">QCoreApplication</h4>
+<p><img src="picture/%E7%BB%A7%E6%89%BF%E7%BB%93%E6%9E%841.png" alt=""></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line">    <span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;对象的类名：&quot;</span>&lt;&lt;a.<span class="built_in">metaObject</span>()-&gt;<span class="built_in">className</span>();</span><br><span class="line">    <span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;应用程序目录：&quot;</span>&lt;&lt;a.<span class="built_in">applicationFilePath</span>();</span><br><span class="line">    a.<span class="built_in">dumpObjectInfo</span>();</span><br><span class="line">    a.<span class="built_in">dumpObjectTree</span>();</span><br><span class="line">    <span class="keyword">return</span> a.<span class="built_in">exec</span>();			<span class="comment">//在这个函数中循环主事件，直到使用exit()才退出</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="QGuiapplication">QGuiapplication</h4>
+<blockquote>
+<p>仅支持操作系统自带的QWindow，功能有限</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QWindow&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QtGui&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QGuiApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line">    QWindow w;</span><br><span class="line">    w.<span class="built_in">show</span>();</span><br><span class="line">    qGuiApp-&gt;<span class="built_in">dumpObjectInfo</span>();		<span class="comment">//QGuiApp:应用对象的全局指针。仅在应用对象为QGuiApplication才有效</span></span><br><span class="line">    qGuiApp-&gt;<span class="built_in">dumpObjectTree</span>();</span><br><span class="line">    <span class="keyword">return</span> a.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>QWindow的基类是Qobject，并没有QWidget</p>
+</blockquote>
+<h4 id="QApplication">QApplication</h4>
+<blockquote>
+<p>能为QtWidgets模块的应用程序提供事件循环；在继承QGuiapplication的基础上，还负责初始化QtWidgets模块所需的资源，并提供更多的接口</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QWidget&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line">    QWidget w;</span><br><span class="line">    w.<span class="built_in">show</span>();</span><br><span class="line">    qApp-&gt;<span class="built_in">dumpObjectInfo</span>();</span><br><span class="line">    qApp-&gt;<span class="built_in">dumpObjectTree</span>();</span><br><span class="line">    <span class="keyword">return</span> a.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/20/Qt/2022-07-20_2-1moc%E5%92%8CQObject/">2-1moc和QObject</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-19T16:00:00.000Z" itemprop="datePublished">
+    2022-07-20
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Qt/">Qt</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="moc和QObject">moc和QObject</h2>
+<h4 id="元对象系统（meta-object-system）">元对象系统（meta-object-system）</h4>
+<blockquote>
+<p>Qt对标准C++进行了扩展，引入了一些新的概念和功能</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>QObject类是所有使用元对象系统的类的基类</p>
+</li>
+<li class="lvl-2">
+<p>QObject派生的类在类的private部分声明Q_OBJEDT宏</p>
+<ul class="lvl-2">
+<li class="lvl-6">MOC才能识别并进行预处理</li>
+<li class="lvl-6">可以不用，同样能进行自动的内存管理，但最好使用</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>MOC为每个QObject的子类提供必要的代码</p>
+</li>
+</ul>
+<blockquote>
+<p>MOC（元对象编译器）是一个预处理器，将Qt的特性程序转换为标准C<ins>程序，再进行C</ins>的编译</p>
+</blockquote>
+<p><strong>注意</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>QObject不支持拷贝</p>
+<ul class="lvl-2">
+<li class="lvl-6">在基类中，将拷贝构造函数和赋值运算符重载函数设置为私有，并使用了Q_DISABLE_COPY()的宏</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>QObject对象以树结构组织自己</p>
+<ul class="lvl-2">
+<li class="lvl-6">当以另一个对象作为父对象创建QObject（即将基类初始化为该对象），这个对象会自动将自身添加到父对象的子对象列表中</li>
+<li class="lvl-6">父对象删除时，子对象自动被删除</li>
+<li class="lvl-6">可以使用findChild()和findChildren()按名称和可选类型查找对象</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;QCoreApplication&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> : <span class="keyword">public</span> QObject</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">A</span>(QObject* parent = <span class="literal">nullptr</span>);</span><br><span class="line">    ~<span class="built_in">A</span>()&#123;<span class="built_in">qDebug</span>()&lt;&lt;<span class="keyword">this</span>&lt;&lt;<span class="string">&quot;被销毁&quot;</span>; &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">A::<span class="built_in">A</span>(QObject* parent) : <span class="built_in">QObject</span>(parent)	<span class="comment">//父对象</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">qDebug</span>()&lt;&lt;<span class="keyword">this</span>&lt;&lt;<span class="string">&quot;被构造&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    A objA;</span><br><span class="line">    A* objA2 = <span class="keyword">new</span> <span class="built_in">A</span>(&amp;objA);		<span class="comment">//objA2是objA的子对象</span></span><br><span class="line">    <span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;objA2&quot;</span>&lt;&lt;objA2;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;						<span class="comment">//程序结束，两个对象同时被销毁（父节点被回收，子节点再被回收)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

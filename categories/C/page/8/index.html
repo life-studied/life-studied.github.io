@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ C++ }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/07/C++/C++%E5%9F%BA%E7%A1%80/2022-03-07_9-1/">9-1</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-06T16:00:00.000Z" itemprop="datePublished">
+    2022-03-07
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="9-1">9.1</h2>
+<h4 id="动态分配new">动态分配new</h4>
+<h5 id="1-内置标量初始化">1.内置标量初始化</h5>
+<p>在类型名后加上初始值并用（）括起</p>
+<p>例如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> *pi=<span class="keyword">new</span> <span class="built_in">int</span> (<span class="number">6</span>);</span><br><span class="line"><span class="type">double</span> *pd=<span class="keyword">new</span> <span class="built_in">double</span> (<span class="number">99.99</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="2-初始化结构或数组（c-11）">2.初始化结构或数组（c++11）</h5>
+<p>使用大括号的列表初始化</p>
+<p>例如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">where</span>&#123;<span class="type">double</span> x;<span class="type">double</span> y;<span class="type">double</span> z;&#125;;</span><br><span class="line">where * one=<span class="keyword">new</span> where &#123;<span class="number">2.5</span>,<span class="number">5.3</span>,<span class="number">7.2</span>&#125;;</span><br><span class="line"><span class="type">int</span> *ar=<span class="keyword">new</span> <span class="type">int</span> [<span class="number">4</span>] &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br></pre></td></tr></table></figure>
+<h5 id="3-运算符、函数、替换函数">3.运算符、函数、替换函数</h5>
+<p>运算符new和new []分别调用下面函数：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> * <span class="keyword">operator</span> <span class="title">new</span><span class="params">(std::<span class="type">size_t</span>)</span></span>;</span><br><span class="line"><span class="type">void</span> * <span class="keyword">operator</span> <span class="keyword">new</span>[](std::<span class="type">size_t</span>);</span><br></pre></td></tr></table></figure>
+<p>delete类似</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/06/C++/C++%E5%9F%BA%E7%A1%80/2022-03-06_8-3%20%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0/">8-3 默认参数</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-05T16:00:00.000Z" itemprop="datePublished">
+    2022-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="8-3-默认参数">8.3 默认参数</h2>
+<p>介绍：函数省略实参时默认使用的值</p>
+<h5 id="设置方法及要求">设置方法及要求</h5>
+<p>设置方法：仅在<strong>函数原型</strong>的参数列表中赋值</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">char</span> * <span class="title">left</span><span class="params">(<span class="type">const</span> <span class="type">char</span> * str, <span class="type">int</span> n=<span class="number">1</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">char</span> * <span class="title">left</span><span class="params">(<span class="type">const</span> <span class="type">char</span> * str, <span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要求：默认参数必须从右往左添至参数列表</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">harpo</span><span class="params">(<span class="type">int</span> n,<span class="type">int</span> m=<span class="number">4</span>,<span class="type">int</span> j=<span class="number">5</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<h5 id="使用说明">使用说明</h5>
+<p>对于带n个默认参数的共m个参数的函数，使用时参数列表中可有[m-n,m]个参数，根据情况使用</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/06/C++/C++%E5%9F%BA%E7%A1%80/2022-03-06_8-4%20%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD/">8-4 函数重载</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-05T16:00:00.000Z" itemprop="datePublished">
+    2022-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="8-4-函数重载">8.4 函数重载</h2>
+<h4 id="介绍">介绍</h4>
+<blockquote>
+<p>允许使用多个同名的不同功能的函数</p>
+<p>编译器辨别的方法仅为<strong>参数列表</strong>，与返回值<strong>无关</strong>！</p>
+</blockquote>
+<h4 id="使用说明">使用说明</h4>
+<blockquote>
+<p>直接定义多个相同名字但是参数不同的函数即可，记得保证传入参数时编译器不会无法确认</p>
+</blockquote>
+<h4 id="注意事项">注意事项</h4>
+<p>1.如果没有任何一个函数完全匹配实参，编译器将尝试强制类型转换</p>
+<p>2.如果多个函数匹配实参，编译器会报错</p>
+<p>3.引用和同类型不引用的参数会引起编译器无法确认</p>
+<p>4.非const实参可以传入const和非const，而const实参只能作用于const</p>
+<p>5.编译器辨别的方法仅为<strong>参数列表</strong>，与返回值<strong>无关</strong>！</p>
+<h4 id="何时使用">何时使用</h4>
+<p>有些可以通过默认参数来避免，但如果类型不同的参数，就需要使用函数重载</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/categories/C/page/7/">« prev</a><a class="page-number" href="/categories/C/">1</a><span class="space">&hellip;</span><a class="page-number" href="/categories/C/page/6/">6</a><a class="page-number" href="/categories/C/page/7/">7</a><span class="page-number current">8</span>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

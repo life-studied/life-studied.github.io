@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ 计算机网络 }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/11/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%AC2%E7%AB%A0%20%E5%BA%94%E7%94%A8%E5%B1%82/2022-07-11_4EMail/">4EMail</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-10T16:00:00.000Z" itemprop="datePublished">
+    2022-07-11
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">网课：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%AC2%E7%AB%A0-%E5%BA%94%E7%94%A8%E5%B1%82/">第2章 应用层</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="EMail">EMail</h2>
+<h4 id="3个主要的组成部分">3个主要的组成部分</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>用户代理</p>
+</li>
+<li class="lvl-2">
+<p>邮件服务器</p>
+</li>
+<li class="lvl-2">
+<p>简单邮件传输协议：SMTP</p>
+</li>
+</ul>
+<h4 id="用户代理">用户代理</h4>
+<blockquote>
+<p>即用来撰写邮件的客户端软件</p>
+</blockquote>
+<p>代理将邮件传输给邮件服务器，邮件服务器将邮件传输给目标服务器，最后接收方使用代理将邮件拉取到本地。</p>
+<h4 id="SMTP（RFC-2821）">SMTP（RFC 2821）</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>使用TCP在客户端和服务器之间传输报文，端口25</p>
+</li>
+<li class="lvl-2">
+<p>直接传输：从发送方服务器到接收方服务器</p>
+</li>
+<li class="lvl-2">
+<p>传输的3个阶段：</p>
+<ul class="lvl-2">
+<li class="lvl-6">握手</li>
+<li class="lvl-6">传输报文</li>
+<li class="lvl-6">关闭</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>命令/响应交互</p>
+<ul class="lvl-2">
+<li class="lvl-6">命令：ASCII文本</li>
+<li class="lvl-6">响应：状态码和状态信息</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>报文必须为7位ASCII码</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%AC2%E7%AB%A0%20%E5%BA%94%E7%94%A8%E5%B1%82/2022-07-10_2Web%20and%20HTTP/">2Web and HTTP</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-09T16:00:00.000Z" itemprop="datePublished">
+    2022-07-10
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">网课：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%AC2%E7%AB%A0-%E5%BA%94%E7%94%A8%E5%B1%82/">第2章 应用层</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="Web-and-HTTP">Web and HTTP</h2>
+<blockquote>
+<p>URL格式：协议名+用户：口令+主机名+路径名+端口</p>
+<p>Prot:	//user:psw	@www.someschool.edu/	someDept/pic.gif:	port</p>
+</blockquote>
+<h4 id="HTTP概况">HTTP概况</h4>
+<blockquote>
+<p>HTTP：超文本传输协议</p>
+<p>Web的应用层协议</p>
+</blockquote>
+<h5 id="使用TCP">使用TCP</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>客户端发起一个与服务器的TCP连接，端口号：80</p>
+</li>
+<li class="lvl-2">
+<p>服务器接受客户的TCP连接</p>
+</li>
+<li class="lvl-2">
+<p>在浏览器与Web服务器交换HTTP报文</p>
+</li>
+<li class="lvl-2">
+<p>TCP连接关闭</p>
+</li>
+</ul>
+<h5 id="HTTP是无状态的">HTTP是无状态的</h5>
+<blockquote>
+<p>服务器并不维护关于客户的任何信息</p>
+</blockquote>
+<h5 id="HTTP连接">HTTP连接</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>非持久HTTP</p>
+<ul class="lvl-2">
+<li class="lvl-6">最多只要一个对象在TCP连接上发送</li>
+<li class="lvl-6">下载多个对象需要多个TCP连接</li>
+<li class="lvl-6">HTTP/1.0使用非持久连接</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>持久HTTP</p>
+<ul class="lvl-2">
+<li class="lvl-6">多个对象可以在一个TCP连接上传输</li>
+<li class="lvl-6">HTTP/1.1默认使用持久连接</li>
+</ul>
+</li>
+</ul>
+<h4 id="HTTP请求">HTTP请求</h4>
+<blockquote>
+<p>两种类型的HTTP报文：请求和响应</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>请求报文</p>
+<ul class="lvl-2">
+<li class="lvl-6">请求行（命令+版本号+URL）</li>
+<li class="lvl-6">若干首部行（包含域名、用户、连接方式等信息）</li>
+<li class="lvl-6">额外的回车符（表示报文结束）</li>
+<li class="lvl-6">实体行</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>响应报文</p>
+<ul class="lvl-2">
+<li class="lvl-6">状态行（协议版本、状态码和状态信息）</li>
+<li class="lvl-6">首部行</li>
+<li class="lvl-6">数据</li>
+</ul>
+</li>
+</ul>
+<h4 id="用户-服务器状态：cookie">用户-服务器状态：cookie</h4>
+<blockquote>
+<p>无连接的特性会影响一些需要记录的网站的使用，因此出现了cookie机制，用于客户端和服务器之间保存历史记录或其它账户信息，规避无连接带来的影响。</p>
+</blockquote>
+<h5 id="4个组成部分">4个组成部分</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>在HTTP响应报文中有一个cookie的首部行</p>
+</li>
+<li class="lvl-2">
+<p>在HTTP请求报文含有一个cookie的首部行</p>
+</li>
+<li class="lvl-2">
+<p>在用户端系统中保留有一个cookie文件，由浏览器应用管理</p>
+</li>
+<li class="lvl-2">
+<p>在Web站点有一个后端数据库，保留用户的cookie</p>
+</li>
+</ul>
+<h4 id="Web缓存（代理服务器）">Web缓存（代理服务器）</h4>
+<p>目标：不访问原始服务器，就能满足客户要求</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>用户设置浏览器，通过缓存的访问Web</p>
+</li>
+<li class="lvl-2">
+<p>浏览器将所有的HTTP请求发给缓存</p>
+<ul class="lvl-2">
+<li class="lvl-6">直接缓存中的对象，直接被返回</li>
+<li class="lvl-6">对象不在缓存中，缓存请求原始服务器，然后再返回对象。</li>
+</ul>
+</li>
+</ul>
+<p>问题：对象再原始服务器中更新了，代理未更新</p>
+<p>解决：使用条件式获取向原始服务器申请是否更新的head</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%AC1%E7%AB%A0%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%8E%E5%9B%A0%E7%89%B9%E7%BD%91/2022-07-06_7%E5%8D%8F%E8%AE%AE%E5%B1%82%E6%AC%A1%E5%92%8C%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9E%8B/">7协议层次和服务模型</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-05T16:00:00.000Z" itemprop="datePublished">
+    2022-07-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">网课：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%AC1%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%8E%E5%9B%A0%E7%89%B9%E7%BD%91/">第1章 计算机网络与因特网</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="协议层次和服务模型">协议层次和服务模型</h2>
+<h4 id="协议层次">协议层次</h4>
+<blockquote>
+<p>网络通过复杂的层次实现。</p>
+<p>对等层之间使用协议来交互。</p>
+</blockquote>
+<p>服务：低层实体向上层实体提供它们之间的通信的能力</p>
+<p>原语：各种API（上层使用下层服务的形式）</p>
+<p>服务访问点（SAP）：使用下层提供的服务通过层间的接口，用于区分向上层提供服务的用户</p>
+<h4 id="服务类型">服务类型</h4>
+<p>面向连接的服务</p>
+<p>无连接的服务</p>
+<h4 id="协议栈">协议栈</h4>
+<h5 id="应用层（网络应用）">应用层（网络应用）</h5>
+<blockquote>
+<p>为用户或其它应用进程提供网络应用服务</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>FTP、SMTP、HTTP、DNS</p>
+</li>
+</ul>
+<h5 id="传输层（主机之间的数据传输）">传输层（主机之间的数据传输）</h5>
+<blockquote>
+<p>在网络层提供的端到端通信基础上，细分为进程到进程，将不可靠的通信变为可靠的通信。</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>TCP、UDP</p>
+</li>
+</ul>
+<h5 id="网络层（为数据包从源到目的选择路由）">网络层（为数据包从源到目的选择路由）</h5>
+<blockquote>
+<p>主机与主机之间的通信，端到端之间的通信，不可靠</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>IP、路由协议</p>
+</li>
+</ul>
+<h5 id="链路层（相邻网络节点之间的数据传输）">链路层（相邻网络节点之间的数据传输）</h5>
+<blockquote>
+<p>2个相邻节点的通信，点到点通信，可靠或不可靠</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>点对对协议PPP、wifi（802.11）、Ethernet</p>
+</li>
+</ul>
+<h5 id="物理层（在线路上传输bit）">物理层（在线路上传输bit）</h5>
+<h4 id="各层次的协议数据单元">各层次的协议数据单元</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>应用层：报文message</p>
+</li>
+<li class="lvl-2">
+<p>传输层：报文段segment：TCP段、UDP数据段</p>
+</li>
+<li class="lvl-2">
+<p>网络层：分组packet</p>
+</li>
+<li class="lvl-2">
+<p>数据链路层：帧frame</p>
+</li>
+<li class="lvl-2">
+<p>物理层：位bit</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%AC1%E7%AB%A0%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%8E%E5%9B%A0%E7%89%B9%E7%BD%91/2022-07-03_1%E4%BB%80%E4%B9%88%E6%98%AFInternet/">1什么是Internet</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-02T16:00:00.000Z" itemprop="datePublished">
+    2022-07-03
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">网课：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%AC1%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%8E%E5%9B%A0%E7%89%B9%E7%BD%91/">第1章 计算机网络与因特网</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="什么是Internet">什么是Internet</h2>
+<h4 id="1-从构成的角度看">1.从构成的角度看</h4>
+<h5 id="1-1节点与边">1.1节点与边</h5>
+<p><strong>节点</strong>分为主机节点与交换节点。交换节点在不同层上又称为：交换机、路由器、负载均衡设备等等；主机节点是目标节点或者源节点。</p>
+<p>边是指网络中的链路。</p>
+<p>链路分为两类，与主机相连的称为接入链路，否则称为骨干链路。</p>
+<p>传输速率：bps（bit/s）</p>
+<h5 id="1-2协议">1.2协议</h5>
+<blockquote>
+<p>对等层的实体在通信的过程中应当遵守的规则集合。</p>
+</blockquote>
+<p>内容包括：格式、次序和动作</p>
+<p><strong>互联网是将众多网络连接在一起的网络</strong></p>
+<h4 id="2-从分布式应用角度看">2.从分布式应用角度看</h4>
+<h5 id="1-基础设施">1.基础设施</h5>
+<blockquote>
+<p>为分布式应用提供通信服务的下层设备。</p>
+</blockquote>
+<p><strong>从服务类型上看：</strong></p>
+<p>1.面向连接的服务（遵守TCP协议）</p>
+<p>2.无连接的服务（遵守UDP协议）</p>
+<h5 id="2-分布式应用">2.分布式应用</h5>
+<blockquote>
+<p>为人类提供服务的应用。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%AC1%E7%AB%A0%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%8E%E5%9B%A0%E7%89%B9%E7%BD%91/2022-07-03_2%E7%BD%91%E7%BB%9C%E7%9A%84%E8%BE%B9%E7%BC%98/">2网络的边缘</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-02T16:00:00.000Z" itemprop="datePublished">
+    2022-07-03
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">网课：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%AC1%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%8E%E5%9B%A0%E7%89%B9%E7%BD%91/">第1章 计算机网络与因特网</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="网络的边缘">网络的边缘</h2>
+<h4 id="1-包含">1.包含</h4>
+<blockquote>
+<p>主机</p>
+<p>应用进程（客户端和服务端）</p>
+</blockquote>
+<h4 id="2-模式">2.模式</h4>
+<h5 id="2-1-c-s模式">2.1 c/s模式</h5>
+<blockquote>
+<p>客户/服务器模式，是一种主从模式，主是指服务器，从是指客户端。</p>
+</blockquote>
+<p><strong>弊病：可扩展性差，当请求达到阈值时，服务处理能力断崖式下降。</strong></p>
+<h5 id="2-2-p2p模式">2.2 p2p模式</h5>
+<blockquote>
+<p>对等模式，每个节点在不同会话中担任服务器和客户端两种角色。因此请求资源和服务资源等量增加。</p>
+</blockquote>
+<h4 id="3-面向连接的服务（TCP）">3.面向连接的服务（TCP）</h4>
+<h5 id="3-1目标">3.1目标</h5>
+<blockquote>
+<p>在端系统之间传输数据</p>
+</blockquote>
+<h5 id="3-2握手">3.2握手</h5>
+<blockquote>
+<p>在数据传输之前做好准备。具体表现为两个通信主机之间建立连接状态。</p>
+</blockquote>
+<h5 id="3-3提供服务">3.3提供服务</h5>
+<h6 id="3-3-1可靠">3.3.1可靠</h6>
+<blockquote>
+<p>数据有序，确认与重传</p>
+</blockquote>
+<h6 id="3-3-2流量控制">3.3.2流量控制</h6>
+<blockquote>
+<p>发送方的数据不会淹没接收方。（双方数据处理能力有差别情况下）</p>
+</blockquote>
+<h6 id="3-3-3拥塞控制">3.3.3拥塞控制</h6>
+<blockquote>
+<p>网络核心（路由器节点）拥塞时，要求发送方降低发送速率。</p>
+</blockquote>
+<h5 id="3-4应用">3.4应用</h5>
+<blockquote>
+<p>Web：HTTP</p>
+<p>文件传送：FTP</p>
+<p>远程登录：Telnet</p>
+<p>email：SMTP</p>
+</blockquote>
+<h4 id="4-（UDP）">4.（UDP）</h4>
+<h5 id="4-1无连接服务">4.1无连接服务</h5>
+<blockquote>
+<p>无连接：没有握手</p>
+</blockquote>
+<h5 id="4-2特性">4.2特性</h5>
+<blockquote>
+<p>无连接</p>
+<p>不可靠</p>
+<p>无流量控制</p>
+<p>无拥塞控制</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%AC1%E7%AB%A0%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%8E%E5%9B%A0%E7%89%B9%E7%BD%91/2022-07-03_3%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/">3网络核心</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-02T16:00:00.000Z" itemprop="datePublished">
+    2022-07-03
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">网课：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%AC1%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%8E%E5%9B%A0%E7%89%B9%E7%BD%91/">第1章 计算机网络与因特网</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="网络核心">网络核心</h2>
+<h4 id="1-线路交换">1.线路交换</h4>
+<blockquote>
+<p>将一条链路分为若干个pieces，选一个与下一个链路中的pieces相连，直至构成一条接通<strong>源端</strong>与<strong>目标端</strong>之间的通路。</p>
+</blockquote>
+<h5 id="1-1分路方法">1.1分路方法</h5>
+<p>1.频分</p>
+<p>2.时分</p>
+<p>3.波分</p>
+<h5 id="1-2优点">1.2优点</h5>
+<blockquote>
+<p>资源独享</p>
+<p>保证速度</p>
+</blockquote>
+<h5 id="1-3缺点">1.3缺点</h5>
+<blockquote>
+<p>不适合用于计算机通信：</p>
+<p>1.建立连接时间长</p>
+<p>2.计算机通信具有突发性，使用线路交换浪费的piece较多</p>
+<p>3.交换机在相邻链路之间的通信映射关系维护可能出问题。</p>
+</blockquote>
+<h4 id="2-分组交换（package）">2.分组交换（package）</h4>
+<blockquote>
+<p>使用全部的链路带宽，将数据分成一个个package，在每次交换时都先存储再转发。</p>
+</blockquote>
+<h5 id="2-1存储原因">2.1存储原因</h5>
+<blockquote>
+<p>保证线路共享</p>
+</blockquote>
+<h5 id="2-2缺点">2.2缺点</h5>
+<blockquote>
+<p>延迟比线路交换大（多出一个存储时间）</p>
+<p>有一个排队时间</p>
+</blockquote>
+<h5 id="2-3排队与延迟">2.3排队与延迟</h5>
+<p>当到达速率&gt;链路的输出速率时：</p>
+<p>​		分组将会排队，等待传输。</p>
+<p>​		如果路由器缓存用完了，分组将会抛弃。</p>
+<h4 id="2-4分路方式">2.4分路方式</h4>
+<h6 id="2-4-1数据报工作原理">2.4.1数据报工作原理</h6>
+<blockquote>
+<p>在通信之前，无需建立一个连接</p>
+<p>每一个分组都独立路由，每一次传输的路径随路由表变化</p>
+<p>路由器根据分组的目标地址进行路由</p>
+</blockquote>
+<h6 id="2-4-2虚电路的工作原理">2.4.2虚电路的工作原理</h6>
+<blockquote>
+<p>在每一个交换机上建立虚电路表，根据虚电路表确定两点之间的路径，分组再在这条路径上存储转发。</p>
+</blockquote>
+<h4 id="3-关键功能">3.关键功能</h4>
+<h5 id="3-1路由">3.1路由</h5>
+<h5 id="3-2转发">3.2转发</h5>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%AC1%E7%AB%A0%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%8E%E5%9B%A0%E7%89%B9%E7%BD%91/2022-07-03_5Internet%E7%BB%93%E6%9E%84%E5%92%8CISP/">5Internet结构和ISP</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-02T16:00:00.000Z" itemprop="datePublished">
+    2022-07-03
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">网课：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E8%AF%BE%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%AC1%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%8E%E5%9B%A0%E7%89%B9%E7%BD%91/">第1章 计算机网络与因特网</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="Internet结构和ISP">Internet结构和ISP</h2>
+<blockquote>
+<p>ISP：互联网服务提供商</p>
+<p>ICP：互联网内容提供商（例如谷歌，百度等）</p>
+</blockquote>
+<h4 id="结构组成">结构组成</h4>
+<blockquote>
+<p>互联网首先由一级ISP组成全球互联网覆盖，节点不多，但带宽尽可能大，为全球客户提供服务。同时，多个一级ISP以对等协议互相接入，或者以IXP连接在一起。共享用户和基础设施。</p>
+<p>其次，由二级ISP（地区服务提供商）接入一级ISP，共享一级ISP的客户与基础设施。</p>
+<p>ICP因用户体验与成本问题，会自行建立专网在数据中心之间传输数据。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/page/2/">« prev</a><a class="page-number" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">1</a><a class="page-number" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/page/2/">2</a><span class="page-number current">3</span>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

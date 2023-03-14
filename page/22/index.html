@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/09/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90C%E8%AF%AD%E8%A8%80%E6%8F%8F%E8%BF%B0%E7%AC%94%E8%AE%B0/2022-09-21_1%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%88%97%E5%92%8C/">1最大子序列和</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-09-20T16:00:00.000Z" itemprop="datePublished">
+    2022-09-21
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90C%E8%AF%AD%E8%A8%80%E6%8F%8F%E8%BF%B0%E7%AC%94%E8%AE%B0/">数据结构与算法分析C语言描述笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="最大子序列和">最大子序列和</h2>
+<h4 id="1-O-n-2">1.O(n^2)</h4>
+<blockquote>
+<p>算法的核心是遍历每一个数字作为开始的所有子序列。定义一个最大值和一个当前子序列和的临时存储。一旦临时值超过最大值，则更新最大值。</p>
+</blockquote>
+<p>根据上述描述，首先有一个外层循环，用于遍历每一个开始的数字。内层循环是以当前数字开始不停加入后续数字，加入后更新临时值，并以此更新最大值。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">MaxSubSequenceSum</span><span class="params">(<span class="type">const</span> <span class="type">int</span> A[], <span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> MaxSum = <span class="number">0</span>, temp_Sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; N;i++ )</span><br><span class="line">    &#123;</span><br><span class="line">        temp_Sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; N;j++ )</span><br><span class="line">        &#123;</span><br><span class="line">            temp_Sum+=A[j];</span><br><span class="line">            <span class="keyword">if</span>(temp_Sum &gt; MaxSum)</span><br><span class="line">                MaxSum = temp_Sum;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>优化的可能设想：如果在以当前数字开头的子序列和已经小于0了，即使后续能出现超过MaxSum的子序列和，也应该直接continue，因为这个子序列大可以去掉前面小于0的序列部分达到更大的和值。这个和值序列必然是以之前小于0的序列后第一个大于0的数字作为开头的序列。</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//优化代码</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">MaxSubSequenceSum</span><span class="params">(<span class="type">const</span> <span class="type">int</span> A[], <span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> MaxSum = <span class="number">0</span>, temp_Sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; N;i++ )</span><br><span class="line">    &#123;</span><br><span class="line">        temp_Sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; N;j++ )</span><br><span class="line">        &#123;</span><br><span class="line">            temp_Sum+=A[j];</span><br><span class="line">            <span class="keyword">if</span>(temp_Sum&lt;=<span class="number">0</span>)</span><br><span class="line">                <span class="keyword">continue</span>;		<span class="comment">//优化的地方</span></span><br><span class="line">            <span class="keyword">if</span>(temp_Sum &gt; MaxSum)</span><br><span class="line">                MaxSum = temp_Sum;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>这个优化并没有减少最坏情况下的时间复杂度，只是在一定程度上做了剪枝来减少了部分常数级时间。</p>
+</li>
+</ul>
+<h4 id="2-O-NlogN">2.O(NlogN)</h4>
+<blockquote>
+<p>这个算法使用了分治的思想，核心为：将当前的序列分为前半和后半两部分。如果存在最大值，则必为下列三种情况之一：</p>
+<p>1.最大值序列在前半部分</p>
+<p>2.最大值序列在后半部分</p>
+<p>3.最大值是前半部分和后半部分的最大值序列加上中间连接部分的副作用（中间夹的序列）</p>
+<p>那么，只要从上述三种情况中直接比较出哪个最大，返回即可。</p>
+</blockquote>
+<blockquote>
+<p>问题是：如何确定前半或后半的最大值序列呢？</p>
+<p>答案是：</p>
+<p>1.分治为最小的一个单元进行时，只要这个单元值大于0，必然可以直接作为最大子序列和返回。（归纳的第一步成立）</p>
+<p>2.如果不是最小的一个单元，则一定可以从左边最大，右边最大，横跨中间最大中找出最大的子序列和，<strong>作为上级调用的左边或右边最大子序列和</strong>，返回。（归纳的第二步）</p>
+</blockquote>
+<blockquote>
+<p>如何知道横跨中间的最大值？</p>
+<p>答案是使用第一种算法（但只需测试两个数，无需所有数字），将当前序列分为两半，每一份都从中间向两边测试以中间两个数字为开头或结尾最大子序列和。最后找到两个最大和，将其加在一起，即为所求最大和。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">Max</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b, <span class="type">int</span> c)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> max = a;</span><br><span class="line">    <span class="keyword">if</span> (max &lt; b)</span><br><span class="line">        max = b;</span><br><span class="line">    <span class="keyword">if</span> (max &lt; c)</span><br><span class="line">        max = c;</span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">MaxSubSum</span><span class="params">(<span class="type">const</span> <span class="type">int</span> A[], <span class="type">int</span> left, <span class="type">int</span> right)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (left == right)</span><br><span class="line">        <span class="keyword">if</span> (A[left] &gt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> A[left];</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> centre = (left + right) / <span class="number">2</span>;</span><br><span class="line">    <span class="type">int</span> leftMax = MaxSubSum(A, left, centre);</span><br><span class="line">    <span class="type">int</span> rightMax = MaxSubSum(A, centre + <span class="number">1</span>, right);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> left_temp_Max = <span class="number">0</span>, left_C_Max = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> right_temp_Max = <span class="number">0</span>, right_C_Max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = centre; i &gt;= left; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        left_temp_Max += A[i];</span><br><span class="line">        <span class="keyword">if</span> (left_temp_Max &gt; left_C_Max)</span><br><span class="line">            left_C_Max = left_temp_Max;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = centre + <span class="number">1</span>; i &lt;= right; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        right_temp_Max += A[i];</span><br><span class="line">        <span class="keyword">if</span> (right_temp_Max &gt; right_C_Max)</span><br><span class="line">            right_C_Max = right_temp_Max;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Max(right_C_Max + left_C_Max, leftMax, rightMax);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">MaxSubSequenceSum</span><span class="params">(<span class="type">int</span> A[], <span class="type">int</span> N)</span>	<span class="comment">//这个是对递归算法的封装，可以少一个参数0</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> MaxSubSum(A,<span class="number">0</span>,N);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>算法的时间复杂度分析：F(n) = 2F(n/2) + O(n) ，由此递推关系式算出时间复杂度为O(NlogN)</p>
+</li>
+</ul>
+<h4 id="3-O-n">3.O(n)</h4>
+<blockquote>
+<p>这个算法的做法是遍历这个序列数组，设置一个最大值和临时存储的最大值。每递增一个，临时值更新，并以此更新最大值。如果临时值小于0，则临时指重置为0（隐含了放弃之前的序列，以当前数字重新作为下一个计算序列的开始）。</p>
+</blockquote>
+<blockquote>
+<p>关于为什么不需要遍历测试每个数字作为开始：</p>
+<p>1.如果某个数字作为开始，并且前面的序列和大于0，那么加上前面的序列一定比当前数字作为开始的子序列和要大。因此以这个数字作为开头的子序列被包含到前面大于0的子序列加上这个子序列里，无需测试。</p>
+<p>2.如果某个数字作为开始，并且前面的序列和小于0，那么加上前面的序列一定比当前数字作为开始的子序列和要小，直接舍弃前面的序列，以当前数字作为开始测试即可，体现在程序里就是临时值被重置。</p>
+</blockquote>
+<blockquote>
+<p>看起来没有测试每个数字开始，实际上隐含地测试过了。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">MaxSubSequenceSum</span><span class="params">(<span class="type">int</span> A[], <span class="type">int</span> N)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> temp_Max = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> Max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i&lt;N ; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        temp_Max += A[i];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(temp_Max &lt; <span class="number">0</span>)</span><br><span class="line">            temp_Max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(temp_Max &gt; Max)</span><br><span class="line">            Max = temp_Max;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/09/06/Python%E8%AF%AD%E6%B3%95/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/2022-09-06_%E5%AD%A6python%E7%AC%AC%E4%B8%80%E5%A4%A9%E7%9A%84%E7%AC%94%E8%AE%B0/">学python第一天的笔记</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-09-05T16:00:00.000Z" itemprop="datePublished">
+    2022-09-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/">Python语法</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">Python编程从入门到实践</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="学python第一天的笔记">学python第一天的笔记</h2>
+<h4 id="1-hello-python">1.hello python</h4>
+<blockquote>
+<p>第一课，安装python，由于很早之前就安装过pycharm，之间跳过，非常的nice</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello python&quot;</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>python的hello world，也可以这么写（在python里单引号和双引号一样能表示字符串）</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hello python&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="2-字符串">2.字符串</h4>
+<blockquote>
+<p>第二节主要讲的字符串的常用方法</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">name = <span class="string">&quot;ada lovelace&quot;</span></span><br><span class="line"><span class="built_in">print</span>(name.title())		<span class="comment">#首字母大写的方法</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">first_name = <span class="string">&quot;ada&quot;</span></span><br><span class="line">last_name = <span class="string">&quot;lovelace&quot;</span></span><br><span class="line">full_name = <span class="string">f&quot;<span class="subst">&#123;first_name&#125;</span> <span class="subst">&#123;last_name&#125;</span>&quot;</span>		<span class="comment">#从python3.6开始使用的格式化字符串方法，具体就是将变量放置在括号中，前置f表示格式化字符串</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;hello, <span class="subst">&#123;full_name.title()&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这是一份练习</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">name1 = <span class="string">&quot;Eric&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Hello <span class="subst">&#123;name1&#125;</span>, would you like to learn some Python today?&quot;</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>打印一个名字的大写，小写与首字符大写</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">name = <span class="string">&quot;jay&quot;</span></span><br><span class="line"><span class="built_in">print</span>(name.title())</span><br><span class="line"><span class="built_in">print</span>(name.lower())</span><br><span class="line"><span class="built_in">print</span>(name.upper())</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/09/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/2022-09-01_%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E7%BB%AA%E8%AE%BA/">第一章 绪论</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-08-31T16:00:00.000Z" itemprop="datePublished">
+    2022-09-01
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="第一章绪论">第一章	绪论</h2>
+<h4 id="1-2基本术语">1.2基本术语</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>记录：每对括号内的内容</p>
+</li>
+<li class="lvl-2">
+<p>数据集：一组记录的集合</p>
+</li>
+<li class="lvl-2">
+<p>样本：每条记录都可以被称为一个样本</p>
+</li>
+<li class="lvl-2">
+<p>属性：反映事件或对象在某方面的表现或性质的事项</p>
+</li>
+<li class="lvl-2">
+<p>属性值：属性上的取值</p>
+</li>
+<li class="lvl-2">
+<p>属性空间：属性张成的空间</p>
+</li>
+<li class="lvl-2">
+<p>特征向量：每个对象在属性空间里都能找到自己的坐标位置，每个点对应一个向量，因此一个样本就是一个特征向量</p>
+</li>
+<li class="lvl-2">
+<p>训练数据：学习或训练过程使用的数据</p>
+</li>
+<li class="lvl-2">
+<p>训练样本：学习或训练过程的每个样本</p>
+</li>
+<li class="lvl-2">
+<p>假设：对应的潜在规律的模型</p>
+</li>
+<li class="lvl-2">
+<p>真相：潜在规律本身</p>
+</li>
+<li class="lvl-2">
+<p>标记：一个样本的结果</p>
+</li>
+<li class="lvl-2">
+<p>样例：拥有标记信息的示例</p>
+</li>
+<li class="lvl-2">
+<p>标记空间：结果所张成的空间</p>
+</li>
+<li class="lvl-2">
+<p>分类：离散值的学习任务，将样本分为几类</p>
+<ul class="lvl-2">
+<li class="lvl-6">二分类任务：仅涉及两个类别的任务，一个是正类，一个是反类</li>
+<li class="lvl-6">多分类任务：涉及多个类别的任务</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>回归：连续值的预测任务，将样本给出数值结果</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/08/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/2022-08-17_2-4%E5%9B%A0%E7%89%B9%E7%BD%91%E4%B8%AD%E7%9A%84%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6/">2-4因特网中的电子邮件</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-08-16T16:00:00.000Z" itemprop="datePublished">
+    2022-08-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">书本：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="2-4因特网中的电子邮件">2.4因特网中的电子邮件</h2>
+<p>因特网电子邮件系统和它的关键组件：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>用户代理</p>
+</li>
+<li class="lvl-2">
+<p>邮件服务器</p>
+</li>
+<li class="lvl-2">
+<p>简单邮件传输协议</p>
+</li>
+</ul>
+<hr>
+<p>过程如下：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>发送方写好邮件，交付给本地用户代理</p>
+</li>
+<li class="lvl-2">
+<p>用户代理传送给发送方的邮件服务器</p>
+</li>
+<li class="lvl-2">
+<p>再传送到接收方的邮件服务器</p>
+</li>
+<li class="lvl-2">
+<p>最后分发到接收方的邮箱中</p>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>电子邮件使用SMTP协议，建立在TCP协议之上，从发送方的邮件服务器向接收方的邮件服务器。</p>
+</blockquote>
+<p>SMTP有两部分：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>运行在发送方邮件服务器上的客户端</p>
+</li>
+<li class="lvl-2">
+<p>运行在接收方邮件服务器的服务器端</p>
+</li>
+</ul>
+<p>注意：每台服务器上这两部分都同时运行</p>
+<hr>
+<h4 id="2-4-1SMTP">2.4.1SMTP</h4>
+<blockquote>
+<p>SMTP是因特网电子邮件应用的核心，用于从发送方的邮件服务器发送报文到接收方的邮件服务器</p>
+</blockquote>
+<p>执行过程：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>客户SMTP在25号端口建立一个到服务器的TCP连接</p>
+</li>
+<li class="lvl-2">
+<p>连接建立，服务器与客户执行应用层的握手（向服务器提供双方的邮件地址）</p>
+</li>
+<li class="lvl-2">
+<p>客户发送报文</p>
+</li>
+<li class="lvl-2">
+<p>关闭TCP连接</p>
+</li>
+</ul>
+<p>**注意：**SMTP是持续连接的，所有报文都是在同一个TCP上发送</p>
+<h4 id="2-4-2与HTTP的对比">2.4.2与HTTP的对比</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>HTTP是一个拉协议（pull protocol），SMTP是一个推协议（push protocol）</p>
+</li>
+<li class="lvl-2">
+<p>SMTP要求每个报文都以7比特ASCII格式，如果包含其他字符或者二进制数据，必须按照该格式进行编码，HTTP无限制</p>
+</li>
+<li class="lvl-2">
+<p>HTTP将对象封装到每一个响应报文中，而SMTP则将所有对象放在一个报文中</p>
+</li>
+</ul>
+<h4 id="2-4-3邮件报文格式与MIME">2.4.3邮件报文格式与MIME</h4>
+<p>格式：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>首部行</p>
+<ul class="lvl-2">
+<li class="lvl-6">必须有一个From：首部行</li>
+<li class="lvl-6">必须有一个To：首部行</li>
+<li class="lvl-6">也许包含一个Subject：首部行</li>
+<li class="lvl-6">也许包含其他首部行</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>空白行（一行）</p>
+</li>
+<li class="lvl-2">
+<p>报文体（ASCII格式）</p>
+</li>
+</ul>
+<h4 id="2-4-4邮件访问协议">2.4.4邮件访问协议</h4>
+<blockquote>
+<p>SMTP用于将邮件从发送方服务器传输到接收方服务器；从用户代理传输到发送方的邮件服务器；POP3用来将邮件从接收方的邮件服务器传送到接收方的用户代理（这是一个用户代理发起的拉协议）；</p>
+</blockquote>
+<h5 id="1-POP3">1.POP3</h5>
+<blockquote>
+<p>一个简单的邮件访问协议</p>
+</blockquote>
+<p>过程：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>用户代理打开一个到邮件服务器端口110上的TCP连接，POP3开始工作</p>
+</li>
+<li class="lvl-2">
+<p>第一阶段：特许</p>
+<ul class="lvl-2">
+<li class="lvl-6">用户代理发送用户名和口令鉴别用户</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>第二阶段：事物处理</p>
+<ul class="lvl-2">
+<li class="lvl-6">用户代理取回报文</li>
+<li class="lvl-6">可选
+<ul class="lvl-4">
+<li class="lvl-10">对报文做删除标记</li>
+<li class="lvl-10">取消报文删除标记</li>
+<li class="lvl-10">获取邮件的统计信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>第三阶段：更新阶段</p>
+<ul class="lvl-2">
+<li class="lvl-6">结束POP3会话</li>
+<li class="lvl-6">邮件服务器删除被标记为删除的报文</li>
+</ul>
+</li>
+</ul>
+<p>注意：标记删除还会区分设备</p>
+<h5 id="2-IMAP">2.IMAP</h5>
+<blockquote>
+<p>为了解决POP3能在远程创建邮件文件夹并为报文指派文件夹的方法，IMAP出现了</p>
+</blockquote>
+<p>IMAP服务器把每个报文与一个文件夹联系起来</p>
+<p>过程：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>报文到达服务器，与收件人INBOX文件夹相关联</p>
+</li>
+<li class="lvl-2">
+<p>用户能</p>
+<ul class="lvl-2">
+<li class="lvl-6">创建文件夹</li>
+<li class="lvl-6">移动邮件到另一个文件夹</li>
+<li class="lvl-6">查询邮件</li>
+</ul>
+</li>
+</ul>
+<p>注意：</p>
+<p>IMAP服务器维护了IMAP会话的用户状态信息</p>
+<p>用户能自主选择接收报文的一部分</p>
+<h5 id="3-基于Web的电子邮件">3.基于Web的电子邮件</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>用户代理是浏览器</p>
+</li>
+<li class="lvl-2">
+<p>邮件服务器与浏览器之间使用HTTP协议</p>
+</li>
+<li class="lvl-2">
+<p>邮件服务器之间使用SMTP协议</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/08/16/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/2022-08-16_2-3%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%EF%BC%9AFTP/">2-3文件传输协议：FTP</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-08-15T16:00:00.000Z" itemprop="datePublished">
+    2022-08-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">书本：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="2-3文件传输协议：FTP">2.3文件传输协议：FTP</h2>
+<p>传输过程：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>用户向FTP用户代理提供远程主机的主机名</p>
+</li>
+<li class="lvl-2">
+<p>FTP用户代理向远程主机文件系统发起TCP连接</p>
+</li>
+<li class="lvl-2">
+<p>用户接着提供用户标识和口令，作为FTP命令的一部分在连接上传送</p>
+</li>
+<li class="lvl-2">
+<p>服务器向该用户授权（允许用户上传文件或下载文件）</p>
+</li>
+</ul>
+<h4 id="FTP与HTTP的区别">FTP与HTTP的区别</h4>
+<blockquote>
+<p>FTP使用了两个并行的TCP连接来传输文件，一个是<strong>控制连接</strong>，一个是<strong>数据连接</strong>。</p>
+<p>控制连接用于两主机之间传输<strong>控制信息</strong>，例如：用户标识，口令，改变远程目录的命令以及“存放”和“获取”文件的命令。</p>
+<p>数据连接用于实际发送一个文件。</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>由于FTP协议使用一个独立的控制连接，所以称控制信息是<strong>带外连接</strong></p>
+</li>
+<li class="lvl-2">
+<p>HTTP可以说是<strong>带内</strong>发送控制信息</p>
+</li>
+</ul>
+<p>注意：控制连接贯穿了整个用户会话期间，但对会话中的每一次文件传输都需要建立一个新的数据连接。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>HTTP是无状态的，服务器无需对用户状态进行追踪</p>
+</li>
+<li class="lvl-2">
+<p>FTP服务器必须在整个会话期间保留用户的状态，追踪用户在远程目录树上的当前位置。</p>
+</li>
+</ul>
+<h4 id="FTP命令和回答">FTP命令和回答</h4>
+<blockquote>
+<p>命令与回答都是以7比特ASCII格式在控制连接上传送。每个命令由四个大写字母的ASCII字符组成，加可选参数，后跟回车换行符。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/08/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/2022-08-15_2-1%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/">2-1应用层协议原理</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-08-14T16:00:00.000Z" itemprop="datePublished">
+    2022-08-15
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">书本：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="2-1应用层协议原理">2.1应用层协议原理</h2>
+<h4 id="2-1-1网络应用程序体系结构">2.1.1网络应用程序体系结构</h4>
+<blockquote>
+<p>应用程序体系结构明显不同于网络的体系结构，由应用程序研发者设计</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>客户-服务器体系结构</p>
+</li>
+<li class="lvl-2">
+<p>P2P体系结构</p>
+</li>
+</ul>
+<h4 id="2-1-2进程通信">2.1.2进程通信</h4>
+<blockquote>
+<p>在同一端系统上，进程间通信的规则由操作系统决定</p>
+<p>不同端系统上，进程通过计算机网络交换报文而相互通信。</p>
+</blockquote>
+<h5 id="1-客户与服务器进程">1.客户与服务器进程</h5>
+<p>在每对通信进程中，我们通常将这两个进程之一标识为客户，而另一个进程标识为服务器。</p>
+<blockquote>
+<p>一般发起通信的进程被标识为客户，在会话开始时等待联系的进程是服务器。</p>
+</blockquote>
+<h5 id="2-进程与计算机网络之间的接口">2.进程与计算机网络之间的接口</h5>
+<p>进程通过一个被称为socket的软件接口向网络发送报文和从网络接收报文</p>
+<p>开发者可以控制socket在应用层的一切，但对于传输层仅能选择协议与有限的几个参数</p>
+<h5 id="3-进程寻址">3.进程寻址</h5>
+<p>为了向另一台主机上的进程发送分组，进程需要一个接收进程的地址</p>
+<p>该地址的信息有：1.主机的地址2.在该主机上的接收进程的标识符</p>
+<p>对应的标识信息为：1.IP地址2.端口号</p>
+<h4 id="2-1-3可供应用程序使用的运输服务">2.1.3可供应用程序使用的运输服务</h4>
+<p>运输层协议提供不同的运输服务，区别的指标有：可靠数据传输，吞吐量，定时和安全性</p>
+<h5 id="1-可靠数据传输">1.可靠数据传输</h5>
+<p>分组在网络中可能丢失，部分应用必须防止该事件，因此需要可靠数据传输特征的协议。</p>
+<h5 id="2-吞吐量">2.吞吐量</h5>
+<p>部分应用对吞吐量有要求（带宽敏感的应用）</p>
+<h5 id="3-定时">3.定时</h5>
+<p>部分实时应用对时延要求较高</p>
+<h5 id="4-安全性">4.安全性</h5>
+<p>部分运输协议能提供安全性服务</p>
+<h4 id="2-1-4因特网提供的运输服务">2.1.4因特网提供的运输服务</h4>
+<h5 id="1-TCP服务">1.TCP服务</h5>
+<blockquote>
+<p>TCP服务包括面向连接的服务和可靠数据传输服务</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>面向连接的服务：客户端和服务器先进行握手（即互相交换传输层控制信息），之后建立起TCP连接，开始报文发送。在发送结束之后需要拆除该连接。</p>
+</li>
+<li class="lvl-2">
+<p>可靠的数据传输服务：无差错，无冗余，按顺序传输数据</p>
+</li>
+</ul>
+<p>**备注：**TCP还拥有拥塞控制机制</p>
+<blockquote>
+<p>TCP安全：由于TCP没有加密，以明文传输，因此出现了TCP的加强版本：SSL。该版本的加强在应用层实现，并拥有自己的库和API（类似TCP的）</p>
+</blockquote>
+<h5 id="2-UDP服务">2.UDP服务</h5>
+<p>提供无连接的、不可靠的轻量级最小服务</p>
+<h5 id="3-运输协议不提供的服务">3.运输协议不提供的服务</h5>
+<blockquote>
+<p>不保证吞吐量和定时的服务</p>
+</blockquote>
+<h4 id="2-1-5应用层协议">2.1.5应用层协议</h4>
+<p>应用层协议定义了运行在不同端系统上的应用程序进程如何相互传递报文：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>交换的报文类型：请求报文、响应报文</p>
+</li>
+<li class="lvl-2">
+<p>各种报文的语法：字段及如何描述</p>
+</li>
+<li class="lvl-2">
+<p>字段的语义</p>
+</li>
+<li class="lvl-2">
+<p>进程如何发送报文和响应报文</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/08/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/2022-08-13_1-2%E7%BD%91%E7%BB%9C%E8%BE%B9%E7%BC%98/">1-2网络边缘</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-08-12T16:00:00.000Z" itemprop="datePublished">
+    2022-08-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">书本：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-2网络边缘">1.2网络边缘</h2>
+<p>端系统又被称为主机，因为它们容纳应用程序。</p>
+<p>主机进一步划分为：客户端和服务器</p>
+<h4 id="1-2-1接入网">1.2.1接入网</h4>
+<blockquote>
+<p>接入网指：将端系统连接到其边缘路由器的物理链路</p>
+</blockquote>
+<p>边缘路由器：端系统到任何其他远程端系统的路径上的第一台路由器</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/08/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/2022-08-13_1-3%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/">1-3网络核心</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-08-12T16:00:00.000Z" itemprop="datePublished">
+    2022-08-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">书本：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-3网络核心">1.3网络核心</h2>
+<blockquote>
+<p>网络核心：由分组交换机和链路组成的网状网络</p>
+</blockquote>
+<h4 id="1-3-1分组交换">1.3.1分组交换</h4>
+<blockquote>
+<p>端系统之间交换报文</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>分组：长报文被划分为的较小的数据块</p>
+</li>
+</ul>
+<h5 id="1-存储转发传输">1.存储转发传输</h5>
+<p>存储转发机制指：交换机能够开始向输出链路传输该分组的第一个比特之前，必须接收到整个分组</p>
+<p>公式：d = NL/R</p>
+<p>(延时 = N个链路*分组大小L/传输速率R)</p>
+<h5 id="2-排队时延和分组丢失">2.排队时延和分组丢失</h5>
+<p>输出缓存：用于存储路由器准备发往输出链路的分组</p>
+<p>排队时延：输出缓存以队列的方式存储输出，导致的延时（变化的）</p>
+<p>分组丢失：缓存空间有限，一个到达的分组可能因为缓存充满了而被丢弃。</p>
+<h5 id="3-转发表和路由选择协议">3.转发表和路由选择协议</h5>
+<blockquote>
+<p>每一个端系统都有一个IP地址，地址具有一种等级结构</p>
+<p>源主机向目的地发送分组时包含了目的地的IP地址，经过的路由器会检查其IP地址的一部分来决定转发链路</p>
+</blockquote>
+<h4 id="1-3-2电路交换">1.3.2电路交换</h4>
+<blockquote>
+<p>相比于分组交换，电路交换在端系统之间预留的通信路径所需要的资源。在接收方与发送方之间，有一条连接被一直维护，称为电路。</p>
+</blockquote>
+<h4 id="1-3-3网络的网络">1.3.3网络的网络</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>第一层ISP：全球承载ISP</p>
+</li>
+<li class="lvl-2">
+<p>因特网交换点IXP：连接相近的区域ISP</p>
+</li>
+<li class="lvl-2">
+<p>第二层ISP：区域ISP</p>
+</li>
+<li class="lvl-2">
+<p>第三层ISP：接入ISP</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/08/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/2022-08-13_1-4%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2%E7%BD%91%E4%B8%AD%E7%9A%84%E6%97%B6%E5%BB%B6%E3%80%81%E4%B8%A2%E5%8C%85%E5%92%8C%E5%90%9E%E5%90%90%E9%87%8F/">1-4分组交换网中的时延、丢包和吞吐量</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-08-12T16:00:00.000Z" itemprop="datePublished">
+    2022-08-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">书本：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-4分组交换网中的时延、丢包和吞吐量">1.4分组交换网中的时延、丢包和吞吐量</h2>
+<h4 id="1-4-1分组交换网中的时延概述">1.4.1分组交换网中的时延概述</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>结点处理时延</p>
+</li>
+<li class="lvl-2">
+<p>排队时延</p>
+</li>
+<li class="lvl-2">
+<p>传输时延</p>
+</li>
+<li class="lvl-2">
+<p>传播时延</p>
+</li>
+</ul>
+<p><strong>时延的类型</strong></p>
+<h5 id="1-处理时延">1.处理时延</h5>
+<p>检查分组首部和决定将分组导向何处所需要的时间等。</p>
+<h5 id="2-排队时延">2.排队时延</h5>
+<p>分组在链路上等待传输，经受排队时延</p>
+<h5 id="3-传输时延">3.传输时延</h5>
+<p>传输时延是L/R</p>
+<h5 id="4-传播时延">4.传播时延</h5>
+<p>从链路起点到下一路由器所需时间</p>
+<h5 id="5-传输时延与传播时延的比较">5.传输时延与传播时延的比较</h5>
+<p>传输时延是路由器将分组推出所需要的时间（与传输速率有关）</p>
+<p>传播时延是由一个路由器到另一个路由器所需要的时间（与传输距离有关）</p>
+<h4 id="1-4-2排队时延和丢包">1.4.2排队时延和丢包</h4>
+<h5 id="排队时延">排队时延</h5>
+<p>假定a是分组到达队列的平均速率（单位：分组/秒）</p>
+<p>R是传输速率（单位：bit/秒）</p>
+<p>L是分组大小（单位：bit/分组）</p>
+<p>则：La/R是流量强度</p>
+<p>若其大于1，则队列不断增加（因此设计时流量强度应当&lt;=1）</p>
+<p>随着流量强度接近1，平均排队时延迅速增加，直至趋于无穷</p>
+<h5 id="丢包">丢包</h5>
+<p>由于队列长度有限，当队列满了，路由器将丢弃该分组</p>
+<h4 id="1-4-3端到端时延">1.4.3端到端时延</h4>
+<blockquote>
+<p>即源到目的地的总时延</p>
+</blockquote>
+<p>假设之间有N-1台路由器，且网络无拥塞（即忽略排队时延）</p>
+<p>d(end-end) = N(d(proc)+d(trans)+d(prop))</p>
+<h5 id="1-traceroute">1.traceroute</h5>
+<h5 id="2-端系统、应用程序和其他时延">2.端系统、应用程序和其他时延</h5>
+<h4 id="1-4-4计算机网络中的吞吐量">1.4.4计算机网络中的吞吐量</h4>
+<blockquote>
+<p>瞬时吞吐量是主机接收到一个文件的速率（bps）</p>
+</blockquote>
+<p><strong>两条链路的简单计算</strong></p>
+<p>假设Rs表示服务器与路由器之间的链路速率</p>
+<p>Rc表示路由器与客户之间的速率</p>
+<p>F表示文件的大小（bit）</p>
+<p>则吞吐量为min{Rs，Rc}</p>
+<p>所需时间为：F/min{Rs，Rc}</p>
+<p><strong>N条链路的普遍计算</strong></p>
+<p>吞吐量为：min{R1,R2,…,RN}</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/08/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/2022-08-10_1-1%E4%BB%80%E4%B9%88%E6%98%AF%E5%9B%A0%E7%89%B9%E7%BD%91/">1-1什么是因特网</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-08-09T16:00:00.000Z" itemprop="datePublished">
+    2022-08-10
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B9%A6%E6%9C%AC%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%94%E8%AE%B0/">书本：计算机网络：自顶向下方法笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-1什么是因特网">1.1什么是因特网</h2>
+<h4 id="1-1-1具体构成">1.1.1具体构成</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>端系统</p>
+</li>
+<li class="lvl-2">
+<p>通信链路（各种物理媒体组成）</p>
+</li>
+<li class="lvl-2">
+<p>分组交换机</p>
+<ul class="lvl-2">
+<li class="lvl-6">路由器
+<ul class="lvl-4">
+<li class="lvl-10">用于网络核心</li>
+</ul>
+</li>
+<li class="lvl-6">链路层交换机
+<ul class="lvl-4">
+<li class="lvl-10">用于接入网中</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>网络服务提供商ISP</p>
+<ul class="lvl-2">
+<li class="lvl-6">由多个分组交换机和多段通信链路组成的网络</li>
+<li class="lvl-6">为端系统提供网络接入</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>协议</p>
+<ul class="lvl-2">
+<li class="lvl-6">IP协议定义了在路由器和端系统之间发送和接收的分组格式</li>
+<li class="lvl-6">。。。</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-1-2服务描述">1.1.2服务描述</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>分布式应用程序：涉及多台相互交换数据的端系统的应用程序</p>
+</li>
+<li class="lvl-2">
+<p>因特网API：规定运行在一个端系统上的软件请求因特网基础设施向运行在另一个端系统上的特定目的地软件交付数据的方式</p>
+</li>
+</ul>
+<h4 id="1-1-3协议">1.1.3协议</h4>
+<blockquote>
+<p>一个协议定义了两个或多个通信实体之间交换的报文格式和次序，以及报文发送和接收一条报文或其他事件所采取的动作</p>
+<p>关键词：格式、次序、动作</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/21/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/23/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

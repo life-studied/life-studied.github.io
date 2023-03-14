@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/15/Java/2023-01-15_5-4%E9%9A%90%E8%97%8F%E5%92%8C%E5%B0%81%E8%A3%85/">5-4隐藏和封装</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-14T16:00:00.000Z" itemprop="datePublished">
+    2023-01-15
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Java/">Java</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="5-4隐藏和封装">5.4隐藏和封装</h2>
+<h4 id="5-4-2-访问控制符">5.4.2 访问控制符</h4>
+<blockquote>
+<p>Java提供了三种访问控制符：public、private、protected。</p>
+</blockquote>
+<p><img src="picture/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E7%BA%A7%E5%88%AB.png" alt=""></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>private：该成员只能在当前类的内部进行访问。</p>
+</li>
+<li class="lvl-2">
+<p>default：该成员能被相同包下的类访问。</p>
+</li>
+<li class="lvl-2">
+<p>protected：该成员既能被相同包下的类访问，也能被不同包下的子类访问</p>
+</li>
+<li class="lvl-2">
+<p>public：该成员可以被所有类访问</p>
+</li>
+</ul>
+<p>**注意：**外部类应该只使用public或者default，因为其不存在所在类的概念。</p>
+<h4 id="5-4-3package、import和import-static">5.4.3package、import和import static</h4>
+<blockquote>
+<p>在Java文件的第一行，应该写package语句来代表该程序属于哪个包。使用包名来区分两个同名类。（类似C++的名称空间）</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> packagename;</span><br></pre></td></tr></table></figure>
+<p><strong>案例</strong></p>
+<blockquote>
+<p>程序清单: codes\05\5.4\Hello.java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> lee; </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Hello</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println( <span class="string">&quot;Hello World! &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">javac -d . Hello.java	#在当前目录下生成Hello类</span><br><span class="line">java lee.Hello			#执行lee文件下的Hello文件</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结果：会生成一个lee文件夹，在文件夹中含有Hello.class文件。如果直接使用<code>javac .\Hello.java</code>，虽然能编译成功，但是不能正常使用。</p>
+<p>当虚拟机要装载 lee.Hello 类时，它会依次搜索 CLASSPATH 环境变量所指定的系列路径，查找这些路径下是否包含 lee 并在 lee 路径下查找是否包含 Hello .class 文件。</p>
+</blockquote>
+<h5 id="包管理">包管理</h5>
+<p><img src="picture/%E9%A1%B9%E7%9B%AE%E9%87%8C%E7%9A%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%92%8Cclass%E6%96%87%E4%BB%B6%E7%9A%84%E7%BB%84%E7%BB%87.png" alt=""></p>
+<h5 id="子包">子包</h5>
+<blockquote>
+<p>下面代码在 lee 包下再定义一个 sub 子包，并在该包下定义 Apple 空类。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> lee.sub;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Apple</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用时，必须使用该类的全名（包名+类名）:<code>lee.sub.Apple</code></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">lee.sub.<span class="type">Apple</span> <span class="variable">a</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">lee</span>.sub.Apple();</span><br></pre></td></tr></table></figure>
+<h5 id="简化包名使用（import）">简化包名使用（import）</h5>
+<blockquote>
+<p>为了简化包名的使用，应当在<code>package</code>后使用<code>import</code></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> lee.sub.Apple;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用import导入指定包的全部类的用法：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> lee.sub.*;</span><br></pre></td></tr></table></figure>
+<h5 id="静态导入（import-static）">静态导入（import static）</h5>
+<blockquote>
+<p>用于导入指定类的某个静态成员。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> lee.sub.Apple.staticmembername;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> lee.sub.Apple.*;</span><br></pre></td></tr></table></figure>
+<h4 id="5-4-4Java常用包">5.4.4Java常用包</h4>
+<blockquote>
+<p>Java 的核心类都放在 Java 包以及其子包下， Java 扩展的许多类都放在 Javax 包以及其子包下。</p>
+</blockquote>
+<p><img src="picture/Java%E5%B8%B8%E7%94%A8%E5%8C%85.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/14/Java/2023-01-14_4-6%E6%B7%B1%E5%85%A5%E6%95%B0%E7%BB%84/">4-6深入数组</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-13T16:00:00.000Z" itemprop="datePublished">
+    2023-01-14
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Java/">Java</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="4-6深入数组">4.6深入数组</h2>
+<blockquote>
+<p>数组是引用类型，数组变量和数组元素在内存中是分开存放的。</p>
+</blockquote>
+<h4 id="4-6-1内存中的数组">4.6.1内存中的数组</h4>
+<blockquote>
+<p>真正的数组对象在堆内存中，而数组变量在栈中。</p>
+<p>数组的长度是不可变的，但是可以将另一个数组赋给原来的数组变量，这样就发生了长度变化（的假象）。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayInman</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span>[] a =  &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">        <span class="type">int</span>[] b = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">4</span>];</span><br><span class="line">        System.out.println(a.length);</span><br><span class="line">        System.out.println(b.length);</span><br><span class="line">        b = a;</span><br><span class="line">        System.out.println(b.length);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//由此得出，数组由两部分组成，数组引用变量和数组元素对象</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-6-2基本类型数组的初始化">4.6.2基本类型数组的初始化</h4>
+<blockquote>
+<p>先动态初始化，再依次赋值</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PrimitiveArrayTest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span>[] iArr;</span><br><span class="line">        iArr = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">5</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; iArr.length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            iArr[i] = i*<span class="number">5</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-6-3引用类型的数组初始化">4.6.3引用类型的数组初始化</h4>
+<blockquote>
+<p>所有的类都是引用类型。</p>
+</blockquote>
+<p><img src="picture/%E5%BC%95%E7%94%A8%E6%95%B0%E7%BB%84%E5%86%85%E5%AD%98.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> height;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">info</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我的年龄是：&quot;</span>+age+<span class="string">&quot;,我的身高是：&quot;</span>+height);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReferenceArrayTest</span></span><br><span class="line">&#123;</span><br><span class="line">    Person[] student;				<span class="comment">//创建了一个指向多个Person引用的引用</span></span><br><span class="line">    student = <span class="keyword">new</span> <span class="title class_">Person</span>[<span class="number">2</span>];		<span class="comment">//初始化指向的Person引用</span></span><br><span class="line">    </span><br><span class="line">    <span class="type">Person</span> <span class="variable">zhang</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>();	<span class="comment">//创建Person实例</span></span><br><span class="line">    zhang.age = <span class="number">18</span>;</span><br><span class="line">    zhang.height = <span class="number">158</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="type">Person</span> <span class="variable">lee</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>();		<span class="comment">//创建Person实例</span></span><br><span class="line">    lee.age = <span class="number">19</span>;</span><br><span class="line">    lee.height = <span class="number">168</span>;</span><br><span class="line">    </span><br><span class="line">    student[<span class="number">0</span>] = zhang;				<span class="comment">//令引用指向实例</span></span><br><span class="line">    student[<span class="number">1</span>] = lee;</span><br><span class="line">    </span><br><span class="line">    lee.info();						<span class="comment">//指向同一实例，所以信息一致</span></span><br><span class="line">    student[<span class="number">1</span>].info();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-6-4没有多维数组">4.6.4没有多维数组</h4>
+<blockquote>
+<p>逻辑上存在多维数组，但在内存中不存在。下面演示一个二维数组的例子。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TwoDimensionTest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span>[][] a;</span><br><span class="line">        </span><br><span class="line">        a = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">4</span>][];	<span class="comment">//初始化多维数组时，可以只指定最左边维的大小;</span></span><br><span class="line">        					<span class="comment">//当然，也可以一次指定每一维的大小:a = new int [4][4];</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; a.length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            a[i] = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">4</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; a.length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; a[i].length; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                a[i][j] = i*j;</span><br><span class="line">                System.out.println(<span class="string">&quot;a[&quot;</span> +i+<span class="string">&quot;][&quot;</span>+j+<span class="string">&quot;]=&quot;</span>+a[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-6-5-Java8的增强工具类：Arrays">4.6.5 Java8的增强工具类：Arrays</h4>
+<blockquote>
+<p>Arrays 类里均为 static 修饰的方法（static 修饰的方法可以直接通过类名调用），可以直接通过<code>Arrays.xxx(xxx)</code> 的形式调用方法。</p>
+</blockquote>
+<h5 id="查找索引">查找索引</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>int binarySearch(type[] a, type key)</code>：<strong>二分法</strong>查询<code>key</code>在<code>a</code>中出现的索引。不存在返回负数。</p>
+<ul class="lvl-2">
+<li class="lvl-6">升序数组</li>
+</ul>
+</li>
+<li class="lvl-3">
+<p><code>int binarySearch(type[] a, int fromIndex int tolndex, type key)</code> ：这个方法与前一个方法类似，但它只搜索数组中从<code>fromIndex</code>到<code>toIndex</code>索引的元素。</p>
+</li>
+</ul>
+<h5 id="复制数组">复制数组</h5>
+<ul class="lvl-0">
+<li class="lvl-3">
+<p><code>type[] copyOf(type[] original, int ength)</code>：复制数组前n个元素。数组不够则补充默认值。</p>
+</li>
+<li class="lvl-3">
+<p><code>type[] copyOfRange(type[] original, int from, int to)</code>: 这个方法与前面方法相似，但这个方法只复制<code>original</code> 数组的<code>from</code>索引到<code>to</code>索引的元素。</p>
+</li>
+</ul>
+<h5 id="比较数组">比较数组</h5>
+<ul class="lvl-0">
+<li class="lvl-3">
+<p><code>boolean equals(type[] a, type[] a2)</code>: 两个数组长度和元素一致返回<code>true</code></p>
+</li>
+</ul>
+<h5 id="批量填充">批量填充</h5>
+<ul class="lvl-0">
+<li class="lvl-3">
+<p><code>void fill(type[] ，type val)</code>: 该方法将会把 数组的所有元素都赋值为 <code>val</code></p>
+</li>
+<li class="lvl-3">
+<p><code>void fill(type[] a, int fromIndex, int tolndex, type val)</code>: 该方法与前一个方法的作用相同，区别只是该方法仅仅将数组的 <code>fromlndex</code> 到 <code>tolndex</code> 索引的数组元素赋值为 <code>val</code></p>
+</li>
+</ul>
+<h5 id="排序">排序</h5>
+<ul class="lvl-0">
+<li class="lvl-3">
+<p><code>void sort(type[] a)</code>: 该方法对 数组的数组元素进行排序。</p>
+</li>
+<li class="lvl-2">
+<p><code>void sort(type[] a, int fromIndex ,int toIndex)</code>: 该方法与前一个方法相似，该方法仅仅对<code>fromlndex</code> 到 <code>toIndex</code> 索引的元素进行排序。</p>
+</li>
+</ul>
+<h5 id="转字符串">转字符串</h5>
+<ul class="lvl-0">
+<li class="lvl-3">
+<p><code>String toString(type[] a)</code>: 该方法将一个数组转换成字符串。该方法按顺序将多个数组元素连缀在一起，多个数组元素使用英文逗号(,)和空格隔开。</p>
+</li>
+</ul>
+<p><strong>案例</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayTest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span>[] a = <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line">        <span class="type">int</span>[] a2 = <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line">        </span><br><span class="line">        System.out.println(<span class="string">&quot;a数组和a2是否相等:&quot;</span>+ Arrays.equals(a,a2));</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span>[] b = Arrays.copyOf(a,<span class="number">6</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;a数组和b是否相等:&quot;</span>+ Arrays.equals(a,b));</span><br><span class="line">        System.out.println(<span class="string">&quot;b的元素为：&quot;</span>+Arrays.toString(b));</span><br><span class="line">        </span><br><span class="line">        Arrays.fill(b,<span class="number">2</span>,<span class="number">4</span>,<span class="number">1</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;b的元素为：&quot;</span>+Arrays.toString(b));</span><br><span class="line">        </span><br><span class="line">        Arrays.sort(b);</span><br><span class="line">        System.out.println(<span class="string">&quot;b的元素为：&quot;</span>+Arrays.toString(b));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">运行结果：</span></span><br><span class="line"><span class="comment">a数组和a2是否相等:true</span></span><br><span class="line"><span class="comment">a数组和b是否相等:false</span></span><br><span class="line"><span class="comment">b的元素为：[3, 4, 5, 6, 0, 0]</span></span><br><span class="line"><span class="comment">b的元素为：[3, 4, 1, 1, 0, 0]</span></span><br><span class="line"><span class="comment">b的元素为：[0, 0, 1, 1, 3, 4]</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/14/Java/2023-01-14_5-1%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/">5-1类和对象</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-13T16:00:00.000Z" itemprop="datePublished">
+    2023-01-14
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Java/">Java</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="5-1类和对象">5.1类和对象</h2>
+<blockquote>
+<p>所有使用类定义的变量都是引用变量</p>
+</blockquote>
+<h4 id="5-1-1定义类">5.1.1定义类</h4>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">[修饰符] <span class="keyword">class</span> <span class="title class_">classname</span></span><br><span class="line">&#123;</span><br><span class="line">    constructers...;</span><br><span class="line">    </span><br><span class="line">    member elements...;</span><br><span class="line">    </span><br><span class="line">    member methods...;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>修饰符：</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>public</p>
+</li>
+<li class="lvl-2">
+<p>final</p>
+</li>
+<li class="lvl-2">
+<p>abstract</p>
+</li>
+</ul>
+<p><strong>类名：</strong></p>
+<blockquote>
+<p><strong>可读性：<strong>类名必须是由一个或多个有意义的单词连缀而成的，每个单词</strong>首字母大写</strong>，其他字母全部小写</p>
+</blockquote>
+<p><strong>成员：</strong></p>
+<blockquote>
+<p>包含三种最常见的成员：<strong>构造器</strong>、<strong>成员变量</strong>和<strong>方法</strong>，每种成员都可以定义零个或多个。</p>
+<p><code>static</code>修饰的成员不能访问没有 <code>static</code> 修饰的成员</p>
+</blockquote>
+<h5 id="1-定义成员变量">1.定义成员变量</h5>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">[修饰符] 类型 成员变量名 [=默认值] ;</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>**修饰符：**修饰符可以省略，也可以是 public、protected、private、static 、final。其中 public、protected、private 最多只能出现其中之一，可以与 static final 组合起来修饰成员变量。</p>
+</li>
+<li class="lvl-2">
+<p>**类型：**类型可以是 Java 允许的任何数据类型，包括基本类型和引用类型</p>
+</li>
+<li class="lvl-2">
+<p>**成员变量名：**从程序可读性角度来看，成员变量名应该由一个或多个有意义的单词连缀而成，第一个单词首字母小写，后面每个单词首字母大写，其他字母全部小写</p>
+</li>
+<li class="lvl-2">
+<p>**默认值：**定义成员变量还可以指定 个可边的默认值</p>
+</li>
+</ul>
+<h5 id="2-定义方法">2.定义方法</h5>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">[修饰符] 方法返回值 类型 方法名(形参列表)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//语句</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>修饰符：public、protected、private、static、final、abstract，其中 public、protected、private三个最多只能出现其中之一。final、abstract最多只能出现其中之一 ，它们都能和static组合起来修饰方法。</p>
+</li>
+</ul>
+<h5 id="3-定义构造器">3.定义构造器</h5>
+<blockquote>
+<p>当类没有构造器时，系统会提供一个默认构造器</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">[修饰符] 构造器名(形参列表)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//语句</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>修饰符：修饰符可以省略，也可以是 public、protected、private 其中之一。</p>
+</li>
+<li class="lvl-2">
+<p>构造器名：构造器名必须和类名相同</p>
+</li>
+</ul>
+<h4 id="5-1-2对象的产生和使用">5.1.2对象的产生和使用</h4>
+<blockquote>
+<p>创建对象的根本途径是构造器，通过 new 关键字来调用某个类的构造器即可创建这个类的实例。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Person p;			<span class="comment">//定义一个引用</span></span><br><span class="line">p = <span class="keyword">new</span> <span class="title class_">Person</span>();	<span class="comment">//创建实例并分配给引用</span></span><br><span class="line"></span><br><span class="line"><span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br></pre></td></tr></table></figure>
+<h5 id="定义对象变量和使用">定义对象变量和使用</h5>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">	<span class="comment">// 访问 name 实例变量，直接为该变量赋值</span></span><br><span class="line">p.name = <span class="string">&quot;李刚&quot;</span>;</span><br><span class="line">	<span class="comment">// 调用 say ()方法，声明 say ()方法时定义了一个形参</span></span><br><span class="line">	<span class="comment">// 调用该方法必须为形参指定一个值</span></span><br><span class="line">p.say(<span class="string">&quot;Java 语言很简单，学习很容易&quot;</span>); </span><br><span class="line">	<span class="comment">// 直接输出 name 实例变量，将输出李刚</span></span><br><span class="line">System.out.println(p.name);</span><br></pre></td></tr></table></figure>
+<h4 id="5-1-3对象、引用和指针">5.1.3对象、引用和指针</h4>
+<blockquote>
+<p>Java中的引用就是C的指针的封装。</p>
+</blockquote>
+<h4 id="5-1-4对象的this引用">5.1.4对象的this引用</h4>
+<blockquote>
+<p>this关键字总是指向调用该方法的对象。和C++一样。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//使用this</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ThisInConstructor</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> foo;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ThisInConstructor</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">this</span>.foo = <span class="number">6</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="keyword">new</span> <span class="title class_">ThisInConstructor</span>().foo);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//返回this</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReturnThis</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> age;</span><br><span class="line">	<span class="keyword">public</span> ReturnThis <span class="title function_">grow</span><span class="params">()</span> </span><br><span class="line">    &#123;</span><br><span class="line">        age++ ; </span><br><span class="line">        <span class="comment">// return this 返回调用该方法的对象</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">ReturnThis</span> <span class="variable">rt</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReturnThis</span>() ; </span><br><span class="line">        <span class="comment">// 可以连续调用同 个方法</span></span><br><span class="line">        rt.grow() </span><br><span class="line">            .grow() </span><br><span class="line">            .grow(); </span><br><span class="line">        System.out.println(<span class="string">&quot;rt的 age 成员变量值是 :&quot;</span> + rt.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/14/%E7%BE%8E%E8%B5%9B%E5%87%86%E5%A4%87/2023-01-14_%E7%BE%8E%E8%B5%9B%E5%87%86%E5%A4%87%E5%8F%82%E8%80%83/">美赛准备参考</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-13T16:00:00.000Z" itemprop="datePublished">
+    2023-01-14
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E7%BE%8E%E8%B5%9B%E5%87%86%E5%A4%87/">美赛准备</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="美赛准备参考">美赛准备参考</h2>
+<p><strong>建模书籍</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>司守奎《数学建模算法与应用》</p>
+</li>
+<li class="lvl-2">
+<p>许建强《数学建模及其应用》</p>
+</li>
+<li class="lvl-2">
+<p>姜启源《数学建模》第4版</p>
+</li>
+<li class="lvl-2">
+<p>李航 《数学统计方法》</p>
+</li>
+</ul>
+<p><strong>程序书籍</strong></p>
+<p>方法一：使用matlab</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>官方文档即可</p>
+</li>
+</ul>
+<p>方法二：使用python</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>《python编程：从入门到实践》</p>
+</li>
+<li class="lvl-2">
+<p>《用python动手学统计学》</p>
+</li>
+</ul>
+<p><strong>论文书籍</strong>(此处指的是使用Latex排版，如果使用Word就不需要)</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>《一份不太简短的Latex介绍》</p>
+</li>
+</ul>
+<p><strong>其它</strong></p>
+<p>了解比赛内容</p>
+<p>了解论文写作格式</p>
+<p>注意：论文使用英文，所以最好找一个英语过关的队友，或者自己上</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/13/Shell%E7%BC%96%E7%A8%8B/Linux_Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E7%AC%94%E8%AE%B0/2023-01-13_1-2%E5%9C%A8%E7%BB%88%E7%AB%AF%E4%B8%AD%E6%98%BE%E7%A4%BA%E8%BE%93%E5%87%BA/">1-2在终端中显示输出</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-12T16:00:00.000Z" itemprop="datePublished">
+    2023-01-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/Linux-Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E7%AC%94%E8%AE%B0/">Linux_Shell脚本攻略笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-2在终端中显示输出">1.2在终端中显示输出</h2>
+<h4 id="1-2-1预备知识">1.2.1预备知识</h4>
+<ol>
+<li class="lvl-3">
+<p><strong>shebang</strong></p>
+</li>
+</ol>
+<blockquote>
+<p>定义解释该脚本所使用的解释器</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">! /bin/bash</span>	</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">如果有，必须在第一行</span></span><br></pre></td></tr></table></figure>
+<p>注意：使用该脚本时，可以不指定解释器，但要赋予权限再使用</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chmod a+x sample.sh</span><br><span class="line">./sample.sh</span><br><span class="line"></span><br><span class="line">chmod a+x sample.sh ; ./sample.sh	#shell使用分号或者换行符来分隔命令</span><br></pre></td></tr></table></figure>
+<h4 id="1-2-2实战演练">1.2.2实战演练</h4>
+<ol>
+<li class="lvl-3">
+<p><code>echo</code>是终端打印的命令</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo welcome to bash		#same, a little diff</span><br><span class="line">echo &quot;welcome to bash&quot;</span><br><span class="line">echo &#x27;welcome to bash&#x27;</span><br><span class="line"></span><br><span class="line">echo &quot;hello!&quot;	#wrong, ! could not be used in &quot;&quot;</span><br><span class="line">echo &#x27;hello!&#x27;	#right</span><br><span class="line">echo &quot;hello\!&quot;	#right</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li class="lvl-3">
+<p><code>printf</code>是另一个命令，与C语言基本一致</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">filename:printf.sh</span></span><br><span class="line"></span><br><span class="line">printf &quot;%-5s %-10s %-4s\n&quot; No Name Mark</span><br><span class="line">printf &quot;%-5s %-10s %-4.2f\n&quot; 1 Sarath 80.3456 </span><br><span class="line">printf &quot;%-5s %-10s %-4.2f\n&quot; 2 James 90.9989 </span><br><span class="line">printf &quot;%-5s %-10s %-4.2f\n&quot; 3 Jeff 77.564</span><br></pre></td></tr></table></figure>
+<p><img src="picture/printf_output.png" alt=""></p>
+<h4 id="1-2-3补充内容">1.2.3补充内容</h4>
+<h5 id="1-echo去除换行">1.echo去除换行</h5>
+<blockquote>
+<p>默认情况下，echo会在输出文本的尾部追加一个换行符。可以使用选项-n来禁止这种行为。</p>
+</blockquote>
+<blockquote>
+<p>在使用转义序列时，需要使用echo -e  &quot;<strong>包含转义序列的字符串</strong>&quot;这种形式。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo -e &quot;1\t2\t3\t&quot;</span><br></pre></td></tr></table></figure>
+<h5 id="2-打印彩色输出">2.打印彩色输出</h5>
+<blockquote>
+<p>脚本可以使用转义序列在终端中生成彩色文本。</p>
+</blockquote>
+<p>见P6</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/13/Shell%E7%BC%96%E7%A8%8B/Linux_Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E7%AC%94%E8%AE%B0/2023-01-13_1-3%E4%BD%BF%E7%94%A8%E5%8F%98%E9%87%8F%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/">1-3使用变量与环境变量</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-12T16:00:00.000Z" itemprop="datePublished">
+    2023-01-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/Linux-Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E7%AC%94%E8%AE%B0/">Linux_Shell脚本攻略笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-3使用变量与环境变量">1.3使用变量与环境变量</h2>
+<h4 id="1-3-1预备知识">1.3.1预备知识</h4>
+<blockquote>
+<p>所有的应用程序和脚本都可以访问环境变量。可以使用<code>env</code>或<code>printenv</code>命令查看当前shell中所定义的全部环境变量</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">env</span><br><span class="line">printenv</span><br></pre></td></tr></table></figure>
+<h5 id="查看其它进程的环境变量">查看其它进程的环境变量</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">假设查看进程名为：process</span></span><br><span class="line">pgrep process	#获取进程PID</span><br><span class="line">12501			#PID</span><br><span class="line"></span><br><span class="line">cat /proc/12501/environ</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>由于变量之间用<code>\0</code>来分隔，因此不好阅读。要想生成一份易读的报表，可以将cat命令的输出通过管道传给tr，将其中的<code>\0</code>替换成<code>\n</code>：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cat</span> /proc/12501/environ | <span class="built_in">tr</span> <span class="string">&#x27;\0&#x27;</span> <span class="string">&#x27;\n&#x27;</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="1-3-2实战演练">1.3.2实战演练</h4>
+<h5 id="1-变量">1.变量</h5>
+<blockquote>
+<p>可以使用等号操作符为变量赋值：</p>
+</blockquote>
+<p><code>varName=value</code></p>
+<p><strong>如果变量带有空白字符，则要放入<code>”“</code>或者<code>‘’</code>中</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">var=&quot;value&quot;</span><br><span class="line">echo $var</span><br><span class="line">echo $&#123;var&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">注意两边没有空格的等号是赋值操作符，加上空格的等号表示的是等量关系测试</span></span><br><span class="line">var = &quot;value&quot;	#wrong</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可以在其它命令的双引号中引用变量值</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span> </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">文件名:variables.sh</span> </span><br><span class="line">fruit=apple </span><br><span class="line">count=5 </span><br><span class="line">echo &quot;We have $count $&#123;fruit&#125;(s)&quot;</span><br></pre></td></tr></table></figure>
+<h5 id="2-export继承变量（子进程）">2.export继承变量（子进程）</h5>
+<blockquote>
+<p>export命令声明了将由子进程所继承的一个或多个变量。这些变量被导出后，当前shell脚本所执行的任何应用程序都会获得这个变量。</p>
+</blockquote>
+<p>标准环境变量PATH包含很多路径</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo $PATH</span><br><span class="line">/home/menu/.local/bin:/home/menu/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin</span><br><span class="line"></span><br><span class="line">echo $PATH | tr &#x27;:&#x27; &#x27;\n&#x27;	#使用换行分隔</span><br><span class="line">/home/menu/.local/bin</span><br><span class="line">/home/menu/bin</span><br><span class="line">/usr/local/bin</span><br><span class="line">/usr/local/sbin</span><br><span class="line">/usr/bin</span><br><span class="line">/usr/sbin</span><br></pre></td></tr></table></figure>
+<p>而要在其中加一个变量，则可以这样，使用<code>：</code>来分隔</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">PATH=&quot;$PATH:/home/user/bin&quot;</span><br></pre></td></tr></table></figure>
+<p>另外还有一些众所周知的环境变量：HOME、PWD、USER、UID、SHELL等</p>
+<p>**注意:**使用单引号时，变量不会被扩展</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &#x27;$var&#x27;</span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">var	<span class="comment">#output</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="1-3-3-补充内容">1.3.3 补充内容</h4>
+<h5 id="1-获取变量长度">1. 获取变量长度</h5>
+<blockquote>
+<p>可以使用$</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/13/Shell%E7%BC%96%E7%A8%8B/Linux_Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E7%AC%94%E8%AE%B0/2023-01-13_1-4%E4%BD%BF%E7%94%A8%E5%87%BD%E6%95%B0%E6%B7%BB%E5%8A%A0%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/">1-4使用函数添加环境变量</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-12T16:00:00.000Z" itemprop="datePublished">
+    2023-01-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/Linux-Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E7%AC%94%E8%AE%B0/">Linux_Shell脚本攻略笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-4使用函数添加环境变量">1.4使用函数添加环境变量</h2>
+<blockquote>
+<p>当你使用源代码构建并安装程序时，通常需要为新的可执行文件和库文件添加特定的路径。</p>
+</blockquote>
+<h4 id="1-4-1实战演练">1.4.1实战演练</h4>
+<blockquote>
+<p>这个例子展示了如何将新的路径添加到环境变量的起始部分。第一个例子利用我们目前所讲过的知识来实现，第二个例子创建了一个函数来简化修改操作。</p>
+</blockquote>
+<h5 id="1">1.</h5>
+<blockquote>
+<p>g++可以链接到动态库，根据变量<code>LD_LIBRARY_PATH</code>。也可以指定<code>-L</code>。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export PATH=/opt/myapp/bin:$PATH</span><br><span class="line">export LD_LIBRARY_PATH=/opt/myapp/lib; $LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure>
+<h5 id="2">2.</h5>
+<blockquote>
+<p>我们可以在<code>.bashrc</code>文件(在用户根目录下)中定义如下函数，简化路径添加操作：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">prepend() &#123; [ -d &quot;$2&quot; ] &amp;&amp; eval $1=\&quot;$2&#x27;:&#x27;\$$1\&quot; &amp;&amp; export $1; &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用方法</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">prepend PATH /opt/myapp/bin 	#注意：必须是根目录开始寻找的，已经存在的文件夹</span><br><span class="line">prepend LD_LIBRARY_PATH /opt/myapp/lib</span><br></pre></td></tr></table></figure>
+<p>**优化：**在进行添加时，如果变量为空，则会在末尾留下一个:。要解决这个问题，可以对该函数再做一些修改：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">prepend() &#123; [ -d &quot;$2&quot; ] &amp;&amp; eval $1=\&quot;$2\$\&#123;$1:+&#x27;:&#x27;\$$1\&#125;\&quot; &amp;&amp; export $1 ; &#125;</span><br><span class="line">eval $1=\&quot;$2’:’\1\&quot;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在这个函数中，我们引入了一种shell参数扩展的形式：</p>
+<p><code>$&#123;parameter:+expression&#125;</code></p>
+<p>如果parameter有值且不为空，则使用expression的值。通过这次修改，在向环境变量中添加新路径时，当且仅当旧值存在，才会增加:。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/11/Java/2023-01-11_4-5%E6%95%B0%E7%BB%84%E7%B1%BB%E5%9E%8B/">4-5数组类型</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-10T16:00:00.000Z" itemprop="datePublished">
+    2023-01-11
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Java/">Java</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="4-5数组类型">4.5数组类型</h2>
+<h4 id="4-5-1定义数组">4.5.1定义数组</h4>
+<blockquote>
+<p>定义数组时，不能指定长度。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">type[] arrayName;		<span class="comment">//recommend</span></span><br><span class="line">type arrayName;			</span><br></pre></td></tr></table></figure>
+<h4 id="4-5-2初始化数组">4.5.2初始化数组</h4>
+<blockquote>
+<p>数组必须先初始化，再使用。</p>
+</blockquote>
+<p><strong>静态初始化</strong></p>
+<blockquote>
+<p>指定元素，但不指定长度</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span>[] intArr;</span><br><span class="line">intArr = <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span>[] a = &#123;<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>&#125;;	<span class="comment">//简化写法</span></span><br></pre></td></tr></table></figure>
+<p><strong>动态初始化</strong></p>
+<blockquote>
+<p>指定长度，但不指定元素</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span>[] intArr;</span><br><span class="line">intArr = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="type">int</span>[] prices = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">5</span>];	<span class="comment">//简化写法</span></span><br></pre></td></tr></table></figure>
+<p>**warning：**严禁既指定长度，又指定元素。</p>
+<h4 id="4-5-3使用数组">4.5.3使用数组</h4>
+<blockquote>
+<p>与C一致</p>
+</blockquote>
+<p>每个数组都有一个length属性</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrTest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span>[] Arr;</span><br><span class="line">        Arr = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">5</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span>  <span class="operator">=</span> <span class="number">0</span>;i&lt;Arr.length;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            System.out.println(Arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-5-4foreach循环">4.5.4foreach循环</h4>
+<blockquote>
+<p>用于遍历数组和集合</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ForEachTest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span>[] Arr = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> element : Arr)</span><br><span class="line">        &#123;</span><br><span class="line">            System.out.println(element);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>**注意：**foreach里的是临时变量，所以赋值没有意义。</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/10/Java/2023-01-10_3-1java%E6%96%87%E6%A1%A3%E6%B3%A8%E9%87%8A/">3-1java文档注释</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-09T16:00:00.000Z" itemprop="datePublished">
+    2023-01-10
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Java/">Java</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="3-1java文档注释">3.1java文档注释</h2>
+<blockquote>
+<p>在对应的类包中：</p>
+<ol>
+<li class="lvl-3">在开头使用文件整体文档注释</li>
+<li class="lvl-3">在每个函数上方使用<strong>文档注释</strong>（以<code>/**</code>开头，以<code>*/</code>结尾，中间补<code>*</code>）。</li>
+</ol>
+<p>常用的javadoc标记有：</p>
+<ul class="lvl-1">
+<li class="lvl-2">
+<p>@author</p>
+</li>
+<li class="lvl-2">
+<p>@version</p>
+</li>
+<li class="lvl-2">
+<p>@param</p>
+</li>
+<li class="lvl-2">
+<p>@return</p>
+</li>
+<li class="lvl-2">
+<p>@exception</p>
+</li>
+<li class="lvl-2">
+<p>@throws</p>
+</li>
+</ul>
+</blockquote>
+<h4 id="3-1-1使用方法">3.1.1使用方法</h4>
+<blockquote>
+<p>注意：Java9开始，文档注释支持HTML5规范</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**	</span></span><br><span class="line"><span class="comment">* Description:</span></span><br><span class="line"><span class="comment">* 网站 &lt;a href=&quot;http://www.crazyit.org&quot;&gt;疯狂Java联盟&lt;/a&gt;&lt;br&gt;</span></span><br><span class="line"><span class="comment">* Copyright (C), 2001-2015 , Yeeku.H.Lee&lt;br&gt; </span></span><br><span class="line"><span class="comment">* This program is protected by copyright 1aws.&lt;br&gt; </span></span><br><span class="line"><span class="comment">* program Name: &lt;br&gt; </span></span><br><span class="line"><span class="comment">* Date: &lt;br&gt; </span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> Yeeku.H.Lee konqyeeku@163.com</span></span><br><span class="line"><span class="comment">* <span class="doctag">@version</span> 1.0 </span></span><br><span class="line"><span class="comment">*/</span> </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/** </span></span><br><span class="line"><span class="comment">    * 一个得到类名的方法</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> 返回类名</span></span><br><span class="line"><span class="comment">    */</span> </span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">Name</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Student&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用以下命令生成javadoc</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">javadoc -d apidoc -windowtitle 测试 -doctitle 学习javadoc工具的测试API文档 -header 我的类</span><br><span class="line">-version -author *Test.java</span><br></pre></td></tr></table></figure>
+<p><img src="picture/%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E6%A1%A3.png" alt=""></p>
+<h4 id="3-1-2实例">3.1.2实例</h4>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**	</span></span><br><span class="line"><span class="comment">* Description:</span></span><br><span class="line"><span class="comment">* 网站 &lt;a href=&quot;http://www.crazyit.org&quot;&gt;疯狂Java联盟&lt;/a&gt;&lt;br&gt;</span></span><br><span class="line"><span class="comment">* Copyright (C), 2001-2015 , Yeeku.H.Lee&lt;br&gt; </span></span><br><span class="line"><span class="comment">* This program is protected by copyright 1aws.&lt;br&gt; </span></span><br><span class="line"><span class="comment">* program Name: &lt;br&gt; </span></span><br><span class="line"><span class="comment">* Date: &lt;br&gt; </span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> Yeeku.H.Lee konqyeeku@163.com</span></span><br><span class="line"><span class="comment">* <span class="doctag">@version</span> 1.0 </span></span><br><span class="line"><span class="comment">*/</span> </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/** </span></span><br><span class="line"><span class="comment">    * 一个得到类名的方法</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> 无</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> 返回类名</span></span><br><span class="line"><span class="comment">    */</span> </span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">Name</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Student&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>命令</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">javadoc -d apidoc -windowtitle 测试 -doctitle 学习javadoc工具的测试API文档 -header 我的类 -version -author Student.java</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结果</p>
+</blockquote>
+<p><img src="picture/javadoc.png" alt=""></p>
+<p><img src="picture/javadoc_html.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/10/Java/2023-01-10_3-6%E7%9B%B4%E6%8E%A5%E9%87%8F/">3-6直接量</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-09T16:00:00.000Z" itemprop="datePublished">
+    2023-01-10
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Java/">Java</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="3-6直接量">3.6直接量</h2>
+<blockquote>
+<p>只有三种类型能指定直接量：</p>
+<ul class="lvl-1">
+<li class="lvl-2">基本类型</li>
+<li class="lvl-2">字符串</li>
+<li class="lvl-2">null</li>
+</ul>
+</blockquote>
+<h4 id="3-6-2直接量赋值">3.6.2直接量赋值</h4>
+<blockquote>
+<p>直接量能赋值给：</p>
+<ol>
+<li class="lvl-3">对应的类型</li>
+<li class="lvl-3">java所支持自动转换过去的类型</li>
+</ol>
+</blockquote>
+<h4 id="3-6-3String特殊点">3.6.3String特殊点</h4>
+<blockquote>
+<p>字符串直接量由常量池缓存。因为<strong>String是不可变类</strong>，在编译期就确定了。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/9/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/11/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/17/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/2022-05-17_8%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/">8数据处理函数</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-16T16:00:00.000Z" itemprop="datePublished">
+    2022-05-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/">SELECT语句</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="数据处理函数">数据处理函数</h2>
+<blockquote>
+<p>不同SQL使用不同函数，不具备可移植性</p>
+</blockquote>
+<h4 id="1-文本处理函数">1.文本处理函数</h4>
+<p><strong>常见：</strong></p>
+<blockquote>
+<p>返回字符串大小写转换</p>
+<p>返回字符串首尾字符</p>
+<p>返回去除左右空格后的字符串</p>
+</blockquote>
+<p><strong>不常见：</strong></p>
+<blockquote>
+<p>soundex	匹配类似字符串发音</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT cust_name,cust_id</span><br><span class="line">From Customers</span><br><span class="line">where SOUNDEX(cust_name) = SOUNDEX(&#x27;Meachial&#x27;);</span><br></pre></td></tr></table></figure>
+<h4 id="2-日期和时间处理函数">2.日期和时间处理函数</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT order_num</span><br><span class="line">From order</span><br><span class="line">where YEAR(order_date) = 2004;</span><br></pre></td></tr></table></figure>
+<h4 id="3-数值处理函数">3.数值处理函数</h4>
+<p><strong>常见：</strong></p>
+<blockquote>
+<p>返回绝对值</p>
+<p>返回三角函数值</p>
+<p>返回指数值</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/17/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/2022-05-17_9%E6%B1%87%E6%80%BB%E6%95%B0%E6%8D%AE%E5%87%BD%E6%95%B0/">9汇总数据函数</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-16T16:00:00.000Z" itemprop="datePublished">
+    2022-05-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/">SELECT语句</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="汇总数据">汇总数据</h2>
+<h4 id="1-聚集函数">1.聚集函数</h4>
+<blockquote>
+<p>统计数据，并返回统计数据结果而非数据本身</p>
+</blockquote>
+<h5 id="1-1AVG">1.1AVG()</h5>
+<blockquote>
+<p>返回所选列的平均值</p>
+</blockquote>
+<h5 id="1-2count">1.2count()</h5>
+<blockquote>
+<p>返回计数的数量</p>
+</blockquote>
+<h5 id="1-3MAX">1.3MAX()</h5>
+<blockquote>
+<p>返回最大值</p>
+</blockquote>
+<h5 id="1-4MIN">1.4MIN()</h5>
+<blockquote>
+<p>返回最小值</p>
+</blockquote>
+<h5 id="1-5SUM">1.5SUM()</h5>
+<blockquote>
+<p>返回总值</p>
+</blockquote>
+<h4 id="2-聚集不同值">2.聚集不同值</h4>
+<blockquote>
+<p>使用参数DISTINCT在聚集函数参数前</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT SUM(DISTINCT cust_price) as sum_price</span><br><span class="line">From Customers</span><br><span class="line">order by cust_id;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-05-06_2-3%E9%9D%9E%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95%E7%9A%84%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/">2-3非递归算法的数学分析</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-05T16:00:00.000Z" itemprop="datePublished">
+    2022-05-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">算法设计与分析</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="非递归算法的数学分析">非递归算法的数学分析</h2>
+<blockquote>
+<p>根据2.1的通用框架来分析非递归算法</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/01/%E4%B8%8A%E8%AF%BE/2022-05-01_%E7%AC%AC%E5%85%AD%E6%AC%A1%E8%AF%BE/">第六次课</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-30T16:00:00.000Z" itemprop="datePublished">
+    2022-05-01
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E4%B8%8A%E8%AF%BE/">上课</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="第六次课">第六次课</h2>
+<blockquote>
+<p>这两天放假，但我马上要考试了，所以疯狂复习，都忘记更新课程了。今天继续。</p>
+</blockquote>
+<h4 id="1-学习内容">1.学习内容</h4>
+<p>完成视频P40-44，做好笔记</p>
+<h4 id="2-练习内容">2.练习内容</h4>
+<blockquote>
+<p>学完循环之后，该练习一下。</p>
+</blockquote>
+<p>完成pta题目16-20</p>
+<h4 id="3-看书">3.看书</h4>
+<p>P39-46</p>
+<h3 id="总结">总结</h3>
+<p>任务如下：</p>
+<p>1.看视频P40-44</p>
+<p>2.完成题目16-20</p>
+<p>3.看书P39-46</p>
+<blockquote>
+<p>放假的大好时光，怎能不来点bug呢？</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/30/C++/C++%E5%9F%BA%E7%A1%80/2022-04-30_14-3%E5%A4%9A%E9%87%8D%E7%BB%A7%E6%89%BF/">14-3多重继承</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-29T16:00:00.000Z" itemprop="datePublished">
+    2022-04-30
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="多重继承">多重继承</h2>
+<blockquote>
+<p>MI描述的是有多个直接基类的类。这同样描述的是is-a关系的继承关系。</p>
+</blockquote>
+<blockquote>
+<p>公有MI有以下两个问题：</p>
+<p>1.从两个基类继承了两个同名方法</p>
+<p>2.从两个或更多基类中继承了同一个类的多个实例</p>
+</blockquote>
+<h4 id="14-3-1虚基类–解决基类问题">14.3.1虚基类–解决基类问题</h4>
+<blockquote>
+<p>虚基类使从多个基类相同的类中派生出的对象只继承一个基类对象。</p>
+</blockquote>
+<p><strong>使用</strong></p>
+<blockquote>
+<p>在类声明中使用关键字virtual。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Singer</span> : <span class="keyword">virtual</span> <span class="keyword">public</span> Worker&#123;...&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Waiter</span> : <span class="keyword">virtual</span> <span class="keyword">public</span> Worker&#123;...&#125;;<span class="comment">//两个基于虚基类的派生类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SingingWaiter</span> : <span class="keyword">public</span> Singer, <span class="keyword">public</span> Waiter &#123;...&#125;;</span><br><span class="line"><span class="comment">//三代继承</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这个SingingWaiter只有Worker对象的一个副本</p>
+</blockquote>
+<p><strong>新的函数构造规则</strong></p>
+<blockquote>
+<p>对于使用虚基类，第三代构造函数如果在初始化列表中调用第二代派生类构造函数，则会通过两条不同的途径将数据传递给虚基类对象。因此C++在基类是虚的时候禁止这种传参方式，而是采用直接显式地在初始化列表中调用虚基类的构造函数。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">SingingWaiter</span>(<span class="type">const</span> Worker &amp; wk, <span class="type">int</span> p = <span class="number">0</span>, <span class="type">int</span> v = Singer::other) : <span class="built_in">Worker</span>(wk), <span class="built_in">Waiter</span>(wk,p), <span class="built_in">Singer</span>(wk,v)&#123;&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>此处使用Worker(wk)来初始化虚基类对象</p>
+<p>注：对于虚基类，这种方式是合法的，对于非虚基类，这种方式是非法的。</p>
+</blockquote>
+<h4 id="14-3-2方法冲突–解决方法问题">14.3.2方法冲突–解决方法问题</h4>
+<blockquote>
+<p>除了修改构造函数，MI还需调整方法。</p>
+<p>对于单继承，如果调用方法，则会使用继承的类中的方法，但对于MI来说，如果继承的两个类出现同名方法，不能确定使用哪一个方法，从而产生二义性。</p>
+</blockquote>
+<p><strong>解决方案</strong></p>
+<p>1.在成员名字前面加上类名和域解析符<code>::</code>，以显式地指明到底使用哪个类的成员，消除二义性</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">SingingWaiter <span class="title">newhere</span><span class="params">(<span class="string">&quot;Elise Hawks&quot;</span>, <span class="number">2005</span>, <span class="number">6</span>, soprano)</span></span>;</span><br><span class="line">newhere.Singer::<span class="built_in">Show</span>();		<span class="comment">//类名和域解析符</span></span><br></pre></td></tr></table></figure>
+<p>2.使用模块化方法重新组装函数</p>
+<blockquote>
+<p>在基类和派生类中只给出自己成员的处理函数，再在三代派生中组装函数</p>
+</blockquote>
+<p><strong>案例</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Worker::Data</span><span class="params">()</span>		<span class="comment">//基类</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Waiter::Data</span><span class="params">()</span>		<span class="comment">//派生1</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Singer::Data</span><span class="params">()</span>		<span class="comment">//派生2</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SingingWaiter::Data</span><span class="params">()</span>	<span class="type">const</span>	<span class="comment">//三代派生组装</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Singer::<span class="built_in">Data</span>();</span><br><span class="line">    Waiter::<span class="built_in">Data</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SingingWaiter::Show</span><span class="params">()</span>	<span class="type">const</span>	<span class="comment">//三代派生组装</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Worker::<span class="built_in">Data</span>();</span><br><span class="line">    <span class="built_in">Data</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3.将所有的数据组件设置为保护的而非私有的</p>
+<h4 id="总结案例">总结案例</h4>
+<blockquote>
+<p>该案例总结地使用了上述方法</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//workermi.h</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Worker</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::string fullname;</span><br><span class="line">    <span class="type">long</span> id;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">Data</span><span class="params">()</span> <span class="type">const</span></span>;		<span class="comment">//虚方法，为派生方法做准备</span></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">Get</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Worker</span>() : <span class="built_in">fullname</span>(<span class="string">&quot;no name&quot;</span>), <span class="built_in">id</span>(<span class="number">0L</span>) &#123;&#125;;</span><br><span class="line">    <span class="built_in">Worker</span>(<span class="type">const</span> std::string &amp; s, <span class="type">long</span> n)</span><br><span class="line">        : <span class="built_in">fullname</span>(s), <span class="built_in">id</span>(n) &#123;&#125;;</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">Worker</span>() = <span class="number">0</span>;	<span class="comment">//纯虚函数，本身无定义</span></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">Set</span><span class="params">()</span> </span>= <span class="number">0</span>; </span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Waiter</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> panache;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Data</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Get</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Waiter</span>() : <span class="built_in">Worker</span>(), <span class="built_in">panache</span>(<span class="number">0</span>) &#123;&#125;</span><br><span class="line">    <span class="built_in">Waiter</span>(<span class="type">const</span> std::string &amp; s, <span class="type">long</span> n, <span class="type">int</span> p = <span class="number">0</span>)</span><br><span class="line">        : <span class="built_in">Worker</span>(s,n), <span class="built_in">panache</span>(p) &#123;&#125;</span><br><span class="line">    <span class="built_in">Waiter</span>(<span class="type">const</span> Worker &amp; wk, <span class="type">int</span> p = <span class="number">0</span>)</span><br><span class="line">        : <span class="built_in">Worker</span>(wk), <span class="built_in">panache</span>(p) &#123;&#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Set</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Show</span><span class="params">()</span> <span class="type">const</span></span>;    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Singer</span> : <span class="keyword">virtual</span> <span class="keyword">public</span> Worker		<span class="comment">//公有派生，虚基类</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">protected</span>:</span><br><span class="line">    <span class="keyword">enum</span>&#123;other, alto, contralto, soprano,</span><br><span class="line">         bass, baritone, tenor&#125;;</span><br><span class="line">    <span class="keyword">enum</span>&#123;Vtypes = <span class="number">7</span>&#125;;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Data</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Get</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    <span class="type">static</span> <span class="type">char</span> *pv[Vtypes];</span><br><span class="line">    <span class="type">int</span> voice;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Singer</span>() : <span class="built_in">Worker</span>(), <span class="built_in">voice</span>(other) &#123;&#125;</span><br><span class="line">    <span class="built_in">Singer</span>(<span class="type">const</span> std::string &amp; s, <span class="type">long</span> n, <span class="type">int</span> v = other)</span><br><span class="line">        : <span class="built_in">Worker</span>(s,n), <span class="built_in">voice</span>(v) &#123;&#125;</span><br><span class="line">    <span class="built_in">Singer</span>(<span class="type">const</span> Worker &amp; wk, <span class="type">int</span> v = other)</span><br><span class="line">        : <span class="built_in">Worker</span>(wk), <span class="built_in">voice</span>(v) &#123;&#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Set</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Show</span><span class="params">()</span> <span class="type">const</span></span>;  </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//三代派生类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SingingWaiter</span> : <span class="keyword">public</span> Singer, <span class="keyword">public</span> Waiter</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">protected</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Data</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Get</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">SingingWaiter</span>() &#123;&#125;;</span><br><span class="line">    <span class="built_in">SingingWaiter</span>(<span class="type">const</span> std::string &amp; s, <span class="type">long</span> n, <span class="type">int</span> p = <span class="number">0</span>,</span><br><span class="line">                  <span class="type">int</span> v = other)</span><br><span class="line">        : <span class="built_in">Worker</span>(s,n), <span class="built_in">Waiter</span>(s,n,p), <span class="built_in">Singer</span>(s,n,v) &#123;&#125;</span><br><span class="line">    <span class="built_in">SingingWaiter</span>(<span class="type">const</span> Worker &amp; wk, <span class="type">int</span> p = <span class="number">0</span>, </span><br><span class="line">                  <span class="type">int</span> v = other)</span><br><span class="line">        : <span class="built_in">Worker</span>(wk), <span class="built_in">Waiter</span>(wk,p), <span class="built_in">Singer</span>(wk,v) &#123;&#125;</span><br><span class="line">    <span class="built_in">SingingWaiter</span>(<span class="type">const</span> Waiter &amp; wt, <span class="type">int</span> v = other)</span><br><span class="line">        : <span class="built_in">Worker</span>(wt), <span class="built_in">Waiter</span>(wt), <span class="built_in">Singer</span>(wt,v) &#123;&#125; </span><br><span class="line">    <span class="built_in">SingingWaiter</span>(<span class="type">const</span> Singer &amp; wt, <span class="type">int</span> p = <span class="number">0</span>)</span><br><span class="line">        : <span class="built_in">Worker</span>(wt), <span class="built_in">Waiter</span>(wt, p), <span class="built_in">Singer</span>(wt) &#123;&#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Set</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Show</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//workermi.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;workmi.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> std::cout;</span><br><span class="line"><span class="keyword">using</span> std::cin;</span><br><span class="line"><span class="keyword">using</span> std::endl;</span><br><span class="line"></span><br><span class="line"><span class="comment">//work methods</span></span><br><span class="line">Worker::~<span class="built_in">Worker</span>() &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//protected methods</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Worker::Data</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;Name: &quot;</span>&lt;&lt;fullname&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;Employee ID: &quot;</span>&lt;&lt; id &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Worker::Get</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">getline</span>(cin, fullname);</span><br><span class="line">    cout&lt;&lt; <span class="string">&quot;Enter worker&#x27;s ID: &quot;</span>;</span><br><span class="line">    cin&gt;&gt;id;</span><br><span class="line">    <span class="keyword">while</span>(cin.<span class="built_in">get</span>()!=<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Waiter methods</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Waiter::Set</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;Enter waiter&#x27;s name: &quot;</span>;</span><br><span class="line">    Worker::<span class="built_in">Get</span>();</span><br><span class="line">    <span class="built_in">Get</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Waiter::Show</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout&lt;&lt; <span class="string">&quot;Category: waiter\n&quot;</span>;</span><br><span class="line">  	Worker::<span class="built_in">Data</span>();</span><br><span class="line">    <span class="built_in">Data</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//protected methods</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Waiter::Data</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;Panache rating: &quot;</span>&lt;&lt; panache&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Waiter::Get</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;Enter waiter&#x27;s panache rating: &quot;</span>;</span><br><span class="line">    cin&gt;&gt;panache;</span><br><span class="line">    <span class="keyword">while</span>(cin.<span class="built_in">get</span>()!=<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Singer methods</span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> * Singer::pv[Singer::Vtypes] = &#123;<span class="string">&quot;other&quot;</span>, <span class="string">&quot;alto&quot;</span>, <span class="string">&quot;contralro&quot;</span>, </span><br><span class="line">                                    <span class="string">&quot;soprano&quot;</span>, <span class="string">&quot;bass&quot;</span>, <span class="string">&quot;baritone&quot;</span>, <span class="string">&quot;tenor&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Singer::Set</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;Enter singer&#x27;s name: &quot;</span>;</span><br><span class="line">    Worker::<span class="built_in">Get</span>();</span><br><span class="line">    <span class="built_in">Get</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Singer::Show</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout&lt;&lt; <span class="string">&quot;Category: singer\n&quot;</span>;</span><br><span class="line">    Worker::<span class="built_in">Data</span>();</span><br><span class="line">    <span class="built_in">Data</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//protected methods</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Singer::Data</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;Vocal range: &quot;</span>&lt;&lt;pv[voice] &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Singer::Get</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;Enter number for singer&#x27;s vocal range:\n&quot;</span>;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; Vtypes; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout&lt;&lt;i&lt;&lt;<span class="string">&quot;: &quot;</span>&lt;&lt;pv[i]&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">        <span class="keyword">if</span>(i%<span class="number">4</span>==<span class="number">3</span>)</span><br><span class="line">            cout&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">if</span>(i%<span class="number">4</span> != <span class="number">0</span>)</span><br><span class="line">        cout&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    cin&gt;&gt;voice;</span><br><span class="line">    <span class="keyword">while</span>(cin.<span class="built_in">get</span>()!=<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//SingingWaiter methods</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SingingWaiter::Data</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Singer::<span class="built_in">Data</span>();</span><br><span class="line">    Waiter::<span class="built_in">Data</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SingingWaiter::Get</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Waiter::<span class="built_in">Get</span>();</span><br><span class="line">    Singer::<span class="built_in">Get</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SingingWaiter::Set</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;Enter singing waiter&#x27;s name: &quot;</span>;</span><br><span class="line">    Worker::<span class="built_in">Get</span>();</span><br><span class="line">    <span class="built_in">Get</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SingingWaiter::Show</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;Category: singing waiter\n&quot;</span>;</span><br><span class="line">    Worker::<span class="built_in">Data</span>();</span><br><span class="line">    <span class="built_in">Data</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="其它问题">其它问题</h4>
+<h5 id="1-混合使用虚基类和非虚基类">1.混合使用虚基类和非虚基类</h5>
+<blockquote>
+<p>当基类是虚基类时，派生类包含基类的一个子对象；当基类不是虚基类时，派生类包含多个子对象。</p>
+<p>当混合使用时，虚基类共享一个对象，非虚基类对象数目递增。</p>
+</blockquote>
+<h5 id="2-虚基类和支配">2.虚基类和支配</h5>
+<blockquote>
+<p>在不使用虚基类的情况下，如果使用不同基类继承的同名成员，可能导致二义性。</p>
+<p>但使用虚基类，如果在某个名称优先于其它名称的情况下，先使用这个名称。</p>
+<p>派生类中的名称优于直接或间接祖先类中的相同名称</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/29/C++/C++%E5%9F%BA%E7%A1%80/2022-04-29_14-2%E7%A7%81%E6%9C%89%E7%BB%A7%E6%89%BF/">14-2私有继承</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-28T16:00:00.000Z" itemprop="datePublished">
+    2022-04-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="私有继承">私有继承</h2>
+<blockquote>
+<p>使用私有继承，基类的公有成员和保护成员都将成为派生类的私有成员。这意味着基类方法不会成为派生类的公有接口的一部分，但可以在派生类的成员函数中使用。</p>
+<p>私有继承与包含提供的特性相同，获得实现，但不获得接口。</p>
+</blockquote>
+<h4 id="14-2-1-Student类示例">14.2.1 Student类示例</h4>
+<p><strong>实现私有继承</strong></p>
+<blockquote>
+<p>私有继承的实现需要用到关键字private，而不是public来定义类。如果不加访问限定符则默认私有继承。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> : <span class="keyword">private</span> std::string, <span class="keyword">private</span> std::valarray&lt;<span class="type">double</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用多个类的继承称为多重继承（MI）。</p>
+</blockquote>
+<h5 id="1-初始化基类组件">1.初始化基类组件</h5>
+<blockquote>
+<p>因为继承了基类，所以需要用基类的构造函数来初始化基类部分的成员数据，而不是直接访问基类成员来初始化。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Student</span>(<span class="type">const</span> <span class="type">char</span> * str, <span class="type">const</span> <span class="type">double</span> * pd, <span class="type">int</span> n)</span><br><span class="line">    : std::<span class="built_in">string</span>(str), <span class="built_in">ArrayDb</span>(pd, n) &#123;&#125;		<span class="comment">//使用类名初始化而不是成员名</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-访问基类的方法">2.访问基类的方法</h5>
+<blockquote>
+<p>使用包含时用对象名来调用方法，使用私有继承时用类名和解析域运算符来调用方法</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">Student::Average</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(ArrayDb::<span class="built_in">size</span>()&gt;<span class="number">0</span>)		<span class="comment">//类名+解析域运算符</span></span><br><span class="line">    	<span class="keyword">return</span> ArrayDb::<span class="built_in">sum</span>()/ArrayDb::<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="3-访问基类对象">3.访问基类对象</h5>
+<blockquote>
+<p>使用私有继承时，方法可以通过类名+解析域运算符来调用，但基类对象本身却没有名字，如何访问？</p>
+<p>答案是使用强制类型转换。将派生类转换为基类就可以调用。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">const</span> string &amp; <span class="title">Student::Name</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="type">const</span> string &amp;) *<span class="keyword">this</span>;			<span class="comment">//通过this指针来返回调用方法的对象，再进行强制类型转换</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="4-访问基类的友元函数">4.访问基类的友元函数</h5>
+<blockquote>
+<p>用类名显式地限定使用基类函数不适用于友元函数，因为友元不属于类。但可以通过显式地转换成基类来调用正确的函数。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ostream &amp; <span class="keyword">operator</span>&lt;&lt;(ostream &amp; os, <span class="type">const</span> Student &amp; stu)</span><br><span class="line">&#123;</span><br><span class="line">    os&lt;&lt;<span class="string">&quot;Scores for&quot;</span>&lt;&lt;(<span class="type">const</span> string &amp;)stu&lt;&lt;<span class="string">&quot;\n&quot;</span>;		<span class="comment">//先将对象转换成基类再调用函数</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="14-2-2使用包含还是私有继承">14.2.2使用包含还是私有继承</h4>
+<blockquote>
+<p>正常倾向于使用包含，它易于理解。同时类中有被包含的对象名，方便调用函数。继承则会引起很多问题，尤其是多个基类继承时。</p>
+<p>在需要多个同种类对象作为子对象时，只能使用包含，而不能使用继承，因为继承的对象没有名字无法区分彼此。</p>
+<p>继承能提供更多特性，一种情况是类包含保护成员，这种成员在派生类中能直接使用，在包含类中却不能直接访问。另一种是需要重新定义虚函数时，只能使用继承的方式来实现，包含却不能做到。此时重定义的函数只能在类中使用，而不是公有的。</p>
+</blockquote>
+<p><strong>综上，通常使用包含来实现</strong></p>
+<h4 id="14-2-3保护继承">14.2.3保护继承</h4>
+<blockquote>
+<p>保护继承是私有继承的变体。关键字：protected</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> : <span class="keyword">protected</span> std::string,</span><br><span class="line">				<span class="keyword">protected</span> std::valarray&lt;<span class="type">double</span>&gt;</span><br><span class="line">                &#123;</span><br><span class="line">                    ...</span><br><span class="line">                &#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>当从派生类中派生出另一个类时，私有继承与保护继承之间的区别就体现出来了。</p>
+<p>私有继承中，第三代类就不能使用基类的接口，因为基类的成员是二代派生的私有。</p>
+<p>保护继承中，第三代类可以使用，因为基类的成员在二代派生中处于保护状态。</p>
+</blockquote>
+<p>（详见P448表14.1）</p>
+<h4 id="14-2-4使用using重新定义访问权限">14.2.4使用using重新定义访问权限</h4>
+<blockquote>
+<p>假设要在派生类外使用私有或保护的基类方法，可以这样做：</p>
+</blockquote>
+<h5 id="1-定义一个派生类方法来使用基类方法">1.定义一个派生类方法来使用基类方法</h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">Student::sum</span><span class="params">()</span> <span class="type">const</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> std::valarray&lt;<span class="type">double</span>&gt;::<span class="built_in">sum</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="2-将函数调用包含在另一个函数调用中">2.将函数调用包含在另一个函数调用中</h5>
+<blockquote>
+<p>即使用一个using声明来指出派生类可以使用特定的基类成员</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> : <span class="keyword">private</span> std::string, <span class="keyword">private</span> std::valarray&lt;<span class="type">double</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">using</span> std::valarray&lt;<span class="type">double</span>&gt;::min;</span><br><span class="line">    <span class="keyword">using</span> std::valarray&lt;<span class="type">double</span>&gt;::max;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>上述声明是的<code>valarray&lt;double&gt;::min()</code>和<code>valarray&lt;double&gt;::max()</code>可用，使其类似于Student类的公有方法。</p>
+</blockquote>
+<p>注：using声明只使用成员名，没有括号、函数特征标和返回类型。</p>
+<blockquote>
+<p>同时，这使得基类的<strong>所有同名函数重载</strong>都可用</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-04-28_2-1%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/">2-1分析框架</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-27T16:00:00.000Z" itemprop="datePublished">
+    2022-04-28
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">算法设计与分析</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="分析框架">分析框架</h2>
+<h4 id="2-1-1输入规模的度量">2.1.1输入规模的度量</h4>
+<blockquote>
+<p>几乎所有的算法对于规模更大的输入都需要运行更长的时间。所有在研究算法效率的时候，把它作为一个算法输入规模n为参数的函数。</p>
+</blockquote>
+<h4 id="2-1-2运行时间的度量单位">2.1.2运行时间的度量单位</h4>
+<blockquote>
+<p>对于算法运行时间的度量单位，尽管可以采用时间的标准单位来衡量，但这种方式往往取决于硬件与其它一些问题，因此不采用。我们也可以统计每一步消耗的时间，但这没有必要。我们关注的是一个算法中对总时间贡献最大的，最重要的操作，并计算运行次数。</p>
+</blockquote>
+<p><strong>公式</strong></p>
+<p>T(n)=copC(n)</p>
+<blockquote>
+<p>cop是一个常数，C(n)是执行次数，这个结果往往是一个近似值</p>
+</blockquote>
+<h4 id="2-1-3增长次数">2.1.3增长次数</h4>
+<blockquote>
+<p>对于小规模输入而言，无需区分算法之间的效率区别。对于n较大时，有意义的是函数的增长次数。</p>
+</blockquote>
+<p><img src="picture/%E5%A2%9E%E9%95%BF%E6%AC%A1%E6%95%B0%E8%A1%A8.png" alt=""></p>
+<blockquote>
+<p>如果一个算法具有对数级增长次数，我们可以认为它对于任何实际规模的输入几乎都会在瞬间完成。</p>
+</blockquote>
+<h4 id="2-1-4算法的最优、最差和平均效率">2.1.4算法的最优、最差和平均效率</h4>
+<h5 id="最坏">最坏</h5>
+<blockquote>
+<p>一个算法的最差效率是指当输入规模为n时算法在最坏情况下的效率。</p>
+</blockquote>
+<p><strong>确定方法</strong></p>
+<blockquote>
+<p>在算法的所有可能输入中，哪种类型的输入会导致基本操作数次数达到最大，再计算这个最差值Cworst(n).</p>
+</blockquote>
+<h5 id="最优">最优</h5>
+<blockquote>
+<p>指当输入规模为n时，算法在最优情况下的效率。</p>
+</blockquote>
+<p><strong>确定方法</strong></p>
+<blockquote>
+<p>在算法可能的规模为n的输入中，找到输入对应最小C(n)值</p>
+</blockquote>
+<h5 id="平均效率">平均效率</h5>
+<blockquote>
+<p>在随机输入的情况下，一个算法具有怎样的行为。</p>
+</blockquote>
+<h3 id="总结">总结</h3>
+<p><img src="picture/2.1%E6%80%BB%E7%BB%93.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-04-28_2-2%E6%B8%90%E8%BF%9B%E7%AC%A6%E5%8F%B7%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%95%88%E7%8E%87%E7%B1%BB%E5%9E%8B/">2-2渐进符号和基本效率类型</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-27T16:00:00.000Z" itemprop="datePublished">
+    2022-04-28
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">算法设计与分析</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="渐进符号和基本效率类型">渐进符号和基本效率类型</h2>
+<blockquote>
+<p>在n趋近于无穷的情况下：</p>
+<p>O(g(n))表示增长次数小于等于cg(n)的函数集合</p>
+<p>omega(g(n))表示增长次数大于等于cg(n)的函数集合</p>
+<p>theta(g(n))表示增长次数等于cg(n)的函数集合</p>
+</blockquote>
+<h4 id="2-2-2符号O">2.2.2符号O</h4>
+<p><img src="picture/%E7%AC%A6%E5%8F%B7O%E7%9A%84%E5%AE%9A%E4%B9%89.png" alt=""></p>
+<h4 id="2-2-3符号omega">2.2.3符号omega</h4>
+<p><img src="picture/%E7%AC%A6%E5%8F%B7omega%E7%9A%84%E5%AE%9A%E4%B9%89.png" alt=""></p>
+<h4 id="2-2-4符号theta">2.2.4符号theta</h4>
+<p><img src="picture/%E7%AC%A6%E5%8F%B7theta%E7%9A%84%E5%AE%9A%E4%B9%89.png" alt=""></p>
+<h4 id="2-2-5渐进符号的有用特性">2.2.5渐进符号的有用特性</h4>
+<p><img src="picture/%E5%AE%9A%E7%90%86O%E7%9A%84%E4%B8%80%E8%88%AC%E7%89%B9%E6%80%A7.png" alt=""></p>
+<blockquote>
+<p>这意味着在同一算法时间函数中，效率取决于最高次项。在两个连续算法中，总效率取决于最慢的那一个。</p>
+</blockquote>
+<h4 id="2-2-6利用极限比较增长次数">2.2.6利用极限比较增长次数</h4>
+<blockquote>
+<p>基于定义比较增长次数虽然更通用，但不简便。因此采用基于极限的比较方法。</p>
+</blockquote>
+<p><img src="picture/%E5%9F%BA%E4%BA%8E%E6%9E%81%E9%99%90%E7%9A%84%E6%AF%94%E8%BE%83%E6%96%B9%E6%B3%95.png" alt=""></p>
+<h4 id="2-2-7基本的效率类型">2.2.7基本的效率类型</h4>
+<blockquote>
+<p>大多数算法可以分成为数不多的几种类型。</p>
+</blockquote>
+<p><img src="picture/%E5%9F%BA%E6%9C%AC%E6%95%88%E7%8E%87%E7%B1%BB%E5%9E%8B.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/26/%E4%B8%8A%E8%AF%BE/2022-04-26_%E7%AC%AC%E4%BA%94%E8%8A%82%E8%AF%BE/">第五节课</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-25T16:00:00.000Z" itemprop="datePublished">
+    2022-04-26
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E4%B8%8A%E8%AF%BE/">上课</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="第五节课">第五节课</h2>
+<blockquote>
+<p>在完成了条件分支的学习之后，你已经能做出简单的判断了。然而，对于一些重复的操作，我们常常使用循环来解决。当然，在循环中我们依旧离不开条件判断——这也是我们的目的。</p>
+</blockquote>
+<h4 id="1-学习内容">1.学习内容</h4>
+<p>完成视频P33-39，做好精炼的笔记。</p>
+<h4 id="2-练习内容">2.练习内容</h4>
+<blockquote>
+<p>从这节课开始，你已经能开始解决一些有一定难度的题目了，当然，是相对于之前的课而言的。巧妙地应用所学，往往能做出一些你未曾想过的结果。我留了两天的内容，也就是说，在学完的第二天专门用来继续做题，巩固基础，不推进度。</p>
+</blockquote>
+<p>第一天：完成pta题目7-10</p>
+<p>第二天：完成pta题目11-15</p>
+<blockquote>
+<p>从这开始，细节往往比你想象的更加重要，so，感受一下你的逻辑是多么脆弱，并变得更谨慎吧。</p>
+</blockquote>
+<h4 id="3-读书">3.读书</h4>
+<blockquote>
+<p>当前的学习内容已经超过练习内容了，我在考虑要不要歇一天来专门练习。不过书是不能停的，so，我们继续看书</p>
+</blockquote>
+<p>看书P28-38</p>
+<p>**注：**书中写了很多都是细节，尽可能地去理解，没有必要全部记住，但一定要留下印象方便以后查阅。这既是一本教材，也是一本工具书。不要想着一口吃完，那是不现实的，除非你是天才。做好笔记，如果有必要。</p>
+<h3 id="总结">总结</h3>
+<p>你应当完成以下内容：</p>
+<p>第一天：</p>
+<p>1.视频P33-39</p>
+<p>2.练习pta题目7-10</p>
+<p>3.看书P28-38</p>
+<p>第二天：</p>
+<p>1.pta题目11-15</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/25/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-04-25_21%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E3%80%81%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E3%80%81%E6%A1%B6%E6%8E%92%E5%BA%8F%E3%80%81%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/">21归并排序、计数排序、桶排序、基数排序</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-24T16:00:00.000Z" itemprop="datePublished">
+    2022-04-25
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="归并排序、计数排序、桶排序、基数排序">归并排序、计数排序、桶排序、基数排序</h2>
+<h4 id="归并排序（分治思想）">归并排序（分治思想）</h4>
+<blockquote>
+<p>递归，将数组拆分成子数组，不断递下去直到拆分成1的数组，再归时排序</p>
+</blockquote>
+<p><strong>时间复杂度</strong></p>
+<blockquote>
+<p>时间：排序时间+合并时间</p>
+<p>空间复杂度：O(n)</p>
+<p>空间换时间</p>
+</blockquote>
+<p><img src="picture/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E5%9B%BE%E8%A7%A3.png" alt=""></p>
+<p><strong>稳定性</strong></p>
+<p>稳定，不破坏原有的排序规则</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">merge_sort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> first, <span class="type">int</span> last)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> mid= <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(first&lt;last)</span><br><span class="line">    &#123;</span><br><span class="line">        mid = (first+last)/<span class="number">2</span>;</span><br><span class="line">        <span class="comment">//分下标</span></span><br><span class="line">        merge_sort(arr,first,mid);</span><br><span class="line">        merge_sort(arr,mid+<span class="number">1</span>,last);</span><br><span class="line">        <span class="comment">//对于分开的元素做处理</span></span><br><span class="line">        merge(arr,first,mid,last);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">merge</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> first, <span class="type">int</span> mid, <span class="type">int</span> last)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> k=<span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> *temp=(<span class="type">int</span> *)<span class="built_in">malloc</span>((high-low+<span class="number">1</span>)*<span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="comment">//申请空间用来存放之后排序的内容</span></span><br><span class="line">    <span class="type">int</span> left_low = low;</span><br><span class="line">    <span class="type">int</span> left_high = mid;</span><br><span class="line">    <span class="type">int</span> right_low = mid+<span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> right_high = high;</span><br><span class="line">    <span class="comment">//记录左右的头尾</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;left_low&lt;=left_high &amp;&amp; right_low&lt;=right_high;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[left_low]&lt;=arr[right_low])</span><br><span class="line">            temp[i]=arr[left_low++];	<span class="comment">//排序并存入数组</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            temp[i]=arr[right_low++];</span><br><span class="line">        k++;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">//三种情况：正好全部跑完、左边结束、右边结束</span></span><br><span class="line">    <span class="keyword">if</span>(left_low&lt;=left_high)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=left_low;i&lt;left_high;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            temp[k]=arr[i];</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(right_low&lt;=right_high)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=right_low;i&lt;right_high;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            temp[k]=arr[i];</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//将新数组的内容放回原数组</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;high-low+<span class="number">1</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        arr[low+<span class="number">1</span>] = temp[i++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>(temp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="计数排序">计数排序</h4>
+<blockquote>
+<p>针对于特定范围（数据跨度小）内的整数进行排序，不能用于小数</p>
+<p>使用一个新数组（大小为最小值到最大值）统计给定数组中不同元素的数量，再遍历这个数组输出</p>
+</blockquote>
+<p><strong>时间复杂度</strong></p>
+<blockquote>
+<p>如果待排序数据的范围不明显大于待排序数组的长度，效率高于快排和归并排序，O(n)+k</p>
+</blockquote>
+<p><strong>稳定性</strong></p>
+<p>不稳定，会破坏原有排序规则</p>
+<blockquote>
+<p>优化方案</p>
+<p>1.更新建立的新数组，规则是count[i]=count[i]+count[i-1]，用于存储下标代表的数字在排序之后的位置范围</p>
+<p>2.原数组从后往前遍历，count[arr[i]]-1就是这个arr[i]排序之后的位置，同时count[arr[i]]要减去1，来保证下一个相同的数组的位置范围不重复。</p>
+</blockquote>
+<p><img src="picture/%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E4%BC%98%E5%8C%96%E5%9B%BE%E8%A7%A3.png" alt=""></p>
+<h4 id="桶排序">桶排序</h4>
+<blockquote>
+<p>有若干个桶，将数据尽量均匀地分到桶中</p>
+<p>在桶中进行排序，并合并</p>
+</blockquote>
+<p><strong>时间复杂度</strong></p>
+<p>遍历数组的时间+对每个桶内的元素排序的时间</p>
+<p><strong>适用场景</strong></p>
+<p>数据跨度不大且范围不大</p>
+<h4 id="基数排序（位数）">基数排序（位数）</h4>
+<blockquote>
+<p>对元素最低有效位到最高有效位逐位排序（先个位，后十位，再百位）</p>
+</blockquote>
+<p><strong>案例</strong></p>
+<p><img src="picture/%E6%A1%B6%E6%8E%92%E5%BA%8F%E5%9B%BE%E8%A7%A31.png" alt=""></p>
+<p><img src="picture/%E6%A1%B6%E6%8E%92%E5%BA%8F%E5%9B%BE%E8%A7%A32.png" alt=""></p>
+<p><img src="picture/%E6%A1%B6%E6%8E%92%E5%BA%8F%E5%9B%BE%E8%A7%A33.png" alt=""></p>
+<p><strong>时间复杂度</strong></p>
+<p>O（(n+b)*d）</p>
+<p>(n-数组长度)</p>
+<p>(b-一个数的基础 十进制b=10)</p>
+<p>(k-计算机表示的最大整数)</p>
+<p>(d-logbK)</p>
+<p><strong>应用场景</strong></p>
+<p>日期(先日再月最后年)</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/32/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="page-number" href="/page/32/">32</a><span class="page-number current">33</span><a class="page-number" href="/page/34/">34</a><a class="page-number" href="/page/35/">35</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/34/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

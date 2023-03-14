@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ HTML5和CSS3基础教程笔记 }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-2%E5%9F%BA%E6%9C%AC%E7%9A%84HTML%E9%A1%B5%E9%9D%A2/">1-2基本的HTML页面</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-2基本的HTML页面">1.2基本的HTML页面</h2>
+<blockquote>
+<p>HTML使用<code>&lt;</code>和<code>&gt;</code>包围HTML标签。开始标签用于标记元素的开始，结束标签用于标记元素的结束。部分元素没有结束标签。</p>
+</blockquote>
+<h4 id="1-2-1网页的顶部和头部">1.2.1网页的顶部和头部</h4>
+<ol>
+<li class="lvl-3">
+<p>网页的<strong>顶部部分</strong>，用于告诉浏览器使用何种编码和当前的文档格式。</p>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span>				<span class="comment">&lt;!--html结束标签--&gt;</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li class="lvl-3">
+<p>网页的<strong>头部部分</strong>，用于设置当前文档的编码格式，设置页面标题以及允许被浏览器捕获的关键词。</p>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>This is the title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-2-2网页的主体">1.2.2网页的主体</h4>
+<blockquote>
+<p>位于<code>&lt;body&gt;</code>之间的元素。</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="1-article">1.article</h5>
+<blockquote>
+<p>更强调一个独立的文章板块。</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">article</span>&gt;</span></span><br><span class="line">	...</span><br><span class="line"><span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-img">2.img</h5>
+<blockquote>
+<p>插入图片</p>
+<p>包含图片路径，大小，网页显示名</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;picturename.jpg&quot;</span> <span class="attr">width</span>=<span class="string">&quot;20&quot;</span> <span class="attr">height</span>=<span class="string">&quot;129&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;Picturename&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="3-p">3.p</h5>
+<blockquote>
+<p>插入段落</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    this is a paragraph.</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-3%E6%A0%87%E7%AD%BE%EF%BC%9A%E5%85%83%E7%B4%A0%E3%80%81%E5%B1%9E%E6%80%A7%E3%80%81%E5%80%BC/">1-3标签：元素、属性、值</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-3标签：元素、属性、值">1.3标签：元素、属性、值</h2>
+<blockquote>
+<p>标签的组成：element、attribute、value。</p>
+</blockquote>
+<h4 id="1-3-1-元素">1.3.1 元素</h4>
+<blockquote>
+<p>有的元素有一个或多个属性，属性用来进一步描述元素。</p>
+</blockquote>
+<p>大多数元素都有一个开始标签和结束标签，里面有文本。少数元素例如img，是空元素，内含属性和值。</p>
+<h4 id="1-3-2-属性和值">1.3.2 属性和值</h4>
+<blockquote>
+<p>属性包含了元素的额外信息。值的引号是可选的，除非在值中存在空白。</p>
+</blockquote>
+<ol>
+<li class="lvl-3">
+<p>可接收的值</p>
+</li>
+</ol>
+<p>部分属性可以接收所有值，但常见的是仅接收预定义值（枚举值）。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">media</span>=<span class="string">&quot;screen&quot;</span> <span class="attr">href</span>=<span class="string">&quot;style.css&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li class="lvl-3">
+<p>特殊属性（布尔属性）</p>
+</li>
+</ol>
+<p>该属性的值是可选的，默认为真。</p>
+<h4 id="1-3-3-父元素和子元素">1.3.3 父元素和子元素</h4>
+<blockquote>
+<p>即元素之间必须正确地嵌套。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-4%E7%BD%91%E9%A1%B5%E7%9A%84%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9/">1-4网页的文本内容</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-4网页的文本内容">1.4网页的文本内容</h2>
+<blockquote>
+<p>网页中文本的多个空白符会被显示为单个空白。同时换行需要专门的换行符。<code>&lt;br&gt;</code></p>
+</blockquote>
+<p>关于特殊字符：为了保证除了ASCII码之外的字符能被保存，需要在头部加入编码格式为<code>utf-8</code>。</p>
+<p><code>&amp;copy;</code>（ 表 示 ©）</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-5%E9%93%BE%E6%8E%A5%E3%80%81%E5%9B%BE%E5%83%8F%E5%92%8C%E5%85%B6%E5%AE%83%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9/">1-5链接、图像和其它文本内容</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-5链接、图像和其它文本内容">1.5链接、图像和其它文本内容</h2>
+<blockquote>
+<p>外部文件（例如图片）并没有保存在html中，而是单独保存，只是被页面所引用。</p>
+</blockquote>
+<p>HTML可以处理链接和图像，但是对于音视频，只有HTML5才能无插件地处理。</p>
+<p>HTML需要插件flash等来处理。</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-6%E6%96%87%E4%BB%B6%E5%90%8D%E5%92%8C%E6%96%87%E4%BB%B6%E5%A4%B9%E5%90%8D/">1-6文件名和文件夹名</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-6文件名和文件夹名">1.6文件名和文件夹名</h2>
+<blockquote>
+<p>文件名和文件夹名全部使用<strong>小写字母</strong>，用<strong>短横线</strong>分隔单词，用 .html 作为扩展名。混合使用大小写字母会增加访问者输入正确地址以及找到页面的难度。</p>
+</blockquote>
+<p><img src="picture/%E6%96%87%E4%BB%B6%E5%90%8D%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-7URL/">1-7URL</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-7URL">1.7URL</h2>
+<blockquote>
+<p>URL是地址的别名，它包含文件的存储位置和浏览器如何处理它的信息。</p>
+</blockquote>
+<p>组成部分：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>模式</p>
+</li>
+<li class="lvl-2">
+<p>主机名</p>
+</li>
+<li class="lvl-2">
+<p>路径</p>
+<ul class="lvl-2">
+<li class="lvl-6">目录</li>
+<li class="lvl-6">文件名</li>
+</ul>
+</li>
+</ul>
+<p><img src="picture/URL.png" alt=""></p>
+<h4 id="1-7-1模式">1.7.1模式</h4>
+<blockquote>
+<p>告诉浏览器如何处理需要打开的文件。</p>
+</blockquote>
+<p>常用：http、https、ftp和mailto等</p>
+<h4 id="1-7-2主机名">1.7.2主机名</h4>
+<blockquote>
+<p>即域名，或者IP地址。</p>
+</blockquote>
+<h4 id="1-7-3路径">1.7.3路径</h4>
+<h5 id="1-绝对URL">1. 绝对URL</h5>
+<p>对于在其它服务器上的内容，使用绝对URL来引用。</p>
+<h5 id="2-相对URL">2.相对URL</h5>
+<p>对于自己服务器上的内容，使用相对URL来引用。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>同目录下：直接写文件名</p>
+</li>
+<li class="lvl-2">
+<p>子目录下：文件夹名+文件名</p>
+</li>
+<li class="lvl-2">
+<p>上层目录下：使用<code>../</code></p>
+</li>
+<li class="lvl-2">
+<p>根相对目录下：为了防止出现<code>../../...</code>情况，使用根相对目录<code>/</code>来处理</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">history.html</span><br><span class="line">info/data.html</span><br><span class="line">../img/image.png</span><br><span class="line">/img/family/vacation.jpg</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-8%E9%83%A8%E5%88%86HTML%E5%85%83%E7%B4%A0%E4%BB%8B%E7%BB%8D/">1-8部分HTML元素介绍</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-8部分HTML元素介绍">1.8部分HTML元素介绍</h2>
+<blockquote>
+<p>HTML 描述的是网页内容的含义，即语义（semantics）。在 Web 社区中，语义化 HTML（semantic HTML）指的是那些使用最恰当的 HTML 元素进行标记的内容，在标记的过程中并不关心内容显示。</p>
+</blockquote>
+<h4 id="1-8-1标题">1.8.1标题</h4>
+<p>HTML提供了6种标题级别，即h1~h6。每一个HTML都应该有一个h1。</p>
+<h4 id="1-8-2图像">1.8.2图像</h4>
+<p>img是呈现图像的主要方式。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;picturename.png&quot;</span> <span class="attr">width</span>=<span class="string">&quot;300&quot;</span> <span class="attr">height</span>=<span class="string">&quot;175&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;This is a picture&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-8-3段落">1.8.3段落</h4>
+<blockquote>
+<p>一个段落可以包含多个句子。如果页面需要再加一个段落，只需要在第一个 p 元素之后再加一个 p 元素就可以了。</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    This is p1</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    This is p2</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-8-4短语元素">1.8.4短语元素</h4>
+<h5 id="1-a">1.a</h5>
+<blockquote>
+<p>表示为anchor，意译为链接。</p>
+</blockquote>
+<h5 id="2-em">2.em</h5>
+<blockquote>
+<p>表示强调。</p>
+</blockquote>
+<h4 id="1-8-5默认CSS">1.8.5默认CSS</h4>
+<blockquote>
+<p>浏览器对HTML有自己的默认CSS，因此在不同浏览器的相同内容可能有不同表现。</p>
+</blockquote>
+<p>可以编写自己的CSS来覆盖默认CSS，从而来防止该问题。</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_2-6%E7%BB%84%E7%BB%87%E6%96%87%E4%BB%B6/">2-6组织文件</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="2-6组织文件">2.6组织文件</h2>
+<p>参考方案：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>将 <strong>CSS、JavaScript 文件夹同图像文件夹</strong>（及其他文件夹）一样放在根目录，也可以将这些文件夹一起放在根目录下的 <code>assets</code>（资源）文件夹里</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_2-4%E9%BB%98%E8%AE%A4%E9%A1%B5%E9%9D%A2%E5%92%8C%E4%B8%BB%E9%A1%B5/">2-4默认页面和主页</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="2-4默认页面和主页">2.4默认页面和主页</h2>
+<blockquote>
+<p>如果用户输入带目录的URL，就会进入当前目录的默认页面。系统会将<code>index.html</code>识别为默认页面。</p>
+<p>网站根目录的默认页面就是网站的主页。同样，任意目录都可以有一个默认页面。</p>
+</blockquote>
+<h4 id="2-4-1默认页面不存在">2.4.1默认页面不存在</h4>
+<p>当默认页面不存在时，部分服务器会暴露目录文件列表。因此，尽可能为每个目录创建一个默认页面。</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_2-8%E6%9F%A5%E7%9C%8B%E4%BB%96%E4%BA%BA%E7%BD%91%E9%A1%B5%E6%BA%90%E7%A0%81/">2-8查看他人网页源码</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="2-8查看他人网页源码">2.8查看他人网页源码</h2>
+<h4 id="2-8-1查看HTML">2.8.1查看HTML</h4>
+<p>方法1：在地址栏输入：view-source:当前网页URL</p>
+<p>方法2：ctrl+U</p>
+<h4 id="2-8-2查看所有源码">2.8.2查看所有源码</h4>
+<blockquote>
+<p>使用开发者工具F12。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/231865779">F12 - 开发者工具详解 - 知乎 (zhihu.com)</a></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

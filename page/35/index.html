@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-04-20_22%E4%BA%8C%E5%8F%89%E5%A0%86%E3%80%81%E5%A0%86%E6%8E%92%E5%BA%8F/">22二叉堆、堆排序</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-19T16:00:00.000Z" itemprop="datePublished">
+    2022-04-20
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="二叉堆、堆排序">二叉堆、堆排序</h2>
+<h4 id="二叉堆">二叉堆</h4>
+<blockquote>
+<p>堆是基于完全二叉树的数据结构</p>
+</blockquote>
+<p>堆分为大顶堆和小顶堆</p>
+<p>大顶堆：根节点值大于孩子</p>
+<p>小顶堆：根节点值小于孩子</p>
+<p><strong>实现结构：数组</strong></p>
+<blockquote>
+<p>结点的父节点：arr[(x-1)/2]</p>
+<p>左孩子：arr[2*x+1]</p>
+<p>右孩子：arr[2*x+2]</p>
+</blockquote>
+<h5 id="堆化处理">堆化处理</h5>
+<blockquote>
+<p>删除根节点的操作</p>
+</blockquote>
+<p>步骤：</p>
+<p>1.找最后一个元素替换根节点，删除这个叶子结点</p>
+<p>2.一直将这个与左右子树比较，与较小的交换，直到这个元素到达叶子结点</p>
+<h5 id="更新操作">更新操作</h5>
+<blockquote>
+<p>反向堆化处理</p>
+</blockquote>
+<p>步骤：</p>
+<p>1.将结点存储的值更新</p>
+<p>2.将这个元素与父节点比较，小于父节点就交换，直到不满足条件（没有父结点或大于父结点）</p>
+<h5 id="插入操作">插入操作</h5>
+<blockquote>
+<p>插入到末尾结点，进行反向堆化处理，与更新操作一致</p>
+</blockquote>
+<h4 id="堆排序">堆排序</h4>
+<blockquote>
+<p>进行堆化操作</p>
+</blockquote>
+<h4 id="应用场景">应用场景</h4>
+<p>优先级队列</p>
+<blockquote>
+<p>队列中的每一个元素都具有优先级，优先级高的先出队，优先级相同的按照顺序依次出队</p>
+</blockquote>
+<p><strong>案例</strong></p>
+<p>1.线程</p>
+<p>2.迪杰斯特拉算法或者普林姆算法的优化</p>
+<blockquote>
+<p>基本步骤</p>
+<p>1.初始化结点（将结点路径值设为最大，源点为0）</p>
+<p>2.定义一个优先级队列，队列中的元素记录结点的编号和最短路径值</p>
+<p>3.遍历队顶结点的邻接结点，如果找到一个小于当前最短路径，更新最短路径并将这个结点入队</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/20/C++/C++%E5%9F%BA%E7%A1%80/2022-04-20_13-2%E7%BB%A7%E6%89%BF%EF%BC%9Ais-a%E5%85%B3%E7%B3%BB/">13-2继承：is-a关系</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-19T16:00:00.000Z" itemprop="datePublished">
+    2022-04-20
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="继承：is-a关系">继承：is-a关系</h2>
+<blockquote>
+<p>继承方式：</p>
+<p>1.公有继承</p>
+<p>2.私有继承</p>
+<p>3.保护继承</p>
+</blockquote>
+<h4 id="公有继承">公有继承</h4>
+<p><strong>建立关系</strong></p>
+<blockquote>
+<p>建立一种is-a关系，即派生类对象也是一个基类对象</p>
+<p>例如：西瓜是一种水果</p>
+</blockquote>
+<p><strong>不建立关系</strong></p>
+<p>1.has-a				例如：午餐包含水果，但水果不是午餐，通常将fruit作为Lunch的数据成员</p>
+<p>2.is-like-a			例如：律师像鲨鱼，但律师不是鲨鱼</p>
+<p>3.uses-a			  例如：计算机可以使用打印机，但不能作为派生类来使用</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/20/C++/C++%E5%9F%BA%E7%A1%80/2022-04-20_13-3%E5%A4%9A%E6%80%81%E5%85%AC%E6%9C%89%E7%BB%A7%E6%89%BF/">13-3多态公有继承</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-19T16:00:00.000Z" itemprop="datePublished">
+    2022-04-20
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="多态公有继承">多态公有继承</h2>
+<blockquote>
+<p>**多态：**同一个方法在基类和派生类中的实现不同</p>
+</blockquote>
+<p>实现机制：</p>
+<p>1.在派生类中重新定义基类的方法</p>
+<p>2.使用虚方法</p>
+<h4 id="13-3-1虚方法">13.3.1虚方法</h4>
+<blockquote>
+<p>在基类和派生类中定义两个同名的方法，则将会根据对象类型来确定使用哪一个版本。但是如果是指针或引用调用了方法，则可能出现派生类调用基类的方法的情况，因为调用只根据指针或引用类型。</p>
+<p>这时就需要虚方法来解决。虚方法保证调用根据指向对象的类型，而不是指针或引用类型。</p>
+</blockquote>
+<p><strong>语法</strong></p>
+<blockquote>
+<p>声明时在函数前加virtual，定义时基类和派生类都需要定义这个同名函数（实现不同）</p>
+</blockquote>
+<p>例：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">test</span>			<span class="comment">//基类</span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">ViewAct</span><span class="params">()</span></span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">testadd</span> ： <span class="keyword">public</span> test		<span class="comment">//派生类</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">ViewAct</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//实现</span></span><br><span class="line"><span class="function">test::<span class="type">void</span> <span class="title">ViewAct</span><span class="params">()</span>		<span class="comment">//基类</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">testadd::<span class="type">void</span> <span class="title">ViewAct</span><span class="params">()</span>		<span class="comment">//派生类</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：派生类的虚函数实现可能会用到基类的虚函数来提高代码复用性，使用时要加上：：来防止使用错误导致无效递归。</p>
+<p><strong>应用场景</strong></p>
+<blockquote>
+<p>如果需要使用数组来管理大量基类和派生类，由于数组本身需要元素类型一致，所以可以使用基类类型的指针数组，使其既能指向基类，又能指向派生类。</p>
+</blockquote>
+<h5 id="虚析构函数">虚析构函数</h5>
+<blockquote>
+<p>派生类和基类的构造函数不会因为指针而使用错误。但析构函数会，因此需要虚析构函数。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/19/C++/C++%E5%9F%BA%E7%A1%80/2022-04-19_12-6%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8/">12-6初始化列表</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-18T16:00:00.000Z" itemprop="datePublished">
+    2022-04-19
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="初始化列表">初始化列表</h2>
+<blockquote>
+<p>初始化列表：初始化列表以冒号开头，后跟一系列以逗号分隔的初始化字段（变量名+（初始化值））</p>
+</blockquote>
+<p><strong>案例</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    string name ;</span><br><span class="line">    <span class="type">int</span> id ;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Foo</span>(string s, <span class="type">int</span> i):<span class="built_in">name</span>(s), <span class="built_in">id</span>(i)&#123;&#125; ; <span class="comment">//声明中的初始化列表</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>注：类成员的初始化顺序与<strong>初始化列表的顺序无关</strong>，与类里面属性定义的顺序有关</p>
+<p>类之间初始化顺序：</p>
+<blockquote>
+<p>父类构造函数–&gt;成员类对象构造函数(按照类定义顺序而不是初始化列表的顺序)–&gt;类自身构造函数</p>
+</blockquote>
+<p>类本身初始化覆盖顺序</p>
+<blockquote>
+<p>先进行声明时初始化，然后进行初始化列表初始化，最后进行构造函数初始化。即初始化列表初始化的变量值会覆盖掉声明时初始化的值，而构造函数中初始化的值又会覆盖掉初始化列表的</p>
+</blockquote>
+<p><strong>案例</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"> <span class="number">1</span> <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdafx.h&quot;</span></span></span><br><span class="line"> <span class="number">2</span> <span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"> <span class="number">3</span> <span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"> <span class="number">4</span> <span class="keyword">class</span> <span class="title class_">A</span> </span><br><span class="line"> <span class="number">5</span> &#123;</span><br><span class="line"> <span class="number">6</span> <span class="keyword">public</span>:</span><br><span class="line"> <span class="number">7</span>     <span class="type">int</span> a = <span class="number">1</span>;							<span class="comment">//声明中初始化（c++11）</span></span><br><span class="line"> <span class="number">8</span>     <span class="built_in">A</span>() &#123;&#125;</span><br><span class="line"> <span class="number">9</span>     <span class="built_in">A</span>(<span class="type">int</span> a_):<span class="built_in">a</span>(a_)&#123;&#125;					<span class="comment">//列表初始化（覆盖声明初始化）</span></span><br><span class="line"><span class="number">10</span>     <span class="built_in">A</span>(<span class="type">int</span> a_, <span class="type">bool</span> b) :<span class="built_in">a</span>(<span class="number">4</span>) &#123; a = a_; &#125;	<span class="comment">//构造函数中初始化（全部覆盖）</span></span><br><span class="line"><span class="number">11</span> &#125;;</span><br><span class="line"><span class="number">12</span> </span><br><span class="line"><span class="number">13</span> <span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function">14 </span>&#123;</span><br><span class="line"><span class="number">15</span>     A a1, <span class="built_in">a2</span>(<span class="number">3</span>), <span class="built_in">a3</span>(<span class="number">5</span>, <span class="literal">true</span>);</span><br><span class="line"><span class="number">16</span>     cout &lt;&lt; <span class="string">&quot;a1.a=&quot;</span> &lt;&lt; a1.a &lt;&lt; endl;</span><br><span class="line"><span class="number">17</span>     cout &lt;&lt; <span class="string">&quot;a2.a=&quot;</span> &lt;&lt; a2.a &lt;&lt; endl;</span><br><span class="line"><span class="number">18</span>     cout &lt;&lt; <span class="string">&quot;a3.a=&quot;</span> &lt;&lt; a3.a &lt;&lt; endl;</span><br><span class="line"><span class="number">19</span>     <span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line"><span class="number">20</span>     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="number">21</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">结果为：</span></span><br><span class="line"><span class="comment">a1.a=1</span></span><br><span class="line"><span class="comment">a2.a=3</span></span><br><span class="line"><span class="comment">a3.a=5</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/A%E6%98%9F%E5%AF%BB%E8%B7%AF%E7%AE%97%E6%B3%95/2022-04-16_A%E5%AF%BB%E8%B7%AF%E7%AE%97%E6%B3%95/">A寻路算法</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-15T16:00:00.000Z" itemprop="datePublished">
+    2022-04-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/A%E6%98%9F%E5%AF%BB%E8%B7%AF%E7%AE%97%E6%B3%95/">A星寻路算法</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h4 id="广度优先搜索">广度优先搜索</h4>
+<p>平等的探索各个方向</p>
+<h4 id="Dijkstra算法">Dijkstra算法</h4>
+<p>确定道路的权值，有区别的探索更好的方向（代价）</p>
+<p>优点：很好的找到最短路径</p>
+<p>缺点：浪费大量资源在探索各个没有可能的方向上</p>
+<h4 id="贪心最佳优先搜索">贪心最佳优先搜索</h4>
+<p>优点：在最可能的方向上进行探索</p>
+<p>缺点：找到的可能不是最短路径</p>
+<h4 id="A-算法">A*算法</h4>
+<h2 id="A-寻路算法">A*寻路算法</h2>
+<p>思路：在当前路径邻接点中选出最优点，来最终组成所有路径</p>
+<p>方法：</p>
+<p>启发性搜索</p>
+<p>公式：F=G+H(代价=已经付出的代价+剩余预计代价)</p>
+<p>每步代价分为直线与斜线，其比值为1：根号2</p>
+<p><strong>数据结构</strong></p>
+<blockquote>
+<p>八叉树：8个方向</p>
+<p>辅助结构：队列（使用广度优先的策略优化，选择方向减少资源利用成本）</p>
+<p>辅助地图：记录走过的路径，优化计算成本</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/12/C++/C++%E5%9F%BA%E7%A1%80/2022-04-12_10-2%20%E6%8A%BD%E8%B1%A1%E5%92%8C%E7%B1%BB/">10-2 抽象和类</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-11T16:00:00.000Z" itemprop="datePublished">
+    2022-04-12
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="10-2抽象和类">10.2抽象和类</h2>
+<h4 id="10-2-1C-中的类">10.2.1C++中的类</h4>
+<p>定义部分：</p>
+<p>1.类声明：数据和公有接口（方法）</p>
+<p>2.类方法定义：类成员函数的实现</p>
+<h5 id="接口说明">接口说明</h5>
+<blockquote>
+<p>类设计不允许使用者直接访问类，而需要使用方法来访问或更改类的属性</p>
+</blockquote>
+<h6 id="1-访问控制">1.访问控制</h6>
+<blockquote>
+<p>关键字public和private（默认）限制了类的访问权限</p>
+</blockquote>
+<blockquote>
+<p>公有成员函数提供对象和程序之间的接口</p>
+</blockquote>
+<h6 id="2-控制对成员的访问：公有还是私有">2.控制对成员的访问：公有还是私有</h6>
+<p>1.数据和函数都可以在公有或私有部分声明</p>
+<p>2.但是隐藏数据是OOP的目标之一，所以一般放在私有里</p>
+<h4 id="10-2-2定义方式">10.2.2定义方式</h4>
+<p>使用class来定义类</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Stock</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:<span class="comment">//可不写</span></span><br><span class="line">    std::string company;</span><br><span class="line">    <span class="type">long</span> shares;</span><br><span class="line">    <span class="type">double</span> share_val;</span><br><span class="line">    <span class="type">double</span> total_val;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">acquire</span><span class="params">(<span class="type">const</span> std::string &amp;co, <span class="type">long</span> n, <span class="type">double</span> pr)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="10-2-3实现类成员中的函数">10.2.3实现类成员中的函数</h4>
+<blockquote>
+<p>类成员函数与常规函数定义类似，有函数头和函数体，返回值和参数，但有两个必须的特征：</p>
+<p>1.使用作用域解析运算符::来标志函数所属的类</p>
+<p>2.类方法可以访问类的private组件</p>
+</blockquote>
+<h5 id="特征1">特征1</h5>
+<p>案例</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Stock::update</span><span class="params">(<span class="type">double</span> price)</span></span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：这标志了update属于Stock类，同时同类函数调用时无需使用作用域解析运算符::</p>
+</blockquote>
+<h5 id="特征2">特征2</h5>
+<p>案例</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Stock</span><span class="comment">//类声明</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::string company;</span><br><span class="line">    <span class="type">long</span> shares;</span><br><span class="line">    <span class="type">double</span> share_val;</span><br><span class="line">    <span class="type">double</span> total_val;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">acquire</span><span class="params">(<span class="type">const</span> std::string &amp;co, <span class="type">long</span> n, <span class="type">double</span> pr)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">(<span class="type">double</span> price)</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Stock::update</span><span class="params">(<span class="type">double</span> price)</span><span class="comment">//其中一个函数的定义</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;company:&quot;</span>&lt;&lt;company;<span class="comment">//直接访问私有属性</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="内联方法">内联方法</h5>
+<p>定义位于类声明中的函数自动成为内联方法</p>
+<h4 id="10-2-4方法使用哪个对象">10.2.4方法使用哪个对象</h4>
+<p>使用成员运算符来使用对象的成员函数</p>
+<p>例如</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Stock Jeo;</span><br><span class="line">Jeo.<span class="built_in">show</span>();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：方法选用调用它的数据成员</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/12/C++/C++%E5%9F%BA%E7%A1%80/2022-04-12_10-3%20%E7%B1%BB%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%92%8C%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0/">10-3 类的构造函数和析构函数</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-11T16:00:00.000Z" itemprop="datePublished">
+    2022-04-12
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="10-3类的构造函数和析构函数">10.3类的构造函数和析构函数</h2>
+<h4 id="10-3-1构造函数">10.3.1构造函数</h4>
+<h5 id="介绍">介绍</h5>
+<p>在对象被构造一瞬间进行的操作函数，常用来初始化</p>
+<h5 id="创建">创建</h5>
+<blockquote>
+<p>构造函数的名称与类名相同，无需声明类型（即无返回值），原型位于类声明的公共部分。</p>
+</blockquote>
+<blockquote>
+<p>注意：类构造函数的参数不能是类成员，因为构造函数应该给类成员赋值，而不是直接接收类成员的值。</p>
+</blockquote>
+<h5 id="使用">使用</h5>
+<p>方法1：显式的调用构造函数</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Stock food=<span class="built_in">Stock</span>(<span class="string">&quot;World Cabbage&quot;</span>,<span class="number">250</span>,<span class="number">2.5</span>);</span><br></pre></td></tr></table></figure>
+<p>方法2：隐式的调用构造函数</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Stock <span class="title">garment</span><span class="params">(<span class="string">&quot;funny&quot;</span>,<span class="number">50</span>,<span class="number">2.5</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>使用new的方法：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Stock *pstock= <span class="keyword">new</span> <span class="built_in">Stock</span>(<span class="string">&quot;hello&quot;</span>,<span class="number">18</span>,<span class="number">19.0</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>注：无法使用对象来调用函数，因为函数开始于对象构造时，此时对象还不存在。</strong></p>
+<h5 id="默认构造函数">默认构造函数</h5>
+<blockquote>
+<p>如果调用者直接创建变量而不使用构造函数，则会自动调用默认构造函数。c++会在没有创建构造函数时自动补上默认构造函数，但一旦有了构造函数，则默认构造函数需要手动补齐。</p>
+</blockquote>
+<p><strong>创建方法有</strong></p>
+<p>1.给构造函数参数全部附上默认值</p>
+<p>2.使用函数重载再定义一个默认构造函数</p>
+<p><strong>注意：默认构造函数只能有一个，所以不能同时使用这两种方法</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Stock gooden;<span class="comment">//隐式的调用了默认构造函数，注意没有（）</span></span><br></pre></td></tr></table></figure>
+<h4 id="10-3-2析构函数">10.3.2析构函数</h4>
+<h5 id="介绍-2">介绍</h5>
+<blockquote>
+<p>对象过期时，程序会自动调用一个特殊的成员函数——析构函数。一般没啥用，但如果对象以new创建，则可以在析构函数中自动写入delete来释放。</p>
+</blockquote>
+<h5 id="创建-2">创建</h5>
+<blockquote>
+<p>析构函数的名称是类名前加~，无需声明类型，也没有参数，原型位于类声明的公共部分。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Stock::~<span class="built_in">Stock</span>()</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="默认析构函数">默认析构函数</h5>
+<blockquote>
+<p>如果调用者直接创建变量而不使用析构函数，则会自动调用默认构造函数。c++会在没有创建析构函数时自动补上默认析构函数。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/12/C++/C++%E5%9F%BA%E7%A1%80/2022-04-12_12-2%E6%94%B9%E8%BF%9B%E5%90%8E%E7%9A%84%E6%96%B0String%E7%B1%BB/">12-2改进后的新String类</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-11T16:00:00.000Z" itemprop="datePublished">
+    2022-04-12
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="12-2改进后的新String类">12.2改进后的新String类</h2>
+<p><strong>注意：c++11建议使用nullptr来表示空指针</strong></p>
+<p>String类与常规c字符串进行比较时，会转换成String类</p>
+<blockquote>
+<p>先使用构造函数将c字符串转换为String类，再将两个String类进行比较</p>
+</blockquote>
+<h4 id="12-2-1使用中括号来访问String类中的字符">12.2.1使用中括号来访问String类中的字符</h4>
+<blockquote>
+<p>虽然对于二元操作符来说，两个操作数一个位于操作符的左侧，另一个位于右侧。但是对于[]来说，一个位于左侧，一个位于内部，这已经被设置好了。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//函数原型</span></span><br><span class="line"><span class="type">char</span> &amp; String::<span class="keyword">operator</span>[](<span class="type">int</span> i)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> str[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：返回值被设置为引用</strong>是为了解决如下赋值问题</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">String <span class="title">means</span><span class="params">(<span class="string">&quot;might&quot;</span>)</span></span>;</span><br><span class="line">means[<span class="number">0</span>]=<span class="string">&#x27;r&#x27;</span>;</span><br><span class="line"><span class="comment">//[]将会返回一个引用，且作为公有成员函数，有权利访问内部成员，所以可以将右值赋值给左侧的引用</span></span><br></pre></td></tr></table></figure>
+<h5 id="对于const类型的String类，使用-可能导致出错，因为-函数不能保证不修改数据">对于const类型的String类，使用[]可能导致出错，因为[]函数不能保证不修改数据</h5>
+<p><strong>解决方案</strong></p>
+<blockquote>
+<p>采用函数重载来提供一个仅供const String使用的operator<a href=""></a>版本</p>
+<p>（c++会区分常量和非常量函数的特征标）</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//重载后的函数原型</span></span><br><span class="line"><span class="type">const</span> <span class="type">char</span> &amp; String::<span class="keyword">operator</span>[](<span class="type">int</span> i) <span class="type">const</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> str[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="12-2-2静态类成员函数">12.2.2静态类成员函数</h4>
+<blockquote>
+<p>不能通过对象来调用静态类成员函数，静态类成员函数也不能使用this指针（因为静态类成员属于整个类）</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//调用方法</span></span><br><span class="line"><span class="type">int</span> count = String::<span class="built_in">Howmany</span>();	<span class="comment">//使用类名和作用域解析符，而不是通过对象！！！</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//函数原型</span></span><br><span class="line"><span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">Howmany</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> num_strings;&#125;</span><br><span class="line"><span class="comment">//声明必须有关键字static，定义中不能出现（除非和声明一起）</span></span><br></pre></td></tr></table></figure>
+<h4 id="12-2-3进一步重载赋值运算符">12.2.3进一步重载赋值运算符</h4>
+<blockquote>
+<p>将常规字符串复制到String类对象中，因为隐含步骤较多，解决方法比较差</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">String name;</span><br><span class="line"><span class="type">char</span> temp[<span class="number">40</span>];</span><br><span class="line">cin.<span class="built_in">getline</span>(temp,<span class="number">40</span>);</span><br><span class="line">name=temp;		<span class="comment">//这个语句实际上执行了三步</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>函数先调用了构造函数String(const char *)创建了一个匿名的临时对象</p>
+<p>再使用String &amp; String::operator=(const String &amp;)来复制对象</p>
+<p>最后调用析构函数来删除临时对象</p>
+</blockquote>
+<p><strong>解决方案</strong></p>
+<blockquote>
+<p>通过重载赋值运算符来直接使用常规字符串，简化了创建和删除工作</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">String &amp; String::<span class="keyword">operator</span>=(<span class="type">const</span> <span class="type">char</span> *)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">delete</span> [] str;				<span class="comment">//释放原有的内存</span></span><br><span class="line">    len = std::<span class="built_in">strlen</span>(s);</span><br><span class="line">    str = <span class="keyword">new</span> <span class="type">char</span>[len+<span class="number">1</span>];</span><br><span class="line">    std::<span class="built_in">strcpy</span>(str,s);</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/12/C++/C++%E5%9F%BA%E7%A1%80/2022-04-12_8-1%20%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0/">8-1 内联函数</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-11T16:00:00.000Z" itemprop="datePublished">
+    2022-04-12
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="8-1-内联函数">8.1 内联函数</h2>
+<blockquote>
+<p>内联函数使用相应的函数代码代替函数调用，来减少进行函数调用的前置步骤需要的时间，使程序无需跳到另一个位置去执行代码。代价是占用更多内存。</p>
+</blockquote>
+<h4 id="选用内联函数的情况">选用内联函数的情况</h4>
+<blockquote>
+<p>如果函数代码本身执行很简单，且调用次数很少，那可以选择内联函数。</p>
+<p>如果函数代码执行所需的时间比处理函数调用机制时间长，或是多次调用，则应该使用函数调用。</p>
+</blockquote>
+<h4 id="使用内联函数的措施">使用内联函数的措施</h4>
+<p><strong>1.在函数声明前加关键词“inline”</strong></p>
+<p><strong>2.在函数定义前加关键词“inline”</strong></p>
+<p>注：常用做法是直接在函数原型处写函数定义即函数头和所有函数代码（函数定义省略）</p>
+<h4 id="注意事项">注意事项</h4>
+<p>内联函数不支持递归（从内联函数的定义很明显可以看出来）</p>
+<h4 id="示例">示例</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">double</span> <span class="title">square</span><span class="params">(<span class="type">double</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x*y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">    <span class="type">double</span> a,b;</span><br><span class="line">    <span class="type">double</span> c=<span class="number">13.0</span>;</span><br><span class="line">    a=<span class="built_in">square</span>(<span class="number">5.0</span>);</span><br><span class="line">    b=<span class="built_in">square</span>(<span class="number">4.5</span>+<span class="number">7.5</span>);</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;a=&quot;</span>&lt;&lt;a&lt;&lt;<span class="string">&quot;,b=&quot;</span>&lt;&lt;b&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;c=&quot;</span>&lt;&lt;c;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;,c square =&quot;</span>&lt;&lt;<span class="built_in">square</span>(c++)&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;Now c =&quot;</span>&lt;&lt;c&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="补充内容">补充内容</h3>
+<h4 id="内联与宏">内联与宏</h4>
+<p>宏定义虽然部分能代替内联函数，但是很多情况下会有问题：宏定义不能按值传递</p>
+<p>例如，如果将上述函数使用宏定义</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> SQUARE(X) ((X)*(X))</span></span><br><span class="line"><span class="comment">//注：此处特意加上（）来防止宏定义的某些问题</span></span><br></pre></td></tr></table></figure>
+<p>调用函数SQUARE(C++)将会把C递增两次，而原来的函数将C递增一次的值传入函数</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/12/C++/C++%E5%9F%BA%E7%A1%80/2022-04-12_8-2%20%E5%BC%95%E7%94%A8%E5%8F%98%E9%87%8F/">8-2 引用变量</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-11T16:00:00.000Z" itemprop="datePublished">
+    2022-04-12
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="8-2-引用变量">8.2 引用变量</h2>
+<blockquote>
+<p>定义：引用是已定义变量的别名。</p>
+</blockquote>
+<blockquote>
+<p>用处：</p>
+<p>1.用作函数的参数，来使函数更改原始数据</p>
+<p>2.设计类</p>
+</blockquote>
+<h4 id="8-2-1创建引用变量">8.2.1创建引用变量</h4>
+<blockquote>
+<p>c++使用&amp;符号来声明引用</p>
+</blockquote>
+<p>例如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> rat;</span><br><span class="line"><span class="type">int</span> &amp; mouse = rat;</span><br><span class="line"><span class="comment">//rat和mouse指向相同的值和内存单元</span></span><br></pre></td></tr></table></figure>
+<p>注意：此处&amp;不是地址运算符，而是类型标志符一部分，类似于*。int &amp;指的是指向int的引用</p>
+<h4 id="引用与指针的区别">引用与指针的区别</h4>
+<p>引用本质上是指针，但是规定更加严格。</p>
+<p>首先，引用必须一声明就初始化</p>
+<p>其次，引用不允许更改其对应的变量</p>
+<p>综上，引用应当这样理解：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> &amp; mouse = rat;</span><br><span class="line"><span class="comment">//类似于</span></span><br><span class="line"><span class="type">int</span> * <span class="type">const</span> pr = &amp;rat;</span><br></pre></td></tr></table></figure>
+<h6 id="警告：引用在再次赋值时不会给出警告，因为其默认为将其所代表的变量更改值，而不是将这个引用换一个代表的变量。因为引用只允许在初始化时设置别名。">警告：引用在再次赋值时不会给出警告，因为其默认为将其所代表的变量更改值，而不是将这个引用换一个代表的变量。因为引用只允许在初始化时设置别名。</h6>
+<h4 id="8-2-2将引用作为函数参数">8.2.2将引用作为函数参数</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap</span><span class="params">(<span class="type">int</span> &amp; a,<span class="type">int</span> &amp; b)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> c=<span class="number">5</span>,d=<span class="number">10</span>;</span><br><span class="line">    <span class="built_in">swap</span>(c,d);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap</span><span class="params">(<span class="type">int</span> &amp;a,<span class="type">int</span> &amp;b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> temp;</span><br><span class="line">    temp=a;</span><br><span class="line">    a=b;</span><br><span class="line">    b=temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="8-2-3引用属性的特殊之处">8.2.3引用属性的特殊之处</h4>
+<p>如果既想要按引用传递参数的便利性，又不想原变量在不知不觉中被改变，可以这样使用</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">refcube</span><span class="params">(<span class="type">const</span> <span class="type">double</span> &amp;ra)</span></span>;</span><br><span class="line"><span class="comment">//这意味着不能通过引用改变变量的值,同时能不用指针来简化操作</span></span><br></pre></td></tr></table></figure>
+<p>另一方面，一些值不能用引用传递，例如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">refcube</span>(x+<span class="number">20</span>);</span><br></pre></td></tr></table></figure>
+<p>如果这样做了，将会创建一个匿名的临时变量来作为引用的原变量（这是在有const限定时才可能），并先将该变量初始化为传入的值</p>
+<h5 id="创建临时变量的情况">创建临时变量的情况</h5>
+<h6 id="1-实参类型正确，但不是左值">1.实参类型正确，但不是左值</h6>
+<h6 id="2-实参类型不正确，但可以转换为正确的类型">2.实参类型不正确，但可以转换为正确的类型</h6>
+<h4 id="8-2-4将引用用于结构">8.2.4将引用用于结构</h4>
+<blockquote>
+<p>此处有一点值得注意</p>
+<p>针对引用，我们可以将这类返回值作为左值</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">accumulate</span>(dup,five)=four;</span><br><span class="line"><span class="comment">//free_throw &amp; accumulate(free_throw &amp; target,free_throw &amp; source);</span></span><br></pre></td></tr></table></figure>
+<p>如果禁止这种用法，可以在返回值上加上限制const</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">const</span> free_throw &amp; <span class="title">accumulate</span><span class="params">(free_throw &amp; target,free_throw &amp; source)</span></span>;</span><br></pre></td></tr></table></figure>
+<h4 id="8-2-5将引用用于类对象">8.2.5将引用用于类对象</h4>
+<h4 id="8-2-6对象、继承和引用">8.2.6对象、继承和引用</h4>
+<p>继承的特征：</p>
+<p>派生类能继承基类的方法</p>
+<p>基类引用能指向派生类对象，无需强制转换</p>
+<h4 id="8-2-7何时使用引用参数">8.2.7何时使用引用参数</h4>
+<p>主要原因：</p>
+<p>1.能修改函数参数所指向的数据对象</p>
+<p>2.提高速度</p>
+<p>指针与引用，选用哪个</p>
+<p>1.数据对象很小，都可传递</p>
+<p>2.数组必须用指针</p>
+<p>3.较大的结构，都可</p>
+<p>4.类对象，引用</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/34/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="page-number" href="/page/34/">34</a><span class="page-number current">35</span><a class="page-number" href="/page/36/">36</a><a class="page-number" href="/page/37/">37</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/36/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

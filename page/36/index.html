@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/12/C++/C++%E5%9F%BA%E7%A1%80/2022-04-12_9-3%20%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4/">9-3 名称空间</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-11T16:00:00.000Z" itemprop="datePublished">
+    2022-04-12
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="9-3-名称空间">9.3 名称空间</h2>
+<blockquote>
+<p>特性：通过定义一种新的声明区域来创建命名的名称空间</p>
+<p>作用：防止相同的名称起冲突</p>
+</blockquote>
+<h4 id="1-位置">1.位置</h4>
+<p>可以是全局或是另一个名称空间中，不能在代码块里。</p>
+<h4 id="2-创建">2.创建</h4>
+<p>使用namespace创建新的名称空间</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">namespace</span> element&#123;</span><br><span class="line">    <span class="type">int</span> m;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-注意">3.注意</h4>
+<p>1.名称空间是<strong>开放</strong>的，即在创建了名称空间之后可以再次使用名称空间在内增加定义变量或函数与代码</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">namespace</span> element&#123;</span><br><span class="line">    <span class="type">int</span> m;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//再次增加定义</span></span><br><span class="line"><span class="keyword">namespace</span> element&#123;</span><br><span class="line">    <span class="type">int</span> hello;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注</strong>：这也意味着可以在库名称空间（例如std）中掺入私货</p>
+<h4 id="4-访问">4.访问</h4>
+<h5 id="1-域解析运算符：：">1.域解析运算符：：</h5>
+<p>例如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Jack::pail=<span class="number">12.22</span>;<span class="comment">//更改</span></span><br><span class="line">Jill::Hill mole;<span class="comment">//创建一个Hill的结构体</span></span><br><span class="line">Jack::<span class="built_in">fetch</span>();<span class="comment">//使用函数</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-using声明和using预编译指令">2.using声明和using预编译指令</h5>
+<p>using声明：使namespace中特定标志符可用</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> Jill::fetch;</span><br></pre></td></tr></table></figure>
+<p>using预编译指令：使整个namespace可用</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> Jill;</span><br></pre></td></tr></table></figure>
+<h4 id="5-名称空间的嵌套">5.名称空间的嵌套</h4>
+<h5 id="1-创建">1.创建</h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">namespace</span> element&#123;</span><br><span class="line">    <span class="keyword">namespace</span> fire&#123;</span><br><span class="line">        <span class="type">int</span> flame;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="2-使用">2.使用</h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> element::fire;<span class="comment">//预编译指令</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">element::fire::flame=<span class="number">1</span>;<span class="comment">//更改数值</span></span><br></pre></td></tr></table></figure>
+<h4 id="6-在名称空间中解除其他名称空间">6.在名称空间中解除其他名称空间</h4>
+<p>例子：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">namespace</span> myth&#123;</span><br><span class="line">    <span class="keyword">using</span> Jill::fetch;</span><br><span class="line">    <span class="keyword">using</span> <span class="keyword">namespace</span> element;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//之后要访问fetch</span></span><br><span class="line">Jill::fetch;</span><br><span class="line">myth::fetch;<span class="comment">//因为已经在myth中允许使用了</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-04-11_14%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/">14最短路径</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-10T16:00:00.000Z" itemprop="datePublished">
+    2022-04-11
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="最短路径">最短路径</h2>
+<h4 id="概念">概念</h4>
+<blockquote>
+<p>源点：一条路径的起始点</p>
+<p>终点：一条路径的终止点</p>
+</blockquote>
+<h4 id="迪杰斯特拉算法-单源点">迪杰斯特拉算法-单源点</h4>
+<p><strong>变量引入介绍</strong></p>
+<blockquote>
+<p>引入一个辅助变量D（数组）</p>
+<p>它的每一个分量表示  当前找到的“从源点v开始到每一个顶点vi的最短路径”的长度</p>
+<p>初始状态：如果v到vi有弧，表示权值，否则无穷大</p>
+<p>引入路径向量，表示当前结点的上一个结点下标</p>
+<p>引入final标记，表示已经经过测试的路径点</p>
+</blockquote>
+<p><strong>解法说明</strong></p>
+<blockquote>
+<p>从初始开始，标记final，然后找相邻结点的最短路径。</p>
+<p>更新相邻结点的辅助向量（=min(当前结点+到这个结点的权值，之前的辅助向量））</p>
+<p>在final未标记的点继续循环，直到找到</p>
+</blockquote>
+<p><img src="picture/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E5%AE%9E%E7%8E%B0%E5%9B%BE.png" alt=""></p>
+<p><img src="picture/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E5%AE%9E%E7%8E%B0%E5%9B%BE2.png" alt=""></p>
+<blockquote>
+<p>完成后从末尾倒推出最短路径</p>
+</blockquote>
+<h5 id="代码实现">代码实现</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INF 65535</span></span><br><span class="line"><span class="comment">//图结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> vexs[<span class="number">20</span>];		<span class="comment">//顶点</span></span><br><span class="line">    <span class="type">int</span> arc[<span class="number">20</span>][<span class="number">20</span>];	<span class="comment">//边</span></span><br><span class="line">    <span class="type">int</span> numVer,numEdges;</span><br><span class="line">&#125;MGraph;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> Pathaec[<span class="number">20</span>];</span><br><span class="line"><span class="comment">//存储最短路径下标</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> ShortPathTable[<span class="number">20</span>];</span><br><span class="line"><span class="comment">//存储v0到各个点的最短路径长度之和</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//需要两个数组</span></span><br><span class="line"><span class="comment">//P的值是前驱结点的下标</span></span><br><span class="line"><span class="comment">//D的值是选取结点到v结点的最短路径长度</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">ShortPath_Dijkstra</span><span class="params">(MGraph,<span class="type">int</span> v0,Patharc* P,ShortPathTable* D)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> k;<span class="comment">//记录下标</span></span><br><span class="line">    <span class="type">int</span> final[<span class="number">20</span>];	<span class="comment">//标记数组，表示已经求得当前下标的结点已被完成求出最短路径</span></span><br><span class="line">    <span class="comment">//初始化数组</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> v=<span class="number">0</span>;v&lt;G.numVer;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        final[i]=<span class="number">0</span>;	<span class="comment">//全部未被处理</span></span><br><span class="line">        (*D)[i]=G.arc[v0][i];	<span class="comment">//初始化起始结点与周边结点的权值</span></span><br><span class="line">        (*P)[i]=<span class="number">-1</span>;		<span class="comment">//路径数组初始化为-1</span></span><br><span class="line">    &#125;</span><br><span class="line">    final[v0]=<span class="number">1</span>;		<span class="comment">//从起始点开始</span></span><br><span class="line">    (*D)[v0]=<span class="number">0</span>;			<span class="comment">//自己对自己的路径为0</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//开始循环，每次求出的v0到某个结点的最短路径</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;G.numVer;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> min=INF;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;G.numVer;j++)	<span class="comment">//找到距离v0最近的点</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!final[j] &amp;&amp; (*D)&lt;min)	<span class="comment">//同时不能被标记</span></span><br><span class="line">            &#123;</span><br><span class="line">                min=(*D)[j];</span><br><span class="line">                k=j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        final[k]=<span class="number">1</span>;		<span class="comment">//将找到的最近结点放入标记</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//修正其余最短路径</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;G.numVer;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//如果经过这个结点的路径比现在的短</span></span><br><span class="line">            <span class="keyword">if</span>(min+G.arc[k][j]&lt;(*D)[j] &amp;&amp; !final[j])</span><br><span class="line">            &#123;</span><br><span class="line">                (*D)[j]=min+G.arc[k][j];</span><br><span class="line">                (*P)[j]=k;</span><br><span class="line">            &#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="弗洛伊德算法-任意两个结点间的路径">弗洛伊德算法-任意两个结点间的路径</h4>
+<blockquote>
+<p>数学表达式</p>
+</blockquote>
+<p><img src="picture/%E5%BC%97%E6%B4%9B%E4%BC%8A%E5%BE%B7%E7%AE%97%E6%B3%95%E7%9A%84%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE%E5%BC%8F.png" alt=""></p>
+<blockquote>
+<p>步骤：</p>
+<p>外层循环：从第一个结点开始</p>
+<p>​	内存循环：检查经过每个结点一次，比较路径并更新</p>
+</blockquote>
+<blockquote>
+<p>实现结构：</p>
+<p>邻接表和路径向量数组</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INF 65535</span></span><br><span class="line"><span class="comment">//图结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> vexs[<span class="number">20</span>];		<span class="comment">//顶点</span></span><br><span class="line">    <span class="type">int</span> arc[<span class="number">20</span>][<span class="number">20</span>];	<span class="comment">//边</span></span><br><span class="line">    <span class="type">int</span> numVer,numEdges;</span><br><span class="line">&#125;MGraph;</span><br><span class="line"></span><br><span class="line"><span class="comment">//path 路径	表示两个结点之间经过的某个结点</span></span><br><span class="line"><span class="comment">//dist 长度数组	代表两个结点的最短路径数值</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">floyd</span><span class="params">(MGraph G,<span class="type">int</span> path[<span class="number">20</span>],<span class="type">int</span> dist[<span class="number">20</span>])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;G.numVer;i++)		<span class="comment">//初始化</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;G.numVer;j++)</span><br><span class="line">    	&#123;</span><br><span class="line">            dist[i][j]=G.arc[i][j];</span><br><span class="line">            path[i][j]=j;</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//计算</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;G.numVer;i++)	<span class="comment">//i是中转</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;G.numVer;j++)		</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>;k&lt;G.numVer;k++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//更新规则：如果经过i结点的路径小于原有路径，则更新</span></span><br><span class="line">                <span class="type">int</span> temp=(dist[j][i]==INF || dist[i][k]==INF)?INF:(dist[j][i]+dist[i][k]);</span><br><span class="line">                <span class="keyword">if</span>(dist[j][k]&gt;temp)</span><br><span class="line">                &#123;</span><br><span class="line">                    dist[j][k]=temp;</span><br><span class="line">                    path[j][k]=path[j][i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-04-08_16%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E7%AE%97%E6%B3%95/">16关键路径算法</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-07T16:00:00.000Z" itemprop="datePublished">
+    2022-04-08
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="关键路径算法（运用拓扑排序）">关键路径算法（运用拓扑排序）</h2>
+<h4 id="概念">概念</h4>
+<blockquote>
+<p>AOV网：顶点表示活动</p>
+<p>AOE网：边来表示活动（带权有向无环图）顶点代表事件，权值表示活动持续的时间</p>
+<p>AOE网常常应用于工程，所以有一个开始和结束的顶点（源点和汇点）（入度/出度为0）</p>
+</blockquote>
+<p><img src="picture/%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E6%A6%82%E5%BF%B5%E5%9B%BE.png" alt=""></p>
+<blockquote>
+<p>关键路径：从源点到汇点路径最长的路径（活动的集合，所描述的是时间）</p>
+<p>例如：西天取经要等到唐僧到西天才能结束</p>
+<p>1.事件最早发生时间ETV（顶点最早发生时间）：从源点开始计算至当前事件所需时间权值之和的最小值</p>
+<p>2.事件最晚发生时间：从如果超出这个时间，就会耽误整个工期。（关键路径时间权值之和）-（从汇点回溯到当前事件所需时间权值之和）</p>
+<p>**注：**如果“事件最早发生时间”=“事件最晚发生时间”，则该事件是关键路径上的事件结点</p>
+<p>3.活动的最早开工时间：与前端事件最早发生时间一致</p>
+<p>4.活动的最晚开工时间：=后端事件的最晚发生时间-活动所需时间</p>
+</blockquote>
+<h4 id="实现思路——运用拓扑排序">实现思路——运用拓扑排序</h4>
+<blockquote>
+<p>建立一个邻接表来表示图</p>
+<p>建立关键路径上的ETV数组（初始化为0）</p>
+<p>建立关键路径上的LTV数组（初始化为汇点总时间）</p>
+<p>建立栈（入度为0的入栈，同时以该结点为入度的结点入度-1）</p>
+</blockquote>
+<p><img src="picture/%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%9B%BE.png" alt=""></p>
+<blockquote>
+<p>从源点（入度为0）入栈开始</p>
+<p>进行拓扑排序</p>
+<p>（增加步骤：在结点入栈时计算对应结点ETV）</p>
+<p>（增加步骤：在结点出栈时再进入另一个栈，直至栈满）</p>
+<p>ETV数组由此计算出关键路径所需的总时间（即汇点所对应的值），中间结点只是承接来辅助计算</p>
+<p>在结点再次入栈后，进行出栈操作，出栈时遍历该结点的下一个结点，根据下一个结点的ETV-权值得到当前结点的LTV</p>
+</blockquote>
+<blockquote>
+<p>计算ETE和LTE数组：</p>
+<p>ETE=ETV</p>
+<p>LTE=活动下一个事件的LTE-活动权值</p>
+</blockquote>
+<blockquote>
+<p>如果ETE=LTE，则是关键路径</p>
+</blockquote>
+<h4 id="代码实现">代码实现</h4>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OK 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ERROR 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MVNum 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> Status;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> VerTexType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> OtherInfo;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建栈 </span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">StackNode</span> &#123;</span></span><br><span class="line">	<span class="type">int</span> data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">StackNode</span>* <span class="title">next</span>;</span></span><br><span class="line">&#125;StackNode, * StackList;</span><br><span class="line"><span class="comment">//出栈函数 </span></span><br><span class="line">StackList <span class="title function_">Pop</span><span class="params">(StackList S, <span class="type">int</span>* e)</span></span><br><span class="line">&#123;</span><br><span class="line">	StackList p;</span><br><span class="line">	p = S;</span><br><span class="line">	<span class="keyword">if</span> (!p)</span><br><span class="line">		<span class="keyword">return</span> ERROR;</span><br><span class="line">	*e = p-&gt;data;</span><br><span class="line">	S = S-&gt;next;</span><br><span class="line">	<span class="built_in">free</span>(p);</span><br><span class="line">	<span class="keyword">return</span> S;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//入栈函数： </span></span><br><span class="line">StackList <span class="title function_">Push</span><span class="params">(StackList S, <span class="type">int</span> e)</span></span><br><span class="line">&#123;</span><br><span class="line">	StackList p;</span><br><span class="line">	p = (StackNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(StackNode));</span><br><span class="line">	p-&gt;data = e;</span><br><span class="line">	p-&gt;next = S;</span><br><span class="line">	S = p;</span><br><span class="line">	<span class="keyword">return</span> S;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//边结点 </span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span> &#123;</span>    <span class="comment">//链表结点</span></span><br><span class="line">	<span class="type">int</span> adjvex;           <span class="comment">//邻接表创建无向网的实现</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span>* <span class="title">nextarc</span>;</span>    <span class="comment">//指向下一条边的指针</span></span><br><span class="line">	OtherInfo info;       <span class="comment">//和边相关的信息</span></span><br><span class="line">&#125;ArcNode;</span><br><span class="line"></span><br><span class="line"><span class="comment">//顶点信息 </span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">VNode</span> &#123;</span>   <span class="comment">//头结点</span></span><br><span class="line">	VerTexType data;   <span class="comment">//顶点信息</span></span><br><span class="line">	ArcNode* firstarc;<span class="comment">//指向第一条依附该顶点的边的指针</span></span><br><span class="line">&#125;VNode, AdjList[MVNum];<span class="comment">//AdjList 表示邻接表类型</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	AdjList vertices;     <span class="comment">//邻接表头结点数组</span></span><br><span class="line">	<span class="type">int</span> vexnum, arcnum;   <span class="comment">//图的顶点数和弧数</span></span><br><span class="line">&#125;ALGraph;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> indegree[<span class="number">100</span>] = &#123; <span class="number">0</span> &#125;;<span class="comment">//结点入度的个数</span></span><br><span class="line"><span class="comment">//这里大家自行解决入度的问题 你可以创建图的时候直接创建相对应的数组</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">TopoSort</span><span class="params">(ALGraph G, <span class="type">int</span>* topo,<span class="type">int</span> *etv)</span></span><br><span class="line">&#123;</span><br><span class="line">	StackList S = <span class="literal">NULL</span>;</span><br><span class="line">	ArcNode* p;</span><br><span class="line">	<span class="comment">//先检查所有入度为0的结点并且入栈</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (!indegree[i]) &#123;</span><br><span class="line">			S = Push(S, i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> m = <span class="number">0</span>;<span class="comment">//记录拓扑序列的个数 </span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		etv[i] = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> index = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (S)</span><br><span class="line">	&#123;</span><br><span class="line">		S = Pop(S, &amp;index);</span><br><span class="line">		<span class="comment">//紧接着跟一个进栈</span></span><br><span class="line">		topo[m] = index;</span><br><span class="line">		m++;</span><br><span class="line">		<span class="keyword">while</span> (p != <span class="literal">NULL</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> k = p-&gt;adjvex;</span><br><span class="line">			indegree[k]--;</span><br><span class="line">			<span class="keyword">if</span> (indegree[k] == <span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				S = Push(S, k);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//求事件的最早发生时间</span></span><br><span class="line">			<span class="keyword">if</span> (etv[index] + (p-&gt;info) &gt; etv[k])</span><br><span class="line">			&#123;</span><br><span class="line">				etv[k] = etv[index] + (p-&gt;info);</span><br><span class="line">			&#125;</span><br><span class="line">			p = p-&gt;nextarc;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	topo[m] = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">if</span> (m &lt; G.vexnum)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//有环</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//输出拓扑序列</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">CriticalPath</span><span class="params">(ALGraph G, <span class="type">int</span>* etv, <span class="type">int</span>* ltv)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> ete, lte;<span class="comment">//活动的最早和最晚</span></span><br><span class="line">	ArcNode* p;</span><br><span class="line">	<span class="type">int</span> topo[<span class="number">99</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="keyword">if</span> (TopoSort(G,topo,etv))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			ltv[i] = etv[G.vexnum - <span class="number">1</span>];<span class="comment">//初始化ltv</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> count = G.vexnum;</span><br><span class="line">	<span class="keyword">while</span> (count)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> gettopo = topo[--count];<span class="comment">//将拓扑序列从后往前拿出来</span></span><br><span class="line">		<span class="keyword">for</span> (p = G.vertices[gettopo].firstarc; p ;p = p-&gt;nextarc)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> k = p-&gt;adjvex;</span><br><span class="line">			<span class="keyword">if</span> (ltv[k] - (p-&gt;info) &lt; ltv[gettopo])</span><br><span class="line">			&#123;</span><br><span class="line">				ltv[gettopo] = ltv[k] - (p-&gt;info);<span class="comment">//求事件的最晚</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//求活动的最早和最晚</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (p = G.vertices[i].firstarc; p; p = p-&gt;nextarc)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> k = p-&gt;adjvex;</span><br><span class="line">			ete = etv[i];</span><br><span class="line">			lte = ltv[k] - p-&gt;info;</span><br><span class="line">			<span class="keyword">if</span> (ete == lte)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">//输出相对应的点和边 加入到最短路径当中</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> </span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span>[n] a;</span><br><span class="line">	<span class="type">int</span> count = <span class="number">0</span>;<span class="comment">//下标</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">insert</span><span class="params">(<span class="type">int</span> val)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//摊还分析</span></span><br><span class="line">	<span class="comment">//每进行一次O(n)的操作 都会跟着N-1次的O(1)</span></span><br><span class="line">	<span class="comment">//O(1)</span></span><br><span class="line">	<span class="keyword">if</span> (count == a.length)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span>  i = <span class="number">0</span>; i &lt; a.length; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			sum = sum + a[i];</span><br><span class="line">		&#125;</span><br><span class="line">		a[<span class="number">0</span>] = sum;</span><br><span class="line">		count = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	a[count] = val;</span><br><span class="line">	count++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">find</span><span class="params">(<span class="type">int</span>[] a, <span class="type">int</span> n, <span class="type">int</span> x)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> pos;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (a[i] == x)</span><br><span class="line">		&#123;</span><br><span class="line">			pos = i;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> pos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-04-08_17%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/">17复杂度分析</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-07T16:00:00.000Z" itemprop="datePublished">
+    2022-04-08
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="复杂度分析">复杂度分析</h2>
+<blockquote>
+<p>算法评价的标准：</p>
+<p>1.准确性</p>
+<p>必须能彻底解决这个问题：使用真实数据的大量测试</p>
+<p>2.健壮性</p>
+<p>必须保证在任何情况下都不会崩溃</p>
+<p>3.效率</p>
+</blockquote>
+<h4 id="3-1运行时间（时间复杂度）">3.1运行时间（时间复杂度）</h4>
+<h6 id="事后统计法的局限性">事后统计法的局限性</h6>
+<blockquote>
+<p>受到测试环境的制约——不同测试环境对算法的影响不同</p>
+</blockquote>
+<blockquote>
+<p>数据规模的制约——大量测试数据需要的代价大</p>
+</blockquote>
+<h5 id="复杂度的估计方法">复杂度的估计方法</h5>
+<blockquote>
+<p>概念：</p>
+<p>时间频度：一个算法中，语句执行的次数叫做时间频度T(n)</p>
+<p>n就是问题的规模</p>
+<p>时间复杂度就是找到T(n)随着规模n变化的规律</p>
+</blockquote>
+<h5 id="一般步骤">一般步骤</h5>
+<p>1.找到算法中的基本语句（算法中执行次数最多的语句，通常是循环体中的语句），对于顺序结构直接求和。</p>
+<p>2.计算基本语句执行次数的数量级（只需计算最高次幂，去除等价无穷小，只关注算法的增长率）</p>
+<p>3.使用O来表示算法的时间性能</p>
+<blockquote>
+<p>P类问题——一个多项式时间复杂度能解决的问题</p>
+<p>NP类问题——一个指数时间复杂度能解决的问题</p>
+</blockquote>
+<h5 id="如何分析">如何分析</h5>
+<p>1.对于简单的输入输出和赋值，近似为O(1)</p>
+<p>2.对于顺序结构，求和法则（找到所有顺序结构中的最大值，其余忽略）</p>
+<p>3.对于选择结构，计算else字句的时间，也可忽略为O(1)</p>
+<p>4.对于循环结构，运行时间主要体现在迭代，乘法法则</p>
+<p>5.对于复杂的算法，拆分成简单的结构再计算</p>
+<h5 id="对于真实项目所需的分析方法">对于真实项目所需的分析方法</h5>
+<blockquote>
+<p>最好、最坏、平均、摊均</p>
+</blockquote>
+<p>最好与最坏都是极端情况</p>
+<p>（加权）平均：所有情况所需的（时间*概率）之和</p>
+<p>摊均：大多数情况都是O(1)，少数情况是O(n)——将所有情况摊分</p>
+<h4 id="3-2所需内存（空间复杂度）">3.2所需内存（空间复杂度）</h4>
+<blockquote>
+<p>算法所耗费的空间</p>
+<p>在算法中需要临时占用的空间大小（不关注原本需要的空间）</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-04-05_15%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/">15拓扑排序</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-04T16:00:00.000Z" itemprop="datePublished">
+    2022-04-05
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="拓扑排序">拓扑排序</h2>
+<h4 id="基础概念">基础概念</h4>
+<blockquote>
+<p>有向无环图：有向图且无环</p>
+<p>活动：在一个表示工程的有向图中，顶点表示活动，边表示活动之间的优先级关系</p>
+<p>AOV网：描述“顶点表示活动，边表示活动之间的优先级关系”的图</p>
+<p>拓扑序列：一个具有n个顶点的有向图，只要满足vi到vj有路径且vi在vj之前，则称之为拓扑序列</p>
+<p>拓扑排序：从有向图中每次选出一个没有前驱的结点，输出（放入序列中），并删除有关的弧</p>
+</blockquote>
+<h4 id="步骤">步骤</h4>
+<blockquote>
+<p>需要一个图，使用邻接表来存储，附带一个矩阵来存储每个结点的入度（如图）</p>
+</blockquote>
+<p><img src="picture/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt=""></p>
+<blockquote>
+<p>为了减少循环次数，使用栈来辅助决策</p>
+<p>每次循环，都先把入度为0的结点入栈，在一个一个出栈过程中更新其余结点的入度，更新过程中出现了入度为0的结点就入栈</p>
+</blockquote>
+<h4 id="代码实现">代码实现</h4>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OK 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ERROR 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MVNum 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> Status;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> VerTexType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> OtherInfo;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建栈 </span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">StackNode</span> &#123;</span></span><br><span class="line">	<span class="type">int</span> data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">StackNode</span>* <span class="title">next</span>;</span></span><br><span class="line">&#125;StackNode, * StackList;</span><br><span class="line"><span class="comment">//出栈函数 </span></span><br><span class="line">StackList <span class="title function_">Pop</span><span class="params">(StackList S, <span class="type">int</span>* e)</span></span><br><span class="line">&#123;</span><br><span class="line">	StackList p;</span><br><span class="line">	p = S;</span><br><span class="line">	<span class="keyword">if</span> (!p)</span><br><span class="line">		<span class="keyword">return</span> ERROR;</span><br><span class="line">	*e = p-&gt;data;</span><br><span class="line">	S = S-&gt;next;</span><br><span class="line">	<span class="built_in">free</span>(p);</span><br><span class="line">	<span class="keyword">return</span> S;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//入栈函数： </span></span><br><span class="line">StackList <span class="title function_">Push</span><span class="params">(StackList S, <span class="type">int</span> e)</span></span><br><span class="line">&#123;</span><br><span class="line">	StackList p;</span><br><span class="line">	p = (StackNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(StackNode));</span><br><span class="line">	p-&gt;data = e;</span><br><span class="line">	p-&gt;next = S;</span><br><span class="line">	S = p;</span><br><span class="line">	<span class="keyword">return</span> S;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//边结点 </span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span> &#123;</span>    <span class="comment">//链表结点</span></span><br><span class="line">	<span class="type">int</span> adjvex;           <span class="comment">//邻接表创建无向网的实现</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span>* <span class="title">nextarc</span>;</span>    <span class="comment">//指向下一条边的指针</span></span><br><span class="line">	OtherInfo info;       <span class="comment">//和边相关的信息</span></span><br><span class="line">&#125;ArcNode;</span><br><span class="line"></span><br><span class="line"><span class="comment">//顶点信息 </span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">VNode</span> &#123;</span>   <span class="comment">//头结点</span></span><br><span class="line">	VerTexType data;   <span class="comment">//顶点信息</span></span><br><span class="line">	ArcNode* firstarc;<span class="comment">//指向第一条依附该顶点的边的指针</span></span><br><span class="line">&#125;VNode, AdjList[MVNum];<span class="comment">//AdjList 表示邻接表类型</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	AdjList vertices;     <span class="comment">//邻接表头结点数组</span></span><br><span class="line">	<span class="type">int</span> vexnum, arcnum;   <span class="comment">//图的顶点数和弧数</span></span><br><span class="line">&#125;ALGraph;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> indegree[<span class="number">100</span>] = &#123; <span class="number">0</span> &#125;;<span class="comment">//结点入度的个数</span></span><br><span class="line"><span class="comment">//这里大家自行解决入度的问题 你可以创建图的时候直接创建相对应的数组</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">TopoSort</span><span class="params">(ALGraph G, <span class="type">int</span>* topo)</span></span><br><span class="line">&#123;</span><br><span class="line">	StackList S = <span class="literal">NULL</span>;</span><br><span class="line">	ArcNode* p;</span><br><span class="line">	<span class="comment">//先检查所有入度为0的结点并且入栈</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (!indegree[i]) &#123;</span><br><span class="line">			S = Push(S, i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> m = <span class="number">0</span>;<span class="comment">//记录拓扑序列的个数 </span></span><br><span class="line">	<span class="type">int</span> index = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (S)</span><br><span class="line">	&#123;</span><br><span class="line">		S = Pop(S, &amp;index);</span><br><span class="line">		topo[m] = index;</span><br><span class="line">		m++;</span><br><span class="line">		<span class="keyword">while</span> (p != <span class="literal">NULL</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> k = p-&gt;adjvex;</span><br><span class="line">			indegree[k]--;</span><br><span class="line">			<span class="keyword">if</span> (indegree[k] == <span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				S = Push(S, k);</span><br><span class="line">			&#125;</span><br><span class="line">			p = p-&gt;nextarc;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	topo[m] = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">if</span> (m &lt; G.vexnum)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//有环</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//输出拓扑序列</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/2022-03-29_11%E9%AB%98%E7%BA%A7%E4%BC%98%E5%8C%96/">11高级优化</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-28T16:00:00.000Z" itemprop="datePublished">
+    2022-03-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="高级优化">高级优化</h2>
+<blockquote>
+<p>一些高级优化算法有如下：</p>
+</blockquote>
+<p><img src="picture/%E4%B8%80%E4%BA%9B%E9%AB%98%E7%BA%A7%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95.png" alt=""></p>
+<blockquote>
+<p>在此给出一个使用这种高级优化算法的例子</p>
+</blockquote>
+<p><img src="picture/%E4%B8%80%E6%AC%A1%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E7%9A%84%E4%BE%8B%E5%AD%90.png" alt=""></p>
+<blockquote>
+<p>这里也给出使用梯度下降法的代码例子</p>
+</blockquote>
+<p><img src="picture/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95%E7%9A%84%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E5%AE%9E%E4%BE%8B.png" alt=""></p>
+<blockquote>
+<p>在这个代码中，要求有两个返回值，jval是算出的代价函数的值，gradient是每个特征值计算偏导的返回值，用于算出下一次特征值并再次带入这个函数。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/2022-03-29_12%E5%A4%9A%E5%85%83%E5%88%86%E7%B1%BB/">12多元分类</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-28T16:00:00.000Z" itemprop="datePublished">
+    2022-03-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="多元分类">多元分类</h2>
+<blockquote>
+<p>多元分类的例子</p>
+</blockquote>
+<p><img src="picture/%E5%A4%9A%E5%85%83%E5%88%86%E7%B1%BB%E7%9A%84%E4%BE%8B%E5%AD%90.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/28/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/2022-03-28_10logistic%E5%9B%9E%E5%BD%92-%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/">10logistic回归-分类算法</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-27T16:00:00.000Z" itemprop="datePublished">
+    2022-03-28
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="logistic回归-分类算法">logistic回归-分类算法</h2>
+<blockquote>
+<p>为保证回归曲线位于分类问题的值域内，采用传统的线性回归算法很容易超出值域，由此引出logistic回归曲线</p>
+</blockquote>
+<h5 id="实现函数">实现函数</h5>
+<blockquote>
+<p>对需要拟合的线性回归曲线进行logistic函数变换</p>
+</blockquote>
+<p><img src="picture/logistic%E5%87%BD%E6%95%B0.png" alt=""></p>
+<blockquote>
+<p>然而，针对该函数产生的原有代价函数并不是一个合格的凹函数，因此采用新的代价函数计算方式来达到目的</p>
+</blockquote>
+<p><img src="picture/logistic%E5%87%BD%E6%95%B0%E7%9A%84%E4%BB%A3%E4%BB%B7%E6%9B%B2%E7%BA%BF.png" alt=""></p>
+<blockquote>
+<p>对于这个函数，可以采用一种比较紧凑的方式来去除分段</p>
+</blockquote>
+<p><img src="picture/logistic%E5%87%BD%E6%95%B0%E7%9A%84%E7%B4%A7%E5%87%91%E5%BD%A2%E5%BC%8F.png" alt=""></p>
+<blockquote>
+<p>之后，采用梯度下降法来收敛这个函数，得到所有zeta的值</p>
+</blockquote>
+<p><strong>注：采用特征缩放能更好执行梯度下降</strong></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/26/MATLAB/2022-03-26_2-2%E8%A1%A8%E8%BE%BE%E5%BC%8F/">2-2表达式</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-25T16:00:00.000Z" itemprop="datePublished">
+    2022-03-26
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MATLAB/">MATLAB</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="表达式">表达式</h2>
+<h4 id="运算符">运算符</h4>
+<p><strong>矩阵运算符</strong></p>
+<p>表达式使用大家熟悉的算术运算符和优先法则。</p>
+<p><strong>+</strong> 加法</p>
+<p>- 减法</p>
+<p>*乘法</p>
+<p><strong>/</strong> 除法</p>
+<p>\左除</p>
+<p><strong>^</strong> 幂</p>
+<p><strong>’</strong> 复共轭转置</p>
+<p><strong>( )</strong> 指定计算顺序</p>
+<p><strong>数组运算符</strong></p>
+<blockquote>
+<p>如果矩阵不用于线性代数运算，则成为二维数值数组。数组的算术运算按元素执行。这意味着，加法和减法运算对数组和矩阵都是相同的，但乘法运算不相同。MATLAB 的乘法数组运算表示法中包含点，也就是小数点。</p>
+</blockquote>
+<p>运算符列表包括</p>
+<p><strong>+</strong> 加法</p>
+<p><strong>-</strong> 减法</p>
+<p><strong>.*</strong> 逐元素乘法</p>
+<p><strong>./</strong> 逐元素除法</p>
+<p>.\ 逐元素左除</p>
+<p><strong>.^</strong> 逐元素幂</p>
+<p><strong>.’</strong> 非共轭数组转置</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/26/MATLAB/2022-03-26_2-3%E8%BE%93%E5%85%A5%E5%91%BD%E4%BB%A4/">2-3输入命令</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-25T16:00:00.000Z" itemprop="datePublished">
+    2022-03-26
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MATLAB/">MATLAB</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="输入命令">输入命令</h2>
+<h4 id="format函数">format函数</h4>
+<blockquote>
+<p>控制显示数字的格式，不改变数字实际值</p>
+</blockquote>
+<p>format short   		 5字长定点数，显示5位<br>
+format long   		  15字长定点数，显示15位双精度，7位单精度<br>
+format short e   	  5字长浮点数<br>
+format long e   	   15字长浮点数<br>
+format hex      		 16进制<br>
+format bank     		定点货币形式<br>
+format rat   			 小数分数表示</p>
+<h4 id="输入长语句">输入长语句</h4>
+<blockquote>
+<p>如果语句无法容纳在一行中，请使用省略号（三个句点）<strong>…</strong>，后跟 <strong>Return</strong> 或 <strong>Enter</strong> 以指示该语句在下一行继续。例如，</p>
+</blockquote>
+<p><strong>s = 1 -1/2 + 1/3 -1/4 + 1/5 - 1/6 + 1/7 …</strong></p>
+<p><strong>- 1/8 + 1/9 - 1/10 + 1/11 - 1/12;</strong></p>
+<blockquote>
+<p><strong>=</strong>、<strong>+</strong> 和 - 符号周围的空白是可选的，但可提高可读性。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/35/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="page-number" href="/page/35/">35</a><span class="page-number current">36</span><a class="page-number" href="/page/37/">37</a><a class="page-number" href="/page/38/">38</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/37/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

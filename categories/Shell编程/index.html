@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ Shell编程 }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/17/Shell%E7%BC%96%E7%A8%8B/Linux_Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E7%AC%94%E8%AE%B0/2023-01-17_1-7%E6%95%B0%E7%BB%84%E5%92%8C%E5%85%B3%E8%81%94%E6%95%B0%E7%BB%84/">1-7数组和关联数组</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-16T16:00:00.000Z" itemprop="datePublished">
+    2023-01-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/Linux-Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E7%AC%94%E8%AE%B0/">Linux_Shell脚本攻略笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-7数组和关联数组">1.7数组和关联数组</h2>
+<blockquote>
+<p>数组允许脚本利用索引将数据集合保存为独立的条目。</p>
+<ul class="lvl-1">
+<li class="lvl-2">普通数组（int-&gt;数据）</li>
+<li class="lvl-2">关联数组（即map 字符串-&gt;数据）</li>
+</ul>
+</blockquote>
+<h4 id="1-7-1-预备知识">1.7.1 预备知识</h4>
+<p>Bash4.0开始支持关联数组。</p>
+<h4 id="1-7-2-实战演练">1.7.2 实战演练</h4>
+<blockquote>
+<p>定义普通数组的方式有很多种</p>
+</blockquote>
+<h5 id="1-单行定义">1.单行定义</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">array_var=(test1 test2 test3 test4 test5)</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">这些值会存储在以0为起始索引的连续位置上</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-键值对定义">2.键值对定义</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">array_var[0]=&quot;test1&quot;</span><br><span class="line">array_var[1]=&quot;test2&quot;</span><br><span class="line">array_var[2]=&quot;test3&quot;</span><br><span class="line">array_var[3]=&quot;test4&quot;</span><br><span class="line">array_var[4]=&quot;test5&quot;</span><br></pre></td></tr></table></figure>
+<h5 id="3-打印特定索引的元素内容">3.打印特定索引的元素内容</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo $&#123;array_var[0]&#125;</span><br><span class="line"></span><br><span class="line">index=5</span><br><span class="line">echo $&#123;array_var[index]&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="4-打印整个数组">4.打印整个数组</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo $&#123;array_var[*]&#125;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">or</span></span><br><span class="line">echo $&#123;array_var[@]&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="5-打印数组长度">5.打印数组长度</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo $&#123;#array_var[*]&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="1-7-3-补充内容">1.7.3 补充内容</h4>
+<h5 id="1-定义关联数组">1.定义关联数组</h5>
+<blockquote>
+<p>首先，需要使用声明语句将一个变量定义为关联数组：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">declare -A ass_array	#声明ass_array为关联数组</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>添加元素</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ass_array=([index1]=val1 [index2]=val2)		#使用行内“索引-值”列表</span><br><span class="line"></span><br><span class="line">ass_array[index1]=val1 		#使用独立的“索引-值”</span><br><span class="line">ass_array[index2]=val2</span><br></pre></td></tr></table></figure>
+<h5 id="2-列出数组索引">2.列出数组索引</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo $&#123;!ass_array[*]&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="3-使用数组元素">3.使用数组元素</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &quot;Apple costs $&#123;fruit_value[apple]&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/17/Shell%E7%BC%96%E7%A8%8B/Linux_Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E7%AC%94%E8%AE%B0/2023-01-17_1-8%E5%88%AB%E5%90%8D/">1-8别名</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-16T16:00:00.000Z" itemprop="datePublished">
+    2023-01-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/Linux-Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E7%AC%94%E8%AE%B0/">Linux_Shell脚本攻略笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-8别名">1.8别名</h2>
+<blockquote>
+<p>别名就是将一个长命令新建一个名字。使用alias命令创建别名。</p>
+</blockquote>
+<h4 id="1-8-1-实战演练">1.8.1 实战演练</h4>
+<h5 id="1-创建别名">1.创建别名</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">alias new_command=&#x27;command sequence&#x27;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>例如，下面使用install命令代替原先复杂的长命令</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">alias install = yum -y install</span><br></pre></td></tr></table></figure>
+<h5 id="2-永久将别名存入终端">2.永久将别名存入终端</h5>
+<blockquote>
+<p>终端关闭后，别名命令会消失。</p>
+<p>解决方案：将别名命令存入<code>~/.bashrc</code>中</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &#x27;alias cmd=&quot;command seq&quot;&#x27; &gt;&gt; ~/.bashrc</span><br></pre></td></tr></table></figure>
+<h5 id="3-删除别名">3.删除别名</h5>
+<blockquote>
+<p>使用unalias命令，或者将命令再次设置为空（<code>alias example=</code>）</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">unalias cmd</span><br></pre></td></tr></table></figure>
+<p>**注意：**创建别名时，如果已经有同名的别名存在，那么原有的别名设置将被新的设置取代。</p>
+<h4 id="1-8-2-补充内容">1.8.2 补充内容</h4>
+<blockquote>
+<p>如果身份为特权用户，别名也会造成安全问题。为了避免对系统造成危害，你应该将命令转义。</p>
+</blockquote>
+<h5 id="1-对别名进行转义">1.对别名进行转义</h5>
+<blockquote>
+<p>创建一个和原生命令同名的别名很容易，你不应该以特权用户的身份运行别名化的命令。我们可以转义要使用的命令，忽略当前定义的别名。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">\command</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>字符<code>\</code>可以转义命令，从而执行原本的命令。在不可信环境下执行特权命令时，在命令前加上<code>\</code>来忽略可能存在的别名总是一种良好的安全实践。这是因为攻击者可能已经将一些别有用心的命令利用别名伪装成了特权命令，让特权用户误输入这种命令，借此来盗取用户输入的重要信息。</p>
+</blockquote>
+<h5 id="2-列举别名">2.列举别名</h5>
+<blockquote>
+<p><code>-p</code>参数能列举出所有已经设定好的别名命令</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">alias -p</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/17/Shell%E7%BC%96%E7%A8%8B/Linux_Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E7%AC%94%E8%AE%B0/2023-01-17_1-9%E9%87%87%E9%9B%86%E7%BB%88%E7%AB%AF%E4%BF%A1%E6%81%AF/">1-9采集终端信息</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-16T16:00:00.000Z" itemprop="datePublished">
+    2023-01-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/Linux-Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E7%AC%94%E8%AE%B0/">Linux_Shell脚本攻略笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-9采集终端信息">1.9采集终端信息</h2>
+<blockquote>
+<p>写脚本时，常常要获取当前终端的设置信息。</p>
+</blockquote>
+<h4 id="1-9-1-预备知识">1.9.1 预备知识</h4>
+<blockquote>
+<p>tput和stty是两款终端处理工具。</p>
+</blockquote>
+<h4 id="1-9-2-实战演练">1.9.2 实战演练</h4>
+<h5 id="1-tput命令">1.tput命令</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>获取终端的行数和列数</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tput cols</span><br><span class="line">tput lines</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>打印当前终端名</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tput longname</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>将光标移动到（100，100）处</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tput cup 100 100</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>设置终端背景色</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tput setb n		#n位于0-7</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>设置终端前景色</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tput setf n		#n位于0-7</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>设置文本粗体</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tput bold</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>设置下划线的起止</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tput smul</span><br><span class="line">tput rmul</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>删除从当前光标位置到行尾的所有内容</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tput ed</span><br></pre></td></tr></table></figure>
+<h5 id="2-stty命令">2.stty命令</h5>
+<blockquote>
+<p>输入密码时，脚本不应该显示输入内容。</p>
+<p>stty命令的选项<code>-echo</code>禁止将输出发送到终端，而选项<code>echo</code>则允许发送输出</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Filename: password.sh</span></span><br><span class="line">echo -e &quot;Enter the passwords:&quot;		#启用反斜杠转义</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">在读取密码前禁止回显</span></span><br><span class="line">stty -echo</span><br><span class="line">read password		#使用read命令将密码读取到变量password里</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">重新允许回显</span></span><br><span class="line">stty echo</span><br><span class="line">echo</span><br><span class="line">echo Password read</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/16/Shell%E7%BC%96%E7%A8%8B/Linux_Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E7%AC%94%E8%AE%B0/2023-01-16_1-6%E7%8E%A9%E8%BD%AC%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91/">1-6玩转文件描述符和重定向</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-15T16:00:00.000Z" itemprop="datePublished">
+    2023-01-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/Linux-Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E7%AC%94%E8%AE%B0/">Linux_Shell脚本攻略笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-6玩转文件描述符和重定向">1.6玩转文件描述符和重定向</h2>
+<blockquote>
+<p>文件描述符是与输入和输出流相关联的整数。</p>
+</blockquote>
+<h4 id="1-6-1-预备知识">1.6.1 预备知识</h4>
+<blockquote>
+<p>脚本可以使用大于号将输出重定向到文件中。</p>
+</blockquote>
+<p>文件描述符是与某个打开的文件或数据流相关联的整数。文件描述符0、1以及2是系统预留的。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>0</strong> —— stdin （标准输入）。</p>
+</li>
+<li class="lvl-2">
+<p><strong>1</strong> —— stdout（标准输出）。</p>
+</li>
+<li class="lvl-2">
+<p><strong>2</strong> —— stderr（标准错误）。</p>
+</li>
+</ul>
+<h4 id="1-6-2-实战演练">1.6.2 实战演练</h4>
+<h5 id="1-使用大于号将文本保存到文件中（覆盖）">1.使用大于号将文本保存到文件中（覆盖）</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &quot;This is a example text 1&quot; &gt; temp.txt		#如果temp.txt已存在，则清空其中内容</span><br></pre></td></tr></table></figure>
+<h5 id="2-使用双大于号将文本追加到文件中">2.使用双大于号将文本追加到文件中</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &quot;This is a example text 2&quot; &gt;&gt; temp.txt</span><br></pre></td></tr></table></figure>
+<h5 id="3-将stderr文本保存到文件中（覆盖）">3.将stderr文本保存到文件中（覆盖）</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ls + 2&gt; out.txt			#OK，指定了stderr流</span><br><span class="line">ls + &gt; out.txt			#NO，默认stdout流即1&gt;，里面没有消息</span><br></pre></td></tr></table></figure>
+<h5 id="4-将stderr和stdout分别重定向到不同文件">4.将stderr和stdout分别重定向到不同文件</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cmd 2&gt; stderr.txt 1&gt; stdout.txt</span><br></pre></td></tr></table></figure>
+<h5 id="5-将stderr和stdout输出到一个文件">5.将stderr和stdout输出到一个文件</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cmd 2&gt;&amp;1 alloutput.txt	#OK</span><br><span class="line">cmd &amp;&gt; output.txt		#OK</span><br></pre></td></tr></table></figure>
+<h5 id="6-不显示、保存stderr">6.不显示、保存stderr</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">command 2&gt; /dev/null	#将命令重定向至空设备中</span><br></pre></td></tr></table></figure>
+<h5 id="7-保存数据同时作为下一命令输入使用">7.保存数据同时作为下一命令输入使用</h5>
+<blockquote>
+<p>stdout作为单数据流（single stream），可以被重定向到文件或是通过管道传入其他程序，但是无法两者兼得。</p>
+<p>tee命令接收到来自stdin的数据。它将stdout的一份副本写入文件out.txt，同时将另一份副本作为后续命令的stdin。</p>
+<p>cat命令没有文件参数，会从stdin读取，再输出到stdout</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">command | tee FILE1 FILE2 | otherCommand</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">eg</span></span><br><span class="line">cat a* | tee out.txt | cat -n</span><br><span class="line">cat a* | tee -a out.txt | cat -n	#使用-a表示追加到文件末尾</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong><code>|</code>符号表示前一个命令的输出作为下一个命令的标准输入。（即将stdout重定向到stdin）</p>
+<h5 id="8-将输入的文字标行号并重定向到两份文件中">8.将输入的文字标行号并重定向到两份文件中</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tee stdout.txt | cat -n &gt; out.txt 		#从stdin读入，输入到stdout.txt，同时标号输入out.txt</span><br></pre></td></tr></table></figure>
+<h4 id="1-6-4-补充内容">1.6.4 补充内容</h4>
+<h5 id="1-将文件重定向到命令">1.将文件重定向到命令</h5>
+<blockquote>
+<p>像读取stdin一样读取文件，使用&lt;</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cmd &lt; file</span><br></pre></td></tr></table></figure>
+<h5 id="2-重定向脚本内部的文本块">2.重定向脚本内部的文本块</h5>
+<blockquote>
+<p>可以将脚本中的文本重定向到文件。</p>
+</blockquote>
+<p><strong>案例</strong></p>
+<blockquote>
+<p>要想将一条警告信息添加到自动生成的文件顶部，可以使用下面的代码：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span> </span><br><span class="line">cat &lt;&lt; EOF &gt; log.txt 	#从该命令下一行开始</span><br><span class="line">This is a generated file. Do not edit. Changes will be overwritten. </span><br><span class="line">EOF						#到EOF结束，不含EOF</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat log.txt</span><br><span class="line">This is a generated file. Do not edit. Changes will be overwritten. </span><br></pre></td></tr></table></figure>
+<h5 id="3-自定义文件描述符">3.自定义文件描述符</h5>
+<blockquote>
+<p>使用exec命令，后面跟新的文件描述符和文件名</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">exec 3&lt; input.txt	#将input.txt作为3，输入模式</span><br><span class="line">cat &lt;&amp;3</span><br><span class="line"></span><br><span class="line">exec 4&gt; output.txt	# 将output.txt作为4，输出模式</span><br><span class="line">echo newline &gt;&amp;4</span><br><span class="line"></span><br><span class="line">exec 5&gt;&gt; input.txt	#将input.txt作为5，追加模式</span><br><span class="line">echo append new line &gt;&amp;5	#不是&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/13/Shell%E7%BC%96%E7%A8%8B/Linux_Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E7%AC%94%E8%AE%B0/2023-01-13_1-2%E5%9C%A8%E7%BB%88%E7%AB%AF%E4%B8%AD%E6%98%BE%E7%A4%BA%E8%BE%93%E5%87%BA/">1-2在终端中显示输出</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-12T16:00:00.000Z" itemprop="datePublished">
+    2023-01-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/Linux-Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E7%AC%94%E8%AE%B0/">Linux_Shell脚本攻略笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-2在终端中显示输出">1.2在终端中显示输出</h2>
+<h4 id="1-2-1预备知识">1.2.1预备知识</h4>
+<ol>
+<li class="lvl-3">
+<p><strong>shebang</strong></p>
+</li>
+</ol>
+<blockquote>
+<p>定义解释该脚本所使用的解释器</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">! /bin/bash</span>	</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">如果有，必须在第一行</span></span><br></pre></td></tr></table></figure>
+<p>注意：使用该脚本时，可以不指定解释器，但要赋予权限再使用</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chmod a+x sample.sh</span><br><span class="line">./sample.sh</span><br><span class="line"></span><br><span class="line">chmod a+x sample.sh ; ./sample.sh	#shell使用分号或者换行符来分隔命令</span><br></pre></td></tr></table></figure>
+<h4 id="1-2-2实战演练">1.2.2实战演练</h4>
+<ol>
+<li class="lvl-3">
+<p><code>echo</code>是终端打印的命令</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo welcome to bash		#same, a little diff</span><br><span class="line">echo &quot;welcome to bash&quot;</span><br><span class="line">echo &#x27;welcome to bash&#x27;</span><br><span class="line"></span><br><span class="line">echo &quot;hello!&quot;	#wrong, ! could not be used in &quot;&quot;</span><br><span class="line">echo &#x27;hello!&#x27;	#right</span><br><span class="line">echo &quot;hello\!&quot;	#right</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li class="lvl-3">
+<p><code>printf</code>是另一个命令，与C语言基本一致</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">filename:printf.sh</span></span><br><span class="line"></span><br><span class="line">printf &quot;%-5s %-10s %-4s\n&quot; No Name Mark</span><br><span class="line">printf &quot;%-5s %-10s %-4.2f\n&quot; 1 Sarath 80.3456 </span><br><span class="line">printf &quot;%-5s %-10s %-4.2f\n&quot; 2 James 90.9989 </span><br><span class="line">printf &quot;%-5s %-10s %-4.2f\n&quot; 3 Jeff 77.564</span><br></pre></td></tr></table></figure>
+<p><img src="picture/printf_output.png" alt=""></p>
+<h4 id="1-2-3补充内容">1.2.3补充内容</h4>
+<h5 id="1-echo去除换行">1.echo去除换行</h5>
+<blockquote>
+<p>默认情况下，echo会在输出文本的尾部追加一个换行符。可以使用选项-n来禁止这种行为。</p>
+</blockquote>
+<blockquote>
+<p>在使用转义序列时，需要使用echo -e  &quot;<strong>包含转义序列的字符串</strong>&quot;这种形式。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo -e &quot;1\t2\t3\t&quot;</span><br></pre></td></tr></table></figure>
+<h5 id="2-打印彩色输出">2.打印彩色输出</h5>
+<blockquote>
+<p>脚本可以使用转义序列在终端中生成彩色文本。</p>
+</blockquote>
+<p>见P6</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/13/Shell%E7%BC%96%E7%A8%8B/Linux_Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E7%AC%94%E8%AE%B0/2023-01-13_1-3%E4%BD%BF%E7%94%A8%E5%8F%98%E9%87%8F%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/">1-3使用变量与环境变量</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-12T16:00:00.000Z" itemprop="datePublished">
+    2023-01-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/Linux-Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E7%AC%94%E8%AE%B0/">Linux_Shell脚本攻略笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-3使用变量与环境变量">1.3使用变量与环境变量</h2>
+<h4 id="1-3-1预备知识">1.3.1预备知识</h4>
+<blockquote>
+<p>所有的应用程序和脚本都可以访问环境变量。可以使用<code>env</code>或<code>printenv</code>命令查看当前shell中所定义的全部环境变量</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">env</span><br><span class="line">printenv</span><br></pre></td></tr></table></figure>
+<h5 id="查看其它进程的环境变量">查看其它进程的环境变量</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">假设查看进程名为：process</span></span><br><span class="line">pgrep process	#获取进程PID</span><br><span class="line">12501			#PID</span><br><span class="line"></span><br><span class="line">cat /proc/12501/environ</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>由于变量之间用<code>\0</code>来分隔，因此不好阅读。要想生成一份易读的报表，可以将cat命令的输出通过管道传给tr，将其中的<code>\0</code>替换成<code>\n</code>：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cat</span> /proc/12501/environ | <span class="built_in">tr</span> <span class="string">&#x27;\0&#x27;</span> <span class="string">&#x27;\n&#x27;</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="1-3-2实战演练">1.3.2实战演练</h4>
+<h5 id="1-变量">1.变量</h5>
+<blockquote>
+<p>可以使用等号操作符为变量赋值：</p>
+</blockquote>
+<p><code>varName=value</code></p>
+<p><strong>如果变量带有空白字符，则要放入<code>”“</code>或者<code>‘’</code>中</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">var=&quot;value&quot;</span><br><span class="line">echo $var</span><br><span class="line">echo $&#123;var&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">注意两边没有空格的等号是赋值操作符，加上空格的等号表示的是等量关系测试</span></span><br><span class="line">var = &quot;value&quot;	#wrong</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可以在其它命令的双引号中引用变量值</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span> </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">文件名:variables.sh</span> </span><br><span class="line">fruit=apple </span><br><span class="line">count=5 </span><br><span class="line">echo &quot;We have $count $&#123;fruit&#125;(s)&quot;</span><br></pre></td></tr></table></figure>
+<h5 id="2-export继承变量（子进程）">2.export继承变量（子进程）</h5>
+<blockquote>
+<p>export命令声明了将由子进程所继承的一个或多个变量。这些变量被导出后，当前shell脚本所执行的任何应用程序都会获得这个变量。</p>
+</blockquote>
+<p>标准环境变量PATH包含很多路径</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo $PATH</span><br><span class="line">/home/menu/.local/bin:/home/menu/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin</span><br><span class="line"></span><br><span class="line">echo $PATH | tr &#x27;:&#x27; &#x27;\n&#x27;	#使用换行分隔</span><br><span class="line">/home/menu/.local/bin</span><br><span class="line">/home/menu/bin</span><br><span class="line">/usr/local/bin</span><br><span class="line">/usr/local/sbin</span><br><span class="line">/usr/bin</span><br><span class="line">/usr/sbin</span><br></pre></td></tr></table></figure>
+<p>而要在其中加一个变量，则可以这样，使用<code>：</code>来分隔</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">PATH=&quot;$PATH:/home/user/bin&quot;</span><br></pre></td></tr></table></figure>
+<p>另外还有一些众所周知的环境变量：HOME、PWD、USER、UID、SHELL等</p>
+<p>**注意:**使用单引号时，变量不会被扩展</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &#x27;$var&#x27;</span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">var	<span class="comment">#output</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="1-3-3-补充内容">1.3.3 补充内容</h4>
+<h5 id="1-获取变量长度">1. 获取变量长度</h5>
+<blockquote>
+<p>可以使用$</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/13/Shell%E7%BC%96%E7%A8%8B/Linux_Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E7%AC%94%E8%AE%B0/2023-01-13_1-4%E4%BD%BF%E7%94%A8%E5%87%BD%E6%95%B0%E6%B7%BB%E5%8A%A0%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/">1-4使用函数添加环境变量</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-12T16:00:00.000Z" itemprop="datePublished">
+    2023-01-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/Linux-Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E7%AC%94%E8%AE%B0/">Linux_Shell脚本攻略笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-4使用函数添加环境变量">1.4使用函数添加环境变量</h2>
+<blockquote>
+<p>当你使用源代码构建并安装程序时，通常需要为新的可执行文件和库文件添加特定的路径。</p>
+</blockquote>
+<h4 id="1-4-1实战演练">1.4.1实战演练</h4>
+<blockquote>
+<p>这个例子展示了如何将新的路径添加到环境变量的起始部分。第一个例子利用我们目前所讲过的知识来实现，第二个例子创建了一个函数来简化修改操作。</p>
+</blockquote>
+<h5 id="1">1.</h5>
+<blockquote>
+<p>g++可以链接到动态库，根据变量<code>LD_LIBRARY_PATH</code>。也可以指定<code>-L</code>。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export PATH=/opt/myapp/bin:$PATH</span><br><span class="line">export LD_LIBRARY_PATH=/opt/myapp/lib; $LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure>
+<h5 id="2">2.</h5>
+<blockquote>
+<p>我们可以在<code>.bashrc</code>文件(在用户根目录下)中定义如下函数，简化路径添加操作：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">prepend() &#123; [ -d &quot;$2&quot; ] &amp;&amp; eval $1=\&quot;$2&#x27;:&#x27;\$$1\&quot; &amp;&amp; export $1; &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用方法</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">prepend PATH /opt/myapp/bin 	#注意：必须是根目录开始寻找的，已经存在的文件夹</span><br><span class="line">prepend LD_LIBRARY_PATH /opt/myapp/lib</span><br></pre></td></tr></table></figure>
+<p>**优化：**在进行添加时，如果变量为空，则会在末尾留下一个:。要解决这个问题，可以对该函数再做一些修改：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">prepend() &#123; [ -d &quot;$2&quot; ] &amp;&amp; eval $1=\&quot;$2\$\&#123;$1:+&#x27;:&#x27;\$$1\&#125;\&quot; &amp;&amp; export $1 ; &#125;</span><br><span class="line">eval $1=\&quot;$2’:’\1\&quot;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在这个函数中，我们引入了一种shell参数扩展的形式：</p>
+<p><code>$&#123;parameter:+expression&#125;</code></p>
+<p>如果parameter有值且不为空，则使用expression的值。通过这次修改，在向环境变量中添加新路径时，当且仅当旧值存在，才会增加:。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/18/Shell%E7%BC%96%E7%A8%8B/2022-12-18_4-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE/">4-环境变量设置</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-17T16:00:00.000Z" itemprop="datePublished">
+    2022-12-18
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="4-环境变量设置">4.环境变量设置</h2>
+<h4 id="1-修改环境变量（用户个人）">1.修改环境变量（用户个人）</h4>
+<blockquote>
+<p>在对应用户下的隐藏文件中修改</p>
+</blockquote>
+<h5 id="1-进入对应文件">1.进入对应文件</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ls ~ -a			#列出~下所有对应文件，找到~/.bash_profile</span><br><span class="line">vim .bash_profile</span><br></pre></td></tr></table></figure>
+<h5 id="2-加入export命令">2.加入export命令</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export name=&quot;hello&quot;</span><br></pre></td></tr></table></figure>
+<h5 id="3-保存退出">3.保存退出</h5>
+<h5 id="4-重新登录用户">4.重新登录用户</h5>
+<blockquote>
+<p>该文件中的环境变量只在当前用户重新登录时才会重新加载。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">exit</span><br><span class="line">su - username		#-不能少</span><br></pre></td></tr></table></figure>
+<h5 id="5-测试">5.测试</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo $name</span><br></pre></td></tr></table></figure>
+<h4 id="2-修改环境变量（全局）">2.修改环境变量（全局）</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>/etc/profile</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/17/Shell%E7%BC%96%E7%A8%8B/2022-12-17_1-shell%E8%84%9A%E6%9C%AC%E7%AE%80%E4%BB%8B/">1-shell脚本简介</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-16T16:00:00.000Z" itemprop="datePublished">
+    2022-12-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-shell脚本简介">1.shell脚本简介</h2>
+<h4 id="1-1shell介绍">1.1shell介绍</h4>
+<p>操作系统每一个动作，都需要一个程序来编写成二进制文件才能执行。每次都需要一个程序太不方便，于是出现了shell来获取约定好的用户命令，并以此查询并执行编写好的二进制文件。</p>
+<h4 id="1-2shell脚本介绍">1.2shell脚本介绍</h4>
+<p>含有多条Linux命令，并含有循环控制语句的文件。</p>
+<p>Linux下是<code>*.sh</code>，Windows下是<code>*.bat</code></p>
+<h4 id="1-3SheBang（-）">1.3SheBang（#!）</h4>
+<blockquote>
+<p>通常在脚本的第一行规定使用何种解释器去执行该脚本</p>
+<p>语法如下：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">! /bin/bash</span>		</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">使用bash来解释</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">或者一样的</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">! /bin/sh</span></span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如果没有指定，则会使用当前环境下的shell解释器去解释，即$SHELL</p>
+</li>
+</ul>
+<h4 id="1-4执行脚本的几种方式">1.4执行脚本的几种方式</h4>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">给文件一个可执行权限</span></span><br><span class="line">chmod +x filename</span><br><span class="line">chmod +x ./hello.sh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">指定路径的解释器去解释（推荐）</span></span><br><span class="line">/bin/bash filename</span><br><span class="line">/bin/bash ./hello.sh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"><span class="built_in">source</span> filename</span></span><br><span class="line">. filename</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/17/Shell%E7%BC%96%E7%A8%8B/2022-12-17_2-Bash%E7%89%B9%E6%80%A7/">2-Bash特性</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-16T16:00:00.000Z" itemprop="datePublished">
+    2022-12-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="2-Bash特性">2.Bash特性</h2>
+<h4 id="1-history命令">1.history命令</h4>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#查看过往的命令历史</span></span><br><span class="line"><span class="built_in">history</span>			</span><br><span class="line"></span><br><span class="line"><span class="comment">#有关历史的变量</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$HISTSIZE</span>	<span class="comment">#查看历史的最大值</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$HISTFILE</span>	<span class="comment">#查看存储历史命令的文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#history参数</span></span><br><span class="line">-c		<span class="comment">#清空历史：history -c</span></span><br><span class="line">-r		<span class="comment">#恢复历史：history -r</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#调用历史命令</span></span><br><span class="line">!历史ID	<span class="comment">#调用对应ID的命令</span></span><br><span class="line">!!		 <span class="comment">#执行上一条命令</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-快捷键">2.快捷键</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>CTRL+L：清屏</p>
+</li>
+<li class="lvl-2">
+<p>CTRL+U：擦除当前命令</p>
+</li>
+<li class="lvl-2">
+<p>CTRL+A：移到行首</p>
+</li>
+<li class="lvl-2">
+<p>CTRL+B：左移一个光标’</p>
+</li>
+<li class="lvl-2">
+<p>CTRL+E：移到行尾</p>
+</li>
+<li class="lvl-2">
+<p>CTRL+C：终止当前命令</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

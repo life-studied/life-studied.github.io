@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ UPDATE&amp;DELETE语句 }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/18/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/UPDATE&amp;DELETE%E8%AF%AD%E5%8F%A5/2022-05-18_16%E6%9B%B4%E6%96%B0%E5%92%8C%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE/">16更新和删除数据</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-17T16:00:00.000Z" itemprop="datePublished">
+    2022-05-18
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/UPDATE-DELETE%E8%AF%AD%E5%8F%A5/">UPDATE&amp;DELETE语句</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="更新和删除数据">更新和删除数据</h2>
+<h4 id="1-更新数据">1.更新数据</h4>
+<blockquote>
+<p>使用UPDATE语句更新表中数据。</p>
+</blockquote>
+<h5 id="1-1更新单列">1.1更新单列</h5>
+<blockquote>
+<p>语句由三部分组成</p>
+<p>1.要更新的表名</p>
+<p>2.列名与它的新值</p>
+<p>3.更新列的过滤条件</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UPDATE Customers</span><br><span class="line">SET cust_email = &#x27;my@s.com&#x27;</span><br><span class="line">Where cust_id = &#x27;00000001&#x27;;</span><br></pre></td></tr></table></figure>
+<p><strong>注：如果没有where过滤，则对象为所有行</strong></p>
+<h5 id="1-2更新多列">1.2更新多列</h5>
+<blockquote>
+<p>SET语句中使用逗号分隔条件</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UPDATE Customers</span><br><span class="line">SET cust_email = &#x27;my@s.com&#x27;,</span><br><span class="line">	cust_name = &#x27;Jay&#x27;</span><br><span class="line">Where cust_id = &#x27;00000001&#x27;;</span><br></pre></td></tr></table></figure>
+<h5 id="1-3删除某个列">1.3删除某个列</h5>
+<blockquote>
+<p>将值设置成NULL即可。</p>
+</blockquote>
+<h4 id="2-删除数据">2.删除数据</h4>
+<blockquote>
+<p>使用DELETE FROM语句删除</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DELETE FROM Customers</span><br><span class="line">Where cust_id = &#x27;00000001&#x27;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

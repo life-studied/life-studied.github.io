@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/11/16/%E9%80%86%E5%90%91%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/2022-11-16_2-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E8%A7%A3%E8%AF%BB%E5%88%86%E6%9E%90/">2-自定义类型数据的解读分析</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-11-15T16:00:00.000Z" itemprop="datePublished">
+    2022-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E9%80%86%E5%90%91%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/">逆向分析基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="自定义类型数据的解读分析">自定义类型数据的解读分析</h2>
+<h4 id="1-如何找到一个数据结构体（类）的起始点">1.如何找到一个数据结构体（类）的起始点</h4>
+<p>步骤：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>要想找到一个结构体的头部，等于要找到这个结构体的指针（因为指针一定指向头部）</p>
+</li>
+<li class="lvl-2">
+<p>由于类指针一般以this的方式出现，因此变成了找this</p>
+</li>
+<li class="lvl-2">
+<p>由于this一般出现在成员函数中，只要这个成员函数改写了成员变量，底层一定是指针+偏移量的形式访问这个数据的</p>
+</li>
+<li class="lvl-2">
+<p>因此最终要找的实际是改写了成员变量的那个语句中的this指针</p>
+</li>
+</ul>
+<h4 id="2-内存对齐">2.内存对齐</h4>
+<blockquote>
+<p>下面的输出结果是12</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">test</span> &#123;</span><br><span class="line">	<span class="type">char</span> x;</span><br><span class="line">	<span class="type">int</span> m;</span><br><span class="line">	<span class="type">char</span> b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">sizeof</span>(test);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//在实际存储中是char 0 0 0 int char 0 0 0</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-数据分析">3.数据分析</h4>
+<blockquote>
+<p>首先根据被修改数据的偏移量找到结构体的首地址，</p>
+<p>根据内存偏移的规则，一般将内存数据读到文件里，每四个字节划分一次</p>
+<p>如果有末尾不像00这种，可以猜测是字符数组，放到vs里去试一下</p>
+</blockquote>
+<h4 id="4-使用CE结构分析工具">4.使用CE结构分析工具</h4>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/11/16/%E9%80%86%E5%90%91%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/2022-11-16_3-%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E4%BA%BA%E7%89%A9%E5%B1%9E%E6%80%A7%E6%98%BE%E7%A4%BA/">3-实现游戏人物属性显示</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-11-15T16:00:00.000Z" itemprop="datePublished">
+    2022-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E9%80%86%E5%90%91%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/">逆向分析基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="实现游戏人物属性显示">实现游戏人物属性显示</h2>
+<h4 id="1-OpenProcess函数">1.OpenProcess函数</h4>
+<blockquote>
+<p>获取某个进程的权限</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">HANDLE</span></span><br><span class="line"><span class="function">WINAPI</span></span><br><span class="line"><span class="function"><span class="title">OpenProcess</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    _In_ DWORD dwDesiredAccess,		<span class="comment">//读取权限</span></span></span></span><br><span class="line"><span class="params"><span class="function">    _In_ BOOL bInheritHandle,		<span class="comment">//是否继承</span></span></span></span><br><span class="line"><span class="params"><span class="function">    _In_ DWORD dwProcessId			<span class="comment">//想要读取的PID</span></span></span></span><br><span class="line"><span class="params"><span class="function">    )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//example</span></span><br><span class="line">HANDLE hProcess = <span class="built_in">OpenProcess</span>(PROCESS_ALL_ACCESS,FALSE,Pid)</span><br></pre></td></tr></table></figure>
+<h4 id="2-ReadProcessMemory函数">2.ReadProcessMemory函数</h4>
+<blockquote>
+<p>获取某个进程的内存</p>
+</blockquote>
+<p>返回值：</p>
+<p>TRUE	成功</p>
+<p>FALSE	失败</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">BOOL</span></span><br><span class="line"><span class="function">WINAPI</span></span><br><span class="line"><span class="function"><span class="title">ReadProcessMemory</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    _In_ HANDLE hProcess,				<span class="comment">//要读取的句柄</span></span></span></span><br><span class="line"><span class="params"><span class="function">    _In_ LPCVOID lpBaseAddress,			<span class="comment">//要读取的地址</span></span></span></span><br><span class="line"><span class="params"><span class="function">    _Out_writes_bytes_to_(nSize,*lpNumberOfBytesRead) LPVOID lpBuffer,		<span class="comment">//指向接收数据的缓冲区</span></span></span></span><br><span class="line"><span class="params"><span class="function">    _In_ SIZE_T nSize,					<span class="comment">//读取大小</span></span></span></span><br><span class="line"><span class="params"><span class="function">    _Out_opt_ SIZE_T* lpNumberOfBytesRead		<span class="comment">//接收到的数据大小（不需要就置NULL）</span></span></span></span><br><span class="line"><span class="params"><span class="function">    )</span></span>;</span><br></pre></td></tr></table></figure>
+<h4 id="3-实际应用">3.实际应用</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	DWORD Pid;</span><br><span class="line">	SIZE_T readByte;</span><br><span class="line">linput:</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;Please input the game ID:&quot;</span>;</span><br><span class="line">	cin &gt;&gt; Pid;</span><br><span class="line">	HANDLE hProcess = <span class="built_in">OpenProcess</span>(PROCESS_ALL_ACCESS,FALSE,Pid);</span><br><span class="line">	<span class="type">long</span> hp&#123;&#125;;</span><br><span class="line">	<span class="keyword">if</span> (hProcess == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;打开失败&quot;</span>;</span><br><span class="line">		<span class="keyword">goto</span> linput;</span><br><span class="line">	&#125;</span><br><span class="line">	BOOL bRet = <span class="built_in">ReadProcessMemory</span>(hProcess, (LPCVOID)<span class="number">0x4CEF18</span>, (LPVOID)&amp;hp, <span class="built_in">sizeof</span>(hp), &amp;readByte);</span><br><span class="line">	<span class="keyword">if</span> (bRet)</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;HP:&quot;</span> &lt;&lt; hp &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;游戏内存读取失败&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/11/16/%E9%80%86%E5%90%91%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/2022-11-16_4-%E6%A8%A1%E4%BB%BFCE%E6%97%A0%E6%95%8C%EF%BC%88%E9%94%81%E8%A1%80%EF%BC%89%E5%8A%9F%E8%83%BD/">4-模仿CE无敌（锁血）功能</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-11-15T16:00:00.000Z" itemprop="datePublished">
+    2022-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E9%80%86%E5%90%91%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/">逆向分析基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="模仿CE无敌（锁血）功能">模仿CE无敌（锁血）功能</h2>
+<h4 id="1-WriteProcessMemory函数">1.WriteProcessMemory函数</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">BOOL</span></span><br><span class="line"><span class="function">WINAPI</span></span><br><span class="line"><span class="function"><span class="title">WriteProcessMemory</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    _In_ HANDLE hProcess,			<span class="comment">//要写入的进程句柄</span></span></span></span><br><span class="line"><span class="params"><span class="function">    _In_ LPVOID lpBaseAddress,		<span class="comment">//要写入的地址</span></span></span></span><br><span class="line"><span class="params"><span class="function">    _In_reads_bytes_(nSize) LPCVOID lpBuffer,	<span class="comment">//要写入的数据指针</span></span></span></span><br><span class="line"><span class="params"><span class="function">    _In_ SIZE_T nSize,							<span class="comment">//要写入的大小</span></span></span></span><br><span class="line"><span class="params"><span class="function">    _Out_opt_ SIZE_T* lpNumberOfBytesWritten	<span class="comment">//实际写入的大小反馈</span></span></span></span><br><span class="line"><span class="params"><span class="function">    )</span></span>;</span><br></pre></td></tr></table></figure>
+<h4 id="2-核心代码">2.核心代码</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">BOOL bRet = <span class="built_in">WriteProcessMemory</span>(hProcess,(LPVOID)(<span class="number">0x4CEF18</span>),&amp;hp,<span class="built_in">sizeof</span>(hp),<span class="literal">NULL</span>);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/11/12/MFC/2022-11-12_10-MFC%E6%B6%88%E6%81%AF%E5%88%86%E7%B1%BB/">10-MFC消息分类</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-11-11T16:00:00.000Z" itemprop="datePublished">
+    2022-11-12
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MFC/">MFC</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="MFC消息分类">MFC消息分类</h2>
+<blockquote>
+<p>消息的分类：标准消息，命令消息，通告消息。</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>[标准消息]：除 WM_COMMAND 之外，所有以 。从 CWnd 类派生的类都可以接收到这一消息</p>
+</li>
+<li class="lvl-2">
+<p>[命令消息]：来自菜单、加速键或工具栏按钮的消息。这类消息都以WM_COMMAND 呈现。在 MFC 中，通过菜单项的标识（ID）来区分不同的命令消息；在 SDK 中，通过消息的 wParam 参数识别。从 CCmdTarget（CWnd的父类）派生的类都可以接收到这一类消息</p>
+</li>
+<li class="lvl-2">
+<p>[通告消息]：由控件产生的消息，例如，按钮的单击，列表框的选择等均产生此类消息，为的是向其父窗口（通常是对话框）通知事件的发生。这类消息也是以 WM_COMMAND 形式呈现。从 CCmdTarget（CWnd 的父类）派生的类都可以接收到这一类消息</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/11/12/MFC/2022-11-12_11-%E5%AF%B9%E8%AF%9D%E6%A1%86/">11-对话框</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-11-11T16:00:00.000Z" itemprop="datePublished">
+    2022-11-12
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MFC/">MFC</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="对话框">对话框</h2>
+<h4 id="1-模态对话框和非模态对话框">1.模态对话框和非模态对话框</h4>
+<h5 id="1-1模态对话框">1.1模态对话框</h5>
+<blockquote>
+<p>模态对话框对整个程序是独占式的，在其显示时，整个程序会暂停，直到关闭该对话框。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">BingoDlg dlg;		<span class="comment">//创建一个临时的对话框对象</span></span><br><span class="line">dlg.<span class="built_in">DoModal</span>();		<span class="comment">//显示对话框，原窗口阻塞等待临时对话框完成操作</span></span><br></pre></td></tr></table></figure>
+<h5 id="1-2非模态对话框">1.2非模态对话框</h5>
+<blockquote>
+<p>当其显示时，允许执行程序中其它任务，而不用关闭这个对话框。在 MFC 中，对资源的操作通常都是通过一个与资源相关的类来完成。对话框资源对应 CDialog 基类。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">BingoDlg *dlg = <span class="keyword">new</span> BingoDlg;			<span class="comment">//创建一个全局的对话框</span></span><br><span class="line">dlg-&gt;<span class="built_in">Create</span>(IDD_BINGO_DLG,<span class="keyword">this</span>);		<span class="comment">//在父窗口的Init相关函数里加入该对话框的初始化</span></span><br><span class="line">dlg-&gt;<span class="built_in">ShowWindow</span>(SW_SHOW);				<span class="comment">//在需要的函数响应处显示</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/11/12/MFC/2022-11-12_12-%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E6%8C%89%E9%92%AE/">12-动态创建按钮</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-11-11T16:00:00.000Z" itemprop="datePublished">
+    2022-11-12
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MFC/">MFC</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="动态创建按钮">动态创建按钮</h2>
+<blockquote>
+<p>按钮的静态创建在类中没有对应的按钮成员变量。但是动态创建需要在包含其的对话框类中加入按钮成员。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">CButton m_button;		<span class="comment">//成员变量，全局属性</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//需要创建按钮的响应函数里</span></span><br><span class="line"><span class="keyword">if</span> (m_button.m_hWnd == <span class="literal">NULL</span>)</span><br><span class="line">&#123;</span><br><span class="line">	m_button.<span class="built_in">Create</span>(_T(<span class="string">&quot;bingo&quot;</span>), BS_DEFPUSHBUTTON | WS_VISIBLE | WS_CHILD, <span class="built_in">CRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>), <span class="keyword">this</span>, <span class="number">123</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//参数：按钮文字，按钮设置，按钮大小和位置，父类，按钮ID（不能重复）</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/11/12/MFC/2022-11-12_13-%E6%8E%A7%E4%BB%B6%E7%9A%84%E8%AE%BF%E9%97%AE/">13-控件的访问</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-11-11T16:00:00.000Z" itemprop="datePublished">
+    2022-11-12
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MFC/">MFC</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="控件的访问">控件的访问</h2>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/11/12/MFC/2022-11-12_9-MFC%E6%A1%86%E6%9E%B6%E7%90%86%E8%AE%BA/">9-MFC框架理论</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-11-11T16:00:00.000Z" itemprop="datePublished">
+    2022-11-12
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MFC/">MFC</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="MFC框架理论">MFC框架理论</h2>
+<h4 id="1-CDocTemplate、CDocument、CView、CFrameWnd-关联关系：">1.CDocTemplate、CDocument、CView、CFrameWnd 关联关系：</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>CWinApp 拥有一个对象指针：CDocManager * m_pDocManager</p>
+</li>
+<li class="lvl-2">
+<p>CDocManager 拥有一个指针链表 CPtrList m_templateList，用来维护一系列的 DocumentTemplate。应用程序在 CMyWinApp::InitInstance 中以 AddDocTemplate 将这些 Document Templates 加入到有CDocManager 所维护的链表之中。</p>
+</li>
+<li class="lvl-2">
+<p>CDocTemplate 拥有三个成员变量，分别持有 Document、View、Frame 的 CRuntimeClass 指针，另有一个成员变量 m_nIDResource，用来表示此 Document 显示时应该采用的 UI 对象。这四份数据在CMyWinApp::InitInstance 函数构造 CDocTemplate 时指定，称为构造函数的参数。</p>
+</li>
+<li class="lvl-2">
+<p>CDocument 有一个成员变量 CDocTemplate * m_pDocTemplate，回指其 DocumentTemplate；另外有一个成员变量 CPtrList m_viewList，表示它可以同时维护一组 Views。</p>
+</li>
+<li class="lvl-2">
+<p>CFrameWnd 有一个成员变量 CView * m_pViewActive，指向当前活动的 View。</p>
+</li>
+<li class="lvl-2">
+<p>CView 有一个成员变量 CDocument * m_pDocument，指向相关的Document。</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/11/11/MFC/2022-11-11_1-MFC%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/">1-MFC开发流程</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-11-10T16:00:00.000Z" itemprop="datePublished">
+    2022-11-11
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MFC/">MFC</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="MFC开发流程">MFC开发流程</h2>
+<h4 id="1-分类">1.分类</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>基于对话框的程序</p>
+<ul class="lvl-2">
+<li class="lvl-6">无菜单栏</li>
+<li class="lvl-6">无工具栏</li>
+<li class="lvl-6">适用于界面简单</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>基于文档和视图的程序</p>
+<ul class="lvl-2">
+<li class="lvl-6">标准的windows应用界面</li>
+<li class="lvl-6">含菜单栏，工具栏，状态栏</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-Win32与MFC的区别">2.Win32与MFC的区别</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>定制界面的区别（手写代码vs拖放组件）</p>
+</li>
+<li class="lvl-2">
+<p>响应键盘、鼠标的区别（窗口处理函数vs消息映射机制）</p>
+</li>
+</ul>
+<h4 id="3-创建控件">3.创建控件</h4>
+<p>在工具箱拖出组件，双击进入。由于有消息映射机制存在，无需维护消息与控件之间的链接，直接写响应即可。</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/11/11/MFC/2022-11-11_5-%E6%98%BE%E7%A4%BA%E5%85%89%E6%A0%87%E5%92%8C%E6%96%87%E6%9C%AC/">5-显示光标和文本</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-11-10T16:00:00.000Z" itemprop="datePublished">
+    2022-11-11
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MFC/">MFC</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="显示光标和文本">显示光标和文本</h2>
+<h4 id="1-MFC程序的四个阶段">1.MFC程序的四个阶段</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>构造：对象被创建阶段</p>
+</li>
+<li class="lvl-2">
+<p>Create阶段：对象被绑定到窗体阶段</p>
+</li>
+<li class="lvl-2">
+<p>ShowWindow/DoModel阶段</p>
+</li>
+<li class="lvl-2">
+<p>Destroy阶段：销毁窗体</p>
+</li>
+<li class="lvl-2">
+<p>Delete阶段：销毁对象</p>
+</li>
+</ul>
+<h4 id="2-添加光标">2.添加光标</h4>
+<blockquote>
+<p>在Create阶段加入光标。点击View里的属性的消息，选择OnCreate，添加</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//CClientDC dc(this);		获取设备上下文</span></span><br><span class="line">TEXTMETRIC tm;				<span class="comment">//创建字体结构体</span></span><br><span class="line">dc.<span class="built_in">GetTextMetrics</span>(&amp;tm);		<span class="comment">//获取程序当前的字体信息</span></span><br><span class="line"><span class="built_in">CreateSolidCaret</span>(<span class="number">3</span>, tm.tmHeight);		<span class="comment">//使用程序自带的字体来创建光标大小</span></span><br><span class="line"><span class="built_in">ShowCaret</span>();				<span class="comment">//显示光标</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-读取键盘输入">3.读取键盘输入</h4>
+<blockquote>
+<p>点击View里的属性的消息，选择OnChar，添加</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//OnChar</span></span><br><span class="line"><span class="function">CClientDC <span class="title">dc</span><span class="params">(<span class="keyword">this</span>)</span></span>;					<span class="comment">//获取设备上下文</span></span><br><span class="line">m_strText += (TCHAR)nChar;			<span class="comment">//成员字符串后面增加用户输入的一个字符</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">InvalidateRect</span>(<span class="literal">NULL</span>);				<span class="comment">//将打印放到OnDraw中，每次输入字符调用刷新（同时每次窗口刷新也都自动将字体再打印一遍）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//OnDraw</span></span><br><span class="line">pDC-&gt;<span class="built_in">TextOut</span>(<span class="number">0</span>, <span class="number">0</span>, m_strText);		<span class="comment">//在设备上下文中输出文本</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-目前问题">4.目前问题</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>TextOut函数只支持单行显示，不支持多行，因此回车不能正常使用</p>
+</li>
+<li class="lvl-2">
+<p>光标位置始终固定在开始处，不能随着文字的增加而移动</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/14/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/16/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

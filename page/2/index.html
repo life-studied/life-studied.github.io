@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/12/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-03-12_1-1%20%E4%BC%A0%E7%BB%9F%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">1-1 传统的错误处理</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-11T16:00:00.000Z" itemprop="datePublished">
+    2023-03-12
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-1-传统的错误处理">1.1 传统的错误处理</h2>
+<h4 id="本书说明">本书说明</h4>
+<ol>
+<li class="lvl-3">
+<p><code>debug</code>模式下，使用<code>assert</code>来进行开发时调试，在发布时通过<code>#define NDEBUG</code>来使其失效。</p>
+</li>
+<li class="lvl-3">
+<p>运行时错误处理采用<code>require.h</code>中定义的<code>assure</code>和<code>require</code>函数。</p>
+</li>
+</ol>
+<h4 id="1-C语言中的错误处理方式">1. C语言中的错误处理方式</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>函数中返回错误信息</p>
+<ul class="lvl-2">
+<li class="lvl-6">问题：错误检查冗长乏味</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>鲜为人知的C库信号处理系统，即signal函数和raise函数</p>
+<ul class="lvl-2">
+<li class="lvl-6">问题：项目中代码耦合度过高，不同库的信号值可能会发生冲突</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>C库的非局部跳转函数：setjmp和longjmp</p>
+<ul class="lvl-2">
+<li class="lvl-6">问题：在C++中跳出作用域时，不会调用析构函数，非常危险。</li>
+</ul>
+</li>
+</ul>
+<h5 id="一个setjmp和longjmp的演示程序">一个setjmp和longjmp的演示程序</h5>
+<blockquote>
+<p>本程序演示了setjmp和longjmp的运作流程：先调用一次setjmp，再使用oz函数创建一个对象，其中使用longjmp跳回setjmp的if判断，并证明了对象不被析构（goto也是如此）。接着返回值变为47，进入else。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;csetjmp&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Rainbow</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Rainbow</span>() &#123; cout &lt;&lt; <span class="string">&quot;Rainbow()&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line">    ~<span class="built_in">Rainbow</span>() &#123; cout &lt;&lt; <span class="string">&quot;~Rainbow()&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">jmp_buf kansas;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">oz</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Rainbow rb;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;There is no place like home&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">longjmp</span>(kansas, <span class="number">47</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">setjmp</span>(kansas) == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;tornado, switch, munchins...&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="built_in">oz</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Auntie Em!&quot;</span></span><br><span class="line">             &lt;&lt; <span class="string">&quot;I had the strangest dream...&quot;</span></span><br><span class="line">             &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*output:</span></span><br><span class="line"><span class="comment">tornado, switch, munchins...</span></span><br><span class="line"><span class="comment">Rainbow()</span></span><br><span class="line"><span class="comment">There is no place like home</span></span><br><span class="line"><span class="comment">There is no place like home</span></span><br><span class="line"><span class="comment">There is no place like home</span></span><br><span class="line"><span class="comment">Auntie Em!I had the strangest dream...</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/12/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-03-12_1-5%20%E6%B8%85%E7%90%86/">1-5 清理</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-11T16:00:00.000Z" itemprop="datePublished">
+    2023-03-12
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-5-清理">1.5 清理</h2>
+<h4 id="1-5-1-引入">1.5.1 引入</h4>
+<blockquote>
+<p>下面这个例子，演示了构造函数中抛出异常，析构函数不会被调用（因为构造没有完成）。同时演示了创建对象数组时抛出异常的情况。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Trace</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> count;</span><br><span class="line">    <span class="type">int</span> objId;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Trace</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        objId = count++;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;constructing Trace #&quot;</span> &lt;&lt; objId &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">if</span> (objId == <span class="number">3</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">Trace</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;destructing Trace #&quot;</span> &lt;&lt; objId &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> Trace::count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span> </span><br><span class="line">    &#123;</span><br><span class="line">        Trace n1;</span><br><span class="line">        Trace array[<span class="number">5</span>];		<span class="comment">//在构造array[2]时抛出异常，array[2]并没有完成构造，因此不会被析构</span></span><br><span class="line">        Trace n2;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(<span class="type">int</span> i)</span><br><span class="line">    &#123;</span><br><span class="line">        cout&lt;&lt;<span class="string">&quot;catch &quot;</span>&lt;&lt;i&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*output:</span></span><br><span class="line"><span class="comment">constructing Trace #0</span></span><br><span class="line"><span class="comment">constructing Trace #1</span></span><br><span class="line"><span class="comment">constructing Trace #2</span></span><br><span class="line"><span class="comment">constructing Trace #3</span></span><br><span class="line"><span class="comment">destructing Trace #2</span></span><br><span class="line"><span class="comment">destructing Trace #1</span></span><br><span class="line"><span class="comment">destructing Trace #0</span></span><br><span class="line"><span class="comment">catch 3</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-5-2-资源管理（important）">1.5.2 资源管理（important）</h4>
+<blockquote>
+<p>由于构造函数因异常而未完成，会不调用析构函数。因此会出现资源泄露的情况。下面是一个UseResource析构未调用，导致Cat析构也同样未能正常调用，出现悬挂指针的情况。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstddef&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Cat</span>() &#123; cout &lt;&lt; <span class="string">&quot;Cat()&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line">    ~<span class="built_in">Cat</span>() &#123; cout &lt;&lt; <span class="string">&quot;~Cat()&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> *<span class="keyword">operator</span> <span class="title">new</span><span class="params">(<span class="type">size_t</span> sz)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;allocating a dog.&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">throw</span> <span class="number">47</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="keyword">operator</span> <span class="title">delete</span><span class="params">(<span class="type">void</span> *p)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;deallocating a dog.&quot;</span> &lt;&lt; endl;</span><br><span class="line">        ::<span class="function"><span class="keyword">operator</span> <span class="title">delete</span><span class="params">(p)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UseSources</span></span><br><span class="line">&#123;</span><br><span class="line">    Cat *bp;</span><br><span class="line">    Dog *op;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">UseSources</span>(<span class="type">int</span> count = <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;UserSources()&quot;</span> &lt;&lt; endl;</span><br><span class="line">        bp = <span class="keyword">new</span> Cat[count];</span><br><span class="line">        op = <span class="keyword">new</span> Dog;</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">UseSources</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;~UseResource()&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">delete</span>[] bp;</span><br><span class="line">        <span class="keyword">delete</span> op;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span>** argv)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function">UseSources <span class="title">ur</span><span class="params">(<span class="number">3</span>)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(<span class="type">int</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cout&lt;&lt;<span class="string">&quot;inside handler&quot;</span>&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*output:</span></span><br><span class="line"><span class="comment">UserSources()</span></span><br><span class="line"><span class="comment">Cat()</span></span><br><span class="line"><span class="comment">Cat()</span></span><br><span class="line"><span class="comment">Cat()</span></span><br><span class="line"><span class="comment">allocating a dog.</span></span><br><span class="line"><span class="comment">inside handler</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-5-3-使所有事物都成为对象">1.5.3 使所有事物都成为对象</h4>
+<h5 id="1-资源获得式初始化（RAII技术）（important）">1. 资源获得式初始化（RAII技术）（important）</h5>
+<blockquote>
+<p>该技术保证每一个对象的资源分配都具有原子性。方法是构建一个类模板，将指针嵌入这个类中。此例中，类是自定义的，但是C++提供了auto_ptr来减少工作量。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstddef&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>, <span class="type">int</span> sz = <span class="number">1</span>&gt;</span><br><span class="line"><span class="keyword">class</span> PWrap</span><br><span class="line">&#123;</span><br><span class="line">    T *ptr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">RangeError</span></span><br><span class="line">    &#123;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">PWrap</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        ptr = <span class="keyword">new</span> T[sz];</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;PWarp constructor&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">PWrap</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">delete</span>[] ptr;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;PWarp destructor&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    T &amp;<span class="keyword">operator</span>[](<span class="type">int</span> i) <span class="keyword">throw</span>(RangeError)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (i &gt;= <span class="number">0</span> &amp;&amp; i &lt; sz)</span><br><span class="line">            <span class="keyword">return</span> ptr[i];</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">RangeError</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Cat</span>() &#123; cout &lt;&lt; <span class="string">&quot;Cat()&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line">    ~<span class="built_in">Cat</span>() &#123; cout &lt;&lt; <span class="string">&quot;~Cat()&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">g</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">void</span> *<span class="keyword">operator</span> <span class="keyword">new</span>[](<span class="type">size_t</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Allocating a Dog&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">throw</span> <span class="number">47</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">void</span> <span class="keyword">operator</span> <span class="keyword">delete</span>[](<span class="type">void</span> *p)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Deallocating a Dog&quot;</span> &lt;&lt; endl;</span><br><span class="line">        ::<span class="keyword">operator</span> <span class="keyword">delete</span>[](p);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UseResources</span></span><br><span class="line">&#123;</span><br><span class="line">    PWrap&lt;Cat, <span class="number">3</span>&gt; cats;				<span class="comment">//通过将指针嵌入这个PWrap&lt;Cat, 3&gt;类中</span></span><br><span class="line">    								<span class="comment">//即使下面PWrap&lt;Dog&gt;类里的Dog构造时抛出异常</span></span><br><span class="line">    								<span class="comment">//这个PWrap&lt;Cat, 3&gt;类的构造也正常完成了</span></span><br><span class="line">    								<span class="comment">//就避免了不调用这个PWrap&lt;Cat, 3&gt;类析构使Cat资源泄露的问题</span></span><br><span class="line">    PWrap&lt;Dog&gt; dog;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">UseResources</span>() &#123; cout &lt;&lt; <span class="string">&quot;UseResources()&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line">    ~<span class="built_in">UseResources</span>() &#123; cout &lt;&lt; <span class="string">&quot;~UseResources()&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123; cats[<span class="number">1</span>].<span class="built_in">g</span>(); &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        UseResources ur;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (<span class="type">int</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;inside handler&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (...)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;inside catch(...)&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Cat()</span></span><br><span class="line"><span class="comment">Cat()</span></span><br><span class="line"><span class="comment">Cat()</span></span><br><span class="line"><span class="comment">PWarp constructor</span></span><br><span class="line"><span class="comment">Allocating a Dog</span></span><br><span class="line"><span class="comment">~Cat()</span></span><br><span class="line"><span class="comment">~Cat()</span></span><br><span class="line"><span class="comment">~Cat()</span></span><br><span class="line"><span class="comment">PWarp destructor</span></span><br><span class="line"><span class="comment">inside handler</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-使用auto-ptr代替自定义类">2.使用auto_ptr代替自定义类</h5>
+<blockquote>
+<p>C++提供了封装指针的类来减少工作量。(本代码不重要)</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstddef&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TraceHeap</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">void</span> *<span class="keyword">operator</span> <span class="title">new</span><span class="params">(<span class="type">size_t</span> sz)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">void</span> *p = ::<span class="keyword">operator</span> <span class="built_in">new</span>(sz);</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Allocating TraceHeap object on the heap&quot;</span></span><br><span class="line">             &lt;&lt; <span class="string">&quot; at address &quot;</span> &lt;&lt; p &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="keyword">operator</span> <span class="title">delete</span><span class="params">(<span class="type">void</span> *p)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Deleting TraceHeap object at address &quot;</span></span><br><span class="line">             &lt;&lt; p &lt;&lt; endl;</span><br><span class="line">        ::<span class="function"><span class="keyword">operator</span> <span class="title">delete</span><span class="params">(p)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">TraceHeap</span>(<span class="type">int</span> i) : <span class="built_in">i</span>(i)</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">getVal</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> i; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">auto_ptr&lt;TraceHeap&gt; <span class="title">pMyObject</span><span class="params">(<span class="keyword">new</span> TraceHeap(<span class="number">5</span>))</span></span>;</span><br><span class="line">    cout &lt;&lt; pMyObject-&gt;<span class="built_in">getVal</span>() &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="1-5-4-函数级的try块">1.5.4 函数级的try块</h4>
+<blockquote>
+<p>C++允许在函数级就使用try块，将函数体作为try的内容。下面是一个构造函数使用函数级try块的例子。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">BaseExcept</span></span><br><span class="line">    &#123;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">Base</span>(<span class="type">int</span> i) : <span class="built_in">i</span>(i) &#123; <span class="keyword">throw</span> <span class="built_in">BaseExcept</span>(); &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived</span> : <span class="keyword">public</span> Base</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">DerivedExcept</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">const</span> <span class="type">char</span> *msg;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">DerivedExcept</span>(<span class="type">const</span> <span class="type">char</span> *msg) : <span class="built_in">msg</span>(msg) &#123;&#125;</span><br><span class="line">        <span class="function"><span class="type">const</span> <span class="type">char</span> *<span class="title">what</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> msg; &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">Derived</span>(<span class="type">int</span> j)</span><br><span class="line">    <span class="keyword">try</span> : <span class="built_in">Base</span>(j)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;This won&#x27;t print&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (Base::BaseExcept &amp;)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">DerivedExcept</span>(<span class="string">&quot;Base Subobject throw&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">Derived</span>(<span class="number">3</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (Derived::DerivedExcept &amp;d)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; d.<span class="built_in">what</span>() &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/12/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-03-12_1-6%20%E6%A0%87%E5%87%86%E5%BC%82%E5%B8%B8/">1-6 标准异常</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-11T16:00:00.000Z" itemprop="datePublished">
+    2023-03-12
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-6-标准异常">1.6 标准异常</h2>
+<blockquote>
+<p>C++提供了标准异常类便于使用。可以据此派生自己的异常类。在<code>&lt;exception&gt;</code>库中定义。</p>
+<p>另外还提供了标准的派生异常类在<code>&lt;stdexcept&gt;</code>：</p>
+<ul class="lvl-1">
+<li class="lvl-2">
+<p>logic_error</p>
+</li>
+<li class="lvl-2">
+<p>runtime_error</p>
+</li>
+</ul>
+<p>可以通过成员函数what()来获取保存的信息。</p>
+</blockquote>
+<h4 id="1-使用标准异常">1.使用标准异常</h4>
+<blockquote>
+<p>由于<code>stdexcept</code>中的派生异常构造自带<code>std::string</code>的参数，相比于裸异常更适合传入参数。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdexcept&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyError</span> : <span class="keyword">public</span> runtime_error</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">MyError</span>(<span class="type">const</span> string &amp;msg = <span class="string">&quot;&quot;</span>) : <span class="built_in">runtime_error</span>(msg) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">MyError</span>(<span class="string">&quot;my message&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (MyError &amp;x)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; x.<span class="built_in">what</span>() &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="2-更多异常类">2.更多异常类</h4>
+<h5 id="2-1-logic-error派生">2.1 logic_error派生</h5>
+<p><img src="picture/logic_error%E6%B4%BE%E7%94%9F%E5%BC%82%E5%B8%B8%E7%B1%BB.png" alt=""></p>
+<h5 id="2-2-runtime-error派生">2.2 runtime_error派生</h5>
+<p><img src="picture/runtime_error%E6%B4%BE%E7%94%9F%E7%B1%BB.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/11/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-03-11_1-3%20%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8/">1-3 捕获异常</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-10T16:00:00.000Z" itemprop="datePublished">
+    2023-03-11
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-3-捕获异常">1.3 捕获异常</h2>
+<h4 id="1-3-1-try块与exception-handler">1.3.1 try块与exception handler</h4>
+<blockquote>
+<p>如果需要捕获异常，会依次执行到第一个符合的，然后退出该块。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">catch</span> (type1 id1)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">catch</span> (type2 id2)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">catch</span> (type3 id3)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="1-3-2-修改setjmp案例（异常处理代替）">1.3.2 修改setjmp案例（异常处理代替）</h4>
+<blockquote>
+<p>保证了程序流程正常，并保证了析构函数的调用。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Rainbow</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Rainbow</span>() &#123; cout &lt;&lt; <span class="string">&quot;Rainbow()&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line">    ~<span class="built_in">Rainbow</span>() &#123; cout &lt;&lt; <span class="string">&quot;~Rainbow()&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">oz</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Rainbow rb;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;There is no place like home&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">throw</span> <span class="number">47</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;tornado, switch, munchins...&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="built_in">oz</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (<span class="type">int</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Auntie Em!&quot;</span></span><br><span class="line">             &lt;&lt; <span class="string">&quot;I had the strangest dream...&quot;</span></span><br><span class="line">             &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*output:</span></span><br><span class="line"><span class="comment">tornado, switch, munchins...</span></span><br><span class="line"><span class="comment">Rainbow()</span></span><br><span class="line"><span class="comment">There is no place like home</span></span><br><span class="line"><span class="comment">There is no place like home</span></span><br><span class="line"><span class="comment">There is no place like home</span></span><br><span class="line"><span class="comment">~Rainbow()</span></span><br><span class="line"><span class="comment">Auntie Em!I had the strangest dream...</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-3-3-终止与恢复">1.3.3 终止与恢复</h4>
+<p>异常处理中，存在两种模型：终止模型和恢复模型</p>
+<p>终止模型：不可能在发生异常的地方恢复程序，直接终止</p>
+<p>恢复模型：将try块放入while里，但是工程中没多大用。</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/11/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2023-03-11_%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E8%A7%84%E5%88%99/">内存对齐规则</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-10T16:00:00.000Z" itemprop="datePublished">
+    2023-03-11
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="内存对齐规则">内存对齐规则</h2>
+<h4 id="1-规则：">1.规则：</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>数据成员的偏移量以min(pack(n)，最大成员占用字节)的整数倍进行对齐。</p>
+</li>
+</ul>
+<h4 id="2-其它说明">2.其它说明</h4>
+<ol>
+<li class="lvl-3">
+<p>内存对齐，是指数据在内存中的存放位置必须是其对齐字节数（一个无符号整数，且必须是2的幂）的倍数。这样做可以提高数据访问的效率和性能。</p>
+</li>
+<li class="lvl-3">
+<p>C++中，不同类型的数据有不同的默认对齐字节数，例如int为4，char为1，double为8等。如果数据是自定义类型（如类或结构体），则其正常对齐字节数等于其最大成员的对齐字节数。</p>
+</li>
+<li class="lvl-3">
+<p>C<ins>中还可以使用#pragma pack(n)或__attribute__((aligned(n)))等指令来修改默认的对齐方式。C</ins>11还引入了alignof和alignas两个关键字来获取或设置数据的对齐字节数。</p>
+</li>
+</ol>
+<h4 id="案例">案例</h4>
+<p>请看下面的代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 例1：默认对齐方式</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="type">char</span> a; <span class="comment">// 占1字节，偏移0</span></span><br><span class="line">    <span class="type">int</span> b; <span class="comment">// 占4字节，偏移4（因为要对齐到4的倍数）</span></span><br><span class="line">    <span class="type">char</span> c; <span class="comment">// 占1字节，偏移8</span></span><br><span class="line">&#125;; <span class="comment">// 结构体A的大小为12（因为要对齐到最大成员的倍数）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 例2：使用#pragma pack(2)指令</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> pack(2) <span class="comment">// 设置对齐字节数为2</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">B</span> &#123;</span><br><span class="line">    <span class="type">char</span> a; <span class="comment">// 占1字节，偏移0</span></span><br><span class="line">    <span class="type">int</span> b; <span class="comment">// 占4字节，偏移2（因为要对齐到2的倍数）</span></span><br><span class="line">    <span class="type">char</span> c; <span class="comment">// 占1字节，偏移6</span></span><br><span class="line">&#125;; <span class="comment">// 结构体B的大小为8（因为要对齐到指定的倍数）</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> pack() <span class="comment">// 恢复默认对齐方式</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 例3：使用__attribute__((aligned(8)))指令</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">C</span> &#123;</span><br><span class="line">    <span class="type">char</span> a; <span class="comment">// 占1字节，偏移0</span></span><br><span class="line">    <span class="type">int</span> b __attribute__((<span class="built_in">aligned</span>(<span class="number">8</span>))); <span class="comment">// 占4字节，偏移8（因为要对齐到8的倍数）</span></span><br><span class="line">    <span class="type">char</span> c; <span class="comment">// 占1字节，偏移12</span></span><br><span class="line">&#125;; <span class="comment">// 结构体C的大小为16（因为要对齐到最大成员的倍数）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 例4：使用C++11中的alignas关键字</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">D</span> &#123;</span><br><span class="line">    <span class="built_in">alignas</span>(<span class="number">16</span>) <span class="type">char</span> a; <span class="comment">// 占1字节，偏移0（但是占用16个空间）</span></span><br><span class="line">    <span class="type">int</span> b; <span class="comment">// 占4字节，偏移16（因为要对齐到16的倍数）</span></span><br><span class="line">    <span class="type">char</span> c; <span class="comment">// 占1字节，偏移20</span></span><br><span class="line">&#125;; <span class="comment">// 结构体D的大小为32（因为要对齐到最大成员的倍数）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 例5：含double的结构体</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">E</span> &#123;</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">double</span> b;</span><br><span class="line">    <span class="type">char</span> c;</span><br><span class="line">&#125;; <span class="comment">// 结构体E的大小为24</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/09/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2023-03-09_7-1%20Windows%E9%94%AE%E7%9B%98%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86/">7-1 Windows键盘消息处理</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-08T16:00:00.000Z" itemprop="datePublished">
+    2023-03-09
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/">Windows游戏编程（逐梦旅程读书笔记）</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="Windows键盘消息处理">Windows键盘消息处理</h2>
+<blockquote>
+<p>在Windows下，所有按键都会被映射为一个虚拟键，有自己的虚拟键码。</p>
+<p>message存储了消息类型，而实际的消息在另外的参数里。</p>
+</blockquote>
+<h4 id="1-键盘消息处理">1.键盘消息处理</h4>
+<p>在消息处理函数中，键盘消息处理的情况：参数<code>wParam</code>存储了传入的实际按键。下面是一个例子。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span>(message)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">case</span> WM_KEYDOWN:</span><br><span class="line">        <span class="keyword">switch</span>(wParam)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">case</span> VK_UP:</span><br><span class="line">                ...;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> VK_ESCAPE:</span><br><span class="line">                ...;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">case</span> WM_DESTROY:</span><br><span class="line">       	...;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/09/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2023-03-09_7-2%20Windows%E9%BC%A0%E6%A0%87%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86/">7-2 Windows鼠标消息处理</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-08T16:00:00.000Z" itemprop="datePublished">
+    2023-03-09
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/">Windows游戏编程（逐梦旅程读书笔记）</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="Windows鼠标消息处理">Windows鼠标消息处理</h2>
+<blockquote>
+<p>在鼠标消息处理中，message传入鼠标消息类型，而<code>wParam</code>和<code>lParam</code>存储了具体的值。</p>
+</blockquote>
+<h4 id="1-lParam参数">1.lParam参数</h4>
+<blockquote>
+<p>该参数的高位部分存储了鼠标光标的x，低位存储了鼠标光标的y。（相对于内部窗口）获取方法如下：</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">WORD <span class="title">LOWORD</span><span class="params">(DWORD dwValue)</span></span>;		<span class="comment">//y</span></span><br><span class="line"><span class="function">WORD <span class="title">HIWORD</span><span class="params">(DWORD dwValue)</span></span>;		<span class="comment">//x</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-wParam参数">2.wParam参数</h4>
+<blockquote>
+<p>该参数记录了鼠标按键和键盘上Ctrl、Shift的状态信息。</p>
+</blockquote>
+<p><img src="picture/lParam.png" alt=""></p>
+<p>使用方法：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(wParam &amp; MK_LBUTTON)</span><br><span class="line">&#123;</span><br><span class="line">    ...;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>综合判断左键单击同时按下ctrl</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(wParam &amp; MK_LBUTTON)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(wParam &amp; MK_CONTROL)</span><br><span class="line">    &#123;</span><br><span class="line">        ...;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-滚轮消息">3.滚轮消息</h4>
+<blockquote>
+<p>wParam参数的高位记录了鼠标键、Ctrl、Shift的信息，低位则记录了鼠标滚轮的信息。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">HIWORD</span>(wParam);		<span class="comment">//高位为120为向前滚，-120为向后滚</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/09/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2023-03-09_7-2-5%20Windows%E9%BC%A0%E6%A0%87%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0/">7-2-5 Windows鼠标相关函数</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-08T16:00:00.000Z" itemprop="datePublished">
+    2023-03-09
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/">Windows游戏编程（逐梦旅程读书笔记）</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="Windows鼠标相关函数">Windows鼠标相关函数</h2>
+<h4 id="1-设置鼠标光标位置（相对于屏幕）">1.设置鼠标光标位置（相对于屏幕）</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">BOOL <span class="title">SetCursorPos</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">  [in] <span class="type">int</span> X,</span></span></span><br><span class="line"><span class="params"><span class="function">  [in] <span class="type">int</span> Y</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>由于转换需要的是屏幕坐标，而获取的是窗口坐标，因此需要一个转换函数。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">BOOL <span class="title">ClientToScreen</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">  [in]      HWND    hWnd,</span></span></span><br><span class="line"><span class="params"><span class="function">  [in, out] LPPOINT lpPoint</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br></pre></td></tr></table></figure>
+<h5 id="使用案例">使用案例</h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span>(message)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">case</span> WM_MOUSEMOVE:   <span class="comment">//鼠标移动消息</span></span><br><span class="line">		g_iX = <span class="built_in">LOWORD</span>(lParam);			<span class="comment">//取得鼠标X坐标</span></span><br><span class="line">		g_iY = <span class="built_in">HIWORD</span>(lParam);			<span class="comment">//取得鼠标Y坐标</span></span><br><span class="line">        Point temp&#123;g_iX,g_iY&#125;;</span><br><span class="line">        <span class="built_in">ClientToScreen</span>(hwnd, &amp;temp);</span><br><span class="line">        <span class="built_in">SetCursorPos</span>(temp.x,temp.y);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-显示与隐藏光标">2.显示与隐藏光标</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">ShowCursor</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">  [in] BOOL bShow</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//example</span></span><br><span class="line"><span class="built_in">ShowCursor</span>(TRUE);		<span class="comment">//显示光标</span></span><br><span class="line"><span class="built_in">ShowCursor</span>(FALSE);		<span class="comment">//隐藏光标</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-获取窗口外鼠标信息">3.获取窗口外鼠标信息</h4>
+<blockquote>
+<p>正常情况下，鼠标指针位于哪个窗口区域内，鼠标消息就自动发给哪个窗口。如果调用了SetCapture，之后无论鼠标的位置在哪，鼠标消息都发给指定的这个窗口，直到调用ReleaseCapture或者调用SetCapture设置另一个窗口为止。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//catch</span></span><br><span class="line"><span class="function">HWND <span class="title">SetCapture</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">  [in] HWND hWnd</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//release</span></span><br><span class="line"><span class="function">BOOL <span class="title">ReleaseCapture</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<h4 id="4-限制光标移动区域">4.限制光标移动区域</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//function</span></span><br><span class="line"><span class="function">BOOL <span class="title">ClipCursor</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">  [in, optional] <span class="type">const</span> RECT *lpRect</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//struct</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">tagRECT</span></span><br><span class="line">&#123;</span><br><span class="line">    LONG    left;		<span class="comment">//左上点x</span></span><br><span class="line">    LONG    top;		<span class="comment">//左上点y</span></span><br><span class="line">    LONG    right;		<span class="comment">//右下点x</span></span><br><span class="line">    LONG    bottom;		<span class="comment">//右下点y</span></span><br><span class="line">&#125; RECT</span><br></pre></td></tr></table></figure>
+<h4 id="5-取得窗口外部区域及内部区域的函数">5.取得窗口外部区域及内部区域的函数</h4>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/08/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2023-03-08_6-1%20%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8A%A8%E7%94%BB%E6%98%BE%E7%A4%BA/">6-1 定时器动画显示</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-07T16:00:00.000Z" itemprop="datePublished">
+    2023-03-08
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/">Windows游戏编程（逐梦旅程读书笔记）</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="定时器动画显示">定时器动画显示</h2>
+<blockquote>
+<p>使用<code>SetTimer</code>函数，可以定时发出<code>WM_TIMER</code>消息。</p>
+</blockquote>
+<h4 id="1-创建定时器">1.创建定时器</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">UINT_PTR <span class="title">SetTimer</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">  [in, optional] HWND      hWnd,			<span class="comment">//接收定时器消息的窗口句柄</span></span></span></span><br><span class="line"><span class="params"><span class="function">  [in]           UINT_PTR  nIDEvent,		<span class="comment">//定时器代号（同一窗口下唯一，不为0）</span></span></span></span><br><span class="line"><span class="params"><span class="function">  [in]           UINT      uElapse,			<span class="comment">//定时（毫秒）</span></span></span></span><br><span class="line"><span class="params"><span class="function">  [in, optional] TIMERPROC lpTimerFunc		<span class="comment">//响应函数指针，可以设为NULL</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//example</span></span><br><span class="line"><span class="built_in">SetTimer</span>(hwnd, <span class="number">1</span>, <span class="number">100</span>, <span class="literal">NULL</span>);</span><br></pre></td></tr></table></figure>
+<p>该函数可以通过<strong>响应函数</strong>来指定操作，也可以在<strong>消息处理函数里加上WM_TIMER消息</strong>来处理。</p>
+<h4 id="2-删除定时器">2.删除定时器</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">BOOL <span class="title">KillTimer</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">  [in, optional] HWND     hWnd,				<span class="comment">//窗口句柄</span></span></span></span><br><span class="line"><span class="params"><span class="function">  [in]           UINT_PTR uIDEvent			<span class="comment">//定时器代号</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//example</span></span><br><span class="line"><span class="built_in">KillTimer</span>(hwnd, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/08/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2023-03-08_6-3%20%E9%80%8F%E6%98%8E%E5%8A%A8%E7%94%BB/">6-3 透明动画</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-07T16:00:00.000Z" itemprop="datePublished">
+    2023-03-08
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/">Windows游戏编程（逐梦旅程读书笔记）</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="透明动画">透明动画</h2>
+<blockquote>
+<p>透明动画 = 透明贴图 + 游戏循环 （上几节的综合运用）</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//【5】消息循环过程</span></span><br><span class="line">	MSG msg = &#123; <span class="number">0</span> &#125;;				<span class="comment">//定义并初始化msg</span></span><br><span class="line">	<span class="keyword">while</span>( msg.message != WM_QUIT )		<span class="comment">//使用while循环，如果消息不是WM_QUIT消息，就继续循环</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>( <span class="built_in">PeekMessage</span>( &amp;msg, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, PM_REMOVE ) )   <span class="comment">//查看应用程序消息队列，有消息时将队列中的消息派发出去。</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">TranslateMessage</span>( &amp;msg );		<span class="comment">//将虚拟键消息转换为字符消息</span></span><br><span class="line">			<span class="built_in">DispatchMessage</span>( &amp;msg );			<span class="comment">//分发一个消息给窗口程序。</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			g_tNow = <span class="built_in">GetTickCount</span>();   <span class="comment">//获取当前系统时间</span></span><br><span class="line">			<span class="keyword">if</span>(g_tNow-g_tPre &gt;= <span class="number">100</span>)        <span class="comment">//当此次循环运行与上次绘图时间相差0.1秒时再进行重绘操作</span></span><br><span class="line">				<span class="built_in">Game_Paint</span>(hwnd);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">VOID <span class="title">Game_Paint</span><span class="params">( HWND hwnd )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(g_iNum == <span class="number">8</span>)               <span class="comment">//判断是否超过最大图号，若超过最大图号“7”，则将显示图号重设为&quot;0&quot;。</span></span><br><span class="line">		g_iNum = <span class="number">0</span>;               </span><br><span class="line"></span><br><span class="line">	<span class="comment">//在mdc中贴上背景图</span></span><br><span class="line">	<span class="built_in">SelectObject</span>(g_bufdc,g_hBackGround);</span><br><span class="line">	<span class="built_in">BitBlt</span>(g_mdc,<span class="number">0</span>,<span class="number">0</span>,WINDOW_WIDTH,WINDOW_HEIGHT,g_bufdc,<span class="number">0</span>,<span class="number">0</span>,SRCCOPY);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//在mdc中进行透明处理</span></span><br><span class="line">	<span class="built_in">SelectObject</span>(g_bufdc,g_hSprite);</span><br><span class="line">	<span class="built_in">TransparentBlt</span>(g_mdc,g_iX,g_iY,<span class="number">60</span>,<span class="number">108</span>,g_bufdc,g_iNum*<span class="number">60</span>,<span class="number">0</span>,<span class="number">60</span>,<span class="number">108</span>,<span class="built_in">RGB</span>(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>));<span class="comment">//采用TransparentBlt透明色彩法</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">//将最后的画面显示在窗口中</span></span><br><span class="line">	<span class="built_in">BitBlt</span>(g_hdc,<span class="number">0</span>,<span class="number">0</span>,WINDOW_WIDTH,WINDOW_HEIGHT,g_mdc,<span class="number">0</span>,<span class="number">0</span>,SRCCOPY);</span><br><span class="line"></span><br><span class="line">	g_tPre = <span class="built_in">GetTickCount</span>();     <span class="comment">//记录此次绘图时间，供下次游戏循环中判断是否已经达到画面更新操作设定的时间间隔。</span></span><br><span class="line">	g_iNum++;                    <span class="comment">//将“g_iNum”值加1，为下一次要显示的图号</span></span><br><span class="line"></span><br><span class="line">	g_iX+=<span class="number">10</span>;					   <span class="comment">//计算下次贴图的坐标</span></span><br><span class="line">	<span class="comment">//如果贴图坐标超出窗口边缘，将其坐标置为-60</span></span><br><span class="line">	<span class="keyword">if</span>(g_iX&gt;=WINDOW_WIDTH)      </span><br><span class="line">		g_iX =<span class="number">-60</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">« prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/3/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

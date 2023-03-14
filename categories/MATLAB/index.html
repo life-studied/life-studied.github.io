@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ MATLAB }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/26/MATLAB/2022-03-26_2-2%E8%A1%A8%E8%BE%BE%E5%BC%8F/">2-2表达式</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-25T16:00:00.000Z" itemprop="datePublished">
+    2022-03-26
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MATLAB/">MATLAB</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="表达式">表达式</h2>
+<h4 id="运算符">运算符</h4>
+<p><strong>矩阵运算符</strong></p>
+<p>表达式使用大家熟悉的算术运算符和优先法则。</p>
+<p><strong>+</strong> 加法</p>
+<p>- 减法</p>
+<p>*乘法</p>
+<p><strong>/</strong> 除法</p>
+<p>\左除</p>
+<p><strong>^</strong> 幂</p>
+<p><strong>’</strong> 复共轭转置</p>
+<p><strong>( )</strong> 指定计算顺序</p>
+<p><strong>数组运算符</strong></p>
+<blockquote>
+<p>如果矩阵不用于线性代数运算，则成为二维数值数组。数组的算术运算按元素执行。这意味着，加法和减法运算对数组和矩阵都是相同的，但乘法运算不相同。MATLAB 的乘法数组运算表示法中包含点，也就是小数点。</p>
+</blockquote>
+<p>运算符列表包括</p>
+<p><strong>+</strong> 加法</p>
+<p><strong>-</strong> 减法</p>
+<p><strong>.*</strong> 逐元素乘法</p>
+<p><strong>./</strong> 逐元素除法</p>
+<p>.\ 逐元素左除</p>
+<p><strong>.^</strong> 逐元素幂</p>
+<p><strong>.’</strong> 非共轭数组转置</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/26/MATLAB/2022-03-26_2-3%E8%BE%93%E5%85%A5%E5%91%BD%E4%BB%A4/">2-3输入命令</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-25T16:00:00.000Z" itemprop="datePublished">
+    2022-03-26
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MATLAB/">MATLAB</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="输入命令">输入命令</h2>
+<h4 id="format函数">format函数</h4>
+<blockquote>
+<p>控制显示数字的格式，不改变数字实际值</p>
+</blockquote>
+<p>format short   		 5字长定点数，显示5位<br>
+format long   		  15字长定点数，显示15位双精度，7位单精度<br>
+format short e   	  5字长浮点数<br>
+format long e   	   15字长浮点数<br>
+format hex      		 16进制<br>
+format bank     		定点货币形式<br>
+format rat   			 小数分数表示</p>
+<h4 id="输入长语句">输入长语句</h4>
+<blockquote>
+<p>如果语句无法容纳在一行中，请使用省略号（三个句点）<strong>…</strong>，后跟 <strong>Return</strong> 或 <strong>Enter</strong> 以指示该语句在下一行继续。例如，</p>
+</blockquote>
+<p><strong>s = 1 -1/2 + 1/3 -1/4 + 1/5 - 1/6 + 1/7 …</strong></p>
+<p><strong>- 1/8 + 1/9 - 1/10 + 1/11 - 1/12;</strong></p>
+<blockquote>
+<p><strong>=</strong>、<strong>+</strong> 和 - 符号周围的空白是可选的，但可提高可读性。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/26/MATLAB/2022-03-26_2-4%E7%B4%A2%E5%BC%95/">2-4索引</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-25T16:00:00.000Z" itemprop="datePublished">
+    2022-03-26
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MATLAB/">MATLAB</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="索引">索引</h2>
+<h4 id="下标">下标</h4>
+<blockquote>
+<p><strong>A</strong> 的行 <strong>i</strong> 和列 <strong>j</strong> 中的元素通过 <strong>A(i,j)</strong> 表示。</p>
+</blockquote>
+<h4 id="冒号运算符">冒号运算符</h4>
+<blockquote>
+<p>冒号运算符用以指定一个迭代对象的起始与结束</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>:<span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/25/MATLAB/2022-03-25_1-8%E7%BC%96%E7%A8%8B%E5%92%8C%E8%84%9A%E6%9C%AC/">1-8编程和脚本</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-24T16:00:00.000Z" itemprop="datePublished">
+    2022-03-25
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MATLAB/">MATLAB</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="编程和脚本">编程和脚本</h2>
+<h4 id="脚本">脚本</h4>
+<h5 id="创建">创建</h5>
+<blockquote>
+<p>使用edit命令</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">edit mysphere;		<span class="comment">%打开一个mysphere.m的文件</span></span><br></pre></td></tr></table></figure>
+<h5 id="运行">运行</h5>
+<blockquote>
+<p>直接输入当前文件夹下脚本名字</p>
+</blockquote>
+<h4 id="实时脚本">实时脚本</h4>
+<blockquote>
+<p>实时查看代码和输出，并与之交互。</p>
+<p>以mxl后缀名结尾的文件</p>
+</blockquote>
+<h5 id="创建-2">创建</h5>
+<blockquote>
+<p>使用edit命令，加后缀名</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">edit newfile.mxl</span><br></pre></td></tr></table></figure>
+<h4 id="循环及条件语句">循环及条件语句</h4>
+<h5 id="循环">循环</h5>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">N = <span class="number">100</span>;</span><br><span class="line">f(<span class="number">1</span>) = <span class="number">1</span>;</span><br><span class="line">f(<span class="number">2</span>) = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> n = <span class="number">3</span>:N</span><br><span class="line">	f(n) = f(n<span class="number">-1</span>) + f(n<span class="number">-2</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">f(<span class="number">1</span>:<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="条件分支">条件分支</h5>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">num = randi(<span class="number">100</span>)</span><br><span class="line"><span class="keyword">if</span> num &lt; <span class="number">34</span></span><br><span class="line"> sz = <span class="string">&#x27;low&#x27;</span></span><br><span class="line"><span class="keyword">elseif</span> num &lt; <span class="number">67</span></span><br><span class="line"> sz = <span class="string">&#x27;medium&#x27;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"> sz = <span class="string">&#x27;high&#x27;</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="脚本位置">脚本位置</h4>
+<p>MATLAB 在特定位置中查找脚本及其他文件。要运行脚本，该文件必须位于当前文件夹或搜索路径中的某个文件夹内。</p>
+<p>默认情况下，MATLAB 安装程序创建的 <strong>MATLAB</strong> 文件夹位于此搜索路径中。如果要将程序存储在其他文件夹，或者要运行其他文件夹中的程序，请将其添加到此搜索路径。在当前文件夹浏览器中选中相应的文件夹，右键点击，然后选择<strong>添加到路径</strong>。</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/25/MATLAB/2022-03-25_2-1%E7%9F%A9%E9%98%B5%E5%92%8C%E5%B9%BB%E6%96%B9%E7%9F%A9%E9%98%B5/">2-1矩阵和幻方矩阵</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-24T16:00:00.000Z" itemprop="datePublished">
+    2022-03-25
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MATLAB/">MATLAB</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="矩阵和幻方矩阵">矩阵和幻方矩阵</h2>
+<h4 id="输入矩阵">输入矩阵</h4>
+<h5 id="元素列表形式输入">元素列表形式输入</h5>
+<p><strong>规定</strong></p>
+<blockquote>
+<p>• 使用空格或逗号分隔行的元素。</p>
+</blockquote>
+<blockquote>
+<p>• 使用分号 <strong>;</strong> 表示每行末尾。</p>
+</blockquote>
+<blockquote>
+<p>• 使用方括号 <strong>[ ]</strong> 将整个元素列表括起来。</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">A = [<span class="number">16</span> <span class="number">3</span> <span class="number">2</span> <span class="number">13</span>; <span class="number">5</span> <span class="number">10</span> <span class="number">11</span> <span class="number">8</span>; <span class="number">9</span> <span class="number">6</span> <span class="number">7</span> <span class="number">12</span>; <span class="number">4</span> <span class="number">15</span> <span class="number">14</span> <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="矩阵求和、转置和对角矩阵">矩阵求和、转置和对角矩阵</h4>
+<h5 id="矩阵元素求和">矩阵元素求和</h5>
+<blockquote>
+<p>sum函数对矩阵的每列进行求和，输出行向量</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">sum(A)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>ans =</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>34 34 34 34</strong></p>
+</blockquote>
+<p><strong>注：</strong></p>
+<p>如果对行进行求和，可以转置矩阵后使用sum再转置回来</p>
+<h5 id="转置矩阵">转置矩阵</h5>
+<blockquote>
+<p>撇号运算符（例如，<strong>A’</strong>）执行复共轭转置。翻转矩阵，更改矩阵的任何复数元素的虚部符号。</p>
+<p>点撇号运算符 (<strong>A.'</strong>) 转置矩阵，但不会影响复数元素的符号。</p>
+<p>对于包含所有实数元素的矩阵，这两个运算符返回相同结果。</p>
+</blockquote>
+<h5 id="主对角线">主对角线</h5>
+<blockquote>
+<p>使用diag函数，返回对角线组成的列矩阵</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="built_in">diag</span>(A)</span><br></pre></td></tr></table></figure>
+<p><strong>ans =</strong></p>
+<p><strong>16</strong></p>
+<p><strong>10</strong></p>
+<p><strong>7</strong></p>
+<p><strong>1</strong></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">sum(<span class="built_in">diag</span>(A))</span><br></pre></td></tr></table></figure>
+<p><strong>ans =</strong></p>
+<p><strong>34</strong></p>
+<h5 id="magic函数">magic函数</h5>
+<blockquote>
+<p>参数为矩阵维数，创建一个幻方</p>
+</blockquote>
+<h5 id="其余生成函数">其余生成函数</h5>
+<p><strong>zeros</strong> 		全部为零</p>
+<p><strong>ones</strong> 		 全部为 1</p>
+<p><strong>rand</strong> 		 均匀分布的随机元素</p>
+<p><strong>randn</strong> 		正态分布的随机元素</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/24/MATLAB/2022-03-24_1-2%E7%9F%A9%E9%98%B5%E5%92%8C%E6%95%B0%E7%BB%84/">1-2矩阵和数组</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-23T16:00:00.000Z" itemprop="datePublished">
+    2022-03-24
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MATLAB/">MATLAB</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="矩阵和数组">矩阵和数组</h2>
+<h4 id="数组创建">数组创建</h4>
+<p><strong>单行数组</strong></p>
+<p>使用[]括起来的，使用逗号（或空格）分隔的一行数字</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">a=[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+<p><strong>多行数组</strong></p>
+<p>使用分号分割各行数字的数组</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">a=[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>;<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>;<span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]</span><br></pre></td></tr></table></figure>
+<h5 id="其它方法">其它方法</h5>
+<p>使用zeros、ones或rand等函数</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">z=<span class="built_in">zeros</span>(<span class="number">5</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="矩阵和数组运算">矩阵和数组运算</h4>
+<p><strong>加减</strong></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">a=[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>;<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>;<span class="number">7</span> <span class="number">8</span> <span class="number">9</span>];</span><br><span class="line">a=a+<span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结果为每个数都加上10</p>
+</blockquote>
+<p><strong>函数</strong></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sin</span>(a);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结果为每个值都取sin</p>
+</blockquote>
+<p><strong>转置</strong></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">a&#x27;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用‘表示转置</p>
+</blockquote>
+<p><strong>乘法</strong></p>
+<p>矩阵乘法</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">a=a*a;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>直接使用*即可</p>
+</blockquote>
+<p>注：逆矩阵使用inv(a)表示</p>
+<p>元素乘法</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">a=a.*a;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用.*运算符</p>
+</blockquote>
+<p><strong>其余元素计算</strong></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">a.^<span class="number">3</span>;</span><br><span class="line">a./<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>分别使用.运算符形式</p>
+</blockquote>
+<h4 id="串联">串联</h4>
+<p>将多个矩阵使用[]串联运算符，可以连接在一起</p>
+<p><strong>水平串联</strong></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">A=[a,a];</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用逗号分隔</p>
+</blockquote>
+<p><strong>垂直串联</strong></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">A=[a;a];</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用；分隔</p>
+</blockquote>
+<h4 id="复数">复数</h4>
+<blockquote>
+<p>复数包含实部和虚部，虚部使用i或j表示</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">c=[<span class="number">3</span>+<span class="number">4</span><span class="built_in">i</span>,<span class="number">4</span>+<span class="number">3</span><span class="built_in">j</span>;-<span class="built_in">i</span>,<span class="number">10</span><span class="built_in">j</span>];</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/24/MATLAB/2022-03-24_1-3%E6%95%B0%E7%BB%84%E7%B4%A2%E5%BC%95/">1-3数组索引</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-23T16:00:00.000Z" itemprop="datePublished">
+    2022-03-24
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MATLAB/">MATLAB</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="数组索引">数组索引</h2>
+<h4 id="引用某个元素">引用某个元素</h4>
+<h5 id="按行和列">按行和列</h5>
+<blockquote>
+<p>使用（行，列）引用</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">A(<span class="number">4</span>,<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="按单一下标（线性索引）">按单一下标（线性索引）</h5>
+<blockquote>
+<p>使用（下标）引用，从左往右从上往下</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">A(<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="数组扩容">数组扩容</h4>
+<blockquote>
+<p>在赋值语句左侧指定数组外的元素，数组会自动增大以容纳新元素</p>
+</blockquote>
+<h4 id="引用多个元素（行列或邻近）">引用多个元素（行列或邻近）</h4>
+<blockquote>
+<p>在（）使用：运算符，格式为start：end</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">A(<span class="number">1</span>:<span class="number">3</span>,<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>引用第二列的前三行元素（并构成一个新矩阵3*1）</p>
+</blockquote>
+<p><strong>单独：运算符</strong></p>
+<blockquote>
+<p>表示该维中的所有元素</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">A(<span class="number">3</span>,:);</span><br><span class="line">A(:,<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="创建等距向量值的矩阵">创建等距向量值的矩阵</h4>
+<blockquote>
+<p>使用：运算符</p>
+<p>格式  start:step:end</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">B=<span class="number">0</span>:<span class="number">10</span>:<span class="number">100</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>创建了一个含11个元素，起始为0，结尾为100，等距10的向量</p>
+</blockquote>
+<blockquote>
+<p>省略step，默认步长为1</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/24/MATLAB/2022-03-24_1-4%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%8F%98%E9%87%8F/">1-4工作区变量</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-23T16:00:00.000Z" itemprop="datePublished">
+    2022-03-24
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MATLAB/">MATLAB</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="工作区变量">工作区变量</h2>
+<blockquote>
+<p>工作区包含在 MATLAB 中创建或从数据文件或其他程序导入的变量。</p>
+</blockquote>
+<h4 id="查看">查看</h4>
+<blockquote>
+<p>使用whos</p>
+</blockquote>
+<h4 id="保存">保存</h4>
+<blockquote>
+<p>退出matlab后变量不会保存，可使用save命令</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">save myfile.mat</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>系统会将其保存在当前文件夹下</p>
+</blockquote>
+<h4 id="清除">清除</h4>
+<blockquote>
+<p>使用clear命令</p>
+</blockquote>
+<h4 id="导入-还原">导入/还原</h4>
+<blockquote>
+<p>使用load命令</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">load myfile.mat</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/24/MATLAB/2022-03-24_1-5%E6%96%87%E6%9C%AC%E5%92%8C%E5%AD%97%E7%AC%A6/">1-5文本和字符</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-23T16:00:00.000Z" itemprop="datePublished">
+    2022-03-24
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MATLAB/">MATLAB</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="文本和字符">文本和字符</h2>
+<h4 id="赋值">赋值</h4>
+<blockquote>
+<p>使用“”将文本赋给变量</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">t=<span class="string">&quot;hello,world&quot;</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果文本内包含“”，在定义中使用两个双引号</p>
+</blockquote>
+<blockquote>
+<p>数据类型string</p>
+</blockquote>
+<h4 id="文本添加">文本添加</h4>
+<blockquote>
+<p>使用+运算符添加至字符串结尾</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">f=<span class="number">71</span>;</span><br><span class="line">c=(f<span class="number">-31</span>)/<span class="number">1.8</span>;</span><br><span class="line">tempText=<span class="string">&quot;Temperature is&quot;</span>+c+<span class="string">&quot;C&quot;</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="字符串数组">字符串数组</h4>
+<p>与数值数组类似，字符串数组可以有多个元素。使用 strlength 函数求数组中每个字符串的长度。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">A = [<span class="string">&quot;a&quot;</span>,<span class="string">&quot;bb&quot;</span>,<span class="string">&quot;ccc&quot;</span>; <span class="string">&quot;dddd&quot;</span>,<span class="string">&quot;eeeeee&quot;</span>,<span class="string">&quot;fffffff&quot;</span>];</span><br><span class="line">strlength(A)</span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span></span><br><span class="line"> <span class="number">4</span> <span class="number">6</span> <span class="number">7</span></span><br></pre></td></tr></table></figure>
+<h4 id="字符数组">字符数组</h4>
+<blockquote>
+<p>将一串字符存进数组，使用单引号，数据类型char</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">seq=<span class="string">&#x27;GCT&#x27;</span>;</span><br><span class="line">seq(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="串联">串联</h5>
+<blockquote>
+<p>使用[]</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">seq2 = [seq <span class="string">&#x27;ATTAGAAACC&#x27;</span>];</span><br><span class="line">seq2 =</span><br><span class="line"> <span class="string">&#x27;GCTAGAATCCATTAGAAACC&#x27;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/24/MATLAB/2022-03-24_1-6%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0/">1-6调用函数</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-23T16:00:00.000Z" itemprop="datePublished">
+    2022-03-24
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MATLAB/">MATLAB</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="调用函数">调用函数</h2>
+<h4 id="传参">传参</h4>
+<blockquote>
+<p>使用（）传入，如果有多个参数，使用逗号分隔</p>
+</blockquote>
+<h4 id="返回值">返回值</h4>
+<blockquote>
+<p>单个返回值直接使用变量接收</p>
+<p>多个返回值使用[]接收</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">[maxA,location] = <span class="built_in">max</span>(A);</span><br></pre></td></tr></table></figure>
+<h4 id="无参数的函数">无参数的函数</h4>
+<blockquote>
+<p>直接使用函数名</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">cls;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/categories/MATLAB/page/2/">2</a><a class="extend next" rel="next" href="/categories/MATLAB/page/2/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ PE文件结构与应用 }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/05/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2023-03-05_1-9PE%E4%BD%93%E2%80%94%E2%80%94%E5%AF%BC%E5%85%A5%E8%A1%A8%E5%88%86%E6%9E%90/">1-9PE体——导入表分析</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-04T16:00:00.000Z" itemprop="datePublished">
+    2023-03-05
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/">PE文件结构与应用</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="PE体——导入表分析">PE体——导入表分析</h2>
+<blockquote>
+<p>导入表在PE体中，通过IMAGE_OPTIONAL_HEADER.DataDirectory的第二项进行获取</p>
+</blockquote>
+<h4 id="1-导入表的结构体定义">1.导入表的结构体定义</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_IMAGE_IMPORT_DESCRIPTOR</span> &#123;</span><br><span class="line">    <span class="keyword">union</span> &#123;</span><br><span class="line">        DWORD   Characteristics;            <span class="comment">// 0 for terminating null import descriptor</span></span><br><span class="line">        DWORD   OriginalFirstThunk;         <span class="comment">// RVA to original unbound IAT (PIMAGE_THUNK_DATA)</span></span><br><span class="line">    &#125; DUMMYUNIONNAME;</span><br><span class="line">    DWORD   TimeDateStamp;                  <span class="comment">// 0 if not bound,</span></span><br><span class="line">                                            <span class="comment">// -1 if bound, and real date\time stamp</span></span><br><span class="line">                                            <span class="comment">//     in IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT (new BIND)</span></span><br><span class="line">                                            <span class="comment">// O.W. date/time stamp of DLL bound to (Old BIND)</span></span><br><span class="line"></span><br><span class="line">    DWORD   ForwarderChain;                 <span class="comment">// -1 if no forwarders</span></span><br><span class="line">    DWORD   Name;</span><br><span class="line">    DWORD   FirstThunk;                     <span class="comment">// RVA to IAT (if bound this IAT has actual addresses)</span></span><br><span class="line">&#125; IMAGE_IMPORT_DESCRIPTOR;</span><br></pre></td></tr></table></figure>
+<p>其中：这个文件在不同地方，保存的内容有所差异</p>
+<h5 id="1-在内存中">1.在内存中</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Name：保存的是一个RVA，这个RVA指向的内存内容是DLL的文件名。</p>
+</li>
+<li class="lvl-2">
+<p>OriginalFirstThunk：RVA，指向一个INT表，Import Name Table，这个表中保存的是所有导入函数名称的RVA</p>
+</li>
+<li class="lvl-2">
+<p>FirstThunk：RVA，指向一个IAT表，Import Name Table，这个表中保存的是所有导入函数的地址。（VA）</p>
+</li>
+</ul>
+<h5 id="2-在文件中">2.在文件中</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Name：保存的是一个RVA，这个RVA指向的内存内容是DLL的文件名。</p>
+</li>
+<li class="lvl-2">
+<p>OriginalFirstThunk：RVA，指向一个INT表，Import Name Table，这个表中保存的是所有导入函数名称的RVA</p>
+</li>
+<li class="lvl-2">
+<p>FirstThunk：RVA，指向一个INT表，Import Name Table，这个表中保存的是所有导入函数名称的RVA（与OriginalFirstThunk一致）</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/04/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2023-03-04_1-2PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E6%A6%82%E8%BF%B0/">1-2PE文件结构概述</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-03T16:00:00.000Z" itemprop="datePublished">
+    2023-03-04
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/">PE文件结构与应用</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="PE文件结构概述">PE文件结构概述</h2>
+<h4 id="1-PE文件在内存中和磁盘中的映射关系（磁盘-内存）">1.PE文件在内存中和磁盘中的映射关系（磁盘-&gt;内存）</h4>
+<p><img src="picture/%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB.png" alt=""></p>
+<h4 id="2-PE文件的结构概览">2.PE文件的结构概览</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>DOS头</p>
+</li>
+<li class="lvl-2">
+<p>DOS Stub Program</p>
+</li>
+<li class="lvl-2">
+<p>PE头</p>
+<ul class="lvl-2">
+<li class="lvl-4">PE标识</li>
+<li class="lvl-4">文件头</li>
+<li class="lvl-4">可选头</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>区块</p>
+</li>
+</ul>
+<p>图解详见：<a target="_blank" rel="noopener" href="https://blog.csdn.net/freeking101/article/details/102752048">(23条消息) PE文件结构详解 --（完整版）_pe结构_擒贼先擒王的博客-CSDN博客</a></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/04/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2023-03-04_1-5%E6%96%87%E4%BB%B6%E5%A4%B4%E5%8F%8A%E7%BC%96%E7%A8%8B%E8%A7%A3%E6%9E%90/">1-5文件头及编程解析</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-03T16:00:00.000Z" itemprop="datePublished">
+    2023-03-04
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/">PE文件结构与应用</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="文件头及编程解析">文件头及编程解析</h2>
+<p><img src="picture/PE%E5%A4%B4%E7%9A%84%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86.png" alt=""></p>
+<blockquote>
+<p>本节内容为文件头</p>
+</blockquote>
+<h4 id="1-文件头结构体内容">1.文件头结构体内容</h4>
+<blockquote>
+<p>该结构体用于判断文件是EXE还是DLL</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_IMAGE_FILE_HEADER</span> &#123;</span><br><span class="line">    WORD    Machine;				<span class="comment">//运行平台</span></span><br><span class="line">    WORD    NumberOfSections;		<span class="comment">//PE中节的数量，最大96</span></span><br><span class="line">    DWORD   TimeDateStamp;			<span class="comment">//编译器创建该文件的时间戳</span></span><br><span class="line">    DWORD   PointerToSymbolTable;	<span class="comment">//指向符号表（用于调试）</span></span><br><span class="line">    DWORD   NumberOfSymbols;		<span class="comment">//符号表中的符号数量</span></span><br><span class="line">    WORD    SizeOfOptionalHeader;	<span class="comment">//可选头的长度 32:E0/64:F0</span></span><br><span class="line">    WORD    Characteristics;		<span class="comment">//文件属性：exe:010f/dll:210e</span></span><br><span class="line">&#125; IMAGE_FILE_HEADER, *PIMAGE_FILE_HEADER;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>其它常用取值</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_SIZEOF_FILE_HEADER 20</span></span><br><span class="line"><span class="comment">//Machine常用取值</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_FILE_MACHINE_I386 0x014C	<span class="comment">//Intel 386</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_FILE_MACHINE_IA63 0x0200	<span class="comment">//Intel 64</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//IMAGE_FILE_HEADER.Characteristics的常用属性(此处取或运算!) :</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_FILE_RELOCS_STRIPPED 0x0001 		<span class="comment">// Relocation info stripped from file.</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_FILE_EXECUTABLE_IMAGE 0x0002 		<span class="comment">// File is executable (i.e. nounresolved externel references).</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_FILE_LINE_NUMS_STRIPPED 0x0004 	<span class="comment">// Line nunbers stripped from file.</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_FILE_LOCALSYMS_STRIPPED 0x0008 <span class="comment">// Local symbols stripped from file.</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_FILE_32BIT_MACHINE 0x0100 <span class="comment">// 32 bit word machine</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_FILE_SYSTEM 0x1000 <span class="comment">// System File.</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_FILE_DLL 0x2000 <span class="comment">//File is a DLL.</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="2-使用编程解析文件头">2.使用编程解析文件头</h4>
+<blockquote>
+<p>由于文件头的大小是固定的，所以比较好解析。不过其中存储了可选头的大小。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/04/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2023-03-04_1-6%E5%8F%AF%E9%80%89%E5%A4%B4%E5%8F%8A%E7%BC%96%E7%A8%8B%E8%A7%A3%E6%9E%90/">1-6可选头及编程解析</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-03T16:00:00.000Z" itemprop="datePublished">
+    2023-03-04
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/">PE文件结构与应用</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="可选头及编程解析">可选头及编程解析</h2>
+<blockquote>
+<p>可选头是IMAGE_OPTIONAL_HEADER，指该结构体的部分数据在不同文件中是不同的。</p>
+<p>由两部分组成：标准字段和增加字段</p>
+</blockquote>
+<h4 id="1-可选头的定义">1.可选头的定义</h4>
+<p>以下为32位和64位可选头的定义：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//32</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_IMAGE_OPTIONAL_HEADER</span> &#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">// Standard fields.</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line"></span><br><span class="line">    WORD    Magic;</span><br><span class="line">    BYTE    MajorLinkerVersion;</span><br><span class="line">    BYTE    MinorLinkerVersion;</span><br><span class="line">    DWORD   SizeOfCode;</span><br><span class="line">    DWORD   SizeOfInitializedData;</span><br><span class="line">    DWORD   SizeOfUninitializedData;</span><br><span class="line">    DWORD   AddressOfEntryPoint;</span><br><span class="line">    DWORD   BaseOfCode;</span><br><span class="line">    DWORD   BaseOfData;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">// NT additional fields.</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line"></span><br><span class="line">    DWORD   ImageBase;</span><br><span class="line">    DWORD   SectionAlignment;</span><br><span class="line">    DWORD   FileAlignment;</span><br><span class="line">    WORD    MajorOperatingSystemVersion;</span><br><span class="line">    WORD    MinorOperatingSystemVersion;</span><br><span class="line">    WORD    MajorImageVersion;</span><br><span class="line">    WORD    MinorImageVersion;</span><br><span class="line">    WORD    MajorSubsystemVersion;</span><br><span class="line">    WORD    MinorSubsystemVersion;</span><br><span class="line">    DWORD   Win32VersionValue;</span><br><span class="line">    DWORD   SizeOfImage;</span><br><span class="line">    DWORD   SizeOfHeaders;</span><br><span class="line">    DWORD   CheckSum;</span><br><span class="line">    WORD    Subsystem;</span><br><span class="line">    WORD    DllCharacteristics;</span><br><span class="line">    DWORD   SizeOfStackReserve;</span><br><span class="line">    DWORD   SizeOfStackCommit;</span><br><span class="line">    DWORD   SizeOfHeapReserve;</span><br><span class="line">    DWORD   SizeOfHeapCommit;</span><br><span class="line">    DWORD   LoaderFlags;</span><br><span class="line">    DWORD   NumberOfRvaAndSizes;</span><br><span class="line">    IMAGE_DATA_DIRECTORY DataDirectory[IMAGE_NUMBEROF_DIRECTORY_ENTRIES];</span><br><span class="line">&#125; IMAGE_OPTIONAL_HEADER32, *PIMAGE_OPTIONAL_HEADER32;</span><br><span class="line"></span><br><span class="line"><span class="comment">//64</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_IMAGE_OPTIONAL_HEADER64</span> &#123;</span><br><span class="line">    WORD        Magic;</span><br><span class="line">    BYTE        MajorLinkerVersion;</span><br><span class="line">    BYTE        MinorLinkerVersion;</span><br><span class="line">    DWORD       SizeOfCode;</span><br><span class="line">    DWORD       SizeOfInitializedData;</span><br><span class="line">    DWORD       SizeOfUninitializedData;</span><br><span class="line">    DWORD       AddressOfEntryPoint;</span><br><span class="line">    DWORD       BaseOfCode;</span><br><span class="line">    ULONGLONG   ImageBase;</span><br><span class="line">    DWORD       SectionAlignment;</span><br><span class="line">    DWORD       FileAlignment;</span><br><span class="line">    WORD        MajorOperatingSystemVersion;</span><br><span class="line">    WORD        MinorOperatingSystemVersion;</span><br><span class="line">    WORD        MajorImageVersion;</span><br><span class="line">    WORD        MinorImageVersion;</span><br><span class="line">    WORD        MajorSubsystemVersion;</span><br><span class="line">    WORD        MinorSubsystemVersion;</span><br><span class="line">    DWORD       Win32VersionValue;</span><br><span class="line">    DWORD       SizeOfImage;</span><br><span class="line">    DWORD       SizeOfHeaders;</span><br><span class="line">    DWORD       CheckSum;</span><br><span class="line">    WORD        Subsystem;</span><br><span class="line">    WORD        DllCharacteristics;</span><br><span class="line">    ULONGLONG   SizeOfStackReserve;</span><br><span class="line">    ULONGLONG   SizeOfStackCommit;</span><br><span class="line">    ULONGLONG   SizeOfHeapReserve;</span><br><span class="line">    ULONGLONG   SizeOfHeapCommit;</span><br><span class="line">    DWORD       LoaderFlags;</span><br><span class="line">    DWORD       NumberOfRvaAndSizes;</span><br><span class="line">    IMAGE_DATA_DIRECTORY DataDirectory[IMAGE_NUMBEROF_DIRECTORY_ENTRIES];</span><br><span class="line">&#125; IMAGE_OPTIONAL_HEADER64, *PIMAGE_OPTIONAL_HEADER64;</span><br></pre></td></tr></table></figure>
+<h4 id="2-AddressOfEntryPoint和ImageBase的解读">2.AddressOfEntryPoint和ImageBase的解读</h4>
+<blockquote>
+<p>ImageBase指的是程序的建议装载地址，一般exe文件的装载地址不会被占用。但是dll的装载地址很可能有别的exe加载过，因此将dll的装载地址重定向到另一个地址。</p>
+<p>AddressOfEntryPoint指的是程序入口点的相对虚拟地址，其虚拟地址应为ImageBase+AddressOfEntryPoint。</p>
+</blockquote>
+<h4 id="3-32位增加字段的解读">3.32位增加字段的解读</h4>
+<p>![](picture/additional fields.png)</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Subsystem：指示了是命令行程序还是GUI程序（或者其它少见的值）</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/04/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2023-03-04_1-8%E6%89%8B%E5%8A%A8%E5%92%8C%E7%BC%96%E7%A8%8B%E6%B7%BB%E5%8A%A0%E8%8A%82/">1-8手动和编程添加节</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-03T16:00:00.000Z" itemprop="datePublished">
+    2023-03-04
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/">PE文件结构与应用</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="手动和编程添加节">手动和编程添加节</h2>
+<p>增加节的步骤：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>增加节表项</p>
+</li>
+<li class="lvl-2">
+<p>修正文件的映像长度</p>
+</li>
+<li class="lvl-2">
+<p>修正一个节的数量</p>
+</li>
+<li class="lvl-2">
+<p>增加文件的节数据</p>
+<ul class="lvl-2">
+<li class="lvl-6">IMAGE_OPTIONAL_HEADER.SizeOfImage</li>
+<li class="lvl-6">IMAGE_FILE_HEADER.NumberOfSections</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;winnt.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="comment">//创建文件映射内核对象</span></span><br><span class="line">HANDLE hMap = <span class="built_in">CreateFileMapping</span> (hFile, <span class="literal">NULL</span>, PAGE_READWRITE, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line"><span class="comment">//将文件映射入内存</span></span><br><span class="line">LPVOID lpBase = <span class="built_in">MapViemOfFile</span>(hMap,FILE_MAP_READ | FILE_MAP_WRITE, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">PIMAGE_DOS_HEADER pImgDosHdr = (PIMAGE_DOS_HEADER)lpBase;</span><br><span class="line">PIMAGE_NT_HEADERS32 pImgNtHdr = (PIMAGE_NT_HEADERS32)((DWORD)lpBase + (DWORD)pImgDosHdr-&gt;e_lfanew);</span><br><span class="line">PIMAGE_SECTION_HEADER pImgSecHdr = <span class="built_in">IMAGE_FIRST_SECTION</span>(pImgNtHdr);</span><br><span class="line"><span class="comment">//获取节的数量</span></span><br><span class="line">WORD wNum = pImgNtHdr-&gt;FileHeader.NumberOfSections;</span><br><span class="line"><span class="comment">//节的大小</span></span><br><span class="line">DWORD dwSize = pImgNtHdr-&gt;OptionalHeader.FileAlignment;</span><br><span class="line"><span class="comment">//构造一个节</span></span><br><span class="line">PIMAGE_SECTION_HEADER pImgNewSec = (PIMAGE_SECTION_HEADER)((DWORD)pImgSecHdr + wNum *<span class="built_in">sizeof</span>(IMAGE_SECTION_HEADER));</span><br><span class="line"></span><br><span class="line"><span class="built_in">strcpy</span>((<span class="type">char</span>*)pImgSecHdr-&gt;Name,<span class="string">&quot;.new&quot;</span>);</span><br><span class="line">pImgNewSec-&gt;Misc.VirtualSize = pImgNtHdr-&gt;OptionalHeader.SectionAlignment;</span><br><span class="line">pImgNewSec-&gt;VirtualAddress = pImgSecHdr[wNum - <span class="number">1</span>].VirtualAddress + pImgSecHdr[wNum - <span class="number">1</span>].SizeOfRawData;</span><br><span class="line">pImgNewSec-&gt;SizeOfRavData = dwSize;</span><br><span class="line">pImgNewSec-&gt;PointerToRawData = pImgSecHdr[wNum - <span class="number">1</span>].PointerToRawData + pImgSecHdr[wNum - <span class="number">1</span>].SizeOfRawData;</span><br><span class="line">pImgNewSec-&gt;Characteristics = <span class="number">0xE0000040</span>;</span><br><span class="line"><span class="comment">//修正节的数量</span></span><br><span class="line">pImgNtHdr-&gt;OptionalHeader.NumberOfSecions+=<span class="number">1</span>;</span><br><span class="line"><span class="comment">//修正映像大小</span></span><br><span class="line">pImgNtHdr-&gt;OptionalHeader.SizeOfImage += pImgNtHdr-&gt;OptionalHeader.SectionAilgnment;</span><br><span class="line"><span class="comment">//释放文件映射</span></span><br><span class="line"><span class="built_in">UnmapVievOfFile</span>(lpBase);</span><br><span class="line"><span class="comment">//关闭文件映射内核对象</span></span><br><span class="line"><span class="built_in">CloseHandle</span>(hMap);</span><br><span class="line"><span class="comment">//关闭文件</span></span><br><span class="line"><span class="built_in">CloseHandle</span>(hFile);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/03/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2023-03-03_1-3DOS%E5%A4%B4%E8%AF%A6%E8%A7%A3/">1-3DOS头详解</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-02T16:00:00.000Z" itemprop="datePublished">
+    2023-03-03
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/">PE文件结构与应用</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="DOS头详解">DOS头详解</h2>
+<p>DOS头是PE文件结构中的第一个头，用来保持对DOS系统的兼容，并且用于定位真正的PE头。</p>
+<h4 id="1-winnt-h">1.winnt.h</h4>
+<blockquote>
+<p>在该头文件中定义了DOS头的结构体，大小为40h，64d</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//&lt;winnt.h&gt;</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_IMAGE_DOS_HEADER</span> &#123;      <span class="comment">// DOS .EXE header</span></span><br><span class="line">    WORD   e_magic;                     <span class="comment">// Magic number</span></span><br><span class="line">    WORD   e_cblp;                      <span class="comment">// Bytes on last page of file</span></span><br><span class="line">    WORD   e_cp;                        <span class="comment">// Pages in file</span></span><br><span class="line">    WORD   e_crlc;                      <span class="comment">// Relocations</span></span><br><span class="line">    WORD   e_cparhdr;                   <span class="comment">// Size of header in paragraphs</span></span><br><span class="line">    WORD   e_minalloc;                  <span class="comment">// Minimum extra paragraphs needed</span></span><br><span class="line">    WORD   e_maxalloc;                  <span class="comment">// Maximum extra paragraphs needed</span></span><br><span class="line">    WORD   e_ss;                        <span class="comment">// Initial (relative) SS value</span></span><br><span class="line">    WORD   e_sp;                        <span class="comment">// Initial SP value</span></span><br><span class="line">    WORD   e_csum;                      <span class="comment">// Checksum</span></span><br><span class="line">    WORD   e_ip;                        <span class="comment">// Initial IP value</span></span><br><span class="line">    WORD   e_cs;                        <span class="comment">// Initial (relative) CS value</span></span><br><span class="line">    WORD   e_lfarlc;                    <span class="comment">// File address of relocation table</span></span><br><span class="line">    WORD   e_ovno;                      <span class="comment">// Overlay number</span></span><br><span class="line">    WORD   e_res[<span class="number">4</span>];                    <span class="comment">// Reserved words</span></span><br><span class="line">    WORD   e_oemid;                     <span class="comment">// OEM identifier (for e_oeminfo)</span></span><br><span class="line">    WORD   e_oeminfo;                   <span class="comment">// OEM information; e_oemid specific</span></span><br><span class="line">    WORD   e_res2[<span class="number">10</span>];                  <span class="comment">// Reserved words</span></span><br><span class="line">    LONG   e_lfanew;                    <span class="comment">// File address of new exe header</span></span><br><span class="line">  &#125; IMAGE_DOS_HEADER, *PIMAGE_DOS_HEADER;</span><br></pre></td></tr></table></figure>
+<p>其中，只关心两个属性<code>e_magic</code>和<code>e_lfanew</code>。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>e_magic标志了是否是一个EXE，大小为两个字节：如果是MZ（十六进制为4D 5A），则为EXE。</p>
+</li>
+<li class="lvl-2">
+<p>e_lfanew记录了PE头相对于文件基址的偏移地址，大小为四个字节：</p>
+</li>
+</ul>
+<h4 id="2-DOS头和DOS-Stub-Program部分">2.DOS头和DOS Stub Program部分</h4>
+<p>DOS头中，除了e_magic和e_lfanew，其余数据都只是填充使用。在DOS下的程序如下：</p>
+<p><img src="picture/DOS%E6%AE%B5%E4%BB%A3%E7%A0%81.png" alt=""></p>
+<p>只输出一个&quot;This is program cannot be run in DOS mode.&quot;，就退出程序。****</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/03/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2023-03-03_1-4%E4%BD%BF%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%88%A4%E6%96%ADPE%E6%96%87%E4%BB%B6%E6%9C%89%E6%95%88%E6%80%A7/">1-4使用程序判断PE文件有效性</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-02T16:00:00.000Z" itemprop="datePublished">
+    2023-03-03
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/">PE文件结构与应用</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="使用程序判断是否是PE文件">使用程序判断是否是PE文件</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//function BottonClick</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//从编辑框获取文件路径和文件名</span></span><br><span class="line"><span class="type">char</span> szFile[MAX_PATH] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"><span class="built_in">GetDlgItemText</span>(IDC_EDIT1,szFile,MAX_PATH);</span><br><span class="line"></span><br><span class="line"><span class="comment">//打开文件</span></span><br><span class="line">HANDLE hFile = <span class="built_in">CreateFile</span>(szFile,GENERIC_READ,FILE_SHARE_READ,<span class="literal">NULL</span>,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建一个内核映射对象</span></span><br><span class="line">HANDLE hMap = <span class="built_in">CreateFileMapping</span>(hFile,<span class="literal">NULL</span>,PAGE_READONLY,<span class="number">0</span>,<span class="number">0</span>,<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//把文件映射入内存</span></span><br><span class="line">LPVOID lpBase = <span class="built_in">MapViewOfFile</span>(hMap,FILE_MAP_READ,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//判断文件是否是有效PE文件</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//释放内存映射</span></span><br><span class="line"><span class="built_in">CloseHandle</span>(hMap);</span><br><span class="line"></span><br><span class="line"><span class="comment">//关闭文件</span></span><br><span class="line"><span class="built_in">CloseHandle</span>(hFile);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//function IsPeFile</span></span><br><span class="line"><span class="function">BOOL <span class="title">IsPeFile</span><span class="params">(LPVOID lpBase)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    PIMAGE_DOS_HEADER pimgDosHdr = <span class="literal">NULL</span>;</span><br><span class="line">    PIMAGE_NT_HEADERS pimgNtHdr = <span class="literal">NULL</span>;</span><br><span class="line">    </span><br><span class="line">    pimgDosHdr = (PIMAGE_DOS_HEADER)lpBase;</span><br><span class="line">    <span class="keyword">if</span>(pimgDosHdr-&gt;e_magic != IMAGE_DOS_SIGNATURE)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> FALSE;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    pimgNtHdr = (PIMAGE_NT_HEADERS)((DWORD)lpBase + (DWORD)pimgDosHdr-&gt;e_lfanew)</span><br><span class="line">    <span class="keyword">if</span>(pimgNtHdr-&gt;Signature != IMAGE_NT_SIGNATURE)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> FALSE;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> TRUE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/02/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2023-03-02_1-1%E5%9C%A8%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%A4%B4%E6%B7%BB%E5%8A%A0%E5%AF%B9%E8%AF%9D%E6%A1%86/">1-1在程序开头添加对话框</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-01T16:00:00.000Z" itemprop="datePublished">
+    2023-03-02
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/">PE文件结构与应用</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="在程序开头添加对话框">在程序开头添加对话框</h2>
+<h4 id="1-使用LordPE修改PE文件的属性">1.使用LordPE修改PE文件的属性</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>使用LordPE打开PE文件：</p>
+</li>
+</ul>
+<p><img src="picture/%E6%89%93%E5%BC%80PE%E6%96%87%E4%BB%B6.png" alt=""></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>打开分区</p>
+</li>
+</ul>
+<p><img src="picture/%E6%89%93%E5%BC%80%E5%88%86%E5%8C%BA.png" alt=""></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>add new Section header</p>
+</li>
+</ul>
+<p>![](picture/add new section.png)</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>edit the new Section header</p>
+<ul class="lvl-2">
+<li class="lvl-6">VOffset：该Section映射在虚拟内存中的地址</li>
+<li class="lvl-6">VSize：该Section映射在虚拟内存中的长度</li>
+<li class="lvl-6">ROffset：该文件的</li>
+</ul>
+</li>
+</ul>
+<p>![](picture/edit the new Section header.png)</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>修改文件大小属性</p>
+</li>
+</ul>
+<p>![](picture/edit the SizeOfImage.png)</p>
+<h4 id="2-使用C32Asm为文件增加size">2.使用C32Asm为文件增加size</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>将PE文件拖入应用（十六进制模式）</p>
+</li>
+<li class="lvl-2">
+<p>来到文件最后，点击最后的数据，然后点击编辑——插入数据，插入0x200大小，即512</p>
+</li>
+</ul>
+<p>![](picture/insert the data.png)</p>
+<p>![](picture/insert success.png)</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>保存</p>
+</li>
+</ul>
+<h4 id="3-使用OD注入对话框代码（在此之前使用LordPE修改PE入口点地址）">3.使用OD注入对话框代码（在此之前使用LordPE修改PE入口点地址）</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>使用OD打开PE文件，可以看到入口点地址（虚拟地址0x404340）( = ImageBase + EntryPoint)</p>
+</li>
+</ul>
+<p><img src="picture/StartOfPoint.png" alt=""></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>使用LordPE修改入口点地址为新增Section地址</p>
+</li>
+</ul>
+<p>![](picture/edit the EntryPoinnt.png)</p>
+<p>![](picture/OD check the EntryPoint.png)</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>使用ctrl+G转到地址0x00436020，选中第一行，按下空格，输入Hello World!!</p>
+</li>
+<li class="lvl-2">
+<p>再选中第二行，输入Hello</p>
+</li>
+</ul>
+<p>![](picture/add the pragma.png)</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>在0x436000处，修改汇编代码</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">push 0</span><br><span class="line">push 436030</span><br><span class="line">push 436020</span><br><span class="line">push 0</span><br><span class="line">call MessageBoxA</span><br><span class="line">jmp 404340</span><br></pre></td></tr></table></figure>
+<p>![](picture/edit the code.png)</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>选中修改的区域，右击，复制到可执行文件——选择</p>
+</li>
+</ul>
+<p>![](picture/choose the edit code.png)</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>在打开的文件窗口中右击——保存文件——覆盖</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

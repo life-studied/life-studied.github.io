@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ Windows API }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/30/Windows%20API/2022-10-30_23-%E7%BA%BF%E7%A8%8B%E6%AD%BB%E9%94%81/">23-线程死锁</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-29T16:00:00.000Z" itemprop="datePublished">
+    2022-10-30
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="线程死锁">线程死锁</h2>
+<blockquote>
+<p>线程死锁发生在两把锁同时进行时，第一个线程独占了资源1，第二个线程独占了资源2，但是继续进行又互相需要对方的资源，因而都卡住，造成死锁的情况。</p>
+</blockquote>
+<p><strong>示例</strong></p>
+<blockquote>
+<p>在该示例下，第一个线程拥有了A，第二个线程拥有了B，但是继续进行又需要对方的资源，于是都等在原地，双方都不能结束，造成死锁。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;process.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> iTickets = <span class="number">5000</span>;</span><br><span class="line">CRITICAL_SECTION g_csA;</span><br><span class="line">CRITICAL_SECTION g_csB;</span><br><span class="line"><span class="comment">// A窗口 B窗口</span></span><br><span class="line"><span class="function">DWORD WINAPI <span class="title">SellTicketA</span><span class="params">(<span class="type">void</span>* lpParam)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">EnterCriticalSection</span>(&amp;g_csA);<span class="comment">//进入临界区A</span></span><br><span class="line">		<span class="built_in">Sleep</span>(<span class="number">1</span>);</span><br><span class="line">		<span class="built_in">EnterCriticalSection</span>(&amp;g_csB);<span class="comment">//进入临界区B</span></span><br><span class="line">		<span class="keyword">if</span> (iTickets &gt; <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">Sleep</span>(<span class="number">1</span>);</span><br><span class="line">			iTickets--;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;A remain %d\n&quot;</span>, iTickets);</span><br><span class="line">			<span class="built_in">LeaveCriticalSection</span>(&amp;g_csB);<span class="comment">//离开临界区B</span></span><br><span class="line">			<span class="built_in">LeaveCriticalSection</span>(&amp;g_csA);<span class="comment">//离开临界区A</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">LeaveCriticalSection</span>(&amp;g_csB);<span class="comment">//离开临界区B</span></span><br><span class="line">			<span class="built_in">LeaveCriticalSection</span>(&amp;g_csA);<span class="comment">//离开临界区A</span></span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">DWORD WINAPI <span class="title">SellTicketB</span><span class="params">(<span class="type">void</span>* lpParam)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">EnterCriticalSection</span>(&amp;g_csB);<span class="comment">//进入临界区B</span></span><br><span class="line">		<span class="built_in">Sleep</span>(<span class="number">1</span>);</span><br><span class="line">		<span class="built_in">EnterCriticalSection</span>(&amp;g_csA);<span class="comment">//进入临界区A</span></span><br><span class="line">		<span class="keyword">if</span> (iTickets &gt; <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">Sleep</span>(<span class="number">1</span>);</span><br><span class="line">			iTickets--;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;B remain %d\n&quot;</span>, iTickets);</span><br><span class="line">			<span class="built_in">LeaveCriticalSection</span>(&amp;g_csA);<span class="comment">//离开临界区A</span></span><br><span class="line">			<span class="built_in">LeaveCriticalSection</span>(&amp;g_csB);<span class="comment">//离开临界区B</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">LeaveCriticalSection</span>(&amp;g_csA);<span class="comment">//离开临界区A</span></span><br><span class="line">			<span class="built_in">LeaveCriticalSection</span>(&amp;g_csB);<span class="comment">//离开临界区B</span></span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HANDLE hThreadA, hThreadB;</span><br><span class="line">	hThreadA = <span class="built_in">CreateThread</span>(<span class="literal">NULL</span>, <span class="number">0</span>, SellTicketA, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>); <span class="comment">//2</span></span><br><span class="line">	hThreadB = <span class="built_in">CreateThread</span>(<span class="literal">NULL</span>, <span class="number">0</span>, SellTicketB, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>); <span class="comment">//2</span></span><br><span class="line">	<span class="built_in">CloseHandle</span>(hThreadA); <span class="comment">//1</span></span><br><span class="line">	<span class="built_in">CloseHandle</span>(hThreadB); <span class="comment">//1</span></span><br><span class="line">	<span class="built_in">InitializeCriticalSection</span>(&amp;g_csA); <span class="comment">//初始化关键代码段A</span></span><br><span class="line">	<span class="built_in">InitializeCriticalSection</span>(&amp;g_csB); <span class="comment">//初始化关键代码段B</span></span><br><span class="line">	<span class="built_in">Sleep</span>(<span class="number">40000</span>);</span><br><span class="line">	<span class="built_in">DeleteCriticalSection</span>(&amp;g_csA);<span class="comment">//删除临界区</span></span><br><span class="line">	<span class="built_in">DeleteCriticalSection</span>(&amp;g_csB);<span class="comment">//删除临界区</span></span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/30/Windows%20API/2022-10-30_24-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%E7%9A%84%E6%80%BB%E7%BB%93/">24-线程同步的总结</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-29T16:00:00.000Z" itemprop="datePublished">
+    2022-10-30
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="线程同步的总结">线程同步的总结</h2>
+<p>Windows 线程同步的方式主要有四种：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>互斥对象 Mutex</p>
+</li>
+<li class="lvl-2">
+<p>事件对象 event</p>
+</li>
+<li class="lvl-2">
+<p>关键代码段criticalSection</p>
+</li>
+<li class="lvl-3">
+<p>信号量</p>
+</li>
+</ul>
+<p>对于四种线程同步的方式，它们之间的区别：</p>
+<p>● 互斥对象和事件以及信号量都属于内核对象，利用内核对象进行线程同步时，速度较慢，但利用互斥对象和事件对象这样的内核对象，可以在多个进程中的各个线程间进行同步。</p>
+<p>● 关键代码段工作在用户方式下，同步速度较快，但在使用关键代码段时，很容易进入死锁状态，因为在等待进入关键代码段时无法设定超时值。</p>
+<hr>
+<h4 id="总结">总结</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>用户级别的：关键代码段，只能本进程中</p>
+</li>
+<li class="lvl-2">
+<p>内核级别的：互斥量/事件/信号量，可以跨进程</p>
+</li>
+</ul>
+<blockquote>
+<p>通常，在编写多线程程序并需要实现线程同步时，首选关键代码段，由于它的使用比较简单，如果是在 MFC 程序中使用的话，可以在类的构造函数 Init 中调用 InitializeCriticalSection 函数，在该类的析构函数中调用 DeleteCriticalSection 函数，在所需保护的代码前面调用EnterCriticalSection 函数，在访问完所需保护的资源后，调用 LeaveCriticalSection 函数。可见，关键代码段在使用上是非常方便的，但有几点需要注意：A 在程序中调用了 EnterCriticalSection 后，要相应的调用 LeaveCriticalSection 函数，否则其他等待该临界区对象所有权的线程将无法执行。B 如果访问关键代码段时，使用了多个临界区对象，就要注意防止线程死锁的发生。另外，如果需要在多个进程间的各个线程间实现同步的话，可以使用互斥对象和事件对象或者信号量。</p>
+</blockquote>
+<h4 id="什么是线程安全？">什么是线程安全？</h4>
+<blockquote>
+<p>假如你的代码在多线程执行和单线程执行永远是完全一样的结果，那么你的代码是线程安全的。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/30/Windows%20API/2022-10-30_25-%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8/">25-进程的创建和使用</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-29T16:00:00.000Z" itemprop="datePublished">
+    2022-10-30
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="进程的创建和使用">进程的创建和使用</h2>
+<h4 id="函数CreateProcess来创建进程">函数CreateProcess来创建进程</h4>
+<p>参数：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>lpCommandLine：打开进程的路径（主要配置的参数）</p>
+</li>
+<li class="lvl-2">
+<p>其余保持默认即可（详见下面示例）</p>
+</li>
+</ul>
+<p>返回值：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>成功为1</p>
+</li>
+<li class="lvl-2">
+<p>失败使用GetLastError()查看对应的错误码</p>
+</li>
+</ul>
+<p><strong>案例</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">RunExe</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	TCHAR szCommandLine[] = <span class="string">L&quot;C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe&quot;</span>;</span><br><span class="line">	STARTUPINFO strStartupInfo;</span><br><span class="line">	<span class="built_in">memset</span>(&amp;strStartupInfo, <span class="number">0</span>, <span class="built_in">sizeof</span>(STARTUPINFO));</span><br><span class="line">	strStartupInfo.cb = <span class="built_in">sizeof</span>(strStartupInfo);</span><br><span class="line">	PROCESS_INFORMATION	szProcessInformation;</span><br><span class="line">	<span class="built_in">memset</span>(&amp;szProcessInformation, <span class="number">0</span>, <span class="built_in">sizeof</span>(PROCESS_INFORMATION));</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> bRet = <span class="built_in">CreateProcess</span>(</span><br><span class="line">		<span class="literal">NULL</span>,</span><br><span class="line">		szCommandLine,</span><br><span class="line">		<span class="literal">NULL</span>,</span><br><span class="line">		<span class="literal">NULL</span>,</span><br><span class="line">		FALSE,</span><br><span class="line">		CREATE_NEW_CONSOLE,</span><br><span class="line">		<span class="literal">NULL</span>,</span><br><span class="line">		<span class="literal">NULL</span>,</span><br><span class="line">		&amp;strStartupInfo,</span><br><span class="line">		&amp;szProcessInformation</span><br><span class="line">	);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (bRet)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;CreateSucess bRet = %d&quot;</span>, bRet);</span><br><span class="line">		<span class="built_in">WaitForSingleObject</span>(szProcessInformation.hProcess, <span class="number">3000</span>);</span><br><span class="line">		<span class="built_in">CloseHandle</span>(szProcessInformation.hProcess);</span><br><span class="line">		<span class="built_in">CloseHandle</span>(szProcessInformation.hThread);</span><br><span class="line">		szProcessInformation.hProcess = <span class="literal">NULL</span>;</span><br><span class="line">		szProcessInformation.hThread = <span class="literal">NULL</span>;</span><br><span class="line">		szProcessInformation.dwProcessId = <span class="literal">NULL</span>;</span><br><span class="line">		szProcessInformation.dwThreadId = <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;Create Failed bRet = %d&quot;</span>, bRet);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;errorcode = %d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;This is Chrome&quot;</span>);</span><br><span class="line">	<span class="built_in">RunExe</span>();</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/29/Windows%20API/2022-10-29_14-%E7%BA%BF%E7%A8%8B%E4%BD%BF%E7%94%A8/">14-线程使用</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-28T16:00:00.000Z" itemprop="datePublished">
+    2022-10-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="线程使用">线程使用</h2>
+<blockquote>
+<p>线程的使用本质就是将一个函数作为内核传入，作为一个独立的分支与主线程同时执行。</p>
+</blockquote>
+<p><strong>核心代码：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI <span class="title">main_xh</span><span class="params">(<span class="type">void</span>* arg)</span>		<span class="comment">//函数必须用unsigned WINAPI作为返回值才能作为指针传入</span></span></span><br><span class="line"><span class="function"></span>&#123;										<span class="comment">//函数参数必须是void*类型传入，再在内部变为实际约定的类型</span></span><br><span class="line">	<span class="type">int</span> num = *((<span class="type">int</span>*)arg);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; num; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;xh&quot;</span>);</span><br><span class="line">		<span class="built_in">Sleep</span>(<span class="number">3000</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, &amp;main_xh, (<span class="type">void</span>*)&amp;xh, <span class="number">0</span>, &amp;xh_id);</span><br></pre></td></tr></table></figure>
+<h4 id="完整代码">完整代码</h4>
+<blockquote>
+<p>注：分支线程执行过程中，主线程不能被终止</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;process.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI <span class="title">main_xh</span><span class="params">(<span class="type">void</span>* arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> num = *((<span class="type">int</span>*)arg);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; num; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;xh&quot;</span>);</span><br><span class="line">		<span class="built_in">Sleep</span>(<span class="number">3000</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI <span class="title">main_xm</span><span class="params">(<span class="type">void</span>* arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> num = *((<span class="type">int</span>*)arg);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; num; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;xm&quot;</span>);</span><br><span class="line">		<span class="built_in">Sleep</span>(<span class="number">2000</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI <span class="title">main_lw</span><span class="params">(<span class="type">void</span>* arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> num = *((<span class="type">int</span>*)arg);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; num; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;lw&quot;</span>);</span><br><span class="line">		<span class="built_in">Sleep</span>(<span class="number">5000</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> xh = <span class="number">20</span>;</span><br><span class="line">	<span class="type">int</span> xm = <span class="number">30</span>;</span><br><span class="line">	<span class="type">int</span> lw = <span class="number">50</span>;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">int</span> xh_id,xm_id,lw_id;</span><br><span class="line">	_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, &amp;main_xm, (<span class="type">void</span>*)&amp;xm, <span class="number">0</span>, &amp;xm_id);</span><br><span class="line">	_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, &amp;main_xh, (<span class="type">void</span>*)&amp;xh, <span class="number">0</span>, &amp;xh_id);</span><br><span class="line">	_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, &amp;main_lw, (<span class="type">void</span>*)&amp;lw, <span class="number">0</span>, &amp;lw_id);</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/29/Windows%20API/2022-10-29_15-%E4%BB%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%B1%82%E9%9D%A2%E7%90%86%E8%A7%A3%E7%BA%BF%E7%A8%8B/">15-从操作系统层面理解线程</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-28T16:00:00.000Z" itemprop="datePublished">
+    2022-10-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="从操作系统层面理解线程">从操作系统层面理解线程</h2>
+<h4 id="补充内容：内核对象">补充内容：内核对象</h4>
+<blockquote>
+<p>1.创建：内核对象通过 API 来创建，每个内核对象是一个数据结构，它对应一块内存，由操作系统内核分配，并且只能由操作系统内核访问。在此数据结构中少数成员如安全描述符和使用计数是所有对象都有的，但其他大多数成员都是不同类型的对象特有的。内核对象的数据结构只能由操作系统提供的 API 访问，应用程序在内存中不能访问。调用创建内核对象的函数后，该函数会返回一个句柄，它标识了所创建的对象。它可以由进程的任何线程使用。</p>
+<p>2.常见的内核对象 : 进程、线程、文件，存取符号对象、事件对象、文件对象、作业对象、互斥对象、管道对象、等待计时器对象，邮件槽对象，信号对象</p>
+</blockquote>
+<h4 id="1-主线程和子线程的声明周期">1.主线程和子线程的声明周期</h4>
+<h5 id="1-1主线程和子线程的结束时间">1.1主线程和子线程的结束时间</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>主线程：在main函数返回时结束</p>
+</li>
+<li class="lvl-2">
+<p>子线程：相应函数结束或者在main结束时被强行结束</p>
+</li>
+</ul>
+<blockquote>
+<p>即main函数结束后，整个进程终止，同时终止其包含的所有线程</p>
+</blockquote>
+<h5 id="1-2使用WaitForSingleObject函数来等待一个内核对象变为已通知状态">1.2使用WaitForSingleObject函数来等待一个内核对象变为已通知状态</h5>
+<blockquote>
+<p>使用该函数，传入相应内核对象的句柄，主线程将阻塞等待该内核对象结束。</p>
+</blockquote>
+<p>参数：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>hHandle：指明内核对象的句柄</p>
+</li>
+<li class="lvl-2">
+<p>dwMilliseconds：等待时间（通常使用INFINITE宏表示一直等待）</p>
+</li>
+</ul>
+<p>核心代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> wr;</span><br><span class="line">HANDLE hThread = (HANDLE)_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, ThreadFun,(<span class="type">void</span>*)&amp;iParam, <span class="number">0</span>, &amp;dwThreadID);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ((wr = <span class="built_in">WaitForSingleObject</span>(hThread, INFINITE)) == WAIT_FAILED)		<span class="comment">//主线程阻塞在此处</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;thread wait error&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="1-3使用WaitForMultipleObjects函数来等待一组内核对象变为已通知状态（多线程阻塞）">1.3使用WaitForMultipleObjects函数来等待一组内核对象变为已通知状态（多线程阻塞）</h5>
+<p>参数：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>nCount：监测的句柄个数</p>
+</li>
+<li class="lvl-2">
+<p>lpHandles：监测的句柄的数组</p>
+</li>
+<li class="lvl-2">
+<p>bWaitAll：TRUE表示等待所有的内核对象发出信号， FALSE表示任意一个内核对象发出信号</p>
+</li>
+<li class="lvl-2">
+<p>dwMilliseconds：等待时间（通常使用INFINITE宏表示一直等待）</p>
+</li>
+</ul>
+<p><strong>案例</strong></p>
+<blockquote>
+<p>本示例开启50个线程，一半用来对全局变量num++500000次，一半用来对全局变量num–500000次，主线程阻塞等待所有线程执行完毕，才会停止。但是最终num不等于0（线程不同步导致对象被多次引用）</p>
+</blockquote>
+<p><img src="picture/%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%90%8C%E6%AD%A5.png" alt=""></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;process.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> NUM_THREAD 50</span></span><br><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI <span class="title">threadInc</span><span class="params">(<span class="type">void</span>* arg)</span></span>;</span><br><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI <span class="title">threadDes</span><span class="params">(<span class="type">void</span>* arg)</span></span>;</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> num = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HANDLE tHandles[NUM_THREAD];</span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;sizeof long long: %d \n&quot;</span>, <span class="built_in">sizeof</span>(<span class="type">long</span> <span class="type">long</span>));</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; NUM_THREAD; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (i % <span class="number">2</span>)</span><br><span class="line">			tHandles[i] = (HANDLE)_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, threadInc, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			tHandles[i] = (HANDLE)_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, threadDes, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">WaitForMultipleObjects</span>(NUM_THREAD, tHandles, TRUE, INFINITE);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;result: %lld \n&quot;</span>, num);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI <span class="title">threadInc</span><span class="params">(<span class="type">void</span>* arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">500000</span>; i++)</span><br><span class="line">		num += <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI <span class="title">threadDes</span><span class="params">(<span class="type">void</span>* arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">500000</span>; i++)</span><br><span class="line">		num -= <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/29/Windows%20API/2022-10-29_17-%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BE%A4%E8%81%8A%E6%9C%8D%E5%8A%A1%E5%99%A8/">17-实现多线程群聊服务器</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-28T16:00:00.000Z" itemprop="datePublished">
+    2022-10-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="实现多线程群聊服务器">实现多线程群聊服务器</h2>
+<h4 id="1-设计思路">1.设计思路</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>对于每一个上线的客户端，服务端会起一个线程去维护</p>
+</li>
+<li class="lvl-2">
+<p>将消息转发给全部客户端</p>
+</li>
+<li class="lvl-2">
+<p>当某个客户端断开（下线），需要处理</p>
+</li>
+</ul>
+<h4 id="完整代码">完整代码</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;process.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib,<span class="string">&quot;ws2_32.lib&quot;</span>)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_CLNT 256</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_BUF_SIZE 1024</span></span><br><span class="line"></span><br><span class="line">SOCKET clnSocks[MAX_CLNT];		<span class="comment">//所有连接的SOCKET客户端</span></span><br><span class="line"><span class="type">int</span> clntCnt = <span class="number">0</span>;				<span class="comment">//当前SOCKET连接数</span></span><br><span class="line"></span><br><span class="line">HANDLE hMutex;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SendMsg</span><span class="params">(<span class="type">char</span>* szMsg, <span class="type">int</span> iLen)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">WaitForSingleObject</span>(hMutex, INFINITE);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; clntCnt; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">send</span>(clnSocks[i], szMsg, iLen, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">ReleaseMutex</span>(hMutex);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI <span class="title">HandleCln</span><span class="params">(<span class="type">void</span>* arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	SOCKET hClntSock = *((SOCKET*)arg);</span><br><span class="line">	<span class="type">int</span> iLen = <span class="number">0</span>, i;</span><br><span class="line">	<span class="type">char</span> szMsg[MAX_BUF_SIZE] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		iLen = <span class="built_in">recv</span>(hClntSock, szMsg, <span class="built_in">sizeof</span>(szMsg), <span class="number">0</span>);</span><br><span class="line">		<span class="keyword">if</span> (iLen != <span class="number">-1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">SendMsg</span>(szMsg, iLen);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">WaitForSingleObject</span>(hMutex, INFINITE);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; clntCnt; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (hClntSock == clnSocks[i])</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt; clntCnt; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				clnSocks[j] = clnSocks[j + <span class="number">1</span>];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	clntCnt--;</span><br><span class="line">	<span class="built_in">ReleaseMutex</span>(hMutex);</span><br><span class="line">	<span class="built_in">closesocket</span>(hClntSock);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HANDLE hThread;</span><br><span class="line"></span><br><span class="line">	WORD wVersionRequested;</span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	<span class="type">int</span> err;</span><br><span class="line">	wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	err = <span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsadata);</span><br><span class="line">	<span class="keyword">if</span> (err)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;WSAStartup errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> err;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">LOBYTE</span>(wsadata.wVersion) != <span class="number">2</span> || <span class="built_in">HIBYTE</span>(wsadata.wVersion) != <span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;LOBYTE errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="built_in">WSACleanup</span>();</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//创建互斥对象</span></span><br><span class="line">	hMutex = <span class="built_in">CreateMutex</span>(<span class="literal">NULL</span>, FALSE, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//创建服务器SOCKET</span></span><br><span class="line">	SOCKET sockSrv = <span class="built_in">socket</span>(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span> (INVALID_SOCKET == sockSrv)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	SOCKADDR_IN addrSrv;</span><br><span class="line">	addrSrv.sin_addr.S_un.S_addr = <span class="built_in">htonl</span>(INADDR_ANY);</span><br><span class="line">	addrSrv.sin_family = AF_INET;</span><br><span class="line">	addrSrv.sin_port = <span class="built_in">htons</span>(<span class="number">9999</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (SOCKET_ERROR == <span class="built_in">bind</span>(sockSrv, (SOCKADDR*)&amp;addrSrv, <span class="built_in">sizeof</span>(SOCKADDR)))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (SOCKET_ERROR == <span class="built_in">listen</span>(sockSrv, <span class="number">5</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;start listen&quot;</span>);</span><br><span class="line"></span><br><span class="line">	SOCKADDR_IN addrCli;</span><br><span class="line">	<span class="type">int</span> len = <span class="built_in">sizeof</span>(SOCKADDR_IN);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		SOCKET sockConn = <span class="built_in">accept</span>(sockSrv, (SOCKADDR*)&amp;addrCli, &amp;len);</span><br><span class="line">		<span class="built_in">WaitForSingleObject</span>(hMutex, INFINITE);</span><br><span class="line">		clnSocks[clntCnt++] = sockConn;</span><br><span class="line">		<span class="built_in">ReleaseMutex</span>(hMutex);</span><br><span class="line">		hThread = (HANDLE)_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, &amp;HandleCln, (<span class="type">void</span>*)&amp;sockConn, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;Connect ip = %s\nNum = %d&quot;</span>, <span class="built_in">inet_ntoa</span>(addrCli.sin_addr), clntCnt);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">closesocket</span>(sockSrv);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/29/Windows%20API/2022-10-29_18-%E7%BE%A4%E8%81%8A%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%81%94%E8%B0%83/">18-群聊服务器与客户端联调</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-28T16:00:00.000Z" itemprop="datePublished">
+    2022-10-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="群聊服务器与客户端联调">群聊服务器与客户端联调</h2>
+<p>客户端设计思路：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>客户端请求链接服务器上线</p>
+</li>
+<li class="lvl-2">
+<p>客户端等待用户的输入</p>
+</li>
+<li class="lvl-2">
+<p>客户端等待服务端消息</p>
+</li>
+<li class="lvl-2">
+<p>等待客户端自己下线</p>
+</li>
+</ul>
+<h4 id="线程任务">线程任务</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>发送线程：用于向服务器发送信息</p>
+</li>
+<li class="lvl-2">
+<p>接收线程：等待服务器传回消息</p>
+</li>
+</ul>
+<h4 id="完整代码">完整代码</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;process.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib,<span class="string">&quot;ws2_32.lib&quot;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> NAME_SIZE 256</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_BUF_SIZE 1024</span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> szName[NAME_SIZE] = <span class="string">&quot;[DEFAULT]&quot;</span>;		<span class="comment">//默认昵称</span></span><br><span class="line"><span class="type">char</span> szMsg[MAX_BUF_SIZE] = <span class="string">&quot;[DEFAULT]&quot;</span>;		<span class="comment">//收发数据的BUF</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI <span class="title">sendMsg</span><span class="params">(<span class="type">void</span>* arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	SOCKET hClntSock = *((SOCKET*)arg);</span><br><span class="line">	<span class="type">char</span> szNameMsg[NAME_SIZE + MAX_BUF_SIZE] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">memset</span>(szMsg, <span class="number">0</span>, MAX_BUF_SIZE);</span><br><span class="line">		<span class="built_in">fgets</span>(szMsg, MAX_BUF_SIZE,stdin);</span><br><span class="line">		<span class="keyword">if</span> (!<span class="built_in">strcmp</span>(szMsg, <span class="string">&quot;Q\n&quot;</span>) || !<span class="built_in">strcmp</span>(szMsg, <span class="string">&quot;q\n&quot;</span>))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">closesocket</span>(hClntSock);</span><br><span class="line">			<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">sprintf</span>(szNameMsg, <span class="string">&quot;%s %s&quot;</span>, szName, szMsg);</span><br><span class="line">		<span class="built_in">send</span>(hClntSock, szNameMsg, <span class="built_in">strlen</span>(szNameMsg), <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">closesocket</span>(hClntSock);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI <span class="title">RecvMsg</span><span class="params">(<span class="type">void</span>* arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	SOCKET hClntSock = *((SOCKET*)arg);</span><br><span class="line">	<span class="type">int</span> iLen = <span class="number">0</span>;</span><br><span class="line">	<span class="type">char</span> szNameMsg[NAME_SIZE + MAX_BUF_SIZE] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">memset</span>(szMsg, <span class="number">0</span>, MAX_BUF_SIZE);</span><br><span class="line">		iLen = <span class="built_in">recv</span>(hClntSock, szNameMsg, <span class="built_in">sizeof</span>(szNameMsg), <span class="number">0</span>);</span><br><span class="line">		<span class="keyword">if</span> (iLen == <span class="number">-1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		szNameMsg[iLen] = <span class="number">0</span>;</span><br><span class="line">		<span class="built_in">fputs</span>(szNameMsg, stdout);</span><br><span class="line">			</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">closesocket</span>(hClntSock);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc,<span class="type">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (argc != <span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;必须输入2个参数，例如昵称\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;进入程序的当前目录，按住shift+右击，打开powershell，输入参数\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;例如：Client.exe Jay\n&quot;</span>);</span><br><span class="line">		<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">sprintf</span>(szName, <span class="string">&quot;[%s]&quot;</span>, argv[<span class="number">1</span>]);</span><br><span class="line">	HANDLE hSendThread, hRecvThread;</span><br><span class="line">	SOCKET hServer;</span><br><span class="line">	SOCKADDR_IN servAdr;</span><br><span class="line">	WORD wVersionRequested;</span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	<span class="type">int</span> err;</span><br><span class="line">	wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	err = <span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsadata);</span><br><span class="line">	<span class="keyword">if</span> (err)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;WSAStartup errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> err;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">LOBYTE</span>(wsadata.wVersion) != <span class="number">2</span> || <span class="built_in">HIBYTE</span>(wsadata.wVersion) != <span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;LOBYTE errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="built_in">WSACleanup</span>();</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	SOCKET sockCli;</span><br><span class="line">	sockCli = <span class="built_in">socket</span>(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">	SOCKADDR_IN addrSrv;</span><br><span class="line">	addrSrv.sin_addr.S_un.S_addr = <span class="built_in">inet_addr</span>(<span class="string">&quot;127.0.0.1&quot;</span>);</span><br><span class="line">	addrSrv.sin_family = AF_INET;</span><br><span class="line">	addrSrv.sin_port = <span class="built_in">htons</span>(<span class="number">9999</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (SOCKET_ERROR == <span class="built_in">connect</span>(sockCli, (sockaddr*)&amp;addrSrv, <span class="built_in">sizeof</span>(sockaddr)))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	hSendThread  = (HANDLE)_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, &amp;sendMsg, (<span class="type">void</span>*)&amp;sockCli, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">	hRecvThread = (HANDLE)_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, &amp;RecvMsg, (<span class="type">void</span>*)&amp;sockCli, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">WaitForSingleObject</span>(hSendThread,INFINITE);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">WaitForSingleObject</span>(hRecvThread, INFINITE);</span><br><span class="line">	<span class="built_in">closesocket</span>(hServer);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/29/Windows%20API/2022-10-29_19-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%EF%BC%9A%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1/">19-线程同步：事件对象</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-28T16:00:00.000Z" itemprop="datePublished">
+    2022-10-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="线程同步：事件对象">线程同步：事件对象</h2>
+<h4 id="事件">事件</h4>
+<p>事件对象也属于内核对象，它包含以下三个成员：</p>
+<p>● 使用计数；</p>
+<p>● 用于指明该事件是一个自动重置的事件还是一个人工重置的事件的布尔值；</p>
+<p>● 用于指明该事件处于已通知状态还是未通知状态的布尔值。</p>
+<h4 id="1-创建事件CreateEvent函数">1.创建事件CreateEvent函数</h4>
+<blockquote>
+<p>将一个句柄变为一个事件的标志，设置该事件的初始信号。</p>
+</blockquote>
+<p>参数：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">HANDLE <span class="title">CreateEvent</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">LPSECURITY_ATTRIBUTES lpEventAttributes, 	<span class="comment">// 安全属性</span></span></span></span><br><span class="line"><span class="params"><span class="function">BOOL bManualReset, 							<span class="comment">// 复位方式 TRUE 必须用 ResetEvent 手动复原 FALSE自动还原为无信号状态</span></span></span></span><br><span class="line"><span class="params"><span class="function">BOOL bInitialState, 						<span class="comment">// 初始状态 TRUE 初始状态为有信号状态 FALSE无信号状态</span></span></span></span><br><span class="line"><span class="params"><span class="function">LPCTSTR lpName 								<span class="comment">//对象名称 NULL 无名的事件对象</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>使用：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">hEvent = <span class="built_in">CreateEvent</span>(<span class="literal">NULL</span>, TRUE, FALSE, <span class="literal">NULL</span>);</span><br><span class="line"><span class="comment">//NUll 默认的安全符 手动 FALSE 初始状态为无信号状态</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-设置事件信号为有信号SetEvent函数">2.设置事件信号为有信号SetEvent函数</h4>
+<blockquote>
+<p>传入一个事件句柄，将该事件设置为有信号（可用）。</p>
+</blockquote>
+<p>参数：事件句柄</p>
+<h4 id="3-设置事件信号为无信号ResetEvent函数">3.设置事件信号为无信号ResetEvent函数</h4>
+<blockquote>
+<p>传入一个事件句柄，将该事件设置为无信号（不可用）。</p>
+</blockquote>
+<p>参数：事件句柄</p>
+<h4 id="4-请求事件对象函数WaitForSingleObject">4.请求事件对象函数WaitForSingleObject</h4>
+<blockquote>
+<p>线程通过调用 WaitForSingleObject 函数请求事件对象，阻塞等待事件，直到有信号。</p>
+</blockquote>
+<p><strong>案例</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;process.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> str[<span class="number">100</span>];</span><br><span class="line">HANDLE hEvent;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI <span class="title">NumberOfAs</span><span class="params">(<span class="type">void</span>* arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> i, cnt = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">WaitForSingleObject</span>(hEvent, INFINITE);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; str[i] != <span class="number">0</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (str[i] == <span class="string">&#x27;A&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			cnt++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;NumberOfAs %d&quot;</span>, cnt);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI	<span class="title">NumberOfOthers</span><span class="params">(<span class="type">void</span>* arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> i, cnt = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; str[i] != <span class="number">0</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (str[i] != <span class="string">&#x27;A&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			cnt++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;NumberOfOthers %d&quot;</span>, cnt);</span><br><span class="line">	<span class="built_in">SetEvent</span>(hEvent);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HANDLE hThread1, hThread2;</span><br><span class="line">	<span class="built_in">fputs</span>(<span class="string">&quot;Input string:\n&quot;</span>,stdout);</span><br><span class="line">	<span class="built_in">fgets</span>(str, <span class="number">100</span>, stdin);</span><br><span class="line">	hEvent = <span class="built_in">CreateEvent</span>(<span class="literal">NULL</span>, TRUE, FALSE, <span class="literal">NULL</span>);</span><br><span class="line">	</span><br><span class="line">	hThread1 = (HANDLE)_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, NumberOfAs, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">	hThread2 = (HANDLE)_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, NumberOfOthers, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">WaitForSingleObject</span>(hThread1, INFINITE);</span><br><span class="line">	<span class="built_in">WaitForSingleObject</span>(hThread2, INFINITE);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">CloseHandle</span>(hEvent);</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/29/Windows%20API/2022-10-29_20-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1/">20-深入理解内核对象</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-28T16:00:00.000Z" itemprop="datePublished">
+    2022-10-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="深入理解内核对象">深入理解内核对象</h2>
+<h4 id="1-内核对象">1.内核对象</h4>
+<blockquote>
+<p>Windows 中每个内核对象都只是一个内存块，它由操作系统内核分配，并只能由操作系统内核进行访问，应用程序不能在内存中定位这些数据结构并直接更改其内容。这个内存块是一个数据结构，其成员维护着与对象相关的信息。少数成员（安全描述符和使用计数）是所有内核对象都有的，但大多数成员都是不同类型对象特有的。</p>
+</blockquote>
+<p>如：file 文件对象、event 事件对象、process 进程、thread 线程、iocompletationport 完成端口（windows 服务器）、mailslot 邮槽、mutex 互斥量和 registry 注册表等。</p>
+<h4 id="2-内核对象的使用计数与生命期">2.内核对象的使用计数与生命期</h4>
+<blockquote>
+<p>内核对象的所有者是操作系统内核，而非进程。换言之也就是说当进程退出，内核对象不一定会销毁。</p>
+<p>操作系统内核通过内核对象的使用计数，知道当前有多少个进程正在使用一个特定的内核对象。初次创建内核对象，使用计数为 1。当另一个进程获得该内核对象的访问权之后，使用计数加1。如果内核对象的使用计数递减为 0，操作系统内核就会销毁该内核对象。也就是说内核对象在当前进程中创建，但是当前进程退出时，内核对象有可能被另外一个进程访问。这时，进程退出只会减少当前进程对引用的所有内核对象的使用计数，而不会减少其他进程对内核对象的使用计数（即使该内核对象由当前进程创建）。那么内核对象的使用计数未递减为 0，操作系统内核不会销毁该内核对象。</p>
+</blockquote>
+<p><strong>注意</strong></p>
+<p>当内核对象被创建时，引用计数就是2。（被创建的时刻为1，同时被访问了，因此再+1）</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/29/Windows%20API/2022-10-29_21-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%EF%BC%9A%E4%BF%A1%E5%8F%B7%E9%87%8F/">21-线程同步：信号量</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-28T16:00:00.000Z" itemprop="datePublished">
+    2022-10-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="线程同步：信号量">线程同步：信号量</h2>
+<h4 id="1-内核对象的状态">1.内核对象的状态</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>触发状态（有信号状态），表示有可用资源。</p>
+</li>
+<li class="lvl-2">
+<p>未触发状态（无信号状态），表示没有可用资源</p>
+</li>
+</ul>
+<h4 id="2-信号量">2.信号量</h4>
+<blockquote>
+<p>用于保证某个内核对象的引用不超过某个最大值。</p>
+</blockquote>
+<p>组成：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>计数器：该内核对象被使用的次数</p>
+</li>
+<li class="lvl-2">
+<p>最大资源数量：标识信号量能<strong>控制</strong>的最大资源数量（实际上可能没有那么多资源）</p>
+</li>
+<li class="lvl-2">
+<p>当前资源数量：表示当前开放资源的个数（资源可以不被线程占用，但是也没开放）</p>
+</li>
+</ul>
+<p>使用规则：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>当前资源数量&gt;0：说明有可用资源，信号量处于触发状态</p>
+</li>
+<li class="lvl-2">
+<p>当前资源数量=0：说明无可用资源，信号量处于未触发状态</p>
+</li>
+</ul>
+<p>补充：</p>
+<blockquote>
+<p>信号量与互斥量不同的地方是，它允许多个线程在同一时刻访问同一资源，但是需要限制在同一时刻访问此资源的最大线程数目。信号量对象对线程的同步方式与前面几种方法不同，信号允许多个线程同时使用共享资源。</p>
+</blockquote>
+<h4 id="3-创建信号量CreateSemaphoreW函数">3.创建信号量CreateSemaphoreW函数</h4>
+<blockquote>
+<p>创建一个信号量，并指定该信号量的初始值和最大值</p>
+</blockquote>
+<p>参数：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>lpSemaphoreAttributes：安全属性，一般用NULL</p>
+</li>
+<li class="lvl-2">
+<p>lInitialCount：初始化时，有多少个资源可用</p>
+</li>
+<li class="lvl-2">
+<p>lMaximumCount：最大可控制的资源数量</p>
+</li>
+<li class="lvl-2">
+<p>lpName：信号的名称，一般用NULL匿名</p>
+</li>
+</ul>
+<p>返回：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>信号句柄</p>
+</li>
+</ul>
+<h4 id="4-增加信号量ReleaseSemaphore函数">4.增加信号量ReleaseSemaphore函数</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>hSemaphore：信号量的句柄</p>
+</li>
+<li class="lvl-2">
+<p>lReleaseCount：增加的资源计数值（如果是n，则加n）</p>
+</li>
+<li class="lvl-2">
+<p>lpPreviousCount：当前资源计数的原始值</p>
+</li>
+</ul>
+<p><strong>案例</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;process.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI <span class="title">Read</span><span class="params">(<span class="type">void</span>* arg)</span></span>;</span><br><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI <span class="title">Accu</span><span class="params">(<span class="type">void</span>* arg)</span></span>;</span><br><span class="line"><span class="type">static</span> HANDLE semOne;</span><br><span class="line"><span class="type">static</span> HANDLE semTwo;</span><br><span class="line"><span class="type">static</span> <span class="type">int</span> num;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HANDLE hThread1, hThread2;</span><br><span class="line">	semOne = <span class="built_in">CreateSemaphore</span>(<span class="literal">NULL</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="literal">NULL</span>);</span><br><span class="line">	<span class="comment">//semOne 没有可用资源 只能表示0或者1的二进制信号量 无信号</span></span><br><span class="line">	semTwo = <span class="built_in">CreateSemaphore</span>(<span class="literal">NULL</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="literal">NULL</span>);</span><br><span class="line">	<span class="comment">//semTwo 有可用资源，有信号状态 有信号</span></span><br><span class="line">	hThread1 = (HANDLE)_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, Read, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">	hThread2 = (HANDLE)_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, Accu, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">	<span class="built_in">WaitForSingleObject</span>(hThread1, INFINITE);</span><br><span class="line">	<span class="built_in">WaitForSingleObject</span>(hThread2, INFINITE);</span><br><span class="line">	<span class="built_in">CloseHandle</span>(semOne);</span><br><span class="line">	<span class="built_in">CloseHandle</span>(semTwo);</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI <span class="title">Read</span><span class="params">(<span class="type">void</span>* arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">fputs</span>(<span class="string">&quot;Input num: &quot;</span>, stdout); <span class="comment">// 1 5 11</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;begin read\n&quot;</span>); <span class="comment">// 3 6 12</span></span><br><span class="line">		<span class="comment">//等待内核对象semTwo的信号，如果有信号，继续执行；如果没有信号，等待</span></span><br><span class="line">		<span class="built_in">WaitForSingleObject</span>(semTwo, INFINITE);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;beginning read\n&quot;</span>); <span class="comment">//4 10 16</span></span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line">		<span class="built_in">ReleaseSemaphore</span>(semOne, <span class="number">1</span>, <span class="literal">NULL</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI <span class="title">Accu</span><span class="params">(<span class="type">void</span>* arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> sum = <span class="number">0</span>, i;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;begin Accu\n&quot;</span>); <span class="comment">//2 9 15</span></span><br><span class="line">		<span class="comment">//等待内核对象semOne的信号，如果有信号，继续执行；如果没有信号，等待</span></span><br><span class="line">		<span class="built_in">WaitForSingleObject</span>(semOne, INFINITE);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;beginning Accu\n&quot;</span>); <span class="comment">//7 13</span></span><br><span class="line">		sum += num;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;sum = %d \n&quot;</span>, sum); <span class="comment">// 8 14</span></span><br><span class="line">		<span class="built_in">ReleaseSemaphore</span>(semTwo, <span class="number">1</span>, <span class="literal">NULL</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Result: %d \n&quot;</span>, sum);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/categories/Windows-API/">« prev</a><a class="page-number" href="/categories/Windows-API/">1</a><span class="page-number current">2</span><a class="page-number" href="/categories/Windows-API/page/3/">3</a><a class="page-number" href="/categories/Windows-API/page/4/">4</a><a class="extend next" rel="next" href="/categories/Windows-API/page/3/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

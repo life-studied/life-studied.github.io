@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/25/C++/GDB/2023-02-25_GDB%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4/">GDB调试命令</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-24T16:00:00.000Z" itemprop="datePublished">
+    2023-02-25
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/GDB/">GDB</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="GDB调试命令">GDB调试命令</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">调试指令</th>
+<th style="text-align:left">shortcut</th>
+<th style="text-align:left">作 用</th>
+<th style="text-align:left">example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">break xxx</td>
+<td style="text-align:left">b</td>
+<td style="text-align:left">在源代码指定的某一行设置断点，其中 xxx 用于指定具体打断点的位置。</td>
+<td style="text-align:left">b 10</td>
+</tr>
+<tr>
+<td style="text-align:left">run</td>
+<td style="text-align:left">r</td>
+<td style="text-align:left">执行被调试的程序，其会自动在第一个断点处暂停执行。</td>
+<td style="text-align:left">run</td>
+</tr>
+<tr>
+<td style="text-align:left">continue</td>
+<td style="text-align:left">c</td>
+<td style="text-align:left">当程序在某一断点处停止运行后，使用该指令可以继续执行，直至遇到下一个断点或者程序结束。</td>
+<td style="text-align:left">c</td>
+</tr>
+<tr>
+<td style="text-align:left">next</td>
+<td style="text-align:left">n</td>
+<td style="text-align:left">步过</td>
+<td style="text-align:left">n</td>
+</tr>
+<tr>
+<td style="text-align:left">print xxx</td>
+<td style="text-align:left">p xxx</td>
+<td style="text-align:left">打印指定变量的值，其中 xxx 指的就是某一变量名。或者是一个表达式，或者是一个有副作用的函数。</td>
+<td style="text-align:left">p i <br>p i+100<br>p strcpy(name,“Jay”)</td>
+</tr>
+<tr>
+<td style="text-align:left">list</td>
+<td style="text-align:left">l</td>
+<td style="text-align:left">显示源程序代码的内容，包括各行代码所在的行号。</td>
+<td style="text-align:left">list</td>
+</tr>
+<tr>
+<td style="text-align:left">quit</td>
+<td style="text-align:left">q</td>
+<td style="text-align:left">终止调试。</td>
+<td style="text-align:left">q</td>
+</tr>
+<tr>
+<td style="text-align:left">set var</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">改变变量值</td>
+<td style="text-align:left">set var p=11</td>
+</tr>
+<tr>
+<td style="text-align:left">step</td>
+<td style="text-align:left">s</td>
+<td style="text-align:left">单步执行</td>
+<td style="text-align:left">s</td>
+</tr>
+<tr>
+<td style="text-align:left">set args x  x …</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">设置程序参数（特殊字符使用双引号包裹）</td>
+<td style="text-align:left">set args hello 2</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/23/GO/%E5%AF%BC%E5%8C%85%E6%A1%88%E4%BE%8B/2023-02-23_Go%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/">Go项目结构</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-22T16:00:00.000Z" itemprop="datePublished">
+    2023-02-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/GO/">GO</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/GO/%E5%AF%BC%E5%8C%85%E6%A1%88%E4%BE%8B/">导包案例</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="Go项目结构">Go项目结构</h2>
+<h4 id="总览">总览</h4>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">--Project path</span></span><br><span class="line"><span class="comment">  --bin     可执行文件</span></span><br><span class="line"><span class="comment">  --build   编译构建结果</span></span><br><span class="line"><span class="comment">  --cmd     代码，甚至可以只有一个main</span></span><br><span class="line"><span class="comment">    --具体包名</span></span><br><span class="line"><span class="comment">  --config  配置文件</span></span><br><span class="line"><span class="comment">  --docs    文档文件</span></span><br><span class="line"><span class="comment">  --example 样例应用程序</span></span><br><span class="line"><span class="comment">  --internal  不便在cmd做展示的、需要隐藏的、需要加密的代码</span></span><br><span class="line"><span class="comment">  --pkg     外部应用程序使用的代码库</span></span><br><span class="line"><span class="comment">  --script  脚本</span></span><br><span class="line"><span class="comment">  --test    测试代码</span></span><br><span class="line"><span class="comment">  --tools   编写的工具，可以从pkg、internal引入代码</span></span><br><span class="line"><span class="comment">  --vender  应用程序依赖项</span></span><br><span class="line"><span class="comment">  go.mod</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h4 id="案例">案例</h4>
+<p><img src="picture/%E6%A1%88%E4%BE%8B.png" alt=""></p>
+<p>步骤：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>在根目录下使用<code>go init mod &lt;modname&gt;</code></p>
+</li>
+</ul>
+<p><img src="picture/initmod.png" alt=""></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>将main包放到cmd目录下，将项目内部使用的包放到internal目录下</p>
+</li>
+<li class="lvl-2">
+<p>main导入包时，以下图的方式</p>
+</li>
+</ul>
+<p><img src="picture/import.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/23/GO/%E7%89%B9%E6%80%A7/2023-02-23_goroutine%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B/">goroutine使用案例</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-22T16:00:00.000Z" itemprop="datePublished">
+    2023-02-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/GO/">GO</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/GO/%E7%89%B9%E6%80%A7/">特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="goroutine使用案例">goroutine使用案例</h2>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Add</span><span class="params">(x, y <span class="type">int</span>, ch <span class="keyword">chan</span> <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">	fmt.Println(x, <span class="string">&quot;+&quot;</span>, y, <span class="string">&quot;=&quot;</span>, x+y)</span><br><span class="line">	ch &lt;- <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	chs := <span class="built_in">make</span>([]<span class="keyword">chan</span> <span class="type">int</span>, <span class="number">100</span>)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100</span>; i++ &#123;</span><br><span class="line">		chs[i] = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>)</span><br><span class="line">		<span class="keyword">go</span> Add(i, i, chs[i])</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100</span>; i++ &#123;</span><br><span class="line">		&lt;-chs[i]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/23/GO/%E7%89%B9%E6%80%A7/2023-02-23_map%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B/">map使用案例</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-22T16:00:00.000Z" itemprop="datePublished">
+    2023-02-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/GO/">GO</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/GO/%E7%89%B9%E6%80%A7/">特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="map使用案例">map使用案例</h2>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//test map</span></span><br><span class="line"><span class="comment">//1.create map</span></span><br><span class="line"><span class="comment">//2.query map</span></span><br><span class="line"><span class="comment">//3.delete map</span></span><br><span class="line"><span class="comment">//4.use struct</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> PersonInfo <span class="keyword">struct</span> &#123;</span><br><span class="line">	ID      <span class="type">string</span></span><br><span class="line">	Name    <span class="type">string</span></span><br><span class="line">	Address <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">FindPerson</span><span class="params">(fID <span class="type">string</span>, sheet <span class="keyword">map</span>[<span class="type">string</span>]PersonInfo)</span></span> &#123;</span><br><span class="line">	person, ok := sheet[fID]</span><br><span class="line">	<span class="keyword">if</span> ok &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;Found Person:&quot;</span>, person.Name, <span class="string">&quot;ID:&quot;</span>,</span><br><span class="line">			person.ID, <span class="string">&quot;Address:&quot;</span>, person.Address)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;Did not find the Person, ID:&quot;</span>, fID)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> personDB <span class="keyword">map</span>[<span class="type">string</span>]PersonInfo</span><br><span class="line">	personDB = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]PersonInfo)</span><br><span class="line"></span><br><span class="line">	personDB[<span class="string">&quot;12345&quot;</span>] = PersonInfo&#123;<span class="string">&quot;12345&quot;</span>, <span class="string">&quot;Tom&quot;</span>, <span class="string">&quot;Room 2003&quot;</span>&#125;</span><br><span class="line">	personDB[<span class="string">&quot;1&quot;</span>] = PersonInfo&#123;<span class="string">&quot;1&quot;</span>, <span class="string">&quot;Jay&quot;</span>, <span class="string">&quot;Room 2005&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">	FindPerson(<span class="string">&quot;1234&quot;</span>, personDB)</span><br><span class="line">	FindPerson(<span class="string">&quot;12345&quot;</span>, personDB)</span><br><span class="line">	<span class="built_in">delete</span>(personDB, <span class="string">&quot;12345&quot;</span>)</span><br><span class="line">	FindPerson(<span class="string">&quot;12345&quot;</span>, personDB)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/23/GO/%E7%89%B9%E6%80%A7/2023-02-23_%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE%EF%BC%88flag%E5%8C%85%EF%BC%89/">命令行参数设置（flag包）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-22T16:00:00.000Z" itemprop="datePublished">
+    2023-02-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/GO/">GO</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/GO/%E7%89%B9%E6%80%A7/">特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="命令行参数设置（flag包）">命令行参数设置（flag包）</h2>
+<h4 id="案例">案例</h4>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;flag&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> infile *<span class="type">string</span> = flag.String(<span class="string">&quot;i&quot;</span>, <span class="string">&quot;infile&quot;</span>, <span class="string">&quot;File contains values for sorting&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> outfile *<span class="type">string</span> = flag.String(<span class="string">&quot;o&quot;</span>, <span class="string">&quot;outfile&quot;</span>, <span class="string">&quot;File to receive sorted values&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> algorithm *<span class="type">string</span> = flag.String(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;qsort&quot;</span>, <span class="string">&quot;Sort algorithms&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	flag.Parse()	<span class="comment">//解析命令行参数并给变量赋值</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> infile != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;infile = &quot;</span>, *infile, <span class="string">&quot;outfile = &quot;</span>, *outfile, <span class="string">&quot;algorithm = &quot;</span>, *algorithm)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="使用">使用</h4>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">go build sorter.go	#编译为二进制文件</span><br><span class="line">.\sorter.exe -i unsorted.dat -o sorted.dat -a buttlesort	#使用</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/23/GO/%E7%89%B9%E6%80%A7/2023-02-23_%E6%8E%A5%E5%8F%A3/">接口</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-22T16:00:00.000Z" itemprop="datePublished">
+    2023-02-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/GO/">GO</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/GO/%E7%89%B9%E6%80%A7/">特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="接口">接口</h2>
+<p>接口可以看作两部分</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>接口存的值（直接用接口变量名）</p>
+</li>
+<li class="lvl-2">
+<p>接口里的变量可以调用的函数（接口变量名.接口函数）</p>
+</li>
+</ul>
+<h4 id="1-空接口">1.空接口</h4>
+<blockquote>
+<p>空接口可以接收任意类型的转换</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//interface&#123;&#125;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">MyPrint</span><span class="params">(val []<span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> _, element := <span class="keyword">range</span> val &#123;</span><br><span class="line">		fmt.Println(element)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	strange := <span class="built_in">make</span>([]<span class="keyword">interface</span>&#123;&#125;, <span class="number">10</span>)</span><br><span class="line">	strange[<span class="number">0</span>] = <span class="number">2.55</span></span><br><span class="line">	strange[<span class="number">1</span>] = <span class="string">&quot;hello&quot;</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">2</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		strange[i] = i</span><br><span class="line">	&#125;</span><br><span class="line">	MyPrint(strange)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-正常接口">2.正常接口</h4>
+<blockquote>
+<p>结构体实现了接口内部的所有函数，就隐式实现了该接口，即可以被隐式转换为该接口</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//interface test</span></span><br><span class="line"><span class="keyword">type</span> Chinese <span class="keyword">struct</span> &#123;</span><br><span class="line">	lan_name <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> English <span class="keyword">struct</span> &#123;</span><br><span class="line">	lan_name <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> lanName <span class="keyword">interface</span> &#123;</span><br><span class="line">	name()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(lan Chinese)</span></span> name() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;This is&quot;</span>, lan.lan_name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(lan English)</span></span> name() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;This is&quot;</span>, lan.lan_name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> c = Chinese&#123;<span class="string">&quot;Chinese&quot;</span>&#125;</span><br><span class="line">	<span class="keyword">var</span> e = English&#123;<span class="string">&quot;English&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> lanname lanName = c</span><br><span class="line">	lanname.name()</span><br><span class="line"></span><br><span class="line">	lanname = e</span><br><span class="line">	lanname.name()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/22/ShortCuts/2023-02-22_ShortCuts/">ShortCuts</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-21T16:00:00.000Z" itemprop="datePublished">
+    2023-02-22
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/ShortCuts/">ShortCuts</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="ShortCuts">ShortCuts</h2>
+<h4 id="1-vscode">1.vscode</h4>
+<h5 id="1-1切换编辑器与终端">1.1切换编辑器与终端</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">alt+q</span><br><span class="line">ctrl+1</span><br></pre></td></tr></table></figure>
+<h4 id="2-markdown">2.markdown</h4>
+<h5 id="2-1代码块">2.1代码块</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">alt+q</span><br></pre></td></tr></table></figure>
+<h5 id="2-2插入图片">2.2插入图片</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ctrl+shift+i</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/06/C++/Linux%E7%9B%B8%E5%85%B3/4CMake/2023-02-06_2-Cmake%E9%A1%B9%E7%9B%AE%E4%BD%BF%E7%94%A8/">2-Cmake项目使用</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-05T16:00:00.000Z" itemprop="datePublished">
+    2023-02-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Linux%E7%9B%B8%E5%85%B3/">Linux相关</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Linux%E7%9B%B8%E5%85%B3/4CMake/">4CMake</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="Cmake项目使用">Cmake项目使用</h2>
+<h4 id="基本目录结构：">基本目录结构：</h4>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">project/</span><br><span class="line">	|</span><br><span class="line">	+--- CMakeList.txt</span><br><span class="line">    |</span><br><span class="line">    +--- src/</span><br><span class="line">    |     |</span><br><span class="line">    |     +--- main.cpp</span><br><span class="line">    |	  |</span><br><span class="line">    |     +--- demo1.cpp</span><br><span class="line">    |	  |</span><br><span class="line">    |     +--- demo2.cpp</span><br><span class="line">    |</span><br><span class="line">    +--- math/</span><br><span class="line">    |     |</span><br><span class="line">    |     +--- MathFunctions.cpp</span><br><span class="line">    |     |</span><br><span class="line">    |     +--- MathFunctions.h</span><br><span class="line">    |     |</span><br><span class="line">    |     +--- CMakeList.txt</span><br><span class="line">    |</span><br><span class="line">    +--- bin/</span><br><span class="line">    |</span><br><span class="line">    +--- build/</span><br></pre></td></tr></table></figure>
+<h4 id="project目录下的CMakeList-txt">project目录下的CMakeList.txt</h4>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="comment"># CMake 最低版本号要求</span></span><br><span class="line"><span class="keyword">cmake_minimum_required</span> (VERSION <span class="number">2.8</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 项目信息</span></span><br><span class="line"><span class="keyword">project</span> (CountNum)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加 math 和 src 子目录</span></span><br><span class="line"><span class="keyword">add_subdirectory</span>(<span class="keyword">math</span> src)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找当前目录下的所有源文件</span></span><br><span class="line"><span class="comment"># 并将名称保存到 DIR_SRCS 变量</span></span><br><span class="line"><span class="keyword">aux_source_directory</span>(. DIR_SRCS)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定生成目标和所需源文件</span></span><br><span class="line"><span class="keyword">add_executable</span>(CountNum <span class="variable">$&#123;DIR_LIB_SRCS&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加链接库</span></span><br><span class="line"><span class="keyword">target_link_libraries</span>(CountNum MathFunctions)</span><br></pre></td></tr></table></figure>
+<h4 id="math目录下的CMakeList-txt">math目录下的CMakeList.txt</h4>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查找当前目录下的所有源文件</span></span><br><span class="line"><span class="comment"># 并将名称保存到 DIR_LIB_SRCS 变量</span></span><br><span class="line"><span class="keyword">aux_source_directory</span>(. DIR_LIB_SRCS)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成链接库</span></span><br><span class="line"><span class="keyword">add_library</span> (MathFunctions <span class="variable">$&#123;DIR_LIB_SRCS&#125;</span>)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/06/MySql/SQL%E7%BD%91%E8%AF%BE/2DML/2023-02-06_2-UPDATE/">2-UPDATE</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-05T16:00:00.000Z" itemprop="datePublished">
+    2023-02-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/">SQL网课</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/2DML/">2DML</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="UPDATE">UPDATE</h2>
+<h4 id="1-WHERE子句">1.WHERE子句</h4>
+<p>用于筛选符合条件的记录</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">WHERE score &gt; 20 and score &lt; 40;</span><br></pre></td></tr></table></figure>
+<h4 id="2-UPDATE">2.UPDATE</h4>
+<h5 id="语法">语法</h5>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UPDATE 表名 SET 列名1=值1, 列名2=值2, 列名3=值3, ... WHERE 条件; </span><br></pre></td></tr></table></figure>
+<h5 id="分析：">分析：</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<pre><code class="language-mysql">  UPDATE 表名 SET 列名1=值1, 列名2=值2, 列名3=值3, ...	-- 将对应的列值改为设置的值
+  <figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">* ```mysql</span><br><span class="line">	WHERE 条件<span class="comment">; 	-- 筛选条件</span></span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ul>
+<h5 id="例子">例子</h5>
+<p>将course表中的数据库的学分改为4，学时改为15</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UPDATE course SET score=4, `time`=15 WHERE name=&quot;数据库&quot;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/05/MySql/SQL%E7%BD%91%E8%AF%BE/0%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/2023-02-05_0DDL%E3%80%81DML%E3%80%81DCL%E5%92%8CDQL/">0DDL、DML、DCL和DQL</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-04T16:00:00.000Z" itemprop="datePublished">
+    2023-02-05
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/">SQL网课</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/0%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">0基础知识</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="DDL、DML、DCL和DQL">DDL、DML、DCL和DQL</h2>
+<p><img src="../picture/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%AD%E8%A8%80.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/5/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/7/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

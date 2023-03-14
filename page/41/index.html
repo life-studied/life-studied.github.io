@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-03-05_6%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E4%B8%8E%E9%81%8D%E5%8E%86/">6二叉树的存储结构与遍历</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-04T16:00:00.000Z" itemprop="datePublished">
+    2022-03-05
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="二叉树">二叉树</h2>
+<h4 id="定义：每个结点最多只有两棵子树">定义：每个结点最多只有两棵子树</h4>
+<blockquote>
+<p>性质：</p>
+<p>1.在第i层上只有2^(i-1)</p>
+<p>2.深度为k的二叉树最多有2^k-1个结点</p>
+<p>3.T=n0+n1+n2</p>
+<p>4.具有n个结点的完全二叉树深度为log2n+1向下取整</p>
+</blockquote>
+<h4 id="满二叉树：没有度为1的结点，所有的结点都在同一层">满二叉树：没有度为1的结点，所有的结点都在同一层</h4>
+<h4 id="完全二叉树：必须按照从上到下，从左到右排列结点">完全二叉树：必须按照从上到下，从左到右排列结点</h4>
+<h4 id="存储方式">存储方式</h4>
+<blockquote>
+<p>将二叉树从上到下，从左到右进行标号，则某个结点X的左孩子结点为2X，右孩子结点为2X+1</p>
+</blockquote>
+<h5 id="数组存储">数组存储</h5>
+<blockquote>
+<p>根节点下标为0，左孩子为2X+1，右孩子为2X+2</p>
+</blockquote>
+<h6 id="缺点：耗费空间">缺点：耗费空间</h6>
+<h6 id="适合完全二叉树或满二叉树">适合完全二叉树或满二叉树</h6>
+<h5 id="链表存储">链表存储</h5>
+<blockquote>
+<p>数据域和指针域（左右）</p>
+</blockquote>
+<h4 id="树的遍历">树的遍历</h4>
+<blockquote>
+<p>先序遍历</p>
+<p>中序遍历</p>
+<p>后序遍历</p>
+<p>层序遍历</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> *<span class="title">left</span>,*<span class="title">right</span>;</span></span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">&#125;node;</span><br><span class="line"></span><br><span class="line"><span class="comment">//根据输出顺序的不同分为先序，中序，后序</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">traverse</span><span class="params">(Node *node)</span></span><br><span class="line">&#123;</span><br><span class="line"> 	<span class="keyword">if</span>(node==<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">//printf(&quot;%d&quot;,node-&gt;data);</span></span><br><span class="line">    <span class="comment">//先中间，再左右</span></span><br><span class="line">    traverse(node-&gt;left);</span><br><span class="line">    <span class="comment">//printf(&quot;%d&quot;,node-&gt;data);</span></span><br><span class="line">    <span class="comment">//先左，再中，后右</span></span><br><span class="line">    traverse(node-&gt;right);</span><br><span class="line">    <span class="comment">//printf(&quot;%d&quot;,node-&gt;data);</span></span><br><span class="line">    <span class="comment">//先左右，再中间</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//层序遍历：一层一层输出</span></span><br><span class="line"><span class="comment">//使用队列实现</span></span><br><span class="line"><span class="comment">//实现方法：从根节点入队，出队后将其左右孩子入队，再循环这个操作</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>层序遍历示例</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//层序遍历：一层一层输出</span></span><br><span class="line"><span class="comment">//使用队列实现</span></span><br><span class="line"><span class="comment">//实现方法：从根节点入队，出队后将其左右孩子入队，再循环这个操作</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SIZE 5</span></span><br><span class="line"><span class="type">int</span> *<span class="built_in">queue</span>;</span><br><span class="line"><span class="type">int</span> front;</span><br><span class="line"><span class="type">int</span> end;</span><br><span class="line"><span class="type">int</span> maxSize;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ChildBro</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> key;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ChildBro</span> *<span class="title">child</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ChildBro</span> *<span class="title">sibling</span>;</span></span><br><span class="line">&#125;Node;</span><br><span class="line"></span><br><span class="line">Node *root;		<span class="comment">//根指针</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Initqueue</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">queue</span>=(<span class="type">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>)*SIZE);</span><br><span class="line">    maxSize=SIZE;</span><br><span class="line">    front=end=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">insert_queue</span><span class="params">(<span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(isFull())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        end=(end+<span class="number">1</span>)%maxSize;</span><br><span class="line">        <span class="built_in">queue</span>[end]=key;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">delete_queue</span><span class="params">(<span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(isEmpty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        front=(front+<span class="number">1</span>)%maxSize;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">isFull</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>((end+<span class="number">1</span>)%maxSize==front)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">isEmpty</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(end==front)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Init</span><span class="params">(<span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    root=(Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">    root-&gt;key=key;</span><br><span class="line">    root-&gt;child=<span class="literal">NULL</span>;</span><br><span class="line">    root-&gt;silbing=<span class="literal">NULL</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">insert</span><span class="params">(<span class="type">int</span> key,<span class="type">int</span> parent)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//定位结点</span></span><br><span class="line">    </span><br><span class="line">    Node* temp;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(temp==<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        Node*node=(Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">        node-&gt;key=key;</span><br><span class="line">        node-&gt;child=<span class="literal">NULL</span>;</span><br><span class="line">        node-&gt;sibling=<span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">if</span>(temp-&gt;child==<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            temp-&gt;child=node;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            node-&gt;sibling=temp-&gt;child;</span><br><span class="line">            temp-&gt;child=node;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//层序遍历核心函数</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">levelOrder</span><span class="params">(Node* root)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//传进来的结点不为空</span></span><br><span class="line">    <span class="keyword">if</span>(root!=<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        insert_queue(root-&gt;key);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(!isEmpty())<span class="comment">//一直循环至队列为空</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> temp=delete_queue();<span class="comment">//元素出队</span></span><br><span class="line">        get_node(root,temp);</span><br><span class="line">        <span class="keyword">if</span>(tempNode-&gt;child!=<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            insert_queue(tempNode-&gt;child-&gt;key)</span><br><span class="line">                </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(tempNode-&gt;sibling!=<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            insert_queue(tempNode-&gt;sibling-&gt;key)</span><br><span class="line">                </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="扩展二叉树（概念）">扩展二叉树（概念）</h4>
+<p>将一个不是满二叉树的补成一个满二叉树（或完全二叉树）</p>
+<p>（将单孩子的结点缺少的结点补成空符号的结点）</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-03-05_7%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91/">7二叉排序树</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-04T16:00:00.000Z" itemprop="datePublished">
+    2022-03-05
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h3 id="二叉排序树">二叉排序树</h3>
+<blockquote>
+<p>性质：（左右子树不空）</p>
+<p>左子树所有结点的值都小于根节点</p>
+<p>右子树所有结点的值都大于根节点</p>
+</blockquote>
+<h5 id="构建二叉排序树">构建二叉排序树</h5>
+<blockquote>
+<p>根据性质一个一个插入即可</p>
+</blockquote>
+<h5 id="优势">优势</h5>
+<blockquote>
+<p>中序遍历（左中右）后就已经排好序</p>
+</blockquote>
+<h5 id="难度">难度</h5>
+<blockquote>
+<p>删除后可能会改变结构，代码实现</p>
+<p>情况分析：</p>
+<p>1.叶子结点，直接删除</p>
+<p>2.单孩子结点，删除结点后将孩子放在删除的位置</p>
+<p>3.左右孩子都有的结点，将排序后前后的任一结点填充到该位置（即左子树的最右边或右子树的最左边那个填充）</p>
+</blockquote>
+<p><strong>代码实现思路：先定位到这个待删除的结点，再给这个结点归类，根据类别删除这个结点</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>* <span class="title">left</span>,*<span class="title">right</span>;</span></span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">&#125;Node;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">insert</span><span class="params">(Node* root,<span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    Node* pre=<span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">while</span>(root!=<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        pre=root;</span><br><span class="line">        <span class="keyword">if</span>(key&lt;root-&gt;data)</span><br><span class="line">        &#123;</span><br><span class="line">            root=root-&gt;left</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            root=root-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    Node* new_node=(Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">    new_node-&gt;left=<span class="literal">NULL</span>;</span><br><span class="line">    new_node-&gt;right=<span class="literal">NULL</span>;</span><br><span class="line">    new_node-&gt;data=key;</span><br><span class="line">    <span class="keyword">if</span>(key&lt;pre-&gt;data)</span><br><span class="line">    &#123;</span><br><span class="line">        pre-&gt;left=new_node;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        pre-&gt;right=new_node;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">deleteNode</span><span class="params">(Node* root,<span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(root==<span class="literal">NULL</span>)<span class="comment">//根节点为空</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">else</span><span class="comment">//正常删除</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(key&lt;root-&gt;data)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> deleteNode(root-&gt;left,key);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(key&gt;root-&gt;data)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> deleteNode(root-&gt;right,key);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//删除</span></span><br><span class="line">            delete(root);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">delete</span><span class="params">(Node* node)</span></span><br><span class="line">&#123;</span><br><span class="line">    Node* temp=<span class="literal">NULL</span>;</span><br><span class="line">    <span class="comment">//删除只有一个孩子或没孩子的结点的情况</span></span><br><span class="line">    <span class="keyword">if</span>(node-&gt;left==<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        temp=node;</span><br><span class="line">        node=node-&gt;right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(node-&gt;right==<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        temp=node;</span><br><span class="line">        node=node-&gt;left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span><span class="comment">//左右子树都不为空</span></span><br><span class="line">    &#123;</span><br><span class="line">        temp=node;</span><br><span class="line">        Node* s=node;<span class="comment">//找左子树的最大值</span></span><br><span class="line">        s=s-&gt;left;</span><br><span class="line">        <span class="keyword">while</span>(s-&gt;right!=<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            temp=s;</span><br><span class="line">            s=s-&gt;right;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//找到后先替换数据</span></span><br><span class="line">        node-&gt;data=s-&gt;data;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//开始删除</span></span><br><span class="line">        <span class="keyword">if</span>(temp!=node)</span><br><span class="line">        &#123;</span><br><span class="line">            </span><br><span class="line">            temp-&gt;right=s-&gt;left;</span><br><span class="line">            <span class="comment">//在此处free</span></span><br><span class="line">		&#125;</span><br><span class="line">        <span class="keyword">else</span><span class="comment">//如果s没有右子树，即定位根本没有进行</span></span><br><span class="line">        &#123;</span><br><span class="line">            temp-&gt;left=s-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="时间复杂度">时间复杂度</h5>
+<blockquote>
+<p>o(h)=o(log2n)</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/02/Python%E8%AF%AD%E6%B3%95/2022-03-02_2%E6%9D%A1%E4%BB%B6%E5%88%86%E6%94%AF&amp;%E5%BE%AA%E7%8E%AF/">2条件分支&amp;循环</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-01T16:00:00.000Z" itemprop="datePublished">
+    2022-03-02
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/">Python语法</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="条件分支-循环">条件分支&amp;循环</h2>
+<h4 id="条件分支">条件分支</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> 条件表达式:</span><br><span class="line">    语句<span class="number">1</span></span><br><span class="line">    语句<span class="number">2</span></span><br><span class="line">    语句<span class="number">3</span></span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">elif</span>:</span><br><span class="line">    语句<span class="number">1</span></span><br><span class="line">    语句<span class="number">2</span></span><br><span class="line">    语句<span class="number">3</span></span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    语句<span class="number">1</span></span><br><span class="line">    语句<span class="number">2</span></span><br><span class="line">    语句<span class="number">3</span></span><br><span class="line">    ...</span><br><span class="line"><span class="comment">#注：</span></span><br><span class="line"><span class="comment">#1.条件表达式不用()</span></span><br><span class="line"><span class="comment">#2.属于if/elif/else后执行的语句必须缩进4</span></span><br></pre></td></tr></table></figure>
+<h4 id="另一种表达式写法">另一种表达式写法</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">条件成立时执行的语句<span class="keyword">if</span> condition <span class="keyword">else</span>条件不成立时执行的语句</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：</p>
+<p>该表达式的值是执行语句的值</p>
+<p>该表达式一样可以嵌套在else里</p>
+</blockquote>
+<h4 id="循环">循环</h4>
+<h5 id="while循环">while循环</h5>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> 条件表达式:</span><br><span class="line">	语句<span class="number">1</span></span><br><span class="line">    语句<span class="number">2</span></span><br><span class="line">    语句<span class="number">3</span></span><br><span class="line">    ...</span><br><span class="line"><span class="comment">#注：</span></span><br><span class="line"><span class="comment">#1.条件表达式不用()</span></span><br><span class="line"><span class="comment">#2.属于if/else后执行的语句必须缩进4</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">break</span></span><br><span class="line"><span class="comment">#注：</span></span><br><span class="line"><span class="comment">#用于循环跳出</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">continue</span></span><br><span class="line"><span class="comment">#注：</span></span><br><span class="line"><span class="comment">#用于进入下一轮循环</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"><span class="comment">#注：</span></span><br><span class="line"><span class="comment">#循环判断错误后进入一次的语句，并结束循环</span></span><br><span class="line">i=<span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> i!=<span class="number">5</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;hh&quot;</span>)</span><br><span class="line">    i+=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;stop&quot;</span>)    </span><br><span class="line"><span class="comment">#输出如下：</span></span><br><span class="line">hh</span><br><span class="line">hh</span><br><span class="line">hh</span><br><span class="line">hh</span><br><span class="line">stop</span><br></pre></td></tr></table></figure>
+<h5 id="for循环">for循环</h5>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> 变量 <span class="keyword">in</span> 可迭代对象:</span><br><span class="line">    语句<span class="number">1</span></span><br><span class="line">    语句<span class="number">2</span></span><br><span class="line">    语句<span class="number">3</span></span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    语句<span class="number">1</span></span><br><span class="line">    语句<span class="number">2</span></span><br><span class="line">    语句<span class="number">3</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>range函数（参数int）</p>
+<p>注：左闭右开</p>
+</blockquote>
+<img src="Python_Picture/range函数.png" style="zoom:50%;" />
+<h6 id="例子：">例子：</h6>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br><span class="line"><span class="comment">#结果为0~9（换行）</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-03-02_4%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95/">4树的概念和表示方法</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-01T16:00:00.000Z" itemprop="datePublished">
+    2022-03-02
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="树的概念和表示方法">树的概念和表示方法</h2>
+<h3 id="概念：">概念：</h3>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">根结点：树的开始</span><br><span class="line">叶子结点：树的末端</span><br><span class="line">父结点：一个结点的上一个</span><br><span class="line">孩子结点：一个结点的下一个</span><br><span class="line">兄弟结点：属于同一个父结点</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">结点的度：拥有子树的个数</span><br><span class="line">树的度：一棵树中最大的结点的度</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">树的深度/高度：层数（根节点根据情况定义）</span><br></pre></td></tr></table></figure>
+<h3 id="表示方法：">表示方法：</h3>
+<blockquote>
+<p>双亲表示法：只存储父亲结点来寻找实现方式：<br>
+1.结构体数组结构体内：数据域与下标（根结点为-1，子结点往后排）缺点：只能找父结点<br>
+2.链表结点内：数据域和父级指针域</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">    <span class="type">int</span> parent;</span><br><span class="line">&#125;Node;</span><br><span class="line"></span><br><span class="line">Node* node[<span class="number">5</span>];	<span class="comment">//存放的数组</span></span><br><span class="line"><span class="type">int</span> size;		<span class="comment">//当前元素个数</span></span><br><span class="line"><span class="type">int</span> maxSize;	<span class="comment">//当前最大元素个数</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Init</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    size=<span class="number">0</span>;</span><br><span class="line">    maxSize=<span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">insert_root</span><span class="params">(<span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    Node* <span class="title function_">new_node</span><span class="params">(Node*)</span><span class="title function_">malloc</span><span class="params">(<span class="keyword">sizeof</span>(Node))</span>;<span class="comment">//创建根节点</span></span><br><span class="line">    new_node-&gt;data=key;<span class="comment">//数据赋值</span></span><br><span class="line">    new_node-&gt;parent=<span class="number">-1</span>;<span class="comment">//根节点特殊下标为-1</span></span><br><span class="line">    node[size]=new_node;<span class="comment">//将根节点地址存入数组</span></span><br><span class="line">    size++;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="type">void</span> <span class="title function_">insert_child</span><span class="params">(<span class="type">int</span> key,<span class="type">int</span> parent_node)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(size==maxSize)<span class="comment">//如果满了</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//提示或者扩容</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//先找到这个父节点的下标</span></span><br><span class="line">        <span class="type">int</span> parent_index=find_parent(parent_node);	<span class="comment">//查找父节点</span></span><br><span class="line">        <span class="keyword">if</span>(parent_index==<span class="number">-1</span>)	<span class="comment">//没找到这个父节点</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//跳出</span></span><br><span class="line">&#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            Node* new_node(Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));<span class="comment">//创建新节点</span></span><br><span class="line">            new_node-&gt;data=key;<span class="comment">//数据赋值</span></span><br><span class="line">            new_node-&gt;parent=parent_index;<span class="comment">//父节点下标赋值</span></span><br><span class="line">            node[size]=new_node;<span class="comment">//将新节点地址存入数组</span></span><br><span class="line">            size++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">find_parent</span><span class="params">(<span class="type">int</span> parent_node)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;size;i++)</span><br><span class="line">    &#123;				</span><br><span class="line">        <span class="keyword">if</span>(parent_node==node[i]-&gt;data)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>孩子表示法：只存储所有孩子结点来寻找实现方式：数组+链表数组存储所有结点，指向的链表存储孩子的下标（如下图）</p>
+</blockquote>
+<p><img src="D:%5C%E6%96%87%E4%BB%B6%E5%90%88%E9%9B%86%5Cmarkdown%E5%90%88%E9%9B%86%5C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson%5Cpicture%5C%E5%AD%A9%E5%AD%90%E8%A1%A8%E7%A4%BA%E6%B3%95%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F.png" alt=""></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Linklist</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Linklist</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;ListNode;<span class="comment">//链表结点</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Child</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Linklist</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;Node;<span class="comment">//数组结点</span></span><br><span class="line"></span><br><span class="line">Node *node_array[<span class="number">20</span>];</span><br><span class="line"><span class="type">int</span> size;</span><br><span class="line"><span class="type">int</span> maxSize;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Init</span><span class="params">(<span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    size=<span class="number">0</span>;</span><br><span class="line">    maxSize=<span class="number">20</span>;</span><br><span class="line">    node_array[size]=(Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">    node_array[size]-&gt;data=key;</span><br><span class="line">    node_array[size]-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">find_parent</span><span class="params">(<span class="type">int</span> parent)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;size;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(node_array[i]==parent)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//创造树</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">Creat_Tree</span><span class="params">(<span class="type">int</span> parent,<span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//找父节点</span></span><br><span class="line">    <span class="type">int</span> index= find_parent(parent);</span><br><span class="line">    <span class="keyword">if</span>(index==<span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//没找到</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//先将其放入数组，再链入链表</span></span><br><span class="line">        <span class="keyword">if</span>(size==maxSize)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//数组是否满</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            node_array[size]=(Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">            node_array[size]-&gt;data=key;</span><br><span class="line">            node_array[size]-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">            </span><br><span class="line">            ListNode* new_node=(ListNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(ListNode));</span><br><span class="line">            new_node-&gt;data=index;</span><br><span class="line">            new_node-&gt;next=node_array[size]-&gt;next;</span><br><span class="line">            node_array[size]-&gt;next=new_node;</span><br><span class="line">            size++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>孩子兄弟表示法：结点结构如下图</p>
+</blockquote>
+<p><img src="D:%5C%E6%96%87%E4%BB%B6%E5%90%88%E9%9B%86%5Cmarkdown%E5%90%88%E9%9B%86%5C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson%5Cpicture%5C%E5%AD%A9%E5%AD%90%E5%85%84%E5%BC%9F%E8%A1%A8%E7%A4%BA%E6%B3%95%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.png" alt=""></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ChildBro</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> key;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ChildBro</span> *<span class="title">child</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ChildBro</span> *<span class="title">sibling</span>;</span></span><br><span class="line">&#125;Node;</span><br><span class="line"></span><br><span class="line">Node *root;		<span class="comment">//根指针</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Init</span><span class="params">(<span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    root=(Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">    root-&gt;key=key;</span><br><span class="line">    root-&gt;child=<span class="literal">NULL</span>;</span><br><span class="line">    root-&gt;silbing=<span class="literal">NULL</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">insert</span><span class="params">(<span class="type">int</span> key,<span class="type">int</span> parent)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//定位结点</span></span><br><span class="line">    </span><br><span class="line">    Node* temp;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(temp==<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        Node*node=(Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">        node-&gt;key=key;</span><br><span class="line">        node-&gt;child=<span class="literal">NULL</span>;</span><br><span class="line">        node-&gt;sibling=<span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">if</span>(temp-&gt;child==<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            temp-&gt;child=node;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            node-&gt;sibling=temp-&gt;child;</span><br><span class="line">            temp-&gt;child=node;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/01/Python%E8%AF%AD%E6%B3%95/2022-03-01_5%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8B&amp;%E8%BF%90%E7%AE%97%E7%AC%A6/">5数字类型&amp;运算符</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-02-28T16:00:00.000Z" itemprop="datePublished">
+    2022-03-01
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/">Python语法</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="数字类型-运算符">数字类型&amp;运算符</h2>
+<h3 id="数字类型">数字类型</h3>
+<h4 id="1-整数">1.整数</h4>
+<blockquote>
+<p>范围：无限大</p>
+</blockquote>
+<blockquote>
+<p>计算：转换为浮点数计算</p>
+</blockquote>
+<blockquote>
+<p>结果：</p>
+<p>除法：浮点数</p>
+<p>其余：整数</p>
+</blockquote>
+<h4 id="2-浮点数">2.浮点数</h4>
+<blockquote>
+<p>范围：精度有限</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=<span class="number">0.3</span></span><br><span class="line"><span class="keyword">if</span> a==<span class="number">0.1</span>+<span class="number">0.2</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;yes&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;no&quot;</span>)</span><br><span class="line"><span class="comment">#结果是no,因为0.1+0.2的结果为0.30000000000000004，而a为0.3</span></span><br></pre></td></tr></table></figure>
+<h5 id="解决方法-decimal模块">解决方法(decimal模块)</h5>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> decimal</span><br><span class="line">a=decimal.Decimal(<span class="string">&#x27;0.1&#x27;</span>)</span><br><span class="line">b=decimal.Decimal(<span class="string">&#x27;0.2&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(a+b)</span><br><span class="line"><span class="comment">#结果为0.3</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-复数">3.复数</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="number">1</span> + <span class="number">2j</span></span><br><span class="line"><span class="comment">#1是实部，2j是虚部</span></span><br><span class="line"><span class="comment">#x.real获取实部</span></span><br><span class="line"><span class="comment">#x.imag获取虚部</span></span><br><span class="line"><span class="comment">#以浮点数形式存储</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-bool类型">4.bool类型</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">bool</span>(字符串)<span class="comment">#只有空字符串才是False，其余都为True</span></span><br><span class="line"><span class="built_in">bool</span>(数字)<span class="comment">#只有0是False，其余都是True</span></span><br></pre></td></tr></table></figure>
+<p><img src="Python_Picture/bool%E4%B8%ADFalse%E6%83%85%E5%86%B5.png%22bool%E4%B8%ADFalse%E7%9A%84%E6%83%85%E5%86%B5%22" alt=""></p>
+<h3 id="运算">运算</h3>
+<h4 id="算数运算符">算数运算符</h4>
+<p><img src="Python_Picture/%E8%BF%90%E7%AE%97%E8%A1%A8.png" alt=""></p>
+<h6 id="注：">注：</h6>
+<blockquote>
+<p>3/2=1.5</p>
+<p>3//2=1(向下取整)</p>
+<p>-3//2=-2(向下取整)</p>
+</blockquote>
+<blockquote>
+<p>abs(复数)=复数的模</p>
+</blockquote>
+<blockquote>
+<p>int(‘整数’)=整数（‘浮点数’报错）</p>
+<p>int(浮点数)=取整</p>
+</blockquote>
+<h4 id="逻辑运算符">逻辑运算符</h4>
+<p><img src="Python_Picture/%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6.png" alt=""></p>
+<h5 id="注：-2">注：</h5>
+<blockquote>
+<p>and返回第一个False的表达式的结果，如果都为True，则输出最后那个表达式的结果</p>
+<p>or返回第一个True的表达式的结果，如果都为False，则输出最后那个表达式的结果（0）</p>
+<p>and和or都遵循短路逻辑</p>
+<p>优先级：not&gt;and&gt;or</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">3</span> <span class="keyword">and</span> <span class="number">4</span>		<span class="comment">#答案是4，原因是3是true，所以将后面的4输出</span></span><br><span class="line"><span class="number">3</span> <span class="keyword">or</span> <span class="number">4</span>		<span class="comment">#答案是3，原因是3是true，所以直接输出前面的3</span></span><br></pre></td></tr></table></figure>
+<h4 id="运算符优先级">运算符优先级</h4>
+<p><img src="Python_Picture/%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7.png" alt=""></p>
+<blockquote>
+<p>注：运算优先级最高的在下</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/02/28/Python%E8%AF%AD%E6%B3%95/2022-02-28_1%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E5%8F%98%E9%87%8F/">1字符串和变量</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-02-27T16:00:00.000Z" itemprop="datePublished">
+    2022-02-28
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/">Python语法</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="变量与字符串">变量与字符串</h2>
+<h4 id="变量">变量</h4>
+<blockquote>
+<p>变量不能以数字开头</p>
+<p>可以是中文</p>
+</blockquote>
+<h4 id="字符串">字符串</h4>
+<blockquote>
+<p>表示方式：‘或’'括起来的一列字符</p>
+<p>如果在字符内有单引号或双引号，则使用转义字符来表示</p>
+</blockquote>
+<h4 id="转义字符的问题">转义字符的问题</h4>
+<blockquote>
+<p>例：</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;D:\three\two\one\now&quot;</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>输出如下：</p>
+<p>D:	hree	wo\one<br>
+ow</p>
+</blockquote>
+<h5 id="解决方法1-使用转义字符">解决方法1(使用转义字符\\)</h5>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;D:\\three\\two\\one\\now&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="解决方法2-使用原始字符串">解决方法2(使用原始字符串)</h5>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">r&quot;D:\three\two\one\now&quot;</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>前置r来使用原始字符串，这样字符串中转义字符不再生效</p>
+</blockquote>
+<h4 id="跨行字符串">跨行字符串</h4>
+<blockquote>
+<p>例：</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello \n</span></span><br><span class="line"><span class="string">...</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>会报错</p>
+</blockquote>
+<h5 id="解决方法1-使用-来标记该字符串未结束">解决方法1(使用\来标记该字符串未结束)</h5>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello \n\</span></span><br><span class="line"><span class="string">world\n\</span></span><br><span class="line"><span class="string">!&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="解决方法2-使用长字符串">解决方法2(使用长字符串)</h5>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">longstr = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">这个</span></span><br><span class="line"><span class="string">是一个</span></span><br><span class="line"><span class="string">长</span></span><br><span class="line"><span class="string">字符</span></span><br><span class="line"><span class="string">串</span></span><br><span class="line"><span class="string">它</span></span><br><span class="line"><span class="string">可以</span></span><br><span class="line"><span class="string">换行写&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：</p>
+<p>长字符串使用三个”前后呼应</p>
+<p>长字符串无需\作为行尾标记</p>
+</blockquote>
+<h3 id="字符串的加法和乘法">字符串的加法和乘法</h3>
+<h4 id="加法">加法</h4>
+<blockquote>
+<p>两个字符串相加的结果是拼接</p>
+</blockquote>
+<h4 id="乘法">乘法</h4>
+<blockquote>
+<p>字符串乘数字的结果是这个字符串重复n遍</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;我每天爱你三千遍\n&quot;</span>*<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/02/28/Python%E8%AF%AD%E6%B3%95/2022-02-28_3%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6/">3比较运算符</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-02-27T16:00:00.000Z" itemprop="datePublished">
+    2022-02-28
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/">Python语法</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h4 id="比较运算符">比较运算符</h4>
+<p><img src="D:%5C%E6%96%87%E4%BB%B6%E5%90%88%E9%9B%86%5Cmarkdown%E5%90%88%E9%9B%86%5CPython%E8%AF%AD%E6%B3%95%5CPython_Picture%5C%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6.png" alt=""></p>
+<blockquote>
+<p>正确返回True</p>
+<p>错误返回False</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/02/28/Python%E8%AF%AD%E6%B3%95/2022-02-28_4random%E6%A8%A1%E5%9D%97/">4random模块</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-02-27T16:00:00.000Z" itemprop="datePublished">
+    2022-02-28
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/">Python语法</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="random模块">random模块</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random	<span class="comment">#导入random模块</span></span><br><span class="line">random.randint(<span class="number">1</span>,<span class="number">10</span>)	<span class="comment">#randomint(下限，上限)，返回int</span></span><br><span class="line"><span class="comment">#注：交互模式会直接输出，编辑模式不会</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>警告：random使用的是伪随机数，种子来源是当前系统时间</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=random.getstate()<span class="comment">#获取已被固定的随机数种子</span></span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">random.setstate(x)<span class="comment">#重新设置种子进入</span></span><br><span class="line"><span class="comment">#此时的随机数会被复现</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/02/26/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/2022-02-26_7%E8%BF%9C%E7%A8%8B%E6%93%8D%E4%BD%9C/">7远程操作</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-02-25T16:00:00.000Z" itemprop="datePublished">
+    2022-02-26
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/">Git版本控制仓库</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="远程操作">远程操作</h2>
+<h4 id="1-查看已配置的仓库">1.查看已配置的仓库</h4>
+<h5 id="命令">命令</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git remote -v	<span class="comment">//查看已配置的仓库</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-添加远程仓库">2.添加远程仓库</h4>
+<h5 id="命令-2">命令</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git remote add &lt;sname&gt; &lt;url&gt;	</span><br><span class="line">    <span class="comment">//参数：标识仓库名与其地址</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-重命名远程仓库">3.重命名远程仓库</h4>
+<h5 id="命令-3">命令</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git remote rename &lt;oname&gt; &lt;nname&gt;</span><br><span class="line">    <span class="comment">//参数：旧名 新名</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-查看远程仓库">4.查看远程仓库</h4>
+<h5 id="命令-4">命令</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git remote show &lt;sname&gt;</span><br><span class="line">    <span class="comment">//参数：仓库名</span></span><br></pre></td></tr></table></figure>
+<h4 id="5-推送内容">5.推送内容</h4>
+<h5 id="命令-5">命令</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git push &lt;remote&gt; &lt;branch&gt;</span><br><span class="line">    <span class="comment">//参数：仓库名 分支名</span></span><br></pre></td></tr></table></figure>
+<h4 id="6-拉取内容">6.拉取内容</h4>
+<h5 id="命令-6">命令</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git fetch &lt;remote&gt;<span class="comment">//抓取远程仓库，不影响工作目录</span></span><br><span class="line">git pull &lt;remote&gt; &lt;branch&gt;	<span class="comment">//抓取远程仓库，并放入工作目录</span></span><br><span class="line">    <span class="comment">//参数：仓库名 分支名</span></span><br></pre></td></tr></table></figure>
+<h4 id="7-移除远程仓库">7.移除远程仓库</h4>
+<h5 id="命令-7">命令</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">git remote remove &lt;sname&gt;</span><br><span class="line">    <span class="comment">//参数：仓库名</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/02/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-02-24_3-1%E4%BD%9C%E4%B8%9A/">3-1作业</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-02-23T16:00:00.000Z" itemprop="datePublished">
+    2022-02-24
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="3-1作业">3-1作业</h2>
+<h5 id="1-东东哥不会做加法运算。需要大家写个程序帮助东东哥进行运算。">1.东东哥不会做加法运算。需要大家写个程序帮助东东哥进行运算。</h5>
+<h5 id="要求：输入需要计算的两个整数，之后用链表来存放这两个整数（一个链表存放一个数据，链表">要求：输入需要计算的两个整数，之后用链表来存放这两个整数（一个链表存放一个数据，链表</h5>
+<h5 id="中的每个结点只包含一个数字）。并要求链表需要以逆序的方式存放这些数据。形式如下：">中的每个结点只包含一个数字）。并要求链表需要以逆序的方式存放这些数据。形式如下：</h5>
+<blockquote>
+<p>输入：103 286</p>
+<p>链表存储为：3-&gt;0-&gt;1 6-&gt;8-&gt;2</p>
+<p>运算：（3–&gt;0-&gt;1） + (6 -&gt; 8-&gt; 2) 即是103 + 286 = 389</p>
+</blockquote>
+<h5 id="请编写相关程序给东东哥使用。">请编写相关程序给东东哥使用。</h5>
+<h5 id="如果数字按照正常的顺序存储在相对应的链表中，那又该如何计算？">如果数字按照正常的顺序存储在相对应的链表中，那又该如何计算？</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LinkList</span>&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">LinkList</span>* <span class="title">next</span>;</span></span><br><span class="line">    <span class="type">int</span> element;</span><br><span class="line">&#125;node;</span><br><span class="line"></span><br><span class="line">node *head1;</span><br><span class="line">node *head2;</span><br><span class="line">node *head3;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init_node</span><span class="params">()</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">insert</span><span class="params">(<span class="type">int</span> key,node* head)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">plus_node</span><span class="params">()</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">delete_node</span><span class="params">(node* head)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> m,n;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入两个整数:&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;m,&amp;n);</span><br><span class="line">    init_node();</span><br><span class="line">    insert(m,head1);</span><br><span class="line">    insert(n,head2);</span><br><span class="line">    plus_node();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,print_node(head3));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init_node</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    head1=(node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(node));</span><br><span class="line">    head2=(node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(node));</span><br><span class="line">    head3=(node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(node));</span><br><span class="line">    head1-&gt;element=<span class="number">0</span>;</span><br><span class="line">    head2-&gt;element=<span class="number">0</span>;</span><br><span class="line">    head3-&gt;element=<span class="number">0</span>;</span><br><span class="line"> 	head1-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">    head2-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">    head3-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">insert</span><span class="params">(<span class="type">int</span> key,node* head)</span></span><br><span class="line">&#123;</span><br><span class="line">    node* temp;</span><br><span class="line">    <span class="keyword">if</span>(key==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">    	temp=(node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(node));</span><br><span class="line">        temp-&gt;element=<span class="number">0</span>;</span><br><span class="line">        temp-&gt;next=head-&gt;next;</span><br><span class="line">        head-&gt;next=temp;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">while</span>(key&gt;<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        temp=(node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(node));</span><br><span class="line">        temp-&gt;element=key%<span class="number">10</span>;</span><br><span class="line">        key/=<span class="number">10</span>;</span><br><span class="line">        temp-&gt;next=head-&gt;next;</span><br><span class="line">        head-&gt;next=temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">plus_node</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    node* temp1;</span><br><span class="line">    node* temp2;</span><br><span class="line">    <span class="type">int</span> temp=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        temp1=head1;</span><br><span class="line">        temp2=head2;</span><br><span class="line">        <span class="keyword">while</span>(temp1-&gt;next!=<span class="literal">NULL</span>)</span><br><span class="line">       		temp1=temp1-&gt;next;</span><br><span class="line">        <span class="keyword">while</span>(temp2-&gt;next!=<span class="literal">NULL</span>)</span><br><span class="line">            temp2=temp2-&gt;next;</span><br><span class="line">        <span class="keyword">if</span>(temp1==head1 &amp;&amp; temp2==head2 &amp;&amp; temp==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">			</span><br><span class="line">            insert((temp1-&gt;element+temp2-&gt;element)%<span class="number">10</span>+temp,head3);</span><br><span class="line">            <span class="keyword">if</span>(temp1-&gt;element+temp2-&gt;element&gt;=<span class="number">10</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				temp=(temp1-&gt;element+temp2-&gt;element)/<span class="number">10</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				temp=<span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">            delete_node(head1);</span><br><span class="line">            delete_node(head2);          </span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">delete_node</span><span class="params">(node* head)</span></span><br><span class="line">&#123;</span><br><span class="line">    node*temp1=head,*temp2=head;</span><br><span class="line">    <span class="keyword">while</span>(temp1-&gt;next!=<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        temp2=temp1;</span><br><span class="line">        temp1=temp1-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(temp1!=head)</span><br><span class="line">    &#123;</span><br><span class="line">        temp2-&gt;next=temp1-&gt;next;</span><br><span class="line">    	<span class="built_in">free</span>(temp1);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">print_node</span><span class="params">(node *head)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> aim=<span class="number">0</span>;</span><br><span class="line">    node *temp;</span><br><span class="line">    <span class="keyword">while</span>(head-&gt;next!=<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        aim*=<span class="number">10</span>;</span><br><span class="line">        aim+=head-&gt;next-&gt;element;</span><br><span class="line">        temp=head-&gt;next;</span><br><span class="line">        head-&gt;next=temp-&gt;next;</span><br><span class="line">        <span class="built_in">free</span>(temp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> aim;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="2-东东哥在出复合计算的数学题目，但是他只有七秒钟的记忆，前一秒写的东西后一秒就忘了。需">2.东东哥在出复合计算的数学题目，但是他只有七秒钟的记忆，前一秒写的东西后一秒就忘了。需</h5>
+<h5 id="要大家写个程序帮助东东哥。帮忙判断一下他出的题目是否是合乎基本的运算法则的。">要大家写个程序帮助东东哥。帮忙判断一下他出的题目是否是合乎基本的运算法则的。</h5>
+<h5 id="例子：">例子：</h5>
+<blockquote>
+<p>东东哥出的题目：((1+2)+3)判断：题目正确</p>
+<p>东东哥出的题目：((1+2+3)判断：错误</p>
+<p>东东哥出的题目：(1+2+3)+(5+6） 判断：题目正确</p>
+<p>东东哥出的题目：(1+2+3)+5+6) 判断：错误</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SIZE 6</span></span><br><span class="line"><span class="type">int</span>* <span class="built_in">stack</span>;</span><br><span class="line"><span class="type">int</span> size;</span><br><span class="line"><span class="type">int</span> top;</span><br><span class="line"><span class="type">void</span> <span class="title function_">init_stack</span><span class="params">()</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">insert_stack</span><span class="params">()</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">delete_stack</span><span class="params">()</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">isEmpty</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> str[<span class="number">20</span>];</span><br><span class="line">    init_stack();</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,str);</span><br><span class="line">    <span class="type">int</span> i=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(str[i]!=<span class="string">&#x27;\0&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(str[i]==<span class="string">&#x27;(&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            insert_stack();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(str[i]==<span class="string">&#x27;)&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            delete_stack();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">        	</span><br><span class="line">		&#125;</span><br><span class="line">		i++;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">if</span>(isEmpty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;yes&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;no&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">init_stack</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    top=<span class="number">-1</span>;</span><br><span class="line">    <span class="built_in">stack</span>=(<span class="type">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>)*SIZE);</span><br><span class="line">    size=SIZE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">insert_stack</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(top!=size<span class="number">-1</span>)</span><br><span class="line">    	top++;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">delete_stack</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(top!=<span class="number">-1</span>)</span><br><span class="line">    	top--;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">    	<span class="built_in">printf</span>(<span class="string">&quot;no&quot;</span>);</span><br><span class="line">    	<span class="built_in">exit</span>(<span class="number">0</span>);	</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">        </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">isEmpty</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(top==<span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="3-东东哥听到图灵机跟他说咱们学到队列了。他不信，想让大家实现一个队列。但是他事儿又比较">3. 东东哥听到图灵机跟他说咱们学到队列了。他不信，想让大家实现一个队列。但是他事儿又比较</h5>
+<h5 id="多，想让大家用栈结构来实现队列。请大家设计一个算法，使用栈来实现队列的操作。">多，想让大家用栈结构来实现队列。请大家设计一个算法，使用栈来实现队列的操作。</h5>
+<h5 id="同时他觉得大家都能用栈实现队列了，那用队列实现栈操作应该也是轻而易举的。所以请再书写">同时他觉得大家都能用栈实现队列了，那用队列实现栈操作应该也是轻而易举的。所以请再书写</h5>
+<h5 id="一个算法，用队列实现栈。">一个算法，用队列实现栈。</h5>
+<blockquote>
+<p>用栈实现队列</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SIZE 6</span></span><br><span class="line"><span class="type">int</span> *stack1;</span><br><span class="line"><span class="type">int</span> *stack2;</span><br><span class="line"><span class="type">int</span> size;</span><br><span class="line"><span class="type">int</span> top1;</span><br><span class="line"><span class="type">int</span> top2;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init_stack</span><span class="params">()</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">insert</span><span class="params">(<span class="type">int</span> *<span class="built_in">stack</span>,<span class="type">int</span> key)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">delete_stack</span><span class="params">()</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">delete</span><span class="params">()</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">isFull</span><span class="params">()</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">isEmpty</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    init_stack();</span><br><span class="line">    insert(stack1,<span class="number">1</span>);</span><br><span class="line">    delete_stack();</span><br><span class="line">    delete();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init_stack</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    stack1=(<span class="type">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>)*SIZE);</span><br><span class="line">    stack2=(<span class="type">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>)*SIZE);</span><br><span class="line">    top1=top2=<span class="number">0</span>;</span><br><span class="line">    size=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">insert</span><span class="params">(<span class="type">int</span> *<span class="built_in">stack</span>,<span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(isFull())</span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        stack1[++top1]=key;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">delete</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(isEmpty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(top!=<span class="number">-1</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">delete_stack</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(isEmpty())</span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        stack2[++top2]=stack1[top1--];</span><br><span class="line">        size--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">isFull</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(top==size<span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">isEmpty</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(top==<span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>用队列实现栈</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SIZE 6</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> *queue1;</span><br><span class="line"><span class="type">int</span> *queue2;</span><br><span class="line"><span class="type">int</span> head1;</span><br><span class="line"><span class="type">int</span> end1;</span><br><span class="line"><span class="type">int</span> head2;</span><br><span class="line"><span class="type">int</span> end2;</span><br><span class="line"><span class="type">int</span> size;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init_queue</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    queue1=(<span class="type">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>)*SIZE);</span><br><span class="line">    queue2=(<span class="type">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>)*SIZE);</span><br><span class="line">    size=<span class="number">0</span>;</span><br><span class="line">    head1=head2=end1=end2=<span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">insert</span><span class="params">(<span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(isFull())</span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        queue1[head1]=key;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">delete</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h5 id="东东哥做了一个员工食堂，但是他比较抠门，只提供了两种食品，分别是烤乳猪和烤兔，烤乳猪">东东哥做了一个员工食堂，但是他比较抠门，只提供了两种食品，分别是烤乳猪和烤兔，烤乳猪</h5>
+<h5 id="和烤兔分别用数字0和数字1表示。前面也说了，他事儿比较多，又不允许员工自由选择。（食物提供的">和烤兔分别用数字0和数字1表示。前面也说了，他事儿比较多，又不允许员工自由选择。（食物提供的</h5>
+<h5 id="数量和员工数量一致）">数量和员工数量一致）</h5>
+<h5 id="此时员工在排队，东东哥定下了一个食堂取餐规则：">此时员工在排队，东东哥定下了一个食堂取餐规则：</h5>
+<blockquote>
+<p>如果队列最前面的员工喜欢栈顶的食物，那么就会拿走他，并且离开队列。</p>
+<p>如果这个员工不喜欢栈顶的食物，那么就放弃食物回到队伍的最后方。</p>
+<p>如果队列里的员工都不喜欢栈顶的食物，那么今天的食堂就关门了。爱干啥干啥去‘</p>
+<p>输入两组数据，比如:食物 1 1 0 0 （第一个元素是栈顶元素） 员工 0 1 0 1 （员工的0和1</p>
+<p>代表跟他们喜欢哪种食物）请计算出来没有吃到午餐的员工的数量。比如上述数据返回0 代表全</p>
+<p>都能吃到午餐。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SIZE 20</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SIZE 20</span></span><br><span class="line"><span class="type">int</span>* <span class="built_in">stack</span>;<span class="comment">//栈顶指针</span></span><br><span class="line"><span class="type">int</span> top;<span class="comment">//栈顶下标</span></span><br><span class="line"><span class="type">int</span> end;<span class="comment">//栈底下标</span></span><br><span class="line"><span class="type">int</span> maxSize1;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> *<span class="built_in">queue</span>;</span><br><span class="line"><span class="type">int</span> front;</span><br><span class="line"><span class="type">int</span> end;</span><br><span class="line"><span class="type">int</span> maxSize;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">initstack</span><span class="params">()</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">push</span><span class="params">(<span class="type">int</span> key)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">pull</span><span class="params">()</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">Initqueue</span><span class="params">()</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">insert_queue</span><span class="params">(<span class="type">int</span> key)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">delete_queue</span><span class="params">()</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">isFull</span><span class="params">()</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">isEmpty</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> temp=<span class="number">0</span>;</span><br><span class="line">    initstack();</span><br><span class="line">    Initqueue();</span><br><span class="line">    push(<span class="number">1</span>);</span><br><span class="line">    push(<span class="number">0</span>);</span><br><span class="line">    push(<span class="number">0</span>);</span><br><span class="line">    push(<span class="number">0</span>);</span><br><span class="line">    push(<span class="number">1</span>);</span><br><span class="line">    push(<span class="number">0</span>);</span><br><span class="line">    push(<span class="number">1</span>);</span><br><span class="line">    push(<span class="number">0</span>);</span><br><span class="line">    push(<span class="number">0</span>);</span><br><span class="line">    push(<span class="number">0</span>);</span><br><span class="line">    push(<span class="number">1</span>);</span><br><span class="line">    push(<span class="number">0</span>);</span><br><span class="line">    insert_queue(<span class="number">1</span>);</span><br><span class="line">    insert_queue(<span class="number">1</span>);</span><br><span class="line">    insert_queue(<span class="number">1</span>);</span><br><span class="line">    insert_queue(<span class="number">1</span>);</span><br><span class="line">    insert_queue(<span class="number">1</span>);</span><br><span class="line">    insert_queue(<span class="number">1</span>);</span><br><span class="line">    insert_queue(<span class="number">1</span>);</span><br><span class="line">    insert_queue(<span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(isEmpty())</span><br><span class="line">        &#123;</span><br><span class="line">            temp=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">stack</span>[top]==<span class="built_in">queue</span>[head])</span><br><span class="line">            &#123;</span><br><span class="line">                pull();</span><br><span class="line">                delete_queue();</span><br><span class="line">                temp=<span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                delete_queue();</span><br><span class="line">                insert_queue(end<span class="number">-1</span>);</span><br><span class="line">                temp++;</span><br><span class="line">                <span class="keyword">if</span>(temp==maxSize)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(temp==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;ok&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;close&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="type">void</span> <span class="title function_">initstack</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">stack</span>=(<span class="type">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>)*SIZE);</span><br><span class="line">    end=<span class="number">-1</span>;</span><br><span class="line">    top=<span class="number">-1</span>;</span><br><span class="line">    maxSize1=SIZE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//压栈（入栈）</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">push</span><span class="params">(<span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//判断栈满</span></span><br><span class="line">    <span class="keyword">if</span>(top==maxSize1)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        top++;</span><br><span class="line">        <span class="built_in">stack</span>[top]=key;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//出栈</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">pull</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(top==<span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        top--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Initqueue</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">queue</span>=(<span class="type">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>)*SIZE);</span><br><span class="line">    maxSize=SIZE;</span><br><span class="line">    front=end=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">insert_queue</span><span class="params">(<span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(isFull())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        end=(end+<span class="number">1</span>)%maxSize;</span><br><span class="line">        <span class="built_in">queue</span>[end]=key;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">delete_queue</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(isEmpty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        front=(front+<span class="number">1</span>)%maxSize;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">isFull</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>((end+<span class="number">1</span>)%maxSize==front)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">isEmpty</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(end==front)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="前面说到，东东哥事儿比较多，他看到员工排队，觉得排队排的不好，他想要改变员工的站位。">前面说到，东东哥事儿比较多，他看到员工排队，觉得排队排的不好，他想要改变员工的站位。</h5>
+<h5 id="他让第一个和第二个员工交换位置，第三个和第四个员工交换位置，依次类推。">他让第一个和第二个员工交换位置，第三个和第四个员工交换位置，依次类推。</h5>
+<h5 id="要求：用单链表实现操作，并且不能改变结点的值。只允许移动结点。">要求：用单链表实现操作，并且不能改变结点的值。只允许移动结点。</h5>
+<blockquote>
+<p>比如 1-&gt; 2 -&gt; 3 -&gt; 4 改变完以后 2 -&gt; 1 -&gt; 4 -&gt; 3</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Linklist</span>&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Linklist</span> * <span class="title">next</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Linklist</span> * <span class="title">front</span>;</span></span><br><span class="line">    <span class="type">int</span> element;</span><br><span class="line">&#125;Node;</span><br><span class="line"></span><br><span class="line">Node* head;</span><br><span class="line">Node* end;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init_Node</span><span class="params">()</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">insert</span><span class="params">(<span class="type">int</span> key)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">change</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    init_Node();</span><br><span class="line">    insert(<span class="number">1</span>);</span><br><span class="line">    insert(<span class="number">2</span>);</span><br><span class="line">    insert(<span class="number">3</span>);</span><br><span class="line">    insert(<span class="number">4</span>);</span><br><span class="line">    change();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init_Node</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    head=(Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">    end=(Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">    head-&gt;next=end;</span><br><span class="line">    end-&gt;front=next;</span><br><span class="line">    head-&gt;front=<span class="literal">NULL</span>;</span><br><span class="line">    end-&gt;front=<span class="literal">NULL</span>;</span><br><span class="line">    head-&gt;element=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">insert</span><span class="params">(<span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    Node* temp;</span><br><span class="line">    temp=(Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">    temp-&gt;element=key;</span><br><span class="line">    temp-&gt;next=head-&gt;next;</span><br><span class="line">    temp-&gt;front=head;</span><br><span class="line">    head-&gt;next=temp;</span><br><span class="line">    temp-&gt;next-&gt;front=temp;</span><br><span class="line">    head-&gt;element++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">change</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    Node* temp=head-&gt;next;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;element/<span class="number">2</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        temp-&gt;next-&gt;front=temp-&gt;front;</span><br><span class="line">        temp-&gt;front-&gt;next=temp-&gt;next;</span><br><span class="line">        temp-&gt;next=temp-&gt;next-&gt;next;</span><br><span class="line">        temp-&gt;front=temp-&gt;next-&gt;front;</span><br><span class="line">        temp-&gt;front-&gt;next=temp;</span><br><span class="line">        temp=temp-&gt;next</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/40/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/39/">39</a><a class="page-number" href="/page/40/">40</a><span class="page-number current">41</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/42/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

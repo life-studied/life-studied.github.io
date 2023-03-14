@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/05/MySql/SQL%E7%BD%91%E8%AF%BE/2DML/2023-02-05_1-INSERT/">1-INSERT</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-04T16:00:00.000Z" itemprop="datePublished">
+    2023-02-05
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/">SQL网课</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/2DML/">2DML</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="INSERT">INSERT</h2>
+<h4 id="语法">语法</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">INSERT INTO 表名(字段1,...,字段n)</span><br><span class="line">VALUES(字段1,...,字段n);</span><br><span class="line"></span><br><span class="line">-- 简写</span><br><span class="line">INSERT INTO 表名</span><br><span class="line">VALUES(字段1,...,字段n);</span><br><span class="line"></span><br><span class="line">-- 插入多条数据</span><br><span class="line">INSERT INTO 表名</span><br><span class="line">VALUES(字段1,...,字段n),</span><br><span class="line">(字段1,...,字段n),</span><br><span class="line">(字段1,...,字段n),</span><br><span class="line">(字段1,...,字段n);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/05/MySql/SQL%E7%BD%91%E8%AF%BE/%E6%A1%88%E4%BE%8B/2023-02-05_%E6%A1%88%E4%BE%8Bexercise-course/">案例exercise-course</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-04T16:00:00.000Z" itemprop="datePublished">
+    2023-02-05
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/">SQL网课</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/%E6%A1%88%E4%BE%8B/">案例</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="案例exercise-course">案例exercise-course</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 1. 在数据库exercise中创建课程表stu_course，包含字段课程编号(number)，类型为整数，长度为</span><br><span class="line">-- 11，是主键，自增长，非空、课程名称(name)，类型为字符串，长度为20，非空、学分(score)，类型</span><br><span class="line">-- 为浮点数，小数点后面保留2位有效数字， 长度为5，非空</span><br><span class="line">CREATE DATABASE IF NOT EXISTS exercise DEFAULT CHARACTER SET UTF8 COLLATE UTF8_GENERAL_CI;</span><br><span class="line"></span><br><span class="line">USE exercise;</span><br><span class="line"></span><br><span class="line">CREATE TABLE IF NOT EXISTS stu_course(</span><br><span class="line">	`number` INT(11) AUTO_INCREMENT PRIMARY KEY NOT NULL COMMENT &#x27;课程编号&#x27;,</span><br><span class="line">	name varchar(20) NOT NULL COMMENT &#x27;课程名称&#x27;,</span><br><span class="line">	score double(5,2) NOT NULL COMMENT &#x27;学号&#x27;</span><br><span class="line">)ENGINE=InnoDB CHARSET=UTF8 COMMENT &#x27;课程表&#x27;;</span><br><span class="line"></span><br><span class="line">-- 向课程表中插入一条数据</span><br><span class="line">INSERT INTO stu_course</span><br><span class="line">VALUES(1,&#x27;Maths&#x27;,60.50);</span><br><span class="line"></span><br><span class="line">-- 将课程表重命名为course</span><br><span class="line">ALTER TABLE stu_course RENAME AS course;</span><br><span class="line"></span><br><span class="line">-- 在课程表中添加字段学时(time)，类型为整数，长度为3，非空</span><br><span class="line">ALTER TABLE course ADD `time` INT(3) NOT NULL COMMENT &#x27;学时&#x27;;</span><br><span class="line"></span><br><span class="line">-- 修改课程表学分类型为浮点数，小数点后面保留1位有效数字，长度为3，非空</span><br><span class="line">ALTER TABLE course MODIFY score double(3,1) NOT NULL COMMENT &#x27;学分&#x27;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/05/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/2%E6%95%B0%E6%8D%AE%E8%A1%A8/2023-02-05_2-ALTER/">2-ALTER</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-04T16:00:00.000Z" itemprop="datePublished">
+    2023-02-05
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/">SQL网课</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/">1DDL</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/2%E6%95%B0%E6%8D%AE%E8%A1%A8/">2数据表</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="ALTER">ALTER</h2>
+<h4 id="语法">语法</h4>
+<h5 id="1-修改表名">1.修改表名</h5>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ALTER TABLE 表名 RENAME AS 新表名;</span><br></pre></td></tr></table></figure>
+<p>示例：将<code>student</code>表名称修改为<code>stu</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ALTER TABLE student RENAME AS stu;</span><br></pre></td></tr></table></figure>
+<h5 id="2-字段">2.字段</h5>
+<h6 id="2-1-增加字段">2.1 增加字段</h6>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ALTER TABLE 表名 ADD 字段名 列类型(长度) [修饰属性] [键/索引] [注释];</span><br></pre></td></tr></table></figure>
+<p>示例：在stu表中添加字段电话（phone），类型字符串，长度11，非空</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ALTER TABLE stu ADD phone VARCHAR(11) not null comment&#x27;联系电话&#x27;;</span><br></pre></td></tr></table></figure>
+<h6 id="2-2-修改字段">2.2 修改字段</h6>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- MODIFY</span><br><span class="line">ALTER TABLE 表名 MODIFY 字段名 列类型(长度) [修饰属性] [键/索引] [注释]; 	-- 只能修改字段的修饰属性</span><br><span class="line">-- CHANGE</span><br><span class="line">ALTER TABLE 表名 CHANGE 字段名 新字段名 列类型(长度) [修饰属性] [键/索引] [注释]; </span><br><span class="line">																  	-- 能修改字段名和修饰属性</span><br></pre></td></tr></table></figure>
+<p>示例1：将 stu 表中的 sex 字段的类型设置为 VARCHAR ，长度为2，默认值为’男’，注释为 “性别，男，女，其他”</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ALTER TABLE stu MODIFY sex VARCHAR(2) DEFAULT &quot;男&quot; COMMENT &quot;性别：男，女，其他&quot;;</span><br></pre></td></tr></table></figure>
+<p>示例2：将 stu 表中 phone 字段修改为 mobile ，属性保持不变</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ALTER TABLE stu CHANGE phone mobile VARCHAR(11) not null comment&#x27;联系电话&#x27;;</span><br></pre></td></tr></table></figure>
+<h6 id="2-3-删除字段">2.3 删除字段</h6>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ALTER TABLE 表名 DROP 字段名;</span><br></pre></td></tr></table></figure>
+<p>示例：删除stu表中的phone字段</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ALTER TABLE stu DROP phone;</span><br></pre></td></tr></table></figure>
+<h5 id="3-查看表结构">3.查看表结构</h5>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DESC stu;</span><br></pre></td></tr></table></figure>
+<h5 id="4-删除表">4.删除表</h5>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DROP TABLE [if exists] 表名;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/04/MySql/SQL%E7%BD%91%E8%AF%BE/0%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/2023-02-04_1-%E5%88%97%E7%9A%84%E7%B1%BB%E5%9E%8B/">1-列的类型</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-03T16:00:00.000Z" itemprop="datePublished">
+    2023-02-04
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/">SQL网课</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/0%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">0基础知识</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="列的类型">列的类型</h2>
+<blockquote>
+<p>常用列类型分为数值类型，日期类型，字符串类型。</p>
+</blockquote>
+<h4 id="1-数值类型">1.数值类型</h4>
+<p><img src="../picture/%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B.png" alt=""></p>
+<blockquote>
+<p>decimal：m代表数据总长度，d代表小数长度。（例如：14432.333中，m为8，d为3）</p>
+</blockquote>
+<h4 id="2-日期类型">2.日期类型</h4>
+<p><img src="../picture/%E6%97%A5%E6%9C%9F%E7%B1%BB%E5%9E%8B.png" alt=""></p>
+<h4 id="3-字符串类型">3.字符串类型</h4>
+<p><img src="../picture/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B.png" alt=""></p>
+<h4 id="4-列类型修饰属性">4.列类型修饰属性</h4>
+<p><img src="../picture/%E5%88%97%E7%B1%BB%E5%9E%8B%E4%BF%AE%E9%A5%B0%E5%B1%9E%E6%80%A7.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/04/MySql/SQL%E7%BD%91%E8%AF%BE/0%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/2023-02-04_2-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%B1%BB%E5%9E%8B/">2-数据表类型</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-03T16:00:00.000Z" itemprop="datePublished">
+    2023-02-04
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/">SQL网课</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/0%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">0基础知识</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="数据表类型">数据表类型</h2>
+<p><code>MySQL</code> 中的数据表类型有许多，如 <code>MyISAM</code> 、 <code>InnoDB</code> 、 <code>HEAP</code> 、 <code>BOB</code> 、 <code>CSV</code> 等。其中最常用的就是</p>
+<p><code>MyISAM</code> 和 <code>InnoDB</code>。</p>
+<h4 id="1-MyISAM与InnoDB的区别">1.MyISAM与InnoDB的区别</h4>
+<p><img src="../picture/MySIAM%E4%B8%8EInnoDB%E7%9A%84%E5%8C%BA%E5%88%AB.png" alt=""></p>
+<p><strong>如何选择</strong>：当涉及的业务操作以查询居多，修改和删除较少时，可以使用MyISAM。当涉及的业务操作经常会有修改和删除操作时，使用InnoDB。</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/04/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/1%E6%95%B0%E6%8D%AE%E5%BA%93/2023-02-04_4-%E5%85%B6%E5%AE%83%EF%BC%88SHOW%E3%80%81USE%EF%BC%89/">4-其它（SHOW、USE）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-03T16:00:00.000Z" itemprop="datePublished">
+    2023-02-04
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/">SQL网课</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/">1DDL</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/1%E6%95%B0%E6%8D%AE%E5%BA%93/">1数据库</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="其它（SHOW、USE）">其它（SHOW、USE）</h2>
+<h4 id="1-查看数据库">1.查看数据库</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SHOW DATABASE;		-- 显示所有被创建的数据库</span><br></pre></td></tr></table></figure>
+<h4 id="2-选择数据库">2.选择数据库</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">USE 数据库名;		-- 选择数据库，接下来的命令是对该数据库生效</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/01/MySql/%E9%94%99%E9%A2%98%E9%9B%86/2023-02-01_2023-2-1/">2023-2-1</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-31T16:00:00.000Z" itemprop="datePublished">
+    2023-02-01
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/%E9%94%99%E9%A2%98%E9%9B%86/">错题集</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="错题集">错题集</h2>
+<h4 id="1">1</h4>
+<p>判断是否相等，使用<code>=</code>而不是<code>==</code></p>
+<h4 id="2">2</h4>
+<p><code>!=</code>只能判断数值，不能判断NULL，必须再使用<code>IS NULL</code>来处理</p>
+<h4 id="3">3</h4>
+<p>使用表名.列明，写更规范的语句</p>
+<p><img src="picture/2023.2.1.3.png" alt=""></p>
+<h4 id="4">4</h4>
+<p>update中嵌套if</p>
+<p><img src="picture/2023.2.1.4.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/28/%E7%BB%98%E7%94%BB/%E5%83%8F%E7%B4%A0%E7%94%BB/2023-01-28_%E5%83%8F%E7%B4%A0%E7%94%BB%E5%A4%84%E7%90%86%EF%BC%88%E6%AD%A5%E9%AA%A4%E5%85%B3%E9%94%AE%E8%AF%8D%EF%BC%89/">像素画处理（步骤关键词）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-27T16:00:00.000Z" itemprop="datePublished">
+    2023-01-28
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/">绘画</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/%E5%83%8F%E7%B4%A0%E7%94%BB/">像素画</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="像素画处理（步骤关键词）">像素画处理（步骤关键词）</h2>
+<h4 id="1-基本">1.基本</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>形状</p>
+</li>
+<li class="lvl-2">
+<p>亮度</p>
+</li>
+<li class="lvl-2">
+<p>边界</p>
+</li>
+</ul>
+<h4 id="2-形状步骤">2.形状步骤</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>使用基本形状绘制</p>
+</li>
+<li class="lvl-2">
+<p>再细修</p>
+</li>
+</ul>
+<h5 id="案例1">案例1</h5>
+<p><img src="picture/%E5%BD%A2%E7%8A%B61.png" alt=""></p>
+<h5 id="案例2">案例2</h5>
+<p><img src="picture/%E5%BD%A2%E7%8A%B62.png" alt=""></p>
+<h4 id="3-亮度步骤">3.亮度步骤</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>光照区使用高饱和度</p>
+</li>
+<li class="lvl-2">
+<p>阴影区使用低饱和度</p>
+</li>
+<li class="lvl-2">
+<p>中间过渡</p>
+</li>
+</ul>
+<h5 id="案例1-2">案例1</h5>
+<p><img src="picture/%E4%BA%AE%E5%BA%A61.png" alt=""></p>
+<h5 id="案例2-2">案例2</h5>
+<p><img src="picture/%E4%BA%AE%E5%BA%A62.png" alt=""></p>
+<h4 id="4-边界步骤">4.边界步骤</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>检测图像和负空间的边界，与参照图对比，看是否一致</p>
+</li>
+</ul>
+<h5 id="案例（下方为一个S型）">案例（下方为一个<code>S</code>型）</h5>
+<p><img src="picture/%E8%B4%9F%E7%A9%BA%E9%97%B41.png" alt=""></p>
+<h4 id="5-深度处理">5.深度处理</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>形状导致深度</p>
+</li>
+<li class="lvl-2">
+<p>亮度导致深度</p>
+</li>
+</ul>
+<h5 id="案例1（形状）">案例1（形状）</h5>
+<p><img src="picture/%E6%B7%B1%E5%BA%A6-%E5%BD%A2%E7%8A%B6.png" alt=""></p>
+<h5 id="案例2（亮度）">案例2（亮度）</h5>
+<p><img src="picture/%E6%B7%B1%E5%BA%A6-%E4%BA%AE%E5%BA%A6.png" alt=""></p>
+<h4 id="6-线条整洁">6.线条整洁</h4>
+<p>整洁来自：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>规律</p>
+</li>
+<li class="lvl-2">
+<p>最少</p>
+</li>
+</ul>
+<h5 id="案例（弧线和直线）">案例（弧线和直线）</h5>
+<p><img src="picture/%E7%BA%BF%E6%9D%A1%E6%95%B4%E6%B4%81.png" alt=""></p>
+<h4 id="7-抗锯齿">7.抗锯齿</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>在锯齿处加上半透明色</p>
+</li>
+</ul>
+<h5 id="案例">案例</h5>
+<p><img src="picture/%E6%8A%97%E9%94%AF%E9%BD%BF.png" alt=""></p>
+<h4 id="8-调色盘">8.调色盘</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>中间颜色选择HSV，S和V靠近中间的值</p>
+</li>
+<li class="lvl-2">
+<p>深色在中间色的基础上，减少5-10H，S和V适当减少</p>
+</li>
+<li class="lvl-2">
+<p>浅色在中间色的基础上，增加5-10H，S和V适当增加</p>
+</li>
+</ul>
+<p><img src="picture/%E8%B0%83%E8%89%B2%E7%9B%981.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/26/Python%E8%AF%AD%E6%B3%95/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2023-01-26_%E5%85%B3%E4%BA%8Eif%20__name__%20==%20__main__/">关于if __name__ == __main__</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-25T16:00:00.000Z" itemprop="datePublished">
+    2023-01-26
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/">Python语法</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="关于if-name-main">关于<code>if __name__ == &quot;__main__&quot;</code></h2>
+<p>在python中，如果当前py文件作为程序入口文件，则该文件的隐含变量<code>__name__</code>的值为<code>“__main__”</code>。否则，为<code>包名.文件名</code>。</p>
+<p>根据这个特性，可以将文件中的一部分代码放到该判断中，在被其它文件导入时，实现自动隐藏。</p>
+<p><strong>案例</strong></p>
+<p>A模块代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 模块A</span><br><span class="line"></span><br><span class="line">a = 100</span><br><span class="line"></span><br><span class="line">print(&#x27;你好，我是模块A……&#x27;)</span><br><span class="line"></span><br><span class="line">if __name__==&#x27;__main__&#x27;:		#被其它模块调用时，不运行</span><br><span class="line"></span><br><span class="line">    print(a)</span><br></pre></td></tr></table></figure>
+<p>B模块代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 模块B</span><br><span class="line"></span><br><span class="line">from package01 import A</span><br><span class="line"></span><br><span class="line">b = 200</span><br><span class="line"></span><br><span class="line">print(&#x27;你好，我是模块B……&#x27;)</span><br><span class="line"></span><br><span class="line">print(b)</span><br></pre></td></tr></table></figure>
+<p>执行B模块，输出结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">你好，我是模块A……</span><br><span class="line">你好，我是模块B……</span><br><span class="line">200</span><br></pre></td></tr></table></figure>
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/26/Python%E8%AF%AD%E6%B3%95/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2023-01-26_%E5%85%B3%E4%BA%8Eimport%E7%9A%84%E5%9D%91/">关于import的坑</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-25T16:00:00.000Z" itemprop="datePublished">
+    2023-01-26
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/">Python语法</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="关于import的坑">关于import的坑</h2>
+<h4 id="1-在库路径下的文件">1.在库路径下的文件</h4>
+<p>​	注：库路径：通过运行代码<code>import sys; print(sys.path)</code>查看</p>
+<p>直接import对应的模块名即可</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import os</span><br><span class="line">import sys</span><br></pre></td></tr></table></figure>
+<h4 id="2-自定义的文件">2.自定义的文件</h4>
+<p>目录结构如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">Tree</span><br><span class="line">|____ m1.py</span><br><span class="line">|____ m2.py</span><br><span class="line">|____ Branch</span><br><span class="line">     |____m3.py</span><br><span class="line">     |____m4.py</span><br></pre></td></tr></table></figure>
+<h5 id="1-当m1要导入m3，m3要导入m4：">1.当m1要导入m3，m3要导入m4：</h5>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> Branch <span class="keyword">import</span> m3		<span class="comment">#m1</span></span><br><span class="line"><span class="keyword">import</span> m4					<span class="comment">#m3</span></span><br></pre></td></tr></table></figure>
+<p>报错：找不到m4</p>
+<p>原因是：m3的import语句被先导入到m1中，然后在m1的目录下去找m4，所以找不到。</p>
+<h5 id="2-解决方法：使用相对导入写法：">2.解决方法：使用相对导入写法：</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>from . import module_name</code>。导入和自己同目录下的模块。</p>
+</li>
+<li class="lvl-2">
+<p><code>from .package_name import module_name</code>。导入和自己同目录的包的模块。</p>
+</li>
+<li class="lvl-2">
+<p><code>from .. import module_name</code>。导入上级目录的模块。</p>
+</li>
+<li class="lvl-2">
+<p><code>from ..package_name import module_name</code>。导入位于上级目录下的包的模块。</p>
+</li>
+<li class="lvl-2">
+<p>当然还可以有更多的<code>.</code>，每多一个点就多往上一层目录。</p>
+</li>
+</ul>
+<p>（所谓相对，是相对于源文件，而绝对导入，是绝对于在解释时的文件）</p>
+<p>上述代码改为：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> Branch <span class="keyword">import</span> m3	<span class="comment">#绝对导入，没有变</span></span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> m4		<span class="comment">#相对导入</span></span><br></pre></td></tr></table></figure>
+<h5 id="3-如果m1也使用相对导入写法：">3.如果m1也使用相对导入写法：</h5>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> .Branch <span class="keyword">import</span> m3	<span class="comment">#相对导入</span></span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> m4		<span class="comment">#相对导入</span></span><br></pre></td></tr></table></figure>
+<p>使用<code>python m1.py</code>会报错</p>
+<p>通过在Tree目录的上一目录下使用<code>python -m Tree.m1</code>成功。</p>
+<p>原因：</p>
+<p>执行<code>python m1.py</code>命令后，当前目录所代表的包’.'变成了<code>__main__</code>。</p>
+<p>而<code>python -m Tree.m1</code>不把m1.py当作运行入口文件，而是也把它当作被导入的模块，这就和非运行入口文件有一样的表现了。</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/6/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/8/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

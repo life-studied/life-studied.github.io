@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ C++基础 }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/14/C++/C++%E5%9F%BA%E7%A1%80/2022-03-14_12-5%E4%BD%BF%E7%94%A8%E6%8C%87%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%8C%87%E9%92%88/">12-5使用指向对象的指针</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-13T16:00:00.000Z" itemprop="datePublished">
+    2022-03-14
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="12-5使用指向对象的指针">12.5使用指向对象的指针</h2>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/13/C++/C++%E5%9F%BA%E7%A1%80/2022-03-13_12-3%E5%9C%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%AD%E4%BD%BF%E7%94%A8new%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">12-3在构造函数中使用new注意事项</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-12T16:00:00.000Z" itemprop="datePublished">
+    2022-03-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="12-3在构造函数中使用new注意事项">12.3在构造函数中使用new注意事项</h2>
+<h4 id="12-3-1注意事项">12.3.1注意事项</h4>
+<p>1.构造函数使用new，析构函数使用delete</p>
+<p>2.new与delete必须兼容，即new[]对于delete[]，new对应delete</p>
+<p>3.多个构造函数中new必须一致，因为只有一个析构函数</p>
+<p>4.复制构造函数与赋值运算符函数都应该考虑到深度复制的问题</p>
+<h4 id="12-3-2包含类成员的类的逐成员复制">12.3.2包含类成员的类的逐成员复制</h4>
+<blockquote>
+<p>对于类成员是一种已经定义好的类，则类之间的复制将对类成员自带的赋值或复制构造函数进行调用，而不需要对于这个类重写这类函数</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/13/C++/C++%E5%9F%BA%E7%A1%80/2022-03-13_12-4%E6%9C%89%E5%85%B3%E8%BF%94%E5%9B%9E%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AF%B4%E6%98%8E/">12-4有关返回对象的说明</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-12T16:00:00.000Z" itemprop="datePublished">
+    2022-03-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="12-4有关返回对象的说明">12.4有关返回对象的说明</h2>
+<h4 id="12-4-1返回指向const对象的引用">12.4.1返回指向const对象的引用</h4>
+<p><strong>说明</strong></p>
+<blockquote>
+<p>1.返回对象将调用复制构造函数（如果初始化新创建的对象），而返回引用不会</p>
+<p>2.引用指向的对象应当在函数执行时存在</p>
+<p>3.const引用与返回的值类型匹配</p>
+</blockquote>
+<h4 id="12-4-2返回指向非const对象的引用">12.4.2返回指向非const对象的引用</h4>
+<p><strong>说明</strong></p>
+<blockquote>
+<p>返回非const对象，某些原因是能直接再次调用这个对象</p>
+<p>例如：cin.getline().getline()</p>
+</blockquote>
+<h4 id="12-4-3返回对象">12.4.3返回对象</h4>
+<blockquote>
+<p>如果被返回的对象是被调用函数中的局部变量，则不该按引用方式返回它。</p>
+</blockquote>
+<h4 id="12-4-4返回const对象">12.4.4返回const对象</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">force1 + force2 = net;</span><br><span class="line"><span class="comment">//之所以能使用这种语句，是因为force1+force2返回值创建了一个临时对象，再将net赋值给它</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>为了避免这种情况的发生，可以采用const对象的返回类型，这样上述语句就会报错</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/07/C++/C++%E5%9F%BA%E7%A1%80/2022-03-07_10-3-5%20const%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/">10-3-5 const成员函数</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-06T16:00:00.000Z" itemprop="datePublished">
+    2022-03-07
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="10-3-5-const成员函数">10.3.5 const成员函数</h2>
+<blockquote>
+<p>如果一个类被创建时就是const类型，则类函数因不能保证不修改类的成员而报错，此时就需要const成员函数来解决这种问题</p>
+</blockquote>
+<h4 id="创建">创建</h4>
+<blockquote>
+<p>在函数参数列表后加const即可</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span> <span class="type">const</span></span>;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/07/C++/C++%E5%9F%BA%E7%A1%80/2022-03-07_10-4%20this%E6%8C%87%E9%92%88/">10-4 this指针</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-06T16:00:00.000Z" itemprop="datePublished">
+    2022-03-07
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="10-4-this指针">10.4 this指针</h2>
+<h5 id="介绍">介绍</h5>
+<blockquote>
+<p>当涉及两个同类对象时，对于本对象该用什么方式表示而定义的指针</p>
+</blockquote>
+<h4 id="10-4-1如何涉及两个对象">10.4.1如何涉及两个对象</h4>
+<blockquote>
+<p>在一个对象的成员函数中提供一个其他对象的参数，从而显式的访问这个对象并隐式的访问自己。</p>
+</blockquote>
+<p><strong>案例</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">const</span> Stock &amp; <span class="title">Stock::topval</span><span class="params">(<span class="type">const</span> Stock &amp; s)</span><span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.top_val&gt;top_val)</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;<span class="comment">//this为本对象的地址，即指向它的指针</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/07/C++/C++%E5%9F%BA%E7%A1%80/2022-03-07_10-5%20%E5%AF%B9%E8%B1%A1%E6%95%B0%E7%BB%84/">10-5 对象数组</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-06T16:00:00.000Z" itemprop="datePublished">
+    2022-03-07
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="10-5-对象数组">10.5 对象数组</h2>
+<h4 id="10-5-1创建对象数组并赋值">10.5.1创建对象数组并赋值</h4>
+<blockquote>
+<p>可以使用构造函数来初始化数组元素</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> STKS=<span class="number">3</span>;</span><br><span class="line">Stock stocks[STKS]=&#123;</span><br><span class="line">    <span class="built_in">Stock</span>(<span class="string">&quot;1&quot;</span>,<span class="number">1</span>,<span class="number">1</span>);<span class="comment">//调用构造函数，每次构造函数调用都表示一个值</span></span><br><span class="line">    <span class="built_in">Stock</span>(<span class="string">&quot;2&quot;</span>,<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line">    <span class="built_in">Stock</span>(<span class="string">&quot;3&quot;</span>,<span class="number">3</span>,<span class="number">3</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：如果没有调用构造函数，系统会使用默认构造函数来初始化其余元素</strong></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/07/C++/C++%E5%9F%BA%E7%A1%80/2022-03-07_10-6%20%E7%B1%BB%E4%BD%9C%E7%94%A8%E5%9F%9F/">10-6 类作用域</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-06T16:00:00.000Z" itemprop="datePublished">
+    2022-03-07
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="10-6-类作用域">10.6 类作用域</h2>
+<blockquote>
+<p>在类中定义的名称的作用域是整个类，只在该类中是已知的。</p>
+</blockquote>
+<h4 id="10-6-1作用域为类的常量">10.6.1作用域为类的常量</h4>
+<p>例如：类声明可能需要使用字面值30来指定数组的长度。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Brakery</span>&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> MONTHS=<span class="number">12</span>;<span class="comment">//不可行！！</span></span><br><span class="line">    <span class="type">double</span> costs[MONTHS];</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是，因为声明只是描述了对象的形式，并没有创建变量，因此<strong>类声明中没有存储值的空间</strong>。所以常量不能被赋值</p>
+<h5 id="处理方法">处理方法</h5>
+<p>1.使用枚举</p>
+<blockquote>
+<p>注意：因为枚举并不创建类数据成员，所以在类中声明的枚举不会在对象中出现。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Brakery</span>&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">enum</span> &#123;MONTHS=<span class="number">12</span>&#125;;<span class="comment">//使用枚举</span></span><br><span class="line">    <span class="type">double</span> costs[MONTHS];</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.使用static</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Brakery</span>&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">static</span> <span class="type">const</span> <span class="type">int</span> MONTHS=<span class="number">12</span>;</span><br><span class="line">    <span class="type">double</span> costs[MONTHS];</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>该常量将与所有静态变量存储在一起，而不是存储在类中，所以能做到</p>
+</blockquote>
+<h4 id="10-6-2作用域内枚举（c-11）">10.6.2作用域内枚举（c++11）</h4>
+<blockquote>
+<p>传统枚举会因为两个枚举内的常量名称一致而引发冲突</p>
+<p>作用域内枚举可以有效避免这个问题</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum class</span> <span class="title class_">egg</span> &#123;Small,Medium,Large&#125;;<span class="comment">//作用域egg</span></span><br><span class="line"><span class="keyword">enum class</span> <span class="title class_">t_shirt</span> &#123;Small,Medium,Large&#125;;<span class="comment">//作用域t_shirt</span></span><br><span class="line">egg choose = egg::Large;<span class="comment">//注意加上作用域解析符::</span></span><br><span class="line">t_shirt T=t_shirt::Large;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>作用域内枚举不能隐式转化为整形</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/07/C++/C++%E5%9F%BA%E7%A1%80/2022-03-07_10-7%20%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">10-7 抽象数据类型</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-06T16:00:00.000Z" itemprop="datePublished">
+    2022-03-07
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="10-7抽象数据类型">10.7抽象数据类型</h2>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/07/C++/C++%E5%9F%BA%E7%A1%80/2022-03-07_9-1/">9-1</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-06T16:00:00.000Z" itemprop="datePublished">
+    2022-03-07
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="9-1">9.1</h2>
+<h4 id="动态分配new">动态分配new</h4>
+<h5 id="1-内置标量初始化">1.内置标量初始化</h5>
+<p>在类型名后加上初始值并用（）括起</p>
+<p>例如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> *pi=<span class="keyword">new</span> <span class="built_in">int</span> (<span class="number">6</span>);</span><br><span class="line"><span class="type">double</span> *pd=<span class="keyword">new</span> <span class="built_in">double</span> (<span class="number">99.99</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="2-初始化结构或数组（c-11）">2.初始化结构或数组（c++11）</h5>
+<p>使用大括号的列表初始化</p>
+<p>例如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">where</span>&#123;<span class="type">double</span> x;<span class="type">double</span> y;<span class="type">double</span> z;&#125;;</span><br><span class="line">where * one=<span class="keyword">new</span> where &#123;<span class="number">2.5</span>,<span class="number">5.3</span>,<span class="number">7.2</span>&#125;;</span><br><span class="line"><span class="type">int</span> *ar=<span class="keyword">new</span> <span class="type">int</span> [<span class="number">4</span>] &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br></pre></td></tr></table></figure>
+<h5 id="3-运算符、函数、替换函数">3.运算符、函数、替换函数</h5>
+<p>运算符new和new []分别调用下面函数：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> * <span class="keyword">operator</span> <span class="title">new</span><span class="params">(std::<span class="type">size_t</span>)</span></span>;</span><br><span class="line"><span class="type">void</span> * <span class="keyword">operator</span> <span class="keyword">new</span>[](std::<span class="type">size_t</span>);</span><br></pre></td></tr></table></figure>
+<p>delete类似</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/06/C++/C++%E5%9F%BA%E7%A1%80/2022-03-06_8-3%20%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0/">8-3 默认参数</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-05T16:00:00.000Z" itemprop="datePublished">
+    2022-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%9F%BA%E7%A1%80/">C++基础</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="8-3-默认参数">8.3 默认参数</h2>
+<p>介绍：函数省略实参时默认使用的值</p>
+<h5 id="设置方法及要求">设置方法及要求</h5>
+<p>设置方法：仅在<strong>函数原型</strong>的参数列表中赋值</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">char</span> * <span class="title">left</span><span class="params">(<span class="type">const</span> <span class="type">char</span> * str, <span class="type">int</span> n=<span class="number">1</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">char</span> * <span class="title">left</span><span class="params">(<span class="type">const</span> <span class="type">char</span> * str, <span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要求：默认参数必须从右往左添至参数列表</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">harpo</span><span class="params">(<span class="type">int</span> n,<span class="type">int</span> m=<span class="number">4</span>,<span class="type">int</span> j=<span class="number">5</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<h5 id="使用说明">使用说明</h5>
+<p>对于带n个默认参数的共m个参数的函数，使用时参数列表中可有[m-n,m]个参数，根据情况使用</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/categories/C/C-%E5%9F%BA%E7%A1%80/page/2/">« prev</a><a class="page-number" href="/categories/C/C-%E5%9F%BA%E7%A1%80/">1</a><a class="page-number" href="/categories/C/C-%E5%9F%BA%E7%A1%80/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/categories/C/C-%E5%9F%BA%E7%A1%80/page/4/">4</a><a class="extend next" rel="next" href="/categories/C/C-%E5%9F%BA%E7%A1%80/page/4/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

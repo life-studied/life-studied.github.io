@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ GO }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/23/GO/%E5%AF%BC%E5%8C%85%E6%A1%88%E4%BE%8B/2023-02-23_Go%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/">Go项目结构</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-22T16:00:00.000Z" itemprop="datePublished">
+    2023-02-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/GO/">GO</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/GO/%E5%AF%BC%E5%8C%85%E6%A1%88%E4%BE%8B/">导包案例</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="Go项目结构">Go项目结构</h2>
+<h4 id="总览">总览</h4>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">--Project path</span></span><br><span class="line"><span class="comment">  --bin     可执行文件</span></span><br><span class="line"><span class="comment">  --build   编译构建结果</span></span><br><span class="line"><span class="comment">  --cmd     代码，甚至可以只有一个main</span></span><br><span class="line"><span class="comment">    --具体包名</span></span><br><span class="line"><span class="comment">  --config  配置文件</span></span><br><span class="line"><span class="comment">  --docs    文档文件</span></span><br><span class="line"><span class="comment">  --example 样例应用程序</span></span><br><span class="line"><span class="comment">  --internal  不便在cmd做展示的、需要隐藏的、需要加密的代码</span></span><br><span class="line"><span class="comment">  --pkg     外部应用程序使用的代码库</span></span><br><span class="line"><span class="comment">  --script  脚本</span></span><br><span class="line"><span class="comment">  --test    测试代码</span></span><br><span class="line"><span class="comment">  --tools   编写的工具，可以从pkg、internal引入代码</span></span><br><span class="line"><span class="comment">  --vender  应用程序依赖项</span></span><br><span class="line"><span class="comment">  go.mod</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h4 id="案例">案例</h4>
+<p><img src="picture/%E6%A1%88%E4%BE%8B.png" alt=""></p>
+<p>步骤：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>在根目录下使用<code>go init mod &lt;modname&gt;</code></p>
+</li>
+</ul>
+<p><img src="picture/initmod.png" alt=""></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>将main包放到cmd目录下，将项目内部使用的包放到internal目录下</p>
+</li>
+<li class="lvl-2">
+<p>main导入包时，以下图的方式</p>
+</li>
+</ul>
+<p><img src="picture/import.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/23/GO/%E7%89%B9%E6%80%A7/2023-02-23_goroutine%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B/">goroutine使用案例</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-22T16:00:00.000Z" itemprop="datePublished">
+    2023-02-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/GO/">GO</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/GO/%E7%89%B9%E6%80%A7/">特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="goroutine使用案例">goroutine使用案例</h2>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Add</span><span class="params">(x, y <span class="type">int</span>, ch <span class="keyword">chan</span> <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">	fmt.Println(x, <span class="string">&quot;+&quot;</span>, y, <span class="string">&quot;=&quot;</span>, x+y)</span><br><span class="line">	ch &lt;- <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	chs := <span class="built_in">make</span>([]<span class="keyword">chan</span> <span class="type">int</span>, <span class="number">100</span>)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100</span>; i++ &#123;</span><br><span class="line">		chs[i] = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>)</span><br><span class="line">		<span class="keyword">go</span> Add(i, i, chs[i])</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100</span>; i++ &#123;</span><br><span class="line">		&lt;-chs[i]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/23/GO/%E7%89%B9%E6%80%A7/2023-02-23_map%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B/">map使用案例</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-22T16:00:00.000Z" itemprop="datePublished">
+    2023-02-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/GO/">GO</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/GO/%E7%89%B9%E6%80%A7/">特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="map使用案例">map使用案例</h2>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//test map</span></span><br><span class="line"><span class="comment">//1.create map</span></span><br><span class="line"><span class="comment">//2.query map</span></span><br><span class="line"><span class="comment">//3.delete map</span></span><br><span class="line"><span class="comment">//4.use struct</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> PersonInfo <span class="keyword">struct</span> &#123;</span><br><span class="line">	ID      <span class="type">string</span></span><br><span class="line">	Name    <span class="type">string</span></span><br><span class="line">	Address <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">FindPerson</span><span class="params">(fID <span class="type">string</span>, sheet <span class="keyword">map</span>[<span class="type">string</span>]PersonInfo)</span></span> &#123;</span><br><span class="line">	person, ok := sheet[fID]</span><br><span class="line">	<span class="keyword">if</span> ok &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;Found Person:&quot;</span>, person.Name, <span class="string">&quot;ID:&quot;</span>,</span><br><span class="line">			person.ID, <span class="string">&quot;Address:&quot;</span>, person.Address)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;Did not find the Person, ID:&quot;</span>, fID)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> personDB <span class="keyword">map</span>[<span class="type">string</span>]PersonInfo</span><br><span class="line">	personDB = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]PersonInfo)</span><br><span class="line"></span><br><span class="line">	personDB[<span class="string">&quot;12345&quot;</span>] = PersonInfo&#123;<span class="string">&quot;12345&quot;</span>, <span class="string">&quot;Tom&quot;</span>, <span class="string">&quot;Room 2003&quot;</span>&#125;</span><br><span class="line">	personDB[<span class="string">&quot;1&quot;</span>] = PersonInfo&#123;<span class="string">&quot;1&quot;</span>, <span class="string">&quot;Jay&quot;</span>, <span class="string">&quot;Room 2005&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">	FindPerson(<span class="string">&quot;1234&quot;</span>, personDB)</span><br><span class="line">	FindPerson(<span class="string">&quot;12345&quot;</span>, personDB)</span><br><span class="line">	<span class="built_in">delete</span>(personDB, <span class="string">&quot;12345&quot;</span>)</span><br><span class="line">	FindPerson(<span class="string">&quot;12345&quot;</span>, personDB)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/23/GO/%E7%89%B9%E6%80%A7/2023-02-23_%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE%EF%BC%88flag%E5%8C%85%EF%BC%89/">命令行参数设置（flag包）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-22T16:00:00.000Z" itemprop="datePublished">
+    2023-02-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/GO/">GO</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/GO/%E7%89%B9%E6%80%A7/">特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="命令行参数设置（flag包）">命令行参数设置（flag包）</h2>
+<h4 id="案例">案例</h4>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;flag&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> infile *<span class="type">string</span> = flag.String(<span class="string">&quot;i&quot;</span>, <span class="string">&quot;infile&quot;</span>, <span class="string">&quot;File contains values for sorting&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> outfile *<span class="type">string</span> = flag.String(<span class="string">&quot;o&quot;</span>, <span class="string">&quot;outfile&quot;</span>, <span class="string">&quot;File to receive sorted values&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> algorithm *<span class="type">string</span> = flag.String(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;qsort&quot;</span>, <span class="string">&quot;Sort algorithms&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	flag.Parse()	<span class="comment">//解析命令行参数并给变量赋值</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> infile != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;infile = &quot;</span>, *infile, <span class="string">&quot;outfile = &quot;</span>, *outfile, <span class="string">&quot;algorithm = &quot;</span>, *algorithm)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="使用">使用</h4>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">go build sorter.go	#编译为二进制文件</span><br><span class="line">.\sorter.exe -i unsorted.dat -o sorted.dat -a buttlesort	#使用</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/23/GO/%E7%89%B9%E6%80%A7/2023-02-23_%E6%8E%A5%E5%8F%A3/">接口</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-22T16:00:00.000Z" itemprop="datePublished">
+    2023-02-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/GO/">GO</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/GO/%E7%89%B9%E6%80%A7/">特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="接口">接口</h2>
+<p>接口可以看作两部分</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>接口存的值（直接用接口变量名）</p>
+</li>
+<li class="lvl-2">
+<p>接口里的变量可以调用的函数（接口变量名.接口函数）</p>
+</li>
+</ul>
+<h4 id="1-空接口">1.空接口</h4>
+<blockquote>
+<p>空接口可以接收任意类型的转换</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//interface&#123;&#125;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">MyPrint</span><span class="params">(val []<span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> _, element := <span class="keyword">range</span> val &#123;</span><br><span class="line">		fmt.Println(element)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	strange := <span class="built_in">make</span>([]<span class="keyword">interface</span>&#123;&#125;, <span class="number">10</span>)</span><br><span class="line">	strange[<span class="number">0</span>] = <span class="number">2.55</span></span><br><span class="line">	strange[<span class="number">1</span>] = <span class="string">&quot;hello&quot;</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">2</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		strange[i] = i</span><br><span class="line">	&#125;</span><br><span class="line">	MyPrint(strange)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-正常接口">2.正常接口</h4>
+<blockquote>
+<p>结构体实现了接口内部的所有函数，就隐式实现了该接口，即可以被隐式转换为该接口</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//interface test</span></span><br><span class="line"><span class="keyword">type</span> Chinese <span class="keyword">struct</span> &#123;</span><br><span class="line">	lan_name <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> English <span class="keyword">struct</span> &#123;</span><br><span class="line">	lan_name <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> lanName <span class="keyword">interface</span> &#123;</span><br><span class="line">	name()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(lan Chinese)</span></span> name() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;This is&quot;</span>, lan.lan_name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(lan English)</span></span> name() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;This is&quot;</span>, lan.lan_name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> c = Chinese&#123;<span class="string">&quot;Chinese&quot;</span>&#125;</span><br><span class="line">	<span class="keyword">var</span> e = English&#123;<span class="string">&quot;English&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> lanname lanName = c</span><br><span class="line">	lanname.name()</span><br><span class="line"></span><br><span class="line">	lanname = e</span><br><span class="line">	lanname.name()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/11/02/GO/Go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/2022-11-02_2-1%E5%8F%98%E9%87%8F/">2-1变量</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-11-01T16:00:00.000Z" itemprop="datePublished">
+    2022-11-02
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/GO/">GO</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/GO/Go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">Go语言编程笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="2-1变量">2.1变量</h2>
+<h4 id="2-1-1变量声明">2.1.1变量声明</h4>
+<blockquote>
+<p>Go的变量声明与C不同。对于纯粹的变量声明，Go引入了关键字var，并将类型置于变量名后。</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> v1 <span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> v2 <span class="type">string</span></span><br><span class="line"><span class="keyword">var</span> v3 [<span class="number">10</span>]<span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> v4 []<span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> v5 <span class="keyword">struct</span>&#123;</span><br><span class="line">    f <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> v6 *<span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> v7 <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> v8 <span class="function"><span class="keyword">func</span><span class="params">(a <span class="type">int</span>)</span></span> <span class="type">int</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>另外的批量声明变量写法如下</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span>(</span><br><span class="line">    v1 <span class="type">int</span></span><br><span class="line">    v2 <span class="type">string</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="2-1-2变量初始化">2.1.2变量初始化</h4>
+<p>对于需要初始化的变量，类型和var关键字都不是必要的，但可以保留。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> v1 <span class="type">int</span> = <span class="number">10</span></span><br><span class="line"><span class="keyword">var</span> v2 = <span class="number">10</span></span><br><span class="line">v3 := <span class="number">10</span>		<span class="comment">//全局变量不行</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-1-3变量赋值">2.1.3变量赋值</h4>
+<p>正常赋值</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> v1 <span class="type">int</span></span><br><span class="line">v1 = <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<p><strong>多重赋值</strong></p>
+<blockquote>
+<p>Go引入多重赋值的特性，代替C/C++中引入第三者来交换变量</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">i,j = j,i</span><br></pre></td></tr></table></figure>
+<h4 id="2-1-4匿名变量">2.1.4匿名变量</h4>
+<blockquote>
+<p>某些时候，函数的部分返回值不需要，可以使用匿名变量来忽略掉返回值，增强可读性</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Getname</span><span class="params">()</span></span> (firstname,lastname,nickname <span class="type">string</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;May&quot;</span>,<span class="string">&quot;Chan&quot;</span>,<span class="string">&quot;Chibi Maruko&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">_, _, nickname = Getname()	<span class="comment">//使用匿名变量，忽略掉前两个返回值</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/11/02/GO/Go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/2022-11-02_2-2%E5%B8%B8%E9%87%8F/">2-2常量</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-11-01T16:00:00.000Z" itemprop="datePublished">
+    2022-11-02
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/GO/">GO</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/GO/Go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">Go语言编程笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="2-2常量">2.2常量</h2>
+<blockquote>
+<p>常量是编译期间就已知且不可更改的值</p>
+</blockquote>
+<h4 id="2-2-1字面常量">2.2.1字面常量</h4>
+<blockquote>
+<p>字面常量就是程序中硬编码的常量。不同于C语言中，对于常量有特定的类型（例如-12属于int，而-12l属于long），Go语言中的常量是无类型的，只要这个常量在对应的变量范围内。（即12可以是int，可以是long，可以是float32等）</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="number">-12</span></span><br><span class="line"><span class="number">3.1415926535897</span></span><br><span class="line"><span class="number">3.2</span>+<span class="number">12i</span>				<span class="comment">//复数类型</span></span><br><span class="line"><span class="literal">true</span>				<span class="comment">//布尔类型</span></span><br><span class="line"><span class="string">&quot;foo&quot;</span>				<span class="comment">//string类型</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-2-2常量定义">2.2.2常量定义</h4>
+<blockquote>
+<p>通过使用const来给字面给常量指定一个友好的名字</p>
+<p>定义方式很自由，见下：</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Pi <span class="type">float64</span> = <span class="number">3.1415926535897</span>		<span class="comment">//可以指定类型float32</span></span><br><span class="line"><span class="keyword">const</span> zero = <span class="number">0.0</span>						<span class="comment">//也可以不指定类型，属于无类型</span></span><br><span class="line"><span class="keyword">const</span>(									<span class="comment">//也可以批量定义</span></span><br><span class="line">    size <span class="type">int64</span> = <span class="number">1024</span></span><br><span class="line">    eof = <span class="number">-1</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">const</span> u, v <span class="type">float32</span> = <span class="number">0</span>, <span class="number">3</span>				<span class="comment">//也可以批量指定类型</span></span><br><span class="line"><span class="keyword">const</span> a, b, c = <span class="number">3</span>, <span class="number">4</span>, <span class="string">&quot;foo&quot;</span>				<span class="comment">//也可以批量定义但自带类型</span></span><br></pre></td></tr></table></figure>
+<p><strong>警告</strong></p>
+<blockquote>
+<p>常量定义时，右值必须是一个在编译期运算的常量表达式。任何运行期才能得到结果的表达式都会编译错误。</p>
+</blockquote>
+<h4 id="2-2-3预定义常量">2.2.3预定义常量</h4>
+<blockquote>
+<p>Go语言预定义的常量有：true、false和iota</p>
+</blockquote>
+<p>iota详见《常量与变量》一章</p>
+<h4 id="2-2-4枚举">2.2.4枚举</h4>
+<blockquote>
+<p>Go语言不支持enum，因此枚举由常量创造，常用方法如下：</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span>(</span><br><span class="line">    Sunday = <span class="literal">iota</span></span><br><span class="line">    Monday</span><br><span class="line">    Tuesday</span><br><span class="line">    Wednesday</span><br><span class="line">    Thursday</span><br><span class="line">    Friday</span><br><span class="line">    Saturday</span><br><span class="line">    numberofDays			<span class="comment">//这个常量没有导出（首字符）</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/11/01/GO/2022-11-01_2-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">2-基础语法</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-31T16:00:00.000Z" itemprop="datePublished">
+    2022-11-01
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/GO/">GO</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="基础语法">基础语法</h2>
+<h4 id="1-行分隔符">1.行分隔符</h4>
+<blockquote>
+<p>在 Go 程序中，一行代表一个语句结束。每个语句不需要像 C 家族中的其它语言一样以分号 ; 结尾，因为这些工作都将由 Go 编译器自动完成。</p>
+<p>如果你打算将多个语句写在同一行，它们则必须使用 ; 人为区分，但在实际开发中我们并不鼓励这种做法。</p>
+</blockquote>
+<h4 id="2-注释">2.注释</h4>
+<blockquote>
+<p>同C语言</p>
+</blockquote>
+<h4 id="3-数据类型">3.数据类型</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>布尔型</p>
+</li>
+<li class="lvl-2">
+<p>数字类型</p>
+</li>
+<li class="lvl-2">
+<p>字符串类型</p>
+</li>
+<li class="lvl-2">
+<p>派生类型</p>
+<ul class="lvl-2">
+<li class="lvl-6">(a) 指针类型（Pointer）</li>
+<li class="lvl-6">(b) 数组类型</li>
+<li class="lvl-6">© 结构化类型(struct)</li>
+<li class="lvl-6">(d) Channel 类型</li>
+<li class="lvl-6">(e) 函数类型</li>
+<li class="lvl-6">(f) 切片类型</li>
+<li class="lvl-6">(g) 接口类型（interface）</li>
+<li class="lvl-6">(h) Map 类型</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/11/01/GO/2022-11-01_4-%E8%BF%90%E7%AE%97%E7%AC%A6/">4-运算符</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-31T16:00:00.000Z" itemprop="datePublished">
+    2022-11-01
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/GO/">GO</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="运算符">运算符</h2>
+<blockquote>
+<p><strong>基本与C语言一致</strong>，区别如下</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>a++和a–是语句，不是表达式，没有值</p>
+</li>
+<li class="lvl-2">
+<p>没有++a和–a</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/31/GO/2022-10-31_1-package/">1-package</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-30T16:00:00.000Z" itemprop="datePublished">
+    2022-10-31
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/GO/">GO</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="package">package</h2>
+<blockquote>
+<p>Go语言是使用包来组织源代码的，包（package）是多个 Go 源码的集合，是一种高级的代码复用方案。Go语言中为我们提供了很多内置包，如 fmt、os、io 等。</p>
+<p>任何源代码文件必须属于某个包，同时源码文件的第一行有效代码必须是<code>package pacakgeName </code>语句，通过该语句声明自己所在的包。</p>
+</blockquote>
+<h4 id="1-声明包">1.声明包</h4>
+<blockquote>
+<p>每一个go文件必须声明其所在的包名，同一个文件夹下的文件，包名必须一致。一般与文件夹名称一致，可以不一样。</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> packageName</span><br></pre></td></tr></table></figure>
+<h4 id="2-导入包">2.导入包</h4>
+<blockquote>
+<p>导入包的包名必须是所在包文件夹的名称，而不是包名（虽然它们有时一致）。同时导入后必须使用该包中的内容，不然也会报错。</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;文件夹名&quot;</span></span><br><span class="line"><span class="keyword">import</span> 包名<span class="string">&quot;文件夹名&quot;</span>		<span class="comment">//或者通过这种方式显式的说明包名</span></span><br><span class="line"><span class="keyword">import</span>(</span><br><span class="line">	<span class="string">&quot;文件夹名1&quot;</span></span><br><span class="line">    <span class="string">&quot;文件夹名2&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>自定义包必须在GOPATH所在目录下，才能在import时被找到</p>
+</li>
+<li class="lvl-2">
+<p>使用包内函数时，函数首字母必须是大写才能被外部使用</p>
+</li>
+<li class="lvl-2">
+<p>调用自定义包时使用 <code>包名 . 函数名</code> 的方式</p>
+</li>
+</ul>
+<p><strong>案例</strong></p>
+<p><a target="_blank" rel="noopener" href="http://c.biancheng.net/view/5123.html">Go语言自定义包 (biancheng.net)</a></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

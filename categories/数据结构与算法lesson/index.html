@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ 数据结构与算法lesson }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/06/04/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-06-04_30%E5%9F%BA%E4%BA%8E%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9%E7%9A%84%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">30基于状态压缩的动态规划</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-06-03T16:00:00.000Z" itemprop="datePublished">
+    2022-06-04
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="基于状态压缩的动态规划">基于状态压缩的动态规划</h2>
+<blockquote>
+<p>一般，以集合信息为状态的特殊的动态规划问题。</p>
+</blockquote>
+<blockquote>
+<p>首先满足动态规划的基本特点</p>
+<p>其次数据规模较小</p>
+</blockquote>
+<h4 id="引入">引入</h4>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/131585177">动态规划——状态压缩DP - 知乎 (zhihu.com)</a></p>
+<p>信息的最小单位：bit（由0和1组成）</p>
+<p>位运算：左移、右移</p>
+<blockquote>
+<p>用0和1组成的数字对任意一个集合，对子集进行编码、掩码。</p>
+</blockquote>
+<p>取第i位的值：S&amp;（1&lt;&lt;i）</p>
+<p>将第i位设置为1/0：S|（1&lt;&lt;i） S&amp;~(1&lt;&lt;i）</p>
+<h4 id="例题">例题</h4>
+<blockquote>
+<p>100顶帽子分给十个人</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/06/04/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-06-04_31%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/">31最长递增子序列</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-06-03T16:00:00.000Z" itemprop="datePublished">
+    2022-06-04
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="最长递增子序列">最长递增子序列</h2>
+<blockquote>
+<p>动态规划的公式：</p>
+<p>dp[i] = 1 + max( dp[j] )</p>
+<p>其中0 &lt;= j &lt; i  &amp;&amp; arr[j] &lt; arr[i]</p>
+</blockquote>
+<p>方法1：</p>
+<p>备忘录</p>
+<blockquote>
+<p>使用递归树，递归终止条件为返回1</p>
+</blockquote>
+<p>方法2：</p>
+<p>动态规划表</p>
+<blockquote>
+<p>for循环找前面符合条件的最小值。</p>
+</blockquote>
+<p>方法3：</p>
+<p>动态规划+二分（1h20m）</p>
+<blockquote>
+<p>一个一个数字扩充进可能的最长序列，不停维护这个序列</p>
+</blockquote>
+<blockquote>
+<p>贪婪思想：如果上升子序列的结尾越小，遍历后一个数字接上去的可能性就越大。</p>
+<p>步骤：</p>
+<p>如果加入的新数字比活动序列中的最小元素还要小，创建一个新序列并维护它。</p>
+<p>如果比所有活动的序列都要大，复制一个目前最长的序列，添加到末尾。</p>
+<p>如果介于之间的，替换末尾元素，删除等长序列。</p>
+</blockquote>
+<blockquote>
+<p>优化：使用辅助数组仅记录末尾数字，数字的个数等于所得的最长递增子序列。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/06/04/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-06-04_32KMP%E7%AE%97%E6%B3%95/">32KMP算法</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-06-03T16:00:00.000Z" itemprop="datePublished">
+    2022-06-04
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="KMP算法">KMP算法</h2>
+<blockquote>
+<p>字符串匹配，用于匹配字符串的下标</p>
+</blockquote>
+<p>对正常单个字符依次匹配的优化。</p>
+<blockquote>
+<p>在匹配失败时，主串指针不需要回溯，子串指针回溯。</p>
+</blockquote>
+<p><strong>方法</strong></p>
+<p>设定一个next数组，存储子串下标要回溯的位置。</p>
+<blockquote>
+<p>假如next[j]表示，对子串前j-1个字符而言，前缀与后缀相同的字符串的最大长度+1；</p>
+<p>由此给出next数组的每一个元素值，得到整个next数组。（没有前后缀的为0）</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/06/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-06-03_10%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E5%92%8C%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/">10哈夫曼树和哈夫曼编码</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-06-02T16:00:00.000Z" itemprop="datePublished">
+    2022-06-03
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="哈夫曼树和哈夫曼编码">哈夫曼树和哈夫曼编码</h2>
+<h4 id="概念">概念</h4>
+<blockquote>
+<p>1.结点路径：某一个结点从根节点到某一个路径上的连接数</p>
+<p>2.树的路径长度：每一个叶子的结点路径长度之和</p>
+<p>3.结点的带权路径长度：某一个结点的权重*该结点的路径长度</p>
+<p>4.树的带权路径长度：每一个叶子的带权路径长度之和</p>
+</blockquote>
+<h4 id="哈夫曼树">哈夫曼树</h4>
+<p><strong>构造方式</strong></p>
+<blockquote>
+<p>一次选择两个权重最小的结点，构造一棵二叉树，将权重赋值给父节点，直至结束。</p>
+</blockquote>
+<p><strong>特点</strong></p>
+<p>数据都存储在叶子结点上</p>
+<h4 id="概念-2">概念</h4>
+<blockquote>
+<p>定长编码：对数据进行指定长度的编码，例如ascll编码</p>
+<p>缺点：浪费空间，适合对指定的数据进行编码</p>
+<p>变长编码：对高频字符进行短位编码</p>
+<p>前缀属性：在字符集中，一个字符的编码不是其他字符编码的前缀。不产生二义性</p>
+</blockquote>
+<h4 id="哈夫曼编码（策略）">哈夫曼编码（策略）</h4>
+<p><strong>作用：数据压缩</strong></p>
+<p><strong>注意：不能产生二义性</strong></p>
+<h4 id="哈夫曼编码树">哈夫曼编码树</h4>
+<blockquote>
+<p>每一个叶子结点都代表一个字符，</p>
+<p>从结点到左孩子结点标记为0，到右孩子结点标记为1</p>
+</blockquote>
+<p><img src="picture/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81%E6%A0%91.png" alt=""></p>
+<h5 id="代码实现">代码实现</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> weight;		<span class="comment">//叶子结点的权值</span></span><br><span class="line">    <span class="type">int</span> lchild;		<span class="comment">//左孩子下标</span></span><br><span class="line">    <span class="type">int</span> rchild;		<span class="comment">//右孩子下标</span></span><br><span class="line">    <span class="type">int</span> parent;		<span class="comment">//父节点下标</span></span><br><span class="line"></span><br><span class="line">&#125;Node,*HuffmanTree;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span>* HuffmanCode;</span><br><span class="line"><span class="comment">//步骤</span></span><br><span class="line"><span class="comment">//选择最小的两个结点</span></span><br><span class="line"><span class="comment">//创建哈夫曼树，并求出哈夫曼编码</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">select</span><span class="params">(HuffmanTree* huffmanTree, <span class="type">int</span> n, <span class="type">int</span>* s1, <span class="type">int</span>* s2)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> min;<span class="comment">//记录最小值的变量</span></span><br><span class="line">    <span class="comment">//找出第一个没有被赋值的单节点</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//如果没有父节点，把结点序号赋值给min，跳出</span></span><br><span class="line">        <span class="keyword">if</span> ((*huffmanTree)[i].parent == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            min = i;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//继续遍历全部结点，找到权值最小的</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//如果没有父节点进入下一次判断</span></span><br><span class="line">        <span class="keyword">if</span> ((*huffmanTree)[i].parent == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ((*huffmanTree)[i].weight &lt; (*huffmanTree)[min].weight)</span><br><span class="line">            &#123;</span><br><span class="line">                min = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    *s1 = min;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//找出第一个没有被赋值的单节点</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//如果没有父节点，把结点序号赋值给min，跳出</span></span><br><span class="line">        <span class="keyword">if</span> ((*huffmanTree)[i].parent == <span class="number">0</span> &amp;&amp; i != *s1)</span><br><span class="line">        &#123;</span><br><span class="line">            min = i;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//继续遍历全部结点，找到权值最小的</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//如果没有父节点进入下一次判断</span></span><br><span class="line">        <span class="keyword">if</span> ((*huffmanTree)[i].parent == <span class="number">0</span> &amp;&amp; i != *s1)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ((*huffmanTree)[i].weight &lt; (*huffmanTree)[min].weight)</span><br><span class="line">            &#123;</span><br><span class="line">                min = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    *s2 = min;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//构建哈夫曼树</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">HuffmanTree* huffmanTree:树</span></span><br><span class="line"><span class="comment">int w[]：数组权值</span></span><br><span class="line"><span class="comment">int n：元素个数</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">creatHuffmanTree</span><span class="params">(HuffmanTree* huffmanTree, <span class="type">int</span> w[], <span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> s1, s2;<span class="comment">//当前结点中最小的两个结点</span></span><br><span class="line">    <span class="type">int</span> m = <span class="number">2</span> * n - <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//所有结点数目=2*n-1</span></span><br><span class="line">    <span class="comment">//结点总数为m+1（因为加上了根节点）</span></span><br><span class="line">    *huffmanTree = (HuffmanTree)<span class="built_in">malloc</span>((m + <span class="number">1</span>) * <span class="keyword">sizeof</span>(Node));</span><br><span class="line">    <span class="comment">//1至n存放叶子数据</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)		<span class="comment">//初始化叶子数组</span></span><br><span class="line">    &#123;</span><br><span class="line">        (*huffmanTree)[i].weight = w[i];</span><br><span class="line">        <span class="comment">//权重赋值</span></span><br><span class="line">        (*huffmanTree)[i].lchild = <span class="number">0</span>;</span><br><span class="line">        (*huffmanTree)[i].rchild = <span class="number">0</span>;</span><br><span class="line">        (*huffmanTree)[i].parent = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//n至最后存放非叶子</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = n + <span class="number">1</span>; i &lt; m; i++)		<span class="comment">//初始化非叶子数组</span></span><br><span class="line">    &#123;</span><br><span class="line">        (*huffmanTree)[i].weight = <span class="number">0</span>;</span><br><span class="line">        (*huffmanTree)[i].lchild = <span class="number">0</span>;</span><br><span class="line">        (*huffmanTree)[i].rchild = <span class="number">0</span>;</span><br><span class="line">        (*huffmanTree)[i].parent = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//开始构建哈夫曼树</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = n + <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        select(huffmanTree, i - <span class="number">1</span>, &amp;s1, &amp;s2);</span><br><span class="line"></span><br><span class="line">        (*huffmanTree)[s1].parent = i;</span><br><span class="line">        (*huffmanTree)[s2].parent = i;</span><br><span class="line">        (*huffmanTree)[i].lchild = s1;</span><br><span class="line">        (*huffmanTree)[i].lchild = s2;</span><br><span class="line">        (*huffmanTree)[i].weight = (*huffmanTree)[s1].weight + (*huffmanTree)[s2].weight;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//创造完毕</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//从n个叶子结点到根，逆向求每个叶子结点对应的哈夫曼编码</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">creatHuffmanCode</span><span class="params">(HuffmanTree* huffmanTree, HuffmanCode* huffmanCode, <span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> c;		<span class="comment">//遍历n个叶子结点的指示标记</span></span><br><span class="line">    <span class="type">int</span> p;		<span class="comment">//当前结点的父节点</span></span><br><span class="line">    <span class="type">int</span> start;<span class="comment">//起始指针</span></span><br><span class="line">    <span class="comment">//分配n个编码的头指针</span></span><br><span class="line">    huffmanCode = (HuffmanCode*)<span class="built_in">malloc</span>((n + <span class="number">1</span>) * <span class="keyword">sizeof</span>(<span class="type">char</span>*));</span><br><span class="line">    <span class="comment">//分配求当前编码的工作空间</span></span><br><span class="line">    <span class="type">char</span>* cd = (<span class="type">char</span>*)<span class="built_in">malloc</span>(n * <span class="keyword">sizeof</span>(<span class="type">char</span>));</span><br><span class="line">    cd[n - <span class="number">1</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        start = n - <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//从叶子到根节点求编码</span></span><br><span class="line">        <span class="keyword">for</span> (c = i, p = (*huffmanTree)[i].parent; p != <span class="number">0</span>; c = p, p = (*huffmanTree)[p].parent)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ((*huffmanTree)[p].lchild == c)</span><br><span class="line">            &#123;</span><br><span class="line">                cd[--start] = <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                cd[--start] = <span class="string">&#x27;1&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        huffmanCode[i] = (<span class="type">char</span>*)<span class="built_in">malloc</span>((n - start) * <span class="keyword">sizeof</span>(<span class="type">char</span>));</span><br><span class="line">        <span class="built_in">strcpy</span>(huffmanCode[i], &amp;cd[start]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, huffmanCode[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="树，二叉树，森林之间的转换">树，二叉树，森林之间的转换</h2>
+<h4 id="树转换为二叉树">树转换为二叉树</h4>
+<blockquote>
+<p>在兄弟结点之间连线，再去除除左孩子以外的其余所有父子连线</p>
+</blockquote>
+<h4 id="森林转换为二叉树">森林转换为二叉树</h4>
+<blockquote>
+<p>1.将每一棵树转换为二叉树</p>
+<p>2.从第二棵开始，根节点作为前一棵根节点的右孩子</p>
+</blockquote>
+<h4 id="二叉树转换为树或者森林">二叉树转换为树或者森林</h4>
+<blockquote>
+<p>1.如果x是y的左孩子，则将x的右孩子与y相连</p>
+<p>2.去除右孩子之间的连线</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/06/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-06-03_29%2001%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">29 01背包问题</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-06-02T16:00:00.000Z" itemprop="datePublished">
+    2022-06-03
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="01背包问题">01背包问题</h2>
+<blockquote>
+<p>是指一类问题：</p>
+<p>给定n个物品和一个背包，物品有重量w[i]和价值v[i]，背包有容量c，如何使得价值最大</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/06/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-06-03_28%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">28动态规划</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-06-02T16:00:00.000Z" itemprop="datePublished">
+    2022-06-03
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="动态规划">动态规划</h2>
+<blockquote>
+<p>一般问题形式：求最优值</p>
+<p>基本思想：将待求解的问题分解成若干子问题，对子问题进行求解。</p>
+<p>一般适合DP求解的问题，子问题不独立。</p>
+<p>将已经解决的子问题的解保存，当需要用到该子问题时，直接使用答案，避免重复计算。</p>
+</blockquote>
+<p><strong>包含的基本要素</strong></p>
+<p>1.最优子结构</p>
+<p>2.重叠子问题</p>
+<p><strong>解决方法</strong></p>
+<blockquote>
+<p>1.动态规划表（自底向上）</p>
+<p>2.备忘录（自顶向下）</p>
+</blockquote>
+<p><strong>解决步骤</strong></p>
+<blockquote>
+<p>1.判定是否是一个动态规划问题</p>
+<p>2.确定好状态（参数）</p>
+<p>3.构建状态转移方程</p>
+<p>4.为状态添加备忘录或DPTable</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/06/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-06-02_27%E7%BA%A2%E9%BB%91%E6%A0%91/">27红黑树</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-06-01T16:00:00.000Z" itemprop="datePublished">
+    2022-06-02
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="红黑树">红黑树</h2>
+<blockquote>
+<p>二叉树-&gt;二叉排序树-&gt;二叉平衡树-&gt;红黑树（自平衡的二叉排序树）</p>
+</blockquote>
+<blockquote>
+<p>由B树转化而来。</p>
+</blockquote>
+<h4 id="特点">特点</h4>
+<blockquote>
+<p>1.节点是红色或黑色</p>
+<p>2.根节点是黑色</p>
+<p>3.所有的叶子节点是黑色（所说的叶子节点是NULL的逻辑模型）</p>
+<p>4.每一个红节点的子节点是黑色（即不存在两个连续的红色）</p>
+<p>5.从任意节点到每个叶子的所有路径都包含相同的黑色节点（又称黑高）。</p>
+</blockquote>
+<p><strong>红黑树的状态有左倾和右倾</strong></p>
+<blockquote>
+<p>根据红色节点个数判断状态</p>
+</blockquote>
+<h4 id="操作">操作</h4>
+<h5 id="插入（从B树演化而来）">插入（从B树演化而来）</h5>
+<blockquote>
+<p>插入的节点必须是红色。</p>
+<p>具体的步骤只有：</p>
+<p>1.重新着色</p>
+<p>2.旋转</p>
+</blockquote>
+<blockquote>
+<p>如果叔叔节点是红色，重新着色。</p>
+<p>如果叔叔节点是黑色，旋转/重新着色/都有</p>
+</blockquote>
+<blockquote>
+<p>1.按照标准的二叉排序树进行插入，新插入的节点设置为红色</p>
+<p>2.如果待插入的节点是根节点，转换为黑色</p>
+<p>3.如果插入节点的父节点是黑色，则直接插入</p>
+<p>4.如果插入节点的父节点不是黑色，则看叔叔节点</p>
+<p>​	4.1如果叔叔节点是红色，将父亲节点和叔叔节点都设置为黑色，将爷爷节点设置为红色，同样模式以爷爷节点继续向上探索，直到根节点（这种情况只着色，不需旋转）</p>
+<p>​	4.2如果叔叔节点是黑色</p>
+</blockquote>
+<h5 id="删除">删除</h5>
+<blockquote>
+<p>概念：双黑节点：如果删除的是一个黑色节点，并且被其它黑色子节点替换。（即待删除节点和替换它的孩子都是黑色）</p>
+</blockquote>
+<blockquote>
+<p>定义：待删除结点内部值value，u为替换它的叶子节点</p>
+<p>1.先执行标准排序树的删除</p>
+<p>2.如果u或v是红色，替换之后直接删除（简单情况）</p>
+<p>3.u和v都是黑色</p>
+<p>​		3.1u是双黑结点</p>
+<p>​				3.1.1当前节点u是双黑节点，但不是根节点</p>
+</blockquote>
+<p><strong>1.待删除结点的兄弟节点是黑色，且兄弟节点的孩子节点至少有一个红色</strong></p>
+<p><strong>2.待删除结点的兄弟节点是黑色，且没有红色孩子</strong></p>
+<p><strong>3.待删除结点的兄弟节点是红色</strong></p>
+<blockquote>
+<p>​				3.1.2当前节点u是双黑节点，并且是根节点</p>
+</blockquote>
+<p><strong>整棵树的黑高减1</strong></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/06/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-06-01_25B+%E6%A0%91%E7%9A%84%E9%80%BB%E8%BE%91%E6%A8%A1%E5%9E%8B/">25B+树的逻辑模型</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-31T16:00:00.000Z" itemprop="datePublished">
+    2022-06-01
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="B-树的逻辑模型">B+树的逻辑模型</h2>
+<blockquote>
+<p>内部的所有结点都不存放数据，只存放索引，真实数据都存在叶子结点中，叶子结点指向磁盘中的某个位置。</p>
+</blockquote>
+<h4 id="概念">概念</h4>
+<blockquote>
+<p>阶：两个阶a，b分别控制叶子节点和内部节点</p>
+</blockquote>
+<h4 id="结构">结构</h4>
+<blockquote>
+<p>与B树类似，都是值之间夹着指针</p>
+<p>区别在于：</p>
+<p>1.父节点与孩子节点之间：对于一个pi指向的子树x而言，每一个内部节点的孩子最多有a个指向子树的指针，父节点最多存放a个数据。（每个父节点都存放着其所有子节点的最大数据/最小数据）</p>
+<p>2.如果任意一个内部节点包含x个（x&lt;=a）指向孩子节点的指针，则包含x-1个孩子。</p>
+<p>3.每个叶子节点有一个next指针，用于将指向下一个叶子，共同组成一个单链表（便于遍历）。</p>
+</blockquote>
+<p><img src="picture/B+%E6%A0%91%E6%A8%A1%E5%9E%8B%E5%9B%BE.png" alt=""></p>
+<h4 id="操作">操作</h4>
+<h5 id="插入">插入</h5>
+<blockquote>
+<p>每次从叶子开始插入。</p>
+<p>分为三种情况：</p>
+<p>1.被插入关键字所在的节点中，关键字数目小于阶数，直接插入</p>
+<p>2.被插入关键字所在的节点中，关键字数目等于阶数，先分裂成两个节点，计算两个节点各有几个数据（一般是阶/2向上和下分别取整），上移一个新的最大值，再插入。</p>
+<p>3.如果在2中，双亲结点关键字大于阶数，继续分裂</p>
+<p>4.如果插入的关键字比当前节点的关键字还大，要及时修正索引，再插入。</p>
+</blockquote>
+<h5 id="删除">删除</h5>
+<blockquote>
+<p>1.如果找到存储关键字的节点，如果关键字个数大于最小值，直接删除</p>
+<p>2.如果删除的是最大/最小关键字，修正双亲的关键字。</p>
+<p>3.如果删除了关键字导致当前节点的关键字个数小于最小值，直接从兄弟节点借，修改兄弟节点的双亲索引。</p>
+<p>4.如果删除了关键字导致当前节点的关键字个数小于最小值，且兄弟节点不够，则合并两个节点：向上删除兄弟节点的最大值，修改当前节点的最大值。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/31/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-05-31_18%E6%9F%A5%E6%89%BE%EF%BC%883+3%EF%BC%89/">18查找（3+3）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-30T16:00:00.000Z" itemprop="datePublished">
+    2022-05-31
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="查找（3-3）">查找（3+3）</h2>
+<h4 id="基本概念">基本概念</h4>
+<blockquote>
+<p>静态查找：数据无需改动，只需查找</p>
+<p>动态查找：对查找的数据需要进行频繁的改动</p>
+</blockquote>
+<blockquote>
+<p>内查找：内存中进行的查找</p>
+<p>外查找：外存中进行的查找</p>
+</blockquote>
+<blockquote>
+<p>平均查找长度：平均查找的次数ASL=cigma(Pi*Ci)</p>
+</blockquote>
+<blockquote>
+<p>分类：</p>
+<p>顺序查找</p>
+<p>区间查找</p>
+</blockquote>
+<h3 id="基础查找">基础查找</h3>
+<h4 id="顺序查找">顺序查找</h4>
+<blockquote>
+<p>一一比较（数据无序）</p>
+</blockquote>
+<h4 id="二分查找">二分查找</h4>
+<blockquote>
+<p>有序数据，区间划分</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">binarySearch</span><span class="params">(<span class="type">int</span> a[], <span class="type">int</span> n, <span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> low=<span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> high=n<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(low&lt;=high)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> mid = (low+high)/<span class="number">2</span>;</span><br><span class="line">        <span class="type">int</span> midValue = a[mid];</span><br><span class="line">        <span class="keyword">if</span>(midValue &lt; key)</span><br><span class="line">        &#123;</span><br><span class="line">            low = mid+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(midValue &gt; key)</span><br><span class="line">        &#123;</span><br><span class="line">            high = mid<span class="number">-1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：二分查找的区间与while条件有很大的细节问题</strong>（此处采用双闭区间）</p>
+<p>[动图理解二分搜索的实现细节 - 知乎 (<a target="_blank" rel="noopener" href="http://zhihu.com">zhihu.com</a>)](<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/139579615#:~:text=%E9%80%9A%E8%BF%87%E4%B8%8A%E9%9D%A2%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2%E7%9A%84%E5%87%A0%E7%A7%8D%E5%AE%9E%E7%8E%B0%EF%BC%8C%E6%88%91%E4%BB%AC%E6%80%BB%E7%BB%93%E4%BA%86%E5%87%A0%E4%B8%AA%E5%80%BC%E5%BE%97%E6%B3%A8%E6%84%8F%E7%9A%84%E7%BB%86%E8%8A%82%E3%80%82">https://zhuanlan.zhihu.com/p/139579615#:~:text=通过上面二分搜索的几种实现，我们总结了几个值得注意的细节。</a> 一，右区间的开闭，也就是右指针的赋值 right %3D nums.length 决定了 while 循环里,(规律一)。 二，nums [mid].value %3D%3D target 的实现 决定了方法最后的返回值 (规律二)。)</p>
+<h4 id="分块查找">分块查找</h4>
+<blockquote>
+<p>索引存储结构：存储数据的同时附加一个索引表-键（关键字 唯一标识）值（地址）对</p>
+</blockquote>
+<blockquote>
+<p>索引顺序查找</p>
+</blockquote>
+<blockquote>
+<p>基本思想：将查找的表分成若干的子块，块内的元素可以无序，第一个块中的最大关键字小于第二个块中的所有记录的关键字，索引表室有序的</p>
+</blockquote>
+<p><strong>案例</strong></p>
+<p><img src="picture/%E5%88%86%E5%9D%97%E6%9F%A5%E6%89%BE%E6%A1%88%E4%BE%8B.png" alt=""></p>
+<blockquote>
+<p>将需要查找的数组以某个规则分块，再建立一个对应的索引表进行查找</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">index</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> key;		<span class="comment">//索引值</span></span><br><span class="line">    <span class="type">int</span> start;		<span class="comment">//开始下标。注：结束下标是下一个开始下标-1</span></span><br><span class="line">&#125;newIndex[<span class="number">3</span>];		<span class="comment">//定义结构体数组</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span> key, <span class="type">int</span> a[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;<span class="number">3</span> &amp;&amp; key &gt; newIndex[i].key)</span><br><span class="line">        i++;			<span class="comment">//找到待查找关键字所在范围</span></span><br><span class="line">    <span class="keyword">if</span>(i&gt;=<span class="number">3</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;		<span class="comment">//数组中不存在这个值</span></span><br><span class="line">    <span class="type">int</span> startValue = newIndex[i].start;</span><br><span class="line">    <span class="keyword">while</span>(startValue &lt;= newIndex[i+<span class="number">1</span>].start<span class="number">-1</span> &amp;&amp; a[startValue] != key)</span><br><span class="line">        startValue++;</span><br><span class="line">    <span class="keyword">if</span>(startValue&gt;newIndex[i+<span class="number">1</span>].start<span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">return</span> a[startValue];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//数组已排好序才能分块</span></span><br></pre></td></tr></table></figure>
+<h3 id="经典查找">经典查找</h3>
+<h4 id="跳越查找">跳越查找</h4>
+<blockquote>
+<p>有序数据</p>
+<p>固定步长地跳越（跳过尽可能多的不在待查找数据边上的数据）</p>
+<p>与二分相比，只需回溯一次</p>
+</blockquote>
+<h4 id="斐波那契查找">斐波那契查找</h4>
+<blockquote>
+<p>是对二分的改进</p>
+</blockquote>
+<blockquote>
+<p>使用黄金分割0.618</p>
+<p>根据斐波那契数列f(k)=f(k-1)+f(k-2)</p>
+</blockquote>
+<blockquote>
+<p>步骤</p>
+<p>找一个大于等于数组长度的最小斐波那契数字</p>
+<p>将数组分成两部分，前半是斐波那契的前半数字，后半是斐波那契的后半数字</p>
+</blockquote>
+<p><strong>案例</strong></p>
+<blockquote>
+<p>1.根据数组长度找到M=13</p>
+<p>2.由斐波那契数列给出两个部分的区间下标</p>
+<p>3.设定初始offset值（后续查找数据在区间2offset = mid / 区间1不更新）</p>
+<p>3.mid = M1+offset</p>
+<p>4.没找到则更新M、M1、M2、offset</p>
+</blockquote>
+<p><img src="picture/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%9F%A5%E6%89%BE%E6%A1%88%E4%BE%8B.png" alt=""></p>
+<h4 id="插值查找">插值查找</h4>
+<blockquote>
+<p>适用于数据<strong>均匀分布</strong>的有序数组</p>
+<p>与二分查找类似</p>
+<p>公式：mid = low + ( (x - arr[low]) / (arr[high] - arr[low]) ) (high - low)</p>
+</blockquote>
+<p><strong>如果数据不均匀，会整体退化为n</strong></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/31/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-05-31_26B%E3%80%81B+%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B9%8B%E7%B4%A2%E5%BC%95/">26B、B+应用场景之索引</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-30T16:00:00.000Z" itemprop="datePublished">
+    2022-05-31
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="B、B-应用场景之索引">B、B+应用场景之索引</h2>
+<blockquote>
+<p>存储引擎，不同引擎支持不同的存储类型。</p>
+<p>索引是一种数据结构，用于指向真实的数据，实现方式任意。（常用B树和B+树）</p>
+<p>索引本身很大，一般存储在硬盘上。因此对于索引的查找需要进行磁盘IO，这也是最重要的评判指标。</p>
+<p>磁盘需要进行寻找磁道和扇区。</p>
+<p>磁盘预读：将磁盘中往后的一些数据一起读取。（查找某个数据时会将周围的数据一起查找）</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/page/2/">2</a><a class="page-number" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/page/3/">3</a><a class="page-number" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/page/4/">4</a><a class="extend next" rel="next" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/page/2/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

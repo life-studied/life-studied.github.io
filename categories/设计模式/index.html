@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ 设计模式 }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/06/18/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/2022-06-18_1%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B%E4%B8%8EUML/">1设计模式简介与UML</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-06-17T16:00:00.000Z" itemprop="datePublished">
+    2022-06-18
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/">课程笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="设计模式简介与UML">设计模式简介与UML</h2>
+<h3 id="1-设计模式">1.设计模式</h3>
+<h4 id="1-1定义">1.1定义</h4>
+<blockquote>
+<p>设计模式时在特定环境下为解决某一软件问题所提供的一套定制的解决方案，该方案描述了类与对象之间的相互作用。</p>
+</blockquote>
+<h4 id="1-2基本要素">1.2基本要素</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>模式名称</p>
+</li>
+<li class="lvl-2">
+<p>问题</p>
+</li>
+<li class="lvl-2">
+<p>解决方案</p>
+</li>
+<li class="lvl-2">
+<p>效果</p>
+</li>
+</ul>
+<h4 id="1-3分类">1.3分类</h4>
+<h5 id="根据用途分类：">根据用途分类：</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>创建型模式：主要描述如何创建对象</p>
+</li>
+<li class="lvl-2">
+<p>结构型模式：主要描述如歌实现类或对象的组合</p>
+</li>
+<li class="lvl-2">
+<p>行为型模式：主要描述类或对象怎样交互以及怎样分配职责</p>
+</li>
+</ul>
+<h5 id="根据范围分类">根据范围分类</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>类模式：处理类和子类之间的关系，这类关系通过继承实现，在编译时就确定下来的一种静态关系</p>
+</li>
+<li class="lvl-2">
+<p>对象模式：处理对象之间的关系，这些关系在运行时变化，更具动态性</p>
+</li>
+</ul>
+<h4 id="1-4使用较多的模式">1.4使用较多的模式</h4>
+<p>工厂方法模式，抽象工厂模式，单例模式，建造者模式，适配器模式，组合模式，外观模式，代理模式，迭代器模式，观察者模式</p>
+<h4 id="1-5优点">1.5优点</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>可维护性复用</p>
+</li>
+<li class="lvl-2">
+<p>提高扩展性</p>
+</li>
+<li class="lvl-2">
+<p>提高开发效率</p>
+</li>
+</ul>
+<h3 id="2-UML">2.UML</h3>
+<h4 id="2-1UML概述">2.1UML概述</h4>
+<p><strong>统一建模语言</strong>是一种开放方法。</p>
+<h5 id="2-1-1模型">2.1.1模型</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>功能模型</p>
+</li>
+<li class="lvl-2">
+<p>对象模型</p>
+</li>
+<li class="lvl-2">
+<p>动态模型</p>
+</li>
+</ul>
+<h5 id="2-1-2图">2.1.2图</h5>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/30/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/2022-05-30_3%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/">3装饰模式</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-29T16:00:00.000Z" itemprop="datePublished">
+    2022-05-30
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="装饰模式">装饰模式</h2>
+<h4 id="意图">意图</h4>
+<blockquote>
+<p>动态地给一个对象添加一些额外的职责。就增加功能来说，装饰器模式相比生成子类更为灵活。</p>
+</blockquote>
+<h4 id="何时使用">何时使用</h4>
+<p>在不想增加很多子类的情况下扩展类。</p>
+<h4 id="如何解决">如何解决</h4>
+<p>将具体功能职责划分，同时继承装饰器模式。</p>
+<h4 id="模式优点">模式优点</h4>
+<p>装饰类和被装饰类可以独立发展，不会相互耦合，装饰器模式是继承的一个替代模式，装饰器模式可以动态地扩展实现一个类的功能。</p>
+<h4 id="模式缺点">模式缺点</h4>
+<p>多层装饰比较复杂。</p>
+<h4 id="代码实现">代码实现</h4>
+<h5 id="情景模拟">情景模拟</h5>
+<blockquote>
+<p>我们还是拿汽车来举例子吧。现在的汽车越来越智能化了，什么定速巡航、自动刹车、车道偏离等功能都逐渐进入我们的生活，为我们带来了更为便利的出行。</p>
+<p>假设上述提到的定速巡航、自动刹车、车道偏离三个功能就是我们想要为汽车装饰的功能，汽车默认的功能配置有：基本配置。</p>
+</blockquote>
+<p>得到具体的汽车（宝马、奥迪、奔驰）后，我们可以选择性地增加装饰功能。</p>
+<h4 id="代码实现-2">代码实现</h4>
+<p>具体实现如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Car</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">show</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 三个实体的汽车类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Bmw</span> :<span class="keyword">public</span> Car</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;这是一辆宝马汽车，配置有：基本配置&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Audi</span> :<span class="keyword">public</span> Car</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;这是一辆奥迪汽车，配置有：基本配置&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Benz</span> :<span class="keyword">public</span> Car</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;这是一辆奔驰汽车，配置有：基本配置&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 装饰器1 定速巡航</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Decorator01</span> :<span class="keyword">public</span> Car</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Decorator01</span>(Car* p) :<span class="built_in">pCar</span>(p) &#123;&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		pCar-&gt;<span class="built_in">show</span>();</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;，定速巡航&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Car* pCar;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 装饰器2 自动刹车</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Decorator02</span> :<span class="keyword">public</span> Car</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Decorator02</span>(Car* p) :<span class="built_in">pCar</span>(p) &#123;&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		pCar-&gt;<span class="built_in">show</span>();</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;，自动刹车&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Car* pCar;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 装饰器3 定速巡航</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Decorator03</span> :<span class="keyword">public</span> Car</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Decorator03</span>(Car* p) :<span class="built_in">pCar</span>(p) &#123;&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		pCar-&gt;<span class="built_in">show</span>();</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;，车道偏离&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Car* pCar;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>接着我们可以使用如下代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Car* p1 = <span class="keyword">new</span> <span class="built_in">Decorator01</span>(<span class="keyword">new</span> <span class="built_in">Bmw</span>());</span><br><span class="line">	p1 = <span class="keyword">new</span> <span class="built_in">Decorator02</span>(p1);</span><br><span class="line">	p1 = <span class="keyword">new</span> <span class="built_in">Decorator03</span>(p1);</span><br><span class="line">	p1-&gt;<span class="built_in">show</span>();</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	Car* p2 = <span class="keyword">new</span> <span class="built_in">Decorator02</span>(<span class="keyword">new</span> <span class="built_in">Audi</span>());</span><br><span class="line">	p2-&gt;<span class="built_in">show</span>();</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	Car* p3 = <span class="keyword">new</span> <span class="built_in">Decorator03</span>(<span class="keyword">new</span> <span class="built_in">Benz</span>());</span><br><span class="line">	p3-&gt;<span class="built_in">show</span>();</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>可以看到，我们在运行代码中：给宝马汽车增加了Decorator01（定速巡航）、Decorator02（自动刹车）、Decorator03（车道偏离）的配置；给奥迪汽车增加了Decorator02（自动刹车）配置；给奔驰汽车增加了Decorator03（车道偏离）配置。</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/30/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/2022-05-30_4%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">4代理模式</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-29T16:00:00.000Z" itemprop="datePublished">
+    2022-05-30
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="代理模式">代理模式</h2>
+<h4 id="代理模式的定义与特点">代理模式的定义与特点</h4>
+<p>代理模式的定义：由于某些原因需要给某对象提供一个代理以控制对该对象的访问。这时，访问对象不适合或者不能直接引用目标对象，代理对象作为访问对象和目标对象之间的中介。</p>
+<p>代理模式的主要优点有：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>代理模式在客户端与目标对象之间起到一个中介作用和保护目标对象的作用；</p>
+</li>
+<li class="lvl-2">
+<p>代理对象可以扩展目标对象的功能；</p>
+</li>
+<li class="lvl-2">
+<p>代理模式能将客户端与目标对象分离，在一定程度上降低了系统的耦合度，增加了程序的可扩展性</p>
+</li>
+</ul>
+<p>其主要缺点是：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>代理模式会造成系统设计中类的数量增加</p>
+</li>
+<li class="lvl-2">
+<p>在客户端和目标对象之间增加一个代理对象，会造成请求处理速度变慢；</p>
+</li>
+<li class="lvl-2">
+<p>增加了系统的复杂度；</p>
+</li>
+</ul>
+<blockquote>
+<p>那么如何解决以上提到的缺点呢？答案是可以使用动态代理方式</p>
+</blockquote>
+<h4 id="代理模式的结构与实现">代理模式的结构与实现</h4>
+<p>代理模式的结构比较简单，主要是通过定义一个继承抽象主题的代理来包含真实主题，从而实现对真实主题的访问，下面来分析其基本结构和实现方法。</p>
+<h5 id="1-模式的结构">1. 模式的结构</h5>
+<blockquote>
+<p>代理模式的主要角色如下。</p>
+</blockquote>
+<ol>
+<li class="lvl-3">
+<p>抽象主题（Subject）类：通过接口或抽象类声明真实主题和代理对象实现的业务方法。</p>
+</li>
+<li class="lvl-3">
+<p>真实主题（Real Subject）类：实现了抽象主题中的具体业务，是代理对象所代表的真实对象，是最终要引用的对象。</p>
+</li>
+<li class="lvl-3">
+<p>代理（Proxy）类：提供了与真实主题相同的接口，其内部含有对真实主题的引用，它可以访问、控制或扩展真实主题的功能。</p>
+</li>
+</ol>
+<p>其结构图如图 1 所示。</p>
+<p><img src="http://c.biancheng.net/uploads/allimg/181115/3-1Q115093011523.gif" alt="代理模式的结构图"></p>
+<blockquote>
+<p>​																	图1 代理模式的结构图</p>
+</blockquote>
+<p>在代码中，一般代理会被理解为代码增强，实际上就是在原代码逻辑前后增加一些代码逻辑，而使调用者无感知。</p>
+<p>根据代理的创建时期，代理模式分为静态代理和动态代理。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>静态：由程序员创建代理类或特定工具自动生成源代码再对其编译，在程序运行前代理类的 .class 文件就已经存在了。</p>
+</li>
+<li class="lvl-2">
+<p>动态：在程序运行时，运用反射机制动态创建而成</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 参考大话设计模式 - 代理模式</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> SAFE_DELETE</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SAFE_DELETE(p) &#123; <span class="keyword">if</span>(p)&#123;delete(p); (p)=NULL;&#125; &#125;</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">// 代理模式</span></span><br><span class="line"><span class="comment">// 抽象类，包含功能接口</span></span><br><span class="line"><span class="comment">// 实现类，继承抽象类，并实现功能</span></span><br><span class="line"><span class="comment">// 代理类，集成抽象类，定义实现类的成员变量，通过实现类的对象，来调用具体实现功能的函数</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">// 该类仅为满足用例，可不存在</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SchoolGirl</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">setname</span><span class="params">(string name)</span> </span>&#123;</span><br><span class="line">		name_ = name;</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	<span class="function">string <span class="title">getname</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name_;</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	string name_;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 礼物接口</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CGiveGift</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">GiveDolls</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">GiveFollows</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">GiveChocolates</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 追求者类，具体实现了礼物接口</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Pursuit</span> : <span class="keyword">public</span> CGiveGift &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Pursuit</span>(SchoolGirl* schoolgirl) &#123;</span><br><span class="line">		schoolgirl_ = schoolgirl;</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">GiveDolls</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (schoolgirl_) &#123;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;pursuit give dolls to &quot;</span> &lt;&lt; schoolgirl_-&gt;<span class="built_in">getname</span>() &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">GiveFollows</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (schoolgirl_) &#123;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;pursuit give follows to &quot;</span> &lt;&lt; schoolgirl_-&gt;<span class="built_in">getname</span>() &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">GiveChocolates</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (schoolgirl_) &#123;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;pursuit give chocolates to &quot;</span> &lt;&lt; schoolgirl_-&gt;<span class="built_in">getname</span>() &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	SchoolGirl* schoolgirl_ = <span class="literal">nullptr</span>;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 代理类，内部定义具体实现类的对象，在继承的函数中调用</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Proxy</span> : <span class="keyword">public</span> CGiveGift &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Proxy</span>(SchoolGirl* schoolgirl) &#123;</span><br><span class="line">		pursuit_ = <span class="keyword">new</span> <span class="built_in">Pursuit</span>(schoolgirl);</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	~<span class="built_in">Proxy</span>() &#123;</span><br><span class="line">		<span class="built_in">SAFE_DELETE</span>(pursuit_);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">GiveDolls</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (pursuit_) &#123;</span><br><span class="line">			pursuit_-&gt;<span class="built_in">GiveDolls</span>();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">GiveFollows</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (pursuit_) &#123;</span><br><span class="line">			pursuit_-&gt;<span class="built_in">GiveFollows</span>();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">GiveChocolates</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (pursuit_) &#123;</span><br><span class="line">			pursuit_-&gt;<span class="built_in">GiveChocolates</span>();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Pursuit* pursuit_ = <span class="literal">nullptr</span>;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	SchoolGirl* schoolgirl = <span class="keyword">new</span> <span class="built_in">SchoolGirl</span>();</span><br><span class="line">	schoolgirl-&gt;<span class="built_in">setname</span>(<span class="string">&quot;李娇娇&quot;</span>);</span><br><span class="line"> </span><br><span class="line">	<span class="comment">// 代理对象</span></span><br><span class="line">	Proxy* proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(schoolgirl);</span><br><span class="line">	<span class="comment">// 代理对象中调用具体实现类的对象的实现方法</span></span><br><span class="line">	proxy-&gt;<span class="built_in">GiveDolls</span>();</span><br><span class="line">	proxy-&gt;<span class="built_in">GiveFollows</span>();</span><br><span class="line">	proxy-&gt;<span class="built_in">GiveChocolates</span>();</span><br><span class="line"> </span><br><span class="line">	<span class="built_in">SAFE_DELETE</span>(proxy)</span><br><span class="line">	<span class="built_in">SAFE_DELETE</span>(schoolgirl)</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在这个案例中，代理标志了追求者，追求者标志了被追求者。代理被创建时，追求者被创建。</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/30/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/2022-05-30_5%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/">5原型模式</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-29T16:00:00.000Z" itemprop="datePublished">
+    2022-05-30
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="原型模式">原型模式</h2>
+<p><strong>为什么需要原型模式？</strong></p>
+<p>现在有一个简历 Resume 类，如果要批量复制简历对象，有哪些方法呢？</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Resume</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::string name;</span><br><span class="line">    std::string sex;</span><br><span class="line">    std::string age;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Resume</span>() &#123;&#125;;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SetPersonalInfo</span><span class="params">(<span class="type">const</span> std::string&amp; name, <span class="type">const</span> std::sting&amp; age)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Resume p1;</span><br><span class="line">    p1.<span class="built_in">SetPersonalInfo</span>(<span class="string">&quot;zhangsan&quot;</span>, <span class="string">&quot;25&quot;</span>);</span><br><span class="line">    Resume p2;</span><br><span class="line">    p2.<span class="built_in">SetPersonalInfo</span>(<span class="string">&quot;zhangsan&quot;</span>, <span class="string">&quot;25&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述实现方式非常简单又容易理解，你需要几份简历，就定义几个简历对象。</p>
+<p><strong>但是，这里有一个很严重的问题：一旦简历内容需要修改，那么所有的简历对象都需要改动。原型模式正是为了解决它而出现的。</strong></p>
+<p><strong>原型模式</strong></p>
+<p>原型模式就是从一个对象再创建另外一个可定制的对象，而且不需要知道任何创建的细节。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Resume</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::string name;</span><br><span class="line">    std::string age;</span><br><span class="line">    std::string education;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Resume</span>() </span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Construct !&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">Resume</span>(<span class="type">const</span> Resume&amp; resume)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;name = resume.name;   </span><br><span class="line">        <span class="keyword">this</span>-&gt;age = resume.age;</span><br><span class="line">        <span class="keyword">this</span>-&gt;education = resume.education;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Copy Construct !&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SetPersonalInfo</span><span class="params">(<span class="type">const</span> std::string&amp; name, <span class="type">const</span> std::string&amp; age)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;name = name;</span><br><span class="line">        <span class="keyword">this</span>-&gt;age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SetEducation</span><span class="params">(<span class="type">const</span> std::string&amp; educatoin)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;education = educatoin;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">PrintResume</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; name &lt;&lt; <span class="string">&quot;, &quot;</span> &lt;&lt; age  &lt;&lt; <span class="string">&quot;, &quot;</span> &lt;&lt; education &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">Resume* <span class="title">Clone</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Resume</span>(*<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Resume* p1 = <span class="keyword">new</span> <span class="built_in">Resume</span>();</span><br><span class="line">    p1-&gt;<span class="built_in">SetPersonalInfo</span>(<span class="string">&quot;Tom&quot;</span>, <span class="string">&quot;25&quot;</span>);</span><br><span class="line">    p1-&gt;<span class="built_in">SetEducation</span>(<span class="string">&quot;master&quot;</span>);</span><br><span class="line">    p1-&gt;<span class="built_in">PrintResume</span>();</span><br><span class="line"></span><br><span class="line">    Resume* p2 = p1-&gt;<span class="built_in">Clone</span>();</span><br><span class="line">    p2-&gt;<span class="built_in">SetPersonalInfo</span>(<span class="string">&quot;Jack&quot;</span>, <span class="string">&quot;28&quot;</span>);</span><br><span class="line">    p2-&gt;<span class="built_in">PrintResume</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当我们定义了第一个简历对象 p1 时，如果再需要创建一个对象，直接调用 p1 中的克隆 Clone 方法，然后返回一个新的对象 p2. 如果想要定制化简历 p2 时，只需要在 p2 中修改与 p1 差异的地方就可以了。而 Clone 一定要借助于拷贝构造函数才能实现。</p>
+<p>所以，一般在初始化的信息不发生变化的情况下，克隆是最好的办法，这既隐藏了对象创建的细节，又对性能能是大大的提升。</p>
+<h4 id="注意！！">注意！！</h4>
+<p>有同学可能会说，直接调用拷贝构造函数是不是就可以了，何必在外层封装一层 Clone？实际上，这是有本质区别的。敲黑板，重点来了！</p>
+<p><strong>原型模式实现的是一个Clone 接口，注意是接口，也就是基于多态的 Clone 虚函数。也就是说原型模式能够通过基类指针来复制派生类对象。拷贝构造函数完不成这样的任务。在继承场景下，Clone 函数可以定义为虚函数。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> Resume* <span class="title">Clone</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Resume</span>(*<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/29/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/2022-05-29_1%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">1简单工厂模式</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-28T16:00:00.000Z" itemprop="datePublished">
+    2022-05-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="简单工厂模式">简单工厂模式</h2>
+<h4 id="1-介绍">1.介绍</h4>
+<blockquote>
+<p>把被创建的对象称为“产品”，把创建产品的对象称为“工厂”。如果要创建的产品不多，只要一个工厂类就可以完成，这种模式叫简单工厂模式。</p>
+<p>在简单工厂模式中创建实例的方法通常为静态（static）方法，因此简单工厂模式（Simple Factory Pattern）又叫作静态工厂方法模式（Static Factory Method Pattern）。</p>
+</blockquote>
+<h4 id="2-意图：">2.意图：</h4>
+<p>简单工厂模式(Simple Factory Pattern)：定义一个工厂类，它可以根据参数的不同返回不同类的实例，被创建的实例通常都具有共同的父类。</p>
+<h4 id="3-解决问题：">3.解决问题：</h4>
+<p>主要解决接口选择的问题。(免得想用那个接口了，偷懒必备，同时提高工程效率)</p>
+<h4 id="4-实现概述：">4.实现概述：</h4>
+<p>将需要创建的各种不同对象的相关代码封装到不同的类中，这些类称为具体产品类。将它们公共的代码进行抽象和提取后封装在一个抽象产品类，每一个具体产品类都是抽象产品类的子类提供一个工厂类用于创建各种产品，工厂类中提供一个创建产品的工厂方法，该方法可以根据所传入的参数不同创建不同的具体产品对象要点：当你需要什么，只需要传入一个正确的参数，就可以获取你所需要的对象，而无须知道其创建细节。</p>
+<h4 id="5-应用场景：">5.应用场景：</h4>
+<p>在以下情况下可以考虑使用简单工厂模式：</p>
+<p>(1) 工厂类负责创建的对象比较少，由于创建的对象较少，不会造成工厂方法中的业务逻辑太过复杂。</p>
+<p>(2) 客户端只知道传入工厂类的参数，对于如何创建对象并不关心。</p>
+<p><strong>生活中场景</strong><br>
+不同工厂生产不同的产品。比如不同的球类工厂生产不同的球类。</p>
+<p><strong>软件中场景</strong><br>
+1、日志记录器：记录可能记录到本地硬盘、系统事件、远程服务器等，用户可以选择记录日志到什么地方。</p>
+<p>2、数据库访问，当用户不知道最后系统采用哪一类数据库，以及数据库可能有变化时。</p>
+<blockquote>
+<p>优点：工厂类包含必要的逻辑判断，可以决定在什么时候创建哪一个产品的实例。客户端无需知道所创建具体产品的类名，只需知道参数即可。缺点：简单工厂模式的工厂类单一，负责所有产品的创建，职责过重，一旦异常，整个系统将受影响。且工厂类代码会非常臃肿，违背高聚合原则。系统扩展困难，一旦增加新产品不得不修改工厂逻辑，在产品类型较多时，可能造成逻辑过于复杂简单工厂模式使用了 static 工厂方法，造成工厂角色无法形成基于继承的等级结构。</p>
+</blockquote>
+<h4 id="6-案例">6.案例</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> <span class="title class_">ProductTypeTag</span>				<span class="comment">//Here create the enumerate for products</span></span><br><span class="line">&#123;</span><br><span class="line">    TypeA,</span><br><span class="line">    TypeB,</span><br><span class="line">    TypeC</span><br><span class="line">&#125;PRODUCTTYPE;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// Here is the product class</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Product</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Here are the derived classes of product</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ProductA</span> : <span class="keyword">public</span> Product</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout&lt;&lt;<span class="string">&quot;I&#x27;m ProductA&quot;</span>&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ProductB</span> : <span class="keyword">public</span> Product</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout&lt;&lt;<span class="string">&quot;I&#x27;m ProductB&quot;</span>&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ProductC</span> : <span class="keyword">public</span> Product</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout&lt;&lt;<span class="string">&quot;I&#x27;m ProductC&quot;</span>&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// Here is the Factory class</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Factory</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Product* <span class="title">CreateProduct</span><span class="params">(PRODUCTTYPE type)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (type)</span><br><span class="line">        &#123;</span><br><span class="line">        <span class="keyword">case</span> TypeA:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">ProductA</span>();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">case</span> TypeB:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">ProductB</span>();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">case</span> TypeC:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">ProductC</span>();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// First, create a factory object</span></span><br><span class="line">    Factory *ProductFactory = <span class="keyword">new</span> <span class="built_in">Factory</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//using product point to get the object&#x27;s memory</span></span><br><span class="line">    Product *productObjA = ProductFactory-&gt;<span class="built_in">CreateProduct</span>(TypeA);</span><br><span class="line">    <span class="keyword">if</span> (productObjA != <span class="literal">NULL</span>)</span><br><span class="line">        productObjA-&gt;<span class="built_in">Show</span>();</span><br><span class="line"> </span><br><span class="line">    Product *productObjB = ProductFactory-&gt;<span class="built_in">CreateProduct</span>(TypeB);</span><br><span class="line">    <span class="keyword">if</span> (productObjB != <span class="literal">NULL</span>)</span><br><span class="line">        productObjB-&gt;<span class="built_in">Show</span>();</span><br><span class="line"> </span><br><span class="line">    Product *productObjC = ProductFactory-&gt;<span class="built_in">CreateProduct</span>(TypeC);</span><br><span class="line">    <span class="keyword">if</span> (productObjC != <span class="literal">NULL</span>)</span><br><span class="line">        productObjC-&gt;<span class="built_in">Show</span>();</span><br><span class="line"> </span><br><span class="line"> <span class="comment">//delete the memory and set the point to NULL</span></span><br><span class="line">    <span class="keyword">delete</span> ProductFactory;</span><br><span class="line">    ProductFactory = <span class="literal">NULL</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">delete</span> productObjA;</span><br><span class="line">    productObjA = <span class="literal">NULL</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">delete</span> productObjB;</span><br><span class="line">    productObjB = <span class="literal">NULL</span>;        </span><br><span class="line"> </span><br><span class="line">    <span class="keyword">delete</span> productObjC;</span><br><span class="line">    productObjC = <span class="literal">NULL</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/29/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/2022-05-29_2%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">2策略模式</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-28T16:00:00.000Z" itemprop="datePublished">
+    2022-05-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="策略模式">策略模式</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//策略类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Strategy</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">     <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">DoSomething</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MethodA</span> : <span class="keyword">public</span> Strategy</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">     <span class="function"><span class="type">void</span> <span class="title">DoSomething</span><span class="params">()</span></span></span><br><span class="line"><span class="function">     </span>&#123;</span><br><span class="line">          cout&lt;&lt;<span class="string">&quot;this is MethodA.&quot;</span>&lt;&lt;endl;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MethodB</span> : <span class="keyword">public</span> Strategy</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">     <span class="function"><span class="type">void</span> <span class="title">DoSomething</span><span class="params">()</span></span></span><br><span class="line"><span class="function">     </span>&#123;</span><br><span class="line">          cout&lt;&lt;<span class="string">&quot;this is MethodB.&quot;</span>&lt;&lt;endl;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MethodC</span> : <span class="keyword">public</span> Strategy</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">     <span class="function"><span class="type">void</span> <span class="title">DoSomething</span><span class="params">()</span></span></span><br><span class="line"><span class="function">     </span>&#123;</span><br><span class="line">          cout&lt;&lt;<span class="string">&quot;this is MethodC.&quot;</span>&lt;&lt;endl;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//上下文类，根据得到的对象匹配对应的策略类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Context</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">     <span class="built_in">Context</span>(Strategy *pStrategy) : <span class="built_in">m_pStrategy</span>(pStrategy)	<span class="comment">//构造函数，给m_pStrategy赋值为对应的策略类指针</span></span><br><span class="line">     &#123;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="function"><span class="type">void</span> <span class="title">Execute</span><span class="params">()</span>		<span class="comment">//封装了对应对象的调用</span></span></span><br><span class="line"><span class="function">     </span>&#123;</span><br><span class="line">          m_pStrategy-&gt;<span class="built_in">DoSomething</span>();</span><br><span class="line">     &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">     Strategy *m_pStrategy;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">     <span class="comment">//创建具体的策略对象</span></span><br><span class="line">     Strategy *pStrategy = <span class="keyword">new</span> MethodA;</span><br><span class="line">     <span class="comment">//创建调用策略的对象</span></span><br><span class="line">     Context *pContext = <span class="keyword">new</span> <span class="built_in">Context</span>(pStrategy);</span><br><span class="line">     <span class="comment">//调用策略的方法</span></span><br><span class="line">     pContext-&gt;<span class="built_in">Execute</span>();<span class="comment">//打印 this is MethodA</span></span><br><span class="line">   </span><br><span class="line">   rerurn <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/29/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5/2022-05-29_%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5/">教程链接</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-28T16:00:00.000Z" itemprop="datePublished">
+    2022-05-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5/">教程链接</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/leacock1991/article/details/111713017">(14条消息) 一文打尽设计模式(C<ins>实现)_墨1024的博客-CSDN博客_c</ins> 设计模式</a></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

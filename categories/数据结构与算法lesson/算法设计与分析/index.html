@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ 算法设计与分析 }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/05/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-05-06_2-3%E9%9D%9E%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95%E7%9A%84%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/">2-3非递归算法的数学分析</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-05-05T16:00:00.000Z" itemprop="datePublished">
+    2022-05-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">算法设计与分析</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="非递归算法的数学分析">非递归算法的数学分析</h2>
+<blockquote>
+<p>根据2.1的通用框架来分析非递归算法</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-04-28_2-1%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6/">2-1分析框架</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-27T16:00:00.000Z" itemprop="datePublished">
+    2022-04-28
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">算法设计与分析</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="分析框架">分析框架</h2>
+<h4 id="2-1-1输入规模的度量">2.1.1输入规模的度量</h4>
+<blockquote>
+<p>几乎所有的算法对于规模更大的输入都需要运行更长的时间。所有在研究算法效率的时候，把它作为一个算法输入规模n为参数的函数。</p>
+</blockquote>
+<h4 id="2-1-2运行时间的度量单位">2.1.2运行时间的度量单位</h4>
+<blockquote>
+<p>对于算法运行时间的度量单位，尽管可以采用时间的标准单位来衡量，但这种方式往往取决于硬件与其它一些问题，因此不采用。我们也可以统计每一步消耗的时间，但这没有必要。我们关注的是一个算法中对总时间贡献最大的，最重要的操作，并计算运行次数。</p>
+</blockquote>
+<p><strong>公式</strong></p>
+<p>T(n)=copC(n)</p>
+<blockquote>
+<p>cop是一个常数，C(n)是执行次数，这个结果往往是一个近似值</p>
+</blockquote>
+<h4 id="2-1-3增长次数">2.1.3增长次数</h4>
+<blockquote>
+<p>对于小规模输入而言，无需区分算法之间的效率区别。对于n较大时，有意义的是函数的增长次数。</p>
+</blockquote>
+<p><img src="picture/%E5%A2%9E%E9%95%BF%E6%AC%A1%E6%95%B0%E8%A1%A8.png" alt=""></p>
+<blockquote>
+<p>如果一个算法具有对数级增长次数，我们可以认为它对于任何实际规模的输入几乎都会在瞬间完成。</p>
+</blockquote>
+<h4 id="2-1-4算法的最优、最差和平均效率">2.1.4算法的最优、最差和平均效率</h4>
+<h5 id="最坏">最坏</h5>
+<blockquote>
+<p>一个算法的最差效率是指当输入规模为n时算法在最坏情况下的效率。</p>
+</blockquote>
+<p><strong>确定方法</strong></p>
+<blockquote>
+<p>在算法的所有可能输入中，哪种类型的输入会导致基本操作数次数达到最大，再计算这个最差值Cworst(n).</p>
+</blockquote>
+<h5 id="最优">最优</h5>
+<blockquote>
+<p>指当输入规模为n时，算法在最优情况下的效率。</p>
+</blockquote>
+<p><strong>确定方法</strong></p>
+<blockquote>
+<p>在算法可能的规模为n的输入中，找到输入对应最小C(n)值</p>
+</blockquote>
+<h5 id="平均效率">平均效率</h5>
+<blockquote>
+<p>在随机输入的情况下，一个算法具有怎样的行为。</p>
+</blockquote>
+<h3 id="总结">总结</h3>
+<p><img src="picture/2.1%E6%80%BB%E7%BB%93.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/2022-04-28_2-2%E6%B8%90%E8%BF%9B%E7%AC%A6%E5%8F%B7%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%95%88%E7%8E%87%E7%B1%BB%E5%9E%8B/">2-2渐进符号和基本效率类型</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-27T16:00:00.000Z" itemprop="datePublished">
+    2022-04-28
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">算法设计与分析</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="渐进符号和基本效率类型">渐进符号和基本效率类型</h2>
+<blockquote>
+<p>在n趋近于无穷的情况下：</p>
+<p>O(g(n))表示增长次数小于等于cg(n)的函数集合</p>
+<p>omega(g(n))表示增长次数大于等于cg(n)的函数集合</p>
+<p>theta(g(n))表示增长次数等于cg(n)的函数集合</p>
+</blockquote>
+<h4 id="2-2-2符号O">2.2.2符号O</h4>
+<p><img src="picture/%E7%AC%A6%E5%8F%B7O%E7%9A%84%E5%AE%9A%E4%B9%89.png" alt=""></p>
+<h4 id="2-2-3符号omega">2.2.3符号omega</h4>
+<p><img src="picture/%E7%AC%A6%E5%8F%B7omega%E7%9A%84%E5%AE%9A%E4%B9%89.png" alt=""></p>
+<h4 id="2-2-4符号theta">2.2.4符号theta</h4>
+<p><img src="picture/%E7%AC%A6%E5%8F%B7theta%E7%9A%84%E5%AE%9A%E4%B9%89.png" alt=""></p>
+<h4 id="2-2-5渐进符号的有用特性">2.2.5渐进符号的有用特性</h4>
+<p><img src="picture/%E5%AE%9A%E7%90%86O%E7%9A%84%E4%B8%80%E8%88%AC%E7%89%B9%E6%80%A7.png" alt=""></p>
+<blockquote>
+<p>这意味着在同一算法时间函数中，效率取决于最高次项。在两个连续算法中，总效率取决于最慢的那一个。</p>
+</blockquote>
+<h4 id="2-2-6利用极限比较增长次数">2.2.6利用极限比较增长次数</h4>
+<blockquote>
+<p>基于定义比较增长次数虽然更通用，但不简便。因此采用基于极限的比较方法。</p>
+</blockquote>
+<p><img src="picture/%E5%9F%BA%E4%BA%8E%E6%9E%81%E9%99%90%E7%9A%84%E6%AF%94%E8%BE%83%E6%96%B9%E6%B3%95.png" alt=""></p>
+<h4 id="2-2-7基本的效率类型">2.2.7基本的效率类型</h4>
+<blockquote>
+<p>大多数算法可以分成为数不多的几种类型。</p>
+</blockquote>
+<p><img src="picture/%E5%9F%BA%E6%9C%AC%E6%95%88%E7%8E%87%E7%B1%BB%E5%9E%8B.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

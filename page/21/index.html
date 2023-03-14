@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/05/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/%E7%BD%91%E8%AF%BE/2022-10-05_2-%E6%B1%87%E7%BC%96%E4%B8%AD%E7%9A%84%E5%AF%84%E5%AD%98%E5%99%A8/">2-汇编中的寄存器</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-04T16:00:00.000Z" itemprop="datePublished">
+    2022-10-05
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">汇编语言</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/%E7%BD%91%E8%AF%BE/">网课</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="汇编中的寄存器">汇编中的寄存器</h2>
+<ul class="lvl-0">
+<li class="lvl-2">8个通用寄存器</li>
+<li class="lvl-2">1个标志寄存器</li>
+<li class="lvl-2">6个段寄存器</li>
+</ul>
+<h4 id="通用寄存器">通用寄存器</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>EAX：累加器（32位），用于计算加法乘法，或者存放函数的返回值</p>
+<ul class="lvl-2">
+<li class="lvl-6">低16位是AX
+<ul class="lvl-4">
+<li class="lvl-10">高8位是AH</li>
+<li class="lvl-10">低8位是AL</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>EBX：基地址寄存器，存放基地址</p>
+<ul class="lvl-2">
+<li class="lvl-6">低16位是BX
+<ul class="lvl-4">
+<li class="lvl-10">高8位是BH</li>
+<li class="lvl-10">低8位是BL</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>ECX：计数寄存器，用于控制循环次数</p>
+<ul class="lvl-2">
+<li class="lvl-6">低16位CX
+<ul class="lvl-4">
+<li class="lvl-10">高8位CH</li>
+<li class="lvl-10">低8位CL</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>EDX：数据寄存器。参与乘除运算。存放IO端口地址。存放除法余数。</p>
+<ul class="lvl-2">
+<li class="lvl-6">低16位DX
+<ul class="lvl-4">
+<li class="lvl-10">高8位DH</li>
+<li class="lvl-10">低8位DL</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>…</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/03/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2022-10-03_assert/">assert</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-02T16:00:00.000Z" itemprop="datePublished">
+    2022-10-03
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="assert">assert</h2>
+<h4 id="语法">语法</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">assert</span>(<span class="type">bool</span>表达式);</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如果bool表达式为false，则会调用<code>std::abort()</code>函数，弹出对话框</p>
+</li>
+<li class="lvl-2">
+<p>头文件为：<code>cassert</code></p>
+</li>
+</ul>
+<h4 id="使用说明">使用说明</h4>
+<blockquote>
+<p>一般在某些不确定是否会发生，但的确有可能出问题的地方，可以使用assert代替if做一个检测。</p>
+</blockquote>
+<p><strong>案例</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;请输入一个整数\n&quot;</span>;</span><br><span class="line">    <span class="type">int</span> c&#123;&#125;;</span><br><span class="line">    std::cin&gt;&gt;c;</span><br><span class="line">    <span class="built_in">assert</span>(c);		<span class="comment">//此处使用assert在release的情况下，程序不会直接崩溃，而是会用一个窗口来提示情况</span></span><br><span class="line">    std::cout&lt;&lt;<span class="number">1000</span>/c;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="关闭assert">关闭assert</h4>
+<blockquote>
+<p>在程序里某些时候，不想看到assert，但是也不应该删除，可以使用宏定义NDEBUG，在头文件之前来去除。</p>
+</blockquote>
+<p><strong>代码案例</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> NDEBUG</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;请输入一个整数\n&quot;</span>;</span><br><span class="line">    <span class="type">int</span> c;</span><br><span class="line">    std::cin&gt;&gt;c;</span><br><span class="line">    <span class="built_in">assert</span>(c);		<span class="comment">//不起作用</span></span><br><span class="line">    std::cout&lt;&lt;<span class="number">1000</span>/c;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>如何实现</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> NDEBUG</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> assert(expression) ((void)0)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line"></span><br><span class="line">    _ACRTIMP <span class="type">void</span> __cdecl _wassert(</span><br><span class="line">        _In_z_ <span class="type">wchar_t</span> <span class="type">const</span>* _Message,</span><br><span class="line">        _In_z_ <span class="type">wchar_t</span> <span class="type">const</span>* _File,</span><br><span class="line">        _In_   <span class="type">unsigned</span>       _Line</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> assert(expression) (void)(                                                       \</span></span><br><span class="line"><span class="meta">            (!!(expression)) ||                                                              \</span></span><br><span class="line"><span class="meta">            (_wassert(_CRT_WIDE(#expression), _CRT_WIDE(__FILE__), (unsigned)(__LINE__)), 0) \</span></span><br><span class="line"><span class="meta">        )</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="static-assert">static_assert</h2>
+<h4 id="语法-2">语法</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">static_assert</span>(<span class="type">bool</span>表达式,<span class="string">&quot;错误信息&quot;</span>);	<span class="comment">//以前版本</span></span><br><span class="line"><span class="built_in">static_assert</span>(<span class="type">bool</span>表达式)			<span class="comment">//c++17</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>与assert不同，static_assert主要是用来在编译时检查重要的条件，里面的bool表达式只能是常量</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>不需要头文件</p>
+</li>
+</ul>
+<h4 id="使用说明-2">使用说明</h4>
+<p><strong>案例</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">static_assert</span>(<span class="built_in">sizeof</span>(<span class="type">int</span>*)==<span class="number">4</span>,<span class="string">&quot;it&#x27;s not x86&quot;</span>);	<span class="comment">//用于检测是否在x86环境下编译</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/03/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2022-10-03_%E4%BB%8E%E5%87%BD%E6%95%B0%E8%A7%92%E5%BA%A6%E5%BD%BB%E5%BA%95%E8%AE%A4%E8%AF%86%E6%A0%88/">从函数角度彻底认识栈</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-02T16:00:00.000Z" itemprop="datePublished">
+    2022-10-03
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="从函数角度彻底认识栈">从函数角度彻底认识栈</h2>
+<h4 id="栈和栈的意义">栈和栈的意义</h4>
+<blockquote>
+<p>每个变量都有一个内存空间。如果一个函数被多次反复调用，分配内存的开支会很大。但为每一个变量分配一个固定的内存空间很浪费内存资源。</p>
+<p>因此，提前分配好一段内存空间（栈），每次变量被创建时，在栈里写就行。</p>
+</blockquote>
+<h4 id="寄存器与CPU">寄存器与CPU</h4>
+<blockquote>
+<p>CPU从内存中将值读入寄存器里，能快速访问。</p>
+</blockquote>
+<h5 id="寄存器">寄存器</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>有eax,ecx,edx,ebp,esp,edi,eip</p>
+</li>
+<li class="lvl-2">
+<p>esp：指向栈顶</p>
+</li>
+<li class="lvl-2">
+<p>ebp：指向栈底</p>
+</li>
+<li class="lvl-2">
+<p>栈：从高地址向低地址（栈底向栈顶）</p>
+</li>
+</ul>
+<h4 id="汇编指令">汇编指令</h4>
+<h5 id="push">push</h5>
+<p>例如：push 32有以下两步</p>
+<ol>
+<li class="lvl-3">
+<p>将栈顶指针上移（esp = esp - 4）</p>
+</li>
+<li class="lvl-3">
+<p>在栈顶写入32（即esp指向的位置写入）</p>
+</li>
+</ol>
+<h5 id="call">call</h5>
+<p>例如：call CD1020</p>
+<ol>
+<li class="lvl-3">
+<p>eap = esp - 4</p>
+</li>
+<li class="lvl-3">
+<p>在esp指向的位置里放入call的下一条指令的地址CD107F（能在函数调用结束后找到并继续执行后续语句）</p>
+</li>
+<li class="lvl-3">
+<p>CPU跳转到CD1020执行</p>
+</li>
+</ol>
+<h4 id="调用函数的整体流程">调用函数的整体流程</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>1.参数从右往左入栈</p>
+</li>
+<li class="lvl-2">
+<p>2.当前语句的下一句指令地址入栈</p>
+</li>
+<li class="lvl-2">
+<p>3.ebp里的数值入栈（给ebp腾出空间来干活）</p>
+</li>
+<li class="lvl-2">
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/03/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2022-10-03_%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%EF%BC%9A%E4%B8%8D%E5%AE%9A%E9%87%8F%E5%8F%82%E6%95%B0/">函数参数：不定量参数</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-02T16:00:00.000Z" itemprop="datePublished">
+    2022-10-03
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="函数参数：不定量参数">函数参数：不定量参数</h2>
+<h4 id="使用说明">使用说明</h4>
+<blockquote>
+<p>详见《<a target="_blank" rel="noopener" href="http://xn--8nrvbud265g.md">可变参数.md</a>》，C++头文件为<cstdarg></p>
+</blockquote>
+<h4 id="底层原理说明">底层原理说明</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>va_list变量是一个char*，也就是一个指针，声明时为空（此处命名为arg）</p>
+</li>
+<li class="lvl-2">
+<p>在va_start时，为arg赋值参数的地址</p>
+</li>
+<li class="lvl-2">
+<p>在va_arg时，将arg指向的地址解读为传入类型，再将这个指针递增一个该类型大小的空间</p>
+</li>
+<li class="lvl-2">
+<p>在va_end时释放内存</p>
+</li>
+</ul>
+<h5 id="好处">好处</h5>
+<blockquote>
+<p>相比于数组传参，不定量参数的变量类型可以更灵活</p>
+</blockquote>
+<h4 id="自己设计可变参数结构体">自己设计可变参数结构体</h4>
+<blockquote>
+<p>使用这种结构体代替可变参数</p>
+</blockquote>
+<p><strong>课程案例</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Sarg</span> &#123;</span><br><span class="line">    <span class="type">int</span> count;</span><br><span class="line">    <span class="type">char</span>* arg;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Average</span><span class="params">(Sarg&amp; y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> sum&#123;&#125;;</span><br><span class="line">    <span class="type">int</span>* arg = (<span class="type">int</span>*)y.arg;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i&#123;&#125;; i &lt; y.count; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum += arg[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum / y.count;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Sarg y;</span><br><span class="line">    y.count = <span class="number">5</span>;</span><br><span class="line">    y.arg = (<span class="type">char</span>*)<span class="keyword">new</span> <span class="type">int</span>[<span class="number">5</span>] &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">10</span>&#125;;	<span class="comment">//此处转成char*，在函数里再转回int*</span></span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">Average</span>(y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>类型不同的方法</strong></p>
+<p>使用链表，将数据进行链接</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/03/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2022-10-03_%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0/">可变参数</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-02T16:00:00.000Z" itemprop="datePublished">
+    2022-10-03
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="可变参数">可变参数</h2>
+<blockquote>
+<p>为了能使函数具有可变参数，需要导入头文件<code>&lt;stdarg.h&gt;</code></p>
+</blockquote>
+<h4 id="原理">原理</h4>
+<blockquote>
+<p>在函数栈中根据依次查询参数地址。头文件中使用宏定义实现参数地址查询。</p>
+</blockquote>
+<h4 id="注意">注意</h4>
+<blockquote>
+<p>至少有一个参数</p>
+</blockquote>
+<h4 id="应用">应用</h4>
+<blockquote>
+<p>先使用va_list 定义一个变量。（本质是char*类型）</p>
+<p>再调用va_start(artptr,lastarg)初始化va_list，lastarg是参数数量</p>
+<p>调用va_arg(artptr，type)访问当前的参数，类型为type，并将指针后移</p>
+<p>最后调用va_end(argptr)清理va_list的内存</p>
+</blockquote>
+<h4 id="案例">案例</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdarg.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">average</span><span class="params">(<span class="type">int</span> num,...)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> </span><br><span class="line">    va_list valist;</span><br><span class="line">    <span class="type">double</span> sum = <span class="number">0.0</span>;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/* 为 num 个参数初始化 valist */</span></span><br><span class="line">    <span class="built_in">va_start</span>(valist, num);</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/* 访问所有赋给 valist 的参数 */</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; num; i++)</span><br><span class="line">    &#123;</span><br><span class="line">       sum += <span class="built_in">va_arg</span>(valist, <span class="type">int</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* 清理为 valist 保留的内存 */</span></span><br><span class="line">    <span class="built_in">va_end</span>(valist);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> sum/num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/01/DLL%E5%88%B6%E4%BD%9C/2022-10-01_1DLLMain/">1DLLMain</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-09-30T16:00:00.000Z" itemprop="datePublished">
+    2022-10-01
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/DLL%E5%88%B6%E4%BD%9C/">DLL制作</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="DLLMain">DLLMain</h2>
+<blockquote>
+<p>Windows在加载DLL时，需要一个入口函数来标志。这个入口函数在DLL被调用时，系统自动调用这个函数，作用为：</p>
+<ol>
+<li class="lvl-3">
+<p>接受通告信息：dll由线程或者进程加载、卸载</p>
+</li>
+<li class="lvl-3">
+<p>初始化dll的状态</p>
+</li>
+<li class="lvl-3">
+<p>涉及资源的进行正确的资源切换</p>
+</li>
+</ol>
+</blockquote>
+<p>这个函数在DLL只调用资源时可以是缺省的，系统会自动调用一个没有内容的该函数作为补充。</p>
+<h4 id="函数原型">函数原型</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">BOOL APIENTRY <span class="title">DllMain</span><span class="params">( HANDLE hModule, WORD ul_reason_for_call, LPVOID lpReserved )</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="相关解释">相关解释</h4>
+<h5 id="1-声明说明符APIENTRY">1.声明说明符APIENTRY</h5>
+<p>其中，<code>APOENTRY</code>的定义为<code>__stdcall</code>，这表明该函数以标准Pascal的方式被调用（另一种方式是C调用方式，宏定义为<code>__cdecl</code>）</p>
+<blockquote>
+<p>注：这两种方式的区别在于函数的参数由谁，在何时在栈中删除。另外也涉及到编译时函数名的翻译问题。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Pascal调用方式：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">（1） 参数从左向右依次压入堆栈</span></span><br><span class="line"><span class="comment">（2） 由被调用函数自己来恢复堆栈</span></span><br><span class="line"><span class="comment">（3） 函数名自动加前导下划线，后面紧跟着一个@,其后紧跟着参数的尺寸</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//例如：</span></span><br><span class="line"><span class="function"><span class="type">int</span> __stdcall <span class="title">function</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span></span>;</span><br><span class="line"><span class="comment">//被翻译为：_function@8</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">C调用方式：(隐式使用)</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">（1） 参数从右向左依次压入堆栈</span></span><br><span class="line"><span class="comment">（2） 由调用者恢复堆栈</span></span><br><span class="line"><span class="comment">（3） 函数名自动加前导下划线</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//例如：</span></span><br><span class="line"><span class="function"><span class="type">int</span> __cdecl <span class="title">function</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span></span>;</span><br><span class="line"><span class="comment">//被翻译为：_function</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-参数">2.参数</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>hModule</strong>：是进程中的每个DLL模块被全局唯一的32字节的HINSTANCE句柄标识，用于代表DLL模块在进程虚拟空间中的起始地址。</p>
+</li>
+<li class="lvl-2">
+<p><strong>ul_reason_for_call</strong>：指明调用原因。宏定义了四种数字作为调用原因。</p>
+<ul class="lvl-2">
+<li class="lvl-6">首先，明确dll在某个进程调用LoadLibrary时才会被加载到这个进程的地址空间中。其次，如果这个模块没用了，必须使用FreeLibrary来</li>
+<li class="lvl-6"><strong>DLL_PROCESS_ATTACH</strong>：如果该DLL是这个进程没有调用过的，则系统采用这个参数来调用DLLMain。
+<ul class="lvl-4">
+<li class="lvl-10">注意：如果DllMain返回TRUE，则LoadLibrary返回这个模块的句柄。如果DllMain返回FALSE，则系统从进程的地址空间中卸载DLL，并且LoadLibrary返回NULL。并且下次调用依旧采用该参数调用DllMain。</li>
+</ul>
+</li>
+<li class="lvl-6"><strong>DLL_PROCESS_DETACH</strong>：当DLL被从进程的地址空间解除映射时，系统调用了它的DllMain，传递的ul_reason_for_call值是DLL_PROCESS_DETACH。</li>
+<li class="lvl-6"><strong>DLL_THREAD_ATTACH</strong>：当进程创建一线程时，系统查看当前映射到进程地址空间中的所有DLL文件映像，并用值DLL_THREAD_ATTACH调用DLL的DllMain函数。新创建的线程负责执行这次的DLL的DllMain函数，只有当所有的DLL都处理完这一通知后，系统才允许线程开始执行它的线程函数。</li>
+<li class="lvl-6"><strong>DLL_THREAD_DETACH</strong>：如果线程调用了ExitThread来结束线程（线程函数返回时，系统也会自动调用ExitThread），系统查看当前映射到进程空间中的所有DLL文件映像，并用DLL_THREAD_DETACH来调用DllMain函数，通知所有的DLL去执行线程级的清理工作。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><strong>lpReserved</strong>：表示一个保留参数，目前已经很少使用。</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/01/DLL%E5%88%B6%E4%BD%9C/2022-10-01_2%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E4%BD%BF%E7%94%A8/">2静态链接库的创建与使用</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-09-30T16:00:00.000Z" itemprop="datePublished">
+    2022-10-01
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/DLL%E5%88%B6%E4%BD%9C/">DLL制作</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="静态链接库的创建与使用">静态链接库的创建与使用</h2>
+<h4 id="1-静态链接库与动态链接库的区别">1.静态链接库与动态链接库的区别</h4>
+<h5 id="静态库">静态库</h5>
+<p>静态链接库文件扩展名为**.lib**, 相当于多个**.obj** 文件链接而成的一个库文件。使用时，需要对应的 <strong>.h</strong> 头文件和 <strong>.lib</strong>。</p>
+<p>优点是，使用步骤少，简单方便。缺点是生成的 .exe 较大，而且每次修改 .lib, .exe 都需要重新编译。</p>
+<p>动态链接库文件扩展名为.dll, 可以多个进程可以共享一个同一个动态链接库，能够节省内存空间。仅在运行时需要，如果修改动态链接库，不一定需要重新编译 .exe, 版本升级方便。</p>
+<p>和动态链接库相比较，静态链接库生成和使用都更简单。</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/09/29/Windows%E4%B8%8BC%E7%9A%84%E6%9F%90%E4%BA%9B%E7%89%B9%E6%80%A7/2022-09-29_1WinMain%E4%B8%8Emain%E7%9A%84%E5%8C%BA%E5%88%AB/">1WinMain与main的区别</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-09-28T16:00:00.000Z" itemprop="datePublished">
+    2022-09-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows%E4%B8%8BC%E7%9A%84%E6%9F%90%E4%BA%9B%E7%89%B9%E6%80%A7/">Windows下C的某些特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h4 id="WinMain与main的区别">WinMain与main的区别</h4>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/09/29/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x/cocos2d-x%E6%B8%B8%E6%88%8F%E5%85%A5%E9%97%A8%E5%BC%80%E5%8F%91%E7%B2%BE%E8%A7%A3/2022-09-29_3-2%E6%96%B0%E5%A2%9E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">3-2新增数据类型</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-09-28T16:00:00.000Z" itemprop="datePublished">
+    2022-09-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x/">cocos2d-x</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x/cocos2d-x%E6%B8%B8%E6%88%8F%E5%85%A5%E9%97%A8%E5%BC%80%E5%8F%91%E7%B2%BE%E8%A7%A3/">cocos2d-x游戏入门开发精解</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="3-2新增数据类型">3.2新增数据类型</h2>
+<blockquote>
+<p>cocos2d-x定义了自己的数据类型，都是以类的形式存在。</p>
+</blockquote>
+<h4 id="3-2-1-Integer">3.2.1 __Integer</h4>
+<h5 id="1-私有成员">1.私有成员</h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> _value;</span><br></pre></td></tr></table></figure>
+<h5 id="2-构造函数">2.构造函数</h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">__Integer(<span class="type">int</span>);			<span class="comment">//唯一构造函数</span></span><br></pre></td></tr></table></figure>
+<h5 id="3">3.</h5>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/09/28/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x/%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA%E6%96%B9%E6%B3%95/2022-09-28_cocos2dx%E9%A1%B9%E7%9B%AE%E5%BB%BA%E7%AB%8B%E8%AE%B0%E5%BD%95/">cocos2dx项目建立记录</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-09-27T16:00:00.000Z" itemprop="datePublished">
+    2022-09-28
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x/">cocos2d-x</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x/%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA%E6%96%B9%E6%B3%95/">项目搭建方法</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="cocos2dx项目建立记录">cocos2dx项目建立记录</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>1.关于相关的环境配置已经完成，可能会发生部分环境丢失，需要重新配置的情况，详见链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/pengnanzheng/article/details/123137113">(19条消息) cocos2dx学习之路(一)———windows10下cocos2dx环境配置_菩提本无树何处惹尘埃的博客-CSDN博客_cocos电脑配置</a></p>
+</li>
+<li class="lvl-2">
+<p>2.关于项目搭建：</p>
+<ul class="lvl-2">
+<li class="lvl-6">1.在cocos_workingspace文件夹下先建立一个文件夹，命名为项目名字</li>
+<li class="lvl-6">2.进入该文件夹，在目录中打开cmd</li>
+<li class="lvl-6">3.使用命令：cocos new project1 -l cpp -p com.project1.games</li>
+<li class="lvl-6">注意：命令中的project1改为你的项目名，例如cocos new Hello_World -l cpp -p com.project1.games</li>
+<li class="lvl-6">4.使用命令：cmake 文件夹名 -G “Visual Studio 16 2019” -AWin32</li>
+<li class="lvl-6">例如：cmake project1 -G “Visual Studio 16 2019” -AWin32</li>
+<li class="lvl-6">5.使用vs2019打开项目（注意打开方式）</li>
+<li class="lvl-6">6.将项目设置为启动项目</li>
+<li class="lvl-6">7.编译测试是否成功</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/20/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/22/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

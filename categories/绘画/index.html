@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ 绘画 }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/28/%E7%BB%98%E7%94%BB/%E5%83%8F%E7%B4%A0%E7%94%BB/2023-01-28_%E5%83%8F%E7%B4%A0%E7%94%BB%E5%A4%84%E7%90%86%EF%BC%88%E6%AD%A5%E9%AA%A4%E5%85%B3%E9%94%AE%E8%AF%8D%EF%BC%89/">像素画处理（步骤关键词）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-27T16:00:00.000Z" itemprop="datePublished">
+    2023-01-28
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/">绘画</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/%E5%83%8F%E7%B4%A0%E7%94%BB/">像素画</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="像素画处理（步骤关键词）">像素画处理（步骤关键词）</h2>
+<h4 id="1-基本">1.基本</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>形状</p>
+</li>
+<li class="lvl-2">
+<p>亮度</p>
+</li>
+<li class="lvl-2">
+<p>边界</p>
+</li>
+</ul>
+<h4 id="2-形状步骤">2.形状步骤</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>使用基本形状绘制</p>
+</li>
+<li class="lvl-2">
+<p>再细修</p>
+</li>
+</ul>
+<h5 id="案例1">案例1</h5>
+<p><img src="picture/%E5%BD%A2%E7%8A%B61.png" alt=""></p>
+<h5 id="案例2">案例2</h5>
+<p><img src="picture/%E5%BD%A2%E7%8A%B62.png" alt=""></p>
+<h4 id="3-亮度步骤">3.亮度步骤</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>光照区使用高饱和度</p>
+</li>
+<li class="lvl-2">
+<p>阴影区使用低饱和度</p>
+</li>
+<li class="lvl-2">
+<p>中间过渡</p>
+</li>
+</ul>
+<h5 id="案例1-2">案例1</h5>
+<p><img src="picture/%E4%BA%AE%E5%BA%A61.png" alt=""></p>
+<h5 id="案例2-2">案例2</h5>
+<p><img src="picture/%E4%BA%AE%E5%BA%A62.png" alt=""></p>
+<h4 id="4-边界步骤">4.边界步骤</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>检测图像和负空间的边界，与参照图对比，看是否一致</p>
+</li>
+</ul>
+<h5 id="案例（下方为一个S型）">案例（下方为一个<code>S</code>型）</h5>
+<p><img src="picture/%E8%B4%9F%E7%A9%BA%E9%97%B41.png" alt=""></p>
+<h4 id="5-深度处理">5.深度处理</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>形状导致深度</p>
+</li>
+<li class="lvl-2">
+<p>亮度导致深度</p>
+</li>
+</ul>
+<h5 id="案例1（形状）">案例1（形状）</h5>
+<p><img src="picture/%E6%B7%B1%E5%BA%A6-%E5%BD%A2%E7%8A%B6.png" alt=""></p>
+<h5 id="案例2（亮度）">案例2（亮度）</h5>
+<p><img src="picture/%E6%B7%B1%E5%BA%A6-%E4%BA%AE%E5%BA%A6.png" alt=""></p>
+<h4 id="6-线条整洁">6.线条整洁</h4>
+<p>整洁来自：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>规律</p>
+</li>
+<li class="lvl-2">
+<p>最少</p>
+</li>
+</ul>
+<h5 id="案例（弧线和直线）">案例（弧线和直线）</h5>
+<p><img src="picture/%E7%BA%BF%E6%9D%A1%E6%95%B4%E6%B4%81.png" alt=""></p>
+<h4 id="7-抗锯齿">7.抗锯齿</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>在锯齿处加上半透明色</p>
+</li>
+</ul>
+<h5 id="案例">案例</h5>
+<p><img src="picture/%E6%8A%97%E9%94%AF%E9%BD%BF.png" alt=""></p>
+<h4 id="8-调色盘">8.调色盘</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>中间颜色选择HSV，S和V靠近中间的值</p>
+</li>
+<li class="lvl-2">
+<p>深色在中间色的基础上，减少5-10H，S和V适当减少</p>
+</li>
+<li class="lvl-2">
+<p>浅色在中间色的基础上，增加5-10H，S和V适当增加</p>
+</li>
+</ul>
+<p><img src="picture/%E8%B0%83%E8%89%B2%E7%9B%981.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/19/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/2022-07-19_13%E5%85%89%E5%BD%B1%E5%85%B3%E7%B3%BB%E4%B9%8B%E4%BA%94%E8%B0%83%E5%AD%90/">13光影关系之五调子</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-18T16:00:00.000Z" itemprop="datePublished">
+    2022-07-19
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/">绘画</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/">素描</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/">入门课程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="光影关系之五调子">光影关系之五调子</h2>
+<ul class="lvl-0">
+<li class="lvl-2">高光</li>
+<li class="lvl-2">明暗交界线</li>
+<li class="lvl-2">灰面（过渡面）</li>
+<li class="lvl-2">反光</li>
+<li class="lvl-2">投影</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/19/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/2022-07-19_15%E5%B9%B3%E8%A1%8C%E9%80%8F%E8%A7%86/">15平行透视</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-18T16:00:00.000Z" itemprop="datePublished">
+    2022-07-19
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/">绘画</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/">素描</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/">入门课程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="平行透视">平行透视</h2>
+<p>​</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/19/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/2022-07-19_14%E9%80%8F%E8%A7%86%E7%90%86%E8%AE%BA/">14透视理论</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-18T16:00:00.000Z" itemprop="datePublished">
+    2022-07-19
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/">绘画</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/">素描</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/">入门课程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="透视理论">透视理论</h2>
+<blockquote>
+<p>透视指平面或曲面上描述物体空间关系的方法或技术</p>
+</blockquote>
+<p>特征：近大远小、近长远短</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/17/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/2022-07-17_10%E5%85%89%E5%BD%B1%E5%85%B3%E7%B3%BB%E4%B9%8B%E6%8A%95%E5%BD%B1/">10光影关系之投影</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-16T16:00:00.000Z" itemprop="datePublished">
+    2022-07-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/">绘画</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/">素描</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/">入门课程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="光影关系之投影">光影关系之投影</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>投影能反映光源的位置关系</p>
+</li>
+<li class="lvl-2">
+<p>投影能反映物体的形状特征</p>
+</li>
+<li class="lvl-2">
+<p>投影能反映光的强弱</p>
+</li>
+<li class="lvl-2">
+<p>投影能反映其承载物的特征</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/17/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/2022-07-17_12%E5%85%89%E5%BD%B1%E5%85%B3%E7%B3%BB%E4%B9%8B%E4%B8%89%E5%A4%A7%E9%9D%A2/">12光影关系之三大面</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-16T16:00:00.000Z" itemprop="datePublished">
+    2022-07-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/">绘画</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/">素描</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/">入门课程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="光影关系之三大面">光影关系之三大面</h2>
+<ul class="lvl-0">
+<li class="lvl-2">亮</li>
+<li class="lvl-2">灰</li>
+<li class="lvl-2">暗</li>
+</ul>
+<h4 id="灰面">灰面</h4>
+<p>灰面是受光面的一部分，是暗面与亮面的过渡面</p>
+<h4 id="三大面">三大面</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>能明确区分物体的光影关系</p>
+</li>
+<li class="lvl-2">
+<p>能确立物体的体积状态</p>
+</li>
+<li class="lvl-2">
+<p>丰富画面层次</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/17/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/2022-07-17_11%E5%85%89%E5%BD%B1%E5%85%B3%E7%B3%BB%E4%B9%8B%E5%8F%97%E8%83%8C%E5%85%89%EF%BC%88%E4%B8%A4%E5%A4%A7%E5%85%B3%E7%B3%BB%EF%BC%89/">11光影关系之受背光（两大关系）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-16T16:00:00.000Z" itemprop="datePublished">
+    2022-07-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/">绘画</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/">素描</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/">入门课程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="光影关系之受背光（两大关系）">光影关系之受背光（两大关系）</h2>
+<h4 id="两大关系——黑白（受光和背光）">两大关系——黑白（受光和背光）</h4>
+<p>明暗交界线：一个面，越锋利越接近一条线</p>
+<p>受光区：只要收到直射的区域</p>
+<p>背光区：没有直射，有反射或者投影等的区域</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/17/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/2022-07-17_8%E5%85%89%E5%BD%B1%E5%85%B3%E7%B3%BB%E4%B9%8B%E5%85%89%E6%BA%90/">8光影关系之光源</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-16T16:00:00.000Z" itemprop="datePublished">
+    2022-07-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/">绘画</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/">素描</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/">入门课程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="光影关系之光源">光影关系之光源</h2>
+<h4 id="灯光（点光源）">灯光（点光源）</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>离物体近</p>
+</li>
+<li class="lvl-2">
+<p>影子越来越模糊</p>
+</li>
+<li class="lvl-2">
+<p>变化快</p>
+</li>
+</ul>
+<h4 id="太阳光（平行光）">太阳光（平行光）</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>距离远</p>
+</li>
+<li class="lvl-2">
+<p>影子变化小</p>
+</li>
+</ul>
+<h4 id="局部光">局部光</h4>
+<p>光影关系强</p>
+<p>影子明显</p>
+<h4 id="散光源">散光源</h4>
+<p>光影关系弱</p>
+<p>影子不明显</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/17/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/2022-07-17_9%E5%85%89%E5%BD%B1%E5%85%B3%E7%B3%BB%E4%B9%8B%E9%AB%98%E5%85%89/">9光影关系之高光</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-16T16:00:00.000Z" itemprop="datePublished">
+    2022-07-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/">绘画</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/">素描</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/">入门课程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="光影关系之高光">光影关系之高光</h2>
+<p>高光指：画面调子最亮的一个点</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>高光可以反映各种物体的状态（形状、大小、材质）</p>
+</li>
+<li class="lvl-2">
+<p>高光可以反映光的状态（形状、强弱）</p>
+</li>
+<li class="lvl-2">
+<p>高光可以使画面增加一个层次</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/06/10/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/2022-06-10_6%E7%BA%BF%E6%9D%A1%E7%BB%83%E4%B9%A0/">6线条练习</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-06-09T16:00:00.000Z" itemprop="datePublished">
+    2022-06-10
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/">绘画</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/">素描</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E7%BB%98%E7%94%BB/%E7%B4%A0%E6%8F%8F/%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/">入门课程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="线条练习">线条练习</h2>
+<h4 id="为什么用直线？">为什么用直线？</h4>
+<p>1.常用</p>
+<p>2.能更好的形成色块</p>
+<h4 id="如何练习线条">如何练习线条</h4>
+<p>1.单侧线条练习</p>
+<p>2.双侧线条练习</p>
+<p>3.形状练习</p>
+<p>4.无形练习</p>
+<h4 id="问题">问题</h4>
+<p>1.不直</p>
+<blockquote>
+<p>过于谨慎、紧张</p>
+</blockquote>
+<p>2.钉头线（一头重，一头尖）</p>
+<blockquote>
+<p>保证下笔和收笔力道一致</p>
+</blockquote>
+<p>3.带钩，来回排</p>
+<blockquote>
+<p>收笔</p>
+</blockquote>
+<p>4.一组线时轻时重</p>
+<blockquote>
+<p>区域确定，手移动的极限</p>
+<p>转动笔尖，第一笔用力不均</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/categories/%E7%BB%98%E7%94%BB/page/2/">2</a><a class="extend next" rel="next" href="/categories/%E7%BB%98%E7%94%BB/page/2/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

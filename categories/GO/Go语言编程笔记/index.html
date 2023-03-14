@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ Go语言编程笔记 }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/11/02/GO/Go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/2022-11-02_2-1%E5%8F%98%E9%87%8F/">2-1变量</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-11-01T16:00:00.000Z" itemprop="datePublished">
+    2022-11-02
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/GO/">GO</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/GO/Go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">Go语言编程笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="2-1变量">2.1变量</h2>
+<h4 id="2-1-1变量声明">2.1.1变量声明</h4>
+<blockquote>
+<p>Go的变量声明与C不同。对于纯粹的变量声明，Go引入了关键字var，并将类型置于变量名后。</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> v1 <span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> v2 <span class="type">string</span></span><br><span class="line"><span class="keyword">var</span> v3 [<span class="number">10</span>]<span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> v4 []<span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> v5 <span class="keyword">struct</span>&#123;</span><br><span class="line">    f <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> v6 *<span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> v7 <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> v8 <span class="function"><span class="keyword">func</span><span class="params">(a <span class="type">int</span>)</span></span> <span class="type">int</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>另外的批量声明变量写法如下</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span>(</span><br><span class="line">    v1 <span class="type">int</span></span><br><span class="line">    v2 <span class="type">string</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="2-1-2变量初始化">2.1.2变量初始化</h4>
+<p>对于需要初始化的变量，类型和var关键字都不是必要的，但可以保留。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> v1 <span class="type">int</span> = <span class="number">10</span></span><br><span class="line"><span class="keyword">var</span> v2 = <span class="number">10</span></span><br><span class="line">v3 := <span class="number">10</span>		<span class="comment">//全局变量不行</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-1-3变量赋值">2.1.3变量赋值</h4>
+<p>正常赋值</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> v1 <span class="type">int</span></span><br><span class="line">v1 = <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<p><strong>多重赋值</strong></p>
+<blockquote>
+<p>Go引入多重赋值的特性，代替C/C++中引入第三者来交换变量</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">i,j = j,i</span><br></pre></td></tr></table></figure>
+<h4 id="2-1-4匿名变量">2.1.4匿名变量</h4>
+<blockquote>
+<p>某些时候，函数的部分返回值不需要，可以使用匿名变量来忽略掉返回值，增强可读性</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Getname</span><span class="params">()</span></span> (firstname,lastname,nickname <span class="type">string</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;May&quot;</span>,<span class="string">&quot;Chan&quot;</span>,<span class="string">&quot;Chibi Maruko&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">_, _, nickname = Getname()	<span class="comment">//使用匿名变量，忽略掉前两个返回值</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/11/02/GO/Go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/2022-11-02_2-2%E5%B8%B8%E9%87%8F/">2-2常量</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-11-01T16:00:00.000Z" itemprop="datePublished">
+    2022-11-02
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/GO/">GO</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/GO/Go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">Go语言编程笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="2-2常量">2.2常量</h2>
+<blockquote>
+<p>常量是编译期间就已知且不可更改的值</p>
+</blockquote>
+<h4 id="2-2-1字面常量">2.2.1字面常量</h4>
+<blockquote>
+<p>字面常量就是程序中硬编码的常量。不同于C语言中，对于常量有特定的类型（例如-12属于int，而-12l属于long），Go语言中的常量是无类型的，只要这个常量在对应的变量范围内。（即12可以是int，可以是long，可以是float32等）</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="number">-12</span></span><br><span class="line"><span class="number">3.1415926535897</span></span><br><span class="line"><span class="number">3.2</span>+<span class="number">12i</span>				<span class="comment">//复数类型</span></span><br><span class="line"><span class="literal">true</span>				<span class="comment">//布尔类型</span></span><br><span class="line"><span class="string">&quot;foo&quot;</span>				<span class="comment">//string类型</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-2-2常量定义">2.2.2常量定义</h4>
+<blockquote>
+<p>通过使用const来给字面给常量指定一个友好的名字</p>
+<p>定义方式很自由，见下：</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Pi <span class="type">float64</span> = <span class="number">3.1415926535897</span>		<span class="comment">//可以指定类型float32</span></span><br><span class="line"><span class="keyword">const</span> zero = <span class="number">0.0</span>						<span class="comment">//也可以不指定类型，属于无类型</span></span><br><span class="line"><span class="keyword">const</span>(									<span class="comment">//也可以批量定义</span></span><br><span class="line">    size <span class="type">int64</span> = <span class="number">1024</span></span><br><span class="line">    eof = <span class="number">-1</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">const</span> u, v <span class="type">float32</span> = <span class="number">0</span>, <span class="number">3</span>				<span class="comment">//也可以批量指定类型</span></span><br><span class="line"><span class="keyword">const</span> a, b, c = <span class="number">3</span>, <span class="number">4</span>, <span class="string">&quot;foo&quot;</span>				<span class="comment">//也可以批量定义但自带类型</span></span><br></pre></td></tr></table></figure>
+<p><strong>警告</strong></p>
+<blockquote>
+<p>常量定义时，右值必须是一个在编译期运算的常量表达式。任何运行期才能得到结果的表达式都会编译错误。</p>
+</blockquote>
+<h4 id="2-2-3预定义常量">2.2.3预定义常量</h4>
+<blockquote>
+<p>Go语言预定义的常量有：true、false和iota</p>
+</blockquote>
+<p>iota详见《常量与变量》一章</p>
+<h4 id="2-2-4枚举">2.2.4枚举</h4>
+<blockquote>
+<p>Go语言不支持enum，因此枚举由常量创造，常用方法如下：</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span>(</span><br><span class="line">    Sunday = <span class="literal">iota</span></span><br><span class="line">    Monday</span><br><span class="line">    Tuesday</span><br><span class="line">    Wednesday</span><br><span class="line">    Thursday</span><br><span class="line">    Friday</span><br><span class="line">    Saturday</span><br><span class="line">    numberofDays			<span class="comment">//这个常量没有导出（首字符）</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

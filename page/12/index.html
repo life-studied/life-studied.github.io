@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/30/Java/2022-12-30_1-5Java%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A7%84%E5%88%99/">1-5Java程序的基本规则</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-29T16:00:00.000Z" itemprop="datePublished">
+    2022-12-30
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Java/">Java</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-5Java程序的基本规则">1.5Java程序的基本规则</h2>
+<h4 id="1-5-1Java程序的组织形式">1.5.1Java程序的组织形式</h4>
+<blockquote>
+<p>Java程序必须以类的形式存在，不允许存在独立的可执行语句和方法。</p>
+</blockquote>
+<p><strong>最简单的Java类</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这个最简单的类没有main方法，程序不能找到入口函数。类本身正确，但是不能被解释器正常解释。</p>
+</blockquote>
+<h4 id="1-5-2Java源程序的命名规则">1.5.2Java源程序的命名规则</h4>
+<p>规则如下：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>扩展名：.java</p>
+</li>
+<li class="lvl-2">
+<p>源文件的文件名可以是任意的。</p>
+<ul class="lvl-2">
+<li class="lvl-6">如果有一个public类，则文件名必须与该类名相同</li>
+<li class="lvl-6">由此，一个文件只能有一个public类</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-5-3一些问题">1.5.3一些问题</h4>
+<blockquote>
+<p>当使用java命令直接运行一个java类时，这个java类必须包含一个main方法，且main方法必须用public和static修饰，且必须是void返回值。</p>
+</blockquote>
+<h4 id="1-5-4编译">1.5.4编译</h4>
+<p><img src="picture/%E7%BC%96%E8%AF%91java%E7%A8%8B%E5%BA%8F.png" alt=""></p>
+<blockquote>
+<p>编译使用javac命令，后面跟文件名 。</p>
+<p>执行时用java命令，后面跟类名。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/23/C++/%E9%AB%98%E8%B4%A8%E9%87%8F%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0/2022-12-23_1-2%E5%A4%B4%E6%96%87%E4%BB%B6%E7%9A%84%E7%BB%93%E6%9E%84/">1-2头文件的结构</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-22T16:00:00.000Z" itemprop="datePublished">
+    2022-12-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E9%AB%98%E8%B4%A8%E9%87%8F%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0/">高质量编程指南笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="头文件的结构">头文件的结构</h2>
+<p>头文件由三部分组成：</p>
+<ol>
+<li class="lvl-3">
+<p>版权和声明</p>
+</li>
+<li class="lvl-3">
+<p>预处理块</p>
+</li>
+<li class="lvl-3">
+<p>函数和类结构声明等</p>
+</li>
+</ol>
+<p><strong>案例</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 版权和版本声明见示例 1-1，此处省略。</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> GRAPHICS_H <span class="comment">// 防止 graphics.h 被重复引用 </span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GRAPHICS_H </span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span> <span class="comment">// 引用标准库的头文件 </span></span></span><br><span class="line">…</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> “myheader.h” <span class="comment">// 引用非标准库的头文件 </span></span></span><br><span class="line">… </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Function1</span><span class="params">(…)</span></span>; <span class="comment">// 全局函数声明 </span></span><br><span class="line">… </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Box</span> <span class="comment">// 类结构声明 </span></span><br><span class="line">&#123; </span><br><span class="line">… </span><br><span class="line">&#125;; </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/23/%E6%B8%B8%E6%88%8F%E6%95%99%E7%A8%8B/%E7%BC%BA%E6%B0%A7/2022-12-23_2-%E5%9F%BA%E6%9C%AC%E7%9A%84%E7%94%9F%E5%AD%98(1-12%E5%91%A8%E6%9C%9F)/">2-基本的生存(1-12周期)</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-22T16:00:00.000Z" itemprop="datePublished">
+    2022-12-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E6%95%99%E7%A8%8B/">游戏教程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E6%95%99%E7%A8%8B/%E7%BC%BA%E6%B0%A7/">缺氧</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="基本的生存（1-12周期）">基本的生存（1-12周期）</h2>
+<h4 id="1-快捷键">1.快捷键</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>空格：暂停</p>
+</li>
+<li class="lvl-2">
+<p>G：挖掘</p>
+</li>
+<li class="lvl-2">
+<p>C：取消</p>
+</li>
+<li class="lvl-2">
+<p>X：拆除</p>
+</li>
+<li class="lvl-2">
+<p>B：复制</p>
+</li>
+<li class="lvl-2">
+<p>Tab：二倍速</p>
+</li>
+</ul>
+<h4 id="2-房间">2.房间</h4>
+<p>一般高度设置：4，size见对应房间概览说明<br>
+$$<br>
+宽度 = size / 4<br>
+$$<br>
+常用设置：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>24平台宽度</p>
+</li>
+<li class="lvl-2">
+<p>左工业区，中间生活区，右边养殖区</p>
+</li>
+</ul>
+<h4 id="3-第一天">3.第一天</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>完成挖掘和一层平台砖块铺设</p>
+</li>
+<li class="lvl-2">
+<p>摆放床</p>
+<ul class="lvl-2">
+<li class="lvl-6">注意光照强度</li>
+<li class="lvl-6">三张简易床铺（分配）</li>
+<li class="lvl-6">可以制作室内来获取加成
+<ul class="lvl-4">
+<li class="lvl-10">需要：气动门</li>
+<li class="lvl-10">资源：铜</li>
+<li class="lvl-10">密封12个</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>建设厕所</p>
+<ul class="lvl-2">
+<li class="lvl-6">户外厕所（2人一个）</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>为前10天做准备（农耕+厕所水循环）</p>
+</li>
+</ul>
+<h4 id="4-第二天">4.第二天</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>人力发电机+电池（研究室准备工作）</p>
+</li>
+</ul>
+<h4 id="5-优先级分配">5.优先级分配</h4>
+<p>关键设施如电力，维生设备设置：8</p>
+<p>紧要设施：9</p>
+<p>其余：5</p>
+<h4 id="6-日程">6.日程</h4>
+<p>2休息：+1士气</p>
+<h4 id="7-其它">7.其它</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>消毒设置：多加一个数量级</p>
+</li>
+<li class="lvl-2">
+<p>研究：食物+液体+氧气</p>
+<ul class="lvl-2">
+<li class="lvl-6">顺序：食物——电力——管道（冲水马桶）</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>建设养殖区（h：2）</p>
+</li>
+<li class="lvl-2">
+<p>复制人优先级设置（主要+次要）</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/22/C++/%E9%AB%98%E8%B4%A8%E9%87%8F%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0/2022-12-22_1-1%E7%89%88%E6%9D%83%E5%92%8C%E5%A3%B0%E6%98%8E/">1-1版权和声明</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-21T16:00:00.000Z" itemprop="datePublished">
+    2022-12-22
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E9%AB%98%E8%B4%A8%E9%87%8F%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0/">高质量编程指南笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="版权和声明">版权和声明</h2>
+<blockquote>
+<p>位置：头文件和定义文件的开头</p>
+</blockquote>
+<p>内容：</p>
+<ol>
+<li class="lvl-3">
+<p>版权信息</p>
+</li>
+<li class="lvl-3">
+<p>文件名称，标识符，摘要</p>
+</li>
+<li class="lvl-3">
+<p>当前版本号，作者/修改者，完成日期</p>
+</li>
+<li class="lvl-3">
+<p>版本历史信息</p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">* Copyright (c) 2001,上海贝尔有限公司网络应用事业部 </span></span><br><span class="line"><span class="comment">* All rights reserved. </span></span><br><span class="line"><span class="comment">* </span></span><br><span class="line"><span class="comment">* 文件名称：filename.h </span></span><br><span class="line"><span class="comment">* 文件标识：见配置管理计划书 </span></span><br><span class="line"><span class="comment">* 摘 要：简要描述本文件的内容 </span></span><br><span class="line"><span class="comment">* </span></span><br><span class="line"><span class="comment">* 当前版本：1.1 </span></span><br><span class="line"><span class="comment">* 作 者：输入作者（或修改者）名字 </span></span><br><span class="line"><span class="comment">* 完成日期：2001年7月20日 </span></span><br><span class="line"><span class="comment">* </span></span><br><span class="line"><span class="comment">* 取代版本：1.0 </span></span><br><span class="line"><span class="comment">* 原作者 ：输入原作者（或修改者）名字 </span></span><br><span class="line"><span class="comment">* 完成日期：2001年5月10日 </span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/22/%E6%B8%B8%E6%88%8F%E6%95%99%E7%A8%8B/%E7%BC%BA%E6%B0%A7/2022-12-22_1-%E9%80%89%E6%8B%A9%E6%98%9F%E7%90%83%E4%B8%8E%E4%BA%BA%E7%89%A9/">1-选择星球与人物</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-21T16:00:00.000Z" itemprop="datePublished">
+    2022-12-22
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E6%95%99%E7%A8%8B/">游戏教程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E6%95%99%E7%A8%8B/%E7%BC%BA%E6%B0%A7/">缺氧</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="选择星球与人物">选择星球与人物</h2>
+<h4 id="1-星球选择">1.星球选择</h4>
+<p>类地星球</p>
+<h4 id="2-人物选择">2.人物选择</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>1建造+1挖掘+1研究</p>
+</li>
+<li class="lvl-2">
+<p>2兴趣</p>
+</li>
+</ul>
+<p>注意事项：</p>
+<ol>
+<li class="lvl-3">
+<p>压力反应不选毁坏和呕吐</p>
+</li>
+<li class="lvl-3">
+<p>负面效果不选氧气、卡路里消耗量大和放屁</p>
+</li>
+</ol>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/19/Docker/2022-12-19_3-Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">3-Docker常用命令</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-18T16:00:00.000Z" itemprop="datePublished">
+    2022-12-19
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Docker/">Docker</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="Docker常用命令">Docker常用命令</h2>
+<h4 id="1-帮助启动类命令">1.帮助启动类命令</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>启动</strong>docker: systemctl start docker</p>
+</li>
+<li class="lvl-2">
+<p><strong>停止</strong>docker: systemctl stop docker</p>
+</li>
+<li class="lvl-2">
+<p>重启docker: systemctl restart docker</p>
+</li>
+<li class="lvl-2">
+<p><strong>查看</strong>docker状态: systemctl status docker</p>
+</li>
+<li class="lvl-2">
+<p>开机启动: systemctl enable docker</p>
+</li>
+<li class="lvl-2">
+<p>查看docker概要信息:dockerinfo</p>
+</li>
+<li class="lvl-2">
+<p>查看docker总体帮助文档: docker --help</p>
+</li>
+<li class="lvl-2">
+<p>查看docker命令帮助文档:docker具体命令–help</p>
+</li>
+</ul>
+<h4 id="2-镜像命令">2.镜像命令</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>查看本地镜像：<code>docker images</code></p>
+<ul class="lvl-2">
+<li class="lvl-6">参数：
+<ul class="lvl-4">
+<li class="lvl-10">-a：列出所有镜像（含历史）</li>
+<li class="lvl-10">-q：只显示镜像ID</li>
+</ul>
+</li>
+<li class="lvl-6">选项意义
+<ul class="lvl-4">
+<li class="lvl-10">REPOSITORY:表示镜像的仓库源</li>
+<li class="lvl-10">TAG:镜像的标签版本号</li>
+<li class="lvl-10">IMAGE ID:镜像ID</li>
+<li class="lvl-10">CREATED:镜像创建时间</li>
+<li class="lvl-10">SIZE:镜像大小</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>在远程仓库搜索镜像：<code>docker search 镜像名</code></p>
+</li>
+<li class="lvl-2">
+<p>拉取镜像：<code>docker pull 镜像名[:TAG]</code></p>
+<ul class="lvl-2">
+<li class="lvl-6">不加TAG默认latest</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>查看镜像/容器/数据卷所占的空间：<code>docker system df</code></p>
+</li>
+<li class="lvl-2">
+<p>删除镜像：<code>docker rmi 镜像ID</code>或者<code>docker rmi 镜像名</code></p>
+<ul class="lvl-2">
+<li class="lvl-6">先docker images查看，再docker rmi</li>
+<li class="lvl-6">强制删除加参数-f</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-容器命令">3.容器命令</h4>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/18/Shell%E7%BC%96%E7%A8%8B/2022-12-18_4-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE/">4-环境变量设置</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-17T16:00:00.000Z" itemprop="datePublished">
+    2022-12-18
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="4-环境变量设置">4.环境变量设置</h2>
+<h4 id="1-修改环境变量（用户个人）">1.修改环境变量（用户个人）</h4>
+<blockquote>
+<p>在对应用户下的隐藏文件中修改</p>
+</blockquote>
+<h5 id="1-进入对应文件">1.进入对应文件</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ls ~ -a			#列出~下所有对应文件，找到~/.bash_profile</span><br><span class="line">vim .bash_profile</span><br></pre></td></tr></table></figure>
+<h5 id="2-加入export命令">2.加入export命令</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export name=&quot;hello&quot;</span><br></pre></td></tr></table></figure>
+<h5 id="3-保存退出">3.保存退出</h5>
+<h5 id="4-重新登录用户">4.重新登录用户</h5>
+<blockquote>
+<p>该文件中的环境变量只在当前用户重新登录时才会重新加载。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">exit</span><br><span class="line">su - username		#-不能少</span><br></pre></td></tr></table></figure>
+<h5 id="5-测试">5.测试</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo $name</span><br></pre></td></tr></table></figure>
+<h4 id="2-修改环境变量（全局）">2.修改环境变量（全局）</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>/etc/profile</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/17/Docker/2022-12-17_1-Docker%E4%B8%89%E8%A6%81%E7%B4%A0/">1-Docker三要素</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-16T16:00:00.000Z" itemprop="datePublished">
+    2022-12-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Docker/">Docker</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="Docker三要素">Docker三要素</h2>
+<blockquote>
+<p>类似于C++从类声明获取类对象一样。</p>
+</blockquote>
+<h4 id="1-镜像（image）">1.镜像（image）</h4>
+<blockquote>
+<p>一个程序的模板，允许使用其生成多个相同的容器实例。其本质是程序的源代码。</p>
+</blockquote>
+<h4 id="2-容器（container）">2.容器（container）</h4>
+<blockquote>
+<p>使用镜像产生的实例。其包含需要的最小环境与运行在其中的程序。</p>
+</blockquote>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="language-bash"> 镜像</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-仓库（responsibility）">3.仓库（responsibility）</h4>
+<blockquote>
+<p>存放镜像文件的地方。</p>
+</blockquote>
+<p>国外为docker hub</p>
+<p>国内为阿里云，网易云等</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/17/Shell%E7%BC%96%E7%A8%8B/2022-12-17_1-shell%E8%84%9A%E6%9C%AC%E7%AE%80%E4%BB%8B/">1-shell脚本简介</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-16T16:00:00.000Z" itemprop="datePublished">
+    2022-12-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-shell脚本简介">1.shell脚本简介</h2>
+<h4 id="1-1shell介绍">1.1shell介绍</h4>
+<p>操作系统每一个动作，都需要一个程序来编写成二进制文件才能执行。每次都需要一个程序太不方便，于是出现了shell来获取约定好的用户命令，并以此查询并执行编写好的二进制文件。</p>
+<h4 id="1-2shell脚本介绍">1.2shell脚本介绍</h4>
+<p>含有多条Linux命令，并含有循环控制语句的文件。</p>
+<p>Linux下是<code>*.sh</code>，Windows下是<code>*.bat</code></p>
+<h4 id="1-3SheBang（-）">1.3SheBang（#!）</h4>
+<blockquote>
+<p>通常在脚本的第一行规定使用何种解释器去执行该脚本</p>
+<p>语法如下：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">! /bin/bash</span>		</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">使用bash来解释</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">或者一样的</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">! /bin/sh</span></span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如果没有指定，则会使用当前环境下的shell解释器去解释，即$SHELL</p>
+</li>
+</ul>
+<h4 id="1-4执行脚本的几种方式">1.4执行脚本的几种方式</h4>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">给文件一个可执行权限</span></span><br><span class="line">chmod +x filename</span><br><span class="line">chmod +x ./hello.sh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">指定路径的解释器去解释（推荐）</span></span><br><span class="line">/bin/bash filename</span><br><span class="line">/bin/bash ./hello.sh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"><span class="built_in">source</span> filename</span></span><br><span class="line">. filename</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/12/17/Shell%E7%BC%96%E7%A8%8B/2022-12-17_2-Bash%E7%89%B9%E6%80%A7/">2-Bash特性</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-12-16T16:00:00.000Z" itemprop="datePublished">
+    2022-12-17
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Shell%E7%BC%96%E7%A8%8B/">Shell编程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="2-Bash特性">2.Bash特性</h2>
+<h4 id="1-history命令">1.history命令</h4>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#查看过往的命令历史</span></span><br><span class="line"><span class="built_in">history</span>			</span><br><span class="line"></span><br><span class="line"><span class="comment">#有关历史的变量</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$HISTSIZE</span>	<span class="comment">#查看历史的最大值</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$HISTFILE</span>	<span class="comment">#查看存储历史命令的文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#history参数</span></span><br><span class="line">-c		<span class="comment">#清空历史：history -c</span></span><br><span class="line">-r		<span class="comment">#恢复历史：history -r</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#调用历史命令</span></span><br><span class="line">!历史ID	<span class="comment">#调用对应ID的命令</span></span><br><span class="line">!!		 <span class="comment">#执行上一条命令</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-快捷键">2.快捷键</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>CTRL+L：清屏</p>
+</li>
+<li class="lvl-2">
+<p>CTRL+U：擦除当前命令</p>
+</li>
+<li class="lvl-2">
+<p>CTRL+A：移到行首</p>
+</li>
+<li class="lvl-2">
+<p>CTRL+B：左移一个光标’</p>
+</li>
+<li class="lvl-2">
+<p>CTRL+E：移到行尾</p>
+</li>
+<li class="lvl-2">
+<p>CTRL+C：终止当前命令</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/11/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/13/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

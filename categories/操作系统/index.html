@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ 操作系统 }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/08/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E3%80%8A%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2022-08-04_1-3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E4%BB%8B%E7%BB%8D/">1-3计算机硬件介绍</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-08-03T16:00:00.000Z" itemprop="datePublished">
+    2022-08-04
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E3%80%8A%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">《现代操作系统》学习笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="计算机硬件介绍">计算机硬件介绍</h2>
+<blockquote>
+<p>硬件有以下组成：</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>CPU</p>
+</li>
+<li class="lvl-2">
+<p>内存</p>
+</li>
+<li class="lvl-2">
+<p>IO设备</p>
+</li>
+<li class="lvl-2">
+<p>系统总线</p>
+</li>
+<li class="lvl-2">
+<p>其它设备</p>
+</li>
+</ul>
+<p><img src="picture/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90.png" alt=""></p>
+<h4 id="1-3-1处理器">1.3.1处理器</h4>
+<blockquote>
+<p>CPU先取出指令，再解码，再执行，再找到下一条指令。</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>通用寄存器用于保存变量和临时结果</p>
+</li>
+<li class="lvl-2">
+<p>程序计数器用于保存下一条指令的内存地址</p>
+</li>
+<li class="lvl-2">
+<p>堆栈指针用于指向当前栈的顶端</p>
+<ul class="lvl-2">
+<li class="lvl-6">这个栈含有已经进入但未退出的每个过程的框架（内含输入参数、局部变量、保存在寄存器中的临时变量）</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>程序状态字寄存器用于保存一些特殊的字段。</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/08/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E3%80%8A%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2022-08-04_1-5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%A6%82%E5%BF%B5/">1-5操作系统的概念</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-08-03T16:00:00.000Z" itemprop="datePublished">
+    2022-08-04
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E3%80%8A%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">《现代操作系统》学习笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="操作系统的概念">操作系统的概念</h2>
+<h4 id="1-5-1进程">1.5.1进程</h4>
+<blockquote>
+<p>进程本质上是一个正在执行的一个程序。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/08/01/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-08-01_5%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/">5线程模型</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-31T16:00:00.000Z" itemprop="datePublished">
+    2022-08-01
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="线程模型">线程模型</h2>
+<ul class="lvl-0">
+<li class="lvl-2">多线程之间会共享同一块地址空间和所有可用数据的能力，进程不能</li>
+<li class="lvl-2">线程比进程更轻量级，更容易创建和撤销</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/30/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E3%80%8A%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2022-07-30_1-1%E4%BB%80%E4%B9%88%E6%98%AF%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">1-1什么是操作系统</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-29T16:00:00.000Z" itemprop="datePublished">
+    2022-07-30
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E3%80%8A%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">《现代操作系统》学习笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="什么是操作系统">什么是操作系统</h2>
+<blockquote>
+<p>一种运行在内核态的软件，向下管理硬件，向上提供资源（的抽象）。</p>
+</blockquote>
+<h4 id="1-1-1作为扩展机器的操作系统">1.1.1作为扩展机器的操作系统</h4>
+<blockquote>
+<p>操作系统的任务是管理好的抽象，并实现和管理它所创建的抽象对象（即隐藏硬件，提供给程序良好的抽象）。</p>
+</blockquote>
+<h4 id="1-1-2作为资源管理者的操作系统">1.1.2作为资源管理者的操作系统</h4>
+<blockquote>
+<p>自底向上来看，操作系统的任务是在相互竞争的程序之间有序地控制对处理器、存储器以及其它IO设备的分配。</p>
+</blockquote>
+<p>资源管理包括以下两种方式实现：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>时间复用</p>
+<ul class="lvl-2">
+<li class="lvl-6">多程序在一个CPU上运行</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>空间复用</p>
+<ul class="lvl-2">
+<li class="lvl-6">每个用户都得到一部分被分割的内存</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/21/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-07-21_4%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/">4进程和线程</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-20T16:00:00.000Z" itemprop="datePublished">
+    2022-07-21
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="进程和线程">进程和线程</h2>
+<h4 id="进程">进程</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>进程是对正在运行中的程序的抽象</p>
+</li>
+</ul>
+<h5 id="支持多进程的多道程序系统">支持多进程的多道程序系统</h5>
+<blockquote>
+<p>严格来说，在某一瞬间，CPU只能运行一个进程，因此并行都是伪并行</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>伪并行</p>
+<ul class="lvl-2">
+<li class="lvl-6">单核或多核处理器同时执行多个进程，从而使程序加快</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>由于CPU执行速度很快，进程间的换进换出也非常迅速，因此很难对多个并行进程进行追踪</p>
+</li>
+</ul>
+<h5 id="进程模型">进程模型</h5>
+<h5 id="进程的创建">进程的创建</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>系统的初始化</p>
+<ul class="lvl-2">
+<li class="lvl-6">启动操作系统时会创建的进程
+<ul class="lvl-4">
+<li class="lvl-10">前台进程：与用户交互的进程</li>
+<li class="lvl-10">守护进程</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>系统调用创建</p>
+<ul class="lvl-2">
+<li class="lvl-6">一个正在运行的进程会创建很多进程来帮助运行</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>用户请求创建</p>
+<ul class="lvl-2">
+<li class="lvl-6">双击应用等</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>批处理创建</p>
+<ul class="lvl-2">
+<li class="lvl-6">在大型机的批处理系统中应用</li>
+</ul>
+</li>
+</ul>
+<h5 id="进程的终止">进程的终止</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>正常退出（自愿的）</p>
+</li>
+<li class="lvl-2">
+<p>错误退出（自愿的）</p>
+</li>
+<li class="lvl-2">
+<p>严重错误（非自愿的）</p>
+</li>
+<li class="lvl-2">
+<p>被其它进程杀死（非自愿的）</p>
+</li>
+</ul>
+<h5 id="进程的层次结构">进程的层次结构</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Unix中，进程形成进程树，一套进程形成进程组</p>
+</li>
+<li class="lvl-2">
+<p>Windows中，进程平等存在，可以随时控制进程</p>
+</li>
+</ul>
+<h5 id="进程的状态">进程的状态</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>进程有自己的程序计数器和内部状态，但进程之间仍需要互相帮助</p>
+<ul class="lvl-2">
+<li class="lvl-6">运行</li>
+<li class="lvl-6">阻塞：等外部某个事件发生之后才能运行</li>
+<li class="lvl-6">就绪：已经可以运行，但某个外部事件正在运行</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/20/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-07-20_3/">3</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-19T16:00:00.000Z" itemprop="datePublished">
+    2022-07-20
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h4 id="线程">线程</h4>
+<blockquote>
+<p>操作系统能够进行运算调度的最小单位。它被包含在进程中，是进程中的实际运作单位。</p>
+</blockquote>
+<h5 id="地址空间">地址空间</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>在一个非常简单的操作系统中，仅仅有一个应用程序运行在内存中。为了运行第二个应用程序，需要把第一个应用程序移除才能把第二个应用程序装入内存</p>
+</li>
+<li class="lvl-2">
+<p>复杂一些的操作系统会允许多个应用程序同时装入内存中运行。为了防止应用程序之间相互干扰，需要某种保护机制</p>
+</li>
+</ul>
+<h5 id="虚拟内存">虚拟内存</h5>
+<h4 id="文件">文件</h4>
+<blockquote>
+<p>所有io设备都以文件的形式提供</p>
+</blockquote>
+<h5 id="特殊文件">特殊文件</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>提供特殊文件时为了使IO设备看起来像文件一样</p>
+</li>
+<li class="lvl-2">
+<p>块特殊文件</p>
+<ul class="lvl-2">
+<li class="lvl-6">磁盘等</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>字特殊文件</p>
+<ul class="lvl-2">
+<li class="lvl-6">打印机、调制解调器等</li>
+</ul>
+</li>
+</ul>
+<h5 id="管道">管道</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>是一种虚文件，用于两个进程之间通信</p>
+</li>
+</ul>
+<h4 id="并发和并行">并发和并行</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>并行指两个或多个事件在同一时刻发生</p>
+</li>
+<li class="lvl-2">
+<p>并发指两个或多个事件在同一时间间隔内发生</p>
+</li>
+</ul>
+<h4 id="系统调用">系统调用</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>操作系统提供两个功能</p>
+<ul class="lvl-2">
+<li class="lvl-6">
+<p>为用户提供应用程序抽象</p>
+</li>
+<li class="lvl-6">
+<p>管理计算机资源</p>
+</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>只有系统调用才能进入内核态，过程调用不能</p>
+</li>
+</ul>
+<h5 id="基于进程原理">基于进程原理</h5>
+<h5 id="基于文件管理">基于文件管理</h5>
+<h5 id="基于目录管理">基于目录管理</h5>
+<h4 id="操作系统结构">操作系统结构</h4>
+<h5 id="单体结构">单体结构</h5>
+<p>主程序调用服务程序，服务程序辅助实用程序调用</p>
+<p><strong>优点</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>调用任意程序都非常高效</p>
+</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如果发生故障，很容易崩溃</p>
+</li>
+</ul>
+<h5 id="分层结构">分层结构</h5>
+<p>使用层来隔离不同的功能，每一层只能与上一层和下一层沟通</p>
+<h5 id="微内核">微内核</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>尽可能减少内核态的模块</p>
+</li>
+<li class="lvl-2">
+<p>将多出的功能放在用户区</p>
+</li>
+</ul>
+<h5 id="客户服务器模式">客户服务器模式</h5>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-07-16_1OS%E6%80%BB%E8%A7%88/">1OS总览</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-15T16:00:00.000Z" itemprop="datePublished">
+    2022-07-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="OS总览">OS总览</h2>
+<h4 id="程序生成过程">程序生成过程</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>预处理过程：将需要引用的内容插入到源文件中，形成.i文件</p>
+<ul class="lvl-2">
+<li class="lvl-6">gcc -e xxx.c -o xxx.i</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>编译阶段：将.i文件翻译成汇编程序</p>
+<ul class="lvl-2">
+<li class="lvl-6">gcc -s xxx.i -o xxx.s</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>汇编阶段：汇编器将.s文件翻译成机器语言指令</p>
+<ul class="lvl-2">
+<li class="lvl-6">gcc -c xxx.s -o xxx.o</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>链接阶段：将.o文件与一些预编译的库文件链接在一起，形成可执行文件</p>
+</li>
+</ul>
+<h4 id="操作系统如何区分和识别代码">操作系统如何区分和识别代码</h4>
+<blockquote>
+<p>根据“语境”来分析</p>
+</blockquote>
+<h4 id="计算机整体的架构">计算机整体的架构</h4>
+<p><img src="picture/%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<p>用户态和内核态运行在CPU中，通过程序状态寄存器控制这两种状态</p>
+<p>在内核态的情况下，能够运行任何指令，开放硬件的一切</p>
+<p>在用户态的情况下，部分功能不能运行，对指令有所限制</p>
+<p>为了获取操作系统的服务，必须要调用操作系统对外的接口</p>
+<h4 id="硬件作用">硬件作用</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>寄存器</p>
+<ul class="lvl-2">
+<li class="lvl-6">通用寄存器：用于保存变量和临时结果
+<ul class="lvl-4">
+<li class="lvl-10">程序计数器：用于存储指向下一条指令的地址</li>
+<li class="lvl-10">用于保存堆栈指针</li>
+<li class="lvl-10">程序状态寄存器：用于维护long型的数据集合，跟踪当前系统的状态</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>CPU：执行指令（从寄存器读取）</p>
+</li>
+</ul>
+<h4 id="存储层次结构">存储层次结构</h4>
+<p><img src="picture/%E5%AD%98%E5%82%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84.png" alt=""></p>
+<h4 id="指令集架构">指令集架构</h4>
+<blockquote>
+<p>CPU处理指令的规则（人为编写的）</p>
+</blockquote>
+<p>用于描述机器代码所执行的效果</p>
+<h4 id="处理器的微体系结构">处理器的微体系结构</h4>
+<p>用于描述处理器的具体实现</p>
+<h4 id="CPU流水线">CPU流水线</h4>
+<p>CPU为了提升性能，将功能分为：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>取指单元</p>
+</li>
+<li class="lvl-2">
+<p>解码单元</p>
+</li>
+<li class="lvl-2">
+<p>执行单元</p>
+</li>
+</ul>
+<h4 id="局部性原理">局部性原理</h4>
+<blockquote>
+<p>缓存造成性能的提升</p>
+</blockquote>
+<h5 id="时间重复性">时间重复性</h5>
+<p>某一个内存多次被重复引用</p>
+<h5 id="空间重复性">空间重复性</h5>
+<p>某一个内存附近的内存被引用</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/07/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-07-16_2/">2</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-07-15T16:00:00.000Z" itemprop="datePublished">
+    2022-07-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id=""></h2>
+<h4 id="磁盘">磁盘</h4>
+<p>每个磁片上分为多个扇片。也可以分为多个磁道，每个磁道分为多个扇区。</p>
+<h4 id="实现输入输出的方式">实现输入输出的方式</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>忙等待：仅能一个设备占用CPU直到使用结束，其它设备不能用</p>
+</li>
+<li class="lvl-2">
+<p>中断：暂时停止一个设备对CPU的占用</p>
+</li>
+<li class="lvl-2">
+<p>直接存储器访问（DMA）：直接控制内存和控制器交换</p>
+</li>
+</ul>
+<h4 id="总线（BUS）">总线（BUS）</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>多个设备或者接入点（站点）</p>
+</li>
+<li class="lvl-2">
+<p>传输的数据包（乘客）</p>
+</li>
+<li class="lvl-2">
+<p>传输的数据有容量（字节块）（4/8byte）</p>
+</li>
+<li class="lvl-2">
+<p>运行有顺序（控制器）</p>
+</li>
+</ul>
+<h4 id="操作系统功能">操作系统功能</h4>
+<h5 id="基本功能">基本功能</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>防止硬件被滥用</p>
+</li>
+<li class="lvl-2">
+<p>通过简单的机制匹配对应的应用程序，进而控制复杂的硬件</p>
+</li>
+</ul>
+<h5 id="对硬件进行的抽象">对硬件进行的抽象</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>进程：程序</p>
+</li>
+<li class="lvl-2">
+<p>虚拟内存：内存和磁盘</p>
+</li>
+<li class="lvl-2">
+<p>文件：io设备</p>
+</li>
+</ul>
+<h4 id="进程">进程</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>进程的本质是操作系统执行的一个程序，这个容器里存放了这个程序所有的信息</p>
+</li>
+<li class="lvl-2">
+<p>与进程相关</p>
+<ul class="lvl-2">
+<li class="lvl-6">地址空间——从某个最小值的存储位置到某个最大值的存储位置的列表</li>
+<li class="lvl-6">资源集——寄存器、文件清单、突发警报、进程清单等信息</li>
+</ul>
+</li>
+</ul>
+<h5 id="进程挂起">进程挂起</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>进程的地址空间——磁盘映像</p>
+</li>
+<li class="lvl-2">
+<p>进程表项（保存了进程当前的信息）</p>
+</li>
+</ul>
+<h5 id="进程间通信">进程间通信</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>合作完成某些作业的相关进程经常需要彼此通信来完成作业</p>
+</li>
+<li class="lvl-2">
+<p>保证信息不会丢失</p>
+<ul class="lvl-2">
+<li class="lvl-6">定时器</li>
+</ul>
+</li>
+</ul>
+<h5 id="并发技术">并发技术</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>通过指令的交错执行，进程在来回切换</p>
+</li>
+<li class="lvl-2">
+<p>一个进程的指令和另一个进程的指令交错执行的过程即为并发</p>
+</li>
+<li class="lvl-2">
+<p>在每个任务运行前，CPU都需要知道任务从哪里加载和运行</p>
+<ul class="lvl-2">
+<li class="lvl-6">CPU寄存器</li>
+<li class="lvl-6">程序计数器（记录下一条指令的位置）</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

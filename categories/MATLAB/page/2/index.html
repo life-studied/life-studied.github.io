@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ MATLAB }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/24/MATLAB/2022-03-24_1-7%E4%BA%8C%E7%BB%B4%E5%9B%BE%E5%92%8C%E4%B8%89%E7%BB%B4%E5%9B%BE/">1-7二维图和三维图</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-23T16:00:00.000Z" itemprop="datePublished">
+    2022-03-24
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MATLAB/">MATLAB</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="二维图和三维图">二维图和三维图</h2>
+<h4 id="线图">线图</h4>
+<blockquote>
+<p>使用plot函数绘制</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">x = <span class="number">0</span>:<span class="built_in">pi</span>/<span class="number">100</span>:<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line">y = <span class="built_in">sin</span>(x);</span><br><span class="line"><span class="built_in">plot</span>(x,y)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>实质是先创建x矩阵，再根据x创建对应的y值矩阵，最后将两个矩阵传入plot函数</p>
+</blockquote>
+<p><strong>plot的第三个参数</strong></p>
+<blockquote>
+<p>线条设定</p>
+<p>每个设定可包含表示线条颜色、样式和标记的字符。标记是在绘制的每个数据点上显示的符号，例如，<strong>+</strong>、<strong>o</strong> 或 *<strong><strong>。例如，</strong>‘g:*’</strong> 请求绘制使用 ***** 标记的绿色点线。</p>
+</blockquote>
+<p><strong>注意</strong></p>
+<p>每次调用绘图函数，都会清空图窗</p>
+<p><strong>将绘图加入到原图中</strong></p>
+<blockquote>
+<p>使用hold on命令</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">x = <span class="number">0</span>:<span class="built_in">pi</span>/<span class="number">100</span>:<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line">y = <span class="built_in">sin</span>(x);</span><br><span class="line"><span class="built_in">plot</span>(x,y)</span><br><span class="line"><span class="built_in">hold</span> on</span><br><span class="line"></span><br><span class="line">y2 = <span class="built_in">cos</span>(x);</span><br><span class="line"><span class="built_in">plot</span>(x,y2,<span class="string">&#x27;:&#x27;</span>)</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sin&#x27;</span>,<span class="string">&#x27;cos&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>关闭图窗</strong></p>
+<blockquote>
+<p>使用hold off命令</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/23/MATLAB/2022-03-23_1-1%E6%A1%8C%E9%9D%A2%E5%9F%BA%E7%A1%80/">1-1桌面基础</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-22T16:00:00.000Z" itemprop="datePublished">
+    2022-03-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MATLAB/">MATLAB</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="桌面基础">桌面基础</h2>
+<h4 id="创建变量">创建变量</h4>
+<blockquote>
+<p>a=1</p>
+</blockquote>
+<p><strong>注：如果没有指定输出类型，则会存储到ans变量中</strong></p>
+<blockquote>
+<p>例如：1+2</p>
+</blockquote>
+<h5 id="不输出结果">不输出结果</h5>
+<blockquote>
+<p>在语句结尾使用；</p>
+</blockquote>
+<h5 id="再次调用命令">再次调用命令</h5>
+<blockquote>
+<p>在空白命令行中键入命令的前几个字符，并按上下箭头</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/categories/MATLAB/">« prev</a><a class="page-number" href="/categories/MATLAB/">1</a><span class="page-number current">2</span>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

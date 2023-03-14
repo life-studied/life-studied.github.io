@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ 数据结构与算法lesson }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-04-11_14%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/">14最短路径</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-10T16:00:00.000Z" itemprop="datePublished">
+    2022-04-11
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="最短路径">最短路径</h2>
+<h4 id="概念">概念</h4>
+<blockquote>
+<p>源点：一条路径的起始点</p>
+<p>终点：一条路径的终止点</p>
+</blockquote>
+<h4 id="迪杰斯特拉算法-单源点">迪杰斯特拉算法-单源点</h4>
+<p><strong>变量引入介绍</strong></p>
+<blockquote>
+<p>引入一个辅助变量D（数组）</p>
+<p>它的每一个分量表示  当前找到的“从源点v开始到每一个顶点vi的最短路径”的长度</p>
+<p>初始状态：如果v到vi有弧，表示权值，否则无穷大</p>
+<p>引入路径向量，表示当前结点的上一个结点下标</p>
+<p>引入final标记，表示已经经过测试的路径点</p>
+</blockquote>
+<p><strong>解法说明</strong></p>
+<blockquote>
+<p>从初始开始，标记final，然后找相邻结点的最短路径。</p>
+<p>更新相邻结点的辅助向量（=min(当前结点+到这个结点的权值，之前的辅助向量））</p>
+<p>在final未标记的点继续循环，直到找到</p>
+</blockquote>
+<p><img src="picture/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E5%AE%9E%E7%8E%B0%E5%9B%BE.png" alt=""></p>
+<p><img src="picture/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E5%AE%9E%E7%8E%B0%E5%9B%BE2.png" alt=""></p>
+<blockquote>
+<p>完成后从末尾倒推出最短路径</p>
+</blockquote>
+<h5 id="代码实现">代码实现</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INF 65535</span></span><br><span class="line"><span class="comment">//图结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> vexs[<span class="number">20</span>];		<span class="comment">//顶点</span></span><br><span class="line">    <span class="type">int</span> arc[<span class="number">20</span>][<span class="number">20</span>];	<span class="comment">//边</span></span><br><span class="line">    <span class="type">int</span> numVer,numEdges;</span><br><span class="line">&#125;MGraph;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> Pathaec[<span class="number">20</span>];</span><br><span class="line"><span class="comment">//存储最短路径下标</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> ShortPathTable[<span class="number">20</span>];</span><br><span class="line"><span class="comment">//存储v0到各个点的最短路径长度之和</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//需要两个数组</span></span><br><span class="line"><span class="comment">//P的值是前驱结点的下标</span></span><br><span class="line"><span class="comment">//D的值是选取结点到v结点的最短路径长度</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">ShortPath_Dijkstra</span><span class="params">(MGraph,<span class="type">int</span> v0,Patharc* P,ShortPathTable* D)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> k;<span class="comment">//记录下标</span></span><br><span class="line">    <span class="type">int</span> final[<span class="number">20</span>];	<span class="comment">//标记数组，表示已经求得当前下标的结点已被完成求出最短路径</span></span><br><span class="line">    <span class="comment">//初始化数组</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> v=<span class="number">0</span>;v&lt;G.numVer;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        final[i]=<span class="number">0</span>;	<span class="comment">//全部未被处理</span></span><br><span class="line">        (*D)[i]=G.arc[v0][i];	<span class="comment">//初始化起始结点与周边结点的权值</span></span><br><span class="line">        (*P)[i]=<span class="number">-1</span>;		<span class="comment">//路径数组初始化为-1</span></span><br><span class="line">    &#125;</span><br><span class="line">    final[v0]=<span class="number">1</span>;		<span class="comment">//从起始点开始</span></span><br><span class="line">    (*D)[v0]=<span class="number">0</span>;			<span class="comment">//自己对自己的路径为0</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//开始循环，每次求出的v0到某个结点的最短路径</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;G.numVer;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> min=INF;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;G.numVer;j++)	<span class="comment">//找到距离v0最近的点</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!final[j] &amp;&amp; (*D)&lt;min)	<span class="comment">//同时不能被标记</span></span><br><span class="line">            &#123;</span><br><span class="line">                min=(*D)[j];</span><br><span class="line">                k=j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        final[k]=<span class="number">1</span>;		<span class="comment">//将找到的最近结点放入标记</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//修正其余最短路径</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;G.numVer;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//如果经过这个结点的路径比现在的短</span></span><br><span class="line">            <span class="keyword">if</span>(min+G.arc[k][j]&lt;(*D)[j] &amp;&amp; !final[j])</span><br><span class="line">            &#123;</span><br><span class="line">                (*D)[j]=min+G.arc[k][j];</span><br><span class="line">                (*P)[j]=k;</span><br><span class="line">            &#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="弗洛伊德算法-任意两个结点间的路径">弗洛伊德算法-任意两个结点间的路径</h4>
+<blockquote>
+<p>数学表达式</p>
+</blockquote>
+<p><img src="picture/%E5%BC%97%E6%B4%9B%E4%BC%8A%E5%BE%B7%E7%AE%97%E6%B3%95%E7%9A%84%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE%E5%BC%8F.png" alt=""></p>
+<blockquote>
+<p>步骤：</p>
+<p>外层循环：从第一个结点开始</p>
+<p>​	内存循环：检查经过每个结点一次，比较路径并更新</p>
+</blockquote>
+<blockquote>
+<p>实现结构：</p>
+<p>邻接表和路径向量数组</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INF 65535</span></span><br><span class="line"><span class="comment">//图结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> vexs[<span class="number">20</span>];		<span class="comment">//顶点</span></span><br><span class="line">    <span class="type">int</span> arc[<span class="number">20</span>][<span class="number">20</span>];	<span class="comment">//边</span></span><br><span class="line">    <span class="type">int</span> numVer,numEdges;</span><br><span class="line">&#125;MGraph;</span><br><span class="line"></span><br><span class="line"><span class="comment">//path 路径	表示两个结点之间经过的某个结点</span></span><br><span class="line"><span class="comment">//dist 长度数组	代表两个结点的最短路径数值</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">floyd</span><span class="params">(MGraph G,<span class="type">int</span> path[<span class="number">20</span>],<span class="type">int</span> dist[<span class="number">20</span>])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;G.numVer;i++)		<span class="comment">//初始化</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;G.numVer;j++)</span><br><span class="line">    	&#123;</span><br><span class="line">            dist[i][j]=G.arc[i][j];</span><br><span class="line">            path[i][j]=j;</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//计算</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;G.numVer;i++)	<span class="comment">//i是中转</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;G.numVer;j++)		</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>;k&lt;G.numVer;k++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//更新规则：如果经过i结点的路径小于原有路径，则更新</span></span><br><span class="line">                <span class="type">int</span> temp=(dist[j][i]==INF || dist[i][k]==INF)?INF:(dist[j][i]+dist[i][k]);</span><br><span class="line">                <span class="keyword">if</span>(dist[j][k]&gt;temp)</span><br><span class="line">                &#123;</span><br><span class="line">                    dist[j][k]=temp;</span><br><span class="line">                    path[j][k]=path[j][i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-04-08_16%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E7%AE%97%E6%B3%95/">16关键路径算法</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-07T16:00:00.000Z" itemprop="datePublished">
+    2022-04-08
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="关键路径算法（运用拓扑排序）">关键路径算法（运用拓扑排序）</h2>
+<h4 id="概念">概念</h4>
+<blockquote>
+<p>AOV网：顶点表示活动</p>
+<p>AOE网：边来表示活动（带权有向无环图）顶点代表事件，权值表示活动持续的时间</p>
+<p>AOE网常常应用于工程，所以有一个开始和结束的顶点（源点和汇点）（入度/出度为0）</p>
+</blockquote>
+<p><img src="picture/%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E6%A6%82%E5%BF%B5%E5%9B%BE.png" alt=""></p>
+<blockquote>
+<p>关键路径：从源点到汇点路径最长的路径（活动的集合，所描述的是时间）</p>
+<p>例如：西天取经要等到唐僧到西天才能结束</p>
+<p>1.事件最早发生时间ETV（顶点最早发生时间）：从源点开始计算至当前事件所需时间权值之和的最小值</p>
+<p>2.事件最晚发生时间：从如果超出这个时间，就会耽误整个工期。（关键路径时间权值之和）-（从汇点回溯到当前事件所需时间权值之和）</p>
+<p>**注：**如果“事件最早发生时间”=“事件最晚发生时间”，则该事件是关键路径上的事件结点</p>
+<p>3.活动的最早开工时间：与前端事件最早发生时间一致</p>
+<p>4.活动的最晚开工时间：=后端事件的最晚发生时间-活动所需时间</p>
+</blockquote>
+<h4 id="实现思路——运用拓扑排序">实现思路——运用拓扑排序</h4>
+<blockquote>
+<p>建立一个邻接表来表示图</p>
+<p>建立关键路径上的ETV数组（初始化为0）</p>
+<p>建立关键路径上的LTV数组（初始化为汇点总时间）</p>
+<p>建立栈（入度为0的入栈，同时以该结点为入度的结点入度-1）</p>
+</blockquote>
+<p><img src="picture/%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%9B%BE.png" alt=""></p>
+<blockquote>
+<p>从源点（入度为0）入栈开始</p>
+<p>进行拓扑排序</p>
+<p>（增加步骤：在结点入栈时计算对应结点ETV）</p>
+<p>（增加步骤：在结点出栈时再进入另一个栈，直至栈满）</p>
+<p>ETV数组由此计算出关键路径所需的总时间（即汇点所对应的值），中间结点只是承接来辅助计算</p>
+<p>在结点再次入栈后，进行出栈操作，出栈时遍历该结点的下一个结点，根据下一个结点的ETV-权值得到当前结点的LTV</p>
+</blockquote>
+<blockquote>
+<p>计算ETE和LTE数组：</p>
+<p>ETE=ETV</p>
+<p>LTE=活动下一个事件的LTE-活动权值</p>
+</blockquote>
+<blockquote>
+<p>如果ETE=LTE，则是关键路径</p>
+</blockquote>
+<h4 id="代码实现">代码实现</h4>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OK 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ERROR 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MVNum 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> Status;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> VerTexType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> OtherInfo;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建栈 </span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">StackNode</span> &#123;</span></span><br><span class="line">	<span class="type">int</span> data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">StackNode</span>* <span class="title">next</span>;</span></span><br><span class="line">&#125;StackNode, * StackList;</span><br><span class="line"><span class="comment">//出栈函数 </span></span><br><span class="line">StackList <span class="title function_">Pop</span><span class="params">(StackList S, <span class="type">int</span>* e)</span></span><br><span class="line">&#123;</span><br><span class="line">	StackList p;</span><br><span class="line">	p = S;</span><br><span class="line">	<span class="keyword">if</span> (!p)</span><br><span class="line">		<span class="keyword">return</span> ERROR;</span><br><span class="line">	*e = p-&gt;data;</span><br><span class="line">	S = S-&gt;next;</span><br><span class="line">	<span class="built_in">free</span>(p);</span><br><span class="line">	<span class="keyword">return</span> S;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//入栈函数： </span></span><br><span class="line">StackList <span class="title function_">Push</span><span class="params">(StackList S, <span class="type">int</span> e)</span></span><br><span class="line">&#123;</span><br><span class="line">	StackList p;</span><br><span class="line">	p = (StackNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(StackNode));</span><br><span class="line">	p-&gt;data = e;</span><br><span class="line">	p-&gt;next = S;</span><br><span class="line">	S = p;</span><br><span class="line">	<span class="keyword">return</span> S;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//边结点 </span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span> &#123;</span>    <span class="comment">//链表结点</span></span><br><span class="line">	<span class="type">int</span> adjvex;           <span class="comment">//邻接表创建无向网的实现</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span>* <span class="title">nextarc</span>;</span>    <span class="comment">//指向下一条边的指针</span></span><br><span class="line">	OtherInfo info;       <span class="comment">//和边相关的信息</span></span><br><span class="line">&#125;ArcNode;</span><br><span class="line"></span><br><span class="line"><span class="comment">//顶点信息 </span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">VNode</span> &#123;</span>   <span class="comment">//头结点</span></span><br><span class="line">	VerTexType data;   <span class="comment">//顶点信息</span></span><br><span class="line">	ArcNode* firstarc;<span class="comment">//指向第一条依附该顶点的边的指针</span></span><br><span class="line">&#125;VNode, AdjList[MVNum];<span class="comment">//AdjList 表示邻接表类型</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	AdjList vertices;     <span class="comment">//邻接表头结点数组</span></span><br><span class="line">	<span class="type">int</span> vexnum, arcnum;   <span class="comment">//图的顶点数和弧数</span></span><br><span class="line">&#125;ALGraph;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> indegree[<span class="number">100</span>] = &#123; <span class="number">0</span> &#125;;<span class="comment">//结点入度的个数</span></span><br><span class="line"><span class="comment">//这里大家自行解决入度的问题 你可以创建图的时候直接创建相对应的数组</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">TopoSort</span><span class="params">(ALGraph G, <span class="type">int</span>* topo,<span class="type">int</span> *etv)</span></span><br><span class="line">&#123;</span><br><span class="line">	StackList S = <span class="literal">NULL</span>;</span><br><span class="line">	ArcNode* p;</span><br><span class="line">	<span class="comment">//先检查所有入度为0的结点并且入栈</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (!indegree[i]) &#123;</span><br><span class="line">			S = Push(S, i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> m = <span class="number">0</span>;<span class="comment">//记录拓扑序列的个数 </span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		etv[i] = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> index = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (S)</span><br><span class="line">	&#123;</span><br><span class="line">		S = Pop(S, &amp;index);</span><br><span class="line">		<span class="comment">//紧接着跟一个进栈</span></span><br><span class="line">		topo[m] = index;</span><br><span class="line">		m++;</span><br><span class="line">		<span class="keyword">while</span> (p != <span class="literal">NULL</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> k = p-&gt;adjvex;</span><br><span class="line">			indegree[k]--;</span><br><span class="line">			<span class="keyword">if</span> (indegree[k] == <span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				S = Push(S, k);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//求事件的最早发生时间</span></span><br><span class="line">			<span class="keyword">if</span> (etv[index] + (p-&gt;info) &gt; etv[k])</span><br><span class="line">			&#123;</span><br><span class="line">				etv[k] = etv[index] + (p-&gt;info);</span><br><span class="line">			&#125;</span><br><span class="line">			p = p-&gt;nextarc;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	topo[m] = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">if</span> (m &lt; G.vexnum)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//有环</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//输出拓扑序列</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">CriticalPath</span><span class="params">(ALGraph G, <span class="type">int</span>* etv, <span class="type">int</span>* ltv)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> ete, lte;<span class="comment">//活动的最早和最晚</span></span><br><span class="line">	ArcNode* p;</span><br><span class="line">	<span class="type">int</span> topo[<span class="number">99</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="keyword">if</span> (TopoSort(G,topo,etv))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			ltv[i] = etv[G.vexnum - <span class="number">1</span>];<span class="comment">//初始化ltv</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> count = G.vexnum;</span><br><span class="line">	<span class="keyword">while</span> (count)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> gettopo = topo[--count];<span class="comment">//将拓扑序列从后往前拿出来</span></span><br><span class="line">		<span class="keyword">for</span> (p = G.vertices[gettopo].firstarc; p ;p = p-&gt;nextarc)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> k = p-&gt;adjvex;</span><br><span class="line">			<span class="keyword">if</span> (ltv[k] - (p-&gt;info) &lt; ltv[gettopo])</span><br><span class="line">			&#123;</span><br><span class="line">				ltv[gettopo] = ltv[k] - (p-&gt;info);<span class="comment">//求事件的最晚</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//求活动的最早和最晚</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (p = G.vertices[i].firstarc; p; p = p-&gt;nextarc)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> k = p-&gt;adjvex;</span><br><span class="line">			ete = etv[i];</span><br><span class="line">			lte = ltv[k] - p-&gt;info;</span><br><span class="line">			<span class="keyword">if</span> (ete == lte)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">//输出相对应的点和边 加入到最短路径当中</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> </span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span>[n] a;</span><br><span class="line">	<span class="type">int</span> count = <span class="number">0</span>;<span class="comment">//下标</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">insert</span><span class="params">(<span class="type">int</span> val)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//摊还分析</span></span><br><span class="line">	<span class="comment">//每进行一次O(n)的操作 都会跟着N-1次的O(1)</span></span><br><span class="line">	<span class="comment">//O(1)</span></span><br><span class="line">	<span class="keyword">if</span> (count == a.length)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span>  i = <span class="number">0</span>; i &lt; a.length; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			sum = sum + a[i];</span><br><span class="line">		&#125;</span><br><span class="line">		a[<span class="number">0</span>] = sum;</span><br><span class="line">		count = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	a[count] = val;</span><br><span class="line">	count++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">find</span><span class="params">(<span class="type">int</span>[] a, <span class="type">int</span> n, <span class="type">int</span> x)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> pos;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (a[i] == x)</span><br><span class="line">		&#123;</span><br><span class="line">			pos = i;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> pos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-04-08_17%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/">17复杂度分析</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-07T16:00:00.000Z" itemprop="datePublished">
+    2022-04-08
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="复杂度分析">复杂度分析</h2>
+<blockquote>
+<p>算法评价的标准：</p>
+<p>1.准确性</p>
+<p>必须能彻底解决这个问题：使用真实数据的大量测试</p>
+<p>2.健壮性</p>
+<p>必须保证在任何情况下都不会崩溃</p>
+<p>3.效率</p>
+</blockquote>
+<h4 id="3-1运行时间（时间复杂度）">3.1运行时间（时间复杂度）</h4>
+<h6 id="事后统计法的局限性">事后统计法的局限性</h6>
+<blockquote>
+<p>受到测试环境的制约——不同测试环境对算法的影响不同</p>
+</blockquote>
+<blockquote>
+<p>数据规模的制约——大量测试数据需要的代价大</p>
+</blockquote>
+<h5 id="复杂度的估计方法">复杂度的估计方法</h5>
+<blockquote>
+<p>概念：</p>
+<p>时间频度：一个算法中，语句执行的次数叫做时间频度T(n)</p>
+<p>n就是问题的规模</p>
+<p>时间复杂度就是找到T(n)随着规模n变化的规律</p>
+</blockquote>
+<h5 id="一般步骤">一般步骤</h5>
+<p>1.找到算法中的基本语句（算法中执行次数最多的语句，通常是循环体中的语句），对于顺序结构直接求和。</p>
+<p>2.计算基本语句执行次数的数量级（只需计算最高次幂，去除等价无穷小，只关注算法的增长率）</p>
+<p>3.使用O来表示算法的时间性能</p>
+<blockquote>
+<p>P类问题——一个多项式时间复杂度能解决的问题</p>
+<p>NP类问题——一个指数时间复杂度能解决的问题</p>
+</blockquote>
+<h5 id="如何分析">如何分析</h5>
+<p>1.对于简单的输入输出和赋值，近似为O(1)</p>
+<p>2.对于顺序结构，求和法则（找到所有顺序结构中的最大值，其余忽略）</p>
+<p>3.对于选择结构，计算else字句的时间，也可忽略为O(1)</p>
+<p>4.对于循环结构，运行时间主要体现在迭代，乘法法则</p>
+<p>5.对于复杂的算法，拆分成简单的结构再计算</p>
+<h5 id="对于真实项目所需的分析方法">对于真实项目所需的分析方法</h5>
+<blockquote>
+<p>最好、最坏、平均、摊均</p>
+</blockquote>
+<p>最好与最坏都是极端情况</p>
+<p>（加权）平均：所有情况所需的（时间*概率）之和</p>
+<p>摊均：大多数情况都是O(1)，少数情况是O(n)——将所有情况摊分</p>
+<h4 id="3-2所需内存（空间复杂度）">3.2所需内存（空间复杂度）</h4>
+<blockquote>
+<p>算法所耗费的空间</p>
+<p>在算法中需要临时占用的空间大小（不关注原本需要的空间）</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/04/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-04-05_15%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/">15拓扑排序</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-04-04T16:00:00.000Z" itemprop="datePublished">
+    2022-04-05
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="拓扑排序">拓扑排序</h2>
+<h4 id="基础概念">基础概念</h4>
+<blockquote>
+<p>有向无环图：有向图且无环</p>
+<p>活动：在一个表示工程的有向图中，顶点表示活动，边表示活动之间的优先级关系</p>
+<p>AOV网：描述“顶点表示活动，边表示活动之间的优先级关系”的图</p>
+<p>拓扑序列：一个具有n个顶点的有向图，只要满足vi到vj有路径且vi在vj之前，则称之为拓扑序列</p>
+<p>拓扑排序：从有向图中每次选出一个没有前驱的结点，输出（放入序列中），并删除有关的弧</p>
+</blockquote>
+<h4 id="步骤">步骤</h4>
+<blockquote>
+<p>需要一个图，使用邻接表来存储，附带一个矩阵来存储每个结点的入度（如图）</p>
+</blockquote>
+<p><img src="picture/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt=""></p>
+<blockquote>
+<p>为了减少循环次数，使用栈来辅助决策</p>
+<p>每次循环，都先把入度为0的结点入栈，在一个一个出栈过程中更新其余结点的入度，更新过程中出现了入度为0的结点就入栈</p>
+</blockquote>
+<h4 id="代码实现">代码实现</h4>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OK 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ERROR 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MVNum 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> Status;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> VerTexType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> OtherInfo;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建栈 </span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">StackNode</span> &#123;</span></span><br><span class="line">	<span class="type">int</span> data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">StackNode</span>* <span class="title">next</span>;</span></span><br><span class="line">&#125;StackNode, * StackList;</span><br><span class="line"><span class="comment">//出栈函数 </span></span><br><span class="line">StackList <span class="title function_">Pop</span><span class="params">(StackList S, <span class="type">int</span>* e)</span></span><br><span class="line">&#123;</span><br><span class="line">	StackList p;</span><br><span class="line">	p = S;</span><br><span class="line">	<span class="keyword">if</span> (!p)</span><br><span class="line">		<span class="keyword">return</span> ERROR;</span><br><span class="line">	*e = p-&gt;data;</span><br><span class="line">	S = S-&gt;next;</span><br><span class="line">	<span class="built_in">free</span>(p);</span><br><span class="line">	<span class="keyword">return</span> S;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//入栈函数： </span></span><br><span class="line">StackList <span class="title function_">Push</span><span class="params">(StackList S, <span class="type">int</span> e)</span></span><br><span class="line">&#123;</span><br><span class="line">	StackList p;</span><br><span class="line">	p = (StackNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(StackNode));</span><br><span class="line">	p-&gt;data = e;</span><br><span class="line">	p-&gt;next = S;</span><br><span class="line">	S = p;</span><br><span class="line">	<span class="keyword">return</span> S;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//边结点 </span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span> &#123;</span>    <span class="comment">//链表结点</span></span><br><span class="line">	<span class="type">int</span> adjvex;           <span class="comment">//邻接表创建无向网的实现</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span>* <span class="title">nextarc</span>;</span>    <span class="comment">//指向下一条边的指针</span></span><br><span class="line">	OtherInfo info;       <span class="comment">//和边相关的信息</span></span><br><span class="line">&#125;ArcNode;</span><br><span class="line"></span><br><span class="line"><span class="comment">//顶点信息 </span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">VNode</span> &#123;</span>   <span class="comment">//头结点</span></span><br><span class="line">	VerTexType data;   <span class="comment">//顶点信息</span></span><br><span class="line">	ArcNode* firstarc;<span class="comment">//指向第一条依附该顶点的边的指针</span></span><br><span class="line">&#125;VNode, AdjList[MVNum];<span class="comment">//AdjList 表示邻接表类型</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	AdjList vertices;     <span class="comment">//邻接表头结点数组</span></span><br><span class="line">	<span class="type">int</span> vexnum, arcnum;   <span class="comment">//图的顶点数和弧数</span></span><br><span class="line">&#125;ALGraph;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> indegree[<span class="number">100</span>] = &#123; <span class="number">0</span> &#125;;<span class="comment">//结点入度的个数</span></span><br><span class="line"><span class="comment">//这里大家自行解决入度的问题 你可以创建图的时候直接创建相对应的数组</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">TopoSort</span><span class="params">(ALGraph G, <span class="type">int</span>* topo)</span></span><br><span class="line">&#123;</span><br><span class="line">	StackList S = <span class="literal">NULL</span>;</span><br><span class="line">	ArcNode* p;</span><br><span class="line">	<span class="comment">//先检查所有入度为0的结点并且入栈</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (!indegree[i]) &#123;</span><br><span class="line">			S = Push(S, i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> m = <span class="number">0</span>;<span class="comment">//记录拓扑序列的个数 </span></span><br><span class="line">	<span class="type">int</span> index = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (S)</span><br><span class="line">	&#123;</span><br><span class="line">		S = Pop(S, &amp;index);</span><br><span class="line">		topo[m] = index;</span><br><span class="line">		m++;</span><br><span class="line">		<span class="keyword">while</span> (p != <span class="literal">NULL</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> k = p-&gt;adjvex;</span><br><span class="line">			indegree[k]--;</span><br><span class="line">			<span class="keyword">if</span> (indegree[k] == <span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				S = Push(S, k);</span><br><span class="line">			&#125;</span><br><span class="line">			p = p-&gt;nextarc;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	topo[m] = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">if</span> (m &lt; G.vexnum)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//有环</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//输出拓扑序列</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/25/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-03-25_13%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">13最小生成树</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-24T16:00:00.000Z" itemprop="datePublished">
+    2022-03-25
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="最小生成树">最小生成树</h2>
+<h4 id="生成树及其性质">生成树及其性质</h4>
+<blockquote>
+<p>连通图的生成树：一个极小的连通子图</p>
+</blockquote>
+<blockquote>
+<p>生成树的属性：</p>
+<p>1.一个连通图可以有多个生成树</p>
+<p>2.一个连通图所有生成树的顶点数和边数都相同</p>
+<p>3.生成树没有环结构</p>
+<p>4.生成树减少任意一条边都会使图不连通，添加一条边都会形成一个环</p>
+<p>5.n个顶点的连通图的生成树包含n个顶点和（n-1）条边</p>
+<p>6.对于n个顶点的无向完全图包含n^(n-2)个生成树</p>
+</blockquote>
+<h4 id="最小生成树–带权图（边的权值最小的生成树）">最小生成树–带权图（边的权值最小的生成树）</h4>
+<h5 id="克鲁斯卡尔算法–贪婪算法（局部最优）">克鲁斯卡尔算法–贪婪算法（局部最优）</h5>
+<blockquote>
+<p>步骤</p>
+<p>1.将图看作森林（每个顶点都是一棵树）</p>
+<p>2.寻找树中权值最小的顶点（同时保证不能形成环）</p>
+<p>3.使用边集(存储前后结点和权值)排序所有边的权值</p>
+<p>4.增序设置结点，并使用并查集（初始化为自身）判断是否相连</p>
+</blockquote>
+<p><img src="picture/%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%E7%AE%97%E6%B3%95.png" alt=""></p>
+<h5 id="普里姆算法–针对结点的算法">普里姆算法–针对结点的算法</h5>
+<blockquote>
+<p>将顶点分为两类</p>
+<p>一类是已经在生成树中的顶点，其余为另一类</p>
+<p>再一步一步的将B类加入到A类，每次在与A类所有顶点相连的顶点中查找</p>
+<p>直到找到所有结点</p>
+</blockquote>
+<p><img src="picture/%E6%99%AE%E9%87%8C%E5%A7%86%E7%AE%97%E6%B3%95.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-03-24_12%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/">12图的遍历</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-23T16:00:00.000Z" itemprop="datePublished">
+    2022-03-24
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="图的遍历">图的遍历</h2>
+<h4 id="DFS">DFS</h4>
+<blockquote>
+<p>递归（前中后序）或者栈实现</p>
+</blockquote>
+<blockquote>
+<p>缺点：不能保证找到的是最近的点</p>
+</blockquote>
+<blockquote>
+<p>优点：</p>
+<p>适用于搜索全部解或者必须走到最深处才能查找到解</p>
+<p>空间上不需要额外空间</p>
+<p>不需要保存搜索中的状态</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//为了判断顶点是否被访问，专门定义一个对应的数组来存储访问信息</span></span><br><span class="line"><span class="type">int</span> Visit[MAXN]=&#123;<span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">DFSTraverse</span><span class="params">(Graph G,<span class="type">int</span> i)</span>	<span class="comment">//对连通分量进行深度搜索</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//如果需要输出，在此进行</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;G.n;j++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(G.arcnum[i][j] &amp;&amp; !Visit[j])		<span class="comment">//既要有边，也要没被访问</span></span><br><span class="line">        &#123;</span><br><span class="line">            Visit[j]=<span class="number">1</span>;</span><br><span class="line">            DFSTraverse[G,j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">DFS</span><span class="params">(Graph G)</span>		<span class="comment">//对整个图进行深搜</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//邻接矩阵&amp;&amp;无向图情况</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;G.n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!Visit[i])	<span class="comment">//如果没有被访问过</span></span><br><span class="line">        &#123;</span><br><span class="line">            Visit[i]=<span class="number">1</span>;	<span class="comment">//设置</span></span><br><span class="line">            DFSTraverse(G,i);</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="BFS">BFS</h4>
+<blockquote>
+<p>队列（层序遍历）</p>
+</blockquote>
+<blockquote>
+<p>缺点：需要持续性防止重复操作</p>
+</blockquote>
+<blockquote>
+<p>优点：只要找到就是最近的点</p>
+<p>适用于搜索最近解或一个解</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> Visit[MAX]=&#123;<span class="number">0</span>&#125;;			<span class="comment">//访问数组</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">BFSTraverse</span><span class="params">(MGraph G)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//对于每一个未被访问的结点调用广度搜索</span></span><br><span class="line">    Queue *Q;	<span class="comment">//先建立一个队列</span></span><br><span class="line">    INitQueue(&amp;Q);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;G.vexnum;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!Visit[i])</span><br><span class="line">        &#123;</span><br><span class="line">            Visit[i]=<span class="number">1</span>;</span><br><span class="line">            <span class="comment">//如果需要输出，在此进行</span></span><br><span class="line">            EnQueue(&amp;Q,G.vexs[i]);	<span class="comment">//把第一个结点入队</span></span><br><span class="line">            <span class="keyword">while</span>(!QueueEmpty(Q))		<span class="comment">//只要队列不空</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="type">int</span> u;		<span class="comment">//根据队列取出的是什么</span></span><br><span class="line">                DeQueue(&amp;Q,&amp;u);	<span class="comment">//元素出队</span></span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="picture/%E6%B7%B1%E6%90%9C%E5%92%8C%E5%B9%BF%E6%90%9C%E7%9A%84%E5%9B%BE%E7%A4%BA.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-03-19_9-1%E4%BD%9C%E4%B8%9A/">9-1作业</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-18T16:00:00.000Z" itemprop="datePublished">
+    2022-03-19
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="9-1作业">9-1作业</h2>
+<p><strong>第一题：部族</strong></p>
+<p>上古之时，一场灾劫席卷大地。不周山天柱倾塌，天穹皲裂，霪雨无止，大水浩洋不息。神农至</p>
+<p>西北一处天裂，以神树矩木为基，兴建流月城。于此指引众神，以灵力炼制五色石，交由女娲补天。补</p>
+<p>天之事耗时弥久，人界黎氓死伤惨重。</p>
+<p>补天进展艰难，各人类部族不忍生灵涂炭，自请入流月城相助。神农感其赤诚，欣然应允，于是</p>
+<p>将一滴神血封入矩木。使其蕴含的生命之力通过矩木枝叶发散，以供各部族人不饮不食而活。</p>
+<p>灾劫过后，神农欲奖赏各部人类，然流月城过于混杂，需将各部族人民分类统一。</p>
+<p><strong>规定</strong></p>
+<p>需要你帮忙划分部族人民。如果x和y是同一部族，y和z是同一部族，那么x和z也是同一部族。</p>
+<p>如果x和y是同一部族，那么和x同一部族的也和y是同一部族，和y同一部族的也都和x是同一部</p>
+<p>族。</p>
+<p><strong>输入格式</strong></p>
+<blockquote>
+<p>第一行：三个整数x，y，z。分别表示有x个人，y个关系，询问z对是否是同一部族。</p>
+</blockquote>
+<blockquote>
+<p>接下来y行，每行两个数 yi，yj。1&lt;= yi,yj &lt;= N,表示yi,yj具有亲戚关系</p>
+</blockquote>
+<blockquote>
+<p>接下来z行，每行两个数Zi,Zj，询问Zi和Zj是否是同一部族的。</p>
+</blockquote>
+<p><strong>输出格式</strong></p>
+<blockquote>
+<p>z行，每行一个yes或者No，表示第X个询问是或者不是同一部族。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> x, y, z;</span><br><span class="line">    <span class="type">int</span> yi, yj;</span><br><span class="line">    <span class="type">int</span> zi, zj;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;x, &amp;y, &amp;z);</span><br><span class="line">    <span class="type">int</span>* uset = (<span class="type">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>) * x);  <span class="comment">//分配内存</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; x; i++)                 <span class="comment">//初始化</span></span><br><span class="line">    &#123;</span><br><span class="line">        uset[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; y; i++)                 <span class="comment">//关系建立</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;yi, &amp;yj);</span><br><span class="line">        <span class="keyword">while</span> (uset[yi] != yi)           <span class="comment">//找到代表</span></span><br><span class="line">        &#123;</span><br><span class="line">            yi = uset[yi];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (uset[yj] != yj)           <span class="comment">//找到代表</span></span><br><span class="line">        &#123;</span><br><span class="line">            yj = uset[yj];</span><br><span class="line">        &#125;</span><br><span class="line">        uset[yi] = yj;                  <span class="comment">//yi的代表为yj</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; z; i++)         <span class="comment">//关系查询</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;zi, &amp;zj);</span><br><span class="line">        <span class="keyword">while</span> (uset[zi] != zi)          <span class="comment">//找到zi的代表</span></span><br><span class="line">        &#123;</span><br><span class="line">            zi = uset[zi];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (uset[zj] != zj)          <span class="comment">//找到zj的代表</span></span><br><span class="line">        &#123;</span><br><span class="line">            zi = uset[zj];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (zi == zj)                   <span class="comment">//看是否在同一集合中</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;yes\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;no\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">free</span>(uset);         <span class="comment">//释放内存</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>第二题：谷歌面试</strong></p>
+<p>在谷歌的一次面试中， Homebrew的作者Max Howell,就是因为没在白板上写出翻转二叉树,最</p>
+<p>后被Google拒绝了。我们已经学完二叉树了，我们可以将二叉树翻转一下么？</p>
+<p><strong>输入格式</strong></p>
+<p><img src="picture/9-1%E4%BD%9C%E4%B8%9A%E9%A2%982%E5%9B%BE1.png" alt=""></p>
+<p><strong>输出格式</strong></p>
+<p><img src="picture/9-1%E4%BD%9C%E4%B8%9A%E9%A2%982%E5%9B%BE2.png" alt=""></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>* <span class="title">left</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>* <span class="title">right</span>;</span></span><br><span class="line">&#125;node;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">creatTree</span><span class="params">(node* root)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">turn_Tree</span><span class="params">(node* root)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    node* root;</span><br><span class="line">    creatTree(&amp;root);</span><br><span class="line">    turn_Tree(&amp;root);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">creatTree</span><span class="params">(node* root)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">    node* temp = root, *temp_pre;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;data);</span><br><span class="line">    <span class="keyword">while</span> (data != <span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span> (temp != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            temp_pre = temp;</span><br><span class="line">            <span class="keyword">if</span> (temp-&gt;data &gt; data)</span><br><span class="line">            &#123;</span><br><span class="line">                temp = temp-&gt;left;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                temp = temp-&gt;right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (data &gt; temp_pre-&gt;data)</span><br><span class="line">        &#123;</span><br><span class="line">            temp_pre-&gt;right = (node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(node));</span><br><span class="line">            temp_pre-&gt;right-&gt;data = data;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            temp_pre-&gt;left = (node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(node));</span><br><span class="line">            temp_pre-&gt;left-&gt;data = data;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">turn_Tree</span><span class="params">(node* root)</span></span><br><span class="line">&#123;</span><br><span class="line">    node* temp;</span><br><span class="line">    <span class="keyword">if</span> (temp-&gt;left == <span class="literal">NULL</span> &amp;&amp; temp-&gt;right == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    temp = root-&gt;left;</span><br><span class="line">    root-&gt;left = root-&gt;right;</span><br><span class="line">    root-&gt;right = temp;</span><br><span class="line">	</span><br><span class="line">    <span class="keyword">if</span>(root-&gt;left!=<span class="literal">NULL</span>)</span><br><span class="line">    turn_Tree(root-&gt;left);</span><br><span class="line">    <span class="keyword">if</span>(root-&gt;right!=<span class="literal">NULL</span>)</span><br><span class="line">    turn_Tree(root-&gt;right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>第三题：验证二叉排序树</strong></p>
+<p>我们已经学过二叉树的数组表示和链表表示了。那么现在，给你一个数组表示的二叉树结构，让你去判断一下这个结构是不是二叉排序树。</p>
+<blockquote>
+<p>比如：</p>
+</blockquote>
+<blockquote>
+<p>输入：tree=[5,1,4,null,null,3,6]</p>
+</blockquote>
+<blockquote>
+<p>输出：false</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//思路：根据数组中二叉树父子之间结点的关系来判断</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>第四题：兽族入侵</strong></p>
+<p>兽人的故乡叫德拉诺大陆，生活在这个星球上的兽人、鸦人、食人魔都有着自己的文明，从德莱尼人来到德拉诺的那天起也预示了这个这个星球，这个种族的命运；德莱尼人来自阿古斯星球，属于阿古斯的难民，自从萨格拉斯蛊惑了基尔加丹和阿克蒙德后，维纶带领部分族人逃难来到了德拉诺，虽然来了新的邻居，但是兽人和德莱尼人并没有发生什么大规模的冲突，大家都相安无事的生活在这里！后来由于种种原因，，德拉诺的生存环境越来越差，几乎无法再维持生存！于是基尔加丹把艾泽拉斯呈现给了古尔丹，让古尔丹和被萨格拉斯附体的麦迪文取得了联系，双方共同建造了黑暗之门，黑暗之门将艾泽拉斯和德拉诺联系在一起，让兽人可以穿过黑暗之门来到艾泽拉斯。引发了第一次兽人大战！</p>
+<p>为了防止战争的延续，我们首先需要判断哪些世界是直接相连的，哪些世界是不直接相连的。</p>
+<p><strong>规定：</strong></p>
+<blockquote>
+<p>给你一个 n x n 的矩阵 isConnected ，其中 isConnected [i] [j] = 1 表示第 i 个世界和第 j 个世界直接相连，而 isConnected[i] [j] = 0 表示二者不直接相连。</p>
+</blockquote>
+<p><strong>第五题：打劫</strong></p>
+<p>一伙人找到了一个可行窃的新的地区进行打家劫舍，这伙人发现，这个地区只有一个可以进去的入口，除了这个入口以外，每栋房子只有一个“父”房子与之连接。在一番侦查之后，这伙人意识到整个地区的房屋排列类似于一颗二叉树。这些房屋有自动报警的能力。 如果两个直接相连的房子在同一天晚上被打劫，就会触发警报。</p>
+<p>这时候我们要计算，在不触发警报的前提下，这伙人能够有多少的收入。</p>
+<blockquote>
+<p>入: [3,2,3,null,3,null,1]</p>
+</blockquote>
+<blockquote>
+<p>3</p>
+</blockquote>
+<blockquote>
+<p>/ \</p>
+</blockquote>
+<blockquote>
+<p>2 3</p>
+</blockquote>
+<blockquote>
+<p>\ \</p>
+</blockquote>
+<blockquote>
+<p>3 1</p>
+</blockquote>
+<blockquote>
+<p>输出: 7</p>
+</blockquote>
+<blockquote>
+<p>解释: 小偷一晚能够盗取的最高金额 = 3 + 3 + 1 = 7.</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-03-18_11%E5%9B%BE/">11图</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-17T16:00:00.000Z" itemprop="datePublished">
+    2022-03-18
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="图">图</h2>
+<h4 id="一些概念">一些概念</h4>
+<blockquote>
+<p>图是由两个集合组成的：V结点集合与E边集</p>
+</blockquote>
+<blockquote>
+<p>简单图：在图结构中，如果不存在顶点到其自身的边，且同一条边不会重复出现</p>
+</blockquote>
+<blockquote>
+<p>无向图：边没有方向</p>
+</blockquote>
+<blockquote>
+<p>有向图：边有方向</p>
+</blockquote>
+<blockquote>
+<p>完全图：如果图中每两个顶点间都存在一条边</p>
+</blockquote>
+<blockquote>
+<p>端点：无向图中的一条边的两个点，互为邻接点</p>
+</blockquote>
+<blockquote>
+<p>度：</p>
+<p>无向图中顶点具有边的数目</p>
+<p>出度：从某个点出去的边数</p>
+<p>入度：进入某个点的边数</p>
+</blockquote>
+<blockquote>
+<p>子图：图的子集</p>
+</blockquote>
+<blockquote>
+<p>路径：从一个顶点到另一个顶点之间的顶点序列</p>
+<p>路径长度：路径所经的边的个数（最大值）</p>
+</blockquote>
+<blockquote>
+<p>回路（环）：开始结点与结束结点相同</p>
+<p>欧拉回路：经过图中各边有且仅有一次的回路（结点可能重复）</p>
+<p>哈密顿回路：经过图中各顶点有且仅有一次的回路</p>
+</blockquote>
+<blockquote>
+<p>连通：两个顶点之间如果有路径，则连通</p>
+<p>连通图：如果任意两个顶点之间连通</p>
+<p>连通分量：在一个无向图中一个极大连通子图，叫做连通分量</p>
+<p>强连通图：有向图中的任意两个顶点之间连通</p>
+<p>强连通分量：有向图中一个极大连通子图，叫做强连通分量</p>
+</blockquote>
+<blockquote>
+<p>稠密图：大于nlnn的图</p>
+<p>稀疏图：少于nlnn的图</p>
+</blockquote>
+<blockquote>
+<p>权：图的每个边对应的数值，叫做权值</p>
+<p>网：带权的图</p>
+</blockquote>
+<blockquote>
+<p>连通图的生成树：极小连通图</p>
+</blockquote>
+<h4 id="图的存储">图的存储</h4>
+<h5 id="1-邻接矩阵">1.邻接矩阵</h5>
+<blockquote>
+<p>用一维数组存储结点</p>
+<p>用二维数组存储边</p>
+<p>列之和为入度，行之和为出度</p>
+</blockquote>
+<p><img src="D:%5C%E6%96%87%E4%BB%B6%E5%90%88%E9%9B%86%5Cmarkdown%E5%90%88%E9%9B%86%5C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson%5Cpicture%5C%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5.png" alt=""></p>
+<p><strong>注：对于带权图，没有边连接结点之间用正无穷表示，其余用权值表示</strong></p>
+<blockquote>
+<p>问题：对于稀疏图会出现空间浪费，因为结点间不连通的较多</p>
+</blockquote>
+<p><strong>代码实现</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> Maxvertices 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="comment">//一维数组表示顶点信息，二维数组表示边信息</span></span><br><span class="line">    <span class="type">int</span> Vertices[Maxvertices];</span><br><span class="line">    <span class="type">int</span> Edge[Maxvertices][Maxvertices];</span><br><span class="line">    <span class="type">int</span> numV,numE;<span class="comment">//顶点数，边数</span></span><br><span class="line">&#125;AdjMatrix;</span><br><span class="line"><span class="comment">//注意：数组最大空间为100，并不意味着每次都需要存入100，真正存入的空间是以numV和numE来统计的</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">CreateGraph</span><span class="params">(AdjMatrix *G)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> n,e;<span class="comment">//n代表顶点数，e代表边数</span></span><br><span class="line">    <span class="type">int</span> vi,vj;	<span class="comment">//边的顶点（两个）</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;输入顶点数和边数&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;e);</span><br><span class="line">    G-&gt;numV=n;</span><br><span class="line">    G-&gt;numE=e;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//初始化图</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)	<span class="comment">//边数组初始化</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(i==j)			<span class="comment">//对角线之间赋0</span></span><br><span class="line">            &#123;</span><br><span class="line">                G-&gt;Edge[i][j]=<span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                G-&gt;Edge[i][j]=<span class="number">32767</span>;	<span class="comment">//其余为无穷值</span></span><br><span class="line">            &#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;G-&gt;numV;i++)		<span class="comment">//顶点信息录入</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;请输入第%d个顶点的信息&quot;</span>,i+<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;G-&gt;Vertices[i]);</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;G-&gt;numE;i++)		<span class="comment">//边信息录入</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;请输入边的顶点信息i,j&quot;</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;vi,&amp;vj);	</span><br><span class="line">        <span class="comment">//无向图示例</span></span><br><span class="line">        G-&gt;Edge[vi<span class="number">-1</span>][vj<span class="number">-1</span>]=<span class="number">1</span>;		<span class="comment">//边存在则赋值</span></span><br><span class="line">        G-&gt;Edge[vj<span class="number">-1</span>][vi<span class="number">-1</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="comment">//有向图则无需对称</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="2-邻接表">2.邻接表</h5>
+<blockquote>
+<p>数组和链表一起存储</p>
+<p>数组：顶点集合</p>
+<p>链表：边集（链表结点之间的关系为”从同一结点出发/进入“）</p>
+<p>注：一个数组元素后的链表数目为一个结点的出度/入度（只能表示一种）</p>
+</blockquote>
+<p><img src="D:%5C%E6%96%87%E4%BB%B6%E5%90%88%E9%9B%86%5Cmarkdown%E5%90%88%E9%9B%86%5C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson%5Cpicture%5C%E9%82%BB%E6%8E%A5%E8%A1%A8.png" alt=""></p>
+<blockquote>
+<p>问题：对于顶点的出度和入度不能同时看到</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXVEX 100	<span class="comment">//顶点数目最大值</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//边链表中的结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">EdgeNode</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> adjvex;				<span class="comment">//邻接的点所对应的下标</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">EdgeNode</span>* <span class="title">next</span>;</span>	<span class="comment">//下一个指针</span></span><br><span class="line">&#125;EdgeNode;</span><br><span class="line"></span><br><span class="line"><span class="comment">//顶点表中的结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">VertexNode</span>&#123;</span></span><br><span class="line">    <span class="type">char</span> data;				<span class="comment">//信息的值</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">EdgeNode</span>* <span class="title">first</span>;</span>	<span class="comment">//边表的头指针</span></span><br><span class="line">&#125;VertexNode,AdjList[MAXVEX];</span><br><span class="line"></span><br><span class="line"><span class="comment">//邻接表的抽象结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">GraphAdjList</span>&#123;</span></span><br><span class="line">    AdjList adjlist;			<span class="comment">//顶点集合数组</span></span><br><span class="line">    <span class="type">int</span> numVertexes,numEdge;	<span class="comment">//顶点的数量和边的数量</span></span><br><span class="line">&#125;GraphAdjList;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">CreateAlGraph</span><span class="params">(GraphAdjList* G)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;输入顶点数和边数&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;G-&gt;numVertexes,&amp;G-&gt;numEdge);			</span><br><span class="line">    <span class="type">int</span> vi,vj;	<span class="comment">//接收顶点信息</span></span><br><span class="line">    <span class="comment">//输入顶点信息</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;G-&gt;numVertexes;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>,&amp;G-&gt;adjlist[i]);</span><br><span class="line">        getchar();</span><br><span class="line">        G-&gt;adjlist[i].first=<span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">//输入边的信息</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;G-&gt;numEdge;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;vi,&amp;vj);</span><br><span class="line">        getchar();</span><br><span class="line">        EdgeNode* e=(EdgeNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(EdgeNode));</span><br><span class="line">        e-&gt;adjvex=vj;</span><br><span class="line">        e-&gt;next=G-&gt;adjlist[vi].first;</span><br><span class="line">        G-&gt;adjlist[vi].first=e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="3-十字链表">3.十字链表</h5>
+<blockquote>
+<p>顶点集合：将出度和入度结合在一起，每个顶点结点多加一个指针</p>
+<p>边集合：采用弧之间的关系</p>
+<p>两个下标和两个指针：头尾结点的下标，指向同一结点的弧首指针，指向同一结点的弧尾指针</p>
+</blockquote>
+<p><img src="D:%5C%E6%96%87%E4%BB%B6%E5%90%88%E9%9B%86%5Cmarkdown%E5%90%88%E9%9B%86%5C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson%5Cpicture%5C%E5%8D%81%E5%AD%97%E9%93%BE%E8%A1%A8.png" alt=""></p>
+<p><img src="D:%5C%E6%96%87%E4%BB%B6%E5%90%88%E9%9B%86%5Cmarkdown%E5%90%88%E9%9B%86%5C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson%5Cpicture%5C%E5%8D%81%E5%AD%97%E9%93%BE%E8%A1%A8%E7%9A%84%E8%BF%9E%E6%8E%A5%E5%9B%BE.png" alt=""></p>
+<blockquote>
+<p>问题：对边的操作频繁不适合</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 100</span></span><br><span class="line"><span class="comment">//边集</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">AreBox</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> tail;		<span class="comment">//弧尾对应的顶点在数组中的下标</span></span><br><span class="line">    <span class="type">int</span> headvex;	<span class="comment">//弧头对应的顶点在数组中的下标</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">AreBox</span>* <span class="title">hlink</span>,*<span class="title">tlink</span>;</span></span><br><span class="line">    <span class="comment">//弧头和弧尾对应的下一个边</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">VexNode</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> data;		<span class="comment">//数据域</span></span><br><span class="line">    AreBox* firstIn,*firstout;</span><br><span class="line">    <span class="comment">//该结点为弧头和弧尾的链表的头结点</span></span><br><span class="line">&#125;VexNode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    VexNode xlist[MAX];	<span class="comment">//顶点数组</span></span><br><span class="line">    <span class="type">int</span> vexnum,arenum;</span><br><span class="line">    <span class="comment">//顶点数和边数</span></span><br><span class="line">&#125;OLGraph;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">CreatDG</span><span class="params">(OLGraph* G)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> vi,vj;	<span class="comment">//邻接顶点下标</span></span><br><span class="line">    <span class="comment">//输入有向图的顶点数和边数</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;G-&gt;vexnum,&amp;G-&gt;arenum);</span><br><span class="line">    <span class="comment">//输入顶点集的数据</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;G-&gt;vexnum;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;G-&gt;xlist[i].data);</span><br><span class="line">        G-&gt;xlist[i].firstIn=<span class="literal">NULL</span>;</span><br><span class="line">        G-&gt;xlist[i].firstout=<span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//构建十字链表</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;G-&gt;arenum;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;vi,&amp;vj);		<span class="comment">//输入下标</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//建立弧的结点</span></span><br><span class="line">        AreBox*p=(AreBox*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(AreBox));</span><br><span class="line">        p-&gt;tailvex=vi;	<span class="comment">//弧尾下标</span></span><br><span class="line">        p-&gt;headvex=vj;	<span class="comment">//弧头下标</span></span><br><span class="line">        p-&gt;hlink=G-&gt;xlist[vj].firstIn;	<span class="comment">//指向弧头相同的下一个弧</span></span><br><span class="line">        p-&gt;tlink=G-&gt;<span class="built_in">list</span>[vj].firstout;</span><br><span class="line">        </span><br><span class="line">        G-&gt;xlist[vi].firstOut=G-&gt;xlist[vi].firstIn=p;		<span class="comment">//头插</span></span><br><span class="line">        </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="4-邻接多重表">4.邻接多重表</h5>
+<blockquote>
+<p>结点采用数组存储</p>
+<p>边采用链表存储</p>
+<p>一个边结点有四个数据</p>
+<p>前后结点，前后指向同一结点的弧指针</p>
+</blockquote>
+<p><img src="D:%5C%E6%96%87%E4%BB%B6%E5%90%88%E9%9B%86%5Cmarkdown%E5%90%88%E9%9B%86%5C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson%5Cpicture%5C%E9%82%BB%E6%8E%A5%E5%A4%9A%E9%87%8D%E8%A1%A8.png" alt=""></p>
+<blockquote>
+<p>优点：删除图中某个结点只需删除数组结点与之后跟踪到的所有结点即可</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 100</span></span><br><span class="line"><span class="comment">//确定边的类型</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> ivex,jvex;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span>* <span class="title">vi</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span>* <span class="title">vj</span>;</span></span><br><span class="line">&#125;AreNode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    <span class="type">char</span> vertex;</span><br><span class="line">    AreNode* first;</span><br><span class="line">&#125;VNode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    VNode Dvex[MAX];</span><br><span class="line">    <span class="type">int</span> vexnum,arenum;</span><br><span class="line">&#125;Grap;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">creat</span><span class="params">(Grap* G)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> vi,vj;</span><br><span class="line">    <span class="comment">//输入顶点数和边数</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;G-&gt;vexnum,&amp;G-&gt;arenum);</span><br><span class="line">    <span class="comment">//输入各顶点的值</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;G-&gt;vexnum;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>,&amp;G-&gt;Dvex[i].vertex);</span><br><span class="line">        getchar();</span><br><span class="line">        G-&gt;Dvex[i].first=<span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//构建邻接多重表</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;G-&gt;arenum;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;vi,&amp;vj);</span><br><span class="line">        AreNode* e=(AreNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(AreNode));</span><br><span class="line">        e-&gt;ivex=vi;</span><br><span class="line">        e-&gt;jvex=vj;</span><br><span class="line">        e-&gt;Vi=G-&gt;Dvex[vi].first;</span><br><span class="line">        G-&gt;Dvex[vi].first=e;</span><br><span class="line">        e-&gt;Vj=G-&gt;Dvex[vj].first;</span><br><span class="line">        G-&gt;Dvex[vj].fist=e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="5-边集数组">5.边集数组</h5>
+<blockquote>
+<p>两个一维数组构成，一个存储顶点信息，一个存储边的信息（结构体数组）</p>
+</blockquote>
+<p><img src="D:%5C%E6%96%87%E4%BB%B6%E5%90%88%E9%9B%86%5Cmarkdown%E5%90%88%E9%9B%86%5C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson%5Cpicture%5C%E8%BE%B9%E9%9B%86%E6%95%B0%E7%BB%84.png" alt=""></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-03-10_9%E5%B9%B6%E6%9F%A5%E9%9B%86%E5%92%8C%E7%BA%BF%E5%BA%8F%E4%BA%8C%E5%8F%89%E6%A0%91/">9并查集和线序二叉树</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-09T16:00:00.000Z" itemprop="datePublished">
+    2022-03-10
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="并查集和线序二叉树">并查集和线序二叉树</h2>
+<h4 id="并查集（树形数据结构）">并查集（树形数据结构）</h4>
+<blockquote>
+<p>对（不相交）集合进行合并和查找</p>
+</blockquote>
+<blockquote>
+<p>树（数组）存储集合，树根存储元素的代表(指向自己)，其余结点存储集合元素（指向上方）</p>
+</blockquote>
+<h5 id="步骤">步骤</h5>
+<ol>
+<li class="lvl-3">
+<p>建立单元素集合</p>
+</li>
+<li class="lvl-3">
+<p>合并元素集合</p>
+</li>
+</ol>
+<h5 id="代码">代码</h5>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> uset[<span class="number">100</span>];		<span class="comment">//下标代表数据元素，值代表父节点</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//size:大小</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">makeSet</span><span class="params">(<span class="type">int</span> size)</span>		<span class="comment">//初始化</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;size;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        uset[i]=i;	<span class="comment">//父节点为自己</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//查找代表的函数</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">find</span><span class="params">(<span class="type">int</span> i)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(i==uset[i])			<span class="comment">//如果找到代表</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> i;			<span class="comment">//返回代表的值</span></span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> find(uset[i]);	<span class="comment">//根据值找父节点</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//合并函数</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">unite</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> m=find(x);</span><br><span class="line">    <span class="type">int</span> n=find(y);</span><br><span class="line">    <span class="keyword">if</span>(m==n)	<span class="comment">//集合相交</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;	<span class="comment">//就不合并了</span></span><br><span class="line">    &#125;</span><br><span class="line">    uset[m]=n;	<span class="comment">//否则就合并</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="路径压缩代码">路径压缩代码</h5>
+<blockquote>
+<p>从末尾开始，将遍历的结点都变成代表的子节点</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> node[<span class="number">100</span>];		<span class="comment">//每个结点</span></span><br><span class="line"><span class="type">int</span> rank[<span class="number">100</span>];		<span class="comment">//树的高度</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">makeSet</span><span class="params">(<span class="type">int</span> size)</span>		<span class="comment">//初始化</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;size;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        node[i]=i;	<span class="comment">//父节点为自己</span></span><br><span class="line">        rank[i]=<span class="number">0</span>;	<span class="comment">//高度为0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">find</span><span class="params">(<span class="type">int</span> x)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(x==node[x])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> node[x]=find(node[x]);		<span class="comment">//找到后传回代表结点给当前结点</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Unite</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span><br><span class="line">&#123;</span><br><span class="line">    x=find(x);		</span><br><span class="line">    y=find(y);</span><br><span class="line">    <span class="keyword">if</span>(x==y)		</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//比较高度，决定谁是谁的子树（集合与集合之间的合并）</span></span><br><span class="line">    <span class="keyword">if</span>(rank[x]&lt;rank[y])		<span class="comment">//如果x的高度小于y的高度</span></span><br><span class="line">    &#123;</span><br><span class="line">        node[x]=y;			<span class="comment">//把x变成y的子树</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        node[y]=x;			<span class="comment">//把y变成x的子树</span></span><br><span class="line">        <span class="keyword">if</span>(rank[x]==rank[y])</span><br><span class="line">        &#123;</span><br><span class="line">            rank[x]++;</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="线索二叉树">线索二叉树</h4>
+<blockquote>
+<p>利用叶子结点的空链域存储中序遍历的结果，左边指向前驱，右边指向后继</p>
+</blockquote>
+<p><strong>特性：线索化过程</strong></p>
+<p><strong>新问题：如何区分叶子结点</strong></p>
+<p><strong>解决：结点增加左右标志域</strong></p>
+<blockquote>
+<p>孩子：0</p>
+<p>线索：1</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ThreadTree</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ThreadTree</span> *<span class="title">left</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ThreadTree</span> *<span class="title">right</span>;</span></span><br><span class="line">    <span class="type">int</span> left_type,right_type;</span><br><span class="line">&#125;Node;</span><br><span class="line">Node* pre;		<span class="comment">//跟随指针</span></span><br><span class="line"><span class="comment">//中序线索化</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">inOrderThreadTree</span><span class="params">(Node* node)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(node==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    inOrderThreadTree(node-&gt;left);</span><br><span class="line">    <span class="comment">//线索化，先处理前驱结点</span></span><br><span class="line">    <span class="comment">//结点左子树为NULL，设置前驱</span></span><br><span class="line">    <span class="keyword">if</span>(node-&gt;left==<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        node-&gt;left_type=<span class="number">1</span>;</span><br><span class="line">        node-&gt;left=pre;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">//结点右子树为NULL，设置前驱的后继</span></span><br><span class="line">    <span class="keyword">if</span>(pre!=<span class="literal">NULL</span> &amp;&amp; pre-&gt;right==<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        pre-&gt;right_type=<span class="number">1</span>;</span><br><span class="line">        pre-&gt;right=node;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    pre=node;  	<span class="comment">//更新pre</span></span><br><span class="line">    inOrderThreadTree(node-&gt;right);</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">inOrderTraverse</span><span class="params">(Node* node)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(node==<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(node!=<span class="literal">NULL</span> &amp;&amp; node-&gt;left_type==<span class="number">0</span>)</span><br><span class="line">        node=node-&gt;left;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(node!=<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        node=node-&gt;right;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/03/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/2022-03-06_8%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91/">8二叉平衡树</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-03-05T16:00:00.000Z" itemprop="datePublished">
+    2022-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">数据结构与算法lesson</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="二叉平衡树">二叉平衡树</h2>
+<h4 id="平衡二叉树">平衡二叉树</h4>
+<h6 id="由来：">由来：</h6>
+<blockquote>
+<p>为了防止二叉排序树中斜树的出现，影响查找效率</p>
+</blockquote>
+<h6 id="性质：">性质：</h6>
+<blockquote>
+<p>1.可以是空树</p>
+</blockquote>
+<blockquote>
+<p>2.任一结点的左右子树高度之差&lt;=1</p>
+</blockquote>
+<h5 id="调整失衡操作">调整失衡操作</h5>
+<blockquote>
+<p>旋转</p>
+<p>左旋</p>
+<p>步骤：</p>
+<p>1.结点的右孩子代替失衡结点的位置</p>
+<p>2.如果右孩子有左子树，变成失衡结点的右子树</p>
+<p>3.失衡结点本身变成右孩子的左子树</p>
+<p>右旋类似</p>
+</blockquote>
+<p><img src="picture/%E6%97%8B%E8%BD%AC%E6%93%8D%E4%BD%9C%E5%8E%9F%E5%9B%BE.png" alt=""></p>
+<p><img src="picture/%E6%97%8B%E8%BD%AC%E6%93%8D%E4%BD%9C%E5%90%8E.png" alt=""></p>
+<p><strong>注：这是在左子树的左孩子失衡或右子树的右孩子失衡下进行的基础操作。如果出现的情况与之不符，则应先对左子树左旋或右子树右旋，再进行上述基本操作</strong></p>
+<blockquote>
+<p>总结：</p>
+<p>LL 单一右旋</p>
+<p>RR 单一左旋</p>
+<p>LR 先左后右</p>
+<p>RL 先右后左</p>
+</blockquote>
+<h5 id="删除操作">删除操作</h5>
+<blockquote>
+<p>与二叉排序树一致</p>
+<p>唯一问题在于删除后是否平衡</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> HEIGHT(node) (node==NULL)?0:((avlnode*)(node)-&gt;height)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX(a,b) ((a)&gt;(b)?(a):(b))</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> key;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">left</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">right</span>;</span></span><br><span class="line">    <span class="type">int</span> height;</span><br><span class="line">&#125;avlnode, * avltree;</span><br><span class="line"></span><br><span class="line">avltree <span class="title function_">left_left_rotation</span><span class="params">(avltree tree)</span></span><br><span class="line">&#123;</span><br><span class="line">    avlnode* k2 = tree-&gt;left;</span><br><span class="line">    tree-&gt;left = k2-&gt;right;</span><br><span class="line">    k2-&gt;right = tree;</span><br><span class="line">    <span class="comment">//注：旋转操作改变了树的高度</span></span><br><span class="line">    tree-&gt;height = MAX(getNode_height(tree-&gt;left), getNode_height(tree-&gt;right)) + <span class="number">1</span>;</span><br><span class="line">    k2-&gt;height = MAX(getNode_height(tree-&gt;left), getNode_height(tree-&gt;right)) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> k2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">avltree <span class="title function_">right_right_rotation</span><span class="params">(avltree tree)</span></span><br><span class="line">&#123;</span><br><span class="line">    avlnode* k2 = tree-&gt;right;</span><br><span class="line">    tree-&gt;right = k2-&gt;left;</span><br><span class="line">    k2-&gt;left = tree;</span><br><span class="line">    <span class="comment">//注：旋转操作改变了树的高度</span></span><br><span class="line">    <span class="comment">//底层的高度是没有变化的，而顶层的失衡结点和替代结点高度发生了变化</span></span><br><span class="line">    tree-&gt;height = MAX(getNode_height(tree-&gt;left), getNode_height(tree-&gt;right)) + <span class="number">1</span>;</span><br><span class="line">    k2-&gt;height = MAX(getNode_height(tree-&gt;left), getNode_height(tree-&gt;right)) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> k2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">avltree <span class="title function_">left_right_rotation</span><span class="params">(avltree tree)</span></span><br><span class="line">&#123;</span><br><span class="line">    tree-&gt;left = right_right_rotation(tree-&gt;left);</span><br><span class="line">    tree = left_left_rotation(tree);</span><br><span class="line">    <span class="comment">//在调用的函数中树的高度已经调整，此处就无需调整</span></span><br><span class="line">    <span class="keyword">return</span> tree;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">avltree <span class="title function_">right_left_rotation</span><span class="params">(avltree tree)</span></span><br><span class="line">&#123;</span><br><span class="line">    tree-&gt;right = left_left_rotation(tree-&gt;right);</span><br><span class="line">    tree = right_right_rotation(tree);</span><br><span class="line">    <span class="comment">//在调用的函数中树的高度已经调整，此处就无需调整</span></span><br><span class="line">    <span class="keyword">return</span> tree;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//插入结点</span></span><br><span class="line">avltree <span class="title function_">insert</span><span class="params">(avltree tree, <span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (tree == <span class="literal">NULL</span>)<span class="comment">//找到可以插入的位置了</span></span><br><span class="line">    &#123;</span><br><span class="line">        avlnode* node = create_node(key, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">        tree = node;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (key &lt; tree-&gt;key)<span class="comment">//左子树中插入结点</span></span><br><span class="line">    &#123;</span><br><span class="line">        tree-&gt;left = insert(tree-&gt;left, key);<span class="comment">//递归查找应该插入的位置</span></span><br><span class="line">        <span class="keyword">if</span> (HEIGHT(tree-&gt;left) - HEIGHT(tree-&gt;right) == <span class="number">2</span>)<span class="comment">//从最底层开始判断是否失衡（递归层层向上判断）</span></span><br><span class="line">            <span class="comment">//注：大前提是左插，所以只可能左边的高度大于右边高度引起的失衡</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (key &lt; tree-&gt;left-&gt;key)<span class="comment">//如果当前树的左子树的key小于插入值</span></span><br><span class="line">            &#123;</span><br><span class="line">                tree = left_left_rotation(tree);</span><br><span class="line">                <span class="comment">//说明当前树是左左型失衡，使用左左旋调整，同时将当前最顶端的结点赋值给树，在最后返回</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                tree = left_right_rotation(tree);</span><br><span class="line">                <span class="comment">//说明当前树是左右型失衡，使用左右旋调整，同时将当前最顶端的结点赋值给树，在最后返回</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span><span class="comment">//在右子树中插入结点</span></span><br><span class="line">    &#123;</span><br><span class="line">        tree-&gt;right = insert(tree-&gt;right, key);<span class="comment">//递归查找应该插入的位置</span></span><br><span class="line">        <span class="keyword">if</span> (HEIGHT(tree-&gt;right) - HEIGHT(tree-&gt;left) == <span class="number">2</span>)<span class="comment">//从最底层开始判断是否失衡（递归层层向上判断）</span></span><br><span class="line">            <span class="comment">//注：大前提是右插，所以只可能右边的高度大于左边高度引起的失衡</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (key &lt; tree-&gt;right-&gt;key)<span class="comment">//如果当前树的右子树的key小于插入值</span></span><br><span class="line">            &#123;</span><br><span class="line">                tree = right_left_rotation(tree);</span><br><span class="line">                <span class="comment">//说明当前树是右左型失衡，使用右左旋调整</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                tree = right_right_rotation(tree);</span><br><span class="line">                <span class="comment">//说明当前树是右右型失衡，使用右右旋调整</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//重新调整二叉树的深度</span></span><br><span class="line">    tree-&gt;height = MAX(getNode_height(tree-&gt;left), getNode_height(tree-&gt;right)) + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> tree;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建新节点</span></span><br><span class="line">avlnode* <span class="title function_">create_node</span><span class="params">(<span class="type">int</span> key, avlnode* left, avlnode* right)</span></span><br><span class="line">&#123;</span><br><span class="line">    avlnode* node = (avlnode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(avlnode));</span><br><span class="line">    node-&gt;key = key;</span><br><span class="line">    node-&gt;left = left;</span><br><span class="line">    node-&gt;right = right;</span><br><span class="line">    node-&gt;height = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//计算当前树的高度</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">getNode_height</span><span class="params">(avlnode* node)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> HEIGHT(node);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">avlnode* <span class="title function_">search_node</span><span class="params">(avltree tree, <span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (tree == <span class="literal">NULL</span> || key == tree-&gt;key)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> tree;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (key &lt; tree-&gt;key)</span><br><span class="line">    &#123;</span><br><span class="line">        search_node(tree-&gt;left, key);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        search_node(tree-&gt;right, key);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">avlnode* <span class="title function_">minimun</span><span class="params">(avltree tree)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (tree == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span> (tree-&gt;right)</span><br><span class="line">        &#123;</span><br><span class="line">            tree = tree-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tree;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">avlnode* <span class="title function_">avltree_deleteNode</span><span class="params">(avltree tree, <span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    avlnode* node = search_node(tree, key);</span><br><span class="line">    <span class="keyword">if</span> (node == <span class="literal">NULL</span> || tree == <span class="literal">NULL</span>)<span class="comment">//如果node定位结果NULL</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> tree;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span><span class="comment">//node定位到了</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (key &lt; tree-&gt;key)<span class="comment">//删除的结点在当前树的左子树</span></span><br><span class="line">        &#123;</span><br><span class="line">            tree-&gt;left = avltree_deleteNode(tree-&gt;left, key);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//检查高度的代码,因为删除的是左子树上的结点，所以右子树可能比左子树高，所以使用右减左</span></span><br><span class="line">            <span class="keyword">if</span> (HEIGHT(tree-&gt;right) - HEIGHT(tree-&gt;left) == <span class="number">2</span>)<span class="comment">//从最底层开始判断是否失衡（递归层层向上判断）</span></span><br><span class="line">            &#123;                                                 </span><br><span class="line">                <span class="keyword">if</span> (tree-&gt;right-&gt;left)<span class="comment">//当前结点的右结点的左结点是否存在</span></span><br><span class="line">                &#123;<span class="comment">//存在</span></span><br><span class="line">                    tree = right_left_rotation(tree);</span><br><span class="line">                    <span class="comment">//说明当前树是右左型失衡，使用右左旋调整</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span><span class="comment">//不存在</span></span><br><span class="line">                &#123;</span><br><span class="line">                    tree = right_right_rotation(tree);</span><br><span class="line">                    <span class="comment">//说明当前树是右右型失衡，使用右右旋调整</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(key &gt; tree-&gt;key)<span class="comment">//删除的结点在右子树</span></span><br><span class="line">        &#123;</span><br><span class="line">            tree-&gt;right = avltree_deleteNode(tree-&gt;right, key);</span><br><span class="line">            <span class="keyword">if</span> (HEIGHT(tree-&gt;left) - HEIGHT(tree-&gt;right) == <span class="number">2</span>)<span class="comment">//从最底层开始判断是否失衡（递归层层向上判断）</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (key &lt; tree-&gt;left-&gt;key)</span><br><span class="line">                &#123;</span><br><span class="line">                    tree = left_left_rotation(tree);</span><br><span class="line">                    <span class="comment">//说明当前树是左左型失衡，使用左左旋调整</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    tree = left_right_rotation(tree);</span><br><span class="line">                    <span class="comment">//说明当前树是左右型失衡，使用左右旋调整</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span><span class="comment">//待删除的结点就是当前树，即递归定位到了当前树==删除结点</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (tree-&gt;left &amp;&amp; tree-&gt;right)<span class="comment">//左右都不为NULL</span></span><br><span class="line">            &#123;</span><br><span class="line">                avlnode* min_node = minimun(tree-&gt;left);<span class="comment">//找到适合取代该结点的结点</span></span><br><span class="line">                tree-&gt;key = min_node-&gt;key;<span class="comment">//把找到的值放入当前结点</span></span><br><span class="line">                tree-&gt;left = avltree_deleteNode(tree-&gt;left, min_node-&gt;key);</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span><span class="comment">//左右至少有一个NULL</span></span><br><span class="line">            &#123;</span><br><span class="line">                tree = (tree-&gt;left ? tree-&gt;left : tree-&gt;right);</span><br><span class="line">                <span class="comment">//独子或无子</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (tree)<span class="comment">//整理高度</span></span><br><span class="line">        &#123;</span><br><span class="line">            tree-&gt;height = MAX(getNode_height(tree-&gt;left), getNode_height(tree-&gt;right)) + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> tree;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：递归这样理解：</p>
+<p>在这个树中，如果结点一下子看不到，就深入一层，直到找到，在当前这个局部树中删除这个结点并消除影响</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/page/2/">« prev</a><a class="page-number" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/">1</a><a class="page-number" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/page/4/">4</a><a class="extend next" rel="next" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95lesson/page/4/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

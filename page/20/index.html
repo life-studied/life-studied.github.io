@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/21/Windows%20API/2022-10-21_5-%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99/">5-客户端程序编写</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-20T16:00:00.000Z" itemprop="datePublished">
+    2022-10-21
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="客户端程序编写">客户端程序编写</h2>
+<h4 id="0-初始化网络库">0.初始化网络库</h4>
+<blockquote>
+<p>同服务器</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">WORD wVersionRequested;</span><br><span class="line">WSADATA wsadata;</span><br><span class="line"><span class="type">int</span> err;	</span><br><span class="line">wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">err = <span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsadata);</span><br><span class="line"><span class="keyword">if</span> (err)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;WSAStartup errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">	<span class="keyword">return</span> err;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">LOBYTE</span>(wsadata.wVersion) != <span class="number">2</span> || <span class="built_in">HIBYTE</span>(wsadata.wVersion) != <span class="number">2</span>)</span><br><span class="line">&#123;	</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;LOBYTE errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">	<span class="built_in">WSACleanup</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="1-创建socket">1.创建socket</h4>
+<blockquote>
+<p>同服务器</p>
+</blockquote>
+<h5 id="1-1-socket">1.1 socket</h5>
+<blockquote>
+<p>socket可以看成一个文件，向socket发送数据就是向其写入。也可以理解为一个网络连接，或者句柄。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">SOCKET sockCli;</span><br></pre></td></tr></table></figure>
+<h5 id="1-2向操作系统申请socket">1.2向操作系统申请socket</h5>
+<blockquote>
+<p>调用socket函数，向操作系统申请一块内存，并将唯一编号返回给socket</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>af：使用的协议簇</p>
+<ul class="lvl-2">
+<li class="lvl-6">AF_UNIX：本机通信</li>
+<li class="lvl-6">AF_INET ：TCP/UDP ipv4</li>
+<li class="lvl-6">AF_INET6：TCP/UDP ipv6</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>type：使用的套接字类型</p>
+<ul class="lvl-2">
+<li class="lvl-6">SOCK_STREAM（TCP流）</li>
+<li class="lvl-6">SOCK_DGRAM（UDP数据报）</li>
+<li class="lvl-6">SOCK_RAW（原始套接字）</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>protocol：在确定协议簇和套接字的情况下，默认为0。在不确定的情况下，可以用于确定协议的种类。</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">sockCli = <span class="built_in">socket</span>(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="2-指定地址和端口（服务器的）">2.指定地址和端口（服务器的）</h4>
+<blockquote>
+<p>使用sockaddr_in，填充地址和端口</p>
+<p>客户端必须指定服务器的地址和端口</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">SOCKADDR_IN addrSrv;</span><br><span class="line">addrSrv.sin_addr.S_un.S_addr = <span class="built_in">inet_addr</span>(<span class="string">&quot;10.7.152.211&quot;</span>);		<span class="comment">//服务器的ipv4地址</span></span><br><span class="line">addrSrv.sin_family = AF_INET;</span><br><span class="line">addrSrv.sin_port = <span class="built_in">htons</span>(<span class="number">9999</span>);									<span class="comment">//服务器的端口号</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-连接服务器">3.连接服务器</h4>
+<blockquote>
+<p>使用connect函数将创建好的socket连接到对应的服务器。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (SOCKET_ERROR == <span class="built_in">connect</span>(sockCli, (sockaddr*)&amp;addrSrv, <span class="built_in">sizeof</span>(sockaddr)))</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-收发数据">4.收发数据</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> recvBuf[<span class="number">100</span>] = &#123;<span class="number">0</span>&#125;;					<span class="comment">//创建接收消息区</span></span><br><span class="line"><span class="type">int</span> iLen = <span class="built_in">recv</span>(sockCli,recvBuf,<span class="number">100</span>,<span class="number">0</span>);		<span class="comment">//阻塞等待消息</span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> sendBuf[<span class="number">100</span>] = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">iLen = <span class="built_in">send</span>(sockCli,sendBuf,<span class="number">100</span>,<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="5-关闭套接字">5.关闭套接字</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">closesocket</span>(sockCli);</span><br></pre></td></tr></table></figure>
+<h4 id="6-清理网络库">6.清理网络库</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">WSACleanup</span>();</span><br></pre></td></tr></table></figure>
+<h4 id="完整代码">完整代码</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;WinSock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib,<span class="string">&quot;ws2_32.lib&quot;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	WORD wVersionRequested;</span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	<span class="type">int</span> err;</span><br><span class="line">	wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	err = <span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsadata);</span><br><span class="line">	<span class="keyword">if</span> (err)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;WSAStartup errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> err;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">LOBYTE</span>(wsadata.wVersion) != <span class="number">2</span> || <span class="built_in">HIBYTE</span>(wsadata.wVersion) != <span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;LOBYTE errnum: %d\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="built_in">WSACleanup</span>();</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	SOCKET sockCli;</span><br><span class="line">	sockCli = <span class="built_in">socket</span>(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">	SOCKADDR_IN addrSrv;</span><br><span class="line">	addrSrv.sin_addr.S_un.S_addr = <span class="built_in">inet_addr</span>(<span class="string">&quot;10.7.152.211&quot;</span>);</span><br><span class="line">	addrSrv.sin_family = AF_INET;</span><br><span class="line">	addrSrv.sin_port = <span class="built_in">htons</span>(<span class="number">9999</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (SOCKET_ERROR == <span class="built_in">connect</span>(sockCli, (sockaddr*)&amp;addrSrv, <span class="built_in">sizeof</span>(sockaddr)))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="type">char</span> recvBuf[<span class="number">100</span>] = &#123; <span class="number">0</span> &#125;;					<span class="comment">//创建接收消息区</span></span><br><span class="line">	<span class="type">int</span> iLen = <span class="built_in">recv</span>(sockCli, recvBuf, <span class="number">100</span>, <span class="number">0</span>);		<span class="comment">//阻塞等待消息</span></span><br><span class="line"></span><br><span class="line">	<span class="type">char</span> sendBuf[<span class="number">100</span>] = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">	iLen = <span class="built_in">send</span>(sockCli, sendBuf, <span class="number">100</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">closesocket</span>(sockCli);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/20/Windows%20API/2022-10-20_3-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">3-网络编程基础</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-19T16:00:00.000Z" itemprop="datePublished">
+    2022-10-20
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="网络编程">网络编程</h2>
+<h4 id="头文件与链接库">头文件与链接库</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib,<span class="string">&quot;ws2_32.lib&quot;</span>)</span></span><br></pre></td></tr></table></figure>
+<h4 id="socket类型与协议设置">socket类型与协议设置</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>SOCK_STREAM：流套接字，适用于TCP</p>
+</li>
+<li class="lvl-2">
+<p>SOCK_DGRAM：数据包套接字，适用于UDP</p>
+</li>
+<li class="lvl-2">
+<p>SOCK_RAW：原始套接字，直接读写内核未处理的IP数据报</p>
+</li>
+</ul>
+<h4 id="IP地址与端口结构体">IP地址与端口结构体</h4>
+<h5 id="1-sockaddr">1.sockaddr</h5>
+<blockquote>
+<p>系统使用的数据类型，不方便写入，使用</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>sa_family：16位地址类型，用于指定地址族</p>
+</li>
+<li class="lvl-2">
+<p>sa_data：14字节地址数据，ip+port</p>
+</li>
+</ul>
+<h5 id="2-sockaddr-in">2.sockaddr_in</h5>
+<blockquote>
+<p>程序员使用的数据类型，便于给成员赋值，并强制类型转为sockaddr后传入参数使用（数据存储方式一致）</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>sin_family：16位地址类型，用于指定地址族</p>
+</li>
+<li class="lvl-2">
+<p>sin_port：16位端口号</p>
+</li>
+<li class="lvl-2">
+<p>sin_addr：in_addr类型结构体，存放32位IP地址</p>
+</li>
+<li class="lvl-2">
+<p>sin_zero：8字节填充</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/19/Windows%20API/2022-10-19_2-%E8%AE%BE%E8%AE%A1%E7%AA%97%E5%8F%A3%E8%BF%87%E7%A8%8B%E5%87%BD%E6%95%B0/">2-设计窗口过程函数</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-18T16:00:00.000Z" itemprop="datePublished">
+    2022-10-19
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="设计窗口过程函数">设计窗口过程函数</h2>
+<blockquote>
+<p>回调函数指：用户每进行一次操作，就调用的函数（即响应）。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">LRESULT CALLBACK <span class="title">my_callback</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    __in HWND hwnd,</span></span></span><br><span class="line"><span class="params"><span class="function">    __in UINT uMsg,</span></span></span><br><span class="line"><span class="params"><span class="function">    __in WPARAM wParam,</span></span></span><br><span class="line"><span class="params"><span class="function">    __in LPARAM lParam)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> ret;</span><br><span class="line">    HDC hdc;</span><br><span class="line">    <span class="keyword">switch</span> (uMsg)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> WM_CHAR:</span><br><span class="line">        <span class="type">char</span> szchar[<span class="number">20</span>];</span><br><span class="line">        <span class="built_in">sprintf_s</span>(szchar, <span class="string">&quot;您刚刚按下了：%c&quot;</span>, wParam);</span><br><span class="line">        <span class="built_in">MessageBox</span>(hwnd, szchar, <span class="string">&quot;char&quot;</span>, <span class="literal">NULL</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> WM_LBUTTONDOWN:</span><br><span class="line">        <span class="built_in">MessageBox</span>(hwnd, <span class="string">&quot;检测鼠标左键按下&quot;</span>, <span class="string">&quot;mes&quot;</span>, <span class="literal">NULL</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> WM_PAINT:</span><br><span class="line">        PAINTSTRUCT ps;</span><br><span class="line">        hdc = <span class="built_in">BeginPaint</span>(hwnd, &amp;ps);</span><br><span class="line">        <span class="built_in">TextOut</span>(hdc, <span class="number">0</span>, <span class="number">0</span>, <span class="string">&quot;the window has repainted&quot;</span>, <span class="built_in">strlen</span>(<span class="string">&quot;the window has repainted&quot;</span>));</span><br><span class="line">        <span class="built_in">EndPaint</span>(hwnd, &amp;ps);</span><br><span class="line">        <span class="built_in">MessageBox</span>(hwnd, <span class="string">&quot;重绘&quot;</span>, <span class="string">&quot;mes&quot;</span>, <span class="literal">NULL</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> WM_CLOSE:</span><br><span class="line">        ret = <span class="built_in">MessageBox</span>(hwnd, <span class="string">&quot;是否真的结束&quot;</span>, <span class="string">&quot;msg&quot;</span>, MB_YESNO);</span><br><span class="line">        <span class="keyword">if</span> (ret == IDYES)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">DestroyWindow</span>(hwnd);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> WM_DESTROY:</span><br><span class="line">        <span class="built_in">PostQuitMessage</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">DefWindowProc</span>(hwnd, uMsg, wParam, lParam);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="整体代码">整体代码</h4>
+<blockquote>
+<p>1在项目——链接器——系统——子系统中，改为窗口</p>
+<p>2改为多字节字符集</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">LPCSTR classname = <span class="string">&quot;MY_C&quot;</span>;</span><br><span class="line">LPCSTR msgname = <span class="string">&quot;first_window&quot;</span>;</span><br><span class="line"><span class="function">LRESULT CALLBACK <span class="title">my_callback</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    __in HWND hWindow,</span></span></span><br><span class="line"><span class="params"><span class="function">    __in UINT uMsg,</span></span></span><br><span class="line"><span class="params"><span class="function">    __in WPARAM wParam,</span></span></span><br><span class="line"><span class="params"><span class="function">    __in LPARAM lParam)</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> WINAPI <span class="title">wWinMain</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    HINSTANCE hInstance,</span></span></span><br><span class="line"><span class="params"><span class="function">    HINSTANCE hPrevInstance,</span></span></span><br><span class="line"><span class="params"><span class="function">    PWSTR pCmdLine,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">int</span> nCmdShow)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    WNDCLASS wndcls;</span><br><span class="line">    wndcls.cbClsExtra = <span class="literal">NULL</span>;</span><br><span class="line">    wndcls.cbWndExtra = <span class="literal">NULL</span>;</span><br><span class="line">    wndcls.hbrBackground = (HBRUSH)<span class="built_in">GetStockObject</span>(WHITE_BRUSH);</span><br><span class="line">    wndcls.hCursor = <span class="built_in">LoadCursor</span>(<span class="literal">NULL</span>, IDC_ARROW);</span><br><span class="line">    wndcls.hIcon = <span class="built_in">LoadIcon</span>(<span class="literal">NULL</span>, IDI_APPLICATION);</span><br><span class="line">    wndcls.hInstance = hInstance;</span><br><span class="line">    wndcls.lpszMenuName = <span class="literal">NULL</span>;</span><br><span class="line">    wndcls.style = CS_HREDRAW | CS_VREDRAW;</span><br><span class="line">    wndcls.lpfnWndProc = my_callback;</span><br><span class="line">    wndcls.lpszClassName = classname;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">RegisterClass</span>(&amp;wndcls);</span><br><span class="line">    HWND hwnd;	<span class="comment">//创建一个句柄</span></span><br><span class="line">    hwnd = <span class="built_in">CreateWindow</span>(</span><br><span class="line">        classname,        <span class="comment">// name of window class </span></span><br><span class="line">        msgname,            <span class="comment">// title-bar string </span></span><br><span class="line">        WS_OVERLAPPEDWINDOW, <span class="comment">// top-level window </span></span><br><span class="line">        CW_USEDEFAULT,       <span class="comment">// default horizontal position </span></span><br><span class="line">        CW_USEDEFAULT,       <span class="comment">// default vertical position </span></span><br><span class="line">        CW_USEDEFAULT,       <span class="comment">// default width </span></span><br><span class="line">        CW_USEDEFAULT,       <span class="comment">// default height </span></span><br><span class="line">        (HWND)<span class="literal">NULL</span>,         <span class="comment">// no owner window </span></span><br><span class="line">        (HMENU)<span class="literal">NULL</span>,        <span class="comment">// use class menu </span></span><br><span class="line">        hInstance,           <span class="comment">// handle to application instance </span></span><br><span class="line">        (LPVOID)<span class="literal">NULL</span>);      <span class="comment">// no window-creation data</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">ShowWindow</span>(hwnd, SW_SHOW);</span><br><span class="line">    <span class="built_in">UpdateWindow</span>(hwnd);</span><br><span class="line"></span><br><span class="line">    MSG msg;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">GetMessage</span>(&amp;msg, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>))		<span class="comment">//只有接收到WM_QUIT才会返回0</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">TranslateMessage</span>(&amp;msg);		<span class="comment">//将消息转化为相应格式，并投递到消息队列中</span></span><br><span class="line">        <span class="built_in">DispatchMessage</span>(&amp;msg);		<span class="comment">//分派消息</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> msg.wParam;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">LRESULT CALLBACK <span class="title">my_callback</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    __in HWND hwnd,</span></span></span><br><span class="line"><span class="params"><span class="function">    __in UINT uMsg,</span></span></span><br><span class="line"><span class="params"><span class="function">    __in WPARAM wParam,</span></span></span><br><span class="line"><span class="params"><span class="function">    __in LPARAM lParam)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> ret;</span><br><span class="line">    HDC hdc;</span><br><span class="line">    <span class="keyword">switch</span> (uMsg)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> WM_CHAR:</span><br><span class="line">        <span class="type">char</span> szchar[<span class="number">20</span>];</span><br><span class="line">        <span class="built_in">sprintf_s</span>(szchar, <span class="string">&quot;您刚刚按下了：%c&quot;</span>, wParam);</span><br><span class="line">        <span class="built_in">MessageBox</span>(hwnd, szchar, <span class="string">&quot;char&quot;</span>, <span class="literal">NULL</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> WM_LBUTTONDOWN:</span><br><span class="line">        <span class="built_in">MessageBox</span>(hwnd, <span class="string">&quot;检测鼠标左键按下&quot;</span>, <span class="string">&quot;mes&quot;</span>, <span class="literal">NULL</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> WM_PAINT:</span><br><span class="line">        PAINTSTRUCT ps;</span><br><span class="line">        hdc = <span class="built_in">BeginPaint</span>(hwnd, &amp;ps);</span><br><span class="line">        <span class="built_in">TextOut</span>(hdc, <span class="number">0</span>, <span class="number">0</span>, <span class="string">&quot;the window has repainted&quot;</span>, <span class="built_in">strlen</span>(<span class="string">&quot;the window has repainted&quot;</span>));</span><br><span class="line">        <span class="built_in">EndPaint</span>(hwnd, &amp;ps);</span><br><span class="line">        <span class="built_in">MessageBox</span>(hwnd, <span class="string">&quot;重绘&quot;</span>, <span class="string">&quot;mes&quot;</span>, <span class="literal">NULL</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> WM_CLOSE:</span><br><span class="line">        ret = <span class="built_in">MessageBox</span>(hwnd, <span class="string">&quot;是否真的结束&quot;</span>, <span class="string">&quot;msg&quot;</span>, MB_YESNO);</span><br><span class="line">        <span class="keyword">if</span> (ret == IDYES)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">DestroyWindow</span>(hwnd);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> WM_DESTROY:</span><br><span class="line">        <span class="built_in">PostQuitMessage</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">DefWindowProc</span>(hwnd, uMsg, wParam, lParam);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/11/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/%E7%BD%91%E8%AF%BE/2022-10-11_4-5LEA%E6%8C%87%E4%BB%A4/">4-5LEA指令</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-10T16:00:00.000Z" itemprop="datePublished">
+    2022-10-11
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">汇编语言</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/%E7%BD%91%E8%AF%BE/">网课</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="LEA指令">LEA指令</h2>
+<p>格式 LEA 寄存器,内存目标</p>
+<p>加载有效地址到寄存器</p>
+<p>注意:内存目标可以是寄存器,总之就是将目标对应的地址取出到某个寄存器里</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/11/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/%E7%BD%91%E8%AF%BE/2022-10-11_4-%E6%AE%B5%E5%AF%84%E5%AD%98%E5%99%A8/">4-段寄存器</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-10T16:00:00.000Z" itemprop="datePublished">
+    2022-10-11
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">汇编语言</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/%E7%BD%91%E8%AF%BE/">网课</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="段寄存器">段寄存器</h2>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/11/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/%E7%BD%91%E8%AF%BE/2022-10-11_ADD%E6%8C%87%E4%BB%A4/">ADD指令</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-10T16:00:00.000Z" itemprop="datePublished">
+    2022-10-11
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">汇编语言</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/%E7%BD%91%E8%AF%BE/">网课</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="ADD指令">ADD指令</h2>
+<p>格式:add 被加数,加数</p>
+<p>影响位:</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>溢出OV（overflow，OF＝1）</p>
+</li>
+<li class="lvl-2">
+<p>增量UP（direction up，DF＝0）</p>
+</li>
+<li class="lvl-2">
+<p>允许中断EI（enable interrupt，IF＝1）</p>
+</li>
+<li class="lvl-2">
+<p>正PL（plus，SF＝0）</p>
+</li>
+<li class="lvl-2">
+<p>零ZR（zero，ZF＝1）</p>
+</li>
+<li class="lvl-2">
+<p>辅助进位AC（auxiliary carry，AF＝1）</p>
+</li>
+<li class="lvl-2">
+<p>偶校验PE（even parity，PF＝1）</p>
+</li>
+<li class="lvl-2">
+<p>进位CY（carry，CF＝1）</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/11/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/%E7%BD%91%E8%AF%BE/2022-10-11_%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8/">标志寄存器及其使用</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-10T16:00:00.000Z" itemprop="datePublished">
+    2022-10-11
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">汇编语言</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/%E7%BD%91%E8%AF%BE/">网课</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="标志寄存器及其使用">标志寄存器及其使用</h2>
+<p>PUSHF/PUSHFD/PUSHFQ指令</p>
+<p>格式：本身（没有操作数）</p>
+<p>标志位影响：无</p>
+<p>效果：将标志位入栈（内存）</p>
+<p><strong>注意</strong>：入栈时先保存高8位，再保存低8位，一共保存16位</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/06/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/%E7%BD%91%E8%AF%BE/2022-10-06_4-4mov%E6%8C%87%E4%BB%A4/">4-4mov指令</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-05T16:00:00.000Z" itemprop="datePublished">
+    2022-10-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">汇编语言</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/%E7%BD%91%E8%AF%BE/">网课</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="mov指令">mov指令</h2>
+<p>格式：mov 目标，源</p>
+<p>目标：内存地址/寄存器</p>
+<p>源：立即数/内存地址/寄存器</p>
+<hr>
+<blockquote>
+<p>将源复制到目标</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/06/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/%E7%BD%91%E8%AF%BE/2022-10-06_3-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8/">3-标志寄存器</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-05T16:00:00.000Z" itemprop="datePublished">
+    2022-10-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">汇编语言</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/%E7%BD%91%E8%AF%BE/">网课</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="标志寄存器">标志寄存器</h2>
+<h4 id="1-状态标志">1.状态标志</h4>
+<h5 id="CF（进位标志）（bit0）">CF（进位标志）（bit0）</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>最高有效位发生进位（加法）或者借位（减法）的情况下置1，反之清零</p>
+</li>
+</ul>
+<p><strong>测试代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> nEax = <span class="number">0x80000000</span>, nEbx = <span class="number">0x80000000</span>;</span><br><span class="line">	<span class="comment">//nEax和nEbx都在内存里，不能直接进行运算。应该加载到寄存器里进行（看似直接进行运算的也是加载到了寄存器里）</span></span><br><span class="line">	__asm &#123;</span><br><span class="line">		mov eax, nEax;</span><br><span class="line">		mov ebx, nEbx;</span><br><span class="line">		add eax, ebx;		<span class="comment">//CY即进位位变成1，OV即溢出位变成1</span></span><br><span class="line">        <span class="comment">//特别注意：是最高有效位才会置1</span></span><br><span class="line">		mov nEax, eax;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%08X\r\n&quot;</span>, nEax);</span><br><span class="line">	<span class="comment">//复习：</span></span><br><span class="line">	<span class="comment">//0：补0</span></span><br><span class="line">	<span class="comment">//8：宽度</span></span><br><span class="line">	<span class="comment">//X：16进制</span></span><br><span class="line">	<span class="comment">//\r：回到行首</span></span><br><span class="line">	<span class="comment">//\n：换行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>借位代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> nEax = <span class="number">0x00000000</span>, nEbx = <span class="number">0x80000000</span>;</span><br><span class="line">	__asm &#123;</span><br><span class="line">		mov eax, nEax;</span><br><span class="line">		mov ebx, nEbx;</span><br><span class="line">		sub eax, ebx;		<span class="comment">//CY即进位位变成1，OV发生下溢，同样变1</span></span><br><span class="line">        <span class="comment">//特别注意：是最高有效位才会置1</span></span><br><span class="line">		mov nEax, eax;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%08X\r\n&quot;</span>, nEax);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="PF（奇偶标志）（bit2）">PF（奇偶标志）（bit2）</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>结果的最低有效字节里有偶数个1才会置1</p>
+</li>
+</ul>
+<p><strong>示例代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> nEax = <span class="number">0x000000C0</span>, nEbx = <span class="number">0x00000000</span>;</span><br><span class="line">	__asm &#123;</span><br><span class="line">		mov eax, nEax;</span><br><span class="line">		mov ebx, nEbx;</span><br><span class="line">		add eax, ebx;	<span class="comment">//PE置1	</span></span><br><span class="line">		mov nEax, eax;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%08X\r\n&quot;</span>, nEax);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//特别注意：一定是最低有效字节里的1的个数 </span></span><br></pre></td></tr></table></figure>
+<h5 id="AF（辅助进位标志）（bit4）">AF（辅助进位标志）（bit4）</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>结果的第3位（从0开始）是否发生进位，是则置1</p>
+</li>
+</ul>
+<p><strong>示例代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> nEax = <span class="number">0x00000008</span>, nEbx = <span class="number">0x00000008</span>;</span><br><span class="line">    <span class="comment">//0000 0100 + 0000 0100 = 0000 1000</span></span><br><span class="line">	__asm &#123;</span><br><span class="line">		mov eax, nEax;</span><br><span class="line">		mov ebx, nEbx;</span><br><span class="line">		add eax, ebx;	<span class="comment">//AC置1</span></span><br><span class="line">		mov nEax, eax;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%08X\r\n&quot;</span>, nEax);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h5 id="ZF（零标志）（bit6）">ZF（零标志）（bit6）</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>结果为0，置1</p>
+</li>
+</ul>
+<h5 id="SF（符号标志）（bit7）">SF（符号标志）（bit7）</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>最高有效位，1代表负数，0代表正数</p>
+</li>
+</ul>
+<h5 id="OF（溢出标志）（bit11）">OF（溢出标志）（bit11）</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>小数-大数或者两个大数相加导致溢出，置1</p>
+</li>
+</ul>
+<blockquote>
+<p>无符号下，CF表示借位或者进位</p>
+<p>有符号下，OF表示借位或者进位</p>
+</blockquote>
+<h4 id="2-控制标志（DF-flag）">2.控制标志（DF flag）</h4>
+<blockquote>
+<p>在标志寄存器的bit10</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>在指定了ESI和EDI后，使用MOVS指令，该位置1为减，置0为加</p>
+</li>
+<li class="lvl-2">
+<p>可以使用std或者cld指令设置</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> nEax = <span class="number">0x00000008</span>, nEbx = <span class="number">0x00000008</span>;</span><br><span class="line">	__asm &#123;</span><br><span class="line">		std;</span><br><span class="line">		cld;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%08X\r\n&quot;</span>, nEax);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ELF是标志寄存器的值</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/05/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/%E7%BD%91%E8%AF%BE/2022-10-05_1-%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E6%B1%87%E7%BC%96%E9%A1%B9%E7%9B%AE/">1-如何创建汇编项目</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-04T16:00:00.000Z" itemprop="datePublished">
+    2022-10-05
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">汇编语言</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/%E7%BD%91%E8%AF%BE/">网课</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="如何创建汇编项目">如何创建汇编项目</h2>
+<ul class="lvl-0">
+<li class="lvl-2">打开vs2019</li>
+<li class="lvl-2">选择控制台</li>
+</ul>
+<h4 id="嵌入汇编指令的方法：">嵌入汇编指令的方法：</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">__asm 汇编指令;</span><br><span class="line">__asm &#123;</span><br><span class="line">    批量汇编指令</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="相关窗口">相关窗口</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>打开寄存器窗口，查看寄存器内部的值</p>
+</li>
+<li class="lvl-2">
+<p>打开反汇编窗口，查看对应的反汇编代码</p>
+</li>
+</ul>
+<p><strong>案例代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> nEax&#123;&#125;, nEbx&#123;&#125;;</span><br><span class="line">	__asm mov nEax, eax;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;eax = %08X\r\n&quot;</span>, nEax);</span><br><span class="line">	__asm &#123;</span><br><span class="line">		mov nEbx, ebx;</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;eax = %08X\r\n&quot;</span>, nEbx);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/19/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/21/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

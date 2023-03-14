@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/14/HEXO%20blog%20construct/2023-03-14_HEXO%20blog%20construct/">HEXO blog construct</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-13T16:00:00.000Z" itemprop="datePublished">
+    2023-03-14
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/HEXO-blog-construct/">HEXO blog construct</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="HEXO-blog-construct">HEXO blog construct</h2>
+<h4 id="1-前置工作">1. 前置工作</h4>
+<h5 id="1-1-安装git">1.1 安装git</h5>
+<h5 id="1-2-安装nodejs">1.2 安装nodejs</h5>
+<h4 id="2-安装HEXO">2. 安装HEXO</h4>
+<blockquote>
+<p>在目标目录下，打开命令行，使用以下命令</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line">npm install</span><br><span class="line">hexo server		#此时生成了静态网页在端口4000上</span><br></pre></td></tr></table></figure>
+<h4 id="3-生成的目录结构">3. 生成的目录结构</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>source目录：存放了md源代码</p>
+</li>
+<li class="lvl-2">
+<p>theme目录：存放了主题配置</p>
+<ul class="lvl-2">
+<li class="lvl-6">主要是config.yml</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>其它</p>
+</li>
+</ul>
+<h4 id="4-生成静态网页">4. 生成静态网页</h4>
+<blockquote>
+<p>在对应目录的命令行下使用<code>hexo g</code>，创建public目录，里面是md渲染成的静态网页。</p>
+</blockquote>
+<h4 id="5-选择主题">5. 选择主题</h4>
+<blockquote>
+<p>在<a target="_blank" rel="noopener" href="https://hexo.io/themes/">Themes | Hexo</a>中选择对应的主题，进入对应的github仓库，在README.md文档中按要求部署。</p>
+</blockquote>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/13/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-03-13_1-10%20%E4%BD%BF%E7%94%A8%E5%BC%82%E5%B8%B8%E9%80%A0%E6%88%90%E7%9A%84%E5%BC%80%E9%94%80/">1-10 使用异常造成的开销</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-12T16:00:00.000Z" itemprop="datePublished">
+    2023-03-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-10-使用异常造成的开销">1.10 使用异常造成的开销</h2>
+<blockquote>
+<p>一个throw表达式就像是一个特殊的系统函数调用，它接收异常对象作为参数并且沿着执行调用链向上回溯。为了完成这项工作，编译器需要在栈上放置额外的信息，来辅助栈反解过程。</p>
+<p>典型情况下异常（应该）只构成程序的很小一部分，其空间开销是相当小的（通常只占总开销的5%～15%）。</p>
+</blockquote>
+<p>详见：<a href="./otherSource/%E5%BC%82%E5%B8%B8%E5%AF%BC%E8%87%B4%E6%A0%88%E7%BB%93%E6%9E%84%E7%9A%84%E9%A2%9D%E5%A4%96%E5%BC%80%E9%94%80.html">异常导致栈结构的额外开销</a></p>
+<p>除了空间开销，异常也会导致压栈操作导致的额外时间开销，但是如果编译器使用的是<strong>零代价模型</strong>则不存在时间开销。</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/13/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-03-13_1-4%20%E5%BC%82%E5%B8%B8%E5%8C%B9%E9%85%8D/">1-4 异常匹配</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-12T16:00:00.000Z" itemprop="datePublished">
+    2023-03-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-4-异常匹配">1.4 异常匹配</h2>
+<h4 id="1-异常匹配不支持非派生的隐式转换">1. 异常匹配不支持非派生的隐式转换</h4>
+<blockquote>
+<p>在下面的例子中，2类能隐式转换为1类，但是在异常捕获的时候，不会。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Except1</span></span><br><span class="line">&#123;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Except2</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Except2</span>(<span class="type">const</span> Except1 &amp;) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123; <span class="keyword">throw</span> <span class="built_in">Except1</span>(); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">f</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (Except2 &amp;)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;inside catch(Except2)&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (Except1 &amp;)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;inside catch(Except1)&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-异常匹配在派生处理的做法">2. 异常匹配在派生处理的做法</h4>
+<blockquote>
+<p>由于异常匹配允许基类匹配派生类，因此优先处理派生类异常，将基类异常放在最后，下面演示了反例后果。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">X</span> &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Trouble</span> &#123;&#125;;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Small</span> : <span class="keyword">public</span> Trouble &#123;&#125;;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Big</span> :<span class="keyword">public</span> Trouble &#123;&#125;;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123; <span class="keyword">throw</span> <span class="built_in">Big</span>(); &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span>** argv)</span> </span>&#123;</span><br><span class="line">    X x;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        x.<span class="built_in">f</span>();</span><br><span class="line">    &#125;<span class="built_in">catch</span>(X::Trouble&amp;)&#123;</span><br><span class="line">        cout&lt;&lt;<span class="string">&quot;catch Trouble&quot;</span>&lt;&lt;endl;</span><br><span class="line">    &#125;<span class="built_in">catch</span>(X::Big&amp;)&#123;</span><br><span class="line">        cout&lt;&lt;<span class="string">&quot;catch Big trouble&quot;</span>&lt;&lt;endl;</span><br><span class="line">    &#125;<span class="built_in">catch</span>(X::Small&amp;)&#123;</span><br><span class="line">        cout&lt;&lt;<span class="string">&quot;catch Small Trouble&quot;</span>&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*output:</span></span><br><span class="line"><span class="comment">catch Trouble</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>另外，异常处理使用引用处理，防止派生类信息被基类捕获后消失。</p>
+<h4 id="3-捕获所有异常">3. 捕获所有异常</h4>
+<blockquote>
+<p>使用省略号代替异常参数列表，就能捕获所有异常，但是不能获得异常实际的信息。一般放在异常捕获的最后，用于捕获意料之外的异常，防止程序直接崩溃。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">catch</span>(...)</span><br><span class="line">&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;an exception was thrown&quot;</span>&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-重新抛出异常">4. 重新抛出异常</h4>
+<blockquote>
+<p>有时，捕获异常并不希望在此处进行处理，而是为了封装一层资源释放，将接收的异常抛向更高一级来处理（省略号捕获符合这种场景）。此时，在catch块中使用不带参数的throw来重新抛出异常。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">catch</span>(...)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//clean the resource here, and then rethrow</span></span><br><span class="line">    <span class="keyword">throw</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="5-不捕获异常情况">5. 不捕获异常情况</h4>
+<blockquote>
+<p>在层层捕获后，依然逃逸的异常。</p>
+</blockquote>
+<h5 id="1-terminate-函数">1. terminate()函数</h5>
+<blockquote>
+<p>最终没有被捕获的异常，会导致库函数terminate()被调用，默认调用C库标准abort()退出。</p>
+<p>注意：abort()绕过析构函数直接退出。</p>
+</blockquote>
+<p>在下列两种情况下，terminate()函数也会执行：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>局部对象的析构函数抛出异常时，栈正在进行清理工作（也称栈反解，即异常的抛出过程被打断）；</p>
+</li>
+<li class="lvl-2">
+<p>或者是全局对象或静态对象的构造函数或析构函数抛出一个异常。（一般来说，不允许析构函数抛出异常。）</p>
+</li>
+</ul>
+<h5 id="2-set-terminate-函数">2. set_terminate()函数</h5>
+<blockquote>
+<p>通过调用set_terminate()函数，来更改指向terminate()的函数指针。同时返回一个原terminate()函数指针便于恢复。</p>
+</blockquote>
+<p>设置自定义terminate函数的要求：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>无参数</p>
+</li>
+<li class="lvl-2">
+<p>无返回值</p>
+</li>
+<li class="lvl-2">
+<p>不能抛出异常</p>
+</li>
+<li class="lvl-2">
+<p>必须执行某种方式的程序终止逻辑</p>
+</li>
+</ul>
+<p><strong>案例</strong></p>
+<blockquote>
+<p>下面的案例，演示了在异常处理过程中，throw时调用类析构函数，函数却再次抛出异常，导致栈反解，直接进入terminate()函数，从而绕开catch(…)的情况。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;exception&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">terminator</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;I&#x27;ll be back!&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">void</span> (*old__terminate)() = <span class="built_in">set_terminate</span>(terminator);</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Botch</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Fruit</span></span><br><span class="line">    &#123;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Botch::f()&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">Fruit</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">Botch</span>() &#123; <span class="keyword">throw</span> <span class="string">&#x27;c&#x27;</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        Botch b;</span><br><span class="line">        b.<span class="built_in">f</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (...)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;inside catch(...)&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/13/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-03-13_1-8%20%E5%BC%82%E5%B8%B8%E5%AE%89%E5%85%A8/">1-8 异常安全</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-12T16:00:00.000Z" itemprop="datePublished">
+    2023-03-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-8-异常安全">1.8 异常安全</h2>
+<blockquote>
+<p>异常安全的代码能够保持一致性并能避免资源泄露。</p>
+</blockquote>
+<p>例如：new运算符可能会抛出bad_alloc的异常，那会不能正常返回一个地址，因此在修改源对象状态前确保没有异常。</p>
+<p>另外，不对delete运算符进行异常检测，这并不是事实，而只是尽可能的假设。不要让析构函数抛出异常是设计异常安全代码的保障。</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/13/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-03-13_1-9%20%E5%9C%A8%E7%BC%96%E7%A8%8B%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%BC%82%E5%B8%B8/">1-9 在编程中使用异常</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-12T16:00:00.000Z" itemprop="datePublished">
+    2023-03-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-9-在编程中使用异常">1.9 在编程中使用异常</h2>
+<h4 id="1-9-1-什么时候避免异常">1.9.1 什么时候避免异常</h4>
+<h5 id="1-不要在异步事件中使用异常">1. 不要在异步事件中使用异常</h5>
+<blockquote>
+<p>由于异步事件与源程序不在同一函数调用栈上，因此在异步中的异常不能正常抛给源程序。</p>
+</blockquote>
+<h5 id="2-不要在处理简单错误时使用异常">2. 不要在处理简单错误时使用异常</h5>
+<blockquote>
+<p>如果在当前能得到足够的信息来处理错误，就不要把异常抛回给更大的语境中。</p>
+</blockquote>
+<h6 id="下面是一段与ai的对话，来说明这个建议：">下面是一段与ai的对话，来说明这个建议：</h6>
+<p>[不要在处理简单错误时使用异常](./otherSource/ChatGPT API Demo.html)</p>
+<h5 id="3-不要将异常用于程序的流程控制">3. 不要将异常用于程序的流程控制</h5>
+<blockquote>
+<p>由于异常处理付出的代价会大很多，因此不要将异常用于处理错误之外的地方。</p>
+</blockquote>
+<h5 id="4-不要强迫自己使用异常">4. 不要强迫自己使用异常</h5>
+<blockquote>
+<p>对于一些小型实用程序，不必费劲捕获可能的所有的异常。</p>
+</blockquote>
+<h4 id="1-9-2-异常的典型应用">1.9.2 异常的典型应用</h4>
+<h5 id="1-什么时候使用异常规格说明">1. 什么时候使用异常规格说明</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>任何时候如果要使用异常规格说明，或调用使用异常规格说明的函数，最好编写自己的unexpected（）函数，在这个unexpected（）函数中将消息记入日志，然后抛出异常或终止程序。</p>
+</li>
+<li class="lvl-2">
+<p>如前所述，应该避免在模板类中使用异常规格说明，因为无法预料模板参数类（template parameter classes）所抛出的异常的类型。</p>
+</li>
+</ul>
+<h5 id="2-从标准异常开始">2. 从标准异常开始</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>检查自己的系统异常是否符合标准库中异常类的定义，使用标准异常能使用户更容易理解和处理。</p>
+</li>
+<li class="lvl-2">
+<p>即使标准异常不符合要求，也先考虑从其中继承，使用what()接口来对用户显示友好。</p>
+</li>
+</ul>
+<h5 id="3-嵌套用户自己的异常">3. 嵌套用户自己的异常</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如果需要创建异常类，最好避免这个异常类污染命名空间。</p>
+</li>
+</ul>
+<h5 id="4-使用异常层次结构">4. 使用异常层次结构</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>为用户提供一个有价值的分类方法</p>
+</li>
+<li class="lvl-2">
+<p>通过最后的基类异常捕获，防止新的派生异常被忽略，同时可以减少代码修改量</p>
+</li>
+</ul>
+<h5 id="5-通过引用而不是值来捕获异常">5. 通过引用而不是值来捕获异常</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>异常对象被传递到异常处理器时，避免进行不必要的对象拷贝</p>
+</li>
+<li class="lvl-2">
+<p>派生对象被当成基类对象捕获时，避免发生对象切割</p>
+</li>
+</ul>
+<h6 id="详细见下方链接：">详细见下方链接：</h6>
+<p><a href="./otherSource/%E4%BD%BF%E7%94%A8%E5%BC%95%E7%94%A8%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8.html">使用引用捕获异常</a></p>
+<h5 id="6-在构造函数中抛出异常">6. 在构造函数中抛出异常</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>由于构造函数没有返回值，因此使用异常代替于其它检测方式更加安全有效。</p>
+</li>
+<li class="lvl-2">
+<p>在构造函数中抛出异常时，注意对象内部的指针和它的清理方式。</p>
+</li>
+</ul>
+<h6 id="经典步骤见下方链接：">经典步骤见下方链接：</h6>
+<p><a href="./otherSource/%E5%9C%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%AD%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8%E7%9A%84%E5%81%9A%E6%B3%95.html">在构造函数抛出异常的正确做法</a></p>
+<h5 id="7-不要在析构函数中触发异常">7. 不要在析构函数中触发异常</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>绝不要在析构函数中抛出异常，否则可能导致terminate()函数的发生</p>
+</li>
+<li class="lvl-2">
+<p>如果析构函数调用的函数可能抛出异常，那么在析构函数中使用try块来保证异常不会泄露出去。</p>
+</li>
+</ul>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/13/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-03-13_1-12-1%20%E5%9B%9B%E7%A7%8D%E5%A4%84%E7%90%86%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%8F%E5%85%B8%E7%94%A8%E6%B3%95/">1-12-1 四种处理错误的经典用法</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-12T16:00:00.000Z" itemprop="datePublished">
+    2023-03-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-12-1-四种处理错误的经典用法">1.12-1 四种处理错误的经典用法</h2>
+<ul class="lvl-0">
+<li class="lvl-2">返回值处理错误</li>
+<li class="lvl-2">errno处理错误</li>
+<li class="lvl-2">signal处理错误</li>
+<li class="lvl-2">异常处理错误</li>
+</ul>
+<p>说明：<a href="../otherSource/%E5%9B%9B%E7%A7%8D%E5%A4%84%E7%90%86%E9%94%99%E8%AF%AF%E7%9A%84%E5%81%9A%E6%B3%95.html">四种处理错误的做法</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;exception&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">func1</span><span class="params">(<span class="type">int</span> status)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (status == <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (status == <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func2</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">fopen</span>(<span class="string">&quot;&quot;</span>, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">    <span class="built_in">perror</span>(<span class="string">&quot;Error1&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">signal_handler</span><span class="params">(<span class="type">int</span> signum)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Receive SIGINT signal, exiting...\n&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(signum);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func3</span><span class="params">(<span class="type">int</span> signum)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">raise</span>(signum); <span class="comment">// 发送信号给信号处理函数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func4</span><span class="params">()</span> <span class="title">throw</span><span class="params">(exception)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="built_in">logic_error</span>(<span class="string">&quot;this is an exception&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> 0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">3</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> res = <span class="built_in">func1</span>(i);</span><br><span class="line">        <span class="keyword">switch</span> (res)</span><br><span class="line">        &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;Error1&quot;</span> &lt;&lt; endl;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;Error2&quot;</span> &lt;&lt; endl;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;Error3&quot;</span> &lt;&lt; endl;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> 0</span></span><br><span class="line">    <span class="built_in">func2</span>();</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> 0</span></span><br><span class="line">    <span class="built_in">signal</span>(SIGINT, signal_handler); <span class="comment">// 注册信号处理函数</span></span><br><span class="line">    <span class="built_in">func3</span>(<span class="number">2</span>);</span><br><span class="line">    <span class="built_in">getchar</span>();</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> 0</span></span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">func4</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (<span class="type">const</span> exception &amp;e)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/13/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-03-13_1-12-2%20%E5%88%9B%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%BC%82%E5%B8%B8%E7%B1%BB/">1-12-2 创建自己的异常类</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-12T16:00:00.000Z" itemprop="datePublished">
+    2023-03-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-12-2-创建自己的异常类">1.12-2 创建自己的异常类</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;exception&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Myexception</span> : <span class="keyword">public</span> logic_error</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">Myexception</span>(<span class="type">const</span> <span class="type">char</span> *s) : <span class="built_in">logic_error</span>(s) &#123;&#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">ThrowExcept</span><span class="params">()</span> <span class="title">throw</span><span class="params">(Myexception)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">Myexception</span>(<span class="string">&quot;my exception&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        MyClass mc;</span><br><span class="line">        mc.<span class="built_in">ThrowExcept</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (<span class="type">const</span> std::exception &amp;e)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/13/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-03-13_1-12-5%20%E5%BC%82%E5%B8%B8%E6%81%A2%E5%A4%8D/">1-12-5 异常恢复</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-12T16:00:00.000Z" itemprop="datePublished">
+    2023-03-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-12-5-异常恢复">1.12-5 异常恢复</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;exception&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">newBad</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> i;</span><br><span class="line">    <span class="type">static</span> <span class="type">void</span> *p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> *<span class="keyword">operator</span> <span class="title">new</span><span class="params">(<span class="type">size_t</span> sz)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        p = ::<span class="keyword">operator</span> <span class="built_in">new</span>(sz);</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;The newBad object number: &quot;</span> &lt;&lt; i + <span class="number">1</span> &lt;&lt; <span class="string">&quot; has been created&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">if</span> (++i &gt;= <span class="number">11</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="built_in">out_of_range</span>(<span class="string">&quot;the 11st object created failed.&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">releaseMemory</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (p)</span><br><span class="line">        &#123;</span><br><span class="line">            ::<span class="function"><span class="keyword">operator</span> <span class="title">delete</span><span class="params">(p)</span></span>;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;the &quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;st object was freed&quot;</span> &lt;&lt; endl;</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> newBad::i = <span class="number">0</span>;</span><br><span class="line"><span class="type">void</span> *newBad::p = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            newBad *mp = <span class="keyword">new</span> newBad;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">catch</span> (<span class="type">const</span> std::exception &amp;e)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cerr &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">            newBad::<span class="built_in">releaseMemory</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/13/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-03-13_1-12-6%20%E6%A0%88%E5%8F%8D%E8%A7%A3%E6%97%B6%E5%86%8D%E6%AC%A1%E5%BC%82%E5%B8%B8/">1-12-6 栈反解时再次异常</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-12T16:00:00.000Z" itemprop="datePublished">
+    2023-03-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-12-6-栈反解时再次异常">1.12-6 栈反解时再次异常</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;exception&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BadIdea</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ~<span class="built_in">BadIdea</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">logic_error</span>(<span class="string">&quot;This is a bad exception&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">my_terminate</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;This is a bad Idea&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> *psource = (<span class="type">void</span> *)<span class="built_in">set_terminate</span>(my_terminate);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        BadIdea ba;</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">logic_error</span>(<span class="string">&quot;test&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (<span class="type">const</span> std::exception &amp;e)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/03/13/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-03-13_1-12-7%20%E5%BC%82%E5%B8%B8%E6%AD%A3%E5%B8%B8%E6%9E%90%E6%9E%84%E7%9A%84%E8%AF%81%E6%98%8E/">1-12-7 异常正常析构的证明</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-03-12T16:00:00.000Z" itemprop="datePublished">
+    2023-03-13
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-12-7-异常正常析构的证明">1.12-7 异常正常析构的证明</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;exception&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyException</span> : <span class="keyword">public</span> logic_error</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">MyException</span>(<span class="type">const</span> <span class="type">char</span> *s) : <span class="built_in">logic_error</span>(s) &#123;&#125;</span><br><span class="line">    ~<span class="built_in">MyException</span>() &#123; cout &lt;&lt; <span class="string">&quot;the Exception has been destructed.&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">test</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">throwException</span><span class="params">()</span> </span>&#123; <span class="keyword">throw</span> <span class="built_in">MyException</span>(<span class="string">&quot;hello, this is MyException.&quot;</span>); &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        test t;</span><br><span class="line">        t.<span class="built_in">throwException</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (<span class="type">const</span> std::exception &amp;e)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/2/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>
