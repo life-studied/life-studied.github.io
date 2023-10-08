@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>6移动数据 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>6移动数据</h1>
+    </header>
+
+    <section>
+      <h2 id="移动数据">移动数据</h2>
+<h4 id="创建矩阵">创建矩阵</h4>
+<span id="more"></span>
+<blockquote>
+<p>方法有</p>
+<p>1.直接输入，使用[]，逗号</p>
+<p>2.使用函数ones，zeros，eye，rand，randn</p>
+</blockquote>
+<h4 id="矩阵数据获取">矩阵数据获取</h4>
+<h5 id="维度">维度</h5>
+<blockquote>
+<p>size(矩阵名，行/列)</p>
+<p>返回值：</p>
+<p>参数1：1*2矩阵</p>
+<p>参数2：1*1矩阵（数字）</p>
+<p>size(A)</p>
+<p>size(A,1)</p>
+<p>size(A,2)</p>
+</blockquote>
+<h5 id="最大维度">最大维度</h5>
+<blockquote>
+<p>length(矩阵名)</p>
+<p>返回值：</p>
+<p>矩阵中最大的维度</p>
+<p>一般用于求向量的长度</p>
+</blockquote>
+<h4 id="存储数据">存储数据</h4>
+<blockquote>
+<p>save命令</p>
+<p>save 文件名 变量名</p>
+<p>save hello.mat v	%将v存储到hello.mat中</p>
+</blockquote>
+<h4 id="导入数据">导入数据</h4>
+<blockquote>
+<p>load命令</p>
+<p>load 文件名	%导入文件名中的变量</p>
+<p>load hello.mat</p>
+</blockquote>
+<h4 id="矩阵下标">矩阵下标</h4>
+<h5 id="索引">索引</h5>
+<blockquote>
+<p>A(3,2)</p>
+<p>A([1 3]😅	%找到第一和第三行的所有元素</p>
+</blockquote>
+<h5 id="增加">增加</h5>
+<blockquote>
+<p>A=[A,[10;11;12]];	%在A的右侧加一列</p>
+<p>A=[A;[10,11,12]];	%在A的下方加一行</p>
+</blockquote>
+<h5 id="单一索引">单一索引</h5>
+<blockquote>
+<p>A(10)	%A中第十个元素，顺序是一列一列数</p>
+<p>A(😃		%A中所有元素组成的列向量</p>
+</blockquote>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2022-10-04T16:00:00.000Z" itemprop="datePublished">
+              2022-10-05
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2023 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>
