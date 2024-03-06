@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ 游戏引擎 }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/09/27/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/03%20FString%E5%AD%97%E7%AC%A6%E4%B8%B2/2023-09-27_06%20FString%E5%88%87%E5%89%B2%E5%AD%97%E7%AC%A6%E4%B8%B2/">06 FString切割字符串</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-09-26T16:00:00.000Z" itemprop="datePublished">
+    2023-09-27
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/03-FString%E5%AD%97%E7%AC%A6%E4%B8%B2/">03 FString字符串</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>06 FString切割字符串</h1>
+<h2 id="6-1-左右切割">6.1 左右切割</h2>
+        
+          <div class="more-link">
+            <a href="/2023/09/27/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/03%20FString%E5%AD%97%E7%AC%A6%E4%B8%B2/2023-09-27_06%20FString%E5%88%87%E5%89%B2%E5%AD%97%E7%AC%A6%E4%B8%B2/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/09/19/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-09-19_2-%20%E8%93%9D%E5%9B%BE%E4%B8%AD%E7%9A%84Gameplay%E6%A1%86%E6%9E%B6/">2- 蓝图中的Gameplay框架</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-09-18T16:00:00.000Z" itemprop="datePublished">
+    2023-09-19
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C-%E7%BC%96%E7%A8%8B/">C++编程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>2. 蓝图中的Gameplay框架</h1>
+<p>​	<code>GameMode</code>是游戏的模式，决定了一切。一个<code>GameMode</code>绑定了其下面的几个要素，不同关卡（<code>map</code>）下，<code>GameMode</code>以及其绑定的蓝图是不一样的。</p>
+        
+          <div class="more-link">
+            <a href="/2023/09/19/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-09-19_2-%20%E8%93%9D%E5%9B%BE%E4%B8%AD%E7%9A%84Gameplay%E6%A1%86%E6%9E%B6/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/09/19/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-09-19_3-%20UE4%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/">3- UE4基本类型</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-09-18T16:00:00.000Z" itemprop="datePublished">
+    2023-09-19
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C-%E7%BC%96%E7%A8%8B/">C++编程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>3. UE4基本类型</h1>
+<table>
+<thead>
+<tr>
+<th>UE4类型</th>
+<th>C++类型</th>
+<th>C++基本类型</th>
+<th>描述</th>
+</tr>
+</thead>
+</table>
+        
+          <div class="more-link">
+            <a href="/2023/09/19/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-09-19_3-%20UE4%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/09/19/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2023-09-19_01%20%E8%93%9D%E5%9B%BE%E8%8A%82%E7%82%B9/">01 蓝图节点</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-09-18T16:00:00.000Z" itemprop="datePublished">
+    2023-09-19
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/">蓝图编程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>01 蓝图节点</h1>
+<h2 id="1-1-蓝图节点类型">1.1 蓝图节点类型</h2>
+        
+          <div class="more-link">
+            <a href="/2023/09/19/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2023-09-19_01%20%E8%93%9D%E5%9B%BE%E8%8A%82%E7%82%B9/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/Cheating%20Engine/1%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/2022-10-05_x86%E6%8C%87%E4%BB%A4%E9%9B%86%EF%BC%88%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%EF%BC%89/">x86指令集（汇编语言基础）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-04T16:00:00.000Z" itemprop="datePublished">
+    2022-10-05
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/Cheating-Engine/">Cheating Engine</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/Cheating-Engine/1%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/">1入门课程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="x86指令集（汇编语言基础）">x86指令集（汇编语言基础）</h2>
+<h4 id="指令格式：">指令格式：</h4>
+        
+          <div class="more-link">
+            <a href="/2022/10/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/Cheating%20Engine/1%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/2022-10-05_x86%E6%8C%87%E4%BB%A4%E9%9B%86%EF%BC%88%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%EF%BC%89/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/Cheating%20Engine/1%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/2022-10-05_%E6%8C%87%E4%BB%A4%E4%BF%AE%E6%94%B9/">指令修改</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-04T16:00:00.000Z" itemprop="datePublished">
+    2022-10-05
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/Cheating-Engine/">Cheating Engine</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/Cheating-Engine/1%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/">1入门课程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="指令修改">指令修改</h2>
+<h4 id="找到目标指令">找到目标指令</h4>
+        
+          <div class="more-link">
+            <a href="/2022/10/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/Cheating%20Engine/1%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/2022-10-05_%E6%8C%87%E4%BB%A4%E4%BF%AE%E6%94%B9/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/Cheating%20Engine/1%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/2022-10-05_%E6%9F%A5%E6%89%BE%E6%95%B0%E6%8D%AE/">查找数据</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-04T16:00:00.000Z" itemprop="datePublished">
+    2022-10-05
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/Cheating-Engine/">Cheating Engine</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/Cheating-Engine/1%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/">1入门课程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="查找数据">查找数据</h2>
+<blockquote>
+<p>数据和指令在内存中存储，对于动态申请内存的数据，每次程序重启时位置都会发生变化，而全局变量在内存中的位置不会发生变化。一般这个全局变量是一个指向数据的指针。</p>
+</blockquote>
+        
+          <div class="more-link">
+            <a href="/2022/10/05/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/Cheating%20Engine/1%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/2022-10-05_%E6%9F%A5%E6%89%BE%E6%95%B0%E6%8D%AE/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/page/10/">« prev</a><a class="page-number" href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">1</a><span class="space">&hellip;</span><a class="page-number" href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/page/9/">9</a><a class="page-number" href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/page/10/">10</a><span class="page-number current">11</span>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

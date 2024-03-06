@@ -68,12 +68,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2023/04/21/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-04-21_3-4%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%9F%A5%E6%89%BE/">3-4 字符串的查找</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_14-3%20%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9C%89%E5%BA%95%E5%B1%82%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%9E%9A%E4%B8%BE%E5%AF%B9%E8%B1%A1%EF%BC%88C++17%EF%BC%89/">14-3 列表初始化有底层类型的枚举对象（C++17）</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2023-04-20T16:00:00.000Z" itemprop="datePublished">
-    2023-04-21
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
   </time>
   
   
@@ -85,7 +85,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
   </li>
 
 
@@ -96,11 +100,11 @@
     </header>
     <div>
       
-        <h2 id="3-4-字符串的查找">3.4 字符串的查找</h2>
-<h4 id="1-string的find函数族">1. string的find函数族</h4>
+        <h2 id="列表初始化有底层类型的枚举对象（C-17）">列表初始化有底层类型的枚举对象（C++17）</h2>
+<h4 id="1-使用列表初始化，隐式转换为强枚举类型">1. 使用列表初始化，隐式转换为强枚举类型</h4>
         
           <div class="more-link">
-            <a href="/2023/04/21/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-04-21_3-4%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%9F%A5%E6%89%BE/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_14-3%20%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9C%89%E5%BA%95%E5%B1%82%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%9E%9A%E4%B8%BE%E5%AF%B9%E8%B1%A1%EF%BC%88C++17%EF%BC%89/#more">Read On »</a>
           </div>
         
       
@@ -114,12 +118,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2023/04/21/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-04-21_3-4-3%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%AF%94%E8%BE%83/">3-4-3 字符串的比较</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_15-1%20%E8%81%9A%E5%90%88%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89/">15-1 聚合类型的定义</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2023-04-20T16:00:00.000Z" itemprop="datePublished">
-    2023-04-21
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
   </time>
   
   
@@ -131,7 +135,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
   </li>
 
 
@@ -142,11 +150,11 @@
     </header>
     <div>
       
-        <h2 id="3-4-3-字符串的比较">3.4.3 字符串的比较</h2>
-<h4 id="1-重载运算符（略）">1. 重载运算符（略）</h4>
+        <h2 id="聚合类型的定义">聚合类型的定义</h2>
+<p>C++ 17标准对聚合类型的定义做出了大幅修改：</p>
         
           <div class="more-link">
-            <a href="/2023/04/21/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-04-21_3-4-3%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%AF%94%E8%BE%83/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_15-1%20%E8%81%9A%E5%90%88%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89/#more">Read On »</a>
           </div>
         
       
@@ -160,12 +168,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2023/04/21/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-04-21_3-4-5%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E5%AD%97%E7%AC%A6%E7%9A%84%E7%89%B9%E6%80%A7/">3-4-5 字符串和字符的特性</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_4-3%20decltype%E7%9A%84%E6%8E%A8%E5%AF%BC%E8%A7%84%E5%88%99/">4-3 decltype的推导规则</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2023-04-20T16:00:00.000Z" itemprop="datePublished">
-    2023-04-21
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
   </time>
   
   
@@ -177,7 +185,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
   </li>
 
 
@@ -188,11 +200,11 @@
     </header>
     <div>
       
-        <h2 id="3-4-5-字符串和字符的特性">3.4.5 字符串和字符的特性</h2>
-<h4 id="1-string的模板定义">1. string的模板定义</h4>
+        <h2 id="4-3-decltype的推导规则">4.3 decltype的推导规则</h2>
+<p>对于<code>decltype(e)</code>（其中e的类型为T）的推导规则有5条。</p>
         
           <div class="more-link">
-            <a href="/2023/04/21/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-04-21_3-4-5%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E5%AD%97%E7%AC%A6%E7%9A%84%E7%89%B9%E6%80%A7/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_4-3%20decltype%E7%9A%84%E6%8E%A8%E5%AF%BC%E8%A7%84%E5%88%99/#more">Read On »</a>
           </div>
         
       
@@ -206,12 +218,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2023/04/21/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-04-21_3-7-1%20%E9%80%86%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/">3-7-1 逆转字符串</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_4-4%20decltype%E4%B8%ADcv%E9%99%90%E5%AE%9A%E7%AC%A6%E7%9A%84%E6%8E%A8%E5%AF%BC/">4-4 decltype中cv限定符的推导</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2023-04-20T16:00:00.000Z" itemprop="datePublished">
-    2023-04-21
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
   </time>
   
   
@@ -223,11 +235,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
   </li>
 
 
@@ -238,57 +250,11 @@
     </header>
     <div>
       
-        <h2 id="3-7-1-逆转字符串">3.7-1 逆转字符串</h2>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">reverse</span><span class="params">(string &amp;s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> size = s.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; size / <span class="number">2</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">char</span> temp = s[i];</span><br><span class="line">        s[i] = s[size - <span class="number">1</span> - i];</span><br><span class="line">        s[size - <span class="number">1</span> - i] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">string <span class="title">s</span><span class="params">(<span class="string">&quot;123456&quot;</span>)</span></span>;</span><br><span class="line">    cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">reverse</span>(s);</span><br><span class="line">    cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2023/04/21/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-04-21_3-7-18%20%E6%B5%8B%E8%AF%95string%E4%B8%ADat%E5%92%8C%5B%5D%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8%E6%9C%BA%E5%88%B6/">3-7-18 测试string中at和[]抛出异常机制</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2023-04-20T16:00:00.000Z" itemprop="datePublished">
-    2023-04-21
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h2 id="3-7-18-测试string中at和-抛出异常机制">3.7-18 测试string中at和[]抛出异常机制</h2>
-<p>经测试：</p>
+        <h2 id="4-4-decltype中cv限定符的推导">4.4 decltype中cv限定符的推导</h2>
+<p>​	正常情况下，<code>decltype(e)</code>的cv限定符会同步e的cv限定符。但是如果e是未加括号的成员变量时，父对象表达式的cv限定符会被忽略。</p>
         
           <div class="more-link">
-            <a href="/2023/04/21/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-04-21_3-7-18%20%E6%B5%8B%E8%AF%95string%E4%B8%ADat%E5%92%8C%5B%5D%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8%E6%9C%BA%E5%88%B6/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_4-4%20decltype%E4%B8%ADcv%E9%99%90%E5%AE%9A%E7%AC%A6%E7%9A%84%E6%8E%A8%E5%AF%BC/#more">Read On »</a>
           </div>
         
       
@@ -302,12 +268,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2023/04/21/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-04-21_3-7-2%20%E6%B5%8B%E8%AF%95%E5%9B%9E%E6%96%87/">3-7-2 测试回文</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_4-5%20decltype(auto)%20%EF%BC%88C++14%EF%BC%89/">4-5 decltype(auto) （C++14）</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2023-04-20T16:00:00.000Z" itemprop="datePublished">
-    2023-04-21
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
   </time>
   
   
@@ -319,11 +285,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
   </li>
 
 
@@ -334,103 +300,11 @@
     </header>
     <div>
       
-        <h2 id="3-7-2-测试回文">3.7-2 测试回文</h2>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">reverse</span><span class="params">(string &amp;s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> size = s.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; size / <span class="number">2</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">char</span> temp = s[i];</span><br><span class="line">        s[i] = s[size - <span class="number">1</span> - i];</span><br><span class="line">        s[size - <span class="number">1</span> - i] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (argc &lt; <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;argc less than 2!&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">string <span class="title">s</span><span class="params">(argv[<span class="number">1</span>])</span></span>;</span><br><span class="line">    <span class="function">string <span class="title">s2</span><span class="params">(argv[<span class="number">1</span>])</span></span>;</span><br><span class="line">    <span class="built_in">reverse</span>(s);</span><br><span class="line">    cout &lt;&lt; (s == s2) &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2023/04/21/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-04-21_3-7-3%20%E6%97%A0%E8%A7%86%E5%A4%A7%E5%B0%8F%E5%86%99%E7%9A%84%E5%9B%9E%E6%96%87/">3-7-3 无视大小写的回文</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2023-04-20T16:00:00.000Z" itemprop="datePublished">
-    2023-04-21
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h2 id="3-7-3-无视大小写的回文">3.7-3 无视大小写的回文</h2>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">reverse</span><span class="params">(string &amp;s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> size = s.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; size / <span class="number">2</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">char</span> temp = <span class="built_in">tolower</span>(s[i]);</span><br><span class="line">        s[i] = <span class="built_in">tolower</span>(s[size - <span class="number">1</span> - i]);</span><br><span class="line">        s[size - <span class="number">1</span> - i] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (argc &lt; <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;argc less than 2!&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">string <span class="title">s</span><span class="params">(argv[<span class="number">1</span>])</span></span>;</span><br><span class="line">    <span class="function">string <span class="title">s2</span><span class="params">(argv[<span class="number">1</span>])</span></span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;i : s2)</span><br><span class="line">        i = <span class="built_in">tolower</span>(i);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">reverse</span>(s);</span><br><span class="line">    cout &lt;&lt; (s == s2) &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2023/04/21/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-04-21_3-7-6%20%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E5%B9%B6%E6%9B%BF%E6%8D%A2%E6%8C%87%E5%AE%9A%E5%AD%97%E7%AC%A6%E4%B8%B2/">3-7-6 读取文件并替换指定字符串</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2023-04-20T16:00:00.000Z" itemprop="datePublished">
-    2023-04-21
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h2 id="3-7-6-读取文件并替换指定字符串">3.7-6 读取文件并替换指定字符串</h2>
-<h4 id="源代码">源代码</h4>
+        <h2 id="4-5-decltype-auto-（C-14）">4.5 decltype(auto) （C++14）</h2>
+<p>在C++14标准中出现了<code>decltype(auto)</code>的语法。其代表使用decltype的推导规则（见4.3）来使用auto;</p>
         
           <div class="more-link">
-            <a href="/2023/04/21/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-04-21_3-7-6%20%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E5%B9%B6%E6%9B%BF%E6%8D%A2%E6%8C%87%E5%AE%9A%E5%AD%97%E7%AC%A6%E4%B8%B2/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_4-5%20decltype(auto)%20%EF%BC%88C++14%EF%BC%89/#more">Read On »</a>
           </div>
         
       
@@ -444,12 +318,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2023/04/21/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-04-21_3-7-7%20%E6%97%A0%E8%A7%86%E5%A4%A7%E5%B0%8F%E5%86%99%E6%9B%BF%E6%8D%A2%E5%AD%97%E7%AC%A6%E4%B8%B2/">3-7-7 无视大小写替换字符串</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-1%20lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E6%B3%95/">7-1 lambda表达式语法</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2023-04-20T16:00:00.000Z" itemprop="datePublished">
-    2023-04-21
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
   </time>
   
   
@@ -461,11 +335,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
   </li>
 
 
@@ -476,8 +350,29 @@
     </header>
     <div>
       
-        <h2 id="3-7-7-无视大小写替换字符串">3.7-7 无视大小写替换字符串</h2>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ichar_traits.h&quot;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function">istring <span class="title">getData</span><span class="params">(string filename)</span> <span class="title">throw</span><span class="params">(std::ifstream::failure)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">std::ifstream <span class="title">streamReader</span><span class="params">(filename, std::ios::binary)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (!streamReader.<span class="built_in">is_open</span>())</span><br><span class="line">        <span class="keyword">throw</span> std::ifstream::<span class="built_in">failure</span>(<span class="string">&quot;file couldn&#x27;t open&quot;</span>);</span><br><span class="line">    streamReader.<span class="built_in">seekg</span>(<span class="number">0</span>, std::ios::end);     <span class="comment">// 游标移到文件结尾</span></span><br><span class="line">    <span class="type">unsigned</span> filesize = streamReader.<span class="built_in">tellg</span>(); <span class="comment">// 获取游标当前位置 - 文件开始位置，此处为文件大小</span></span><br><span class="line">    <span class="type">char</span> *_data = <span class="keyword">new</span> <span class="type">char</span>[filesize];         <span class="comment">// 分配内存</span></span><br><span class="line">    streamReader.<span class="built_in">seekg</span>(<span class="number">0</span>, std::ios::beg);     <span class="comment">// 跳转回开始</span></span><br><span class="line">    streamReader.<span class="built_in">read</span>(_data, filesize);       <span class="comment">// 读取文件</span></span><br><span class="line">    streamReader.<span class="built_in">close</span>();</span><br><span class="line">    <span class="function">istring <span class="title">data</span><span class="params">(_data)</span></span>;</span><br><span class="line">    <span class="keyword">delete</span>[] _data;</span><br><span class="line">    <span class="keyword">return</span> std::<span class="built_in">move</span>(data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">istring &amp;<span class="title">replaceAll</span><span class="params">(istring &amp;context,</span></span></span><br><span class="line"><span class="params"><span class="function">                    <span class="type">const</span> istring &amp;from,</span></span></span><br><span class="line"><span class="params"><span class="function">                    <span class="type">const</span> istring &amp;to)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">size_t</span> lookHere = <span class="number">0</span>;</span><br><span class="line">    <span class="type">size_t</span> foundHere;</span><br><span class="line">    <span class="keyword">while</span> ((foundHere = context.<span class="built_in">find</span>(from, lookHere)) != istring::npos) <span class="comment">// find from lookHere</span></span><br><span class="line">    &#123;                                                                  <span class="comment">// to avoid the string</span></span><br><span class="line">        context.<span class="built_in">replace</span>(foundHere, from.<span class="built_in">size</span>(), to);                   <span class="comment">//&quot;to&quot; is the substr</span></span><br><span class="line">        lookHere = foundHere + to.<span class="built_in">size</span>();                              <span class="comment">// of &quot;from&quot;</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> SHOWREPLACE</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;stringNumber:&quot;</span> &lt;&lt; foundHere &lt;&lt; endl;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> context;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    istring fileTxt = <span class="built_in">getData</span>(<span class="string">&quot;Rparse.h&quot;</span>);</span><br><span class="line">    cout&lt;&lt;fileTxt&lt;&lt;endl;</span><br><span class="line">    <span class="built_in">replaceAll</span>(fileTxt,<span class="string">&quot;Size&quot;</span>,<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">    cout&lt;&lt;fileTxt&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="7-1-lambda表达式语法">7.1 lambda表达式语法</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">[capture](params) specifiers exception -&gt;ret &#123; body &#125;</span><br><span class="line">&lt;!--more--&gt;</span><br></pre></td></tr></table></figure>
+<p>lambda表达式由下面几个部分组成：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>【capture】：捕获列表，必写</p>
+</li>
+<li class="lvl-2">
+<p>【params】：参数列表，可选</p>
+</li>
+<li class="lvl-2">
+<p>【specifiers】：限定符，可选</p>
+</li>
+<li class="lvl-2">
+<p>【exception】：异常说明符，可选</p>
+</li>
+<li class="lvl-2">
+<p>【ret】：返回值类型，可选</p>
+</li>
+<li class="lvl-2">
+<p>【body】：函数体，必写</p>
+</li>
+</ul>
 
       
     </div>
@@ -490,12 +385,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2023/04/11/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-04-11_2-1%20%E6%96%AD%E8%A8%80/">2-1 断言</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-10%20%E6%A8%A1%E6%9D%BF%E8%AF%AD%E6%B3%95%E7%9A%84%E6%B3%9B%E5%9E%8Blambda%E8%A1%A8%E8%BE%BE%E5%BC%8F(C++20)/">7-10 模板语法的泛型lambda表达式(C++20)</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2023-04-10T16:00:00.000Z" itemprop="datePublished">
-    2023-04-11
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
   </time>
   
   
@@ -507,7 +402,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
   </li>
 
 
@@ -518,11 +417,161 @@
     </header>
     <div>
       
-        <h2 id="2-1-断言">2.1 断言</h2>
-<h4 id="2-1-1-断言的定义">2.1.1 断言的定义</h4>
+        <h2 id="7-10-模板语法的泛型lambda表达式">7.10 模板语法的泛型lambda表达式</h2>
+<p>​	原有的lambda表达式所支持的泛型，由于不能直接获取模板参数的类型，所以会导致很多不自然的用法：</p>
         
           <div class="more-link">
-            <a href="/2023/04/11/C++/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-04-11_2-1%20%E6%96%AD%E8%A8%80/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-10%20%E6%A8%A1%E6%9D%BF%E8%AF%AD%E6%B3%95%E7%9A%84%E6%B3%9B%E5%9E%8Blambda%E8%A1%A8%E8%BE%BE%E5%BC%8F(C++20)/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-11%20%E5%8F%AF%E6%9E%84%E9%80%A0%E5%92%8C%E5%8F%AF%E8%B5%8B%E5%80%BC%E7%9A%84%E6%97%A0%E7%8A%B6%E6%80%81%E7%9A%84lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F(C++20)/">7-11 可构造和可赋值的无状态的lambda表达式(C++20)</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="7-11-可构造和可赋值的无状态的lambda表达式">7.11 可构造和可赋值的无状态的lambda表达式</h2>
+<p>​	在下面的应用场景里，因为需要的模板参数是类型，因此将lambda的类型传入时，由于会创建相应的对象，而lambda表达式的默认构造函数被删除了，因此在C++20前不能使用。</p>
+        
+          <div class="more-link">
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-11%20%E5%8F%AF%E6%9E%84%E9%80%A0%E5%92%8C%E5%8F%AF%E8%B5%8B%E5%80%BC%E7%9A%84%E6%97%A0%E7%8A%B6%E6%80%81%E7%9A%84lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F(C++20)/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-2%20%E6%8D%95%E8%8E%B7%E5%88%97%E8%A1%A8/">7-2 捕获列表</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="7-2-捕获列表">7.2 捕获列表</h2>
+<h4 id="7-2-1-作用域">7.2.1 作用域</h4>
+        
+          <div class="more-link">
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-2%20%E6%8D%95%E8%8E%B7%E5%88%97%E8%A1%A8/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-3%20lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">7-3 lambda表达式的实现原理</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="7-3-lambda表达式的实现原理">7.3 lambda表达式的实现原理</h2>
+<p>​	lambda表达式本质上是创建了一个类，然后实例化一个类对象。函数体是该类的重载运算符<code>()</code>，调用lambda表达式时，本质就是调用这个对象的()运算符函数。</p>
+        
+          <div class="more-link">
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-3%20lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/#more">Read On »</a>
           </div>
         
       
@@ -535,13 +584,13 @@
 
   <section id="nav-wrapper">
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/categories/C/page/6/">« prev</a><a class="page-number" href="/categories/C/">1</a><span class="space">&hellip;</span><a class="page-number" href="/categories/C/page/5/">5</a><a class="page-number" href="/categories/C/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/categories/C/page/8/">8</a><a class="page-number" href="/categories/C/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/categories/C/page/15/">15</a><a class="extend next" rel="next" href="/categories/C/page/8/">next »</a>
+      <a class="extend prev" rel="prev" href="/categories/C/page/6/">« prev</a><a class="page-number" href="/categories/C/">1</a><span class="space">&hellip;</span><a class="page-number" href="/categories/C/page/5/">5</a><a class="page-number" href="/categories/C/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/categories/C/page/8/">8</a><a class="page-number" href="/categories/C/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/categories/C/page/19/">19</a><a class="extend next" rel="next" href="/categories/C/page/8/">next »</a>
     </nav>
   </section>
 
 
             <footer>
-    <div>© 2023 - Yunyin </div>
+    <div>© 2024 - Yunyin </div>
     <div>
         <span>
             Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
