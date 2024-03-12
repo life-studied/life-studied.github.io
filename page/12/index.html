@@ -64,7 +64,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_8-2%20%E4%BD%8D%E5%9F%9F%E7%9A%84%E9%BB%98%E8%AE%A4%E5%88%9D%E5%A7%8B%E5%8C%96(C++20)/">8-2 位域的默认初始化(C++20)</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_4-5%20decltype(auto)%20%EF%BC%88C++14%EF%BC%89/">4-5 decltype(auto) （C++14）</a>
         </h1>
       
       <div class='ListMeta'>
@@ -96,11 +96,11 @@
     </header>
     <div>
       
-        <h2 id="8-2-位域的默认初始化">8.2 位域的默认初始化</h2>
-<p>​	在C++20后，允许对数据成员的位域进行默认初始化。</p>
+        <h2 id="4-5-decltype-auto-（C-14）">4.5 decltype(auto) （C++14）</h2>
+<p>在C++14标准中出现了<code>decltype(auto)</code>的语法。其代表使用decltype的推导规则（见4.3）来使用auto;</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_8-2%20%E4%BD%8D%E5%9F%9F%E7%9A%84%E9%BB%98%E8%AE%A4%E5%88%9D%E5%A7%8B%E5%8C%96(C++20)/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_4-5%20decltype(auto)%20%EF%BC%88C++14%EF%BC%89/#more">Read On »</a>
           </div>
         
       
@@ -114,7 +114,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_9-2%20%E4%BD%BF%E7%94%A8%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96/">9-2 使用列表初始化</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-1%20lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E6%B3%95/">7-1 lambda表达式语法</a>
         </h1>
       
       <div class='ListMeta'>
@@ -146,13 +146,30 @@
     </header>
     <div>
       
-        <h2 id="9-2-使用列表初始化">9.2 使用列表初始化</h2>
-<h4 id="1-隐式调用构造函数">1. 隐式调用构造函数</h4>
-        
-          <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_9-2%20%E4%BD%BF%E7%94%A8%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96/#more">Read On »</a>
-          </div>
-        
+        <h2 id="7-1-lambda表达式语法">7.1 lambda表达式语法</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">[capture](params) specifiers exception -&gt;ret &#123; body &#125;</span><br><span class="line">&lt;!--more--&gt;</span><br></pre></td></tr></table></figure>
+<p>lambda表达式由下面几个部分组成：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>【capture】：捕获列表，必写</p>
+</li>
+<li class="lvl-2">
+<p>【params】：参数列表，可选</p>
+</li>
+<li class="lvl-2">
+<p>【specifiers】：限定符，可选</p>
+</li>
+<li class="lvl-2">
+<p>【exception】：异常说明符，可选</p>
+</li>
+<li class="lvl-2">
+<p>【ret】：返回值类型，可选</p>
+</li>
+<li class="lvl-2">
+<p>【body】：函数体，必写</p>
+</li>
+</ul>
+
       
     </div>
 </article>
@@ -164,7 +181,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_9-3%20initializer_list%E8%AF%A6%E8%A7%A3/">9-3 initializer_list详解</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-10%20%E6%A8%A1%E6%9D%BF%E8%AF%AD%E6%B3%95%E7%9A%84%E6%B3%9B%E5%9E%8Blambda%E8%A1%A8%E8%BE%BE%E5%BC%8F(C++20)/">7-10 模板语法的泛型lambda表达式(C++20)</a>
         </h1>
       
       <div class='ListMeta'>
@@ -196,11 +213,11 @@
     </header>
     <div>
       
-        <h2 id="9-3-initializer-list详解">9.3 initializer_list详解</h2>
-<p>​	标准容器只要支持<code>initializer_list</code>，就能使用列表初始化。其中，<code>initializer_list</code>是一个支持begin，end和size成员函数的类模板。</p>
+        <h2 id="7-10-模板语法的泛型lambda表达式">7.10 模板语法的泛型lambda表达式</h2>
+<p>​	原有的lambda表达式所支持的泛型，由于不能直接获取模板参数的类型，所以会导致很多不自然的用法：</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_9-3%20initializer_list%E8%AF%A6%E8%A7%A3/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-10%20%E6%A8%A1%E6%9D%BF%E8%AF%AD%E6%B3%95%E7%9A%84%E6%B3%9B%E5%9E%8Blambda%E8%A1%A8%E8%BE%BE%E5%BC%8F(C++20)/#more">Read On »</a>
           </div>
         
       
@@ -214,7 +231,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_9-4%20%E4%BD%BF%E7%94%A8%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">9-4 使用列表初始化的注意事项</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-11%20%E5%8F%AF%E6%9E%84%E9%80%A0%E5%92%8C%E5%8F%AF%E8%B5%8B%E5%80%BC%E7%9A%84%E6%97%A0%E7%8A%B6%E6%80%81%E7%9A%84lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F(C++20)/">7-11 可构造和可赋值的无状态的lambda表达式(C++20)</a>
         </h1>
       
       <div class='ListMeta'>
@@ -246,11 +263,11 @@
     </header>
     <div>
       
-        <h2 id="9-4-使用列表初始化的注意事项">9.4 使用列表初始化的注意事项</h2>
-<h4 id="9-4-1-隐式缩窄转换的问题">9.4.1 隐式缩窄转换的问题</h4>
+        <h2 id="7-11-可构造和可赋值的无状态的lambda表达式">7.11 可构造和可赋值的无状态的lambda表达式</h2>
+<p>​	在下面的应用场景里，因为需要的模板参数是类型，因此将lambda的类型传入时，由于会创建相应的对象，而lambda表达式的默认构造函数被删除了，因此在C++20前不能使用。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_9-4%20%E4%BD%BF%E7%94%A8%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-11%20%E5%8F%AF%E6%9E%84%E9%80%A0%E5%92%8C%E5%8F%AF%E8%B5%8B%E5%80%BC%E7%9A%84%E6%97%A0%E7%8A%B6%E6%80%81%E7%9A%84lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F(C++20)/#more">Read On »</a>
           </div>
         
       
@@ -264,7 +281,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_9-5%20%E6%8C%87%E5%AE%9A%E5%88%9D%E5%A7%8B%E5%8C%96(C++20)/">9-5 指定初始化(C++20)</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-2%20%E6%8D%95%E8%8E%B7%E5%88%97%E8%A1%A8/">7-2 捕获列表</a>
         </h1>
       
       <div class='ListMeta'>
@@ -296,11 +313,11 @@
     </header>
     <div>
       
-        <h2 id="9-5-指定初始化">9.5 指定初始化</h2>
-<p>​	为了提高数据成员初始化的可读性和灵活性，C++20标准中引入了指定初始化的特性。该特性允许指定初始化数据成员的名称，从而使代码意图更加明确。</p>
+        <h2 id="7-2-捕获列表">7.2 捕获列表</h2>
+<h4 id="7-2-1-作用域">7.2.1 作用域</h4>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_9-5%20%E6%8C%87%E5%AE%9A%E5%88%9D%E5%A7%8B%E5%8C%96(C++20)/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-2%20%E6%8D%95%E8%8E%B7%E5%88%97%E8%A1%A8/#more">Read On »</a>
           </div>
         
       
@@ -314,7 +331,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_%E4%BD%BF%E7%94%A8using%E6%89%93%E5%BC%80%E5%BC%BA%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B%EF%BC%88C++20%EF%BC%89/">使用using打开强枚举类型（C++20）</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-3%20lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">7-3 lambda表达式的实现原理</a>
         </h1>
       
       <div class='ListMeta'>
@@ -346,11 +363,11 @@
     </header>
     <div>
       
-        <h2 id="使用using打开强枚举类型">使用using打开强枚举类型</h2>
-<p>​	C<ins>20标准扩展了<code>using</code>，用于打开强枚举类型的命名空间。注意：在g</ins>和vs中均尚未支持本语法。</p>
+        <h2 id="7-3-lambda表达式的实现原理">7.3 lambda表达式的实现原理</h2>
+<p>​	lambda表达式本质上是创建了一个类，然后实例化一个类对象。函数体是该类的重载运算符<code>()</code>，调用lambda表达式时，本质就是调用这个对象的()运算符函数。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_%E4%BD%BF%E7%94%A8using%E6%89%93%E5%BC%80%E5%BC%BA%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B%EF%BC%88C++20%EF%BC%89/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-3%20lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/#more">Read On »</a>
           </div>
         
       
@@ -364,7 +381,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01%20%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/2024-03-06_01%20imgui%E4%B8%8B%E8%BD%BD/">01 imgui下载</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-4%20%E6%97%A0%E7%8A%B6%E6%80%81%E7%9A%84lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/">7-4 无状态的lambda表达式</a>
         </h1>
       
       <div class='ListMeta'>
@@ -377,15 +394,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  { <a href="/categories/C/">C++</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/">ImGui</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/">01 准备工作</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
   </li>
 
 
@@ -396,11 +413,11 @@
     </header>
     <div>
       
-        <h1>imgui下载</h1>
-<h2 id="普通版本">普通版本</h2>
+        <h2 id="7-4-无状态的lambda表达式">7.4 无状态的lambda表达式</h2>
+<p>​	无状态的lambda表达式指的是<strong>不捕获任何变量</strong>的lambda表达式。这种表达式可以被隐式地转换成函数指针。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01%20%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/2024-03-06_01%20imgui%E4%B8%8B%E8%BD%BD/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-4%20%E6%97%A0%E7%8A%B6%E6%80%81%E7%9A%84lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/#more">Read On »</a>
           </div>
         
       
@@ -414,7 +431,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01%20%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/2024-03-06_02%20%E4%B8%8B%E8%BD%BDGLFW%E5%92%8CGLEW/">02 下载GLFW和GLEW</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-5%20%E5%9C%A8STL%E4%B8%AD%E4%BD%BF%E7%94%A8lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/">7-5 在STL中使用lambda表达式</a>
         </h1>
       
       <div class='ListMeta'>
@@ -427,15 +444,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  { <a href="/categories/C/">C++</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/">ImGui</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/">01 准备工作</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
   </li>
 
 
@@ -446,11 +463,11 @@
     </header>
     <div>
       
-        <h1>下载GLFW和GLEW</h1>
-<h2 id="GLFW（lib文件）">GLFW（lib文件）</h2>
+        <h2 id="7-5-在STL中使用lambda表达式">7.5 在STL中使用lambda表达式</h2>
+<p>​	在stl的算法函数中，常常需要传入一个谓词来作为回调函数使用，此处就可以使用lambda表达式来代替辅助函数。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01%20%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/2024-03-06_02%20%E4%B8%8B%E8%BD%BDGLFW%E5%92%8CGLEW/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-5%20%E5%9C%A8STL%E4%B8%AD%E4%BD%BF%E7%94%A8lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/#more">Read On »</a>
           </div>
         
       
@@ -464,7 +481,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01%20%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/2024-03-06_03%20%E9%85%8D%E7%BD%AE%E9%A1%B9%E7%9B%AE%EF%BC%88VS2022%EF%BC%89/">03 配置项目（VS2022）</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-6%20%E5%B9%BF%E4%B9%89%E6%8D%95%E8%8E%B7(C++14)/">7-6 广义捕获(C++14)</a>
         </h1>
       
       <div class='ListMeta'>
@@ -477,15 +494,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  { <a href="/categories/C/">C++</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/">ImGui</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/">01 准备工作</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
   </li>
 
 
@@ -496,11 +513,11 @@
     </header>
     <div>
       
-        <h1>配置项目（VS2022）</h1>
-<h2 id="1-复制文件夹">1. 复制文件夹</h2>
+        <h2 id="7-6-广义捕获-C-14">7.6 广义捕获(C++14)</h2>
+<p>​	在lambda表达式的简单捕获之外，还有广义捕获的方式，以自定义捕获的变量名和其初始值。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01%20%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/2024-03-06_03%20%E9%85%8D%E7%BD%AE%E9%A1%B9%E7%9B%AE%EF%BC%88VS2022%EF%BC%89/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-6%20%E5%B9%BF%E4%B9%89%E6%8D%95%E8%8E%B7(C++14)/#more">Read On »</a>
           </div>
         
       
@@ -514,7 +531,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/02%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2024-03-06_01%20%E8%AE%BE%E7%BD%AEStyle/">01 设置Style</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-7%20%E6%B3%9B%E5%9E%8Blambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/">7-7 泛型lambda表达式</a>
         </h1>
       
       <div class='ListMeta'>
@@ -527,15 +544,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  { <a href="/categories/C/">C++</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/">ImGui</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/02-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">02 学习笔记</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
   </li>
 
 
@@ -546,11 +563,11 @@
     </header>
     <div>
       
-        <h1>01 设置Style</h1>
-<h2 id="1-内置style">1. 内置style</h2>
+        <h2 id="7-7-泛型lambda表达式">7.7 泛型lambda表达式</h2>
+<p>​	lambda表达式可以使用<code>auto</code>达到泛型的效果。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/02%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2024-03-06_01%20%E8%AE%BE%E7%BD%AEStyle/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-7%20%E6%B3%9B%E5%9E%8Blambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/#more">Read On »</a>
           </div>
         
       
@@ -563,7 +580,7 @@
 
   <section id="nav-wrapper">
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/11/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/74/">74</a><a class="extend next" rel="next" href="/page/13/">next »</a>
+      <a class="extend prev" rel="prev" href="/page/11/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/75/">75</a><a class="extend next" rel="next" href="/page/13/">next »</a>
     </nav>
   </section>
 

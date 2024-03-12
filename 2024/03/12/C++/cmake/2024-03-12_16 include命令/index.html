@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>UE类型系统 | Yunyin&#39;s blog</title>
+  <title>16 include命令 | Yunyin&#39;s blog</title>
   
     <link rel="icon" href="/assert/C++.jpg">
   
@@ -59,21 +59,14 @@
             <div>
   <article class='ContentView'>
     <header class='PageTitle'>
-        <h1>UE类型系统</h1>
+        <h1>16 include命令</h1>
     </header>
 
     <section>
-      <h1>UE类型系统</h1>
-<p>​	UE的类型系统是指在运行时能动态获取到Object的类型信息的系统。它是从<code>UField</code>开始继承，而非UObject。继承自UObject的原因在于，UObject提供了序列化的重要功能，便于使用。</p>
+      <h1>include命令</h1>
+<p>​	include命令用于导入<code>cmake</code>模块，即<code>.cmake</code>文件。该文件中存储了一些<code>cmake</code>命令和一些宏/函数，当<code>CMakeLists.txt</code>包含该<code>.cmake</code>文件时，当编译运行时，该<code>.cmake</code>里的一些命令就会在该包含处得到执行，并且在包含以后的地方能够调用该.<code>cmake</code>里的一些宏和函数。</p>
 <span id="more"></span>
-<p><img src="./assets/image-20240202144414469.png" alt="image-20240202144414469"></p>
-<h2 id="类型标记">类型标记</h2>
-<p>​	通过在对应声明上标记UCLASS，UPROPERTY等，就会创建一个对应的类型类，里面存储对应的类型信息。</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Fp4y1K7zK/?spm_id_from=333.337.search-card.all.click">UE5 C++] UE类型反射数据基础——UStruct/<em>UClass</em></a></p>
-</li>
-</ul>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">include</span>(&lt;<span class="keyword">file</span>|module&gt; [OPTIONAL] [RESULT_VARIABLE &lt;var&gt;]</span><br><span class="line">                      [NO_POLICY_SCOPE])</span><br></pre></td></tr></table></figure>
 
 
       
@@ -83,8 +76,8 @@
       <section class='ArticleMeta'>
           <div>
             发布于&nbsp;
-            <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
-              2024-03-06
+            <time datetime="2024-03-11T16:00:00.000Z" itemprop="datePublished">
+              2024-03-12
             </time>
           </div>
           
