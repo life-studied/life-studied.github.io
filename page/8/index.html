@@ -64,7 +64,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_02%20%E7%90%86%E8%A7%A3auto%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC/">02 理解auto类型推导</a>
+          <a href="/2024/03/06/C++/%E6%A0%87%E5%87%86%E5%BA%93/2024-03-06_find_if%EF%BC%88+advance%EF%BC%89/">find_if（+advance）</a>
         </h1>
       
       <div class='ListMeta'>
@@ -81,11 +81,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
+  { <a href="/categories/C/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a> }
   </li>
 
 
@@ -96,11 +92,11 @@
     </header>
     <div>
       
-        <h1>02 理解auto类型推导</h1>
-<p>​	<code>auto</code>的类型推导，与<strong>条款1的类型推导几乎一致</strong>。例如：</p>
+        <h1>find_if（+advance）</h1>
+<p>​	可以配合<code>lambda</code>表达式和<code>std::advance</code>使用。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_02%20%E7%90%86%E8%A7%A3auto%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E6%A0%87%E5%87%86%E5%BA%93/2024-03-06_find_if%EF%BC%88+advance%EF%BC%89/#more">Read On »</a>
           </div>
         
       
@@ -114,7 +110,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_06%20%E5%BD%93auto%E6%8E%A8%E5%AF%BC%E5%87%BA%E9%9D%9E%E9%A2%84%E6%9C%9F%E7%B1%BB%E5%9E%8B%E6%97%B6%E5%BA%94%E5%BD%93%E4%BD%BF%E7%94%A8%E6%98%BE%E5%BC%8F%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%88%9D%E5%A7%8B%E5%8C%96/">06 当auto推导出非预期类型时应当使用显式的类型初始化</a>
+          <a href="/2024/03/06/C++/%E6%A0%87%E5%87%86%E5%BA%93/2024-03-06_stdbitset/">stdbitset</a>
         </h1>
       
       <div class='ListMeta'>
@@ -131,11 +127,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
+  { <a href="/categories/C/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a> }
   </li>
 
 
@@ -146,11 +138,11 @@
     </header>
     <div>
       
-        <h1>06 当auto推导出非预期类型时应当使用显式的类型初始化</h1>
-<h2 id="1-auto推导出非预期类型">1. auto推导出非预期类型</h2>
+        <h1>std::bitset</h1>
+<p>[TOC]</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_06%20%E5%BD%93auto%E6%8E%A8%E5%AF%BC%E5%87%BA%E9%9D%9E%E9%A2%84%E6%9C%9F%E7%B1%BB%E5%9E%8B%E6%97%B6%E5%BA%94%E5%BD%93%E4%BD%BF%E7%94%A8%E6%98%BE%E5%BC%8F%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%88%9D%E5%A7%8B%E5%8C%96/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E6%A0%87%E5%87%86%E5%BA%93/2024-03-06_stdbitset/#more">Read On »</a>
           </div>
         
       
@@ -164,7 +156,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_08%20%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8nullptr%E8%80%8C%E4%B8%8D%E6%98%AF0%E6%88%96%E8%80%85NULL/">08 优先使用nullptr而不是0或者NULL</a>
+          <a href="/2024/03/06/C++/%E6%A0%87%E5%87%86%E5%BA%93/2024-03-06_stdspan/">stdspan</a>
         </h1>
       
       <div class='ListMeta'>
@@ -181,11 +173,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
+  { <a href="/categories/C/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a> }
   </li>
 
 
@@ -196,11 +184,11 @@
     </header>
     <div>
       
-        <h1>08 优先使用nullptr而不是0或者NULL</h1>
-<p>​	 <strong>0 和 NULL 都不属于指针类型</strong>。 在 C++98 中，这意味着传递 0 或者 NULL 作为参数给重载函数永远不会调用指针重载的那个函数：</p>
+        <h1>std::span</h1>
+<p>​	C++20引入了<code>std::span</code>作为一种语法糖，用于表示连续内存范围。它提供了一种轻量级的、非拥有式的、零开销的方式来引用数组或其他连续内存块。<code>std::span</code>可以用于传递数组片段给函数，或者在函数内部对连续内存进行操作，而无需进行内存拷贝。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_08%20%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8nullptr%E8%80%8C%E4%B8%8D%E6%98%AF0%E6%88%96%E8%80%85NULL/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E6%A0%87%E5%87%86%E5%BA%93/2024-03-06_stdspan/#more">Read On »</a>
           </div>
         
       
@@ -214,7 +202,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_09%20%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8%E5%A3%B0%E6%98%8E%E5%88%AB%E5%90%8D%E8%80%8C%E4%B8%8D%E6%98%AF%20typedef/">09 优先使用声明别名而不是 typedef</a>
+          <a href="/2024/03/06/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-03-06_mutable%20%E5%85%B3%E9%94%AE%E5%AD%97/">mutable 关键字</a>
         </h1>
       
       <div class='ListMeta'>
@@ -231,11 +219,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
   </li>
 
 
@@ -246,11 +230,11 @@
     </header>
     <div>
       
-        <h1>09 优先使用声明别名而不是 typedef</h1>
-<h2 id="1-using更好理解函数指针">1. using更好理解函数指针</h2>
+        <h1>mutable 关键字</h1>
+<p>​	<strong>mutalbe</strong>的中文意思是“可变的，易变的”，跟constant（既C++中的const）是反义词。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_09%20%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8%E5%A3%B0%E6%98%8E%E5%88%AB%E5%90%8D%E8%80%8C%E4%B8%8D%E6%98%AF%20typedef/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-03-06_mutable%20%E5%85%B3%E9%94%AE%E5%AD%97/#more">Read On »</a>
           </div>
         
       
@@ -264,7 +248,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_12%20%E4%BD%BF%E7%94%A8override%E5%85%B3%E9%94%AE%E5%AD%97%E5%A3%B0%E6%98%8E%E8%A6%86%E7%9B%96%E7%9A%84%E5%87%BD%E6%95%B0/">12 使用override关键字声明覆盖的函数</a>
+          <a href="/2024/03/06/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-03-06_split%20string/">split string</a>
         </h1>
       
       <div class='ListMeta'>
@@ -281,11 +265,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
   </li>
 
 
@@ -296,11 +276,11 @@
     </header>
     <div>
       
-        <h1>12 使用override关键字声明覆盖的函数</h1>
-<p>​	覆盖父类的虚函数的条件：</p>
+        <h1>split string</h1>
+<h2 id="1-无法识别相邻分割字符（传入型）">1. 无法识别相邻分割字符（传入型）</h2>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_12%20%E4%BD%BF%E7%94%A8override%E5%85%B3%E9%94%AE%E5%AD%97%E5%A3%B0%E6%98%8E%E8%A6%86%E7%9B%96%E7%9A%84%E5%87%BD%E6%95%B0/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-03-06_split%20string/#more">Read On »</a>
           </div>
         
       
@@ -314,7 +294,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_13%20%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8const_iterator%E8%80%8C%E4%B8%8D%E6%98%AFiterator/">13 优先使用const_iterator而不是iterator</a>
+          <a href="/2024/03/06/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-03-06_stdenable_if/">stdenable_if</a>
         </h1>
       
       <div class='ListMeta'>
@@ -331,11 +311,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
   </li>
 
 
@@ -346,11 +322,11 @@
     </header>
     <div>
       
-        <h1>13 优先使用const_iterator而不是iterator</h1>
-<p>​	在<code>C++98</code>中，如果使用<code>const_iterator</code>可能导致语义可行但是编译不过的情况：</p>
+        <h1>std::enable_if</h1>
+<h2 id="1-定义">1. 定义</h2>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_13%20%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8const_iterator%E8%80%8C%E4%B8%8D%E6%98%AFiterator/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-03-06_stdenable_if/#more">Read On »</a>
           </div>
         
       
@@ -364,7 +340,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_14%20%E5%A6%82%E6%9E%9C%E5%87%BD%E6%95%B0%E4%B8%8D%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8%E8%AF%B7%E4%BD%BF%E7%94%A8noexcept/">14 如果函数不抛出异常请使用noexcept</a>
+          <a href="/2024/03/06/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-03-06_stdfilesystem/">stdfilesystem</a>
         </h1>
       
       <div class='ListMeta'>
@@ -381,11 +357,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
   </li>
 
 
@@ -396,11 +368,53 @@
     </header>
     <div>
       
-        <h1>14 如果函数不抛出异常请使用<code>noexcept</code></h1>
-<h2 id="1-展开调用栈方面的优化">1. 展开调用栈方面的优化</h2>
+        <h1>std::filesystem</h1>
+<p>​	用于文件系统的一些内容</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/03/06/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-03-06_stdis_integral/">stdis_integral</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>std::is_integral</h1>
+<p>​	用于判断是否是一个整数类型，包括bool类型。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_14%20%E5%A6%82%E6%9E%9C%E5%87%BD%E6%95%B0%E4%B8%8D%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8%E8%AF%B7%E4%BD%BF%E7%94%A8noexcept/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-03-06_stdis_integral/#more">Read On »</a>
           </div>
         
       
@@ -414,7 +428,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_15%20%E5%B0%BD%E5%8F%AF%E8%83%BD%E7%9A%84%E4%BD%BF%E7%94%A8constexpr/">15 尽可能的使用constexpr</a>
+          <a href="/2024/03/06/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-03-06_%E7%BC%96%E8%AF%91%E6%9C%9F%E5%88%A4%E6%96%AD%E7%B1%BB%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/">编译期判断类是否存在成员函数</a>
         </h1>
       
       <div class='ListMeta'>
@@ -431,11 +445,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
   </li>
 
 
@@ -446,11 +456,11 @@
     </header>
     <div>
       
-        <h1>15 尽可能的使用<code>constexpr</code></h1>
-<p>​	<code>constexpr</code>和<code>const</code>一样，它们是编译期可知的。但是<code>const</code>不提供<code>constexpr</code>所能保证之事，因为<code>const</code>对象不需要在编译期初始化它的值。</p>
+        <h1>编译期判断类是否存在成员函数</h1>
+<h2 id="1-检测类是否存在push-back">1. 检测类是否存在push_back</h2>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_15%20%E5%B0%BD%E5%8F%AF%E8%83%BD%E7%9A%84%E4%BD%BF%E7%94%A8constexpr/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-03-06_%E7%BC%96%E8%AF%91%E6%9C%9F%E5%88%A4%E6%96%AD%E7%B1%BB%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/#more">Read On »</a>
           </div>
         
       
@@ -464,7 +474,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_16%20%E8%AE%A9const%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/">16 让const成员函数线程安全</a>
+          <a href="/2024/03/06/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-03-06_%E9%98%B2%E5%A4%9A%E5%BC%80%EF%BC%88C++%EF%BC%89(Windows)/">防多开（C++）(Windows)</a>
         </h1>
       
       <div class='ListMeta'>
@@ -481,11 +491,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
   </li>
 
 
@@ -496,61 +502,11 @@
     </header>
     <div>
       
-        <h1>16 让<code>const</code>成员函数线程安全</h1>
-<p>​	这个条款是基于，多个线程可以同时在一个对象上执行一个<code>const</code>成员函数这个假设的。如果你可以<strong>保证</strong>在一个对象上永远不会有多个线程执行该成员函数——该函数的线程安全是无关紧要的。</p>
+        <h1>防多开（C++）(Windows)</h1>
+<h2 id="1-实现描述">1. 实现描述</h2>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_16%20%E8%AE%A9const%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_17%20%E7%90%86%E8%A7%A3%E7%89%B9%E6%AE%8A%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E7%94%9F%E6%88%90/">17 理解特殊成员函数的生成</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
-    2024-03-06
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>17 理解特殊成员函数的生成</h1>
-<p>​	移动构造和拷贝构造是编译器默认生成的内容，虽然移动构造在某些成员身上表现为拷贝构造。</p>
-        
-          <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_17%20%E7%90%86%E8%A7%A3%E7%89%B9%E6%AE%8A%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E7%94%9F%E6%88%90/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-03-06_%E9%98%B2%E5%A4%9A%E5%BC%80%EF%BC%88C++%EF%BC%89(Windows)/#more">Read On »</a>
           </div>
         
       
@@ -563,7 +519,7 @@
 
   <section id="nav-wrapper">
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/7/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/76/">76</a><a class="extend next" rel="next" href="/page/9/">next »</a>
+      <a class="extend prev" rel="prev" href="/page/7/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/79/">79</a><a class="extend next" rel="next" href="/page/9/">next »</a>
     </nav>
   </section>
 

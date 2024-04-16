@@ -64,7 +64,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/cpp%20tutorial%20on%20youtube/tutorial1/2024-03-06_01%20spawn%20actor/">01 spawn actor</a>
+          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-03-06_%E5%8A%A8%E7%94%BB%E4%B8%8E%E8%92%99%E5%A4%AA%E5%A5%87/">动画与蒙太奇</a>
         </h1>
       
       <div class='ListMeta'>
@@ -85,11 +85,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/cpp-tutorial-on-youtube/">cpp tutorial on youtube</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/cpp-tutorial-on-youtube/tutorial1/">tutorial1</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/">杂文</a> }
   </li>
 
 
@@ -100,67 +96,11 @@
     </header>
     <div>
       
-        <h1>spawn actor</h1>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">	<span class="built_in">UFUNCTION</span>(BlueprintCallable, Category=<span class="string">&quot;Abilities&quot;</span>)</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">SpawnTheActor</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">UPROPERTY</span>(EditAnywhere)</span><br><span class="line">	TSubclassOf&lt;AActor&gt; actorBPToSpawn;</span><br></pre></td></tr></table></figure>
-<p>​	set the actorBPToSpawn In BluePrint;</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">AMyCharacter::SpawnTheActor</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	FActorSpawnParameters spawnParams;</span><br><span class="line">	<span class="comment">// 解决碰撞生成点的方法： 一定会生成，如果可以启动适应</span></span><br><span class="line">	spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">GetWorld</span>()-&gt;<span class="built_in">SpawnActor</span>&lt;AActor&gt;(actorBPToSpawn, <span class="built_in">GetActorTransform</span>(), spawnParams);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/03%20FString%E5%AD%97%E7%AC%A6%E4%B8%B2/2024-03-06_03%20FString%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5/">03 FString字符串拼接</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
-    2024-03-06
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/03-FString%E5%AD%97%E7%AC%A6%E4%B8%B2/">03 FString字符串</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>03 FString字符串拼接</h1>
-<h2 id="3-1-字符串拼接">3.1 字符串拼接</h2>
+        <h1>动画与蒙太奇</h1>
+<p>​	动画蓝图是由状态机和插槽驱动的，以一种线性的方式输出。一般插槽用于插入蒙太奇蓝图，用于限制动画播放的优先级。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/03%20FString%E5%AD%97%E7%AC%A6%E4%B8%B2/2024-03-06_03%20FString%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5/#more">Read On »</a>
+            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-03-06_%E5%8A%A8%E7%94%BB%E4%B8%8E%E8%92%99%E5%A4%AA%E5%A5%87/#more">Read On »</a>
           </div>
         
       
@@ -174,7 +114,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/03%20FString%E5%AD%97%E7%AC%A6%E4%B8%B2/2024-03-06_07%20FString%E7%9A%84Find/">07 FString的Find</a>
+          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-03-06_%E6%B5%85%E6%9E%90StaticClass%E7%9A%84%E5%AE%9E%E7%8E%B0/">浅析StaticClass的实现</a>
         </h1>
       
       <div class='ListMeta'>
@@ -195,15 +135,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/03-FString%E5%AD%97%E7%AC%A6%E4%B8%B2/">03 FString字符串</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/">杂文</a> }
   </li>
 
 
@@ -214,11 +146,11 @@
     </header>
     <div>
       
-        <h1>07 FString的Find</h1>
-<h2 id="1-Find">1. Find</h2>
+        <h1>浅析StaticClass的实现</h1>
+<p>​	每一个继承自UObject的类，都可以通过<code>xxx::StaticClass()</code>获取到该类的UClass对象。本文主要研究该函数在何处定义以及实现方式。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/03%20FString%E5%AD%97%E7%AC%A6%E4%B8%B2/2024-03-06_07%20FString%E7%9A%84Find/#more">Read On »</a>
+            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-03-06_%E6%B5%85%E6%9E%90StaticClass%E7%9A%84%E5%AE%9E%E7%8E%B0/#more">Read On »</a>
           </div>
         
       
@@ -232,7 +164,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/03%20FString%E5%AD%97%E7%AC%A6%E4%B8%B2/2024-03-06_08%20FString%E7%9A%84Replace/">08 FString的Replace</a>
+          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-03-06_%E8%8E%B7%E5%8F%96%E5%BC%95%E6%93%8E%E7%89%88%E6%9C%AC%EF%BC%88%E4%BB%A3%E7%A0%81%EF%BC%89/">获取引擎版本（代码）</a>
         </h1>
       
       <div class='ListMeta'>
@@ -253,15 +185,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/03-FString%E5%AD%97%E7%AC%A6%E4%B8%B2/">03 FString字符串</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/">杂文</a> }
   </li>
 
 
@@ -272,11 +196,11 @@
     </header>
     <div>
       
-        <h1>08 FString的Replace</h1>
-<h2 id="1-Replace">1. Replace</h2>
+        <h1>代码中获取引擎版本</h1>
+<p>​	文件：<code>Runtime\Core\Public\Misc\EngineVersion.h</code></p>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/03%20FString%E5%AD%97%E7%AC%A6%E4%B8%B2/2024-03-06_08%20FString%E7%9A%84Replace/#more">Read On »</a>
+            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-03-06_%E8%8E%B7%E5%8F%96%E5%BC%95%E6%93%8E%E7%89%88%E6%9C%AC%EF%BC%88%E4%BB%A3%E7%A0%81%EF%BC%89/#more">Read On »</a>
           </div>
         
       
@@ -290,7 +214,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/03%20FString%E5%AD%97%E7%AC%A6%E4%B8%B2/2024-03-06_09%20FString%20%E7%9A%84%E6%89%93%E5%8D%B0/">09 FString 的打印</a>
+          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-03-06_%E8%93%9D%E5%9B%BE%E9%80%9A%E4%BF%A1%EF%BC%8811%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%89/">蓝图通信（11种方法）</a>
         </h1>
       
       <div class='ListMeta'>
@@ -311,15 +235,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/03-FString%E5%AD%97%E7%AC%A6%E4%B8%B2/">03 FString字符串</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/">杂文</a> }
   </li>
 
 
@@ -330,11 +246,11 @@
     </header>
     <div>
       
-        <h1>09 FString 的打印</h1>
-<h2 id="使用Printf">使用Printf</h2>
+        <h1>蓝图通信（11种方法）</h1>
+<p>[TOC]</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/03%20FString%E5%AD%97%E7%AC%A6%E4%B8%B2/2024-03-06_09%20FString%20%E7%9A%84%E6%89%93%E5%8D%B0/#more">Read On »</a>
+            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-03-06_%E8%93%9D%E5%9B%BE%E9%80%9A%E4%BF%A1%EF%BC%8811%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%89/#more">Read On »</a>
           </div>
         
       
@@ -348,7 +264,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/04%20FText%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/2024-03-06_01%20FText%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8/">01 FText的创建和使用</a>
+          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x(axmol)/cocos2d-x%E6%B8%B8%E6%88%8F%E5%85%A5%E9%97%A8%E5%BC%80%E5%8F%91%E7%B2%BE%E8%A7%A3/2024-03-06_3-2%E6%96%B0%E5%A2%9E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">3-2新增数据类型</a>
         </h1>
       
       <div class='ListMeta'>
@@ -365,19 +281,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x-axmol/">cocos2d-x(axmol)</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/04-FText%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/">04 FText本地化字符串</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x-axmol/cocos2d-x%E6%B8%B8%E6%88%8F%E5%85%A5%E9%97%A8%E5%BC%80%E5%8F%91%E7%B2%BE%E8%A7%A3/">cocos2d-x游戏入门开发精解</a> }
   </li>
 
 
@@ -388,11 +296,13 @@
     </header>
     <div>
       
-        <h1>01 FText的创建和使用</h1>
-<p>​	定义FText之前，要指定<code>LOCTEXT_NAMESPACE</code>宏，使用完取消宏。</p>
+        <h2 id="3-2新增数据类型">3.2新增数据类型</h2>
+<blockquote>
+<p>cocos2d-x定义了自己的数据类型，都是以类的形式存在。</p>
+</blockquote>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/04%20FText%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/2024-03-06_01%20FText%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8/#more">Read On »</a>
+            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x(axmol)/cocos2d-x%E6%B8%B8%E6%88%8F%E5%85%A5%E9%97%A8%E5%BC%80%E5%8F%91%E7%B2%BE%E8%A7%A3/2024-03-06_3-2%E6%96%B0%E5%A2%9E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/#more">Read On »</a>
           </div>
         
       
@@ -406,7 +316,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/04%20FText%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/2024-03-06_02%20FText%E6%9C%AC%E5%9C%B0%E5%8C%96%E4%BD%BF%E7%94%A8/">02 FText本地化使用</a>
+          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x(axmol)/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/2024-03-06_axmol%E5%AE%89%E8%A3%85/">axmol安装</a>
         </h1>
       
       <div class='ListMeta'>
@@ -423,19 +333,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x-axmol/">cocos2d-x(axmol)</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/04-FText%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/">04 FText本地化字符串</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x-axmol/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/">安装与项目搭建</a> }
   </li>
 
 
@@ -446,11 +348,11 @@
     </header>
     <div>
       
-        <h1>02 FText本地化使用</h1>
-<p>​	在Window中，找到Localization Dashboard。</p>
+        <h1>axmol安装</h1>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/168732477">【Axmol】基于Cocos2d-x 4.0的持续维护的游戏引擎介绍 - 知乎 (zhihu.com)</a></p>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/04%20FText%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/2024-03-06_02%20FText%E6%9C%AC%E5%9C%B0%E5%8C%96%E4%BD%BF%E7%94%A8/#more">Read On »</a>
+            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x(axmol)/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/2024-03-06_axmol%E5%AE%89%E8%A3%85/#more">Read On »</a>
           </div>
         
       
@@ -464,7 +366,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_01%20TArray%E5%9F%BA%E7%A1%80/">01 TArray基础</a>
+          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x(axmol)/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/2024-03-06_cocos2dx%EF%BC%884-0%EF%BC%89%E5%AE%89%E8%A3%85/">cocos2dx（4-0）安装</a>
         </h1>
       
       <div class='ListMeta'>
@@ -481,19 +383,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x-axmol/">cocos2d-x(axmol)</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/05-TArray/">05 TArray</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x-axmol/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/">安装与项目搭建</a> }
   </li>
 
 
@@ -504,11 +398,11 @@
     </header>
     <div>
       
-        <h1>TArray基础</h1>
-<h2 id="初始化">初始化</h2>
+        <h1>cocos2dx安装</h1>
+<h2 id="1-下载cocos2d-x压缩文件（选择4-0版本）">1. 下载cocos2d-x压缩文件（选择4.0版本）</h2>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_01%20TArray%E5%9F%BA%E7%A1%80/#more">Read On »</a>
+            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x(axmol)/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/2024-03-06_cocos2dx%EF%BC%884-0%EF%BC%89%E5%AE%89%E8%A3%85/#more">Read On »</a>
           </div>
         
       
@@ -522,7 +416,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_02%20TArray%20%E6%B7%BB%E5%8A%A0/">02 TArray 添加</a>
+          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x(axmol)/%E6%89%93%E5%8C%85%E9%A1%B9%E7%9B%AE/2024-03-06_%E6%89%93%E5%8C%85cocos2d-x%E5%B7%A5%E7%A8%8B%E5%88%B0%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA/">打包cocos2d-x工程到安卓手机</a>
         </h1>
       
       <div class='ListMeta'>
@@ -539,19 +433,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x-axmol/">cocos2d-x(axmol)</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/05-TArray/">05 TArray</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x-axmol/%E6%89%93%E5%8C%85%E9%A1%B9%E7%9B%AE/">打包项目</a> }
   </li>
 
 
@@ -562,11 +448,56 @@
     </header>
     <div>
       
-        <h1>TArray 添加</h1>
-<h2 id="Add">Add</h2>
+        <h1>打包cocos2d-x工程到安卓手机</h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sunnyboychina/article/details/106093937">(35条消息) cocos2d-x 4.0 学习之路（十八）将工程部署到安卓手机_cocos2d-x 安卓_sunnyboychina的博客-CSDN博客</a></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x(axmol)/%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5/2024-03-06_cocos2d-x%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5/">cocos2d-x教程链接</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x-axmol/">cocos2d-x(axmol)</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x-axmol/%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5/">教程链接</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Px411v7u8?p=164">【极客学院】Cocos2d-x游戏开发全套教学_哔哩哔哩_bilibili</a></p>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_02%20TArray%20%E6%B7%BB%E5%8A%A0/#more">Read On »</a>
+            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x(axmol)/%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5/2024-03-06_cocos2d-x%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5/#more">Read On »</a>
           </div>
         
       
@@ -580,7 +511,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_03%20TArray%20%E6%8F%92%E5%85%A5/">03 TArray 插入</a>
+          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x(axmol)/%E7%BC%96%E8%AF%91cpp-tests/2024-03-06_%E7%BC%96%E8%AF%91cpp-tests(axmol)/">编译cpp-tests(axmol)</a>
         </h1>
       
       <div class='ListMeta'>
@@ -597,19 +528,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x-axmol/">cocos2d-x(axmol)</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/05-TArray/">05 TArray</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/cocos2d-x-axmol/%E7%BC%96%E8%AF%91cpp-tests/">编译cpp-tests</a> }
   </li>
 
 
@@ -620,13 +543,9 @@
     </header>
     <div>
       
-        <h1>TArray 插入</h1>
-<h2 id="Insert">Insert</h2>
-        
-          <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_03%20TArray%20%E6%8F%92%E5%85%A5/#more">Read On »</a>
-          </div>
-        
+        <h1>编译cpp-tests(axmol)</h1>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd \axmol\tests\cpp-tests\proj.win32</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"></span><br><span class="line">cmake -S .. -B build -G &quot;Visual Studio 17 2022&quot; -A x64</span><br></pre></td></tr></table></figure>
+
       
     </div>
 </article>
@@ -637,7 +556,7 @@
 
   <section id="nav-wrapper">
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/21/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/page/76/">76</a><a class="extend next" rel="next" href="/page/23/">next »</a>
+      <a class="extend prev" rel="prev" href="/page/21/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/page/79/">79</a><a class="extend next" rel="next" href="/page/23/">next »</a>
     </nav>
   </section>
 

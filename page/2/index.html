@@ -64,12 +64,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/12/C++/cmake/2024-03-12_15%20%E4%BD%BF%E7%94%A8CMake%E7%BC%96%E8%AF%91/">15 使用CMake编译</a>
+          <a href="/2024/04/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-04-16_%E5%AF%B9pair%E8%BF%9B%E8%A1%8Chash%E5%8C%96/">对pair进行hash化</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-03-11T16:00:00.000Z" itemprop="datePublished">
-    2024-03-12
+  <time datetime="2024-04-15T16:00:00.000Z" itemprop="datePublished">
+    2024-04-16
   </time>
   
   
@@ -81,7 +81,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/cmake/">cmake</a> }
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
   </li>
 
 
@@ -92,11 +92,11 @@
     </header>
     <div>
       
-        <h1>使用CMake编译</h1>
-<h2 id="创建build目录">创建build目录</h2>
+        <h1>对pair进行hash化</h1>
+<p>​	<code>std::map</code>底层采用红黑树，因此它会调用对象的<code>operator&lt;</code>进行排序放置。</p>
         
           <div class="more-link">
-            <a href="/2024/03/12/C++/cmake/2024-03-12_15%20%E4%BD%BF%E7%94%A8CMake%E7%BC%96%E8%AF%91/#more">Read On »</a>
+            <a href="/2024/04/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-04-16_%E5%AF%B9pair%E8%BF%9B%E8%A1%8Chash%E5%8C%96/#more">Read On »</a>
           </div>
         
       
@@ -110,12 +110,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/12/C++/cmake/2024-03-12_16%20include%E5%91%BD%E4%BB%A4/">16 include命令</a>
+          <a href="/2024/04/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-04-16_%E7%BC%96%E8%AF%91%E6%9C%9F%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9A%E8%A7%84%E5%88%99%E6%95%B0%E7%BB%84/">编译期生成指定规则数组</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-03-11T16:00:00.000Z" itemprop="datePublished">
-    2024-03-12
+  <time datetime="2024-04-15T16:00:00.000Z" itemprop="datePublished">
+    2024-04-16
   </time>
   
   
@@ -127,7 +127,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/cmake/">cmake</a> }
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
   </li>
 
 
@@ -138,11 +138,11 @@
     </header>
     <div>
       
-        <h1>include命令</h1>
-<p>​	include命令用于导入<code>cmake</code>模块，即<code>.cmake</code>文件。该文件中存储了一些<code>cmake</code>命令和一些宏/函数，当<code>CMakeLists.txt</code>包含该<code>.cmake</code>文件时，当编译运行时，该<code>.cmake</code>里的一些命令就会在该包含处得到执行，并且在包含以后的地方能够调用该.<code>cmake</code>里的一些宏和函数。</p>
+        <h1>编译期生成指定规则数组</h1>
+<h2 id="以fbnq数列为例子-C-20">以fbnq数列为例子(C++20)</h2>
         
           <div class="more-link">
-            <a href="/2024/03/12/C++/cmake/2024-03-12_16%20include%E5%91%BD%E4%BB%A4/#more">Read On »</a>
+            <a href="/2024/04/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-04-16_%E7%BC%96%E8%AF%91%E6%9C%9F%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9A%E8%A7%84%E5%88%99%E6%95%B0%E7%BB%84/#more">Read On »</a>
           </div>
         
       
@@ -156,12 +156,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/12/C++/cmake/2024-03-12_17%20%E7%94%9F%E6%88%90compile_commands-json%E6%96%87%E4%BB%B6%E4%BE%9BIntelliSense%E5%88%86%E6%9E%90/">17 生成compile_commands-json文件供IntelliSense分析</a>
+          <a href="/2024/04/16/C++/%E9%9D%99%E6%80%81%E5%8F%8D%E5%B0%84&amp;template/2024-04-16_01%20%E7%B1%BB%E5%9E%8B%E8%90%83%E5%8F%96/">01 类型萃取</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-03-11T16:00:00.000Z" itemprop="datePublished">
-    2024-03-12
+  <time datetime="2024-04-15T16:00:00.000Z" itemprop="datePublished">
+    2024-04-16
   </time>
   
   
@@ -173,7 +173,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/cmake/">cmake</a> }
+  { <a href="/categories/C/%E9%9D%99%E6%80%81%E5%8F%8D%E5%B0%84-template/">静态反射&amp;template</a> }
   </li>
 
 
@@ -184,11 +184,11 @@
     </header>
     <div>
       
-        <h1>生成compile_commands.json文件供IntelliSense分析</h1>
-<p>​	使用如下宏：</p>
+        <h1>类型萃取</h1>
+<h2 id="指针萃取">指针萃取</h2>
         
           <div class="more-link">
-            <a href="/2024/03/12/C++/cmake/2024-03-12_17%20%E7%94%9F%E6%88%90compile_commands-json%E6%96%87%E4%BB%B6%E4%BE%9BIntelliSense%E5%88%86%E6%9E%90/#more">Read On »</a>
+            <a href="/2024/04/16/C++/%E9%9D%99%E6%80%81%E5%8F%8D%E5%B0%84&template/2024-04-16_01%20%E7%B1%BB%E5%9E%8B%E8%90%83%E5%8F%96/#more">Read On »</a>
           </div>
         
       
@@ -202,12 +202,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/12/C++/cmake/2024-03-12_18%20%E6%8C%87%E5%AE%9A%E7%BC%96%E8%AF%91%E5%99%A8/">18 指定编译器</a>
+          <a href="/2024/04/16/C++/%E9%9D%99%E6%80%81%E5%8F%8D%E5%B0%84&amp;template/2024-04-16_02%20%E9%9D%99%E6%80%81%E5%8F%8D%E5%B0%84/">02 静态反射</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-03-11T16:00:00.000Z" itemprop="datePublished">
-    2024-03-12
+  <time datetime="2024-04-15T16:00:00.000Z" itemprop="datePublished">
+    2024-04-16
   </time>
   
   
@@ -219,7 +219,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/cmake/">cmake</a> }
+  { <a href="/categories/C/%E9%9D%99%E6%80%81%E5%8F%8D%E5%B0%84-template/">静态反射&amp;template</a> }
   </li>
 
 
@@ -230,11 +230,11 @@
     </header>
     <div>
       
-        <h1>指定编译器</h1>
-<p>​	使用宏：</p>
+        <h1>静态反射</h1>
+<h2 id="更规范的基本萃取代码">更规范的基本萃取代码</h2>
         
           <div class="more-link">
-            <a href="/2024/03/12/C++/cmake/2024-03-12_18%20%E6%8C%87%E5%AE%9A%E7%BC%96%E8%AF%91%E5%99%A8/#more">Read On »</a>
+            <a href="/2024/04/16/C++/%E9%9D%99%E6%80%81%E5%8F%8D%E5%B0%84&template/2024-04-16_02%20%E9%9D%99%E6%80%81%E5%8F%8D%E5%B0%84/#more">Read On »</a>
           </div>
         
       
@@ -248,12 +248,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/12/C++/cmake/2024-03-12_%E8%A1%A5%E5%85%85%EF%BC%9Aopencv%20&amp;&amp;%20Eigen3%20cmake/">补充：opencv &amp;&amp; Eigen3 cmake</a>
+          <a href="/2024/04/16/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/Git%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/2024-04-16_01%20git%20add%20&amp;%20commit/">01 git add &amp; commit</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-03-11T16:00:00.000Z" itemprop="datePublished">
-    2024-03-12
+  <time datetime="2024-04-15T16:00:00.000Z" itemprop="datePublished">
+    2024-04-16
   </time>
   
   
@@ -261,11 +261,11 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
+  { <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/">Git版本控制仓库</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/cmake/">cmake</a> }
+  { <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/Git%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/">Git底层原理</a> }
   </li>
 
 
@@ -276,11 +276,11 @@
     </header>
     <div>
       
-        <h1>补充：opencv &amp;&amp; Eigen3 cmake</h1>
-<h2 id="使用find-package">使用find_package</h2>
+        <h1>git add &amp; commit</h1>
+<h2 id="1-git对象">1. git对象</h2>
         
           <div class="more-link">
-            <a href="/2024/03/12/C++/cmake/2024-03-12_%E8%A1%A5%E5%85%85%EF%BC%9Aopencv%20&&%20Eigen3%20cmake/#more">Read On »</a>
+            <a href="/2024/04/16/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/Git%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/2024-04-16_01%20git%20add%20&%20commit/#more">Read On »</a>
           </div>
         
       
@@ -294,12 +294,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/12/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-03-12_UE%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F/">UE类型系统</a>
+          <a href="/2024/04/16/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/Git%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/2024-04-16_02%20git%20branch/">02 git branch</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-03-11T16:00:00.000Z" itemprop="datePublished">
-    2024-03-12
+  <time datetime="2024-04-15T16:00:00.000Z" itemprop="datePublished">
+    2024-04-16
   </time>
   
   
@@ -307,15 +307,11 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  { <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/">Git版本控制仓库</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/">杂文</a> }
+  { <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/Git%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/">Git底层原理</a> }
   </li>
 
 
@@ -326,11 +322,11 @@
     </header>
     <div>
       
-        <h1>UE类型系统</h1>
-<p>​	UE的类型系统是指在运行时能动态获取到Object的类型信息的系统。它是从<code>UField</code>开始继承，而非UObject。继承自UObject的原因在于，UObject提供了序列化的重要功能，便于使用。</p>
+        <h1>git branch</h1>
+<p>​	branch可以理解为一个另一个对象，其存储在<code>.git/refs/heads/</code>下，一个文件就是一个分支对象。</p>
         
           <div class="more-link">
-            <a href="/2024/03/12/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-03-12_UE%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F/#more">Read On »</a>
+            <a href="/2024/04/16/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/Git%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/2024-04-16_02%20git%20branch/#more">Read On »</a>
           </div>
         
       
@@ -344,12 +340,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/12/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-03-12_UHT%E8%A7%A3%E8%AF%BB/">UHT解读</a>
+          <a href="/2024/04/16/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/Git%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/2024-04-16_03%20git%20merge%20&amp;%20git%20rebase/">03 git merge &amp; git rebase</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-03-11T16:00:00.000Z" itemprop="datePublished">
-    2024-03-12
+  <time datetime="2024-04-15T16:00:00.000Z" itemprop="datePublished">
+    2024-04-16
   </time>
   
   
@@ -357,15 +353,11 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  { <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/">Git版本控制仓库</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/">杂文</a> }
+  { <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/Git%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/">Git底层原理</a> }
   </li>
 
 
@@ -376,11 +368,11 @@
     </header>
     <div>
       
-        <h1>UHT解读</h1>
-<p>​	一般UBT会收集头文件中的信息，并传递给UHT，来生成对应的<code>classname.generated.h</code>。一般生成的地址不在和源代码同级，而是在<code>Intermediate\Build\Win64\UnrealEditor\Inc\MODULE_NAME\UHT</code>下。</p>
+        <h1>git merge &amp; git rebase</h1>
+<h2 id="git-merge">git merge</h2>
         
           <div class="more-link">
-            <a href="/2024/03/12/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-03-12_UHT%E8%A7%A3%E8%AF%BB/#more">Read On »</a>
+            <a href="/2024/04/16/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BB%93%E5%BA%93/Git%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/2024-04-16_03%20git%20merge%20&%20git%20rebase/#more">Read On »</a>
           </div>
         
       
@@ -394,44 +386,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/2024-03-06_Readme/">Readme</a>
+          <a href="/2024/04/16/%E6%B8%B8%E6%88%8F%E6%95%99%E7%A8%8B/%E6%98%9F%E9%9C%B2%E8%B0%B7miniscript/2024-04-16_00%20%E7%8E%AF%E5%A2%83/">00 环境</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
-    2024-03-06
-  </time>
-  
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>Readme</h1>
-<p>​	本项目记录了从2021年暑假开始的学习笔记。</p>
-        
-          <div class="more-link">
-            <a href="/2024/03/06/2024-03-06_Readme/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/03/06/Eigen/2024-03-06_01%20Matrix%E7%B1%BB/">01 Matrix类</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
-    2024-03-06
+  <time datetime="2024-04-15T16:00:00.000Z" itemprop="datePublished">
+    2024-04-16
   </time>
   
   
@@ -439,7 +399,11 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/Eigen/">Eigen</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E6%95%99%E7%A8%8B/">游戏教程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E6%95%99%E7%A8%8B/%E6%98%9F%E9%9C%B2%E8%B0%B7miniscript/">星露谷miniscript</a> }
   </li>
 
 
@@ -450,11 +414,11 @@
     </header>
     <div>
       
-        <h1>Matrix类</h1>
-<p>[TOC]</p>
+        <h1>环境</h1>
+<h2 id="版本">版本</h2>
         
           <div class="more-link">
-            <a href="/2024/03/06/Eigen/2024-03-06_01%20Matrix%E7%B1%BB/#more">Read On »</a>
+            <a href="/2024/04/16/%E6%B8%B8%E6%88%8F%E6%95%99%E7%A8%8B/%E6%98%9F%E9%9C%B2%E8%B0%B7miniscript/2024-04-16_00%20%E7%8E%AF%E5%A2%83/#more">Read On »</a>
           </div>
         
       
@@ -468,12 +432,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/Eigen/2024-03-06_02%20%E7%AE%97%E6%B3%95%EF%BC%88Matrix%20and%20vector%EF%BC%89/">02 算法（Matrix and vector）</a>
+          <a href="/2024/04/16/%E6%B8%B8%E6%88%8F%E6%95%99%E7%A8%8B/%E6%98%9F%E9%9C%B2%E8%B0%B7miniscript/2024-04-16_01%20%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/">01 基本操作命令</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
-    2024-03-06
+  <time datetime="2024-04-15T16:00:00.000Z" itemprop="datePublished">
+    2024-04-16
   </time>
   
   
@@ -481,7 +445,11 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/Eigen/">Eigen</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E6%95%99%E7%A8%8B/">游戏教程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E6%95%99%E7%A8%8B/%E6%98%9F%E9%9C%B2%E8%B0%B7miniscript/">星露谷miniscript</a> }
   </li>
 
 
@@ -492,11 +460,57 @@
     </header>
     <div>
       
-        <h1>算法（Matrix and vector）</h1>
-<p>[TOC]</p>
+        <h1>基本操作命令</h1>
+<h2 id="控制台">控制台</h2>
         
           <div class="more-link">
-            <a href="/2024/03/06/Eigen/2024-03-06_02%20%E7%AE%97%E6%B3%95%EF%BC%88Matrix%20and%20vector%EF%BC%89/#more">Read On »</a>
+            <a href="/2024/04/16/%E6%B8%B8%E6%88%8F%E6%95%99%E7%A8%8B/%E6%98%9F%E9%9C%B2%E8%B0%B7miniscript/2024-04-16_01%20%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/04/16/%E6%B8%B8%E6%88%8F%E6%95%99%E7%A8%8B/%E6%98%9F%E9%9C%B2%E8%B0%B7miniscript/2024-04-16_02%20%E6%98%9F%E9%9C%B2%E8%B0%B7%E6%93%8D%E4%BD%9Cbot/">02 星露谷操作bot</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-04-15T16:00:00.000Z" itemprop="datePublished">
+    2024-04-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E6%95%99%E7%A8%8B/">游戏教程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E6%95%99%E7%A8%8B/%E6%98%9F%E9%9C%B2%E8%B0%B7miniscript/">星露谷miniscript</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>星露谷操作bot</h1>
+<h2 id="代码目录">代码目录</h2>
+        
+          <div class="more-link">
+            <a href="/2024/04/16/%E6%B8%B8%E6%88%8F%E6%95%99%E7%A8%8B/%E6%98%9F%E9%9C%B2%E8%B0%B7miniscript/2024-04-16_02%20%E6%98%9F%E9%9C%B2%E8%B0%B7%E6%93%8D%E4%BD%9Cbot/#more">Read On »</a>
           </div>
         
       
@@ -509,7 +523,7 @@
 
   <section id="nav-wrapper">
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">« prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/76/">76</a><a class="extend next" rel="next" href="/page/3/">next »</a>
+      <a class="extend prev" rel="prev" href="/">« prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/79/">79</a><a class="extend next" rel="next" href="/page/3/">next »</a>
     </nav>
   </section>
 

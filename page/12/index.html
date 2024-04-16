@@ -64,7 +64,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_13%20%E7%BB%A7%E6%89%BF%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/">13 继承构造函数</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_15%20%E5%B0%BD%E5%8F%AF%E8%83%BD%E7%9A%84%E4%BD%BF%E7%94%A8constexpr/">15 尽可能的使用constexpr</a>
         </h1>
       
       <div class='ListMeta'>
@@ -85,7 +85,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
   </li>
 
 
@@ -96,11 +96,11 @@
     </header>
     <div>
       
-        <h2 id="继承构造函数">继承构造函数</h2>
-<p>​	在某些情况下，子类仅仅是添加了一个特别的方法，但与父类构造函数基本一致。此时如果父类拥有大量构造函数，子类就同样要复制它们，仅仅为了转发构造参数。为此，C++11提出了继承构造函数的概念。</p>
+        <h1>15 尽可能的使用<code>constexpr</code></h1>
+<p>​	<code>constexpr</code>和<code>const</code>一样，它们是编译期可知的。但是<code>const</code>不提供<code>constexpr</code>所能保证之事，因为<code>const</code>对象不需要在编译期初始化它的值。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_13%20%E7%BB%A7%E6%89%BF%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_15%20%E5%B0%BD%E5%8F%AF%E8%83%BD%E7%9A%84%E4%BD%BF%E7%94%A8constexpr/#more">Read On »</a>
           </div>
         
       
@@ -114,7 +114,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_14-2%20%E4%BD%BF%E7%94%A8%E5%BC%BA%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B/">14-2 使用强枚举类型</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_16%20%E8%AE%A9const%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/">16 让const成员函数线程安全</a>
         </h1>
       
       <div class='ListMeta'>
@@ -135,7 +135,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
   </li>
 
 
@@ -146,11 +146,11 @@
     </header>
     <div>
       
-        <h2 id="使用强枚举类型">使用强枚举类型</h2>
-<p>强枚举类型具备以下三个特性：</p>
+        <h1>16 让<code>const</code>成员函数线程安全</h1>
+<p>​	这个条款是基于，多个线程可以同时在一个对象上执行一个<code>const</code>成员函数这个假设的。如果你可以<strong>保证</strong>在一个对象上永远不会有多个线程执行该成员函数——该函数的线程安全是无关紧要的。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_14-2%20%E4%BD%BF%E7%94%A8%E5%BC%BA%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_16%20%E8%AE%A9const%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/#more">Read On »</a>
           </div>
         
       
@@ -164,7 +164,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_14-3%20%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9C%89%E5%BA%95%E5%B1%82%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%9E%9A%E4%B8%BE%E5%AF%B9%E8%B1%A1%EF%BC%88C++17%EF%BC%89/">14-3 列表初始化有底层类型的枚举对象（C++17）</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_17%20%E7%90%86%E8%A7%A3%E7%89%B9%E6%AE%8A%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E7%94%9F%E6%88%90/">17 理解特殊成员函数的生成</a>
         </h1>
       
       <div class='ListMeta'>
@@ -185,7 +185,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
   </li>
 
 
@@ -196,11 +196,11 @@
     </header>
     <div>
       
-        <h2 id="列表初始化有底层类型的枚举对象（C-17）">列表初始化有底层类型的枚举对象（C++17）</h2>
-<h4 id="1-使用列表初始化，隐式转换为强枚举类型">1. 使用列表初始化，隐式转换为强枚举类型</h4>
+        <h1>17 理解特殊成员函数的生成</h1>
+<p>​	移动构造和拷贝构造是编译器默认生成的内容，虽然移动构造在某些成员身上表现为拷贝构造。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_14-3%20%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9C%89%E5%BA%95%E5%B1%82%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%9E%9A%E4%B8%BE%E5%AF%B9%E8%B1%A1%EF%BC%88C++17%EF%BC%89/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_17%20%E7%90%86%E8%A7%A3%E7%89%B9%E6%AE%8A%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E7%94%9F%E6%88%90/#more">Read On »</a>
           </div>
         
       
@@ -214,7 +214,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_15-1%20%E8%81%9A%E5%90%88%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89/">15-1 聚合类型的定义</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_18%20%E5%AF%B9%E4%BA%8E%E7%8B%AC%E5%8D%A0%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8stdunique_ptr/">18 对于独占资源使用stdunique_ptr</a>
         </h1>
       
       <div class='ListMeta'>
@@ -235,7 +235,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
   </li>
 
 
@@ -246,11 +246,56 @@
     </header>
     <div>
       
-        <h2 id="聚合类型的定义">聚合类型的定义</h2>
-<p>C++ 17标准对聚合类型的定义做出了大幅修改：</p>
+        <h1>18 对于独占资源使用<code>std::unique_ptr</code></h1>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_1-1%20%E4%BC%A0%E7%BB%9F%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">1-1 传统的错误处理</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-1-传统的错误处理">1.1 传统的错误处理</h2>
+<h4 id="本书说明">本书说明</h4>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_15-1%20%E8%81%9A%E5%90%88%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_1-1%20%E4%BC%A0%E7%BB%9F%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/#more">Read On »</a>
           </div>
         
       
@@ -264,7 +309,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_4-3%20decltype%E7%9A%84%E6%8E%A8%E5%AF%BC%E8%A7%84%E5%88%99/">4-3 decltype的推导规则</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_1-10%20%E4%BD%BF%E7%94%A8%E5%BC%82%E5%B8%B8%E9%80%A0%E6%88%90%E7%9A%84%E5%BC%80%E9%94%80/">1-10 使用异常造成的开销</a>
         </h1>
       
       <div class='ListMeta'>
@@ -285,7 +330,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
   </li>
 
 
@@ -296,11 +341,13 @@
     </header>
     <div>
       
-        <h2 id="4-3-decltype的推导规则">4.3 decltype的推导规则</h2>
-<p>对于<code>decltype(e)</code>（其中e的类型为T）的推导规则有5条。</p>
+        <h2 id="1-10-使用异常造成的开销">1.10 使用异常造成的开销</h2>
+<blockquote>
+<p>一个throw表达式就像是一个特殊的系统函数调用，它接收异常对象作为参数并且沿着执行调用链向上回溯。为了完成这项工作，编译器需要在栈上放置额外的信息，来辅助栈反解过程。</p>
+</blockquote>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_4-3%20decltype%E7%9A%84%E6%8E%A8%E5%AF%BC%E8%A7%84%E5%88%99/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_1-10%20%E4%BD%BF%E7%94%A8%E5%BC%82%E5%B8%B8%E9%80%A0%E6%88%90%E7%9A%84%E5%BC%80%E9%94%80/#more">Read On »</a>
           </div>
         
       
@@ -314,7 +361,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_4-4%20decltype%E4%B8%ADcv%E9%99%90%E5%AE%9A%E7%AC%A6%E7%9A%84%E6%8E%A8%E5%AF%BC/">4-4 decltype中cv限定符的推导</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_1-3%20%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8/">1-3 捕获异常</a>
         </h1>
       
       <div class='ListMeta'>
@@ -335,7 +382,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
   </li>
 
 
@@ -346,11 +393,11 @@
     </header>
     <div>
       
-        <h2 id="4-4-decltype中cv限定符的推导">4.4 decltype中cv限定符的推导</h2>
-<p>​	正常情况下，<code>decltype(e)</code>的cv限定符会同步e的cv限定符。但是如果e是未加括号的成员变量时，父对象表达式的cv限定符会被忽略。</p>
+        <h2 id="1-3-捕获异常">1.3 捕获异常</h2>
+<h4 id="1-3-1-try块与exception-handler">1.3.1 try块与exception handler</h4>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_4-4%20decltype%E4%B8%ADcv%E9%99%90%E5%AE%9A%E7%AC%A6%E7%9A%84%E6%8E%A8%E5%AF%BC/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_1-3%20%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8/#more">Read On »</a>
           </div>
         
       
@@ -364,7 +411,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_4-5%20decltype(auto)%20%EF%BC%88C++14%EF%BC%89/">4-5 decltype(auto) （C++14）</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_1-4%20%E5%BC%82%E5%B8%B8%E5%8C%B9%E9%85%8D/">1-4 异常匹配</a>
         </h1>
       
       <div class='ListMeta'>
@@ -385,7 +432,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
   </li>
 
 
@@ -396,11 +443,11 @@
     </header>
     <div>
       
-        <h2 id="4-5-decltype-auto-（C-14）">4.5 decltype(auto) （C++14）</h2>
-<p>在C++14标准中出现了<code>decltype(auto)</code>的语法。其代表使用decltype的推导规则（见4.3）来使用auto;</p>
+        <h2 id="1-4-异常匹配">1.4 异常匹配</h2>
+<h4 id="1-异常匹配不支持非派生的隐式转换">1. 异常匹配不支持非派生的隐式转换</h4>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_4-5%20decltype(auto)%20%EF%BC%88C++14%EF%BC%89/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_1-4%20%E5%BC%82%E5%B8%B8%E5%8C%B9%E9%85%8D/#more">Read On »</a>
           </div>
         
       
@@ -414,7 +461,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-1%20lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E6%B3%95/">7-1 lambda表达式语法</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_1-5%20%E6%B8%85%E7%90%86/">1-5 清理</a>
         </h1>
       
       <div class='ListMeta'>
@@ -435,7 +482,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
   </li>
 
 
@@ -446,78 +493,11 @@
     </header>
     <div>
       
-        <h2 id="7-1-lambda表达式语法">7.1 lambda表达式语法</h2>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">[capture](params) specifiers exception -&gt;ret &#123; body &#125;</span><br><span class="line">&lt;!--more--&gt;</span><br></pre></td></tr></table></figure>
-<p>lambda表达式由下面几个部分组成：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>【capture】：捕获列表，必写</p>
-</li>
-<li class="lvl-2">
-<p>【params】：参数列表，可选</p>
-</li>
-<li class="lvl-2">
-<p>【specifiers】：限定符，可选</p>
-</li>
-<li class="lvl-2">
-<p>【exception】：异常说明符，可选</p>
-</li>
-<li class="lvl-2">
-<p>【ret】：返回值类型，可选</p>
-</li>
-<li class="lvl-2">
-<p>【body】：函数体，必写</p>
-</li>
-</ul>
-
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-10%20%E6%A8%A1%E6%9D%BF%E8%AF%AD%E6%B3%95%E7%9A%84%E6%B3%9B%E5%9E%8Blambda%E8%A1%A8%E8%BE%BE%E5%BC%8F(C++20)/">7-10 模板语法的泛型lambda表达式(C++20)</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
-    2024-03-06
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h2 id="7-10-模板语法的泛型lambda表达式">7.10 模板语法的泛型lambda表达式</h2>
-<p>​	原有的lambda表达式所支持的泛型，由于不能直接获取模板参数的类型，所以会导致很多不自然的用法：</p>
+        <h2 id="1-5-清理">1.5 清理</h2>
+<h4 id="1-5-1-引入">1.5.1 引入</h4>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-10%20%E6%A8%A1%E6%9D%BF%E8%AF%AD%E6%B3%95%E7%9A%84%E6%B3%9B%E5%9E%8Blambda%E8%A1%A8%E8%BE%BE%E5%BC%8F(C++20)/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_1-5%20%E6%B8%85%E7%90%86/#more">Read On »</a>
           </div>
         
       
@@ -531,7 +511,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-11%20%E5%8F%AF%E6%9E%84%E9%80%A0%E5%92%8C%E5%8F%AF%E8%B5%8B%E5%80%BC%E7%9A%84%E6%97%A0%E7%8A%B6%E6%80%81%E7%9A%84lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F(C++20)/">7-11 可构造和可赋值的无状态的lambda表达式(C++20)</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_1-6%20%E6%A0%87%E5%87%86%E5%BC%82%E5%B8%B8/">1-6 标准异常</a>
         </h1>
       
       <div class='ListMeta'>
@@ -552,7 +532,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
   </li>
 
 
@@ -563,11 +543,13 @@
     </header>
     <div>
       
-        <h2 id="7-11-可构造和可赋值的无状态的lambda表达式">7.11 可构造和可赋值的无状态的lambda表达式</h2>
-<p>​	在下面的应用场景里，因为需要的模板参数是类型，因此将lambda的类型传入时，由于会创建相应的对象，而lambda表达式的默认构造函数被删除了，因此在C++20前不能使用。</p>
+        <h2 id="1-6-标准异常">1.6 标准异常</h2>
+<blockquote>
+<p>C++提供了标准异常类便于使用。可以据此派生自己的异常类。在<code>&lt;exception&gt;</code>库中定义。</p>
+</blockquote>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_7-11%20%E5%8F%AF%E6%9E%84%E9%80%A0%E5%92%8C%E5%8F%AF%E8%B5%8B%E5%80%BC%E7%9A%84%E6%97%A0%E7%8A%B6%E6%80%81%E7%9A%84lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F(C++20)/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_1-6%20%E6%A0%87%E5%87%86%E5%BC%82%E5%B8%B8/#more">Read On »</a>
           </div>
         
       
@@ -580,7 +562,7 @@
 
   <section id="nav-wrapper">
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/11/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/76/">76</a><a class="extend next" rel="next" href="/page/13/">next »</a>
+      <a class="extend prev" rel="prev" href="/page/11/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/79/">79</a><a class="extend next" rel="next" href="/page/13/">next »</a>
     </nav>
   </section>
 

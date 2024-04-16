@@ -64,12 +64,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2023/01/11/Java/2023-01-11_4-2%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/">4-2分支结构</a>
+          <a href="/2023/02/23/MySql/SQL%E7%BD%91%E8%AF%BE/2DML/2023-02-23_2-UPDATE/">2-UPDATE</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2023-01-10T16:00:00.000Z" itemprop="datePublished">
-    2023-01-11
+  <time datetime="2023-02-22T16:00:00.000Z" itemprop="datePublished">
+    2023-02-23
   </time>
   
   
@@ -77,7 +77,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/Java/">Java</a> }
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/">SQL网课</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/2DML/">2DML</a> }
   </li>
 
 
@@ -88,11 +96,11 @@
     </header>
     <div>
       
-        <h2 id="4-2分支结构">4.2分支结构</h2>
-<h4 id="4-2-1if分支">4.2.1if分支</h4>
+        <h2 id="UPDATE">UPDATE</h2>
+<h4 id="1-WHERE子句">1.WHERE子句</h4>
         
           <div class="more-link">
-            <a href="/2023/01/11/Java/2023-01-11_4-2%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/#more">Read On »</a>
+            <a href="/2023/02/23/MySql/SQL%E7%BD%91%E8%AF%BE/2DML/2023-02-23_2-UPDATE/#more">Read On »</a>
           </div>
         
       
@@ -106,12 +114,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2023/01/11/Java/2023-01-11_4-3%E5%BE%AA%E7%8E%AF/">4-3循环</a>
+          <a href="/2023/02/23/MySql/SQL%E7%BD%91%E8%AF%BE/%E6%A1%88%E4%BE%8B/2023-02-23_%E6%A1%88%E4%BE%8Bexercise-course/">案例exercise-course</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2023-01-10T16:00:00.000Z" itemprop="datePublished">
-    2023-01-11
+  <time datetime="2023-02-22T16:00:00.000Z" itemprop="datePublished">
+    2023-02-23
   </time>
   
   
@@ -119,7 +127,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/Java/">Java</a> }
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/">SQL网课</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/%E6%A1%88%E4%BE%8B/">案例</a> }
   </li>
 
 
@@ -130,13 +146,163 @@
     </header>
     <div>
       
-        <h2 id="4-3循环">4.3循环</h2>
+        <h2 id="案例exercise-course">案例exercise-course</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 1. 在数据库exercise中创建课程表stu_course，包含字段课程编号(number)，类型为整数，长度为</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line">-- 11，是主键，自增长，非空、课程名称(name)，类型为字符串，长度为20，非空、学分(score)，类型</span><br><span class="line">-- 为浮点数，小数点后面保留2位有效数字， 长度为5，非空</span><br><span class="line">CREATE DATABASE IF NOT EXISTS exercise DEFAULT CHARACTER SET UTF8 COLLATE UTF8_GENERAL_CI;</span><br><span class="line"></span><br><span class="line">USE exercise;</span><br><span class="line"></span><br><span class="line">CREATE TABLE IF NOT EXISTS stu_course(</span><br><span class="line">	`number` INT(11) AUTO_INCREMENT PRIMARY KEY NOT NULL COMMENT &#x27;课程编号&#x27;,</span><br><span class="line">	name varchar(20) NOT NULL COMMENT &#x27;课程名称&#x27;,</span><br><span class="line">	score double(5,2) NOT NULL COMMENT &#x27;学号&#x27;</span><br><span class="line">)ENGINE=InnoDB CHARSET=UTF8 COMMENT &#x27;课程表&#x27;;</span><br><span class="line"></span><br><span class="line">-- 向课程表中插入一条数据</span><br><span class="line">INSERT INTO stu_course</span><br><span class="line">VALUES(1,&#x27;Maths&#x27;,60.50);</span><br><span class="line"></span><br><span class="line">-- 将课程表重命名为course</span><br><span class="line">ALTER TABLE stu_course RENAME AS course;</span><br><span class="line"></span><br><span class="line">-- 在课程表中添加字段学时(time)，类型为整数，长度为3，非空</span><br><span class="line">ALTER TABLE course ADD `time` INT(3) NOT NULL COMMENT &#x27;学时&#x27;;</span><br><span class="line"></span><br><span class="line">-- 修改课程表学分类型为浮点数，小数点后面保留1位有效数字，长度为3，非空</span><br><span class="line">ALTER TABLE course MODIFY score double(3,1) NOT NULL COMMENT &#x27;学分&#x27;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/23/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/1%E6%95%B0%E6%8D%AE%E5%BA%93/2023-02-23_4-%E5%85%B6%E5%AE%83%EF%BC%88SHOW%E3%80%81USE%EF%BC%89/">4-其它（SHOW、USE）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-22T16:00:00.000Z" itemprop="datePublished">
+    2023-02-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/">SQL网课</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/">1DDL</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/1%E6%95%B0%E6%8D%AE%E5%BA%93/">1数据库</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="其它（SHOW、USE）">其它（SHOW、USE）</h2>
+<h4 id="1-查看数据库">1.查看数据库</h4>
+        
+          <div class="more-link">
+            <a href="/2023/02/23/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/1%E6%95%B0%E6%8D%AE%E5%BA%93/2023-02-23_4-%E5%85%B6%E5%AE%83%EF%BC%88SHOW%E3%80%81USE%EF%BC%89/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/23/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/2%E6%95%B0%E6%8D%AE%E8%A1%A8/2023-02-23_2-ALTER/">2-ALTER</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-22T16:00:00.000Z" itemprop="datePublished">
+    2023-02-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/">SQL网课</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/">1DDL</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/2%E6%95%B0%E6%8D%AE%E8%A1%A8/">2数据表</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="ALTER">ALTER</h2>
+<h4 id="语法">语法</h4>
+        
+          <div class="more-link">
+            <a href="/2023/02/23/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/2%E6%95%B0%E6%8D%AE%E8%A1%A8/2023-02-23_2-ALTER/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-2%E5%9F%BA%E6%9C%AC%E7%9A%84HTML%E9%A1%B5%E9%9D%A2/">1-2基本的HTML页面</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-2基本的HTML页面">1.2基本的HTML页面</h2>
 <blockquote>
-<p>while</p>
+<p>HTML使用<code>&lt;</code>和<code>&gt;</code>包围HTML标签。开始标签用于标记元素的开始，结束标签用于标记元素的结束。部分元素没有结束标签。</p>
 </blockquote>
         
           <div class="more-link">
-            <a href="/2023/01/11/Java/2023-01-11_4-3%E5%BE%AA%E7%8E%AF/#more">Read On »</a>
+            <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-2%E5%9F%BA%E6%9C%AC%E7%9A%84HTML%E9%A1%B5%E9%9D%A2/#more">Read On »</a>
           </div>
         
       
@@ -150,12 +316,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2023/01/11/Java/2023-01-11_4-4%E6%8E%A7%E5%88%B6%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/">4-4控制循环结构</a>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-3%E6%A0%87%E7%AD%BE%EF%BC%9A%E5%85%83%E7%B4%A0%E3%80%81%E5%B1%9E%E6%80%A7%E3%80%81%E5%80%BC/">1-3标签：元素、属性、值</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2023-01-10T16:00:00.000Z" itemprop="datePublished">
-    2023-01-11
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
   </time>
   
   
@@ -163,7 +329,11 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/Java/">Java</a> }
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
   </li>
 
 
@@ -174,139 +344,13 @@
     </header>
     <div>
       
-        <h2 id="4-4控制循环结构">4.4控制循环结构</h2>
-<h4 id="4-3-4break">4.3.4break</h4>
-        
-          <div class="more-link">
-            <a href="/2023/01/11/Java/2023-01-11_4-4%E6%8E%A7%E5%88%B6%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2023/01/11/Java/2023-01-11_4-5%E6%95%B0%E7%BB%84%E7%B1%BB%E5%9E%8B/">4-5数组类型</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2023-01-10T16:00:00.000Z" itemprop="datePublished">
-    2023-01-11
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/Java/">Java</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h2 id="4-5数组类型">4.5数组类型</h2>
-<h4 id="4-5-1定义数组">4.5.1定义数组</h4>
-        
-          <div class="more-link">
-            <a href="/2023/01/11/Java/2023-01-11_4-5%E6%95%B0%E7%BB%84%E7%B1%BB%E5%9E%8B/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2023/01/09/Java/2023-01-09_1-5Java%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A7%84%E5%88%99/">1-5Java程序的基本规则</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2023-01-08T16:00:00.000Z" itemprop="datePublished">
-    2023-01-09
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/Java/">Java</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h2 id="1-5Java程序的基本规则">1.5Java程序的基本规则</h2>
-<h4 id="1-5-1Java程序的组织形式">1.5.1Java程序的组织形式</h4>
-        
-          <div class="more-link">
-            <a href="/2023/01/09/Java/2023-01-09_1-5Java%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A7%84%E5%88%99/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2023/01/09/Java/2023-01-09_1-7Java9%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/">1-7Java9的垃圾回收机制</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2023-01-08T16:00:00.000Z" itemprop="datePublished">
-    2023-01-09
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/Java/">Java</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h2 id="1-7Java9的垃圾回收机制">1.7Java9的垃圾回收机制</h2>
+        <h2 id="1-3标签：元素、属性、值">1.3标签：元素、属性、值</h2>
 <blockquote>
-<p>Java不需要程序员控制内存回收，由JRE在后台自动进行。</p>
+<p>标签的组成：element、attribute、value。</p>
 </blockquote>
         
           <div class="more-link">
-            <a href="/2023/01/09/Java/2023-01-09_1-7Java9%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/#more">Read On »</a>
+            <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-3%E6%A0%87%E7%AD%BE%EF%BC%9A%E5%85%83%E7%B4%A0%E3%80%81%E5%B1%9E%E6%80%A7%E3%80%81%E5%80%BC/#more">Read On »</a>
           </div>
         
       
@@ -320,12 +364,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2023/01/09/Java/2023-01-09_3-2%E6%A0%87%E6%B3%A8%E7%AC%A6%E5%92%8C%E5%85%B3%E9%94%AE%E5%AD%97/">3-2标注符和关键字</a>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-4%E7%BD%91%E9%A1%B5%E7%9A%84%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9/">1-4网页的文本内容</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2023-01-08T16:00:00.000Z" itemprop="datePublished">
-    2023-01-09
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
   </time>
   
   
@@ -333,7 +377,11 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/Java/">Java</a> }
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
   </li>
 
 
@@ -344,11 +392,13 @@
     </header>
     <div>
       
-        <h2 id="3-2标注符和关键字">3.2标注符和关键字</h2>
-<h4 id="3-2-1分隔符">3.2.1分隔符</h4>
+        <h2 id="1-4网页的文本内容">1.4网页的文本内容</h2>
+<blockquote>
+<p>网页中文本的多个空白符会被显示为单个空白。同时换行需要专门的换行符。<code>&lt;br&gt;</code></p>
+</blockquote>
         
           <div class="more-link">
-            <a href="/2023/01/09/Java/2023-01-09_3-2%E6%A0%87%E6%B3%A8%E7%AC%A6%E5%92%8C%E5%85%B3%E9%94%AE%E5%AD%97/#more">Read On »</a>
+            <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-4%E7%BD%91%E9%A1%B5%E7%9A%84%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9/#more">Read On »</a>
           </div>
         
       
@@ -362,12 +412,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2023/01/09/Java/2023-01-09_3-3%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%88%86%E7%B1%BB/">3-3数据类型分类</a>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-5%E9%93%BE%E6%8E%A5%E3%80%81%E5%9B%BE%E5%83%8F%E5%92%8C%E5%85%B6%E5%AE%83%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9/">1-5链接、图像和其它文本内容</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2023-01-08T16:00:00.000Z" itemprop="datePublished">
-    2023-01-09
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
   </time>
   
   
@@ -375,7 +425,11 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/Java/">Java</a> }
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
   </li>
 
 
@@ -386,17 +440,13 @@
     </header>
     <div>
       
-        <h2 id="3-3数据类型分类">3.3数据类型分类</h2>
-<ul class="lvl-0">
-<li class="lvl-2">基本类型
-<ul class="lvl-2">
-<li class="lvl-6">整型</li>
-</ul>
-</li>
-</ul>
+        <h2 id="1-5链接、图像和其它文本内容">1.5链接、图像和其它文本内容</h2>
+<blockquote>
+<p>外部文件（例如图片）并没有保存在html中，而是单独保存，只是被页面所引用。</p>
+</blockquote>
         
           <div class="more-link">
-            <a href="/2023/01/09/Java/2023-01-09_3-3%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%88%86%E7%B1%BB/#more">Read On »</a>
+            <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-5%E9%93%BE%E6%8E%A5%E3%80%81%E5%9B%BE%E5%83%8F%E5%92%8C%E5%85%B6%E5%AE%83%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9/#more">Read On »</a>
           </div>
         
       
@@ -410,12 +460,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2023/01/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90C%E8%AF%AD%E8%A8%80%E6%8F%8F%E8%BF%B0%E7%AC%94%E8%AE%B0/2023-01-09_2-%E7%BA%BF%E6%AE%B5%E6%A0%91/">2-线段树</a>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-6%E6%96%87%E4%BB%B6%E5%90%8D%E5%92%8C%E6%96%87%E4%BB%B6%E5%A4%B9%E5%90%8D/">1-6文件名和文件夹名</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2023-01-08T16:00:00.000Z" itemprop="datePublished">
-    2023-01-09
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
   </time>
   
   
@@ -423,7 +473,11 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90C%E8%AF%AD%E8%A8%80%E6%8F%8F%E8%BF%B0%E7%AC%94%E8%AE%B0/">数据结构与算法分析C语言描述笔记</a> }
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
   </li>
 
 
@@ -434,11 +488,13 @@
     </header>
     <div>
       
-        <h2 id="线段树">线段树</h2>
-<h4 id="1-构建">1.构建</h4>
+        <h2 id="1-6文件名和文件夹名">1.6文件名和文件夹名</h2>
+<blockquote>
+<p>文件名和文件夹名全部使用<strong>小写字母</strong>，用<strong>短横线</strong>分隔单词，用 .html 作为扩展名。混合使用大小写字母会增加访问者输入正确地址以及找到页面的难度。</p>
+</blockquote>
         
           <div class="more-link">
-            <a href="/2023/01/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90C%E8%AF%AD%E8%A8%80%E6%8F%8F%E8%BF%B0%E7%AC%94%E8%AE%B0/2023-01-09_2-%E7%BA%BF%E6%AE%B5%E6%A0%91/#more">Read On »</a>
+            <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-6%E6%96%87%E4%BB%B6%E5%90%8D%E5%92%8C%E6%96%87%E4%BB%B6%E5%A4%B9%E5%90%8D/#more">Read On »</a>
           </div>
         
       
@@ -452,12 +508,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2023/01/09/C++/Linux%E7%9B%B8%E5%85%B3/2023-01-09_5-Makefile%E8%AF%A6%E8%A7%A3/">5-Makefile详解</a>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-7URL/">1-7URL</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2023-01-08T16:00:00.000Z" itemprop="datePublished">
-    2023-01-09
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
   </time>
   
   
@@ -465,11 +521,11 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/Linux%E7%9B%B8%E5%85%B3/">Linux相关</a> }
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
   </li>
 
 
@@ -480,8 +536,15 @@
     </header>
     <div>
       
-        <h2 id="Makefile详解">Makefile详解</h2>
-
+        <h2 id="1-7URL">1.7URL</h2>
+<blockquote>
+<p>URL是地址的别名，它包含文件的存储位置和浏览器如何处理它的信息。</p>
+</blockquote>
+        
+          <div class="more-link">
+            <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-7URL/#more">Read On »</a>
+          </div>
+        
       
     </div>
 </article>
@@ -492,7 +555,7 @@
 
   <section id="nav-wrapper">
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/44/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/43/">43</a><a class="page-number" href="/page/44/">44</a><span class="page-number current">45</span><a class="page-number" href="/page/46/">46</a><a class="page-number" href="/page/47/">47</a><span class="space">&hellip;</span><a class="page-number" href="/page/76/">76</a><a class="extend next" rel="next" href="/page/46/">next »</a>
+      <a class="extend prev" rel="prev" href="/page/44/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/43/">43</a><a class="page-number" href="/page/44/">44</a><span class="page-number current">45</span><a class="page-number" href="/page/46/">46</a><a class="page-number" href="/page/47/">47</a><span class="space">&hellip;</span><a class="page-number" href="/page/79/">79</a><a class="extend next" rel="next" href="/page/46/">next »</a>
     </nav>
   </section>
 
