@@ -64,7 +64,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_8-2%20%E4%BD%8D%E5%9F%9F%E7%9A%84%E9%BB%98%E8%AE%A4%E5%88%9D%E5%A7%8B%E5%8C%96(C++20)/">8-2 位域的默认初始化(C++20)</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_10-2%20%E6%98%BE%E5%BC%8F%E9%BB%98%E8%AE%A4%E5%92%8C%E6%98%BE%E5%BC%8F%E5%88%A0%E9%99%A4/">10-2 显式默认和显式删除</a>
         </h1>
       
       <div class='ListMeta'>
@@ -96,11 +96,11 @@
     </header>
     <div>
       
-        <h2 id="8-2-位域的默认初始化">8.2 位域的默认初始化</h2>
-<p>​	在C++20后，允许对数据成员的位域进行默认初始化。</p>
+        <h2 id="10-2-显式默认和显式删除">10.2 显式默认和显式删除</h2>
+<p>​	如果在类中添加了自定义的构造函数，其原本所属于的默认构造函数就会被破坏，失去其<strong>平凡性</strong>。因此提供了显式默认的方式来保证默认的构造函数仍然能被生成。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_8-2%20%E4%BD%8D%E5%9F%9F%E7%9A%84%E9%BB%98%E8%AE%A4%E5%88%9D%E5%A7%8B%E5%8C%96(C++20)/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_10-2%20%E6%98%BE%E5%BC%8F%E9%BB%98%E8%AE%A4%E5%92%8C%E6%98%BE%E5%BC%8F%E5%88%A0%E9%99%A4/#more">Read On »</a>
           </div>
         
       
@@ -114,7 +114,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_9-2%20%E4%BD%BF%E7%94%A8%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96/">9-2 使用列表初始化</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_11%20%E9%9D%9E%E5%8F%97%E9%99%90%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B/">11 非受限联合类型</a>
         </h1>
       
       <div class='ListMeta'>
@@ -146,11 +146,11 @@
     </header>
     <div>
       
-        <h2 id="9-2-使用列表初始化">9.2 使用列表初始化</h2>
-<h4 id="1-隐式调用构造函数">1. 隐式调用构造函数</h4>
+        <h2 id="非受限联合类型">非受限联合类型</h2>
+<h4 id="11-1-联合类型在C-中的局限性">11.1 联合类型在C++中的局限性</h4>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_9-2%20%E4%BD%BF%E7%94%A8%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_11%20%E9%9D%9E%E5%8F%97%E9%99%90%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B/#more">Read On »</a>
           </div>
         
       
@@ -164,7 +164,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_9-3%20initializer_list%E8%AF%A6%E8%A7%A3/">9-3 initializer_list详解</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_12-2%20%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/">12-2 委托构造函数</a>
         </h1>
       
       <div class='ListMeta'>
@@ -196,11 +196,11 @@
     </header>
     <div>
       
-        <h2 id="9-3-initializer-list详解">9.3 initializer_list详解</h2>
-<p>​	标准容器只要支持<code>initializer_list</code>，就能使用列表初始化。其中，<code>initializer_list</code>是一个支持begin，end和size成员函数的类模板。</p>
+        <h2 id="委托构造函数">委托构造函数</h2>
+<p>为了合理复用构造函数，C++11提供了委托构造函数。委托者被成为委托构造函数，被委托者被称为代理构造函数。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_9-3%20initializer_list%E8%AF%A6%E8%A7%A3/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_12-2%20%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/#more">Read On »</a>
           </div>
         
       
@@ -214,7 +214,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_9-4%20%E4%BD%BF%E7%94%A8%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">9-4 使用列表初始化的注意事项</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_12-3%20%E5%A7%94%E6%89%98%E6%A8%A1%E6%9D%BF%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/">12-3 委托模板构造函数</a>
         </h1>
       
       <div class='ListMeta'>
@@ -246,11 +246,11 @@
     </header>
     <div>
       
-        <h2 id="9-4-使用列表初始化的注意事项">9.4 使用列表初始化的注意事项</h2>
-<h4 id="9-4-1-隐式缩窄转换的问题">9.4.1 隐式缩窄转换的问题</h4>
+        <h2 id="委托模板构造函数">委托模板构造函数</h2>
+<p>委托模板构造函数是指<strong>代理构造函数是一个函数模板</strong>。下面是一个例子：</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_9-4%20%E4%BD%BF%E7%94%A8%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_12-3%20%E5%A7%94%E6%89%98%E6%A8%A1%E6%9D%BF%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/#more">Read On »</a>
           </div>
         
       
@@ -264,7 +264,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_9-5%20%E6%8C%87%E5%AE%9A%E5%88%9D%E5%A7%8B%E5%8C%96(C++20)/">9-5 指定初始化(C++20)</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_12-4%20%E6%8D%95%E8%8E%B7%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E5%BC%82%E5%B8%B8/">12-4 捕获委托构造函数的异常</a>
         </h1>
       
       <div class='ListMeta'>
@@ -296,11 +296,11 @@
     </header>
     <div>
       
-        <h2 id="9-5-指定初始化">9.5 指定初始化</h2>
-<p>​	为了提高数据成员初始化的可读性和灵活性，C++20标准中引入了指定初始化的特性。该特性允许指定初始化数据成员的名称，从而使代码意图更加明确。</p>
+        <h2 id="捕获委托构造函数的异常">捕获委托构造函数的异常</h2>
+<p>下面演示一个使用<code>Function-try-block</code>去捕获委托构造函数异常的例子。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_9-5%20%E6%8C%87%E5%AE%9A%E5%88%9D%E5%A7%8B%E5%8C%96(C++20)/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_12-4%20%E6%8D%95%E8%8E%B7%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E5%BC%82%E5%B8%B8/#more">Read On »</a>
           </div>
         
       
@@ -314,7 +314,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_%E4%BD%BF%E7%94%A8using%E6%89%93%E5%BC%80%E5%BC%BA%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B%EF%BC%88C++20%EF%BC%89/">使用using打开强枚举类型（C++20）</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_13%20%E7%BB%A7%E6%89%BF%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/">13 继承构造函数</a>
         </h1>
       
       <div class='ListMeta'>
@@ -346,11 +346,11 @@
     </header>
     <div>
       
-        <h2 id="使用using打开强枚举类型">使用using打开强枚举类型</h2>
-<p>​	C<ins>20标准扩展了<code>using</code>，用于打开强枚举类型的命名空间。注意：在g</ins>和vs中均尚未支持本语法。</p>
+        <h2 id="继承构造函数">继承构造函数</h2>
+<p>​	在某些情况下，子类仅仅是添加了一个特别的方法，但与父类构造函数基本一致。此时如果父类拥有大量构造函数，子类就同样要复制它们，仅仅为了转发构造参数。为此，C++11提出了继承构造函数的概念。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_%E4%BD%BF%E7%94%A8using%E6%89%93%E5%BC%80%E5%BC%BA%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B%EF%BC%88C++20%EF%BC%89/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_13%20%E7%BB%A7%E6%89%BF%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/#more">Read On »</a>
           </div>
         
       
@@ -364,7 +364,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01%20%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/2024-03-06_01%20imgui%E4%B8%8B%E8%BD%BD/">01 imgui下载</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_14-2%20%E4%BD%BF%E7%94%A8%E5%BC%BA%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B/">14-2 使用强枚举类型</a>
         </h1>
       
       <div class='ListMeta'>
@@ -377,15 +377,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  { <a href="/categories/C/">C++</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/">ImGui</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/">01 准备工作</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
   </li>
 
 
@@ -396,11 +396,11 @@
     </header>
     <div>
       
-        <h1>imgui下载</h1>
-<h2 id="普通版本">普通版本</h2>
+        <h2 id="使用强枚举类型">使用强枚举类型</h2>
+<p>强枚举类型具备以下三个特性：</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01%20%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/2024-03-06_01%20imgui%E4%B8%8B%E8%BD%BD/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_14-2%20%E4%BD%BF%E7%94%A8%E5%BC%BA%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B/#more">Read On »</a>
           </div>
         
       
@@ -414,7 +414,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01%20%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/2024-03-06_02%20%E4%B8%8B%E8%BD%BDGLFW%E5%92%8CGLEW/">02 下载GLFW和GLEW</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_14-3%20%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9C%89%E5%BA%95%E5%B1%82%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%9E%9A%E4%B8%BE%E5%AF%B9%E8%B1%A1%EF%BC%88C++17%EF%BC%89/">14-3 列表初始化有底层类型的枚举对象（C++17）</a>
         </h1>
       
       <div class='ListMeta'>
@@ -427,15 +427,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  { <a href="/categories/C/">C++</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/">ImGui</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/">01 准备工作</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
   </li>
 
 
@@ -446,11 +446,11 @@
     </header>
     <div>
       
-        <h1>下载GLFW和GLEW</h1>
-<h2 id="GLFW（lib文件）">GLFW（lib文件）</h2>
+        <h2 id="列表初始化有底层类型的枚举对象（C-17）">列表初始化有底层类型的枚举对象（C++17）</h2>
+<h4 id="1-使用列表初始化，隐式转换为强枚举类型">1. 使用列表初始化，隐式转换为强枚举类型</h4>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01%20%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/2024-03-06_02%20%E4%B8%8B%E8%BD%BDGLFW%E5%92%8CGLEW/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_14-3%20%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9C%89%E5%BA%95%E5%B1%82%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%9E%9A%E4%B8%BE%E5%AF%B9%E8%B1%A1%EF%BC%88C++17%EF%BC%89/#more">Read On »</a>
           </div>
         
       
@@ -464,7 +464,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01%20%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/2024-03-06_03%20%E9%85%8D%E7%BD%AE%E9%A1%B9%E7%9B%AE%EF%BC%88VS2022%EF%BC%89/">03 配置项目（VS2022）</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_15-1%20%E8%81%9A%E5%90%88%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89/">15-1 聚合类型的定义</a>
         </h1>
       
       <div class='ListMeta'>
@@ -477,15 +477,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  { <a href="/categories/C/">C++</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/">ImGui</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/">01 准备工作</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
   </li>
 
 
@@ -496,11 +496,11 @@
     </header>
     <div>
       
-        <h1>配置项目（VS2022）</h1>
-<h2 id="1-复制文件夹">1. 复制文件夹</h2>
+        <h2 id="聚合类型的定义">聚合类型的定义</h2>
+<p>C++ 17标准对聚合类型的定义做出了大幅修改：</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01%20%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/2024-03-06_03%20%E9%85%8D%E7%BD%AE%E9%A1%B9%E7%9B%AE%EF%BC%88VS2022%EF%BC%89/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_15-1%20%E8%81%9A%E5%90%88%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89/#more">Read On »</a>
           </div>
         
       
@@ -514,7 +514,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/02%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2024-03-06_01%20%E8%AE%BE%E7%BD%AEStyle/">01 设置Style</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_4-3%20decltype%E7%9A%84%E6%8E%A8%E5%AF%BC%E8%A7%84%E5%88%99/">4-3 decltype的推导规则</a>
         </h1>
       
       <div class='ListMeta'>
@@ -527,15 +527,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  { <a href="/categories/C/">C++</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/">ImGui</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/02-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">02 学习笔记</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C-%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">现代C++语言核心特性解析读书笔记</a> }
   </li>
 
 
@@ -546,11 +546,11 @@
     </header>
     <div>
       
-        <h1>01 设置Style</h1>
-<h2 id="1-内置style">1. 内置style</h2>
+        <h2 id="4-3-decltype的推导规则">4.3 decltype的推导规则</h2>
+<p>对于<code>decltype(e)</code>（其中e的类型为T）的推导规则有5条。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/02%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2024-03-06_01%20%E8%AE%BE%E7%BD%AEStyle/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%8E%B0%E4%BB%A3C++%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_4-3%20decltype%E7%9A%84%E6%8E%A8%E5%AF%BC%E8%A7%84%E5%88%99/#more">Read On »</a>
           </div>
         
       
@@ -563,7 +563,7 @@
 
   <section id="nav-wrapper">
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/16/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/79/">79</a><a class="extend next" rel="next" href="/page/18/">next »</a>
+      <a class="extend prev" rel="prev" href="/page/16/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/81/">81</a><a class="extend next" rel="next" href="/page/18/">next »</a>
     </nav>
   </section>
 

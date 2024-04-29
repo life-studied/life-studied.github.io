@@ -64,7 +64,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_01%20TArray%E5%9F%BA%E7%A1%80/">01 TArray基础</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2024-03-06_3-7-1%20%E9%80%86%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/">3-7-1 逆转字符串</a>
         </h1>
       
       <div class='ListMeta'>
@@ -77,23 +77,19 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  { <a href="/categories/C/">C++</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/05-TArray/">05 TArray</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
   </li>
 
 
@@ -104,11 +100,61 @@
     </header>
     <div>
       
-        <h1>TArray基础</h1>
-<h2 id="初始化">初始化</h2>
+        <h2 id="3-7-1-逆转字符串">3.7-1 逆转字符串</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">reverse</span><span class="params">(string &amp;s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> size = s.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; size / <span class="number">2</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">char</span> temp = s[i];</span><br><span class="line">        s[i] = s[size - <span class="number">1</span> - i];</span><br><span class="line">        s[size - <span class="number">1</span> - i] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">string <span class="title">s</span><span class="params">(<span class="string">&quot;123456&quot;</span>)</span></span>;</span><br><span class="line">    cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">reverse</span>(s);</span><br><span class="line">    cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2024-03-06_3-7-18%20%E6%B5%8B%E8%AF%95string%E4%B8%ADat%E5%92%8C%5B%5D%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8%E6%9C%BA%E5%88%B6/">3-7-18 测试string中at和[]抛出异常机制</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="3-7-18-测试string中at和-抛出异常机制">3.7-18 测试string中at和[]抛出异常机制</h2>
+<p>经测试：</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_01%20TArray%E5%9F%BA%E7%A1%80/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2024-03-06_3-7-18%20%E6%B5%8B%E8%AF%95string%E4%B8%ADat%E5%92%8C%5B%5D%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8%E6%9C%BA%E5%88%B6/#more">Read On »</a>
           </div>
         
       
@@ -122,7 +168,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_02%20TArray%20%E6%B7%BB%E5%8A%A0/">02 TArray 添加</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2024-03-06_3-7-2%20%E6%B5%8B%E8%AF%95%E5%9B%9E%E6%96%87/">3-7-2 测试回文</a>
         </h1>
       
       <div class='ListMeta'>
@@ -135,23 +181,19 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  { <a href="/categories/C/">C++</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/05-TArray/">05 TArray</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
   </li>
 
 
@@ -162,11 +204,111 @@
     </header>
     <div>
       
-        <h1>TArray 添加</h1>
-<h2 id="Add">Add</h2>
+        <h2 id="3-7-2-测试回文">3.7-2 测试回文</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">reverse</span><span class="params">(string &amp;s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> size = s.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; size / <span class="number">2</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">char</span> temp = s[i];</span><br><span class="line">        s[i] = s[size - <span class="number">1</span> - i];</span><br><span class="line">        s[size - <span class="number">1</span> - i] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (argc &lt; <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;argc less than 2!&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">string <span class="title">s</span><span class="params">(argv[<span class="number">1</span>])</span></span>;</span><br><span class="line">    <span class="function">string <span class="title">s2</span><span class="params">(argv[<span class="number">1</span>])</span></span>;</span><br><span class="line">    <span class="built_in">reverse</span>(s);</span><br><span class="line">    cout &lt;&lt; (s == s2) &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2024-03-06_3-7-3%20%E6%97%A0%E8%A7%86%E5%A4%A7%E5%B0%8F%E5%86%99%E7%9A%84%E5%9B%9E%E6%96%87/">3-7-3 无视大小写的回文</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="3-7-3-无视大小写的回文">3.7-3 无视大小写的回文</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">reverse</span><span class="params">(string &amp;s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> size = s.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; size / <span class="number">2</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">char</span> temp = <span class="built_in">tolower</span>(s[i]);</span><br><span class="line">        s[i] = <span class="built_in">tolower</span>(s[size - <span class="number">1</span> - i]);</span><br><span class="line">        s[size - <span class="number">1</span> - i] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (argc &lt; <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;argc less than 2!&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">string <span class="title">s</span><span class="params">(argv[<span class="number">1</span>])</span></span>;</span><br><span class="line">    <span class="function">string <span class="title">s2</span><span class="params">(argv[<span class="number">1</span>])</span></span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;i : s2)</span><br><span class="line">        i = <span class="built_in">tolower</span>(i);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">reverse</span>(s);</span><br><span class="line">    cout &lt;&lt; (s == s2) &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2024-03-06_3-7-6%20%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E5%B9%B6%E6%9B%BF%E6%8D%A2%E6%8C%87%E5%AE%9A%E5%AD%97%E7%AC%A6%E4%B8%B2/">3-7-6 读取文件并替换指定字符串</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="3-7-6-读取文件并替换指定字符串">3.7-6 读取文件并替换指定字符串</h2>
+<h4 id="源代码">源代码</h4>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_02%20TArray%20%E6%B7%BB%E5%8A%A0/#more">Read On »</a>
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2024-03-06_3-7-6%20%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E5%B9%B6%E6%9B%BF%E6%8D%A2%E6%8C%87%E5%AE%9A%E5%AD%97%E7%AC%A6%E4%B8%B2/#more">Read On »</a>
           </div>
         
       
@@ -180,7 +322,57 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_03%20TArray%20%E6%8F%92%E5%85%A5/">03 TArray 插入</a>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2024-03-06_3-7-7%20%E6%97%A0%E8%A7%86%E5%A4%A7%E5%B0%8F%E5%86%99%E6%9B%BF%E6%8D%A2%E5%AD%97%E7%AC%A6%E4%B8%B2/">3-7-7 无视大小写替换字符串</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="3-7-7-无视大小写替换字符串">3.7-7 无视大小写替换字符串</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ichar_traits.h&quot;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function">istring <span class="title">getData</span><span class="params">(string filename)</span> <span class="title">throw</span><span class="params">(std::ifstream::failure)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">std::ifstream <span class="title">streamReader</span><span class="params">(filename, std::ios::binary)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (!streamReader.<span class="built_in">is_open</span>())</span><br><span class="line">        <span class="keyword">throw</span> std::ifstream::<span class="built_in">failure</span>(<span class="string">&quot;file couldn&#x27;t open&quot;</span>);</span><br><span class="line">    streamReader.<span class="built_in">seekg</span>(<span class="number">0</span>, std::ios::end);     <span class="comment">// 游标移到文件结尾</span></span><br><span class="line">    <span class="type">unsigned</span> filesize = streamReader.<span class="built_in">tellg</span>(); <span class="comment">// 获取游标当前位置 - 文件开始位置，此处为文件大小</span></span><br><span class="line">    <span class="type">char</span> *_data = <span class="keyword">new</span> <span class="type">char</span>[filesize];         <span class="comment">// 分配内存</span></span><br><span class="line">    streamReader.<span class="built_in">seekg</span>(<span class="number">0</span>, std::ios::beg);     <span class="comment">// 跳转回开始</span></span><br><span class="line">    streamReader.<span class="built_in">read</span>(_data, filesize);       <span class="comment">// 读取文件</span></span><br><span class="line">    streamReader.<span class="built_in">close</span>();</span><br><span class="line">    <span class="function">istring <span class="title">data</span><span class="params">(_data)</span></span>;</span><br><span class="line">    <span class="keyword">delete</span>[] _data;</span><br><span class="line">    <span class="keyword">return</span> std::<span class="built_in">move</span>(data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">istring &amp;<span class="title">replaceAll</span><span class="params">(istring &amp;context,</span></span></span><br><span class="line"><span class="params"><span class="function">                    <span class="type">const</span> istring &amp;from,</span></span></span><br><span class="line"><span class="params"><span class="function">                    <span class="type">const</span> istring &amp;to)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">size_t</span> lookHere = <span class="number">0</span>;</span><br><span class="line">    <span class="type">size_t</span> foundHere;</span><br><span class="line">    <span class="keyword">while</span> ((foundHere = context.<span class="built_in">find</span>(from, lookHere)) != istring::npos) <span class="comment">// find from lookHere</span></span><br><span class="line">    &#123;                                                                  <span class="comment">// to avoid the string</span></span><br><span class="line">        context.<span class="built_in">replace</span>(foundHere, from.<span class="built_in">size</span>(), to);                   <span class="comment">//&quot;to&quot; is the substr</span></span><br><span class="line">        lookHere = foundHere + to.<span class="built_in">size</span>();                              <span class="comment">// of &quot;from&quot;</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> SHOWREPLACE</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;stringNumber:&quot;</span> &lt;&lt; foundHere &lt;&lt; endl;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> context;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    istring fileTxt = <span class="built_in">getData</span>(<span class="string">&quot;Rparse.h&quot;</span>);</span><br><span class="line">    cout&lt;&lt;fileTxt&lt;&lt;endl;</span><br><span class="line">    <span class="built_in">replaceAll</span>(fileTxt,<span class="string">&quot;Size&quot;</span>,<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">    cout&lt;&lt;fileTxt&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/Components/Camera%20Compents/2024-03-06_01%20Camera%20Actor/">01 Camera Actor</a>
         </h1>
       
       <div class='ListMeta'>
@@ -201,15 +393,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/Components/">Components</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/05-TArray/">05 TArray</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/Components/Camera-Compents/">Camera Compents</a> }
   </li>
 
 
@@ -220,11 +408,11 @@
     </header>
     <div>
       
-        <h1>TArray 插入</h1>
-<h2 id="Insert">Insert</h2>
+        <h1>Camera Actor</h1>
+<h2 id="1-View-Target-根据摄像机视角移动">1. View Target 根据摄像机视角移动</h2>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_03%20TArray%20%E6%8F%92%E5%85%A5/#more">Read On »</a>
+            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/Components/Camera%20Compents/2024-03-06_01%20Camera%20Actor/#more">Read On »</a>
           </div>
         
       
@@ -238,7 +426,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_04%20TArray%20%E5%A0%86%E5%8C%96%E6%93%8D%E4%BD%9C/">04 TArray 堆化操作</a>
+          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/Components/Camera%20Compents/2024-03-06_02%20%E6%91%84%E5%83%8F%E6%9C%BA%E5%AF%BC%E8%BD%A8/">02 摄像机导轨</a>
         </h1>
       
       <div class='ListMeta'>
@@ -259,15 +447,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/Components/">Components</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/05-TArray/">05 TArray</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/Components/Camera-Compents/">Camera Compents</a> }
   </li>
 
 
@@ -278,11 +462,61 @@
     </header>
     <div>
       
-        <h1>TArray 堆化操作</h1>
-<p>​	将数组堆化，要保证其中元素支持<code>&lt;运算符</code>。</p>
+        <h1>02 摄像机导轨</h1>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1wK4y1V7Md/">【同步】【UE4&amp;5】相机滑轨与相机吊臂的使用教学#定序器_哔哩哔哩_bilibili</a></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/Components/%E5%A2%9E%E5%BC%BA%E8%BE%93%E5%85%A5/2024-03-06_00%20%E7%AE%80%E4%BB%8B/">00 简介</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/Components/">Components</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/Components/%E5%A2%9E%E5%BC%BA%E8%BE%93%E5%85%A5/">增强输入</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>简介</h1>
+<p>​	增强输入系统统一了原来在项目设置偏好的输入系统，采用蓝图的方式去统一处理输入，便于复用和抽象，本质上和原输入系统一样。</p>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_04%20TArray%20%E5%A0%86%E5%8C%96%E6%93%8D%E4%BD%9C/#more">Read On »</a>
+            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/Components/%E5%A2%9E%E5%BC%BA%E8%BE%93%E5%85%A5/2024-03-06_00%20%E7%AE%80%E4%BB%8B/#more">Read On »</a>
           </div>
         
       
@@ -296,7 +530,7 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_06%20TArray%E7%9A%84index&amp;value%E5%8C%85%E5%90%AB%EF%BC%88%E5%88%A4%E6%96%AD%EF%BC%89/">06 TArray的index&amp;value包含（判断）</a>
+          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/Components/%E5%A2%9E%E5%BC%BA%E8%BE%93%E5%85%A5/2024-03-06_01%20%E8%BE%93%E5%85%A5%E6%93%8D%E4%BD%9C%E7%9A%84%E4%BA%8C%E7%BB%B4%E5%AE%9E%E4%BE%8B%EF%BC%88%E4%BB%A5%E7%A7%BB%E5%8A%A8%E8%A7%86%E8%A7%92%E4%B8%BA%E4%BE%8B%EF%BC%89/">01 输入操作的二维实例（以移动视角为例）</a>
         </h1>
       
       <div class='ListMeta'>
@@ -317,15 +551,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/Components/">Components</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/05-TArray/">05 TArray</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/Components/%E5%A2%9E%E5%BC%BA%E8%BE%93%E5%85%A5/">增强输入</a> }
   </li>
 
 
@@ -336,297 +566,17 @@
     </header>
     <div>
       
-        <h1>TArray的index&amp;value包含（判断）</h1>
-<h2 id="IsValidIndex">IsValidIndex</h2>
+        <h1>输入操作的二维实例（以移动视角为例）</h1>
+<ul class="lvl-0">
+<li class="lvl-2">创建InputAction，将值类型改为2D向量。
+<ul class="lvl-2">
+<li class="lvl-4"><img src="./assets/image-20240125153019408.png" alt="image-20240125153019408"></li>
+</ul>
+</li>
+</ul>
         
           <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_06%20TArray%E7%9A%84index&value%E5%8C%85%E5%90%AB%EF%BC%88%E5%88%A4%E6%96%AD%EF%BC%89/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_05%20TArray%20%E6%A0%88%E6%93%8D%E4%BD%9C/">05 TArray 栈操作</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
-    2024-03-06
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/05-TArray/">05 TArray</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>TArray 栈操作</h1>
-<h2 id="Push-Pop">Push &amp; Pop</h2>
-        
-          <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_05%20TArray%20%E6%A0%88%E6%93%8D%E4%BD%9C/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_08%20TArray%20Find/">08 TArray Find</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
-    2024-03-06
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/05-TArray/">05 TArray</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>TArray Find</h1>
-<h2 id="Find">Find</h2>
-        
-          <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_08%20TArray%20Find/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_07%20TArray%20%E7%A7%BB%E9%99%A4/">07 TArray 移除</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
-    2024-03-06
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/05-TArray/">05 TArray</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>TArray 移除</h1>
-<h2 id="RemoveAt">RemoveAt</h2>
-        
-          <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_07%20TArray%20%E7%A7%BB%E9%99%A4/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_09%20TArray%20%E5%90%88%E5%B9%B6%EF%BC%88Append%EF%BC%89/">09 TArray 合并（Append）</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
-    2024-03-06
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/05-TArray/">05 TArray</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>TArray 合并（Append）</h1>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">TArray&lt;int32&gt; TInt32s1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line">TArray&lt;int32&gt; TInt32s2 = &#123;<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>&#125;;</span><br><span class="line"></span><br><span class="line">TInt32s1.<span class="built_in">Append</span>(TInt32s2);</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_10%20TArray%20%E9%81%8D%E5%8E%86/">10 TArray 遍历</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
-    2024-03-06
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/05-TArray/">05 TArray</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>TArray 遍历</h1>
-<h2 id="auto-for-loop">auto for-loop</h2>
-        
-          <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_10%20TArray%20%E9%81%8D%E5%8E%86/#more">Read On »</a>
+            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/Components/%E5%A2%9E%E5%BC%BA%E8%BE%93%E5%85%A5/2024-03-06_01%20%E8%BE%93%E5%85%A5%E6%93%8D%E4%BD%9C%E7%9A%84%E4%BA%8C%E7%BB%B4%E5%AE%9E%E4%BE%8B%EF%BC%88%E4%BB%A5%E7%A7%BB%E5%8A%A8%E8%A7%86%E8%A7%92%E4%B8%BA%E4%BE%8B%EF%BC%89/#more">Read On »</a>
           </div>
         
       
@@ -639,7 +589,7 @@
 
   <section id="nav-wrapper">
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/25/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><a class="page-number" href="/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/page/79/">79</a><a class="extend next" rel="next" href="/page/27/">next »</a>
+      <a class="extend prev" rel="prev" href="/page/25/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><a class="page-number" href="/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/page/81/">81</a><a class="extend next" rel="next" href="/page/27/">next »</a>
     </nav>
   </section>
 

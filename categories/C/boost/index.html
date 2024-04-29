@@ -68,6 +68,110 @@
     <header class="title">
       
         <h1>
+          <a href="/2024/04/29/C++/boost/asio/2024-04-29_05%20%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BBServer/">05 读写分离Server</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-04-28T16:00:00.000Z" itemprop="datePublished">
+    2024-04-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/boost/">boost</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/boost/asio/">asio</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>读写分离的Server</h1>
+<h3 id="线程安全的队列写数据">线程安全的队列写数据</h3>
+<pre><code>使用读写分离的Server，通过队列来写数据。队列需要保证线程的安全性。
+</code></pre>
+<h3 id="Send">Send</h3>
+        
+          <div class="more-link">
+            <a href="/2024/04/29/C++/boost/asio/2024-04-29_05%20%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BBServer/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/04/29/C++/boost/asio/2024-04-29_06%20%E5%A4%84%E7%90%86%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98/">06 处理粘包问题</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-04-28T16:00:00.000Z" itemprop="datePublished">
+    2024-04-29
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/boost/">boost</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/boost/asio/">asio</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>处理粘包问题</h1>
+<p>常用的处理方式是，使用tlv协议，即<code>消息id+消息长度+消息内容</code>。简化的方案就是，消息长度+消息内容。</p>
+<h2 id="方案实现">方案实现</h2>
+        
+          <div class="more-link">
+            <a href="/2024/04/29/C++/boost/asio/2024-04-29_06%20%E5%A4%84%E7%90%86%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
           <a href="/2024/04/16/C++/boost/2024-04-16_00%20asio%20standalone%20download/">00 asio standalone download</a>
         </h1>
       
@@ -390,51 +494,6 @@
             <a href="/2024/04/16/C++/boost/asio/2024-04-16_02%20asio%E5%90%8C%E6%AD%A5%E8%AF%BB%E5%86%99readwrite%EF%BC%88from%20buffer%EF%BC%89/#more">Read On »</a>
           </div>
         
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/04/16/C++/boost/asio/2024-04-16_05%20%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BBServer/">05 读写分离Server</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-04-15T16:00:00.000Z" itemprop="datePublished">
-    2024-04-16
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/boost/">boost</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/boost/asio/">asio</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>读写分离的Server</h1>
-
       
     </div>
 </article>
