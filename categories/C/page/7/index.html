@@ -68,6 +68,56 @@
     <header class="title">
       
         <h1>
+          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_13%20%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8const_iterator%E8%80%8C%E4%B8%8D%E6%98%AFiterator/">13 优先使用const_iterator而不是iterator</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>13 优先使用const_iterator而不是iterator</h1>
+<p>​	在<code>C++98</code>中，如果使用<code>const_iterator</code>可能导致语义可行但是编译不过的情况：</p>
+        
+          <div class="more-link">
+            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_13%20%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8const_iterator%E8%80%8C%E4%B8%8D%E6%98%AFiterator/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
           <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_14%20%E5%A6%82%E6%9E%9C%E5%87%BD%E6%95%B0%E4%B8%8D%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8%E8%AF%B7%E4%BD%BF%E7%94%A8noexcept/">14 如果函数不抛出异常请使用noexcept</a>
         </h1>
       
@@ -502,56 +552,6 @@
         
           <div class="more-link">
             <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_1-4%20%E5%BC%82%E5%B8%B8%E5%8C%B9%E9%85%8D/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_1-5%20%E6%B8%85%E7%90%86/">1-5 清理</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
-    2024-03-06
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h2 id="1-5-清理">1.5 清理</h2>
-<h4 id="1-5-1-引入">1.5.1 引入</h4>
-        
-          <div class="more-link">
-            <a href="/2024/03/06/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-03-06_1-5%20%E6%B8%85%E7%90%86/#more">Read On »</a>
           </div>
         
       

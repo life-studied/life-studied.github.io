@@ -68,6 +68,108 @@
     <header class="title">
       
         <h1>
+          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/cpp%20tutorial%20on%20youtube/tutorial1/2024-03-06_00%20cpp%20tutorial%20address/">00 cpp tutorial address</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/cpp-tutorial-on-youtube/">cpp tutorial on youtube</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/cpp-tutorial-on-youtube/tutorial1/">tutorial1</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>cpp tutorial address</h1>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=HNfpKFER2hI">How to Use C++ in Unreal Engine 5 - Beginner Tutorial (youtube.com)</a></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/cpp%20tutorial%20on%20youtube/tutorial1/2024-03-06_01%20spawn%20actor/">01 spawn actor</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
+    2024-03-06
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/cpp-tutorial-on-youtube/">cpp tutorial on youtube</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/cpp-tutorial-on-youtube/tutorial1/">tutorial1</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>spawn actor</h1>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">	<span class="built_in">UFUNCTION</span>(BlueprintCallable, Category=<span class="string">&quot;Abilities&quot;</span>)</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">SpawnTheActor</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">UPROPERTY</span>(EditAnywhere)</span><br><span class="line">	TSubclassOf&lt;AActor&gt; actorBPToSpawn;</span><br></pre></td></tr></table></figure>
+<p>​	set the actorBPToSpawn In BluePrint;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">AMyCharacter::SpawnTheActor</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	FActorSpawnParameters spawnParams;</span><br><span class="line">	<span class="comment">// 解决碰撞生成点的方法： 一定会生成，如果可以启动适应</span></span><br><span class="line">	spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">GetWorld</span>()-&gt;<span class="built_in">SpawnActor</span>&lt;AActor&gt;(actorBPToSpawn, <span class="built_in">GetActorTransform</span>(), spawnParams);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
           <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/03%20FString%E5%AD%97%E7%AC%A6%E4%B8%B2/2024-03-06_03%20FString%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5/">03 FString字符串拼接</a>
         </h1>
       
@@ -519,122 +621,6 @@
         
           <div class="more-link">
             <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_02%20TArray%20%E6%B7%BB%E5%8A%A0/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_03%20TArray%20%E6%8F%92%E5%85%A5/">03 TArray 插入</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
-    2024-03-06
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/05-TArray/">05 TArray</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>TArray 插入</h1>
-<h2 id="Insert">Insert</h2>
-        
-          <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_03%20TArray%20%E6%8F%92%E5%85%A5/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_04%20TArray%20%E5%A0%86%E5%8C%96%E6%93%8D%E4%BD%9C/">04 TArray 堆化操作</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-03-05T16:00:00.000Z" itemprop="datePublished">
-    2024-03-06
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/">网课</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/">UE5C++基础</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C-%E5%9F%BA%E7%A1%80/05-TArray/">05 TArray</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>TArray 堆化操作</h1>
-<p>​	将数组堆化，要保证其中元素支持<code>&lt;运算符</code>。</p>
-        
-          <div class="more-link">
-            <a href="/2024/03/06/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E7%BD%91%E8%AF%BE/UE5C++%E5%9F%BA%E7%A1%80/05%20TArray/2024-03-06_04%20TArray%20%E5%A0%86%E5%8C%96%E6%93%8D%E4%BD%9C/#more">Read On »</a>
           </div>
         
       
