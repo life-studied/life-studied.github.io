@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>03 git merge &amp; git rebase | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>03 git merge &amp; git rebase</h1>
+    </header>
+
+    <section>
+      <h1>git merge &amp; git rebase</h1>
+<h2 id="git-merge">git merge</h2>
+<span id="more"></span>
+<p>​	git merge会合并两个分支，并形成一个新的commit在合并分支上，因为合并后数据增加，需要重新计算hash值。新的commit指向两个parent。</p>
+<img src="./assets/image-20240324214306483.png" alt="image-20240324214306483" style="zoom:33%;" />
+<h2 id="git-rebase">git rebase</h2>
+<blockquote>
+<p>git rebase用于精简合并后的分支结构。</p>
+</blockquote>
+<p>​	git rebase同样会合并两个分支，但是是找到两个分支的公共祖先，将别的分支之后所有新的commit先放到公共祖先后，再将自己分支所有新的commit放到后面。</p>
+<img src="./assets/image-20240324213851068.png" alt="image-20240324213851068" style="zoom:33%;" />
+<p>​	注意：这会导致自己分支新的每一个commit重新计算hash值，因为它仅与文件数据有关，而新增了dev分支的内容再次计算hash值，得出的结果自然不同。</p>
+<h3 id="使用">使用</h3>
+<p>对于git rebase的使用，应该<strong>在dev分支进行</strong>（将main分支的更新的部分rebase过来，自己更新的部分补充在后面）。</p>
+<p>然后切换到main分支，merge合并dev分支。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git checkout dev</span><br><span class="line">git rebase main</span><br><span class="line">git checkout main</span><br><span class="line">git merge dev</span><br></pre></td></tr></table></figure>
+<img src="./assets/image-20241105201916470.png" alt="image-20241105201916470" style="zoom: 33%;" />
+<h2 id="参考资料">参考资料</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV11z4y1X79p/">【<em>原理</em>解析】让你完全搞明白<em>Git</em>是如何管理你的代码的</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1VG411F7rB?spm_id_from=333.1245.0.0">五分钟学会git rebase和 git merge的区别</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Vc411S7gv/?spm_id_from=333.337.search-card.all.click"><em>Git</em> merge &amp; <em>rebase</em> 区别和用法</a></p>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

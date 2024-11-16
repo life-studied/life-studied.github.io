@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>05 切片和索引 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>05 切片和索引</h1>
+    </header>
+
+    <section>
+      <h1>切片和索引</h1>
+<p>​	切片和索引用于选择矩阵或向量的多行或多列元素。</p>
+<span id="more"></span>
+<p>[TOC]</p>
+<h2 id="OverView">OverView</h2>
+<p>​	所有的应用都是基于下面的函数。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">DenseBase::<span class="built_in">operator</span>()(<span class="type">const</span> RowIndices&amp;, <span class="type">const</span> ColIndices&amp;)</span><br></pre></td></tr></table></figure>
+<p>​	一般而言，它接受<code>public</code>下面两个函数的任意<code>class</code>对象，即可以与Eigen::Index兼容的任意整数：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">&lt;integral type&gt; <span class="keyword">operator</span>[](&lt;integral type&gt;) <span class="type">const</span>;</span><br><span class="line">&lt;integral type&gt; <span class="built_in">size</span>() <span class="type">const</span>;</span><br></pre></td></tr></table></figure>
+<p>​	特殊的有：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>一个表示行或列数的下标整数。</p>
+</li>
+<li class="lvl-2">
+<p>符号 <code>Eigen::all</code> 按递增顺序表示相应行或列的整套集合。</p>
+</li>
+<li class="lvl-2">
+<p>通过函数<code>Eigen::seq</code>, <code>Eigen::seqN</code>, or <code>Eigen::placeholders::lastN</code> 构造的 <a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/classEigen_1_1ArithmeticSequence.html">ArithmeticSequence</a></p>
+</li>
+<li class="lvl-2">
+<p>任意一维向量/数组，例如：<code>std::vector</code>、<code>std::array</code>、<code>Eigen::Array</code>、<code>Eigen::Vector/RowVector</code>、纯C数组。</p>
+</li>
+</ul>
+<h2 id="Basic-Slicing">Basic Slicing</h2>
+<p>​	通过<code>seq</code>或<code>seqN</code>函数创建在矩阵或向量中均匀分布的一组元素。</p>
+<table>
+<thead>
+<tr>
+<th>function</th>
+<th>description</th>
+<th>example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/namespaceEigen.html#a0c04400203ca9b414e13c9c721399969">seq</a>(firstIdx,lastIdx)</td>
+<td>represents the sequence of integers ranging from to <code>firstIdx``lastIdx</code></td>
+<td><a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/namespaceEigen.html#a0c04400203ca9b414e13c9c721399969">seq</a>(2,5) &lt;=&gt; {2,3,4,5}</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/namespaceEigen.html#a0c04400203ca9b414e13c9c721399969">seq</a>(firstIdx,lastIdx,incr)</td>
+<td>same but using the increment to advance from one index to the next <code>incr</code></td>
+<td><a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/namespaceEigen.html#a0c04400203ca9b414e13c9c721399969">seq</a>(2,8,2) &lt;=&gt; {2,4,6,8}</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/namespaceEigen.html#a3a3c346d2a61d1e8e86e6fb4cf57fbda">seqN</a>(firstIdx,size)</td>
+<td>represents the sequence of integers starting from <code>size``firstIdx</code></td>
+<td><a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/namespaceEigen.html#a3a3c346d2a61d1e8e86e6fb4cf57fbda">seqN</a>(2,5) &lt;=&gt; {2,3,4,5,6}</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/namespaceEigen.html#a3a3c346d2a61d1e8e86e6fb4cf57fbda">seqN</a>(firstIdx,size,incr)</td>
+<td>same but using the increment to advance from one index to the next <code>incr</code></td>
+<td><a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/namespaceEigen.html#a3a3c346d2a61d1e8e86e6fb4cf57fbda">seqN</a>(2,3,3) &lt;=&gt; {2,5,8}</td>
+</tr>
+</tbody>
+</table>
+<p>​	通过切片可以来与block函数等价。第一个参数表示选择的行数，第二个参数表示选择的列数。</p>
+<table>
+<thead>
+<tr>
+<th>Intent</th>
+<th>Code</th>
+<th>Block-API</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bottom-left corner starting at row with columns <code>i``n</code></td>
+<td>A(<a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/namespaceEigen.html#a0c04400203ca9b414e13c9c721399969">seq</a>(i,<a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/group__Core__Module.html#ga66661a473fe06e47e3fd5c591b6ffe8d">last</a>), <a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/namespaceEigen.html#a3a3c346d2a61d1e8e86e6fb4cf57fbda">seqN</a>(0,n))</td>
+<td>A.bottomLeftCorner(A.rows()-i,n)</td>
+</tr>
+<tr>
+<td>Block starting at ,j having rows, and columns <code>i``m``n</code></td>
+<td>A(<a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/namespaceEigen.html#a3a3c346d2a61d1e8e86e6fb4cf57fbda">seqN</a>(i,m), <a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/namespaceEigen.html#a3a3c346d2a61d1e8e86e6fb4cf57fbda">seqN</a>(i,n))</td>
+<td>A.block(i,j,m,n)</td>
+</tr>
+<tr>
+<td>Block starting at ,j0 and ending at ,j1 <code>i0``i1</code></td>
+<td>A(<a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/namespaceEigen.html#a0c04400203ca9b414e13c9c721399969">seq</a>(i0,i1), <a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/namespaceEigen.html#a0c04400203ca9b414e13c9c721399969">seq</a>(j0,j1)</td>
+<td>A.block(i0,j0,i1-i0+1,j1-j0+1)</td>
+</tr>
+<tr>
+<td>Even columns of A</td>
+<td>A(<a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/group__Core__Module.html#ga4abe6022fbef6cda264ef2947a2be1a9">all</a>, <a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/namespaceEigen.html#a0c04400203ca9b414e13c9c721399969">seq</a>(0,<a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/group__Core__Module.html#ga66661a473fe06e47e3fd5c591b6ffe8d">last</a>,2))</td>
+<td></td>
+</tr>
+<tr>
+<td>First odd rows A <code>n</code></td>
+<td>A(<a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/namespaceEigen.html#a3a3c346d2a61d1e8e86e6fb4cf57fbda">seqN</a>(1,n,2), <a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/group__Core__Module.html#ga4abe6022fbef6cda264ef2947a2be1a9">all</a>)</td>
+<td></td>
+</tr>
+<tr>
+<td>The last past one column</td>
+<td>A(<a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/group__Core__Module.html#ga4abe6022fbef6cda264ef2947a2be1a9">all</a>, <a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/group__Core__Module.html#ga66661a473fe06e47e3fd5c591b6ffe8d">last</a>-1)</td>
+<td>A.col(A.cols()-2)</td>
+</tr>
+<tr>
+<td>The middle row</td>
+<td>A(<a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/group__Core__Module.html#ga66661a473fe06e47e3fd5c591b6ffe8d">last</a>/2,<a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/group__Core__Module.html#ga4abe6022fbef6cda264ef2947a2be1a9">all</a>)</td>
+<td>A.row((A.rows()-1)/2)</td>
+</tr>
+<tr>
+<td>Last elements of v starting at i</td>
+<td>v(<a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/namespaceEigen.html#a0c04400203ca9b414e13c9c721399969">seq</a>(i,<a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/group__Core__Module.html#ga66661a473fe06e47e3fd5c591b6ffe8d">last</a>))</td>
+<td>v.tail(v.size()-i)</td>
+</tr>
+<tr>
+<td>Last elements of v <code>n</code></td>
+<td>v(<a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/namespaceEigen.html#a0c04400203ca9b414e13c9c721399969">seq</a>(<a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/group__Core__Module.html#ga66661a473fe06e47e3fd5c591b6ffe8d">last</a>+1-n,<a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/group__Core__Module.html#ga66661a473fe06e47e3fd5c591b6ffe8d">last</a>))</td>
+<td>v.tail(n)</td>
+</tr>
+</tbody>
+</table>
+<p>​	最后数个元素从上述API使用会比较复杂，因此可以使用<code>lastN</code>API来完成它们。</p>
+<table>
+<thead>
+<tr>
+<th>Intent</th>
+<th>Code</th>
+<th>Block-API equivalence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Last elements of v <code>n</code></td>
+<td>v(lastN(n))</td>
+<td>v.tail(n)</td>
+</tr>
+<tr>
+<td>Bottom-right corner of A of size times <code>m``n</code></td>
+<td>v(lastN(m), lastN(n))</td>
+<td>A.bottomRightCorner(m,n)</td>
+</tr>
+<tr>
+<td>Bottom-right corner of A of size times <code>m``n</code></td>
+<td>v(lastN(m), lastN(n))</td>
+<td>A.bottomRightCorner(m,n)</td>
+</tr>
+<tr>
+<td>Last columns taking 1 column over 3 <code>n</code></td>
+<td>A(<a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/group__Core__Module.html#ga4abe6022fbef6cda264ef2947a2be1a9">all</a>, lastN(n,3))</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="编译期size和incr">编译期size和incr</h2>
+<p>​	为了提升性能，如果有需要，可以使用<code>Eigen::fix&lt;val&gt;</code>来指定编译期参数。它可以与<code>Eigen::last</code>联用。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 获取向量倒数第7至倒数第2</span></span><br><span class="line"><span class="built_in">v</span>(<span class="built_in">seq</span>(last-fix&lt;<span class="number">7</span>&gt;, last-fix&lt;<span class="number">2</span>&gt;));</span><br><span class="line"><span class="comment">// same, using seqN</span></span><br><span class="line"><span class="built_in">v</span>(<span class="built_in">seqN</span>(last<span class="number">-7</span>, fix&lt;<span class="number">6</span>&gt;));</span><br><span class="line"><span class="comment">// 奇数列</span></span><br><span class="line"><span class="built_in">A</span>(all, <span class="built_in">seq</span>(<span class="number">0</span>,last,fix&lt;<span class="number">2</span>&gt;));</span><br></pre></td></tr></table></figure>
+<h2 id="逆序seq">逆序seq</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">A</span>(all, <span class="built_in">seq</span>(<span class="number">20</span>, <span class="number">10</span>, fix&lt;<span class="number">-2</span>&gt;));</span><br><span class="line"><span class="built_in">A</span>(<span class="built_in">seqN</span>(last, n, fix&lt;<span class="number">-1</span>&gt;), all);</span><br><span class="line"><span class="built_in">A</span>(<span class="built_in">lastN</span>(n).<span class="built_in">reverse</span>(), all);</span><br></pre></td></tr></table></figure>
+<h2 id="通过下标数组指定行列">通过下标数组指定行列</h2>
+<p>​	可以通过<code>std::vector</code>或者<code>std::array</code>来指定需要的行列。</p>
+<p>​	下面演示了如何通过vector指定列数，提取出需要的列形成一个新矩阵。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::vector&lt;<span class="type">int</span>&gt; ind&#123;<span class="number">4</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">3</span>&#125;;</span><br><span class="line">MatrixXi A = MatrixXi::<span class="built_in">Random</span>(<span class="number">4</span>,<span class="number">6</span>);</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Initial matrix A:\n&quot;</span> &lt;&lt; A &lt;&lt; <span class="string">&quot;\n\n&quot;</span>;</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;A(all,ind):\n&quot;</span> &lt;&lt; <span class="built_in">A</span>(Eigen::placeholders::all,ind) &lt;&lt; <span class="string">&quot;\n\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Initial matrix A:</span></span><br><span class="line"><span class="comment">  7   9  -5  -3   3 -10</span></span><br><span class="line"><span class="comment"> -2  -6   1   0   5  -5</span></span><br><span class="line"><span class="comment">  6  -3   0   9  -8  -8</span></span><br><span class="line"><span class="comment">  6   6   3   9   2   6</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">A(all,ind):</span></span><br><span class="line"><span class="comment">  3  -5 -10 -10  -3</span></span><br><span class="line"><span class="comment">  5   1  -5  -5   0</span></span><br><span class="line"><span class="comment"> -8   0  -8  -8   9</span></span><br><span class="line"><span class="comment">  2   3   6   6   9</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>​	使用<strong>大括号表示的临时数组</strong>也可：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">MatrixXi A = MatrixXi::<span class="built_in">Random</span>(<span class="number">4</span>,<span class="number">6</span>);</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Initial matrix A:\n&quot;</span> &lt;&lt; A &lt;&lt; <span class="string">&quot;\n\n&quot;</span>;</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;A(all,&#123;4,2,5,5,3&#125;):\n&quot;</span> &lt;&lt; <span class="built_in">A</span>(Eigen::placeholders::all,&#123;<span class="number">4</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">3</span>&#125;) &lt;&lt; <span class="string">&quot;\n\n&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>​	或者<strong>表达式数组</strong>的方式：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">ArrayXi <span class="title">ind</span><span class="params">(<span class="number">5</span>)</span></span>; ind&lt;&lt;<span class="number">4</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">3</span>;</span><br><span class="line">MatrixXi A = MatrixXi::<span class="built_in">Random</span>(<span class="number">4</span>,<span class="number">6</span>);</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Initial matrix A:\n&quot;</span> &lt;&lt; A &lt;&lt; <span class="string">&quot;\n\n&quot;</span>;</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;A(all,ind-1):\n&quot;</span> &lt;&lt; <span class="built_in">A</span>(Eigen::placeholders::all,ind<span class="number">-1</span>) &lt;&lt; <span class="string">&quot;\n\n&quot;</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="自定义index-list">自定义index list</h2>
+<p>​	更一般而言，只要对象含有<code>size()</code>方法和<code>operator[]</code>，都可以用来作为输入规则。</p>
+<p>​	下面演示了一个自定义的结构体，当行数或列数下标<code>i</code>小于<code>out_size - in_size</code>时，选择第<code>0</code>个，否则选择下标<code>i - 差值</code>个元素。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">pad</span> &#123;</span><br><span class="line">  <span class="function">Index <span class="title">size</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> out_size; &#125;</span><br><span class="line">  Index <span class="keyword">operator</span>[] (Index i) <span class="type">const</span> &#123; <span class="keyword">return</span> std::<span class="built_in">max</span>&lt;Index&gt;(<span class="number">0</span>,i-(out_size-in_size)); &#125;</span><br><span class="line">  Index in_size, out_size;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">Matrix3i A;</span><br><span class="line">A.<span class="built_in">reshaped</span>() = VectorXi::<span class="built_in">LinSpaced</span>(<span class="number">9</span>,<span class="number">1</span>,<span class="number">9</span>);</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Initial matrix A:\n&quot;</span> &lt;&lt; A &lt;&lt; <span class="string">&quot;\n\n&quot;</span>;</span><br><span class="line"><span class="function">MatrixXi <span class="title">B</span><span class="params">(<span class="number">5</span>,<span class="number">5</span>)</span></span>;</span><br><span class="line">B = <span class="built_in">A</span>(pad&#123;<span class="number">3</span>,<span class="number">5</span>&#125;, pad&#123;<span class="number">3</span>,<span class="number">5</span>&#125;);</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;A(pad&#123;3,N&#125;, pad&#123;3,N&#125;):\n&quot;</span> &lt;&lt; B &lt;&lt; <span class="string">&quot;\n\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Initial matrix A:</span></span><br><span class="line"><span class="comment">1 4 7</span></span><br><span class="line"><span class="comment">2 5 8</span></span><br><span class="line"><span class="comment">3 6 9</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">A(pad&#123;3,N&#125;, pad&#123;3,N&#125;):</span></span><br><span class="line"><span class="comment">1 1 1 4 7</span></span><br><span class="line"><span class="comment">1 1 1 4 7</span></span><br><span class="line"><span class="comment">1 1 1 4 7</span></span><br><span class="line"><span class="comment">2 2 2 5 8</span></span><br><span class="line"><span class="comment">3 3 3 6 9</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

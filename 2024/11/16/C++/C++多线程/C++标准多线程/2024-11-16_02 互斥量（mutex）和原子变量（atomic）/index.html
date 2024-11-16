@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>02 互斥量（mutex）和原子变量（atomic） | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>02 互斥量（mutex）和原子变量（atomic）</h1>
+    </header>
+
+    <section>
+      <h2 id="02-互斥量（mutex）和原子变量（atomic）">02 互斥量（mutex）和原子变量（atomic）</h2>
+<p>[TOC]</p>
+<span id="more"></span>
+<p>​	关键字：thread;mutex;lock_guard;unique_lock;atomic</p>
+<h3 id="1-问题引入">1.问题引入</h3>
+<p>​	下面的代码会导致结果不为0。</p>
+<p>​	原因：存在竞态条件，在读写同一变量时没有加锁。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> globalVariable = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">task1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i  = <span class="number">0</span>;i &lt; <span class="number">1000000</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        globalVariable ++;</span><br><span class="line">        globalVariable --;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function">std::thread <span class="title">t1</span><span class="params">(task1)</span></span>;</span><br><span class="line">    <span class="function">std::thread <span class="title">t2</span><span class="params">(task1)</span></span>;</span><br><span class="line">    </span><br><span class="line">    t1.<span class="built_in">join</span>();</span><br><span class="line">    t2.<span class="built_in">join</span>();</span><br><span class="line">    </span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;current value is &quot;</span> &lt;&lt; globalVariable;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-方案1：使用lock来管理临界区">2. 方案1：使用lock来管理临界区</h3>
+<h4 id="2-1-用mutex解决问题">2.1 用mutex解决问题</h4>
+<p>​	使用互斥量<code>mutex</code>这个原语能够对代码段进行上锁。解决该简单问题。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mutex&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::mutex mtx;</span><br><span class="line"><span class="type">int</span> globalVariable = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">task1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i  = <span class="number">0</span>;i &lt; <span class="number">1000000</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        mtx.<span class="built_in">lock</span>();</span><br><span class="line">        globalVariable ++;</span><br><span class="line">        globalVariable --;</span><br><span class="line">        mtx.<span class="built_in">unlock</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function">std::thread <span class="title">t1</span><span class="params">(task1)</span></span>;</span><br><span class="line">    <span class="function">std::thread <span class="title">t2</span><span class="params">(task1)</span></span>;</span><br><span class="line">    </span><br><span class="line">    t1.<span class="built_in">join</span>();</span><br><span class="line">    t2.<span class="built_in">join</span>();</span><br><span class="line">    </span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;current value is &quot;</span> &lt;&lt; globalVariable;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-新问题与解决：代码中途return或throw（std-lock-guard-std-unique-lock）">2.2 新问题与解决：代码中途return或throw（std::lock_guard/std::unique_lock）</h4>
+<h5 id="2-2-1-std-lock-guard">2.2.1 std::lock_guard</h5>
+<p>​	对于代码在解锁前<code>return</code>或<code>throw</code>，解锁操作就不能很好的执行。</p>
+<p>​	解决方法：使用<code>std::lock_guard&lt;std::mutex&gt;</code>对象来自动管理<code>mutex</code>对象的生命周期。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mutex&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::mutex mtx;</span><br><span class="line"><span class="type">int</span> globalVariable = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">task1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i  = <span class="number">0</span>;i &lt; <span class="number">1000000</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(mtx)</span></span>;		<span class="comment">//自动管理锁</span></span><br><span class="line">        globalVariable ++;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//if(...)</span></span><br><span class="line">        <span class="comment">//throw ...</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//if(...)</span></span><br><span class="line">        <span class="comment">//return ...</span></span><br><span class="line">        </span><br><span class="line">        globalVariable --;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function">std::thread <span class="title">t1</span><span class="params">(task1)</span></span>;</span><br><span class="line">    <span class="function">std::thread <span class="title">t2</span><span class="params">(task1)</span></span>;</span><br><span class="line">    </span><br><span class="line">    t1.<span class="built_in">join</span>();</span><br><span class="line">    t2.<span class="built_in">join</span>();</span><br><span class="line">    </span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;current value is &quot;</span> &lt;&lt; globalVariable;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="2-2-2-unique-lock">2.2.2 unique_lock</h5>
+<p>​	<code>std::guard_lock</code>自带的功能仅有创建和析构，对加锁部分的粒度在当前整个作用域，不是很灵活。</p>
+<p>​	因此可以使用<code>std::unique_lock</code>中的<code>unlock</code>函数来为临界区设置更细致的粒度。（还有其它函数来使用）</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mutex&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::mutex mtx;</span><br><span class="line"><span class="type">int</span> globalVariable = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">task1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000000</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function">std::unique_lock&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(mtx)</span></span>;		<span class="comment">//自动管理锁</span></span><br><span class="line">        globalVariable++;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//if(...)</span></span><br><span class="line">        <span class="comment">//throw ...</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//if(...)</span></span><br><span class="line">        <span class="comment">//return ...</span></span><br><span class="line"></span><br><span class="line">        lock.<span class="built_in">unlock</span>();          <span class="comment">//减小锁的粒度</span></span><br><span class="line">        globalVariable--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">std::thread <span class="title">t1</span><span class="params">(task1)</span></span>;</span><br><span class="line">    <span class="function">std::thread <span class="title">t2</span><span class="params">(task1)</span></span>;</span><br><span class="line"></span><br><span class="line">    t1.<span class="built_in">join</span>();</span><br><span class="line">    t2.<span class="built_in">join</span>();</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;current value is &quot;</span> &lt;&lt; globalVariable;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-3-新问题与解决：因为上锁顺序导致的死锁（std-lock）">2.3 新问题与解决：因为上锁顺序导致的死锁（std::lock）</h4>
+<p>​	问题：</p>
+<ol>
+<li class="lvl-3">
+<p>存在两个锁mtx1和mtx2。</p>
+</li>
+<li class="lvl-3">
+<p>线程1先上锁mtx1，再上锁mtx2；线程2相反。导致死锁发生。</p>
+</li>
+</ol>
+<p>​	解决方法：</p>
+<pre><code>	1. 两个线程都按顺序进行分别上锁；
+	2. 或者**推荐使用**`std::lock`对两把锁直接进行上锁。而不是分开上锁。
+</code></pre>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mutex&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::mutex mtx1;</span><br><span class="line">std::mutex mtx2;</span><br><span class="line"><span class="type">int</span> globalVariable = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">task1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i  = <span class="number">0</span>;i &lt; <span class="number">1000000</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        std::<span class="built_in">lock</span>(mtx1, mtx2);</span><br><span class="line">        globalVariable ++;</span><br><span class="line">        globalVariable --;</span><br><span class="line">        mtx1.<span class="built_in">unlock</span>();</span><br><span class="line">        mtx2.<span class="built_in">unlock</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">task2</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i  = <span class="number">0</span>;i &lt; <span class="number">1000000</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        std::<span class="built_in">lock</span>(mtx1, mtx2);			<span class="comment">//传入两个锁参数，直接全部上锁</span></span><br><span class="line">        globalVariable ++;</span><br><span class="line">        globalVariable --;</span><br><span class="line">        mtx1.<span class="built_in">unlock</span>();</span><br><span class="line">        mtx2.<span class="built_in">unlock</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function">std::thread <span class="title">t1</span><span class="params">(task1)</span></span>;</span><br><span class="line">    <span class="function">std::thread <span class="title">t2</span><span class="params">(task2)</span></span>;</span><br><span class="line">    </span><br><span class="line">    t1.<span class="built_in">join</span>();</span><br><span class="line">    t2.<span class="built_in">join</span>();</span><br><span class="line">    </span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;current value is &quot;</span> &lt;&lt; globalVariable;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-方案2：使用atomic设置原子变量">3. 方案2：使用atomic设置原子变量</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;atomic&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::atomic&lt;<span class="type">int</span>&gt; globalVariable = <span class="number">0</span>;		<span class="comment">//使用atomic模板化一个原子变量</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">task1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000000</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        globalVariable++;					<span class="comment">//当成int使用即可</span></span><br><span class="line">        globalVariable--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">std::thread <span class="title">t1</span><span class="params">(task1)</span></span>;</span><br><span class="line">    <span class="function">std::thread <span class="title">t2</span><span class="params">(task1)</span></span>;</span><br><span class="line"></span><br><span class="line">    t1.<span class="built_in">join</span>();</span><br><span class="line">    t2.<span class="built_in">join</span>();</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;current value is &quot;</span> &lt;&lt; globalVariable;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_03%20%E9%83%A8%E5%88%86%E5%AD%98%E5%82%A8%E5%AE%9A%E5%BA%8F%E6%A8%A1%E5%9E%8B/">03 部分存储定序模型</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory-order/">内存模型与memory_order</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>部分存储定序模型</h1>
+<p>TSO在store buffer的情况下已经带来了不小的性能提升，但是芯片设计人员并不满足于这一点，于是他们在TSO模型的基础上继续放宽内存访问限制，允许CPU以非FIFO来处理store buffer缓冲区中的指令。</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_03%20%E9%83%A8%E5%88%86%E5%AD%98%E5%82%A8%E5%AE%9A%E5%BA%8F%E6%A8%A1%E5%9E%8B/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_04%20%E5%AE%BD%E6%9D%BE%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/">04 宽松存储模型</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory-order/">内存模型与memory_order</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>宽松存储模型</h1>
+<p>为了获取更多的性能，在PSO的模型的基础上不仅允许store-load、store-store乱序，还进一步允许load-load乱序和load-store乱序。</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_04%20%E5%AE%BD%E6%9D%BE%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_05%20memory_order_release%20&amp;%20memory_order_acquire/">05 memory_order_release &amp; memory_order_acquire</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory-order/">内存模型与memory_order</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>memory_order_release &amp; memory_order_acquire</h1>
+<h2 id="1-memory-order-release保证写不后">1. memory_order_release保证写不后</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_05%20memory_order_release%20&%20memory_order_acquire/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_06%20memory_order_consume/">06 memory_order_consume</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory-order/">内存模型与memory_order</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>memory_order_consume</h1>
+<p>std::memory_order_consume的语义是，所有后续对本原子类型的操作，必须在本操作完成之后才可以执行。简单点就是不得前。但是这个操作只能用来对读进行优化。也就是说release线程是不能使用这个的。也就是说，只能对读依赖的一方进行优化.</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_06%20memory_order_consume/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_07%20memory_order_seq_cst/">07 memory_order_seq_cst</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory-order/">内存模型与memory_order</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>memory_order_seq_cst</h1>
+<p><code>std::memory_order_seq_cst</code>表示最强约束。</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_07%20memory_order_seq_cst/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_08%20memory%20order%E4%B8%8E%E4%B8%8B%E5%B1%82%E7%9A%84%E8%81%94%E7%B3%BB/">08 memory order与下层的联系</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory-order/">内存模型与memory_order</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>与下层的联系</h1>
+<h2 id="分层协议模型">分层协议模型</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_08%20memory%20order%E4%B8%8E%E4%B8%8B%E5%B1%82%E7%9A%84%E8%81%94%E7%B3%BB/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/%E5%8A%A0%E5%AF%86%E4%B8%8E%E8%A7%A3%E5%AF%86/2024-11-16_rsa%E7%AE%97%E6%B3%95/">rsa算法</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E5%8A%A0%E5%AF%86%E4%B8%8E%E8%A7%A3%E5%AF%86/">加密与解密</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>rsa算法</h1>
+<h2 id="加密与解密过程">加密与解密过程</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/%E5%8A%A0%E5%AF%86%E4%B8%8E%E8%A7%A3%E5%AF%86/2024-11-16_rsa%E7%AE%97%E6%B3%95/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/%E6%A0%87%E5%87%86%E5%BA%93/2024-11-16_find_if%EF%BC%88+advance%EF%BC%89/">find_if（+advance）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>find_if（+advance）</h1>
+<p>​	可以配合<code>lambda</code>表达式和<code>std::advance</code>使用。</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/%E6%A0%87%E5%87%86%E5%BA%93/2024-11-16_find_if%EF%BC%88+advance%EF%BC%89/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/%E6%A0%87%E5%87%86%E5%BA%93/2024-11-16_random/">random</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>random</h1>
+<h2 id="1-简介">1.简介</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/%E6%A0%87%E5%87%86%E5%BA%93/2024-11-16_random/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/%E6%A0%87%E5%87%86%E5%BA%93/2024-11-16_regex/">regex</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>regex</h1>
+<h2 id="1-简介">1. 简介</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/%E6%A0%87%E5%87%86%E5%BA%93/2024-11-16_regex/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/33/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="page-number" href="/page/33/">33</a><span class="page-number current">34</span><a class="page-number" href="/page/35/">35</a><a class="page-number" href="/page/36/">36</a><span class="space">&hellip;</span><a class="page-number" href="/page/91/">91</a><a class="extend next" rel="next" href="/page/35/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

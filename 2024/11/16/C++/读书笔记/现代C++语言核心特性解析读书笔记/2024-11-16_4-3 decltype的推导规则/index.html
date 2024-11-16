@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>4-3 decltype的推导规则 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>4-3 decltype的推导规则</h1>
+    </header>
+
+    <section>
+      <h2 id="4-3-decltype的推导规则">4.3 decltype的推导规则</h2>
+<p>对于<code>decltype(e)</code>（其中e的类型为T）的推导规则有5条。</p>
+<span id="more"></span>
+<ol>
+<li class="lvl-3">
+<p>如果e是一个未加括号的标识表达式或者未加括号的类成员访问，则推导出的类型是e的类型T。</p>
+</li>
+<li class="lvl-3">
+<p>如果e是一个函数调用或者仿函数调用，那么推导出的类型是其返回值类型。</p>
+</li>
+<li class="lvl-3">
+<p>如果e是一个类型为T的左值，则推导类型是T&amp;。</p>
+</li>
+<li class="lvl-3">
+<p>如果e是一个类型为T的将亡值，则推导出的类型是T&amp;&amp;。</p>
+</li>
+<li class="lvl-3">
+<p>除去以上情况，推导出的类型为T。</p>
+</li>
+</ol>
+<p>下面是例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//1</span><br><span class="line">int i;</span><br><span class="line">struct A</span><br><span class="line">&#123;</span><br><span class="line">	double x;</span><br><span class="line">&#125;;</span><br><span class="line">const A* a = new A();</span><br><span class="line"></span><br><span class="line">decltype(i);		//标识符：int</span><br><span class="line">decltype(a-&gt;x);		//标识符：double</span><br><span class="line">decltype((a-&gt;x));	//3:左值表达式：const double&amp;</span><br><span class="line"></span><br><span class="line">//2</span><br><span class="line">const int&amp;&amp; foo();</span><br><span class="line">class B</span><br><span class="line">&#123;</span><br><span class="line">    bool operator()() &#123; return true; &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">decltype(foo());		//const int&amp;&amp;</span><br><span class="line">decltype(B());			//bool</span><br><span class="line"></span><br><span class="line">//3</span><br><span class="line">//见1</span><br><span class="line"></span><br><span class="line">//4</span><br><span class="line">decltype(static_cast&lt;int&amp;&amp;&gt;(1)) b;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

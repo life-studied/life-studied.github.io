@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Nacos学习笔记 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>Nacos学习笔记</h1>
+    </header>
+
+    <section>
+      <h1>Nacos学习笔记</h1>
+<h2 id="1-为什么需要Nacos">1.为什么需要Nacos</h2>
+<span id="more"></span>
+<p>​	Nacos是一个服务注册中心和配置中心。什么是服务注册中心详见：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45203607/article/details/121886232">微服务介绍</a></p>
+<p>​	配置中心的好处在于，如果在代码中直接写死其它服务的地址，如果那个服务挂掉就不方便更改。但是使用Nacos可以动态配置服务地址等配置信息，保证能动态获取到服务的地址等作用。</p>
+<h2 id="2-Nacos常见功能">2.Nacos常见功能</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>注册服务</p>
+</li>
+<li class="lvl-2">
+<p>反注册服务（下线服务）</p>
+</li>
+<li class="lvl-2">
+<p>服务发现</p>
+</li>
+<li class="lvl-2">
+<p>心跳机制</p>
+</li>
+</ul>
+<p>实现原理详见：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34700865/article/details/118760601">Nacos服务注册中心原理总结</a></p>
+<h2 id="3-C-Nacos-SDK及教程">3.C++ Nacos SDK及教程</h2>
+<p>见Nacos的官方Github：<a target="_blank" rel="noopener" href="https://github.com/nacos-group/nacos-sdk-cpp/blob/master/README_zh_CN.md">nacos-sdk-cpp/README_zh_CN.md at master · nacos-group/nacos-sdk-cpp (github.com)</a></p>
+<h2 id="4-项目封装的Nacos接口（NacosClient-h）">4.项目封装的Nacos接口（NacosClient.h）</h2>
+<p>​	注意：Nacos不支持Windows。因此在服务从Windows开发转移到Linux运行时，Nacos会需要特别关注可能出现的问题。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 定义一个Nacos客户端，用于封装Nacos常用操作</span></span><br><span class="line"><span class="comment"> * 注意：Nacos目前不支持Windows版本，</span></span><br><span class="line"><span class="comment"> * 所以在Windows下面使用Nacos配置其实就是读取本地配置文件，并且不支持Windows服务注册功能</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">NacosClient</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="comment">//服务器地址</span></span><br><span class="line">	string m_address;</span><br><span class="line">	<span class="comment">//命名空间</span></span><br><span class="line">	string m_namespace;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> LINUX</span></span><br><span class="line">	<span class="comment">//当前命名服务</span></span><br><span class="line">	NamingService* namingSvc;</span><br><span class="line">	<span class="comment">//注册实例ID</span></span><br><span class="line">	std::string instanceId;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">//************************************</span></span><br><span class="line">	<span class="comment">// Method:    NacosClient</span></span><br><span class="line">	<span class="comment">// FullName:  NacosClient::NacosClient</span></span><br><span class="line">	<span class="comment">// Access:    public </span></span><br><span class="line">	<span class="comment">// Returns:   </span></span><br><span class="line">	<span class="comment">// Qualifier: 构造初始化</span></span><br><span class="line">	<span class="comment">// Parameter: const string&amp; address 服务器地址，如：39.99.114.126:8848</span></span><br><span class="line">	<span class="comment">// Parameter: const string&amp; namespaceId 命名空间，如：1653f775-4782-46ad-9cd2-b60155a574c6</span></span><br><span class="line">	<span class="comment">//************************************</span></span><br><span class="line">	<span class="built_in">NacosClient</span>(<span class="type">const</span> string&amp; address, <span class="type">const</span> string&amp; namespaceId);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 析构释放资源</span></span><br><span class="line">	~<span class="built_in">NacosClient</span>();</span><br><span class="line"></span><br><span class="line">	<span class="comment">//************************************</span></span><br><span class="line">	<span class="comment">// Method:    getConfig</span></span><br><span class="line">	<span class="comment">// FullName:  NacosClient::getConfig</span></span><br><span class="line">	<span class="comment">// Access:    public </span></span><br><span class="line">	<span class="comment">// Returns:   std::string</span></span><br><span class="line">	<span class="comment">// Qualifier: 获取yaml配置</span></span><br><span class="line">	<span class="comment">// Parameter: const string&amp; dataId 配置ID</span></span><br><span class="line">	<span class="comment">// Parameter: const string&amp; groupName 分组名称，默认值：DEFAULT_GROUP</span></span><br><span class="line">	<span class="comment">//************************************</span></span><br><span class="line">	<span class="function">YAML::Node <span class="title">getConfig</span><span class="params">(<span class="type">const</span> string&amp; dataId, <span class="type">const</span> string&amp; groupName = <span class="string">&quot;DEFAULT_GROUP&quot;</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//************************************</span></span><br><span class="line">	<span class="comment">// Method:    getConfigText</span></span><br><span class="line">	<span class="comment">// FullName:  NacosClient::getConfigText</span></span><br><span class="line">	<span class="comment">// Access:    public </span></span><br><span class="line">	<span class="comment">// Returns:   std::string</span></span><br><span class="line">	<span class="comment">// Qualifier: 获取文本配置</span></span><br><span class="line">	<span class="comment">// Parameter: const string &amp; dataId 配置ID</span></span><br><span class="line">	<span class="comment">// Parameter: const string &amp; groupName 分组名称，默认值：DEFAULT_GROUP</span></span><br><span class="line">	<span class="comment">//************************************</span></span><br><span class="line">	<span class="function">std::string <span class="title">getConfigText</span><span class="params">(<span class="type">const</span> string&amp; dataId, <span class="type">const</span> string&amp; groupName = <span class="string">&quot;DEFAULT_GROUP&quot;</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//************************************</span></span><br><span class="line">	<span class="comment">// Method:    registerInstance</span></span><br><span class="line">	<span class="comment">// FullName:  NacosClient::registerInstance</span></span><br><span class="line">	<span class="comment">// Access:    public </span></span><br><span class="line">	<span class="comment">// Returns:   bool 注册成功返回true</span></span><br><span class="line">	<span class="comment">// Qualifier: 注册服务</span></span><br><span class="line">	<span class="comment">// Parameter: const string &amp; ip 注册服务IP地址</span></span><br><span class="line">	<span class="comment">// Parameter: int port 注册服务端口</span></span><br><span class="line">	<span class="comment">// Parameter: const string &amp; serviceName 注册服务名称</span></span><br><span class="line">	<span class="comment">// Parameter: const string &amp; groupName 分组名称，默认值：DEFAULT_GROUP</span></span><br><span class="line">	<span class="comment">// Parameter: const string &amp; clusterName 集群名称，默认值：DEFAULT</span></span><br><span class="line">	<span class="comment">//************************************</span></span><br><span class="line">	<span class="function"><span class="type">bool</span> <span class="title">registerInstance</span><span class="params">(<span class="type">const</span> string&amp; ip, <span class="type">int</span> port, <span class="type">const</span> string&amp; serviceName, <span class="type">const</span> string&amp; groupName = <span class="string">&quot;DEFAULT_GROUP&quot;</span>, <span class="type">const</span> string&amp; clusterName = <span class="string">&quot;DEFAULT&quot;</span>)</span></span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//************************************</span></span><br><span class="line">	<span class="comment">// Method:    deregisterInstance</span></span><br><span class="line">	<span class="comment">// FullName:  NacosClient::deregisterInstance</span></span><br><span class="line">	<span class="comment">// Access:    public </span></span><br><span class="line">	<span class="comment">// Returns:   bool 反注册成功返回true</span></span><br><span class="line">	<span class="comment">// Qualifier: 反注册服务</span></span><br><span class="line">	<span class="comment">// Parameter: const string &amp; ip 注册服务IP地址</span></span><br><span class="line">	<span class="comment">// Parameter: int port 注册服务端口</span></span><br><span class="line">	<span class="comment">// Parameter: const string &amp; serviceName 注册服务名称</span></span><br><span class="line">	<span class="comment">// Parameter: const string &amp; groupName 分组名称，默认值：DEFAULT_GROUP</span></span><br><span class="line">	<span class="comment">// Parameter: const string &amp; clusterName 集群名称，默认值：DEFAULT</span></span><br><span class="line">	<span class="comment">//************************************</span></span><br><span class="line">	<span class="function"><span class="type">bool</span> <span class="title">deregisterInstance</span><span class="params">(<span class="type">const</span> string&amp; ip, <span class="type">int</span> port, <span class="type">const</span> string&amp; serviceName, <span class="type">const</span> string&amp; groupName = <span class="string">&quot;DEFAULT_GROUP&quot;</span>, <span class="type">const</span> string&amp; clusterName = <span class="string">&quot;DEFAULT&quot;</span>)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// _NACOSCLIENT_H_</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

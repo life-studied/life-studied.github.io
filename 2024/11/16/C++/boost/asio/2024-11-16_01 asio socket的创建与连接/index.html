@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>01 asio socket的创建与连接 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>01 asio socket的创建与连接</h1>
+    </header>
+
+    <section>
+      <h1>asio socket的创建与连接</h1>
+<h2 id="1-网络编程的基本流程">1. 网络编程的基本流程</h2>
+<span id="more"></span>
+<p>​	asio是基于该基本流程进行封装的lib。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>服务端：</p>
+<p>1）socket——创建socket对象。</p>
+<p>2）bind——绑定本机ip+port。</p>
+<p>3）listen——监听来电，若在监听到来电，则建立起连接。</p>
+<p>4）accept——再创建一个socket对象给其收发消息。原因是现实中服务端都是面对多个客户端，那么为了区分各个客户端，则每个客户端都需再分配一个socket对象进行收发消息。</p>
+<p>5）read、write——就是收发消息了。</p>
+</li>
+<li class="lvl-2">
+<p>客户端：</p>
+<p>1）socket——创建socket对象。</p>
+<p>2）connect——根据服务端ip+port，发起连接请求。</p>
+<p>3）write、read——建立连接后，就可发收消息了。</p>
+</li>
+</ul>
+<img src="./assets/image-20240410120756390.png" alt="image-20240410120756390" style="zoom: 50%;" />
+<h2 id="2-基础：endpoint创建">2. 基础：endpoint创建</h2>
+<p>​	创建的endpoint仅仅是存储了IP+port的数据对象，抽象意义上代表了一个通信端点。</p>
+<h3 id="high-level">high-level</h3>
+<p>​	后续是创建endpoint的理论详细步骤，但是实践中常常将其写作一个临时对象传递使用：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">sock.<span class="built_in">connect</span>(ip::tcp::<span class="built_in">endpoint</span>(ip::address::<span class="built_in">from_string</span>(<span class="string">&quot;127.0.0.1&quot;</span>),<span class="number">6688</span>));	<span class="comment">// client</span></span><br><span class="line"></span><br><span class="line"><span class="function">tcp::acceptor <span class="title">acptr</span><span class="params">(io, tcp::endpoint(tcp::v4(), <span class="number">6688</span>))</span></span>;	<span class="comment">//server</span></span><br></pre></td></tr></table></figure>
+<h3 id="客户端">客户端</h3>
+<p>​	通过指定对方（即服务器）的IP+Port构建一个用于通信的endpoint.</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">client_end_point</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Step 1. Assume that the client application has already </span></span><br><span class="line">    <span class="comment">// obtained the IP-address and the protocol port number.</span></span><br><span class="line">    std::string raw_ip_address = <span class="string">&quot;127.0.0.1&quot;</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">short</span> port_num = <span class="number">3333</span>;</span><br><span class="line">    <span class="comment">// Used to store information about error that happens</span></span><br><span class="line">    <span class="comment">// while parsing the raw IP-address.</span></span><br><span class="line">    boost::system::error_code ec;</span><br><span class="line">    <span class="comment">// Step 2. Using IP protocol version independent address</span></span><br><span class="line">    <span class="comment">// representation.</span></span><br><span class="line">    asio::ip::address ip_address =</span><br><span class="line">        asio::ip::address::<span class="built_in">from_string</span>(raw_ip_address, ec);</span><br><span class="line">    <span class="keyword">if</span> (ec.<span class="built_in">value</span>() != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// Provided IP address is invalid. Breaking execution.</span></span><br><span class="line">        std::cout</span><br><span class="line">            &lt;&lt; <span class="string">&quot;Failed to parse the IP address. Error code = &quot;</span></span><br><span class="line">            &lt;&lt; ec.<span class="built_in">value</span>() &lt;&lt; <span class="string">&quot;. Message: &quot;</span> &lt;&lt; ec.<span class="built_in">message</span>();</span><br><span class="line">        <span class="keyword">return</span> ec.<span class="built_in">value</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Step 3.</span></span><br><span class="line">    asio::ip::<span class="function">tcp::endpoint <span class="title">ep</span><span class="params">(ip_address, port_num)</span></span>;</span><br><span class="line">    <span class="comment">// Step 4. The endpoint is ready and can be used to specify a </span></span><br><span class="line">    <span class="comment">// particular server in the network the client wants to </span></span><br><span class="line">    <span class="comment">// communicate with.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="服务端">服务端</h3>
+<p>​	创建一个用于接受任意IP的endpoint，需要指定监听的端口。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">server_end_point</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// Step 1. Here we assume that the server application has</span></span><br><span class="line">    <span class="comment">//already obtained the protocol port number.</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">short</span> port_num = <span class="number">3333</span>;</span><br><span class="line">    <span class="comment">// Step 2. Create special object of asio::ip::address class</span></span><br><span class="line">    <span class="comment">// that specifies all IP-addresses available on the host. Note</span></span><br><span class="line">    <span class="comment">// that here we assume that server works over IPv4 protocol.</span></span><br><span class="line">    asio::ip::address ip_address = asio::ip::address_v4::<span class="built_in">any</span>(); 	<span class="comment">//asio::ip::address_v6::any()也可</span></span><br><span class="line">    <span class="comment">// Step 3.</span></span><br><span class="line">    asio::ip::<span class="function">tcp::endpoint <span class="title">ep</span><span class="params">(ip_address, port_num)</span></span>;</span><br><span class="line">    <span class="comment">// Step 4. The endpoint is created and can be used to </span></span><br><span class="line">    <span class="comment">// specify the IP addresses and a port number on which </span></span><br><span class="line">    <span class="comment">// the server application wants to listen for incoming </span></span><br><span class="line">    <span class="comment">// connections.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-基础：socket创建-使用">3. 基础：socket创建 &amp; 使用</h2>
+<p>​	socket是用于网络通信的基本对象，用于connect/read/write。</p>
+<h3 id="客户端-2">客户端</h3>
+<p>​	对于客户端而言，创建好socket后，打开socket然后连接对应的服务器endpoint即可。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span>  <span class="title">connect_to_end</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Step 1. Assume that the client application has already</span></span><br><span class="line">            <span class="comment">// obtained the IP address and protocol port number of the</span></span><br><span class="line">            <span class="comment">// target server.</span></span><br><span class="line">    std::string raw_ip_address = <span class="string">&quot;127.0.0.1&quot;</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">short</span> port_num = <span class="number">3333</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// Step 2. Creating an endpoint designating </span></span><br><span class="line">        <span class="comment">// a target server application.</span></span><br><span class="line">        asio::ip::<span class="function">tcp::endpoint</span></span><br><span class="line"><span class="function">            <span class="title">ep</span><span class="params">(asio::ip::address::from_string(raw_ip_address),</span></span></span><br><span class="line"><span class="params"><span class="function">                port_num)</span></span>;</span><br><span class="line">        asio::io_context ios;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Step 3. Creating and opening a socket.</span></span><br><span class="line">        asio::ip::<span class="function">tcp::socket <span class="title">sock</span><span class="params">(ios, ep.protocol())</span></span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Step 4. Connecting a socket.</span></span><br><span class="line">        sock.<span class="built_in">connect</span>(ep);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Overloads of asio::ip::address::from_string() and </span></span><br><span class="line">    <span class="comment">// asio::ip::tcp::socket::connect() used here throw</span></span><br><span class="line">    <span class="comment">// exceptions in case of error condition.</span></span><br><span class="line">    <span class="built_in">catch</span> (system::system_error&amp; e) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Error occured! Error code = &quot;</span> &lt;&lt; e.<span class="built_in">code</span>()</span><br><span class="line">            &lt;&lt; <span class="string">&quot;. Message: &quot;</span> &lt;&lt; e.<span class="built_in">what</span>();</span><br><span class="line">        <span class="keyword">return</span> e.<span class="built_in">code</span>().<span class="built_in">value</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="服务器">服务器</h3>
+<p>​	对于服务器而言，socket的作用是监听对应的port，接受客户端的连接，然后创建一个新的socket负责这个连接。</p>
+<p>​	监听的socket在asio中有一个特定的对象：<code>asio::ip::tcp::acceptor</code>，其内部封装了一个socket。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">accept_new_connection</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// The size of the queue containing the pending connection</span></span><br><span class="line">            <span class="comment">// requests.</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> BACKLOG_SIZE = <span class="number">30</span>;		<span class="comment">// tcp缓存的连接数</span></span><br><span class="line">    <span class="comment">// Step 1. Here we assume that the server application has</span></span><br><span class="line">    <span class="comment">// already obtained the protocol port number.</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">short</span> port_num = <span class="number">3333</span>;</span><br><span class="line">    <span class="comment">// Step 2. Creating a server endpoint.</span></span><br><span class="line">    asio::ip::<span class="function">tcp::endpoint <span class="title">ep</span><span class="params">(asio::ip::address_v4::any(),</span></span></span><br><span class="line"><span class="params"><span class="function">        port_num)</span></span>;</span><br><span class="line">    asio::io_context  ios;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// Step 3. Instantiating and opening an acceptor socket.</span></span><br><span class="line">        asio::ip::<span class="function">tcp::acceptor <span class="title">acceptor</span><span class="params">(ios, ep.protocol())</span></span>;	<span class="comment">// 创建的同时open了，相当于</span></span><br><span class="line">        														<span class="comment">// asio::ip::tcp::acceptor acceptor(ios);</span></span><br><span class="line">        														<span class="comment">// acceptor.open(ep.protocol(), ec);</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Step 4. Binding the acceptor socket to the </span></span><br><span class="line">        <span class="comment">// server endpint.</span></span><br><span class="line">        acceptor.<span class="built_in">bind</span>(ep);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Step 5. Starting to listen for incoming connection</span></span><br><span class="line">        <span class="comment">// requests.</span></span><br><span class="line">        acceptor.<span class="built_in">listen</span>(BACKLOG_SIZE);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Step 6. Creating an active socket.</span></span><br><span class="line">        asio::ip::<span class="function">tcp::socket <span class="title">sock</span><span class="params">(ios)</span></span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Step 7. Processing the next connection request and </span></span><br><span class="line">        <span class="comment">// connecting the active socket to the client.</span></span><br><span class="line">        acceptor.<span class="built_in">accept</span>(sock);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (system::system_error&amp; e) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Error occured! Error code = &quot;</span> &lt;&lt; e.<span class="built_in">code</span>()</span><br><span class="line">            &lt;&lt; <span class="string">&quot;. Message: &quot;</span> &lt;&lt; e.<span class="built_in">what</span>();</span><br><span class="line">        <span class="keyword">return</span> e.<span class="built_in">code</span>().<span class="built_in">value</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="补充：通过域名解析的方式连接">补充：通过域名解析的方式连接</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">dns_connect_to_end</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::string host = <span class="string">&quot;example.com&quot;</span>;</span><br><span class="line">    std::string port_num = <span class="number">3333</span>;</span><br><span class="line">    asio::io_context ioc;</span><br><span class="line">    asio::ip::tcp::<span class="function">resolver::query <span class="title">rq</span><span class="params">(host, port_num, asio::ip::tcp::resolver::query::numeric_service)</span></span>;</span><br><span class="line">    asio::ip::<span class="function">tcp::resolver <span class="title">r</span><span class="params">(ioc)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        asio::ip::tcp::resolver::iterator it = r.<span class="built_in">resolve</span>(rq);</span><br><span class="line">        asio::ip::<span class="function">tcp::socket <span class="title">s</span><span class="params">(ioc)</span></span>;</span><br><span class="line">        asio::<span class="built_in">connect</span>(s, it);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(system::system_error&amp; e)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Error occured!Error Code=&quot;</span> &lt;&lt; e.<span class="built_in">code</span>() &lt;&lt; <span class="string">&quot;.Message:&quot;</span> &lt;&lt; e.<span class="built_in">what</span>();</span><br><span class="line">        <span class="keyword">return</span> e.<span class="built_in">code</span>().<span class="built_in">value</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-基础：buffer">4. 基础：buffer</h2>
+<h3 id="概念说明">概念说明</h3>
+<p>​	任何网络库都有提供buffer的数据结构，所谓buffer就是接收和发送数据时缓存数据的结构。</p>
+<p>​	<code>boost::asio</code>提供了<code>asio::mutable_buffer</code> 和 <code>asio::const_buffer</code>这两个结构，他们是一段连续的空间，首字节存储了后续数据的长度。</p>
+<p>​	asio::mutable_buffer用于写服务，asio::const_buffer用于读服务。但是这两个结构都没有被asio的api直接使用。</p>
+<p>​	对于提供给api的buffer参数，asio提出了<code>MutableBufferSequence</code>和<code>ConstBufferSequence</code>概念，他们是由多个<code>asio::mutable_buffer</code>和<code>asio::const_buffer</code>组成的。</p>
+<p>​	上述的两个Sequence的结构类似于<code>std::vector&lt;asio::mutable_buffer&gt;</code>：</p>
+<img src="https://cdn.llfc.club/1676257797218.jpg" alt="https://cdn.llfc.club/1676257797218.jpg" style="zoom: 67%;" />
+<p>​	也就是说boost::asio为了节省空间，将一部分连续的空间组合起来，作为参数交给api使用。</p>
+<h3 id="实际使用">实际使用</h3>
+<p>​	boost::asio为了简化用户的操作，允许用户使用buffer()函数来得到一个<code>MutableBufferSequence</code>/<code>ConstBufferSequence</code>概念的对象，根据传入参数是只读还是可写决定返回的类型。</p>
+<p>​	只读：<code>asio::const_buffer_1</code></p>
+<p>​	可写：<code>asio::mutable_buffer_1</code></p>
+<h3 id="演示code">演示code</h3>
+<p>​	假设需要使用send函数发送数据：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> ConstBufferSequence&gt;</span></span><br><span class="line"><span class="function">std::<span class="type">size_t</span> <span class="title">send</span><span class="params">(<span class="type">const</span> ConstBufferSequence &amp; buffers)</span></span>;</span><br></pre></td></tr></table></figure>
+<h4 id="不用提供的buffer">不用提供的buffer</h4>
+<p>​	自己构造一个<code>asio::const_buffer</code>以及传递给send()的<code>vector&lt;asio::const_buffer&gt;</code>对象。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">use_const_buffer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::string buf = <span class="string">&quot;hello world!&quot;</span>;</span><br><span class="line">    <span class="function">asio::const_buffer  <span class="title">asio_buf</span><span class="params">(buf.c_str(), buf.length())</span></span>;</span><br><span class="line">    std::vector&lt;asio::const_buffer&gt; buffers_sequence;</span><br><span class="line">    buffers_sequence.<span class="built_in">push_back</span>(asio_buf);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="使用buffer函数">使用buffer函数</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">use_buffer_str</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    asio::const_buffers_1 output_buf = asio::<span class="built_in">buffer</span>(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="C-style-string">C-style string</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">use_buffer_array</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">const</span> <span class="type">size_t</span>  BUF_SIZE_BYTES = <span class="number">20</span>;</span><br><span class="line">    <span class="function">std::unique_ptr&lt;<span class="type">char</span>[] &gt; <span class="title">buf</span><span class="params">(<span class="keyword">new</span> <span class="type">char</span>[BUF_SIZE_BYTES])</span></span>;</span><br><span class="line">    <span class="keyword">auto</span> input_buf = asio::<span class="built_in">buffer</span>(<span class="built_in">static_cast</span>&lt;<span class="type">void</span>*&gt;(buf.<span class="built_in">get</span>()), BUF_SIZE_BYTES);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>流式io</p>
+<p>​	对于流式操作，我们可以用<code>streambuf</code>，将输入输出流和streambuf绑定，可以实现流式输入和输出。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">use_stream_buffer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    asio::streambuf buf;</span><br><span class="line">    <span class="function">std::ostream <span class="title">output</span><span class="params">(&amp;buf)</span></span>;</span><br><span class="line">    <span class="comment">// Writing the message to the stream-based buffer.</span></span><br><span class="line">    output &lt;&lt; <span class="string">&quot;Message1\nMessage2&quot;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Now we want to read all data from a streambuf</span></span><br><span class="line">    <span class="comment">// until &#x27;\n&#x27; delimiter.</span></span><br><span class="line">    <span class="comment">// Instantiate an input stream which uses our </span></span><br><span class="line">    <span class="comment">// stream buffer.</span></span><br><span class="line">    <span class="function">std::istream <span class="title">input</span><span class="params">(&amp;buf)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// We&#x27;ll read data into this string.</span></span><br><span class="line">    std::string message1;</span><br><span class="line">    std::<span class="built_in">getline</span>(input, message1);</span><br><span class="line">    <span class="comment">// Now message1 string contains &#x27;Message1&#x27;.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

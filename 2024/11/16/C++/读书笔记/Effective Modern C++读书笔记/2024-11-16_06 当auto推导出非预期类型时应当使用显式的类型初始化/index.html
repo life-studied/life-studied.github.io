@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>06 当auto推导出非预期类型时应当使用显式的类型初始化 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>06 当auto推导出非预期类型时应当使用显式的类型初始化</h1>
+    </header>
+
+    <section>
+      <h1>06 当auto推导出非预期类型时应当使用显式的类型初始化</h1>
+<h2 id="1-auto推导出非预期类型">1. auto推导出非预期类型</h2>
+<span id="more"></span>
+<p>​	有时候 <code>auto</code> 的类型推导会和你想的南辕北辙。举一个例子，假设我有一个函数接受一个 <code>Widget</code> 返回一个 <code>std::vector&lt;bool&gt;</code> ，其中每个 <code>bool</code> 表征 <code>Widget</code> 是否接受一个特定的特性：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">std::vector&lt;<span class="type">bool</span>&gt; <span class="title">features</span><span class="params">(<span class="type">const</span> Widget&amp; w)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>​	假设要取第5个<code>bool</code>：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Widget w;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="type">bool</span> highPriority = <span class="built_in">features</span>(w)[<span class="number">5</span>]; </span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="built_in">processWidget</span>(w, highPriority);</span><br></pre></td></tr></table></figure>
+<p>​	这份代码没有任何问题。它工作正常。但是如果我们做一个看起来无伤大雅的修改，把 <code>highPriority</code> 的显式的类型换成 <code>auto</code> ：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> highPriority = <span class="built_in">features</span>(w)[<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">processWidget</span>(w, highPriority); <span class="comment">// 未定义行为</span></span><br></pre></td></tr></table></figure>
+<p>​	正如注释中所提到的，调用 <code>processWidget</code> 现在会导致未定义的行为。但是为什么呢？答案是：在使用 auto 的代码中，<code>highPriority</code> 的类型已经不是 bool 了。</p>
+<p>​	尽管 <code>std::vector&lt;bool&gt;</code> 从概念上说是 <code>bool</code> 的容器，对 <code>std::vector&lt;bool&gt;</code> 的 <code>operator[]</code> 运算符并不一定是返回容器中的元素的引用（ <code>std::vector::operator[]</code> 对所有的类型都返回引用，就是<strong>除了 <code>bool</code></strong> ）。</p>
+<p>​	事实上，他返回的是一个 <code>std::vector&lt;bool&gt;::reference</code> 对象（一个在 <code>std::vector&lt;bool&gt;</code> 中内嵌的<code>class</code>）。</p>
+<h2 id="2-显式的类型初始化原则">2. 显式的类型初始化原则</h2>
+<p>​	不管你是如何发现它们，一旦 <code>auto</code> 被决定作为推导代理类的类型而不是它被代理的类型，它就不需要涉及到关于 <code>auto</code> ， <code>auto</code> 自己本身没有问题。问题在于 auto 推导的类型不是所想让它推导出来的类型。</p>
+<p>​	解决方案就是强制一个不同的类型推导。 我把这种方法叫做<strong>显式的类型初始化原则</strong>。 显式的类型初始化原则涉及到使用 <code>auto</code> 声明一个变量，但是转换初始化表达式到 <code>auto</code> 想要 的类型。下面就是一个强制 <code>highPriority</code> 类型是 <code>bool</code> 的例子：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> highPriority = <span class="built_in">static_cast</span>&lt;<span class="type">bool</span>&gt;(<span class="built_in">features</span>(w)[<span class="number">5</span>]);</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

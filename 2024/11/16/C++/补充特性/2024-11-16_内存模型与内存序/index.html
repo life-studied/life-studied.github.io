@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>内存模型与内存序 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>内存模型与内存序</h1>
+    </header>
+
+    <section>
+      <h1>内存模型与内存序</h1>
+<h2 id="std-atomic保证">std::atomic保证</h2>
+<span id="more"></span>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>原子性：对一个变量操作期间，保证其它线程不对该变量进行操作</p>
+</li>
+<li class="lvl-2">
+<p>内存序：构造一个事件的发生先后的顺序关系。</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">atomic</span> : _Choose_atomic_base_t&lt;_Ty&gt; &#123; <span class="comment">// atomic value</span></span><br><span class="line">    <span class="built_in">atomic</span>(<span class="type">const</span> atomic&amp;)                     = <span class="keyword">delete</span>;</span><br><span class="line">    atomic&amp; <span class="keyword">operator</span>=(<span class="type">const</span> atomic&amp;)          = <span class="keyword">delete</span>;</span><br><span class="line">    atomic&amp; <span class="keyword">operator</span>=(<span class="type">const</span> atomic&amp;) <span class="keyword">volatile</span> = <span class="keyword">delete</span>;</span><br><span class="line">    </span><br><span class="line">    _Ty <span class="keyword">operator</span>=(<span class="type">const</span> _Ty _Value) <span class="keyword">noexcept</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;<span class="built_in">store</span>(_Value);</span><br><span class="line">        <span class="keyword">return</span> _Value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">store</span><span class="params">(<span class="type">const</span> _Ty _Value)</span> <span class="keyword">volatile</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">        <span class="built_in">static_assert</span>(_Deprecate_non_lock_free_volatile&lt;_Ty&gt;, <span class="string">&quot;Never fails&quot;</span>);</span><br><span class="line">        <span class="built_in">const_cast</span>&lt;atomic*&gt;(<span class="keyword">this</span>)-&gt;_Base::<span class="built_in">store</span>(_Value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">store</span><span class="params">(<span class="type">const</span> _Ty _Value, <span class="type">const</span> memory_order _Order)</span> <span class="keyword">volatile</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">        <span class="built_in">static_assert</span>(_Deprecate_non_lock_free_volatile&lt;_Ty&gt;, <span class="string">&quot;Never fails&quot;</span>);</span><br><span class="line">        <span class="built_in">const_cast</span>&lt;atomic*&gt;(<span class="keyword">this</span>)-&gt;_Base::<span class="built_in">store</span>(_Value, _Order);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">_NODISCARD _Ty <span class="title">load</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">volatile</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">        <span class="built_in">static_assert</span>(_Deprecate_non_lock_free_volatile&lt;_Ty&gt;, <span class="string">&quot;Never fails&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">const_cast</span>&lt;<span class="type">const</span> atomic*&gt;(<span class="keyword">this</span>)-&gt;_Base::<span class="built_in">load</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">_NODISCARD _Ty <span class="title">load</span><span class="params">(<span class="type">const</span> memory_order _Order)</span> <span class="type">const</span> <span class="keyword">volatile</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">        <span class="built_in">static_assert</span>(_Deprecate_non_lock_free_volatile&lt;_Ty&gt;, <span class="string">&quot;Never fails&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">const_cast</span>&lt;<span class="type">const</span> atomic*&gt;(<span class="keyword">this</span>)-&gt;_Base::<span class="built_in">load</span>(_Order);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">using</span> _Base::exchange;</span><br><span class="line">    <span class="function">_Ty <span class="title">exchange</span><span class="params">(<span class="type">const</span> _Ty _Value)</span> <span class="keyword">volatile</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">        <span class="built_in">static_assert</span>(_Deprecate_non_lock_free_volatile&lt;_Ty&gt;, <span class="string">&quot;Never fails&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">const_cast</span>&lt;atomic*&gt;(<span class="keyword">this</span>)-&gt;_Base::<span class="built_in">exchange</span>(_Value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">_Ty <span class="title">exchange</span><span class="params">(<span class="type">const</span> _Ty _Value, <span class="type">const</span> memory_order _Order)</span> <span class="keyword">volatile</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">        <span class="built_in">static_assert</span>(_Deprecate_non_lock_free_volatile&lt;_Ty&gt;, <span class="string">&quot;Never fails&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">const_cast</span>&lt;atomic*&gt;(<span class="keyword">this</span>)-&gt;_Base::<span class="built_in">exchange</span>(_Value, _Order);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> _HAS_CXX20</span></span><br><span class="line">    <span class="keyword">using</span> _Base::wait;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">wait</span><span class="params">(<span class="type">const</span> _Ty _Expected, <span class="type">const</span> memory_order _Order = memory_order_seq_cst)</span> <span class="type">const</span> <span class="keyword">volatile</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">        <span class="built_in">const_cast</span>&lt;<span class="type">const</span> atomic*&gt;(<span class="keyword">this</span>)-&gt;_Base::<span class="built_in">wait</span>(_Expected, _Order);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">using</span> _Base::notify_one;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">notify_one</span><span class="params">()</span> <span class="keyword">volatile</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">        <span class="built_in">const_cast</span>&lt;atomic*&gt;(<span class="keyword">this</span>)-&gt;_Base::<span class="built_in">notify_one</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">using</span> _Base::notify_all;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">notify_all</span><span class="params">()</span> <span class="keyword">volatile</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">        <span class="built_in">const_cast</span>&lt;atomic*&gt;(<span class="keyword">this</span>)-&gt;_Base::<span class="built_in">notify_all</span>();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// _HAS_CXX20</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">operator</span> _Ty() <span class="type">const</span> <span class="keyword">volatile</span> <span class="keyword">noexcept</span> &#123;</span><br><span class="line">        <span class="built_in">static_assert</span>(_Deprecate_non_lock_free_volatile&lt;_Ty&gt;, <span class="string">&quot;Never fails&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;<span class="built_in">load</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">operator</span> _Ty() <span class="type">const</span> <span class="keyword">noexcept</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;<span class="built_in">load</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="原子性">原子性</h3>
+<p>​	原子性的意思是，读写该变量的操作是原子的。原子性通过store和load函数内部保证，operator=内部实际上调用了store。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;atomic&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::atomic&lt;<span class="type">int</span>&gt; a;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">increase</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++)</span><br><span class="line">		a++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function">std::thread <span class="title">t1</span><span class="params">(increase)</span></span>;</span><br><span class="line">	<span class="function">std::thread <span class="title">t2</span><span class="params">(increase)</span></span>;</span><br><span class="line">	t1.<span class="built_in">join</span>();</span><br><span class="line">	t2.<span class="built_in">join</span>();</span><br><span class="line">	std::cout &lt;&lt; a;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="store">store</h3>
+<p>负责原子地写入数据。</p>
+<h3 id="load">load</h3>
+<p>负责原子的读取数据。</p>
+<h3 id="fetch-add">fetch_add</h3>
+<p>原子自增。</p>
+<h3 id="fetch-sub">fetch_sub</h3>
+<p>原子自减。</p>
+<h3 id="compare-exchange-strong">compare_exchange_strong</h3>
+<p>​	用于自定义原子操作。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fetch_sqr</span><span class="params">(std::atomic&lt;T&gt; data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">auto</span> old_data = data.<span class="built_in">load</span>();</span><br><span class="line">        <span class="keyword">auto</span> new_data = old_data* old_data;</span><br><span class="line">    &#125; <span class="keyword">while</span>(!data.<span class="built_in">compare_exchange_strong</span>(old_data, new_data));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="内存序">内存序</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">if</span> _HAS_CXX20</span></span><br><span class="line">_EXPORT_STD <span class="keyword">enum class</span> <span class="title class_">memory_order</span> : <span class="type">int</span> &#123;</span><br><span class="line">    relaxed,</span><br><span class="line">    consume,</span><br><span class="line">    acquire,</span><br><span class="line">    release,</span><br><span class="line">    acq_rel,</span><br><span class="line">    seq_cst,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// LWG-3268</span></span><br><span class="line">    memory_order_relaxed = relaxed,</span><br><span class="line">    memory_order_consume = consume,</span><br><span class="line">    memory_order_acquire = acquire,</span><br><span class="line">    memory_order_release = release,</span><br><span class="line">    memory_order_acq_rel = acq_rel,</span><br><span class="line">    memory_order_seq_cst = seq_cst</span><br><span class="line">&#125;;</span><br><span class="line">_EXPORT_STD <span class="keyword">inline</span> <span class="keyword">constexpr</span> memory_order memory_order_relaxed = memory_order::relaxed;</span><br><span class="line">_EXPORT_STD <span class="keyword">inline</span> <span class="keyword">constexpr</span> memory_order memory_order_consume = memory_order::consume;</span><br><span class="line">_EXPORT_STD <span class="keyword">inline</span> <span class="keyword">constexpr</span> memory_order memory_order_acquire = memory_order::acquire;</span><br><span class="line">_EXPORT_STD <span class="keyword">inline</span> <span class="keyword">constexpr</span> memory_order memory_order_release = memory_order::release;</span><br><span class="line">_EXPORT_STD <span class="keyword">inline</span> <span class="keyword">constexpr</span> memory_order memory_order_acq_rel = memory_order::acq_rel;</span><br><span class="line">_EXPORT_STD <span class="keyword">inline</span> <span class="keyword">constexpr</span> memory_order memory_order_seq_cst = memory_order::seq_cst;</span><br><span class="line"><span class="meta">#<span class="keyword">else</span> <span class="comment">// ^^^ _HAS_CXX20 / !_HAS_CXX20 vvv</span></span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">memory_order</span> &#123;</span><br><span class="line">    memory_order_relaxed,</span><br><span class="line">    memory_order_consume,</span><br><span class="line">    memory_order_acquire,</span><br><span class="line">    memory_order_release,</span><br><span class="line">    memory_order_acq_rel,</span><br><span class="line">    memory_order_seq_cst</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// ^^^ !_HAS_CXX20 ^^^</span></span></span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>relaxed：无内存序</p>
+</li>
+<li class="lvl-2">
+<p>seq_cst：顺序一致性</p>
+</li>
+<li class="lvl-2">
+<p>consume：与该变量有关的指令不会重排</p>
+</li>
+<li class="lvl-2">
+<p>acquire：下方的指令不会排序到上方</p>
+</li>
+<li class="lvl-2">
+<p>release：上方的指令不会排序到下方</p>
+</li>
+<li class="lvl-2">
+<p>acq_rel：双侧屏障</p>
+</li>
+</ul>
+<h4 id="验证模型">验证模型</h4>
+<h5 id="线程池（避免验证中频繁创建和释放线程开销）">线程池（避免验证中频繁创建和释放线程开销）</h5>
+<p>​	使用MSVC的std::async（底层实现使用了线程池技术）。</p>
+<h5 id="测试基类模板">测试基类模板</h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">t1</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">t2</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">reset</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">bool</span> <span class="title">test</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">virtual</span> ~<span class="built_in">Test</span>() = <span class="keyword">default</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TestModel</span></span><br><span class="line">&#123;</span><br><span class="line">	T t;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">run</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="type">const</span> <span class="type">size_t</span> thread_count = std::thread::<span class="built_in">hardware_concurrency</span>();</span><br><span class="line">		</span><br><span class="line">		T testInstance;</span><br><span class="line">		</span><br><span class="line">		<span class="type">size_t</span> err_num = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; ++i) &#123;</span><br><span class="line">			std::vector&lt;std::future&lt;<span class="type">void</span>&gt;&gt; futures;</span><br><span class="line"></span><br><span class="line">			testInstance.<span class="built_in">reset</span>();</span><br><span class="line">			futures.<span class="built_in">emplace_back</span>(std::<span class="built_in">async</span>(std::launch::async, &amp;T::t2, &amp;testInstance));</span><br><span class="line">			futures.<span class="built_in">emplace_back</span>(std::<span class="built_in">async</span>(std::launch::async, &amp;T::t1, &amp;testInstance));</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">auto</span>&amp; future : futures) &#123;</span><br><span class="line">				future.<span class="built_in">get</span>();  </span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> (!testInstance.<span class="built_in">test</span>()) &#123;</span><br><span class="line">				err_num++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;执行完成，错误数量：&quot;</span> &lt;&lt; err_num &lt;&lt; std::endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h5 id="核心测试代码">核心测试代码</h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> in_atomic 0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">TestStr</span> :Test</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> in_atomic</span></span><br><span class="line">	std::atomic&lt;<span class="type">bool</span>&gt; flag;</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">	<span class="type">bool</span> flag;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">	std::string str;</span><br><span class="line">	<span class="type">bool</span> res;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">t1</span><span class="params">()</span> <span class="keyword">override</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		str = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> in_atomic</span></span><br><span class="line">		flag.<span class="built_in">store</span>(<span class="literal">true</span>);</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">		flag = <span class="literal">true</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">t2</span><span class="params">()</span> <span class="keyword">override</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> in_atomic</span></span><br><span class="line">		<span class="keyword">while</span> (flag.<span class="built_in">load</span>() == <span class="literal">false</span>);</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">		<span class="keyword">while</span> (flag == <span class="literal">false</span>) std::this_thread::<span class="built_in">yield</span>();;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">		<span class="keyword">if</span> (str == <span class="string">&quot;Hello&quot;</span>) res = <span class="literal">true</span>;</span><br><span class="line">		ss &lt;&lt; <span class="string">&quot;string is &quot;</span> &lt;&lt; str &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">reset</span><span class="params">()</span> <span class="keyword">override</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		flag = <span class="literal">false</span>;</span><br><span class="line">		res = <span class="literal">false</span>;</span><br><span class="line">		str.<span class="built_in">clear</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">bool</span> <span class="title">test</span><span class="params">()</span> <span class="keyword">override</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	TestModel&lt;TestStr&gt; t;</span><br><span class="line">	t.<span class="built_in">run</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="易错问题">易错问题</h2>
+<h3 id="data-data-1">data = data + 1</h3>
+<p>​	此操作并非原子操作，因为实际上是两步，分别保证原子性，但不保证合在一起的原子性：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> data_new = data.<span class="built_in">load</span>() + <span class="number">1</span>;</span><br><span class="line">data.<span class="built_in">store</span>(data_new);</span><br></pre></td></tr></table></figure>
+<p>​	正确做法：使用重载的operator++运算符。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">data++;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

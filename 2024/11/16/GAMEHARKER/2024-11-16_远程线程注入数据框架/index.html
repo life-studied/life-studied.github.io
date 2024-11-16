@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>远程线程注入数据框架 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>远程线程注入数据框架</h1>
+    </header>
+
+    <section>
+      <h2 id="远程线程注入数据框架">远程线程注入数据框架</h2>
+<blockquote>
+<p>通过远程线程注入的方式，不能直接调用本程序里的函数，因此需要将被调用的函数和相应的数据写入到对方的内存中，再去调用。</p>
+</blockquote>
+<span id="more"></span>
+<p>步骤：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>在对方内存分配空间</p>
+</li>
+<li class="lvl-2">
+<p>获取系统dll（例如kernel.dll）的地址</p>
+<ul class="lvl-2">
+<li class="lvl-6">在不同exe中一般在同一地址</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>将系统dll的地址和需要用到的参数数据写入到对方的内存中</p>
+</li>
+<li class="lvl-2">
+<p>将注入的函数写入到对方的内存中</p>
+</li>
+<li class="lvl-2">
+<p>开启一个远程线程，执行注入的函数，调用所用的dll函数</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// InjectDll2Exe.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;tchar.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> std::cin;</span><br><span class="line"><span class="keyword">using</span> std::cout;</span><br><span class="line"><span class="keyword">using</span> std::endl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> f_LoadLibrary = <span class="type">unsigned</span> <span class="type">long</span> <span class="built_in">long</span>(WINAPI*)(<span class="type">wchar_t</span>* dllName);</span><br><span class="line"><span class="keyword">using</span> f_GetProcAddress = <span class="built_in">FARPROC</span>(WINAPI*)(<span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> hModule, <span class="type">char</span>* lpProcName);</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">RemoteCall</span>	<span class="comment">//数据框架，用于注入到对方的内存来被函数调用</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">wchar_t</span> dllName[<span class="number">0x100</span>] = &#123;&#125;;        <span class="comment">// 被注入的dll名字</span></span><br><span class="line">    <span class="type">char</span> funcName[<span class="number">0x20</span>] = &#123; <span class="string">&quot;main_loop_window&quot;</span> &#125;;</span><br><span class="line">    <span class="type">wchar_t</span> kernelName[<span class="number">0x10</span>] = &#123; _T(<span class="string">&quot;kernel32.dll&quot;</span>) &#125;;</span><br><span class="line">    f_LoadLibrary pLoadLiarbry;         <span class="comment">// LoadLibrary函数地址</span></span><br><span class="line">    f_GetProcAddress pGetProcAddress;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Inject</span><span class="params">()</span>       <span class="comment">// 注入的远程函数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> address = <span class="number">0xCCCCCCCCCCCCCCCC</span>;</span><br><span class="line">    RemoteCall* p = (RemoteCall*)address;</span><br><span class="line">    <span class="keyword">auto</span> libAddr = p-&gt;<span class="built_in">pLoadLiarbry</span>(p-&gt;dllName);</span><br><span class="line">    <span class="keyword">auto</span> myfunc = p-&gt;<span class="built_in">pGetProcAddress</span>(libAddr, p-&gt;funcName);</span><br><span class="line">    <span class="built_in">myfunc</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">RemoteCall* <span class="title">WriteData</span><span class="params">(HANDLE &amp;hProcess)</span>      <span class="comment">// 写入RemoteCall到目标进程，返回写入地址</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    RemoteCall data;</span><br><span class="line">    <span class="keyword">auto</span> loadLibraryAddr = <span class="built_in">GetProcAddress</span>(<span class="built_in">LoadLibraryW</span>(_T(<span class="string">&quot;kernel32.dll&quot;</span>)), <span class="string">&quot;LoadLibraryW&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (!loadLibraryAddr)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;get loadLibrary failed!&quot;</span>;</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    data.pLoadLiarbry = (f_LoadLibrary)loadLibraryAddr;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">auto</span> getProcAddressAddr = <span class="built_in">GetProcAddress</span>(<span class="built_in">LoadLibraryW</span>(_T(<span class="string">&quot;kernel32.dll&quot;</span>)), <span class="string">&quot;GetProcAddress&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (!getProcAddressAddr)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;get getProcAddress failed!&quot;</span>;</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    data.pGetProcAddress = (f_GetProcAddress)getProcAddressAddr;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算dll名字的长度，写入数据</span></span><br><span class="line">    <span class="type">size_t</span> lenth&#123;&#125;;</span><br><span class="line">    <span class="comment">//const wchar_t* dllName = L&quot;C:/Users/10654/Documents/WeChat Files/wxid_7jgdmcfyfwjq22/FileStorage/File/2023-12/SharkTeeth_ImGui_DLL/x64/Release/SharkTeeth_ImGui_DLL.dll&quot;;</span></span><br><span class="line">    <span class="comment">//const wchar_t* dllName = L&quot;D:/codeSpace/IDE-Project/vs2022/TestDll/x64/Release/TestDll.dll&quot;;</span></span><br><span class="line">    <span class="type">const</span> <span class="type">wchar_t</span>* dllName = <span class="string">L&quot;D:/codeSpace/IDE-Project/vs2022/inject-window-dll/x64/Release/inject-window-dll.dll&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (lenth = <span class="number">0</span>; dllName[lenth++];);</span><br><span class="line">    <span class="built_in">memcpy</span>(data.dllName, dllName, (lenth + <span class="number">1</span>) * <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> data_address = <span class="built_in">VirtualAllocEx</span>(hProcess, <span class="number">0</span>, <span class="built_in">sizeof</span>(data), MEM_COMMIT, PAGE_EXECUTE_READWRITE);</span><br><span class="line">    <span class="keyword">if</span> (!data_address)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;remote data inject failed!&quot;</span>;</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">WriteProcessMemory</span>(hProcess, data_address, (LPCVOID)&amp;data, <span class="built_in">sizeof</span>(data), <span class="literal">NULL</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> (RemoteCall*)data_address;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span>* <span class="title">WriteCode</span><span class="params">(HANDLE &amp;hProcess, RemoteCall* data_address)</span> <span class="comment">// 写入注入函数代码到目标进程，返回代码地址</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">char</span> _code[<span class="number">0x200</span>] = &#123;&#125;;</span><br><span class="line">    <span class="built_in">memcpy</span>(_code, Inject, <span class="built_in">sizeof</span>(_code));</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; <span class="number">0x200</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> * p = (<span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span>*)&amp;_code[i];</span><br><span class="line">        <span class="keyword">if</span> (*p == <span class="number">0xCCCCCCCCCCCCCCCC</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            *p = (<span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span>)data_address;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">auto</span> remote_code_address = <span class="built_in">VirtualAllocEx</span>(hProcess, <span class="number">0</span>, <span class="built_in">sizeof</span>(_code), MEM_COMMIT, PAGE_EXECUTE_READWRITE);</span><br><span class="line">    <span class="keyword">if</span> (!remote_code_address)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;remote code inject failed!&quot;</span>;</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">WriteProcessMemory</span>(hProcess, remote_code_address, (LPCVOID)_code, <span class="built_in">sizeof</span>(_code), <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">return</span> remote_code_address;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    DWORD pid&#123;&#125;;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;请输入Pid:&quot;</span>;</span><br><span class="line">    cin &gt;&gt; pid;</span><br><span class="line">    <span class="keyword">auto</span> hProcess = <span class="built_in">OpenProcess</span>(PROCESS_ALL_ACCESS, FALSE, pid);</span><br><span class="line">    <span class="keyword">if</span> (!hProcess)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;OpenProcess failed!&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">auto</span> data_address = <span class="built_in">WriteData</span>(hProcess);</span><br><span class="line">    <span class="keyword">auto</span> call_address = <span class="built_in">WriteCode</span>(hProcess, data_address);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> hThread = <span class="built_in">CreateRemoteThread</span>(hProcess, <span class="literal">NULL</span>, <span class="number">0</span>, (LPTHREAD_START_ROUTINE)call_address, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span> (!hThread)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Create Remote Thread Failed!&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//WaitForSingleObject(hThread, INFINITE);</span></span><br><span class="line">    <span class="built_in">MessageBox</span>(<span class="literal">NULL</span>, <span class="string">L&quot;注入成功&quot;</span>, <span class="string">L&quot;注入提示&quot;</span>, MB_OK);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

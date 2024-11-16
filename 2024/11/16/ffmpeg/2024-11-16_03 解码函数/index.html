@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>03 解码函数 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>03 解码函数</h1>
+    </header>
+
+    <section>
+      <h1>解码函数</h1>
+<img src="./assets/解码流程.png" alt="解码流程" style="zoom:50%;" />
+<span id="more"></span>
+<h2 id="avcodec-alloc-context3"><strong>avcodec_alloc_context3()</strong></h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>函数原型:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">AVCodecContext *<span class="title function_">avcodec_alloc_context3</span><span class="params">(<span class="type">const</span> AVCodec *codec)</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-2">
+<p>参数说明:</p>
+<ul class="lvl-2">
+<li class="lvl-4"><code>codec</code>: 指向 <code>AVCodec</code> 结构的指针，表示要使用的解码器或编码器。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>使用示例:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">AVCodecContext *codec_ctx;</span><br><span class="line">AVCodec *codec = avcodec_find_decoder(AV_CODEC_ID_H264);</span><br><span class="line">codec_ctx = avcodec_alloc_context3(codec);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="avcodec-find-decoder"><strong>avcodec_find_decoder()</strong></h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>函数原型:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> AVCodec *<span class="title function_">avcodec_find_decoder</span><span class="params">(<span class="keyword">enum</span> AVCodecID id)</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-2">
+<p>参数说明:</p>
+<ul class="lvl-2">
+<li class="lvl-4"><code>id</code>: 要查找的解码器的 ID。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>使用示例:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> AVCodec *codec = avcodec_find_decoder(AV_CODEC_ID_AAC);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="avcodec-find-decoder-by-name"><strong>avcodec_find_decoder_by_name()</strong></h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>函数原型:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> AVCodec *<span class="title function_">avcodec_find_decoder_by_name</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *name)</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-2">
+<p>参数说明:</p>
+<ul class="lvl-2">
+<li class="lvl-4"><code>name</code>: 要查找的解码器的名称。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>使用示例:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> AVCodec *codec = avcodec_find_decoder_by_name(<span class="string">&quot;h264&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="avcodec-open2"><strong>avcodec_open2()</strong></h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>函数原型:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">avcodec_open2</span><span class="params">(AVCodecContext *avctx, <span class="type">const</span> AVCodec *codec, AVDictionary **options)</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-2">
+<p>参数说明:</p>
+<ul class="lvl-2">
+<li class="lvl-4"><code>avctx</code>: 指向 <code>AVCodecContext</code> 结构的指针，表示解码器上下文。</li>
+<li class="lvl-4"><code>codec</code>: 指向 <code>AVCodec</code> 结构的指针，表示要打开的解码器。</li>
+<li class="lvl-4"><code>options</code>: 用于传递额外选项的字典。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>使用示例:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (avcodec_open2(codec_ctx, codec, <span class="literal">NULL</span>) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;Could not open codec\n&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="avcodec-decode-video2-–-deprecated"><s><strong>avcodec_decode_video2()</strong></s> – deprecated</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>函数原型:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">avcodec_decode_video2</span><span class="params">(AVCodecContext *avctx, AVFrame *picture,</span></span><br><span class="line"><span class="params">                          <span class="type">int</span> *got_picture_ptr, AVPacket *avpkt)</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-2">
+<p>参数说明:</p>
+<ul class="lvl-2">
+<li class="lvl-4"><code>avctx</code>: 指向 <code>AVCodecContext</code> 结构的指针。</li>
+<li class="lvl-4"><code>picture</code>: 用于存储解码后视频帧的 <code>AVFrame</code> 结构。</li>
+<li class="lvl-4"><code>got_picture_ptr</code>: 非零表示 <code>picture</code> 包含一个有效的帧。</li>
+<li class="lvl-4"><code>avpkt</code>: 包含要解码数据的 <code>AVPacket</code>。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>使用示例:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">AVFrame *frame = av_frame_alloc();</span><br><span class="line"><span class="type">int</span> got_picture = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (avcodec_decode_video2(codec_ctx, frame, &amp;got_picture, &amp;pkt) &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (got_picture) &#123;</span><br><span class="line">        <span class="comment">// 处理解码后的帧</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">av_frame_free(&amp;frame);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="avcodec-decode-audio4-–-deprecated"><s><strong>avcodec_decode_audio4()</strong></s> – deprecated</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>函数原型:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">avcodec_decode_audio4</span><span class="params">(AVCodecContext *avctx, AVFrame *frame,</span></span><br><span class="line"><span class="params">                          <span class="type">int</span> *got_frame_ptr, <span class="type">const</span> AVPacket *avpkt)</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-2">
+<p>参数说明与 <code>avcodec_decode_video2</code> 类似，但用于音频解码。</p>
+</li>
+</ul>
+<h2 id="avcodec-send-packet"><strong>avcodec_send_packet()</strong></h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>函数原型:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">avcodec_send_packet</span><span class="params">(AVCodecContext *avctx, <span class="type">const</span> AVPacket *avpkt)</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-2">
+<p>参数说明:</p>
+<ul class="lvl-2">
+<li class="lvl-4"><code>avctx</code>: 指向 <code>AVCodecContext</code> 结构的指针。</li>
+<li class="lvl-4"><code>avpkt</code>: 包含要发送给解码器的数据包。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>使用示例:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (avcodec_send_packet(codec_ctx, &amp;pkt) != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;Error sending a packet for decoding\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="avcodec-receive-frame"><strong>avcodec_receive_frame()</strong></h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>函数原型:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">avcodec_receive_frame</span><span class="params">(AVCodecContext *avctx, AVFrame *frame)</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-2">
+<p>参数说明:</p>
+<ul class="lvl-2">
+<li class="lvl-4"><code>avctx</code>: 指向 <code>AVCodecContext</code> 结构的指针。</li>
+<li class="lvl-4"><code>frame</code>: 用于接收解码后数据的 <code>AVFrame</code> 结构。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>使用示例:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">AVFrame *frame = av_frame_alloc();</span><br><span class="line"><span class="keyword">while</span> (avcodec_receive_frame(codec_ctx, frame) &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// 处理解码后的帧</span></span><br><span class="line">&#125;</span><br><span class="line">av_frame_free(&amp;frame);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="avcodec-free-context"><strong>avcodec_free_context()</strong></h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>函数原型:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">   <span class="type">void</span> <span class="title function_">avcodec_free_context</span><span class="params">(AVCodecContext **avctx)</span>;</span><br><span class="line">- 参数说明:</span><br><span class="line">  - `avctx`: 指向 `AVCodecContext` 结构指针的指针。</span><br><span class="line">- 使用示例:</span><br><span class="line">  ```c</span><br><span class="line">  <span class="title function_">avcodec_free_context</span><span class="params">(&amp;codec_ctx)</span>;</span><br><span class="line"></span><br><span class="line">## **avcodec_close()**</span><br><span class="line"></span><br><span class="line">- 函数原型:</span><br><span class="line">  ```c</span><br><span class="line">  <span class="type">void</span> <span class="title function_">avcodec_close</span><span class="params">(AVCodecContext *avctx)</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-2">
+<p>参数说明:</p>
+<ul class="lvl-2">
+<li class="lvl-4"><code>avctx</code>: 指向 <code>AVCodecContext</code> 结构的指针。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>使用示例:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">avcodec_close(codec_ctx);</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>07 查看与设置系统变量 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>07 查看与设置系统变量</h1>
+    </header>
+
+    <section>
+      <h1>查看与设置系统变量</h1>
+<p>MySQL 服务器程序运行过程中会用到许多影响程序行为的变量，它们被称为 MySQL 系统变量。</p>
+<span id="more"></span>
+<h2 id="1-查看系统变量">1. 查看系统变量</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SHOW VARIABLES [LIKE 匹配的模式];</span><br><span class="line"></span><br><span class="line">SHOW [GLOBAL|SESSION] VARIABLES [LIKE 匹配的模式];</span><br></pre></td></tr></table></figure>
+<h2 id="2-设置系统变量">2. 设置系统变量</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>通过启动参数设置（略）</p>
+</li>
+<li class="lvl-2">
+<p>运行过程中设置</p>
+</li>
+</ul>
+<blockquote>
+<p>对于大部分系统变量来说，它们的值可以在服务器程序运行过程中进行动态修改而无需停止并重启服务器。</p>
+</blockquote>
+<h3 id="2-1-不同范围的系统变量">2.1 不同范围的系统变量</h3>
+<p>对于同一个系统变量，我们有时想让不同的客户端有不同的值。例如，对于客户端A，默认引擎是InnoDB，对于客户端B，默认引擎是MyISAM。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>GLOBAL ：全局变量，影响服务器的整体操作。</p>
+</li>
+<li class="lvl-2">
+<p>SESSION ：会话变量，影响某个客户端连接的操作。</p>
+</li>
+</ul>
+<blockquote>
+<p>在服务器启动时，会将每个Global变量初始化为其默认值（可以通过命令行或选项文件中指定的选项更改这些默认值）。然后服务器还为每个连接的客户端维护一组Session变量，客户端的会话变量在连接时使用相应全局变量的当前值初始化。</p>
+<p>通过启动选项设置的系统变量的作用范围都是 GLOBAL 的，也就是对所有客户端都有效的，因为在系统启动的时候还没有客户端程序连接进来。</p>
+</blockquote>
+<h3 id="2-2-设置系统变量">2.2 设置系统变量</h3>
+<p><strong>语法</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SET [GLOBAL|SESSION] 系统变量名 = 值;</span><br><span class="line">SET [@@(GLOBAL|SESSION).]var_name = XXX;</span><br></pre></td></tr></table></figure>
+<h4 id="GLOBAL">GLOBAL</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语句一：SET GLOBAL default_storage_engine = MyISAM;</span><br><span class="line">语句二：SET @@GLOBAL.default_storage_engine = MyISAM;</span><br></pre></td></tr></table></figure>
+<h4 id="SESSION">SESSION</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语句一：SET SESSION default_storage_engine = MyISAM;</span><br><span class="line">语句二：SET @@SESSION.default_storage_engine = MyISAM;</span><br><span class="line">语句三：SET default_storage_engine = MyISAM;</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-系统变量范围的注意点">2.3 系统变量范围的注意点</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>并不是所有系统变量都具有 GLOBAL 和 SESSION 的作用范围。</p>
+<ul class="lvl-2">
+<li class="lvl-4">GLOBAL：有一些系统变量只具有 GLOBAL 作用范围，比方说 max_connections ，表示服务器程序支持同时最多有多少个客户端程序进行连接。</li>
+<li class="lvl-4">SESSION：有一些系统变量只具有 SESSION 作用范围，比如 insert_id ，表示在对某个包含 AUTO_INCREMENT 列的表进行插入时，该列初始的值。</li>
+<li class="lvl-4">都有：有一些系统变量的值既具有 GLOBAL 作用范围，也具有 SESSION 作用范围，比如我们前边用到的 <code>default_storage_engine</code> ，而且其实大部分的系统变量都是这样的，</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>有些系统变量是只读的，并不能设置值</p>
+<ul class="lvl-2">
+<li class="lvl-4">比方说 version ，表示当前 MySQL 的版本，我们客户端是不能设置它的值的，只能在 SHOW VARIABLES 语句里查看。</li>
+</ul>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

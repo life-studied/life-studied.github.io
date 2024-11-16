@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>02 C++原子操作的内存顺序 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>02 C++原子操作的内存顺序</h1>
+    </header>
+
+    <section>
+      <h1>C++atomic中原子操作的内存顺序</h1>
+<p>​	这里有六个内存序列选项可应用于对原子类型的操作（来源于枚举类<code>std::memory_order</code>）：</p>
+<span id="more"></span>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>memory_order_relaxed</p>
+</li>
+<li class="lvl-2">
+<p>memory_order_consume</p>
+</li>
+<li class="lvl-2">
+<p>memory_order_acquire</p>
+</li>
+<li class="lvl-2">
+<p>memory_order_release</p>
+</li>
+<li class="lvl-2">
+<p>memory_order_acq_rel</p>
+</li>
+<li class="lvl-2">
+<p>memory_order_seq_cst</p>
+</li>
+</ul>
+<p>​	除非你为特定的操作指定一个序列选项，否则内存序列选项对于所有原子类型默认都是<code>memory_order_seq_cst</code>。虽然有六个选项，但是它们仅代表三种内存模型：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>排序一致序列(<em>sequentially consistent</em>)</p>
+</li>
+<li class="lvl-2">
+<p>获取-释放序列(<em>memory_order_consume, memory_order_acquire, memory_order_release和memory_order_acq_rel</em>)</p>
+</li>
+<li class="lvl-2">
+<p>自由序列(<em>memory_order_relaxed</em>)</p>
+</li>
+</ul>
+<h2 id="1-排序一致队列">1. 排序一致队列</h2>
+<p>​	默认的序列命名为**“排序一致”**(<em>sequentially cons</em>)，是因为它意味着：程序中的行为从任意角度去看，序列顺序都保持一致。如果原子类型实例上的所有操作都是序列一致的，那么一个多线程程序的行为，就以某种特殊的排序执行，好像单线程那样。</p>
+<p>​	这是目前来看，最容易理解的内存序列，这也就是将其设置为默认的原因：所有线程都必须了解，不同的操作也遵守相同的顺序。因为其简单的行为，可以使用原子变量进行编写。通过不同的线程，你可以写出所有序列上可能的操作，这样就可以消除那些不一致，以及验证你代码的行为是否与预期相符。</p>
+<p>​	这也就意味着，<strong>所有操作都不能重排序</strong>；如果你的代码，在一个线程中，将一个操作放在另一个操作前面，那么这个顺序就必须让其他所有的线程都遵守。</p>
+<p>​	从同步的角度看，对于同一变量，<strong>排序一致的存储操作</strong> 同步相关于 <strong>同步一致的载入操作</strong>。这就提供了一种对两个(以上)线程操作的排序约束，但是排序一致的功能要比排序约束大的多。所以，对于使用排序一致原子操作的系统上的任一排序一致的原子操作，都会在对值进行存储以后，再进行加载。这种约束不是线程在自由内存序列中使用原子操作；这些线程依旧可以知道，操作以不同顺序排列，所以你必须使用排序一致操作，去保证在多线的情况下有加速的效果。</p>
+<p>​	以下清单展示了序列一致的行为，对于x和y的加载和存储都显示标注为<code>memory_order_seq_cst</code>，不过在这段代码中，标签可以忽略，因为其是默认项。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;atomic&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;assert.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::atomic&lt;<span class="type">bool</span>&gt; x, y;</span><br><span class="line">std::atomic&lt;<span class="type">int</span>&gt; z;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">write_x</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	x.<span class="built_in">store</span>(<span class="literal">true</span>, std::memory_order_seq_cst);  <span class="comment">// 1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">write_y</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	y.<span class="built_in">store</span>(<span class="literal">true</span>, std::memory_order_seq_cst);  <span class="comment">// 2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">read_x_then_y</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (!x.<span class="built_in">load</span>(std::memory_order_seq_cst));</span><br><span class="line">	<span class="keyword">if</span> (y.<span class="built_in">load</span>(std::memory_order_seq_cst))  <span class="comment">// 3</span></span><br><span class="line">		++z;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">read_y_then_x</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (!y.<span class="built_in">load</span>(std::memory_order_seq_cst));</span><br><span class="line">	<span class="keyword">if</span> (x.<span class="built_in">load</span>(std::memory_order_seq_cst))  <span class="comment">// 4</span></span><br><span class="line">		++z;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	x = <span class="literal">false</span>;</span><br><span class="line">	y = <span class="literal">false</span>;</span><br><span class="line">	z = <span class="number">0</span>;</span><br><span class="line">	<span class="function">std::thread <span class="title">a</span><span class="params">(write_x)</span></span>;</span><br><span class="line">	<span class="function">std::thread <span class="title">b</span><span class="params">(write_y)</span></span>;</span><br><span class="line">	<span class="function">std::thread <span class="title">c</span><span class="params">(read_x_then_y)</span></span>;</span><br><span class="line">	<span class="function">std::thread <span class="title">d</span><span class="params">(read_y_then_x)</span></span>;</span><br><span class="line">	a.<span class="built_in">join</span>();</span><br><span class="line">	b.<span class="built_in">join</span>();</span><br><span class="line">	c.<span class="built_in">join</span>();</span><br><span class="line">	d.<span class="built_in">join</span>();</span><br><span class="line">	<span class="built_in">assert</span>(z.<span class="built_in">load</span>() != <span class="number">0</span>);  <span class="comment">// 5</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

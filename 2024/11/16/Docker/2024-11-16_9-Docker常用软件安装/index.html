@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>9-Docker常用软件安装 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>9-Docker常用软件安装</h1>
+    </header>
+
+    <section>
+      <h2 id="Docker常用软件安装">Docker常用软件安装</h2>
+<h3 id="1-tomcat">1.tomcat</h3>
+<span id="more"></span>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d -p 8080:8080 --name=t1 tomcat</span><br></pre></td></tr></table></figure>
+<h3 id="2-mysql">2.mysql</h3>
+<h4 id="2-1-简单版本安装">2.1 简单版本安装</h4>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker pull mysql:5.7</span><br><span class="line">docker run -p 3307:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7	#-e为环境变量</span><br></pre></td></tr></table></figure>
+<p>关闭Linux防火墙并重启Docker及容器：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl stop firewalld.service	#关闭防火墙</span><br><span class="line">systemctl restart docker			#重启docker</span><br><span class="line">docker start 容器ID</span><br><span class="line">docker exec -it 容器ID /bin/bash</span><br></pre></td></tr></table></figure>
+<p>使用<code>Navicat</code>尝试连接：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>ip：192.168.10.10（Linux的ip）</p>
+</li>
+<li class="lvl-2">
+<p>端口：3307</p>
+</li>
+<li class="lvl-2">
+<p>密码：123456</p>
+</li>
+</ul>
+<h4 id="2-2-实战版本安装">2.2 实战版本安装</h4>
+<h5 id="1-运行mysql">1.运行mysql</h5>
+<p>使用多个数据卷，挂载多个目录：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>mysql日志目录</p>
+</li>
+<li class="lvl-2">
+<p>mysql表</p>
+</li>
+<li class="lvl-2">
+<p>mysql配置文件目录</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d -p 3307:3306 --privileged=true -v /opt/mysql/log:/var/log/mysql -v /opt/mysql/data:/var/lib/mysql -v /opt/mysql/conf:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=123456 --name mysql mysql:5.7</span><br></pre></td></tr></table></figure>
+<h5 id="2-新建mysql的配置文件my-cnf（用于设置字符编码集）">2.新建mysql的配置文件my.cnf（用于设置字符编码集）</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd /opt/mysql/conf/</span><br><span class="line">vim my.cnf</span><br></pre></td></tr></table></figure>
+<p>编辑文件：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[client]</span><br><span class="line">default_character_set=utf8</span><br><span class="line">[mysqld]</span><br><span class="line">collation_server = utf8_general_ci</span><br><span class="line">character_set_server = utf8</span><br></pre></td></tr></table></figure>
+<h5 id="3-重启mysql">3.重启mysql</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker restart mysql容器ID</span><br><span class="line">docker exec -it mysql容器ID /bin/bash</span><br></pre></td></tr></table></figure>
+<h5 id="4-查看mysql编码是否设置成功">4.查看mysql编码是否设置成功</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u root -p</span><br><span class="line">输入密码</span><br><span class="line"><span class="meta prompt_">mysql&gt; </span><span class="language-bash">show variables like <span class="string">&#x27;character%&#x27;</span>;</span></span><br></pre></td></tr></table></figure>
+<h5 id="5-新建表再查看插入情况">5.新建表再查看插入情况</h5>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">show databases;</span><br><span class="line">use docker;</span><br><span class="line">select* from accounts;</span><br></pre></td></tr></table></figure>
+<h3 id="3-Redis">3.Redis</h3>
+<h4 id="3-1-简单安装">3.1 简单安装</h4>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker pull redis:6.0.8</span><br><span class="line">docker run -d -p 6379:6379 redis:6.0.8</span><br><span class="line">docker exec -it redis容器ID /bin/bash</span><br></pre></td></tr></table></figure>
+<p>​	使用：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">redis-cli</span><br><span class="line">set username eric</span><br><span class="line">get username</span><br></pre></td></tr></table></figure>
+<h4 id="3-2-实战版安装">3.2 实战版安装</h4>
+<h5 id="1-在宿主机下创建目录">1.在宿主机下创建目录</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd /opt</span><br><span class="line">mkdir -p app/redis</span><br></pre></td></tr></table></figure>
+<h5 id="2-将redis-conf文件模板（笔记目录docker下）copy到目录下">2.将redis.conf文件模板（笔记目录docker下）copy到目录下</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp redis.conf /opt/app/redis/</span><br><span class="line">cd /opt/app/redis </span><br><span class="line">vim redis.conf</span><br></pre></td></tr></table></figure>
+<h5 id="3-修改部分配置">3.修改部分配置</h5>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>允许redis外部连接：<code>bind 0.0.0.0</code></p>
+</li>
+<li class="lvl-2">
+<p><code>daemonize no</code></p>
+</li>
+<li class="lvl-2">
+<p>开启redis数据持久化：<code>appendonly yes</code></p>
+</li>
+</ul>
+<h5 id="4-创建redis容器">4.创建redis容器</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -p 6379:6379 --name myredis --privileged=true -v /opt/app/redis/redis.conf:/etc/redis/redis.conf -v /opt/app/redis/data:/data -d redis:6.0.8 redis-server /etc/redis/redis.conf</span><br></pre></td></tr></table></figure>
+<h5 id="5-测试客户端">5.测试客户端</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">redis-cli</span><br><span class="line">set username eric</span><br><span class="line">get username</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

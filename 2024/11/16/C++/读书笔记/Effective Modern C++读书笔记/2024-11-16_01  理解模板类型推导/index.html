@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>01  理解模板类型推导 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>01  理解模板类型推导</h1>
+    </header>
+
+    <section>
+      <h1>01  理解模板类型推导</h1>
+<h2 id="1-1-函数模板与衍生">1.1 函数模板与衍生</h2>
+<span id="more"></span>
+<p>​	下面是一个模板函数的代码，其中<code>ParamType</code>是一个与<code>T</code>有关的类型。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(ParamType param)</span></span>;</span><br></pre></td></tr></table></figure>
+<h3 id="（Easy）第一种情况：-ParamType-是个非通用的引用或者是一个指针">（Easy）第一种情况： ParamType 是个非通用的引用或者是一个指针</h3>
+<h4 id="1-T">1. T&amp;</h4>
+<p>​	函数模板如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(T&amp; param)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>​	声明的变量如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">27</span>; 		<span class="comment">// x是一个int</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> cx = x; 	<span class="comment">// cx是一个const int</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>&amp; rx = x; 	<span class="comment">// rx是const int的引用</span></span><br></pre></td></tr></table></figure>
+<p>​	调用产生的模板参数为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">f</span>(x); 	<span class="comment">// T是int，param的类型时int&amp;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">f</span>(cx); 	<span class="comment">// T是const int，</span></span><br><span class="line">		<span class="comment">// param的类型是const int&amp;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">f</span>(rx); 	<span class="comment">// T是const int</span></span><br><span class="line">		<span class="comment">// param的类型时const int&amp;</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-const-T">2. const T&amp;</h4>
+<p>​	函数模板如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">const</span> T&amp; param)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>​	声明的变量如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">27</span>; 		<span class="comment">// x是一个int</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> cx = x; 	<span class="comment">// cx是一个const int</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>&amp; rx = x; 	<span class="comment">// rx是const int的引用</span></span><br></pre></td></tr></table></figure>
+<p>​	调用产生的模板参数为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">f</span>(x); 	<span class="comment">// T是int，param的类型时const int&amp;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">f</span>(cx); 	<span class="comment">// T是int，param的类型是const int&amp;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">f</span>(rx); 	<span class="comment">// T是int，param的类型时const int&amp;</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-T">3. T*</h4>
+<p>​	函数模板如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(T* param)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>​	声明的变量如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">27</span>; 			<span class="comment">// x是一个int</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* cx = &amp;x; 	<span class="comment">// cx是一个const int*</span></span><br></pre></td></tr></table></figure>
+<p>​	调用产生的模板参数为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">f</span>(x); 	<span class="comment">// T是int，param的类型时int*</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">f</span>(cx); 	<span class="comment">// T是const int，</span></span><br><span class="line">		<span class="comment">// param的类型是const int*</span></span><br></pre></td></tr></table></figure>
+<h3 id="第二种情况：-ParamType-是个万能引用（Universal-Reference）">第二种情况： ParamType 是个万能引用（Universal Reference）</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(T&amp;&amp; param)</span></span>; 	<span class="comment">// param现在是一个通用的引用</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> x = <span class="number">27</span>; 		<span class="comment">// 和之前一样</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> cx = x; 	<span class="comment">// 和之前一样</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>&amp; rx = x; 	<span class="comment">// 和之前一样</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">f</span>(x); 		<span class="comment">// x是左值，所以T是int&amp;</span></span><br><span class="line">			<span class="comment">// param的类型也是int&amp;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">f</span>(cx); 		<span class="comment">// cx是左值，所以T是const int&amp;</span></span><br><span class="line">			<span class="comment">// param的类型也是const int&amp;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">f</span>(rx); 		<span class="comment">// rx是左值，所以T是const int&amp;</span></span><br><span class="line">			<span class="comment">// param的类型也是const int&amp;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">f</span>(<span class="number">27</span>); 		<span class="comment">// 27是右值，所以T是int</span></span><br><span class="line">			<span class="comment">// 所以param的类型是int&amp;&amp;</span></span><br></pre></td></tr></table></figure>
+<h3 id="第三种情况：-ParamType-既不是指针也不是引用">第三种情况： ParamType 既不是指针也不是引用</h3>
+<h4 id="1-传递值和引用">1. 传递值和引用</h4>
+<p>​	当 <code>ParamType</code> 既不是指针也不是引用，我们把它处理成<code>pass-by-value</code>：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; </span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(T param)</span></span>; 	<span class="comment">// param现在是pass-by-value</span></span><br></pre></td></tr></table></figure>
+<p>​	即，不论传递的是引用还是值，都会将值<strong>拷贝</strong>一份，并<strong>忽略cv限定符</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">27</span>; 		<span class="comment">// 和之前一样</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> cx = x; 	<span class="comment">// 和之前一样</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>&amp; rx = x; 	<span class="comment">// 和之前一样</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">f</span>(x); 		<span class="comment">// T和param的类型都是int</span></span><br><span class="line"><span class="built_in">f</span>(cx); 		<span class="comment">// T和param的类型也都是int</span></span><br><span class="line"><span class="built_in">f</span>(rx); 		<span class="comment">// T和param的类型还都是int</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-传递指针">2. 传递指针</h4>
+<p>​	<strong>指针的特殊情况</strong></p>
+<p>​	指针被传递时，<strong>指针本身</strong>依旧会发生拷贝，即<strong>失去cv属性并拷贝</strong>一个新的指针，但是<strong>指针指向的内存对应的属性会被保留</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(T param)</span></span>; 	<span class="comment">// param仍然是按值传递的（pass by value）</span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">char</span>* <span class="type">const</span> ptr = <span class="string">&quot;Fun with pointers&quot;</span>;	<span class="comment">// ptr是一个const指针，指向一个const对象</span></span><br><span class="line"><span class="built_in">f</span>(ptr); 										<span class="comment">// 给参数传递的是一个const char * const类型</span></span><br><span class="line">												<span class="comment">// 推导结果为T = const char*</span></span><br></pre></td></tr></table></figure>
+<p>​	按照按值传递的类型 推导法则， <code>ptr</code> 的 <code>const</code> 特性会被忽略，这样 <code>param</code> 的推导出来的类型就是 <code>const char*</code> ， 也就是一个可以被修改的指针，指向一个 <code>const</code> 的字符串。 <code>ptr</code> 指向的东西的 <code>const</code> 特性被加以保留，但是 <code>ptr</code> 自己本身的 <code>const</code> 特性会被忽略，因为它要被重新复制一份而创建了一个新的指针 <code>param</code> 。</p>
+<h4 id="3-传递数组（important）">3. 传递数组（important）</h4>
+<h5 id="3-1-正常引入">3.1 正常引入</h5>
+<p>​	使用正常的数组作为参数：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span> name[] = <span class="string">&quot;J. P. Briggs&quot;</span>; <span class="comment">// name的类型是const char[13]</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">myFunc</span><span class="params">(<span class="type">int</span> param[])</span></span>; 			<span class="comment">// 等价于void myFunc(int* param);</span></span><br><span class="line"><span class="built_in">myFunc</span>(name);</span><br></pre></td></tr></table></figure>
+<p>​	结果是，<strong>数组退化为了指针参数</strong>。</p>
+<h5 id="3-2-模板参数">3.2 模板参数</h5>
+<p>​	因为数组参数声明会被当做指针参数，传递给模板函数的按值传递的数组参数会被退化成指针类型。这就意味着在模板 <code>f</code> 的调用中，模板参数 T 被推导成 <code>const char*</code> ：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span> name[] = <span class="string">&quot;J. P. Briggs&quot;</span>; <span class="comment">// name的类型是const char[13]</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(T param)</span></span>;	<span class="comment">// 模板拥有一个按值传递的参数</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">f</span>(name);	<span class="comment">// const char*</span></span><br></pre></td></tr></table></figure>
+<h5 id="3-3-如果是T-（important）">3.3 如果是T&amp;（important）</h5>
+<p>​	尽管函数<strong>不能被真正的定义成参数为数组</strong>，但是可以声明参数是数组的引用！（例如：<code>int (&amp;a)[10]</code>）</p>
+<p>​	所以如果我们修改模板 f 的参数成引用：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(T&amp; param)</span></span>; <span class="comment">// 引用参数的模板</span></span><br></pre></td></tr></table></figure>
+<p>​	然后传一个数组给他：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">f</span>(name); 		<span class="comment">// 传递数组给f，T = const char (&amp;)[13]</span></span><br></pre></td></tr></table></figure>
+<p>​	T 最后推导出来的<strong>实际的类型就是数组</strong>！类型推导包括了数组的长度，所以在这个例子里面， T 被推导成了 <code>const char [13]</code> ，函数 f 的参数（数组的引用）被推导成了 <code>const char (&amp;)[13]</code> 。是的，语法看起来怪怪的，但是理解了这些可以升华你的精神。</p>
+<h5 id="3-4-数组引用T-和-带数组长度N的模板（important）">3.4 数组引用T&amp; 和 带数组长度N的模板（important）</h5>
+<p>​	有趣的是，声明数组的引用可以创造出一个推导出一个数组包含的元素长度的模板：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在编译的时候返回数组的长度（数组参数没有名字，</span></span><br><span class="line"><span class="comment">// 因为只关心数组包含的元素的个数）</span></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, std::<span class="type">size_t</span> N&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">constexpr</span> std::<span class="type">size_t</span> <span class="title">arraySize</span><span class="params">(T (&amp;)[N])</span> <span class="keyword">noexcept</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> N; <span class="comment">// constexpr和noexcept在随后的条款中介绍</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> keyVals[] = &#123; <span class="number">1</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">11</span>, <span class="number">22</span>, <span class="number">35</span> &#125;; <span class="comment">// keyVals有七个元素</span></span><br><span class="line"><span class="type">int</span> mappedVals[<span class="built_in">arraySize</span>(keyVals)]; 		<span class="comment">// mappedVals长度也是七</span></span><br></pre></td></tr></table></figure>
+<p>​	<strong>备注</strong>：优先使用<code>std::array</code></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::array&lt;<span class="type">int</span>, arraySize(keyVals)&gt; mappedVals; 	<span class="comment">// mappedVals长度是七</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-传递函数">4. 传递函数</h4>
+<p>​	数组并不是C++唯一可以退化成指针的东西。函数类型可以被退化成函数指针，和我们之前讨论的数组的推导类似，函数可以被退化成函数指针：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">someFunc</span><span class="params">(<span class="type">int</span>， <span class="type">double</span>)</span></span>; 	<span class="comment">// someFunc是一个函数</span></span><br><span class="line">								<span class="comment">// 类型是void(int, double)</span></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f1</span><span class="params">(T param)</span></span>; 			<span class="comment">// 在f1中 参数直接按值传递</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f2</span><span class="params">(T&amp; param)</span></span>; 			<span class="comment">// 在f2中 参数是按照引用传递</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">f1</span>(someFunc); 	<span class="comment">// param被推导成函数指针</span></span><br><span class="line">				<span class="comment">// 类型是void(*)(int, double)</span></span><br><span class="line"><span class="built_in">f2</span>(someFunc); 	<span class="comment">// param被推导成函数指针</span></span><br><span class="line">				<span class="comment">// 类型时void(&amp;)(int, double)</span></span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

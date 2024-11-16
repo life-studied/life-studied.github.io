@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ C++ }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/cmake/2024-11-16_%E8%A1%A5%E5%85%85%EF%BC%9A%E6%9B%B4%E4%B8%A5%E6%A0%BC%E7%9A%84%E7%BC%96%E8%AF%91%E6%8C%87%E4%BB%A4%EF%BC%88Linux%EF%BC%89/">补充：更严格的编译指令（Linux）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/cmake/">cmake</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>更严格的编译指令（Linux）</h1>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="comment"># helpful compiler flags for gcc/clang</span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="comment"># the descriptions for these flags can be found on the GNU Compiler Collection&#x27;s webpage.</span></span><br><span class="line"><span class="keyword">add_compile_options</span>(</span><br><span class="line">  -Wall</span><br><span class="line">  -Wextra</span><br><span class="line">  -Werror</span><br><span class="line">  -pedantic-errors</span><br><span class="line">  -Wconversion</span><br><span class="line">  -Wsign-conversion</span><br><span class="line">  -Wdouble-promotion</span><br><span class="line">  -Wcast-align</span><br><span class="line">  -Wformat=<span class="number">2</span></span><br><span class="line">  -Wuninitialized</span><br><span class="line">  -Wnull-dereference</span><br><span class="line">  -Wnon-virtual-dtor</span><br><span class="line">  -Woverloaded-virtual</span><br><span class="line">  -Wdeprecated-copy-dtor</span><br><span class="line">  -Wold-style-cast</span><br><span class="line">  -Wzero-as-null-pointer-constant</span><br><span class="line">  -Wsuggest-override</span><br><span class="line">  -fstack-protector-strong</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>解释：</p>
+<ol>
+<li class="lvl-3">
+<p><code>-Wall</code>：打开几乎所有的警告信息，除了一些非常具体或不常见的问题。</p>
+</li>
+<li class="lvl-3">
+<p><code>-Wextra</code>：打开额外的警告信息，比 <code>-Wall</code> 更加严格。</p>
+</li>
+<li class="lvl-3">
+<p><code>-Werror</code>：将所有警告视为错误。</p>
+</li>
+<li class="lvl-3">
+<p><code>-pedantic-errors</code>：将所有语言不兼容的警告视为错误。</p>
+</li>
+<li class="lvl-3">
+<p><code>-Wconversion</code>：警告隐式转换可能导致精度损失的情况。</p>
+</li>
+<li class="lvl-3">
+<p><code>-Wsign-conversion</code>：警告隐式转换可能导致符号改变的情况。</p>
+</li>
+<li class="lvl-3">
+<p><code>-Wdouble-promotion</code>：警告隐式将 float 转换为 double 的情况。</p>
+</li>
+<li class="lvl-3">
+<p><code>-Wcast-align</code>：警告指针转换可能导致对齐问题的情况。</p>
+</li>
+<li class="lvl-3">
+<p><code>-Wformat=2</code>：启用更严格的格式字符串检查。</p>
+</li>
+<li class="lvl-4">
+<p><code>-Wuninitialized</code>：警告使用未初始化的变量。</p>
+</li>
+<li class="lvl-4">
+<p><code>-Wnull-dereference</code>：警告解引用空指针的情况。</p>
+</li>
+<li class="lvl-4">
+<p><code>-Wnon-virtual-dtor</code>：警告非虚析构函数的使用，这可能在多态类中导致问题。</p>
+</li>
+<li class="lvl-4">
+<p><code>-Woverloaded-virtual</code>：警告重载的虚函数可能导致意外行为。</p>
+</li>
+<li class="lvl-4">
+<p><code>-Wdeprecated-copy-dtor</code>：警告使用已弃用的复制构造函数或析构函数。</p>
+</li>
+<li class="lvl-4">
+<p><code>-Wold-style-cast</code>：警告使用旧式 C 风格的类型转换。</p>
+</li>
+<li class="lvl-4">
+<p><code>-Wzero-as-null-pointer-constant</code>：警告使用字面量 0 作为空指针常量。</p>
+</li>
+<li class="lvl-4">
+<p><code>-Wsuggest-override</code>：在适当的地方建议使用 <code>override</code> 来明确虚函数的重写。</p>
+</li>
+<li class="lvl-4">
+<p><code>-fstack-protector-strong</code>：启用强栈保护，以防止栈溢出攻击。</p>
+</li>
+</ol>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/doxygen/2024-11-16_00%20doxygen%E5%88%9B%E5%BB%BA%E6%8C%87%E5%8D%97/">00 doxygen创建指南</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/doxygen/">doxygen</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>doxygen创建指南</h1>
+<h2 id="创建docs目录并初始化doxygen">创建docs目录并初始化doxygen</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/doxygen/2024-11-16_00%20doxygen%E5%88%9B%E5%BB%BA%E6%8C%87%E5%8D%97/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/doxygen/2024-11-16_01%20%E6%9B%B4%E6%94%B9%E5%AF%BC%E8%88%AA%E6%A0%8F%E5%92%8C%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B/">01 更改导航栏和项目简介</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/doxygen/">doxygen</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>更改导航栏和项目简介</h1>
+<h2 id="添加简介">添加简介</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/doxygen/2024-11-16_01%20%E6%9B%B4%E6%94%B9%E5%AF%BC%E8%88%AA%E6%A0%8F%E5%92%8C%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/doxygen/2024-11-16_03%20%E5%AE%9E%E4%BD%93%EF%BC%88entity%EF%BC%89%E4%B8%8E%E6%B3%A8%E9%87%8A%E9%A3%8E%E6%A0%BC/">03 实体（entity）与注释风格</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/doxygen/">doxygen</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>实体（entity）与注释风格</h1>
+<h2 id="实体">实体</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/doxygen/2024-11-16_03%20%E5%AE%9E%E4%BD%93%EF%BC%88entity%EF%BC%89%E4%B8%8E%E6%B3%A8%E9%87%8A%E9%A3%8E%E6%A0%BC/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/doxygen/2024-11-16_04%20%E5%87%BD%E6%95%B0%E6%B3%A8%E9%87%8A%E5%92%8C%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">04 函数注释和注意事项</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/doxygen/">doxygen</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>函数注释和注意事项</h1>
+<ul class="lvl-0">
+<li class="lvl-2">@see：指向另一个参考实体</li>
+<li class="lvl-2">@return：描述返回值信息</li>
+</ul>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/doxygen/2024-11-16_04%20%E5%87%BD%E6%95%B0%E6%B3%A8%E9%87%8A%E5%92%8C%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/ecs/2024-11-16_ecs%E8%B5%84%E6%96%99/">ecs资料</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/ecs/">ecs</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>ecs资料</h1>
+<h2 id="成熟开源lib">成熟开源lib</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/ecs/2024-11-16_ecs%E8%B5%84%E6%96%99/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/oatpp/2024-11-16_01%20oatpp%E5%AE%89%E8%A3%85%E5%92%8C%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F/">01 oatpp安装和基础使用注意</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/oatpp/">oatpp</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>oatpp安装和基础使用注意</h1>
+<h2 id="下载">下载</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/oatpp/2024-11-16_01%20oatpp%E5%AE%89%E8%A3%85%E5%92%8C%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/oatpp/2024-11-16_03%20PageDTO%E8%A7%A3%E8%AF%BB/">03 PageDTO解读</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/oatpp/">oatpp</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>03 PageDTO解读</h1>
+<p>[TOC]</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/oatpp/2024-11-16_03%20PageDTO%E8%A7%A3%E8%AF%BB/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/oatpp/2024-11-16_04%20MenuDTO%E8%A7%A3%E8%AF%BB/">04 MenuDTO解读</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/oatpp/">oatpp</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>04 MenuDTO解读</h1>
+<p>​	MenuDTO本质上是对</p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/oatpp/2024-11-16_05%20Step-By-Step-Guide%E8%A7%A3%E8%AF%BB%EF%BC%88%E4%B8%8A%EF%BC%89/">05 Step-By-Step-Guide解读（上）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/oatpp/">oatpp</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>05 Step-By-Step-Guide解读（上）</h1>
+<p>​	Step-By-Step-Guide主要演示了两个层面的使用，从简单到复杂：</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/oatpp/2024-11-16_05%20Step-By-Step-Guide%E8%A7%A3%E8%AF%BB%EF%BC%88%E4%B8%8A%EF%BC%89/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/categories/C/page/7/">« prev</a><a class="page-number" href="/categories/C/">1</a><span class="space">&hellip;</span><a class="page-number" href="/categories/C/page/6/">6</a><a class="page-number" href="/categories/C/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/categories/C/page/9/">9</a><a class="page-number" href="/categories/C/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/categories/C/page/27/">27</a><a class="extend next" rel="next" href="/categories/C/page/9/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

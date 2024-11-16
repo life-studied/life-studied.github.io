@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>3-4-3 字符串的比较 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>3-4-3 字符串的比较</h1>
+    </header>
+
+    <section>
+      <h2 id="3-4-3-字符串的比较">3.4.3 字符串的比较</h2>
+<h4 id="1-重载运算符（略）">1. 重载运算符（略）</h4>
+<span id="more"></span>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>&gt;=</code></p>
+</li>
+<li class="lvl-2">
+<p><code>&lt;=</code></p>
+</li>
+<li class="lvl-2">
+<p><code>==</code></p>
+</li>
+<li class="lvl-2">
+<p><code>!=</code></p>
+</li>
+</ul>
+<h4 id="2-Compare成员函数">2. Compare成员函数</h4>
+<p>​	<code>compare</code>成员函数提供比重载运算符更复杂、精密的比较手段：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>两个string</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">string <span class="title">first</span><span class="params">(<span class="string">&quot;This&quot;</span>)</span></span>;</span><br><span class="line">    <span class="function">string <span class="title">first</span><span class="params">(<span class="string">&quot;That&quot;</span>)</span></span>;</span><br><span class="line">    <span class="built_in">assert</span>(first.<span class="built_in">compare</span>(second) &gt; <span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    first.<span class="built_in">swap</span>(second);		<span class="comment">//swap the two strings</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">assert</span>(second.<span class="built_in">compare</span>(first) &lt; <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>两个string各自的子集</p>
+<ul class="lvl-2">
+<li class="lvl-6">参数：
+<ul class="lvl-4">
+<li class="lvl-10">s1起始下标</li>
+<li class="lvl-10">s1的字符数</li>
+<li class="lvl-10">s2</li>
+<li class="lvl-10">s2起始下标</li>
+<li class="lvl-10">s2的字符数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">string <span class="title">first</span><span class="params">(<span class="string">&quot;This is a day that will live in infamy&quot;</span>)</span></span>;</span><br><span class="line">    <span class="function">string <span class="title">second</span><span class="params">(<span class="string">&quot;I don&#x27;t believe that this is what I signed up for&quot;</span>)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">assert</span>(first.<span class="built_in">compare</span>(<span class="number">1</span>, <span class="number">7</span>, second, <span class="number">22</span>, <span class="number">7</span>) == <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">assert</span>(first.<span class="built_in">compare</span>(<span class="number">1</span>, <span class="number">9</span>, second, <span class="number">22</span>, <span class="number">9</span>) &lt; <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-取字符（at和">3. 取字符（<code>at</code>和<code>[]</code>)</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>at</code>和<code>[]</code>都取出字符，一般两者表现一致</p>
+</li>
+<li class="lvl-2">
+<p>不同的地方在于数组越界时，<code>at</code>抛出一个<code>out_of_range</code>异常，而<code>[]</code>将会使程序中断</p>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

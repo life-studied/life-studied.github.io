@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>17-DockerFile常用指令 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>17-DockerFile常用指令</h1>
+    </header>
+
+    <section>
+      <h2 id="DockerFile常用指令">DockerFile常用指令</h2>
+<h4 id="1-FROM关键字">1. FROM关键字</h4>
+<span id="more"></span>
+<p>​	作为dockerfile的第一句，指定基础镜像。</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> 镜像名:tag</span><br></pre></td></tr></table></figure>
+<h4 id="2-MAINTAINER关键字（可选）">2. MAINTAINER关键字（可选）</h4>
+<p>​	描述镜像维护者的姓名和邮箱地址。</p>
+<h4 id="3-RUN关键字">3. RUN关键字</h4>
+<p>​	容器在build时执行的指令。(<code>docker build</code>)</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>shell格式（推荐）</p>
+</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="language-bash"> shell命令</span></span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>exec格式</p>
+</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="language-bash"> [<span class="string">&quot;可执行文件&quot;</span>，<span class="string">&quot;参数1&quot;</span>，<span class="string">&quot;参数2&quot;</span>]</span></span><br><span class="line"><span class="comment"># RUN [&quot;./test.php&quot;,&quot;dev&quot;,&quot;offline&quot;] 等价于 RUN ./test.php dev offline</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-EXPOSE关键字">4. EXPOSE关键字</h4>
+<p>​	当前容器对外暴露的端口。</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">EXPOSE</span> 端口号</span><br></pre></td></tr></table></figure>
+<h4 id="5-WORKDIR">5. WORKDIR</h4>
+<p>​	创建容器后，终端默认登录进来的工作目录（落脚点）。</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /myspace/tomcat</span></span><br></pre></td></tr></table></figure>
+<h4 id="6-USER">6. USER</h4>
+<p>​	以什么样的用户去执行镜像，默认为root。</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">USER</span> root</span><br></pre></td></tr></table></figure>
+<h4 id="7-ENV">7. ENV</h4>
+<p>​	作用于本dockerfile中的环境变量，构建后在后续指令中便于使用。</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ENV</span> CATALINE_HOME /usr/local/tomcat</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> <span class="variable">$CATALINE_HOME</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="8-VOLUME">8. VOLUME</h4>
+<p>​	指定容器数据卷。</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 9. ADD</span></span><br><span class="line"></span><br><span class="line">​	将宿主机中的压缩包放到镜像对应目录下并解压。</span><br><span class="line"></span><br><span class="line">```dockerfile</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="10-COPY">10. COPY</h4>
+<p>​	将宿主机中的文件或目录拷贝到镜像中。</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">COPY</span><span class="language-bash"> src dest</span></span><br><span class="line"><span class="comment">#src 源文件或目录</span></span><br><span class="line"><span class="comment">#dest 容器中的指定路径，不存在时自动创建</span></span><br></pre></td></tr></table></figure>
+<h4 id="11-CMD">11. CMD</h4>
+<p>​	容器启动后执行的指令。只会执行最后一条<code>CMD</code>指令。</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CMD</span><span class="language-bash"> cataline.sh run</span></span><br></pre></td></tr></table></figure>
+<p>​	注意：会被<code>docker run</code>后的参数覆盖。如果<code>docker run... /bin/bash</code>则会不执行<code>CMD</code>后的指令。</p>
+<h4 id="12-ENRTRYPOINT">12. ENRTRYPOINT</h4>
+<p>​	同样时容器启动后执行的指令，但不会被<code>docker run</code>后的命令覆盖。</p>
+<p>​	另外，如果后面跟CMD，将会把CMD中的参数作为默认参数传递给当前命令，如果有传参，则会覆盖该参数。</p>
+<p><strong>案例</strong></p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu</span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> myscript.sh /usr/local/bin/</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">chmod</span> +x /usr/local/bin/myscript.sh</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;myscript.sh&quot;</span>]</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;arg1&quot;</span>, <span class="string">&quot;arg2&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>是否传参</th>
+<th>传参执行</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>默认命令</td>
+<td><a target="_blank" rel="noopener" href="http://myscript.sh">myscript.sh</a> arg1 arg2</td>
+</tr>
+<tr>
+<td>Docker命令传参</td>
+<td>docker run myimage arg3 arg4</td>
+</tr>
+<tr>
+<td>实际命令</td>
+<td><a target="_blank" rel="noopener" href="http://myscript.sh">myscript.sh</a> arg3 arg4</td>
+</tr>
+</tbody>
+</table>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>08 有限状态机 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>08 有限状态机</h1>
+    </header>
+
+    <section>
+      <h1>有限状态机</h1>
+<h2 id="API实现">API实现</h2>
+<span id="more"></span>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;machine.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;chrono&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">enum class</span> <span class="title class_">m_state</span></span><br><span class="line">&#123;</span><br><span class="line">    idle,   <span class="comment">// 0 </span></span><br><span class="line">    walk,   <span class="comment">// 1 &quot;1-2&quot;</span></span><br><span class="line">    run,    <span class="comment">// 2</span></span><br><span class="line">    jump,   <span class="comment">// 3</span></span><br><span class="line">    sleep</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">StartToJump</span> : <span class="keyword">public</span> action_base</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">StopToIdle</span> : <span class="keyword">public</span> action_base</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> happy = <span class="number">0</span>;</span><br><span class="line">    machine&lt;m_state&gt; m;</span><br><span class="line">    m.<span class="built_in">add_state</span>(m_state::walk);</span><br><span class="line">    m.<span class="built_in">add_state</span>(m_state::run);</span><br><span class="line">    m.<span class="built_in">add_state</span>(m_state::jump);</span><br><span class="line">    m.<span class="built_in">add_state</span>(m_state::idle);</span><br><span class="line">    m.<span class="built_in">add_state</span>(m_state::sleep);</span><br><span class="line">    m.<span class="built_in">init_state</span>(m_state::walk);</span><br><span class="line">    m.<span class="built_in">add_transition</span>(m_state::walk, m_state::jump, [](action_base&amp; act)-&gt;<span class="type">bool</span> &#123; <span class="keyword">return</span> <span class="built_in">dynamic_cast</span>&lt;StartToJump*&gt;(&amp;act) != <span class="literal">nullptr</span>; &#125;);</span><br><span class="line">    m.<span class="built_in">add_transition</span>(m_state::jump, m_state::idle, [&amp;](action_base&amp; act)-&gt;<span class="type">bool</span> &#123; <span class="keyword">return</span>  happy == <span class="number">0</span>; &#125;);</span><br><span class="line">    m.<span class="built_in">add_state_out_func</span>(m_state::walk, []() &#123;std::cout &lt;&lt; <span class="string">&quot;leave walk\n&quot;</span>; &#125;);</span><br><span class="line">    m.<span class="built_in">run</span>();</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">	<span class="comment">/*machine m;</span></span><br><span class="line"><span class="comment">	m</span></span><br><span class="line"><span class="comment">		.add_state(m_state::walk)</span></span><br><span class="line"><span class="comment">		.add_state(m_state::walk)</span></span><br><span class="line"><span class="comment">		.add_transition()</span></span><br><span class="line"><span class="comment">		.run();*/</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        m.<span class="built_in">push_action</span>(<span class="built_in">dynamic_pointer_cast</span>&lt;action_base&gt;(std::<span class="built_in">make_shared</span>&lt;StartToJump&gt;()));</span><br><span class="line">        m.<span class="built_in">push_action</span>(<span class="built_in">dynamic_pointer_cast</span>&lt;action_base&gt;(std::<span class="built_in">make_shared</span>&lt;StopToIdle&gt;()));</span><br><span class="line">        <span class="keyword">using</span> <span class="keyword">namespace</span> std::literals;</span><br><span class="line">        std::this_thread::<span class="built_in">sleep_for</span>(<span class="number">1</span>s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    m.<span class="built_in">stop</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/50421568">一个有限状态机的C++实现 - 知乎 (zhihu.com)</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000040763760">设计模式 - 谈 C++17 里的 State 模式之二 - logger - SegmentFault 思否</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://github.com/hedzr/fsm-cxx">hedzr/fsm-cxx: a finite state machine within c++17 (github.com)</a></p>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

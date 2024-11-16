@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>2-2-4 TestSuite框架介绍 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>2-2-4 TestSuite框架介绍</h1>
+    </header>
+
+    <section>
+      <h2 id="2-2-4-TestSuite框架介绍">2.2.4 TestSuite框架介绍</h2>
+<h5 id="1-主要类">1.主要类</h5>
+<span id="more"></span>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Test类</p>
+</li>
+<li class="lvl-2">
+<p>Suite类</p>
+</li>
+</ul>
+<h5 id="2-Test类">2.Test类</h5>
+<p>​	是一个抽象基类，内含成功和失败的次数和run方法。</p>
+<p>​	使用：重写run方法即可。多用test_宏。</p>
+<h5 id="3-初步使用">3.初步使用</h5>
+<p><strong>案例</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<pre><code class="language-C++">  // DateTest.h
+  #ifndef DATETEST_H
+  #define DATETEST_H
+  #include &quot;Date.h&quot;
+  #include &quot;../TestSuite/Test.h&quot;
+  
+  class DateTest : public TestSuite::Test
+  &#123;
+      Date mybday;
+      Date today;
+      Date myevebday;
+  
+  public:
+      DateTest() : mybday(1951, 10, 1), myevebday(&quot;19510930&quot;) &#123;&#125;
+      void run()
+      &#123;
+          testOps();
+          testFunctions();
+          testDuration();
+      &#125;
+      void testOps()
+      &#123;
+          test_(mybday &lt; today);
+          test_(mybday &lt;= today);
+          ...
+      &#125;
+      void testFunction()
+      &#123;
+          test_(mybday.getYear() == 1951);
+          ... test_(mybday.toString() == &quot;19511001&quot;);
+          ...
+      &#125;
+      void testDuration()
+      &#123;
+          Date d2(2003, 7, 4);
+          Date::Duration dur = duration(mybday, d2);
+          test_(dur.years == 51);
+          test_(dur.months == 9);
+          test_(dur.days == 3);
+      &#125;
+  &#125;
+  
+  #endif 
+  
+  <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">* ```C++</span><br><span class="line">	<span class="comment">//DateTest.cpp</span></span><br><span class="line">	<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">	<span class="meta">#<span class="keyword">include</span> <span class="string">&quot;DateTest.h&quot;</span></span></span><br><span class="line">	<span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	    DateTest test;</span><br><span class="line">	    test.<span class="built_in">run</span>();</span><br><span class="line">	    <span class="keyword">return</span> test.<span class="built_in">report</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*	</span></span><br><span class="line"><span class="comment">		Test：report（）函数显示前面的输出，并且把测试失败的次数作为返回值。</span></span><br><span class="line"><span class="comment">		这个值也适合作为main（）函数的返回值。</span></span><br><span class="line"><span class="comment">	*/</span></span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ul>
+<h5 id="4-异常检测">4.异常检测</h5>
+<p>对于异常，不能直接用布尔表达式来判断，则这样使用来测试成功或失败：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">testException</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="function">Date <span class="title">d</span><span class="params">(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)</span></span>;		<span class="comment">//Invaild</span></span><br><span class="line">        <span class="built_in">fail_</span>();			<span class="comment">//not throw, fail</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(Date::DateError&amp;)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">succeed_</span>();			<span class="comment">//throw, success</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">run</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">testException</span>();		<span class="comment">//add exception test to run function</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-5-Suite类配合Test类">2.2.5 Suite类配合Test类</h4>
+<p>​	Suite类可以将测试案例集中到一个函数单元中。程序设计人员可以使用addtest_()成员函数添加一个Test对象到Suite中，也可以使用addSuite()将现有的一个测试套件添加到Suite中。</p>
+<h5 id="1-案例">1.案例</h5>
+<p>下面是一个案例，测试了和String有关的所有类的测试：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;../TestSuite/Suite.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;StringStorage.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Sieve.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Find.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Rparse.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;TrimTest.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;CompStr.h&quot;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> TestSuite;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function">Suite <span class="title">suite</span><span class="params">(<span class="string">&quot;String Tests&quot;</span>)</span></span>;		<span class="comment">//创建Suite类，用于测试String相关的类</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//添加测试类</span></span><br><span class="line">    suite.<span class="built_in">addTest</span>(<span class="keyword">new</span> StringStorageTest);</span><br><span class="line">    suite.<span class="built_in">addTest</span>(<span class="keyword">new</span> SieveTest);</span><br><span class="line">    suite.<span class="built_in">addTest</span>(<span class="keyword">new</span> FindTest);</span><br><span class="line">    suite.<span class="built_in">addTest</span>(<span class="keyword">new</span> RparseTest);</span><br><span class="line">    suite.<span class="built_in">addTest</span>(<span class="keyword">new</span> TrimTest);</span><br><span class="line">    suite.<span class="built_in">addTest</span>(<span class="keyword">new</span> CompStrTest);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//开始运行测试</span></span><br><span class="line">    suite.<span class="built_in">run</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//报告错误（print），并获取错误数量</span></span><br><span class="line">    <span class="type">long</span> nFail = suite.<span class="built_in">report</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//释放所有的测试类</span></span><br><span class="line">    suite.<span class="built_in">free</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> nFail;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="2-Suite接口">2.Suite接口</h5>
+<p>![](picture/Suite function.png)</p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

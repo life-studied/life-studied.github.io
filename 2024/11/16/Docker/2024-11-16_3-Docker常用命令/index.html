@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>3-Docker常用命令 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>3-Docker常用命令</h1>
+    </header>
+
+    <section>
+      <h2 id="Docker常用命令">Docker常用命令</h2>
+<h4 id="1-帮助启动类命令">1.帮助启动类命令</h4>
+<span id="more"></span>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>启动</strong>docker: systemctl start docker</p>
+</li>
+<li class="lvl-2">
+<p><strong>停止</strong>docker: systemctl stop docker</p>
+</li>
+<li class="lvl-2">
+<p>重启docker: systemctl restart docker</p>
+</li>
+<li class="lvl-2">
+<p><strong>查看</strong>docker状态: systemctl status docker</p>
+</li>
+<li class="lvl-2">
+<p>开机启动: systemctl enable docker</p>
+</li>
+<li class="lvl-2">
+<p>查看docker概要信息:dockerinfo</p>
+</li>
+<li class="lvl-2">
+<p>查看docker总体帮助文档: docker --help</p>
+</li>
+<li class="lvl-2">
+<p>查看docker命令帮助文档:docker具体命令–help</p>
+</li>
+</ul>
+<h4 id="2-镜像命令">2.镜像命令</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>查看本地镜像：<code>docker images</code></p>
+<ul class="lvl-2">
+<li class="lvl-6">
+<p>参数：</p>
+<ul class="lvl-4">
+<li class="lvl-10">-a：列出所有镜像（含历史）</li>
+<li class="lvl-10">-q：只显示镜像ID</li>
+</ul>
+</li>
+<li class="lvl-6">
+<p>选项意义</p>
+<ul class="lvl-4">
+<li class="lvl-10">REPOSITORY:表示镜像的仓库源</li>
+<li class="lvl-10">TAG:镜像的标签版本号</li>
+<li class="lvl-10">IMAGE ID:镜像ID</li>
+<li class="lvl-10">CREATED:镜像创建时间</li>
+<li class="lvl-10">SIZE:镜像大小</li>
+</ul>
+</li>
+<li class="lvl-6">
+<pre><code class="language-shell">docker images -a
+docker images -q
+docker images -aq
+<figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line">	</span><br><span class="line">* 在远程仓库搜索镜像：`docker search 镜像名`</span><br><span class="line"></span><br><span class="line">	* ```shell</span><br><span class="line">		docker search redis</span><br></pre></td></tr></table></figure>
+
+
+</code></pre>
+</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>拉取镜像：<code>docker pull 镜像名[:TAG]</code></p>
+<ul class="lvl-2">
+<li class="lvl-4">不加TAG默认latest，TAG是版本号</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>查看镜像/容器/数据卷分别所占的空间：<code>docker system df</code></p>
+</li>
+<li class="lvl-2">
+<p>删除镜像：<code>docker rmi 镜像ID</code>   或者   <code>docker rmi 镜像名</code></p>
+<ul class="lvl-2">
+<li class="lvl-4">
+<p>先docker images查看，再docker rmi</p>
+</li>
+<li class="lvl-4">
+<p>强制删除加参数-f</p>
+<ul class="lvl-4">
+<li class="lvl-6">
+<pre><code class="language-shell">  docker rmi -f hello-world
+  <figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line"><span class="operator"></span></span><br><span class="line"><span class="operator">* </span>删除所有镜像<span class="operator"></span></span><br><span class="line"><span class="operator"></span></span><br><span class="line"><span class="operator">	* </span>```shell</span><br><span class="line">		docker rmi -f <span class="constructor">$(<span class="params">docker</span> <span class="params">images</span> -<span class="params">a</span>)</span></span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-容器命令">3.容器命令</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>启动容器：<code>docker run [OPTIONS] IMAGE [COMMAND][ARG]</code></p>
+<ul class="lvl-2">
+<li class="lvl-4">
+<p>options:</p>
+<ul class="lvl-4">
+<li class="lvl-6"><code>--name</code>：为容器指定一个名字</li>
+<li class="lvl-6"><code>-d</code>：后台运行容器，同时返回容器ID</li>
+<li class="lvl-6"><code>-i</code>：以交互模式运行，一般与<code>-t</code>一起使用</li>
+<li class="lvl-6"><code>-t</code>：为容器分配一个伪输入终端，一般与<code>-i</code>一起使用</li>
+<li class="lvl-6"><code>-P</code>：大写，随机端口映射</li>
+<li class="lvl-6"><code>-p</code>：小写，指定端口映射</li>
+<li class="lvl-6"><code>--net</code>：使用宿主机的ip和端口</li>
+</ul>
+</li>
+<li class="lvl-4">
+<p>案例：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -it --name=u1 ubuntu /bin/bash			#运行ubuntu，使用bash来解释</span><br><span class="line">docker ps	#罗列正在运行的	容器</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-4">
+<p>查看容器：<code>docker ps</code></p>
+</li>
+<li class="lvl-4">
+<p>option:</p>
+<ul class="lvl-4">
+<li class="lvl-6"><code>-a</code>：查看历史容器记录</li>
+<li class="lvl-6"><code>-l</code>：查看最近的容器</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>退出容器：<code>exit</code>   或者    <code>ctrl+p+q</code></p>
+<ul class="lvl-2">
+<li class="lvl-4"><code>exit</code>：<code>run</code>进去，容器退出；<code>attach</code>进去，容器退出；<code>exec</code>进去不退出</li>
+<li class="lvl-4"><code>ctrl+p+q</code>：<code>run</code>进去，容器不退出</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>删除已停止的容器：<code>docker rm 容器ID</code></p>
+<ul class="lvl-2">
+<li class="lvl-4">
+<p>option:</p>
+<ul class="lvl-4">
+<li class="lvl-6"><code>-f</code>：删除正在运行的容器</li>
+</ul>
+</li>
+<li class="lvl-4">
+<p>删除所有容器：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker rm -f $(docker ps -a -q)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>启动已停止的容器：<code>docker start 容器ID</code></p>
+</li>
+<li class="lvl-2">
+<p>强制停止容器：<code>docker kill 容器ID</code></p>
+</li>
+<li class="lvl-2">
+<p>进入容器：<code>docker exec -it 容器ID /bin/bash</code>   或者   <code>docker attach 容器ID</code></p>
+</li>
+<li class="lvl-2">
+<p>查看容器日志：<code>docker logs 容器ID</code></p>
+<ul class="lvl-2">
+<li class="lvl-4">用于排查容器出问题的原因</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>查看容器进程信息：<code>docker top 容器ID</code></p>
+</li>
+<li class="lvl-2">
+<p>查看容器详细信息：<code>docker inspect 容器ID</code></p>
+</li>
+</ul>
+<h4 id="4-容器备份">4.容器备份</h4>
+<h5 id="1-将容器内文件导出">1.将容器内文件导出</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker cp 容器ID 原文件地址 目标文件地址</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>原文件地址：在容器中的地址</p>
+</li>
+<li class="lvl-2">
+<p>目标文件地址：在宿主机的地址</p>
+</li>
+</ul>
+<h5 id="2-导入和导出容器">2.导入和导出容器</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker export 容器ID &gt; 文件名.tar.gz		#导出容器到压缩文件</span><br><span class="line"></span><br><span class="line">cat 压缩文件 | docker import - 用户名/镜像名[:TAG]	#将压缩文件作为镜像导入到docker</span><br><span class="line">docker run 镜像名 </span><br></pre></td></tr></table></figure>
+<p><strong>案例</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker export f62b5da39a4f &gt; ubuntu.tar.gz</span><br><span class="line"></span><br><span class="line">cat ubuntu.tar.gz | docker import - wen/ubuntu:1.0</span><br><span class="line">docker run -it wen/ubuntu:1.0  /bin/bash</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

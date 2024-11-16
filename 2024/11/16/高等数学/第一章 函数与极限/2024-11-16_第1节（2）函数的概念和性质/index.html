@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>第1节（2）函数的概念和性质 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>第1节（2）函数的概念和性质</h1>
+    </header>
+
+    <section>
+      <h2 id="第1节（2）函数的概念和性质">第1节（2）函数的概念和性质</h2>
+<h2 id="二-函数">二.函数</h2>
+<span id="more"></span>
+<h3 id="（一）概念">（一）概念</h3>
+<ol>
+<li class="lvl-3">
+<p>定义：$D\subset R$，$f:D\mapsto R$，即为定义在D上的函数，记作$y=f(x)$，$x\in D$。</p>
+<p>x：自变量，y：因变量，D：定义域，f(x)为值域。</p>
+</li>
+<li class="lvl-3">
+<p>自然定义域：例如$y=\dfrac{1}{x-1}(x\neq 1)$，$y=\sqrt{1-x^2},[-1,1]$</p>
+</li>
+<li class="lvl-3">
+<p>表示法：表格，图像，解析式。</p>
+</li>
+<li class="lvl-3">
+<p>特殊函数</p>
+<ol>
+<li class="lvl-6">符号函数：$y=sgn(x)=\begin{cases}-1,&amp;x&lt;0\0,&amp;x=0\1,&amp; x&gt;0\end{cases}$</li>
+<li class="lvl-6">取整函数：$y=[x]$，取不超过自变量的最大整数。（例如：$[5.6]=5$）</li>
+<li class="lvl-6">狄利克雷函数：$y=D(x)=\begin{cases}1,&amp;x\in Q\0,&amp;x\not\in Q\end{cases}$</li>
+</ol>
+</li>
+</ol>
+<h3 id="（二）函数特性">（二）函数特性</h3>
+<ol>
+<li class="lvl-3">
+<p>有界性：$f(x)$在$X$上有定义</p>
+<ol>
+<li class="lvl-6">有上界：$\forall x\in X$，若$\exists K_1$，使得$f(x)\leq K_1\Longleftrightarrow$有上界。称$K_1$为$f(x)$的一个上界。</li>
+<li class="lvl-6">有下界：$\forall x\in X$，若$\exists K_1$，使得$f(x)\geq K_1\Longleftrightarrow$有下界。称$K_1$为$f(x)$的一个下界。</li>
+<li class="lvl-6">有界：$\forall x\in X$，若$\exists$正数$K$，使得$-K\leq f(x)\leq K\Longleftrightarrow$有界。</li>
+</ol>
+</li>
+<li class="lvl-3">
+<p>单调性：设$f(x)$在$X$上有定义，$\forall x_1,x_2\in X$，不妨令$x_1&lt;x_2$</p>
+<ol>
+<li class="lvl-6">
+<p>总有$f(x_1)&lt;f(x_2)\Rightarrow f(x)$在$X$上$\uparrow$（严格）</p>
+<p>​		$f(x_1)\leq f(x_2)\Rightarrow f(x)$在$X$上$\uparrow$（非严格）</p>
+</li>
+<li class="lvl-6">
+<p>总有$f(x_1)&gt;f(x_2)\Rightarrow f(x)$在$X$上$\downarrow$（严格）</p>
+<p>​		$f(x_1)\geq f(x_2)\Rightarrow f(x)$在$X$上$\downarrow$（非严格）</p>
+</li>
+</ol>
+</li>
+<li class="lvl-3">
+<p>奇偶性：$f(x)$的定义域$D$关于原点对称，$\forall x\in D$</p>
+<ol>
+<li class="lvl-6">若$f(x)=f(-x)\Longleftrightarrow f(x)$是偶函数（函数图像关于$y$轴对称）</li>
+<li class="lvl-6">若$f(x)=-f(-x)\Longleftrightarrow f(x)$是奇函数（函数图像关于原点对称）</li>
+</ol>
+</li>
+<li class="lvl-3">
+<p>周期性：$f(x)$定义域为$D$，$\exists L&gt;0$，$\forall x\in D$，都有$f(x)=f(x+L)\Longleftrightarrow f(x)$为周期函数，以$L$为周期。</p>
+</li>
+</ol>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>浅析StaticClass的实现 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>浅析StaticClass的实现</h1>
+    </header>
+
+    <section>
+      <h1>浅析StaticClass的实现</h1>
+<p>​	每一个继承自UObject的类，都可以通过<code>xxx::StaticClass()</code>获取到该类的UClass对象。本文主要研究该函数在何处定义以及实现方式。</p>
+<span id="more"></span>
+<h2 id="声明点和定义点">声明点和定义点</h2>
+<p>​	在<code>xxx.generated.h</code>中，通过模板特化，出现了该函数的声明：</p>
+<img src="./assets/image-20240202152821420.png" alt="image-20240202152821420" style="zoom: 50%;" />
+<h3 id="模板特化StaticClass的定义">模板特化StaticClass的定义</h3>
+<p>​	在<code>xxx.generated.cpp</code>中，可以找到该函数的定义，是转发调用了<code>xxx::StaticClass()</code>静态成员函数。</p>
+<img src="./assets/image-20240202152946435.png" alt="image-20240202152946435" style="zoom:50%;" />
+<h3 id="静态成员函数StaticClass的定义">静态成员函数StaticClass的定义</h3>
+<p>​	仔细查看后发现，这个被转发的成员函数，是从<code>GENERATE_BODY</code>宏中的<code>DECLARE_CLASS</code>宏创建的定义，这个宏被定义于<code>CoreUObject\Public\UObject\ObjectMacros.h</code>中。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> DECLARE_CLASS( TClass, TSuperClass, TStaticFlags, TStaticCastFlags, TPackage, TRequiredAPI  ) \</span></span><br><span class="line"><span class="meta">private: \</span></span><br><span class="line"><span class="meta">    TClass&amp; operator=(TClass&amp;&amp;);   \</span></span><br><span class="line"><span class="meta">    TClass&amp; operator=(const TClass&amp;);   \</span></span><br><span class="line"><span class="meta">	TRequiredAPI static UClass* GetPrivateStaticClass(); \</span></span><br><span class="line"><span class="meta">public: \</span></span><br><span class="line"><span class="meta">	<span class="comment">/** Bitwise union of #EClassFlags pertaining to this class.*/</span> \</span></span><br><span class="line"><span class="meta">	static constexpr EClassFlags StaticClassFlags=EClassFlags(TStaticFlags); \</span></span><br><span class="line"><span class="meta">	<span class="comment">/** Typedef for the base class (&#123;&#123; typedef-type &#125;&#125;) */</span> \</span></span><br><span class="line"><span class="meta">	typedef TSuperClass Super;\</span></span><br><span class="line"><span class="meta">	<span class="comment">/** Typedef for &#123;&#123; typedef-type &#125;&#125;. */</span> \</span></span><br><span class="line"><span class="meta">	typedef TClass ThisClass;\</span></span><br><span class="line"><span class="meta">	<span class="comment">/** Returns a UClass object representing this class at runtime */</span> \</span></span><br><span class="line"><span class="meta">	inline static UClass* StaticClass() \</span></span><br><span class="line"><span class="meta">	&#123; \</span></span><br><span class="line"><span class="meta">		return GetPrivateStaticClass(); \</span></span><br><span class="line"><span class="meta">	&#125; \</span></span><br><span class="line"><span class="meta">	<span class="comment">/** Returns the package this class belongs in */</span> \</span></span><br><span class="line"><span class="meta">	inline static const TCHAR* StaticPackage() \</span></span><br><span class="line"><span class="meta">	&#123; \</span></span><br><span class="line"><span class="meta">		return TPackage; \</span></span><br><span class="line"><span class="meta">	&#125; \</span></span><br><span class="line"><span class="meta">	<span class="comment">/** Returns the static cast flags for this class */</span> \</span></span><br><span class="line"><span class="meta">	inline static EClassCastFlags StaticClassCastFlags() \</span></span><br><span class="line"><span class="meta">	&#123; \</span></span><br><span class="line"><span class="meta">		return TStaticCastFlags; \</span></span><br><span class="line"><span class="meta">	&#125; \</span></span><br><span class="line"><span class="meta">	<span class="comment">/** For internal use only; use StaticConstructObject() to create new objects. */</span> \</span></span><br><span class="line"><span class="meta">	inline void* operator new(const size_t InSize, EInternal InInternalOnly, UObject* InOuter = (UObject*)GetTransientPackage(), FName InName = NAME_None, EObjectFlags InSetFlags = RF_NoFlags) \</span></span><br><span class="line"><span class="meta">	&#123; \</span></span><br><span class="line"><span class="meta">		return StaticAllocateObject(StaticClass(), InOuter, InName, InSetFlags); \</span></span><br><span class="line"><span class="meta">	&#125; \</span></span><br><span class="line"><span class="meta">	<span class="comment">/** For internal use only; use StaticConstructObject() to create new objects. */</span> \</span></span><br><span class="line"><span class="meta">	inline void* operator new( const size_t InSize, EInternal* InMem ) \</span></span><br><span class="line"><span class="meta">	&#123; \</span></span><br><span class="line"><span class="meta">		return (void*)InMem; \</span></span><br><span class="line"><span class="meta">	&#125; \</span></span><br><span class="line"><span class="meta">	<span class="comment">/* Eliminate V1062 warning from PVS-Studio while keeping MSVC and Clang happy. */</span> \</span></span><br><span class="line"><span class="meta">	inline void operator delete(void* InMem) \</span></span><br><span class="line"><span class="meta">	&#123; \</span></span><br><span class="line"><span class="meta">		::operator delete(InMem); \</span></span><br><span class="line"><span class="meta">	&#125;</span></span><br></pre></td></tr></table></figure>
+<p>​	可以看到，这个宏中定义了<code>StaticClass()</code>成员函数，方法是转发<code>GetPrivateStaticClass()</code>成员函数。</p>
+<h3 id="成员函数GetPrivateStaticClass的定义">成员函数GetPrivateStaticClass的定义</h3>
+<p>​	<code>GetPrivateStaticClass</code>成员函数是在<code>xxx.genereated.cpp</code>中的宏<code>IMPLEMENT_CLASS_NO_AUTO_REGISTRATION</code>定义的。这个宏本身定义于<code>CoreUObject\Public\UObject\ObjectMacros.h</code>中。可以看出它是一个经典的单例模式：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(TClass) \</span></span><br><span class="line"><span class="meta">	FClassRegistrationInfo Z_Registration_Info_UClass_##TClass; \</span></span><br><span class="line"><span class="meta">	UClass* TClass::GetPrivateStaticClass() \</span></span><br><span class="line"><span class="meta">	&#123; \</span></span><br><span class="line"><span class="meta">		<span class="keyword">if</span> (!Z_Registration_Info_UClass_##TClass.InnerSingleton) \</span></span><br><span class="line"><span class="meta">		&#123; \</span></span><br><span class="line"><span class="meta">			<span class="comment">/* this could be handled with templates, but we want it external to avoid code bloat */</span> \</span></span><br><span class="line"><span class="meta">			GetPrivateStaticClassBody( \</span></span><br><span class="line"><span class="meta">				StaticPackage(), \</span></span><br><span class="line"><span class="meta">				(TCHAR*)TEXT(#TClass) + 1 + ((StaticClassFlags &amp; CLASS_Deprecated) ? 11 : 0), \</span></span><br><span class="line"><span class="meta">				Z_Registration_Info_UClass_##TClass.InnerSingleton, \</span></span><br><span class="line"><span class="meta">				StaticRegisterNatives##TClass, \</span></span><br><span class="line"><span class="meta">				sizeof(TClass), \</span></span><br><span class="line"><span class="meta">				alignof(TClass), \</span></span><br><span class="line"><span class="meta">				TClass::StaticClassFlags, \</span></span><br><span class="line"><span class="meta">				TClass::StaticClassCastFlags(), \</span></span><br><span class="line"><span class="meta">				TClass::StaticConfigName(), \</span></span><br><span class="line"><span class="meta">				(UClass::ClassConstructorType)InternalConstructor<span class="string">&lt;TClass&gt;</span>, \</span></span><br><span class="line"><span class="meta">				(UClass::ClassVTableHelperCtorCallerType)InternalVTableHelperCtorCaller<span class="string">&lt;TClass&gt;</span>, \</span></span><br><span class="line"><span class="meta">				UOBJECT_CPPCLASS_STATICFUNCTIONS_FORCLASS(TClass), \</span></span><br><span class="line"><span class="meta">				&amp;TClass::Super::StaticClass, \</span></span><br><span class="line"><span class="meta">				&amp;TClass::WithinClass::StaticClass \</span></span><br><span class="line"><span class="meta">			); \</span></span><br><span class="line"><span class="meta">		&#125; \</span></span><br><span class="line"><span class="meta">		return Z_Registration_Info_UClass_##TClass.InnerSingleton; \</span></span><br><span class="line"><span class="meta">	&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="GetPrivateStaticClassBody函数解读">GetPrivateStaticClassBody函数解读</h2>
+<p>​	这个函数定义于<code>CoreUObject\Private\UObject\Class.cpp</code>中，原型为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">GetPrivateStaticClassBody</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">	<span class="type">const</span> TCHAR* PackageName,</span></span></span><br><span class="line"><span class="params"><span class="function">	<span class="type">const</span> TCHAR* Name,</span></span></span><br><span class="line"><span class="params"><span class="function">	UClass*&amp; ReturnClass,</span></span></span><br><span class="line"><span class="params"><span class="function">	<span class="type">void</span>(*RegisterNativeFunc)(),</span></span></span><br><span class="line"><span class="params"><span class="function">	uint32 InSize,</span></span></span><br><span class="line"><span class="params"><span class="function">	uint32 InAlignment,</span></span></span><br><span class="line"><span class="params"><span class="function">	EClassFlags InClassFlags,</span></span></span><br><span class="line"><span class="params"><span class="function">	EClassCastFlags InClassCastFlags,</span></span></span><br><span class="line"><span class="params"><span class="function">	<span class="type">const</span> TCHAR* InConfigName,</span></span></span><br><span class="line"><span class="params"><span class="function">	UClass::ClassConstructorType InClassConstructor,</span></span></span><br><span class="line"><span class="params"><span class="function">	UClass::ClassVTableHelperCtorCallerType InClassVTableHelperCtorCaller,</span></span></span><br><span class="line"><span class="params"><span class="function">	FUObjectCppClassStaticFunctions&amp;&amp; InCppClassStaticFunctions,</span></span></span><br><span class="line"><span class="params"><span class="function">	UClass::StaticClassFunctionType InSuperClassFn,</span></span></span><br><span class="line"><span class="params"><span class="function">	UClass::StaticClassFunctionType InWithinClassFn</span></span></span><br><span class="line"><span class="params"><span class="function">	)</span></span>;</span><br></pre></td></tr></table></figure>
+<h3 id="函数指针解读">函数指针解读</h3>
+<p>​	在函数中，出现了两个函数指针：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">(UClass::ClassConstructorType)InternalConstructor&lt;TClass&gt;;</span><br><span class="line">(UClass::ClassVTableHelperCtorCallerType)InternalVTableHelperCtorCaller&lt;TClass&gt;;</span><br></pre></td></tr></table></figure>
+<p>​	它们是对模板类进行特化实现后，将特化的函数指针传递过来：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Helper template to call the default constructor for a class</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">InternalConstructor</span><span class="params">( <span class="type">const</span> FObjectInitializer&amp; X )</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">	T::__DefaultConstructor(X);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Helper template to call the vtable ctor caller for a class</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span></span><br><span class="line"><span class="function">UObject* <span class="title">InternalVTableHelperCtorCaller</span><span class="params">(FVTableHelper&amp; Helper)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> T::__VTableCtorCaller(Helper);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://ue5wiki.com/wiki/40612/">StaticClass 实现分析 | 虚幻社区知识库 (ue5wiki.com)</a></p>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

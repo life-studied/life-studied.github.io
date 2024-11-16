@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>C语言抽象实现接口 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>C语言抽象实现接口</h1>
+    </header>
+
+    <section>
+      <h1>C语言抽象实现接口</h1>
+<p>​	实现方法很简单，使用函数指针放在接口结构体中。继承它的结构体（实际上是通过组合）调用这个接口的函数指针。</p>
+<span id="more"></span>
+<h2 id="抽象接口">抽象接口</h2>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="title function_">void</span><span class="params">(*printer_print_fn)</span><span class="params">(<span class="type">void</span>* printer, <span class="type">const</span> <span class="type">char</span>* str)</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">printer_i</span> &#123;</span></span><br><span class="line">	printer_print_fn print;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="继承（组合）接口">继承（组合）接口</h2>
+<h3 id="color-printer">color_printer</h3>
+<h4 id="头文件">头文件</h4>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;printer_i.h&quot;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">color_printer</span> &#123;</span></span><br><span class="line">	<span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">printer_i</span>* <span class="title">interface</span>;</span></span><br><span class="line">	<span class="type">int</span> enable_color;</span><br><span class="line">	<span class="type">const</span> <span class="type">char</span>* color_command;</span><br><span class="line">	<span class="type">char</span>* buf;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">color_printer_print</span><span class="params">(<span class="keyword">struct</span> color_printer* self, <span class="type">const</span> <span class="type">char</span>* str)</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> color_printer* <span class="title function_">color_printer_new</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* color_command)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">color_printer_cleanup</span><span class="params">(<span class="keyword">struct</span> color_printer* self)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">color_printer_print</span><span class="params">(<span class="keyword">struct</span> color_printer* self, <span class="type">const</span> <span class="type">char</span>* str)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">color_printer_disable_color</span><span class="params">(<span class="keyword">struct</span> color_printer* self)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">color_printer_enable_color</span><span class="params">(<span class="keyword">struct</span> color_printer* self)</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="cpp文件">cpp文件</h4>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;color_printer.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">printer_i</span> <span class="title">printer_interface</span> &#123;</span></span><br><span class="line">	(printer_print_fn)color_printer_print</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> color_printer* <span class="title function_">color_printer_new</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* color_command)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">color_printer</span>* <span class="title">self</span>;</span></span><br><span class="line">	self = (color_printer*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> color_printer));</span><br><span class="line">	assert(self != <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	self-&gt;interface = &amp;printer_interface;</span><br><span class="line">	self-&gt;color_command = color_command;</span><br><span class="line">	self-&gt;enable_color = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">	self-&gt;buf = (<span class="type">char</span>*)<span class="built_in">malloc</span>(<span class="number">100</span>);</span><br><span class="line">	assert(self-&gt;buf != <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">color_printer_cleanup</span><span class="params">(<span class="keyword">struct</span> color_printer* self)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">free</span>(self-&gt;buf);</span><br><span class="line">	<span class="built_in">free</span>(self);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">color_printer_print</span><span class="params">(<span class="keyword">struct</span> color_printer* self, <span class="type">const</span> <span class="type">char</span>* str)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (self-&gt;enable_color) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%s%s\033[0m\n&quot;</span>, self-&gt;color_command, str);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, str);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">color_printer_disable_color</span><span class="params">(<span class="keyword">struct</span> color_printer* self)</span></span><br><span class="line">&#123;</span><br><span class="line">	self-&gt;enable_color = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">color_printer_enable_color</span><span class="params">(<span class="keyword">struct</span> color_printer* self)</span></span><br><span class="line">&#123;</span><br><span class="line">	self-&gt;enable_color = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="plain-printer">plain_printer</h3>
+<h4 id="头文件-2">头文件</h4>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;printer_i.h&quot;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">plain_printer</span> &#123;</span></span><br><span class="line">	<span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">printer_i</span>* <span class="title">interface</span>;</span></span><br><span class="line">	<span class="type">const</span> <span class="type">char</span>* prefix;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">plain_printer_print</span><span class="params">(<span class="keyword">struct</span> plain_printer* self, <span class="type">const</span> <span class="type">char</span>* str)</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> plain_printer* <span class="title function_">plain_printer_new</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* prefix)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">plain_printer_cleanup</span><span class="params">(<span class="keyword">struct</span> plain_printer* self)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">plain_printer_print</span><span class="params">(<span class="keyword">struct</span> plain_printer* self, <span class="type">const</span> <span class="type">char</span>* str)</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="cpp文件-2">cpp文件</h4>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;plain_printer.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">printer_i</span> <span class="title">printer_interface</span> &#123;</span></span><br><span class="line">	(printer_print_fn)plain_printer_print</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> plain_printer* <span class="title function_">plain_printer_new</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* prefix)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">plain_printer</span>* <span class="title">self</span>;</span></span><br><span class="line">	self = (plain_printer*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> plain_printer));</span><br><span class="line">	assert(self != <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	self-&gt;interface = &amp;printer_interface;</span><br><span class="line">	self-&gt;prefix = prefix;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">plain_printer_cleanup</span><span class="params">(<span class="keyword">struct</span> plain_printer* self)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">free</span>(self);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">plain_printer_print</span><span class="params">(<span class="keyword">struct</span> plain_printer* self, <span class="type">const</span> <span class="type">char</span>* str)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s%s\n&quot;</span>, self-&gt;prefix, str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="使用接口的方式">使用接口的方式</h2>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;color_printer.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;plain_printer.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">plain_printer</span>* <span class="title">p1</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">plain_printer</span>* <span class="title">p2</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">color_printer</span>* <span class="title">p3</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">color_printer</span>* <span class="title">p4</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">printer_i</span>** <span class="title">p</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">	p1 = plain_printer_new(<span class="string">&quot;&gt;&gt;&gt;&quot;</span>);</span><br><span class="line">	p2 = plain_printer_new(<span class="string">&quot;~~~&quot;</span>);</span><br><span class="line">	p3 = color_printer_new(<span class="string">&quot;\033[31;47m&quot;</span>);</span><br><span class="line">	p4 = color_printer_new(<span class="string">&quot;\033[30;42m&quot;</span>);</span><br><span class="line"></span><br><span class="line">	p = (<span class="keyword">struct</span> printer_i**)p1;</span><br><span class="line">	(*p)-&gt;print(p, <span class="string">&quot;Hello from p1&quot;</span>);</span><br><span class="line"></span><br><span class="line">	p = (<span class="keyword">struct</span> printer_i**)p2;</span><br><span class="line">	(*p)-&gt;print(p, <span class="string">&quot;Hello from p2&quot;</span>);</span><br><span class="line"></span><br><span class="line">	p = (<span class="keyword">struct</span> printer_i**)p3;</span><br><span class="line">	(*p)-&gt;print(p, <span class="string">&quot;Hello from p3&quot;</span>);</span><br><span class="line"></span><br><span class="line">	p = (<span class="keyword">struct</span> printer_i**)p4;</span><br><span class="line">	(*p)-&gt;print(p, <span class="string">&quot;Hello from p4&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

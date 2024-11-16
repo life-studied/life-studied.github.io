@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>05 AVFrame数据模型与API | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>05 AVFrame数据模型与API</h1>
+    </header>
+
+    <section>
+      <h1>AVFrame数据模型与API</h1>
+<h2 id="1-数据模型">1. 数据模型</h2>
+<span id="more"></span>
+<p>AVFrame与AVPacket类似，同样是通过一个引用指向真正的frame数据。</p>
+<h2 id="2-常用API">2. 常用API</h2>
+<table>
+<thead>
+<tr>
+<th>函数原型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AVFrame *av_frame_alloc(void);</code></td>
+<td>分配AVFrame</td>
+</tr>
+<tr>
+<td><code>void av_frame_free(AVFrame **frame);</code></td>
+<td>释放AVFrame</td>
+</tr>
+<tr>
+<td><code>int av_frame_ref(AVFrame *dst, const AVFrame *src);</code></td>
+<td>增加引用计数</td>
+</tr>
+<tr>
+<td><code>void av_frame_unref(AVFrame *frame);</code></td>
+<td>减少引用计数</td>
+</tr>
+<tr>
+<td><code>void av_frame_move_ref(AVFrame *dst, AVFrame *src);</code></td>
+<td>转移引用计数</td>
+</tr>
+<tr>
+<td><code>int av_frame_get_buffer(AVFrame *frame, int align);</code></td>
+<td>根据AVFrame分配内存</td>
+</tr>
+<tr>
+<td><code>AVFrame *av_frame_clone(const AVFrame *src);</code></td>
+<td>等于 <code>av_frame_alloc() + av_frame_ref()</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-examples">3. examples</h2>
+<h3 id="av-frame-get-buffer">av_frame_get_buffer</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">AVFrame* frame = <span class="built_in">av_frame_alloc</span>();</span><br><span class="line"><span class="comment">// 1024 * (16/8) * 1 = 2048 byte</span></span><br><span class="line">frame-&gt;nb_samples = <span class="number">1024</span>;	<span class="comment">// 采样点数</span></span><br><span class="line">frame-&gt;format = AV_SAMPLE_FMT_S16;	<span class="comment">// 每个采样点16bit (AV_SAMPLE_FMT_S16/AV_SAMPLE_FMT_S16P)</span></span><br><span class="line">frame-&gt;channel_layout = AV_CH_LAYOUT_MONO;	<span class="comment">// (AV_CH_LAYOUT_MONO/AV_CH_LAYOUT_STEREO)</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> ret = <span class="built_in">av_frame_get_buffer</span>(frame, <span class="number">0</span>);	<span class="comment">// 根据设置分配buffer内存 ref:1</span></span><br><span class="line"></span><br><span class="line">ret = <span class="built_in">av_frame_make_writable</span>(frame);	<span class="comment">// 允许写入</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">av_frame_unref</span>(frame);	<span class="comment">// ref:0</span></span><br><span class="line"><span class="built_in">av_frame_free</span>(&amp;frame);</span><br></pre></td></tr></table></figure>
+<p>FFmpeg 中定义两种音频声道布局类型，分别代表：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>AV_CH_LAYOUT_MONO</code>: 单声道布局，只有一个声道。（size* 1）</p>
+</li>
+<li class="lvl-2">
+<p><code>AV_CH_LAYOUT_STEREO</code>: 立体声布局，有两个声道。（size* 2）</p>
+</li>
+</ul>
+<p>FFmpeg 中定义两种采样格式，其中：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>AV_SAMPLE_FMT_S16</code> 表示音频样本以16位有符号整型的形式存储，所有声道的样本都存储在同一个连续的缓冲区内</p>
+<ul class="lvl-2">
+<li class="lvl-4">
+<p>（即在同一缓冲区交错存储）</p>
+</li>
+<li class="lvl-4">
+<pre><code class="language-C++">frame-&gt;buf[0]-&gt;size;	// 4096
+<figure class="highlight xl"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- `AV_SAMPLE_FMT_S16P` 表示每个声道的样本存储在不同的缓冲区中，它是一种平面音频格式，每个声道的数据是分开存储的</span><br><span class="line"></span><br><span class="line">  - （即在两个缓冲区分别存储）</span><br><span class="line"></span><br><span class="line">  - ```C++</span><br><span class="line">    <span class="function"><span class="title">frame</span>-&gt;</span><span class="function"><span class="title">buf</span>[0]-&gt;</span>size;	<span class="comment">// 2048</span></span><br><span class="line">    <span class="function"><span class="title">frame</span>-&gt;</span><span class="function"><span class="title">buf</span>[1]-&gt;</span>size;	<span class="comment">// 2048</span></span><br></pre></td></tr></table></figure>
+
+
+
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

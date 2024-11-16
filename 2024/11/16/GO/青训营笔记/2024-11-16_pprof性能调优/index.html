@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>pprof性能调优 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>pprof性能调优</h1>
+    </header>
+
+    <section>
+      <h1>pprof性能调优</h1>
+<h2 id="代码中使用pprof">代码中使用pprof</h2>
+<span id="more"></span>
+<p>​	在main函数开始使用下面的代码开启pprof功能。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;log&quot;</span></span><br><span class="line">	<span class="string">&quot;net/http&quot;</span></span><br><span class="line">	_ <span class="string">&quot;net/http/pprof&quot;</span></span><br><span class="line">	<span class="string">&quot;os&quot;</span></span><br><span class="line">	<span class="string">&quot;runtime&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="string">&quot;github.com/wolfogre/go-pprof-practice/animal&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	log.SetFlags(log.Lshortfile | log.LstdFlags)</span><br><span class="line">	log.SetOutput(os.Stdout)</span><br><span class="line"></span><br><span class="line">	runtime.GOMAXPROCS(<span class="number">1</span>)</span><br><span class="line">	runtime.SetMutexProfileFraction(<span class="number">1</span>)</span><br><span class="line">	runtime.SetBlockProfileRate(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">if</span> err := http.ListenAndServe(<span class="string">&quot;:6060&quot;</span>, <span class="literal">nil</span>); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			log.Fatal(err)</span><br><span class="line">		&#125;</span><br><span class="line">		os.Exit(<span class="number">0</span>)</span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="浏览器查看pprof">浏览器查看pprof</h2>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line">http://localhost:6060/debug/pprof</span><br></pre></td></tr></table></figure>
+<h2 id="终端查看pprof">终端查看pprof</h2>
+<h3 id="CPU性能分析">CPU性能分析</h3>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">go tool pprof &quot;http://localhost:6060/debug/pprof/profile?seconds=10&quot;	#监测时间10s</span><br></pre></td></tr></table></figure>
+<h4 id="1-top">1. top</h4>
+<p>​	使用<code>topN</code>可以从高到底对CPU性能消耗的函数排序。</p>
+<p><img src="./assets/image-20230729160518803.png" alt="image-20230729160518803"></p>
+<p>其中：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>flat：当前函数（不包括函数调用）消耗的CPU性能</p>
+</li>
+<li class="lvl-2">
+<p>cum：当前函数（包括函数调用）消耗的CPU性能</p>
+</li>
+</ul>
+<h4 id="2-list">2. list</h4>
+<p>​	使用<code>list+函数名</code>列出函数对应的代码。可用此来列出CPU消耗最多的函数对应的代码。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">list Eat</span><br></pre></td></tr></table></figure>
+<p><img src="./assets/image-20230729160738957.png" alt="image-20230729160738957"></p>
+<h4 id="3-web">3. web</h4>
+<p>​	<code>web</code>命令用于使用浏览器查看函数性能的消耗情况。</p>
+<h3 id="堆内存分析">堆内存分析</h3>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">go tool pprof -http=:8080 &quot;http://localhost:6060/debug/pprof/heap&quot;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

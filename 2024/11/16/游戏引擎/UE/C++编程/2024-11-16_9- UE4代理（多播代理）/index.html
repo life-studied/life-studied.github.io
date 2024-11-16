@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>9- UE4代理（多播代理） | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>9- UE4代理（多播代理）</h1>
+    </header>
+
+    <section>
+      <h1>9. UE4代理（多播代理）</h1>
+<p>​	多播代理相比于单播代理，可以绑定多个函数，执行时也是执行多个函数。</p>
+<span id="more"></span>
+<p>​	但注意：多播代理<strong>不保证函数的执行顺序</strong>。</p>
+<h2 id="1-代理类型的声明">1. 代理类型的声明</h2>
+<p>代理在被使用以创建变量之前应该被声明：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>返回值：多播代理<strong>不存在返回值</strong></p>
+</li>
+<li class="lvl-2">
+<p>参数：有几个参数，以及相应参数类型</p>
+</li>
+<li class="lvl-2">
+<p>命名：代理的名字</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 多播代理</span></span><br><span class="line"><span class="built_in">DECLARE_MULTICAST_DELEGATE</span>(FTestMultiDelegateNoParam);		<span class="comment">//无参无返回值代理（命名最好规范：F+代理名+MultiDelegate+参数数量）</span></span><br><span class="line"><span class="built_in">DECLARE_MULTICAST_DELEGATE_TwoParams</span>(FTestMultiDelegateTwoParams, <span class="type">float</span>, <span class="type">const</span> FString&amp;);	<span class="comment">//双参数</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="2-代理的创建">2. 代理的创建</h2>
+<p>​	多播代理使用<code>Addxxx</code>的方法添加绑定。</p>
+<p>​	下面是绑定的函数说明，绑定方法与单播代理一致：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>绑定Lambda：<code>AddLambda</code></p>
+</li>
+<li class="lvl-2">
+<p>绑定原生C++类函数：<code>AddRaw</code></p>
+</li>
+<li class="lvl-2">
+<p>绑定共享指针：<code>AddSP</code></p>
+</li>
+<li class="lvl-2">
+<p>绑定线程安全共享指针：<code>AddThreadSafeSP</code></p>
+</li>
+<li class="lvl-2">
+<p>绑定静态函数：<code>AddStatic</code></p>
+</li>
+<li class="lvl-2">
+<p>绑定UFUNCTION：<code>AddUFunction</code></p>
+</li>
+<li class="lvl-2">
+<p>绑定UObject：<code>AddUObject</code></p>
+</li>
+</ul>
+<h2 id="3-调用代理绑定的对象（Execute）">3. 调用代理绑定的对象（Execute）</h2>
+<p>​	使用<code>Execute</code>调用绑定的对象：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(DelegateTwoParamsRetVal.<span class="built_in">IsBound</span>())</span><br><span class="line">&#123;</span><br><span class="line">    DelegateTwoParamsRetVal.<span class="built_in">Execute</span>(<span class="number">23</span>, <span class="string">&quot;Hello Delegate&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>无参代理的新方法</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">DECLARE_DELEGATE.<span class="built_in">ExecuteIfBound</span>();	<span class="comment">//无参数执行</span></span><br></pre></td></tr></table></figure>
+<h3 id=""></h3>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

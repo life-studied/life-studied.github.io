@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2024-11-16_6-3%20%E9%80%8F%E6%98%8E%E5%8A%A8%E7%94%BB/">6-3 透明动画</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/">Windows游戏编程（逐梦旅程读书笔记）</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="透明动画">透明动画</h2>
+<blockquote>
+<p>透明动画 = 透明贴图 + 游戏循环 （上几节的综合运用）</p>
+</blockquote>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2024-11-16_6-3%20%E9%80%8F%E6%98%8E%E5%8A%A8%E7%94%BB/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2024-11-16_7-1%20Windows%E9%94%AE%E7%9B%98%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86/">7-1 Windows键盘消息处理</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/">Windows游戏编程（逐梦旅程读书笔记）</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="Windows键盘消息处理">Windows键盘消息处理</h2>
+<blockquote>
+<p>在Windows下，所有按键都会被映射为一个虚拟键，有自己的虚拟键码。</p>
+</blockquote>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2024-11-16_7-1%20Windows%E9%94%AE%E7%9B%98%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2024-11-16_7-2%20Windows%E9%BC%A0%E6%A0%87%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86/">7-2 Windows鼠标消息处理</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/">Windows游戏编程（逐梦旅程读书笔记）</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="Windows鼠标消息处理">Windows鼠标消息处理</h2>
+<blockquote>
+<p>在鼠标消息处理中，message传入鼠标消息类型，而<code>wParam</code>和<code>lParam</code>存储了具体的值。</p>
+</blockquote>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2024-11-16_7-2%20Windows%E9%BC%A0%E6%A0%87%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2024-11-16_7-2-5%20Windows%E9%BC%A0%E6%A0%87%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0/">7-2-5 Windows鼠标相关函数</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/">Windows游戏编程（逐梦旅程读书笔记）</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="Windows鼠标相关函数">Windows鼠标相关函数</h2>
+<h4 id="1-设置鼠标光标位置（相对于屏幕）">1.设置鼠标光标位置（相对于屏幕）</h4>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2024-11-16_7-2-5%20Windows%E9%BC%A0%E6%A0%87%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/cmu15445/2024-11-16_00%20cmu15445%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AF%B4%E6%98%8E/">00 cmu15445环境搭建说明</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/cmu15445/">cmu15445</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>cmu15445环境搭建说明</h1>
+<h2 id="1-安装WSL">1. 安装WSL</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/cmu15445/2024-11-16_00%20cmu15445%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AF%B4%E6%98%8E/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/excalidraw/2024-11-16_excalidraw%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/">excalidraw服务器部署</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/excalidraw/">excalidraw</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>excalidraw服务器部署</h1>
+<h2 id="1-环境安装">1. 环境安装</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/excalidraw/2024-11-16_excalidraw%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/ffmpeg/2024-11-16_00%20FFmpeg%E5%9F%BA%E7%A1%80&amp;%E5%91%BD%E4%BB%A4%E8%A1%8C/">00 FFmpeg基础&amp;命令行</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/ffmpeg/">ffmpeg</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>00 FFmpeg基础&amp;命令行</h1>
+<h2 id="一、概念">一、概念</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/ffmpeg/2024-11-16_00%20FFmpeg%E5%9F%BA%E7%A1%80&%E5%91%BD%E4%BB%A4%E8%A1%8C/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/ffmpeg/2024-11-16_00%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%9F%A5%E8%AF%A2%E8%A1%A8/">00 数据结构查询表</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/ffmpeg/">ffmpeg</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>数据结构查询表</h1>
+<h2 id="AVFormatContext">AVFormatContext</h2>
+<p><code>AVFormatContext</code> 是处理多媒体文件的核心结构体，包含了多媒体文件的封装格式信息。</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/ffmpeg/2024-11-16_00%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%9F%A5%E8%AF%A2%E8%A1%A8/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/ffmpeg/2024-11-16_00%20%E6%B5%81%E7%A8%8B/">00 流程</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/ffmpeg/">ffmpeg</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>流程</h1>
+<p><img src="./assets/image-20240808205341901.png" alt="image-20240808205341901"></p>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/ffmpeg/2024-11-16_00%20%E8%A7%86%E9%A2%91%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F/">00 视频编码格式</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/ffmpeg/">ffmpeg</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>00 视频编码格式</h1>
+<h2 id="编码格式与封装格式">编码格式与封装格式</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/ffmpeg/2024-11-16_00%20%E8%A7%86%E9%A2%91%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/17/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/91/">91</a><a class="extend next" rel="next" href="/page/19/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

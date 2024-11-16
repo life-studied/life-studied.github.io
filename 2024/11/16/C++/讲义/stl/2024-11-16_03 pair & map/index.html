@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>03 pair &amp; map | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>03 pair &amp; map</h1>
+    </header>
+
+    <section>
+      <h1>pair &amp; map</h1>
+<p>[TOC]</p>
+<span id="more"></span>
+<h2 id="1-pair">1. pair</h2>
+<p>​	pair是一个二元组，第一个是first，第二个是second。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;utility&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; p;</span><br><span class="line">p.first = <span class="number">1</span>;</span><br><span class="line">p.second = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="2-map">2. map</h2>
+<p>​	map是一个含有多个二元组的容器。它的底层实现是一个红黑树，也就是说，它的查找效率是O(lgn)。</p>
+<h3 id="2-1-插入">2.1 插入</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; m;</span><br><span class="line">m.<span class="built_in">insert</span>(&#123;<span class="number">1</span>,<span class="number">2</span>&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-查找">2.2 查找</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; m&#123;</span><br><span class="line">    &#123;<span class="number">1</span>,<span class="number">2</span>&#125;,</span><br><span class="line">    &#123;<span class="number">2</span>,<span class="number">2</span>&#125;,</span><br><span class="line">    &#123;<span class="number">3</span>,<span class="number">2</span>&#125;,</span><br><span class="line">    &#123;<span class="number">4</span>,<span class="number">2</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> it = m.<span class="built_in">find</span>(<span class="number">2</span>);</span><br><span class="line"><span class="keyword">if</span>(it != m.<span class="built_in">end</span>())</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">auto</span> res = it-&gt;second;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-删除">2.3 删除</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">m.<span class="built_in">erase</span>(it);</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-修改">2.4 修改</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">m[<span class="number">2</span>] = <span class="number">2</span>;</span><br><span class="line">m[<span class="number">3</span>] = <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="注意点">注意点</h3>
+<h4 id="1-如果不能保证存在，使用find获取迭代器">1. 如果不能保证存在，使用find获取迭代器</h4>
+<p>​	使用[]运算符，可以拿到对应的value，但是如果原本这个pair不存在，则会设置一个默认的value进去，并返回。</p>
+<p>​	所以使用find，去检测是否存在。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(m[<span class="number">2</span>] == <span class="number">0</span>);		<span class="comment">// wrong!</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">auto</span> it = m.<span class="built_in">find</span>(<span class="number">2</span>); it != m.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
+<h4 id="2-即使不关心是否存在，也使用find获取迭代器">2. 即使不关心是否存在，也使用find获取迭代器</h4>
+<p>​	使用[]运算符虽然方便，但是每次使用都会进行一次查找，但是使用find只会查找一次，接下来就能直接定位到位置。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(m[<span class="number">2</span>] == <span class="number">0</span>)		<span class="comment">//1</span></span><br><span class="line">&#123;</span><br><span class="line">    m[<span class="number">2</span>]++;			<span class="comment">//2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">auto</span> it = m.<span class="built_in">find</span>(<span class="number">2</span>); it != m.<span class="built_in">end</span>())	<span class="comment">//1</span></span><br><span class="line">&#123;</span><br><span class="line">    it-&gt;second++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    m.<span class="built_in">insert</span>(&#123;<span class="number">2</span>, <span class="number">0</span>&#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="3-unordered-map">3. unordered_map</h2>
+<p>​	这个最常用，因为底层是hash表，即查找时间是O(1)。</p>
+<p>​	用法与map一致。</p>
+<h2 id="4-补充知识点：将pair作为key">4. 补充知识点：将pair作为key</h2>
+<p>​	经常存在需求，需要将pair作为key，例如，根据坐标xy，查找到对应的属性。此处的xy，就是一个典型的pair结构。</p>
+<h3 id="map">map</h3>
+<p>​	如果使用了map，则可以直接这样用：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">map&lt;pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt;, <span class="type">int</span>&gt; m;</span><br><span class="line">pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; p&#123;<span class="number">2</span>,<span class="number">2</span>&#125;;</span><br><span class="line">m.<span class="built_in">find</span>(p);</span><br></pre></td></tr></table></figure>
+<p>​	因为它的底层的红黑树，通过比较两个pair是否相等，即通过pair的<code>==运算符</code>重载进行比较查找，时间复杂度是O(lgn)。</p>
+<h3 id="unordered-map">unordered_map</h3>
+<p>​	如果使用了unordered_map，则不可以直接使用，因为它的底层是hash表，查找方式是对数据结构去计算它的hash值，而pair并没有规定如何计算它的hash值。</p>
+<p>​	但是unordered_map的性能是O(1)，非常优越，因此可以手写一个pair的hash值计算来辅助使用，下面是boost库实现的源代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="comment">// from boost (functional/hash):</span></span><br><span class="line"><span class="comment">// see http://www.boost.org/doc/libs/1_35_0/doc/html/hash/combine.html template</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">hash_combine</span><span class="params">(std::<span class="type">size_t</span> &amp;seed, <span class="type">const</span> T &amp;val)</span> </span>&#123;</span><br><span class="line">    seed ^= std::<span class="built_in">hash</span>&lt;T&gt;()(val) + <span class="number">0x9e3779b9</span> + (seed &lt;&lt; <span class="number">6</span>) + (seed &gt;&gt; <span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// auxiliary generic functions to create a hash value using a seed</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">hash_val</span><span class="params">(std::<span class="type">size_t</span> &amp;seed, <span class="type">const</span> T &amp;val)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">hash_combine</span>(seed, val);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Types&gt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">hash_val</span><span class="params">(std::<span class="type">size_t</span> &amp;seed, <span class="type">const</span> T &amp;val, <span class="type">const</span> Types &amp;... args)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">hash_combine</span>(seed, val);</span><br><span class="line">    <span class="built_in">hash_val</span>(seed, args...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Types&gt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> std::<span class="type">size_t</span> <span class="title">hash_val</span><span class="params">(<span class="type">const</span> Types &amp;... args)</span> </span>&#123;</span><br><span class="line">    std::<span class="type">size_t</span> seed = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">hash_val</span>(seed, args...);</span><br><span class="line">    <span class="keyword">return</span> seed;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">pair_hash</span> &#123;</span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T1</span>, <span class="keyword">class</span> <span class="title class_">T2</span>&gt;</span><br><span class="line">    <span class="function">std::<span class="type">size_t</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> std::pair&lt;T1, T2&gt; &amp;p)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">hash_val</span>(p.first, p.second);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">using</span> ll = <span class="type">long</span> <span class="type">long</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    unordered_map&lt;pair&lt;ll, ll&gt;, ll, pair_hash&gt; slopeCount;</span><br><span class="line">    unordered_set&lt;pair&lt;ll, ll&gt;, pair_hash&gt; seen;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

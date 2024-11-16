@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ 蓝图编程 }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_01%20%E8%93%9D%E5%9B%BE%E8%8A%82%E7%82%B9/">01 蓝图节点</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/">蓝图编程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>01 蓝图节点</h1>
+<h2 id="1-1-蓝图节点类型">1.1 蓝图节点类型</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_01%20%E8%93%9D%E5%9B%BE%E8%8A%82%E7%82%B9/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_02%20%E5%8F%98%E9%87%8F/">02 变量</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/">蓝图编程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>02 变量</h1>
+<p>​	变量创建后都要先编译才能设置默认值。</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_02%20%E5%8F%98%E9%87%8F/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_03%20%E6%96%87%E6%9C%AC%E7%B1%BB%E5%9E%8B/">03 文本类型</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/">蓝图编程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>03 文本类型</h1>
+<p>文本类型有三种：</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_03%20%E6%96%87%E6%9C%AC%E7%B1%BB%E5%9E%8B/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_04%20%E5%90%91%E9%87%8FVector/">04 向量Vector</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/">蓝图编程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>04 向量Vector</h1>
+<p>​	向量是有长度和方向的值，由三个数字组成（X，Y，Z），用于表示位置，旋转和缩放等。</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_04%20%E5%90%91%E9%87%8FVector/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_05%20%E6%97%8B%E8%BD%AC%E4%BD%93retator/">05 旋转体retator</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/">蓝图编程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>05 旋转体retator</h1>
+<p>​	retator是与向量类似的一种数据类型。都有XYZ值。但是其表示的意义不同，向量修改X的值代表沿着X的方向移动，而旋转体修改X的值代表绕着X轴旋转。</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_05%20%E6%97%8B%E8%BD%AC%E4%BD%93retator/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_06%20%E5%8F%98%E6%8D%A2Transform/">06 变换Transform</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/">蓝图编程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>06 变换Transform</h1>
+<p>​	<strong>变换</strong>是结合了位移、旋转、缩放的数据集，通常用于同时获取游戏对象的位置、旋转、缩放等数据</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_06%20%E5%8F%98%E6%8D%A2Transform/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_07%20%E5%8F%98%E9%87%8F%E7%9A%84%E8%BF%90%E7%AE%97%E5%92%8C%E6%AF%94%E8%BE%83/">07 变量的运算和比较</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/">蓝图编程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>07 变量的运算和比较</h1>
+<h2 id="7-1-运算">7.1 运算</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_07%20%E5%8F%98%E9%87%8F%E7%9A%84%E8%BF%90%E7%AE%97%E5%92%8C%E6%AF%94%E8%BE%83/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

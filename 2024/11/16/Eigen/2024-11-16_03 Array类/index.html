@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>03 Array类 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>03 Array类</h1>
+    </header>
+
+    <section>
+      <h1>Array类</h1>
+<blockquote>
+<p>​	Array类是用于提供通用数组的类，而不是用于线性代数的Matrix类。Array类提供了一种执行系数运算的简单方法，这些运算可能不具有线性代数意义。例如向数组中的每个系数添加一个常数或将两个数组系数相乘。</p>
+</blockquote>
+<span id="more"></span>
+<p>[TOC]</p>
+<h2 id="模板说明">模板说明</h2>
+<p>​	与Matrix类似，有三个参数：类型，行数和列数。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Array&lt;<span class="keyword">typename</span> Scalar, <span class="type">int</span> RowsAtCompileTime, <span class="type">int</span> ColsAtCompileTime&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="基本类型">基本类型</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Typedef</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Array&lt;float,Dynamic,1&gt;</td>
+<td style="text-align:left">ArrayXf</td>
+</tr>
+<tr>
+<td style="text-align:left">Array&lt;float,3,1&gt;</td>
+<td style="text-align:left">Array3f</td>
+</tr>
+<tr>
+<td style="text-align:left">Array&lt;double,Dynamic,Dynamic&gt;</td>
+<td style="text-align:left">ArrayXXd</td>
+</tr>
+<tr>
+<td style="text-align:left">Array&lt;double,3,3&gt;</td>
+<td style="text-align:left">Array33d</td>
+</tr>
+</tbody>
+</table>
+<h2 id="访问元素">访问元素</h2>
+<p>​	与Matrix类似，通过()运算符来访问和修改。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Eigen/Dense&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="function">Eigen::ArrayXXf  <span class="title">m</span><span class="params">(<span class="number">2</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// assign some values coefficient by coefficient</span></span><br><span class="line">  <span class="built_in">m</span>(<span class="number">0</span>,<span class="number">0</span>) = <span class="number">1.0</span>; <span class="built_in">m</span>(<span class="number">0</span>,<span class="number">1</span>) = <span class="number">2.0</span>;</span><br><span class="line">  <span class="built_in">m</span>(<span class="number">1</span>,<span class="number">0</span>) = <span class="number">3.0</span>; <span class="built_in">m</span>(<span class="number">1</span>,<span class="number">1</span>) = <span class="built_in">m</span>(<span class="number">0</span>,<span class="number">1</span>) + <span class="built_in">m</span>(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// print values to standard output</span></span><br><span class="line">  std::cout &lt;&lt; m &lt;&lt; std::endl &lt;&lt; std::endl;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">// using the comma-initializer is also allowed</span></span><br><span class="line">  m &lt;&lt; <span class="number">1.0</span>,<span class="number">2.0</span>,</span><br><span class="line">       <span class="number">3.0</span>,<span class="number">4.0</span>;</span><br><span class="line">     </span><br><span class="line">  <span class="comment">// print values to standard output</span></span><br><span class="line">  std::cout &lt;&lt; m &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="加法和减法">加法和减法</h2>
+<h3 id="两个Array">两个Array</h3>
+<p>​	与Matrix类似。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Eigen/Dense&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="function">Eigen::ArrayXXf <span class="title">a</span><span class="params">(<span class="number">3</span>,<span class="number">3</span>)</span></span>;</span><br><span class="line">  <span class="function">Eigen::ArrayXXf <span class="title">b</span><span class="params">(<span class="number">3</span>,<span class="number">3</span>)</span></span>;</span><br><span class="line">  a &lt;&lt; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,</span><br><span class="line">       <span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,</span><br><span class="line">       <span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>;</span><br><span class="line">  b &lt;&lt; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,</span><br><span class="line">       <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,</span><br><span class="line">       <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>;</span><br><span class="line">       </span><br><span class="line">  <span class="comment">// Adding two arrays</span></span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;a + b = &quot;</span> &lt;&lt; std::endl &lt;&lt; a + b &lt;&lt; std::endl &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="每个系数加减一个常数">每个系数加减一个常数</h3>
+<p>​	提供了与Matrix不同的操作。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Eigen/Dense&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="function">Eigen::ArrayXXf <span class="title">a</span><span class="params">(<span class="number">3</span>,<span class="number">3</span>)</span></span>;</span><br><span class="line">  <span class="function">Eigen::ArrayXXf <span class="title">b</span><span class="params">(<span class="number">3</span>,<span class="number">3</span>)</span></span>;</span><br><span class="line">  a &lt;&lt; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,</span><br><span class="line">       <span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,</span><br><span class="line">       <span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>;</span><br><span class="line">  b &lt;&lt; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,</span><br><span class="line">       <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,</span><br><span class="line">       <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>;</span><br><span class="line">    </span><br><span class="line">  <span class="comment">// Subtracting a scalar from an array</span></span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;a - 2 = &quot;</span> &lt;&lt; std::endl &lt;&lt; a - <span class="number">2</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Array乘法">Array乘法</h2>
+<p>​	Array的乘法被解释为：对应系数相乘。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Eigen/Dense&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="function">Eigen::ArrayXXf <span class="title">a</span><span class="params">(<span class="number">2</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">  <span class="function">Eigen::ArrayXXf <span class="title">b</span><span class="params">(<span class="number">2</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">  a &lt;&lt; <span class="number">1</span>,<span class="number">2</span>,</span><br><span class="line">       <span class="number">3</span>,<span class="number">4</span>;</span><br><span class="line">  b &lt;&lt; <span class="number">5</span>,<span class="number">6</span>,</span><br><span class="line">       <span class="number">7</span>,<span class="number">8</span>;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;a * b = &quot;</span> &lt;&lt; std::endl &lt;&lt; a * b &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">a * b = </span></span><br><span class="line"><span class="comment"> 5 12</span></span><br><span class="line"><span class="comment">21 32</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="其它系数计算函数">其它系数计算函数</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>abs：取每个系数的绝对值</p>
+</li>
+<li class="lvl-2">
+<p>sqrt：取每个系数的平方根</p>
+</li>
+<li class="lvl-2">
+<p>min：取两个Array中系数更小的那个</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Eigen/Dense&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  Eigen::ArrayXf a = Eigen::ArrayXf::<span class="built_in">Random</span>(<span class="number">5</span>);</span><br><span class="line">  a *= <span class="number">2</span>;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;a =&quot;</span> &lt;&lt; std::endl</span><br><span class="line">            &lt;&lt; a &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;a.abs() =&quot;</span> &lt;&lt; std::endl</span><br><span class="line">            &lt;&lt; a.<span class="built_in">abs</span>() &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;a.abs().sqrt() =&quot;</span> &lt;&lt; std::endl</span><br><span class="line">            &lt;&lt; a.<span class="built_in">abs</span>().<span class="built_in">sqrt</span>() &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;a.min(a.abs().sqrt()) =&quot;</span> &lt;&lt; std::endl</span><br><span class="line">            &lt;&lt; a.<span class="built_in">min</span>(a.<span class="built_in">abs</span>().<span class="built_in">sqrt</span>()) &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">a =</span></span><br><span class="line"><span class="comment">  1.36</span></span><br><span class="line"><span class="comment">-0.422</span></span><br><span class="line"><span class="comment">  1.13</span></span><br><span class="line"><span class="comment">  1.19</span></span><br><span class="line"><span class="comment">  1.65</span></span><br><span class="line"><span class="comment">a.abs() =</span></span><br><span class="line"><span class="comment"> 1.36</span></span><br><span class="line"><span class="comment">0.422</span></span><br><span class="line"><span class="comment"> 1.13</span></span><br><span class="line"><span class="comment"> 1.19</span></span><br><span class="line"><span class="comment"> 1.65</span></span><br><span class="line"><span class="comment">a.abs().sqrt() =</span></span><br><span class="line"><span class="comment">1.17</span></span><br><span class="line"><span class="comment">0.65</span></span><br><span class="line"><span class="comment">1.06</span></span><br><span class="line"><span class="comment">1.09</span></span><br><span class="line"><span class="comment">1.28</span></span><br><span class="line"><span class="comment">a.min(a.abs().sqrt()) =</span></span><br><span class="line"><span class="comment">  1.17</span></span><br><span class="line"><span class="comment">-0.422</span></span><br><span class="line"><span class="comment">  1.06</span></span><br><span class="line"><span class="comment">  1.09</span></span><br><span class="line"><span class="comment">  1.28</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="在Matrix和Array之间转换">在Matrix和Array之间转换</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>.array()</code>：将Matrix-&gt;Array</p>
+</li>
+<li class="lvl-2">
+<p><code>.matrix()</code>：将Array-&gt;Matrix</p>
+</li>
+</ul>
+<p>注意：</p>
+<ol>
+<li class="lvl-3">
+<p>允许直接将数组的计算结果赋值给矩阵。</p>
+</li>
+<li class="lvl-3">
+<p>允许直接将矩阵的计算结果赋值给数组</p>
+</li>
+<li class="lvl-3">
+<p>矩阵可以使用<code>cwiseProduct</code>成员方法直接计算系数乘积。</p>
+</li>
+</ol>
+<p><strong>基本案例</strong></p>
+<p>​	展示了注意事项和基本操作。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Eigen/Dense&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> Eigen::MatrixXf;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="function">MatrixXf <span class="title">m</span><span class="params">(<span class="number">2</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">  <span class="function">MatrixXf <span class="title">n</span><span class="params">(<span class="number">2</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">  <span class="function">MatrixXf <span class="title">result</span><span class="params">(<span class="number">2</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line"> </span><br><span class="line">  m &lt;&lt; <span class="number">1</span>,<span class="number">2</span>,</span><br><span class="line">       <span class="number">3</span>,<span class="number">4</span>;</span><br><span class="line">  n &lt;&lt; <span class="number">5</span>,<span class="number">6</span>,</span><br><span class="line">       <span class="number">7</span>,<span class="number">8</span>;</span><br><span class="line"> </span><br><span class="line">  result = m * n;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;-- Matrix m*n: --\n&quot;</span> &lt;&lt; result &lt;&lt; <span class="string">&quot;\n\n&quot;</span>;</span><br><span class="line">  result = m.<span class="built_in">array</span>() * n.<span class="built_in">array</span>();</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;-- Array m*n: --\n&quot;</span> &lt;&lt; result &lt;&lt; <span class="string">&quot;\n\n&quot;</span>;</span><br><span class="line">  result = m.<span class="built_in">cwiseProduct</span>(n);</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;-- With cwiseProduct: --\n&quot;</span> &lt;&lt; result &lt;&lt; <span class="string">&quot;\n\n&quot;</span>;</span><br><span class="line">  result = m.<span class="built_in">array</span>() + <span class="number">4</span>;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;-- Array m + 4: --\n&quot;</span> &lt;&lt; result &lt;&lt; <span class="string">&quot;\n\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>高级案例</strong></p>
+<p>​	展示了更复杂的使用。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Eigen/Dense&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> Eigen::MatrixXf;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="function">MatrixXf <span class="title">m</span><span class="params">(<span class="number">2</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">  <span class="function">MatrixXf <span class="title">n</span><span class="params">(<span class="number">2</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">  <span class="function">MatrixXf <span class="title">result</span><span class="params">(<span class="number">2</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line"> </span><br><span class="line">  m &lt;&lt; <span class="number">1</span>,<span class="number">2</span>,</span><br><span class="line">       <span class="number">3</span>,<span class="number">4</span>;</span><br><span class="line">  n &lt;&lt; <span class="number">5</span>,<span class="number">6</span>,</span><br><span class="line">       <span class="number">7</span>,<span class="number">8</span>;</span><br><span class="line">  </span><br><span class="line">  result = (m.<span class="built_in">array</span>() + <span class="number">4</span>).<span class="built_in">matrix</span>() * m;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;-- Combination 1: --\n&quot;</span> &lt;&lt; result &lt;&lt; <span class="string">&quot;\n\n&quot;</span>;</span><br><span class="line">  result = (m.<span class="built_in">array</span>() * n.<span class="built_in">array</span>()).<span class="built_in">matrix</span>() * m;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;-- Combination 2: --\n&quot;</span> &lt;&lt; result &lt;&lt; <span class="string">&quot;\n\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>01 GoogleTest Primer | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>01 GoogleTest Primer</h1>
+    </header>
+
+    <section>
+      <h1>GoogleTest Primer</h1>
+<h2 id="创建测试套件">创建测试套件</h2>
+<span id="more"></span>
+<p>​	使用<code>TEST()</code>宏创建测试套件，它是一个不带返回值的C++函数</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>TestSuiteName：测试套件名称，用于命名一组测试</p>
+</li>
+<li class="lvl-2">
+<p>TestName：当前测试名称，用于命名当前测试</p>
+</li>
+<li class="lvl-2">
+<p>上述两个参数应以C++标准进行命名，并要求不带<code>_</code></p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">TEST</span>(TestSuiteName, TestName) &#123;</span><br><span class="line">  ... test body ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>案例</strong></p>
+<p>​	对于下面的函数</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">Factorial</span><span class="params">(<span class="type">int</span> n)</span></span>;  <span class="comment">// Returns the factorial of n</span></span><br></pre></td></tr></table></figure>
+<p>​	创建Test：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Tests factorial of 0.</span></span><br><span class="line"><span class="built_in">TEST</span>(FactorialTest, HandlesZeroInput) &#123;</span><br><span class="line">  <span class="built_in">EXPECT_EQ</span>(<span class="built_in">Factorial</span>(<span class="number">0</span>), <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Tests factorial of positive numbers.</span></span><br><span class="line"><span class="built_in">TEST</span>(FactorialTest, HandlesPositiveInput) &#123;</span><br><span class="line">  <span class="built_in">EXPECT_EQ</span>(<span class="built_in">Factorial</span>(<span class="number">1</span>), <span class="number">1</span>);</span><br><span class="line">  <span class="built_in">EXPECT_EQ</span>(<span class="built_in">Factorial</span>(<span class="number">2</span>), <span class="number">2</span>);</span><br><span class="line">  <span class="built_in">EXPECT_EQ</span>(<span class="built_in">Factorial</span>(<span class="number">3</span>), <span class="number">6</span>);</span><br><span class="line">  <span class="built_in">EXPECT_EQ</span>(<span class="built_in">Factorial</span>(<span class="number">8</span>), <span class="number">40320</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="创建Test-Fixtures（类）：为多个测试配置相同的数据">创建Test Fixtures（类）：为多个测试配置相同的数据</h2>
+<h3 id="1-继承testing-Test类">1. 继承testing::Test类</h3>
+<p>​	public继承testing::Test，并在protected中使用<code>SetUp()</code>完成资源的初始化，使用<code>TearDown()</code>完成资源的释放。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">QueueTest</span> : <span class="keyword">public</span> testing::Test &#123;</span><br><span class="line"> <span class="keyword">protected</span>:</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">SetUp</span><span class="params">()</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">     <span class="comment">// q0_ remains empty</span></span><br><span class="line">     q1_.<span class="built_in">Enqueue</span>(<span class="number">1</span>);</span><br><span class="line">     q2_.<span class="built_in">Enqueue</span>(<span class="number">2</span>);</span><br><span class="line">     q2_.<span class="built_in">Enqueue</span>(<span class="number">3</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// void TearDown() override &#123;&#125;</span></span><br><span class="line"></span><br><span class="line">  Queue&lt;<span class="type">int</span>&gt; q0_;</span><br><span class="line">  Queue&lt;<span class="type">int</span>&gt; q1_;</span><br><span class="line">  Queue&lt;<span class="type">int</span>&gt; q2_;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="2-使用TEST-F-创建相关的测试套件">2. 使用TEST_F()创建相关的测试套件</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">TEST_F</span>(QueueTest, IsEmptyInitially) &#123;</span><br><span class="line">  <span class="built_in">EXPECT_EQ</span>(q0_.<span class="built_in">size</span>(), <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">TEST_F</span>(QueueTest, DequeueWorks) &#123;</span><br><span class="line">  <span class="type">int</span>* n = q0_.<span class="built_in">Dequeue</span>();</span><br><span class="line">  <span class="built_in">EXPECT_EQ</span>(n, <span class="literal">nullptr</span>);</span><br><span class="line"></span><br><span class="line">  n = q1_.<span class="built_in">Dequeue</span>();</span><br><span class="line">  <span class="built_in">ASSERT_NE</span>(n, <span class="literal">nullptr</span>);</span><br><span class="line">  <span class="built_in">EXPECT_EQ</span>(*n, <span class="number">1</span>);</span><br><span class="line">  <span class="built_in">EXPECT_EQ</span>(q1_.<span class="built_in">size</span>(), <span class="number">0</span>);</span><br><span class="line">  <span class="keyword">delete</span> n;</span><br><span class="line"></span><br><span class="line">  n = q2_.<span class="built_in">Dequeue</span>();</span><br><span class="line">  <span class="built_in">ASSERT_NE</span>(n, <span class="literal">nullptr</span>);</span><br><span class="line">  <span class="built_in">EXPECT_EQ</span>(*n, <span class="number">2</span>);</span><br><span class="line">  <span class="built_in">EXPECT_EQ</span>(q2_.<span class="built_in">size</span>(), <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">delete</span> n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="断言">断言</h2>
+<h3 id="ASSERT">ASSERT_*</h3>
+<p>​	<code>ASSERT_*</code>如果失败，会终止当前函数。</p>
+<h3 id="EXPECT">EXPECT_*</h3>
+<p>​	<code>EXPECT_*</code>如果失败，不会终止当前函数。</p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

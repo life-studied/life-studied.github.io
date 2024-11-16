@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>01 五个基类的简介（UObjectActorPawnCharacterController） | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>01 五个基类的简介（UObjectActorPawnCharacterController）</h1>
+    </header>
+
+    <section>
+      <h1>01 五个基类</h1>
+<h2 id="1-1-UObject类">1.1 UObject类</h2>
+<span id="more"></span>
+<p>​	UObject是提供了如下功能的类：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>垃圾回收（GC）</p>
+</li>
+<li class="lvl-2">
+<p>引用自动更新（Reference updating）</p>
+</li>
+<li class="lvl-2">
+<p>Reflection 反射</p>
+</li>
+<li class="lvl-2">
+<p>Serialization 序列化</p>
+</li>
+<li class="lvl-2">
+<p>Automatic updating of default property changes自动检测默认变量的更改</p>
+</li>
+<li class="lvl-2">
+<p>Automatic property initialization 自动变量初始化</p>
+</li>
+<li class="lvl-2">
+<p>Automatic editor integration 和虚幻引擎编辑器的自动交互</p>
+</li>
+<li class="lvl-2">
+<p>Type information available at runtime 运行时类型识别</p>
+</li>
+<li class="lvl-2">
+<p>Network replication 网络复制</p>
+</li>
+</ul>
+<h3 id="GC的两种方案">GC的两种方案</h3>
+<p>​	对于<strong>继承自UObject类</strong>的对象，如果有一个指针指向它，并且它被UPROPERTY标记了，那么会被自动GC</p>
+<p>​	对于<strong>非UObject对象</strong>，才能选择<strong>智能指针</strong>进行自动内存释放。</p>
+<h3 id="反射">反射</h3>
+<p>​	反射可以在<strong>运行时获取对象的类信息，成员信息</strong>等。</p>
+<h3 id="序列化">序列化</h3>
+<p>​	将对象的信息<strong>保存到磁盘</strong>，下次再完好无损地加载。</p>
+<h3 id="与Editor的交互">与Editor的交互</h3>
+<p>​	允许类的变量能够<strong>被Editor简单编辑</strong></p>
+<h3 id="运行时类型检测">运行时类型检测</h3>
+<p>​	注意：虚幻引擎打开了<code>/GR-</code>编译器参数。即，<strong>不允许使用C++标准的<code>dynamic_cast</code></strong>。</p>
+<p>​	使用<code>Cast&lt;&gt;</code>模板函数来完成RTTI的功能。</p>
+<h3 id="网络复制">网络复制</h3>
+<p>​	在网络游戏的c/s模式下，可以<strong>自动</strong>将被<strong>宏</strong>标记的变量，从<strong>服务器复制到客户端</strong>。</p>
+<h3 id="其它注意">其它注意</h3>
+<h4 id="构造函数与DefaultObject">构造函数与DefaultObject</h4>
+<p>​	由于<code>UObject</code>会在引擎加载阶段创建一个**<code>DefaultObject</code>**，因此构造函数会被默认调用一次。</p>
+<h4 id="构造函数与UWorld">构造函数与UWorld</h4>
+<p>​	构造函数被调用时，<code>UWorld</code>不一定存在，因此<strong>不要在构造函数中调用<code>GetWorld()</code></strong></p>
+<h2 id="1-2-Actor类">1.2 Actor类</h2>
+<p>​	Actor类的标志是：<strong>能够挂载组件</strong>。（它可以没有坐标与旋转量，因为它可以不存在实体。）</p>
+<p>​	组件：组件不是<code>Actor</code>，而是<code>UObject</code>。</p>
+<p>​	如果需要挂载组件，例如<code>SceneComponent</code>（提供坐标与旋转量），<code>StaticMeshComponent</code>（被渲染）…选择Actor。</p>
+<h2 id="1-3-Pawn-Character-Controller（控制与被控制）">1.3 Pawn/Character/Controller（控制与被控制）</h2>
+<h3 id="1-3-1-Pawn">1.3.1 Pawn</h3>
+<p>​	<code>Pawn</code>代表傀儡，即一个<strong>可以被控制的对象</strong>（无论是AIController或者玩家Controller）。</p>
+<h3 id="1-3-2-Character">1.3.2 Character</h3>
+<p>​	Character代表角色，<strong>特点</strong>在于：</p>
+<p>​	它提供了<strong>一个特殊的组件<code>Character Movement</code></strong>。这个组件提供了一个基础的、基于胶囊体的<strong>角色移动功能</strong>。包括移动和跳跃，以及如果你需要， 还能自行扩展出更多，例如蹲伏和爬行。</p>
+<h4 id="注意">注意</h4>
+<p>​	如果用不上这类移动（例如飞船类的移动），请继承<code>Pawn</code>而不要去继承<code>Character</code>。</p>
+<h3 id="1-3-3-Controller">1.3.3 Controller</h3>
+<p>​	Controller用于操纵Pawn或者Character的行为。它可以是AIController（行为树/EQS环境查询系统），或者玩家Controller。通常在这个类中<strong>绑定输入</strong>，然后转化为对Pawn/Character方法的调用（例如：前进、开火、跳跃等肉体执行的方法）。</p>
+<blockquote>
+<p>抽象出Controller的原因：不同的怪物可能会共享同一套Controller，从而获得类似的行为。</p>
+</blockquote>
+<p>​	灵魂可以通过<code>Possess/UnPossess</code>来控制一个肉体，或者从一个肉体上离开。</p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

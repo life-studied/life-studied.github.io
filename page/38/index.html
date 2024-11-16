@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%92%8C%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F/">可变参数和折叠表达式</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>可变参数和折叠表达式</h1>
+<h2 id="1-sizeof…获取参数数量">1.sizeof…获取参数数量</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%92%8C%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF/">可变参数模板</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="可变参数模板">可变参数模板</h2>
+<h4 id="所有使用可变参数模板的方式">所有使用可变参数模板的方式</h4>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E5%AF%B9pair%E8%BF%9B%E8%A1%8Chash%E5%8C%96/">对pair进行hash化</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>对pair进行hash化</h1>
+<p>​	<code>std::map</code>底层采用红黑树，因此它会调用对象的<code>operator&lt;</code>进行排序放置。</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E5%AF%B9pair%E8%BF%9B%E8%A1%8Chash%E5%8C%96/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E6%A8%A1%E6%9D%BF%E4%BB%A3%E6%9B%BF%E8%99%9A%E5%87%BD%E6%95%B0/">模板代替虚函数</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>模板代替虚函数</h1>
+<h2 id="虚函数版本">虚函数版本</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E6%A8%A1%E6%9D%BF%E4%BB%A3%E6%9B%BF%E8%99%9A%E5%87%BD%E6%95%B0/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E7%B1%BB%E5%9E%8B%E9%95%BF%E5%BA%A6%E5%9C%A8%E4%B8%8D%E5%90%8C%E5%B9%B3%E5%8F%B0%E4%B8%8B%E7%9A%84%E5%8C%BA%E5%88%AB/">类型长度在不同平台下的区别</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="类型长度在不同平台下的区别">类型长度在不同平台下的区别</h2>
+<p>表格：</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E7%B1%BB%E5%9E%8B%E9%95%BF%E5%BA%A6%E5%9C%A8%E4%B8%8D%E5%90%8C%E5%B9%B3%E5%8F%B0%E4%B8%8B%E7%9A%84%E5%8C%BA%E5%88%AB/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E7%BC%96%E8%AF%91%E6%9C%9F%E5%88%A4%E6%96%AD%E7%B1%BB%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/">编译期判断类是否存在成员函数</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>编译期判断类是否存在成员函数</h1>
+<h2 id="1-检测类是否存在push-back">1. 检测类是否存在push_back</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E7%BC%96%E8%AF%91%E6%9C%9F%E5%88%A4%E6%96%AD%E7%B1%BB%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E7%BC%96%E8%AF%91%E6%9C%9F%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9A%E8%A7%84%E5%88%99%E6%95%B0%E7%BB%84/">编译期生成指定规则数组</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>编译期生成指定规则数组</h1>
+<h2 id="以fbnq数列为例子-C-20">以fbnq数列为例子(C++20)</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E7%BC%96%E8%AF%91%E6%9C%9F%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9A%E8%A7%84%E5%88%99%E6%95%B0%E7%BB%84/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E7%BC%96%E8%AF%91%E6%9C%9F%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%A4%84%E7%90%86/">编译期类型检测与处理</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>编译期类型检测与处理</h1>
+<h2 id="简单形式">简单形式</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E7%BC%96%E8%AF%91%E6%9C%9F%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%A4%84%E7%90%86/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8/">虚函数表</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>虚函数表</h1>
+<p>​	虚函数表是存放虚函数的指针的一张表。</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E9%98%B2%E5%A4%9A%E5%BC%80%EF%BC%88C++%EF%BC%89(Windows)/">防多开（C++）(Windows)</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>防多开（C++）(Windows)</h1>
+<h2 id="1-实现描述">1. 实现描述</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E9%98%B2%E5%A4%9A%E5%BC%80%EF%BC%88C++%EF%BC%89(Windows)/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/37/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><a class="page-number" href="/page/37/">37</a><span class="page-number current">38</span><a class="page-number" href="/page/39/">39</a><a class="page-number" href="/page/40/">40</a><span class="space">&hellip;</span><a class="page-number" href="/page/91/">91</a><a class="extend next" rel="next" href="/page/39/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

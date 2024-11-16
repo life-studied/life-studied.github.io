@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>clang tools入门 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>clang tools入门</h1>
+    </header>
+
+    <section>
+      <h1>clang tools入门</h1>
+<p>​	Clang工具是为C++开发者所设计的单独的命令行（潜在的图形界面）工具集，这些开发者是已经使用Clang并且喜欢使用Clang作为他们的编译器。这些工具内部提供了面向开发的功能：语法检查，自动格式化，重构等。</p>
+<span id="more"></span>
+<h2 id="clang-format">clang-format</h2>
+<p>​	<strong>Clang-format既是一个库，也是一个单独的工具。</strong></p>
+<p>​	它的目标是根据认证的风格指引去自动格式化C++源码文件。</p>
+<blockquote>
+<p>为了达到这个目标，clang-format使用Clang的Lexer去把一个输入文件转换为一个token流，然后改变这些token周围的的所有空格。clang-format的这个目标是既要可以作为一个用户工具（理论上拥有强大的IDE集成），同时又要作为其它重构工具的一部分，比如：在重命名的时候去格式化所有改变的行。</p>
+</blockquote>
+<h2 id="clang-tidy">clang-tidy</h2>
+<p>​	<a target="_blank" rel="noopener" href="http://clang.llvm.org/extra/clang-tidy/">clang-tidy</a>是一个基于clang的静态代码分析框架，支持C++/C/Objective-C。</p>
+<p>​	它是一个功能更强大的lint工具。绝大部分lint工具只能在出现问题的代码地方给出提示，之后需要人为修改，而clang-tidy则能够自动修复功能（当然这个如何修复需要该check作者提供）；并且clang-tidy采用模块化设计，非常容易扩展。如果用户想往clang-tidy添加一个新的检测功能，只需要编写一个clang-tidy check实现，每一个check检测一种问题，例如检测某个违反Code style的模式，检测某些API不正确使用的方法等等。</p>
+<h2 id="clang-check">clang-check</h2>
+<p>​	clang-check 是 Clang 编译器提供的一个功能，它在编译过程中对代码进行语法和语义检查，但不会进行像 Clang-Tidy 那样的深层次的代码风格或复杂逻辑的检查。Clang Check 主要用于捕获编译时错误，例如语法错误、类型不匹配等，但它不具备 Clang-Tidy 提供的代码改进建议和风格检查功能。</p>
+<h2 id="参考资料">参考资料</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://hokein.github.io/clang-tools-tutorial/">Introduction · Clang Tools入门教程 (hokein.github.io)</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://clang.llvm.org/docs/HowToSetupToolingForLLVM.html">How To Setup Clang Tooling For LLVM — Clang 19.0.0git documentation</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weiwei9363/article/details/135818540">C/C++ 静态代码检测工具 Clang-tidy 简易教程</a></p>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>3-3-2 替换字符串中的字符 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>3-3-2 替换字符串中的字符</h1>
+    </header>
+
+    <section>
+      <h2 id="3-3-2-替换字符串中的字符">3.3.2 替换字符串中的字符</h2>
+<p>​	<code>replace</code>函数用于替换字符串中的字符。</p>
+<span id="more"></span>
+<h4 id="1-不同的重载版本">1.不同的重载版本</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>（成员函数）指定位置的指定数量的字符串，替换为给定字符串</p>
+<ul class="lvl-2">
+<li class="lvl-6">
+<p>参数</p>
+<ul class="lvl-4">
+<li class="lvl-10">para1：start</li>
+<li class="lvl-10">para2：number</li>
+<li class="lvl-10">para3：replace string(C style or C++ string)</li>
+</ul>
+</li>
+<li class="lvl-6">
+<p>simple example：</p>
+<ul class="lvl-4">
+<li class="lvl-10">
+<pre><code class="language-C++">  #include &lt;cassert&gt;
+  #include &lt;string&gt;
+  using namespace std;
+  
+  int main(int argc, char const *argv[])
+  &#123;
+      string s(&quot;A place of text&quot;);
+      string tag(&quot;$tag$&quot;);
+      s.insert(8,tag+' ');
+      assert(s == &quot;A place $tag$ of text&quot;);
+      int start = s.find(tag);
+      assert(start == 8);
+      assert(tag.size() == 5);
+      s.replace(start, tag.size(), &quot;hello there&quot;);
+      assert(s == &quot;A place hello there of text&quot;);
+      return 0;
+  &#125;
+  <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">* （全局函数）指定范围内的一个字符替换为另一个字符</span><br><span class="line"></span><br><span class="line">	* 参数：</span><br><span class="line"></span><br><span class="line">		* para1：开始迭代器</span><br><span class="line">		* para2：结束迭代器</span><br><span class="line">		* para3：查找的字符</span><br><span class="line">		* para4：替换成字符</span><br><span class="line"></span><br><span class="line">	* simple example:</span><br><span class="line"></span><br><span class="line">		* ```C++</span><br><span class="line">			<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line">			<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cassert&gt;</span></span></span><br><span class="line">			<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line">			<span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">			</span><br><span class="line">			<span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function">			</span>&#123;</span><br><span class="line">			    <span class="function">string <span class="title">s</span><span class="params">(<span class="string">&quot;aaaXaaaXXaaXXXaXXXXaaa&quot;</span>)</span></span>;</span><br><span class="line">			    <span class="built_in">replace</span> (s.<span class="built_in">begin</span>(),s.<span class="built_in">end</span>(),<span class="string">&#x27;X&#x27;</span>,<span class="string">&#x27;Y&#x27;</span>);</span><br><span class="line">			    <span class="built_in">assert</span>(s == <span class="string">&quot;aaaYaaaYYaaYYYaYYYYaaa&quot;</span>);</span><br><span class="line">			&#125;</span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-string-npos成员（静态常量）">2.<code>string::npos</code>成员（静态常量）</h4>
+<p>​	数据成员<code>npos</code>表示一个不存在的字符位置。下面是一个simple example:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstddef&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdexcept&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">replaceChars</span><span class="params">(string &amp;modifyMe,</span></span></span><br><span class="line"><span class="params"><span class="function">                  <span class="type">const</span> string &amp;fineMe, <span class="type">const</span> string &amp;newChars)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">size_t</span> i = modifyMe.<span class="built_in">find</span>(fineMe, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (i != string::npos)					<span class="comment">//if not find, get the string::npos</span></span><br><span class="line">        modifyMe.<span class="built_in">replace</span>(i, fineMe.<span class="built_in">size</span>(), newChars);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">out_of_range</span>(<span class="string">&quot;not found&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    string bigNews = <span class="string">&quot;I thought I saw Elvis in an UFO. &quot;</span></span><br><span class="line">                     <span class="string">&quot;I have been working too hard. &quot;</span>;</span><br><span class="line">    <span class="function">string <span class="title">replacement</span><span class="params">(<span class="string">&quot;wig&quot;</span>)</span></span>;</span><br><span class="line">    <span class="function">string <span class="title">findMe</span><span class="params">(<span class="string">&quot;UFO&quot;</span>)</span></span>;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">replaceChars</span>(bigNews, findMe, replacement);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (<span class="type">const</span> std::exception &amp;e)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">assert</span>(bigNews == <span class="string">&quot;I thought I saw Elvis in an wig. I have been working too hard. &quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="3-实现替换所有特征字符串函数">3.实现替换所有特征字符串函数</h4>
+<p>​	使用<code>find</code>和<code>replace</code>实现</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//ReplaceAll.h</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> REPLACEALL_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> REPLACEALL_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">std::string&amp; <span class="title">replaceAll</span><span class="params">(std::string&amp; context,</span></span></span><br><span class="line"><span class="params"><span class="function">                       <span class="type">const</span> std::string&amp; from,</span></span></span><br><span class="line"><span class="params"><span class="function">                       <span class="type">const</span> std::string&amp; to)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//ReplaceAll.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstddef&gt;</span>	</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ReplaceAll.h&quot;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function">std::string&amp; <span class="title">replaceAll</span><span class="params">(std::string&amp; context,</span></span></span><br><span class="line"><span class="params"><span class="function">                       <span class="type">const</span> std::string&amp; from,</span></span></span><br><span class="line"><span class="params"><span class="function">                       <span class="type">const</span> std::string&amp; to)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">size_t</span> lookHere = <span class="number">0</span>;</span><br><span class="line">    <span class="type">size_t</span> foundHere;</span><br><span class="line">    <span class="keyword">while</span>((foundHere = context.<span class="built_in">find</span>(from, lookHere))!=string::npos)	<span class="comment">//find from lookHere</span></span><br><span class="line">    &#123;																<span class="comment">//to avoid the string</span></span><br><span class="line">        context.<span class="built_in">replace</span>(foundHere, from.<span class="built_in">size</span>(), to);				<span class="comment">//&quot;to&quot; is the substr </span></span><br><span class="line">        lookHere = foundHere + to.<span class="built_in">size</span>();							<span class="comment">//of &quot;from&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> context;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>02 export | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>02 export</h1>
+    </header>
+
+    <section>
+      <h1>export</h1>
+<h2 id="导出命令">导出命令</h2>
+<span id="more"></span>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">ClientCommand</span>.<span class="title function_">export</span>(&#123;<span class="string">&quot;type&quot;</span>: <span class="string">&quot;pdf&quot;</span>, <span class="string">&quot;appendBody&quot;</span>: <span class="string">&quot;&quot;</span>, <span class="string">&quot;runCommand&quot;</span>: <span class="literal">false</span>, <span class="string">&quot;runCommandStr&quot;</span>: <span class="string">&quot;&quot;</span>, <span class="string">&quot;showOutput&quot;</span>: <span class="literal">false</span>, <span class="string">&quot;key&quot;</span>: <span class="string">&quot;pdf&quot;</span>&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="frame-js相关解读">frame.js相关解读</h2>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">c.<span class="property">export</span> = <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> t = e.<span class="property">type</span>;</span><br><span class="line">            i.<span class="property">editor</span>.<span class="property">export</span>.<span class="title function_">beforeExport</span>(),</span><br><span class="line">                i.<span class="property">editor</span>.<span class="property">export</span>.<span class="title function_">showExportNotification</span>(),</span><br><span class="line">                i.<span class="property">editor</span>.<span class="property">localSettingBridge</span>.<span class="title function_">loadFromFile</span>(),</span><br><span class="line">                e = i.<span class="property">editor</span>.<span class="property">localSettingBridge</span>.<span class="title function_">loadExportOption</span>(e),</span><br><span class="line">                <span class="string">&quot;html&quot;</span> == t ? i.<span class="property">editor</span>.<span class="property">export</span>.<span class="title function_">exportAndSaveHTML</span>(e) : </span><br><span class="line">                <span class="string">&quot;html-plain&quot;</span> == t ? (<span class="title class_">Object</span>.<span class="title function_">assign</span>(e, &#123; <span class="attr">noStyle</span>: !<span class="number">0</span> &#125;), i.<span class="property">editor</span>.<span class="property">export</span>.<span class="title function_">exportAndSaveHTML</span>(e)) : </span><br><span class="line">                <span class="string">&quot;image&quot;</span> == t ? i.<span class="property">editor</span>.<span class="property">export</span>.<span class="title function_">exportToImage</span>(e) : </span><br><span class="line">                <span class="string">&quot;pdf&quot;</span> == t ? s.<span class="title function_">exportPDF</span>(e) : </span><br><span class="line">                <span class="string">&quot;custom&quot;</span> == t ? i.<span class="property">editor</span>.<span class="property">export</span>.<span class="title function_">exportWithCommand</span>(e) : </span><br><span class="line">                l.<span class="title function_">export</span>(t, e), <span class="regexp">/^html/</span>.<span class="title function_">exec</span>(t) &amp;&amp; <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&quot;ty-show-notification&quot;</span>)</span><br><span class="line">        &#125;, </span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

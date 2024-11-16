@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>03 FString字符串拼接 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>03 FString字符串拼接</h1>
+    </header>
+
+    <section>
+      <h1>03 FString字符串拼接</h1>
+<h2 id="3-1-字符串拼接">3.1 字符串拼接</h2>
+<span id="more"></span>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>使用+运算符</p>
+</li>
+<li class="lvl-2">
+<p>使用Append函数</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">FString s1 = <span class="built_in">TEXT</span>(<span class="string">&quot;Hello World&quot;</span>);</span><br><span class="line">FString s2 = <span class="built_in">TEXT</span>(<span class="string">&quot; and you&quot;</span>);</span><br><span class="line">FString s3 = s1 + s2;	<span class="comment">//拼接</span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> ANSICHAR* p = <span class="string">&quot;string 2&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> TCHAR* p2 = <span class="built_in">TEXT</span>(<span class="string">&quot;string 3&quot;</span>);</span><br><span class="line">int32 Len = FCString::<span class="built_in">Strlen</span>(p2);		<span class="comment">//strlen of TCHAR</span></span><br><span class="line"></span><br><span class="line">s1.<span class="built_in">AppendChars</span>(p, <span class="number">4</span>);		<span class="comment">//char string</span></span><br><span class="line">s1.<span class="built_in">AppendChars</span>(p2, <span class="number">4</span>);		<span class="comment">//TCHAR	string</span></span><br><span class="line">s1.<span class="built_in">Append</span>(s2);				<span class="comment">//FString</span></span><br><span class="line"></span><br><span class="line">s1.<span class="built_in">AppendChar</span>(<span class="string">L&#x27;c&#x27;</span>);		<span class="comment">//one wide char</span></span><br><span class="line">s1.<span class="built_in">AppendChar</span>(<span class="string">&#x27;c&#x27;</span>);			<span class="comment">//one char</span></span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

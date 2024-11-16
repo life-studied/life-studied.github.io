@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ cmake }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/cmake/2024-11-16_24%20%E6%B7%BB%E5%8A%A0%E5%A4%B4%E6%96%87%E4%BB%B6%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9Atarget_include_directories%E3%80%81include_directories%E5%92%8Cadd_executable/">24 添加头文件的区别：target_include_directories、include_directories和add_executable</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/cmake/">cmake</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>添加头文件的区别：target_include_directories、include_directories和add_executable</h1>
+<p>​	这三种方式都可以对当前项目添加引用路径。</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/cmake/2024-11-16_24%20%E6%B7%BB%E5%8A%A0%E5%A4%B4%E6%96%87%E4%BB%B6%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9Atarget_include_directories%E3%80%81include_directories%E5%92%8Cadd_executable/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/cmake/2024-11-16_26%20add_custom_target/">26 add_custom_target</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/cmake/">cmake</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>add_custom_target</h1>
+<p>​	在很多时候，需要在<code>cmake</code>中创建一些目标，如<code>clean</code>、<code>copy</code>等等，这就需要通过<code>add_custom_target</code>来指定。同时，<code>add_custom_command</code>可以用来完成对<code>add_custom_target</code>生成的<code>target</code>的补充。</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/cmake/2024-11-16_26%20add_custom_target/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/cmake/2024-11-16_27%20cmake%E6%96%87%E4%BB%B6%20%E6%B7%BB%E5%8A%A0%E5%AE%8F%E5%AE%9A%E4%B9%89/">27 cmake文件 添加宏定义</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/cmake/">cmake</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>cmake文件添加宏定义</h1>
+<h2 id="example">example</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/cmake/2024-11-16_27%20cmake%E6%96%87%E4%BB%B6%20%E6%B7%BB%E5%8A%A0%E5%AE%8F%E5%AE%9A%E4%B9%89/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/cmake/2024-11-16_%E8%A1%A5%E5%85%85%EF%BC%9ACMAKE%20generate%20intellisense%20for%20vscode/">补充：CMAKE generate intellisense for vscode</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/cmake/">cmake</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>CMAKE generate intellisense for vscode</h1>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="comment"># this is helpful for editors like VS Code</span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="keyword">set</span>(CMAKE_EXPORT_COMPILE_COMMANDS <span class="keyword">ON</span>)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/cmake/2024-11-16_%E8%A1%A5%E5%85%85%EF%BC%9AMSVC%20%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E8%AF%91/">补充：MSVC 多线程编译</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/cmake/">cmake</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>MSVC 多线程编译</h1>
+<p>​	将如下命令添加入<code>CMakeLists.txt</code>：</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/cmake/2024-11-16_%E8%A1%A5%E5%85%85%EF%BC%9AMSVC%20%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E8%AF%91/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/cmake/2024-11-16_%E8%A1%A5%E5%85%85%EF%BC%9Acatch2%E4%BD%BF%E7%94%A8cmake%E7%A4%BA%E4%BE%8B/">补充：catch2使用cmake示例</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/cmake/">cmake</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>catch2使用cmake示例</h1>
+<h2 id="项目结构">项目结构</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/cmake/2024-11-16_%E8%A1%A5%E5%85%85%EF%BC%9Acatch2%E4%BD%BF%E7%94%A8cmake%E7%A4%BA%E4%BE%8B/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/cmake/2024-11-16_%E8%A1%A5%E5%85%85%EF%BC%9Aglew%20&amp;&amp;%20glfw%20&amp;&amp;%20imgui%20cmake%20config/">补充：glew &amp;&amp; glfw &amp;&amp; imgui cmake config</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/cmake/">cmake</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>glew &amp;&amp; glfw &amp;&amp; imgui cmake config</h1>
+<blockquote>
+<p>使用FetchContent模块</p>
+</blockquote>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/cmake/2024-11-16_%E8%A1%A5%E5%85%85%EF%BC%9Aglew%20&&%20glfw%20&&%20imgui%20cmake%20config/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/cmake/2024-11-16_%E8%A1%A5%E5%85%85%EF%BC%9Agrpc%E7%BC%96%E8%AF%91%E6%8C%87%E5%8D%97/">补充：grpc编译指南</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/cmake/">cmake</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>grpc编译指南</h1>
+<h2 id="1-下载版本">1. 下载版本</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/cmake/2024-11-16_%E8%A1%A5%E5%85%85%EF%BC%9Agrpc%E7%BC%96%E8%AF%91%E6%8C%87%E5%8D%97/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/cmake/2024-11-16_%E8%A1%A5%E5%85%85%EF%BC%9Aopencv%20&amp;&amp;%20Eigen3%20cmake/">补充：opencv &amp;&amp; Eigen3 cmake</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/cmake/">cmake</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>补充：opencv &amp;&amp; Eigen3 cmake</h1>
+<h2 id="使用find-package">使用find_package</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/cmake/2024-11-16_%E8%A1%A5%E5%85%85%EF%BC%9Aopencv%20&&%20Eigen3%20cmake/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/cmake/2024-11-16_%E8%A1%A5%E5%85%85%EF%BC%9A%E6%9B%B4%E4%B8%A5%E6%A0%BC%E7%9A%84%E7%BC%96%E8%AF%91%E6%8C%87%E4%BB%A4%EF%BC%88Linux%EF%BC%89/">补充：更严格的编译指令（Linux）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/cmake/">cmake</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>更严格的编译指令（Linux）</h1>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="comment"># helpful compiler flags for gcc/clang</span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="comment"># the descriptions for these flags can be found on the GNU Compiler Collection&#x27;s webpage.</span></span><br><span class="line"><span class="keyword">add_compile_options</span>(</span><br><span class="line">  -Wall</span><br><span class="line">  -Wextra</span><br><span class="line">  -Werror</span><br><span class="line">  -pedantic-errors</span><br><span class="line">  -Wconversion</span><br><span class="line">  -Wsign-conversion</span><br><span class="line">  -Wdouble-promotion</span><br><span class="line">  -Wcast-align</span><br><span class="line">  -Wformat=<span class="number">2</span></span><br><span class="line">  -Wuninitialized</span><br><span class="line">  -Wnull-dereference</span><br><span class="line">  -Wnon-virtual-dtor</span><br><span class="line">  -Woverloaded-virtual</span><br><span class="line">  -Wdeprecated-copy-dtor</span><br><span class="line">  -Wold-style-cast</span><br><span class="line">  -Wzero-as-null-pointer-constant</span><br><span class="line">  -Wsuggest-override</span><br><span class="line">  -fstack-protector-strong</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>解释：</p>
+<ol>
+<li class="lvl-3">
+<p><code>-Wall</code>：打开几乎所有的警告信息，除了一些非常具体或不常见的问题。</p>
+</li>
+<li class="lvl-3">
+<p><code>-Wextra</code>：打开额外的警告信息，比 <code>-Wall</code> 更加严格。</p>
+</li>
+<li class="lvl-3">
+<p><code>-Werror</code>：将所有警告视为错误。</p>
+</li>
+<li class="lvl-3">
+<p><code>-pedantic-errors</code>：将所有语言不兼容的警告视为错误。</p>
+</li>
+<li class="lvl-3">
+<p><code>-Wconversion</code>：警告隐式转换可能导致精度损失的情况。</p>
+</li>
+<li class="lvl-3">
+<p><code>-Wsign-conversion</code>：警告隐式转换可能导致符号改变的情况。</p>
+</li>
+<li class="lvl-3">
+<p><code>-Wdouble-promotion</code>：警告隐式将 float 转换为 double 的情况。</p>
+</li>
+<li class="lvl-3">
+<p><code>-Wcast-align</code>：警告指针转换可能导致对齐问题的情况。</p>
+</li>
+<li class="lvl-3">
+<p><code>-Wformat=2</code>：启用更严格的格式字符串检查。</p>
+</li>
+<li class="lvl-4">
+<p><code>-Wuninitialized</code>：警告使用未初始化的变量。</p>
+</li>
+<li class="lvl-4">
+<p><code>-Wnull-dereference</code>：警告解引用空指针的情况。</p>
+</li>
+<li class="lvl-4">
+<p><code>-Wnon-virtual-dtor</code>：警告非虚析构函数的使用，这可能在多态类中导致问题。</p>
+</li>
+<li class="lvl-4">
+<p><code>-Woverloaded-virtual</code>：警告重载的虚函数可能导致意外行为。</p>
+</li>
+<li class="lvl-4">
+<p><code>-Wdeprecated-copy-dtor</code>：警告使用已弃用的复制构造函数或析构函数。</p>
+</li>
+<li class="lvl-4">
+<p><code>-Wold-style-cast</code>：警告使用旧式 C 风格的类型转换。</p>
+</li>
+<li class="lvl-4">
+<p><code>-Wzero-as-null-pointer-constant</code>：警告使用字面量 0 作为空指针常量。</p>
+</li>
+<li class="lvl-4">
+<p><code>-Wsuggest-override</code>：在适当的地方建议使用 <code>override</code> 来明确虚函数的重写。</p>
+</li>
+<li class="lvl-4">
+<p><code>-fstack-protector-strong</code>：启用强栈保护，以防止栈溢出攻击。</p>
+</li>
+</ol>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/categories/C/cmake/">« prev</a><a class="page-number" href="/categories/C/cmake/">1</a><span class="page-number current">2</span>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

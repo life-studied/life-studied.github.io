@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>01 文件操作 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>01 文件操作</h1>
+    </header>
+
+    <section>
+      <h1>01 文件操作</h1>
+<p>流操作</p>
+<span id="more"></span>
+<h2 id="std-ifstream">std::ifstream</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::string filename = <span class="string">&quot;Test.b&quot;</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// prepare a file to read</span></span><br><span class="line">    <span class="type">double</span> d = <span class="number">3.14</span>;</span><br><span class="line">    std::<span class="built_in">ofstream</span>(filename, std::ios::binary)</span><br><span class="line">        .<span class="built_in">write</span>(<span class="built_in">reinterpret_cast</span>&lt;<span class="type">char</span>*&gt;(&amp;d), <span class="keyword">sizeof</span> d) &lt;&lt; <span class="number">123</span> &lt;&lt; <span class="string">&quot;abc&quot;</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// open file for reading</span></span><br><span class="line">    <span class="function">std::ifstream <span class="title">istrm</span><span class="params">(filename, std::ios::binary)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (!istrm.<span class="built_in">is_open</span>())</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;failed to open &quot;</span> &lt;&lt; filename &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">double</span> d;</span><br><span class="line">        istrm.<span class="built_in">read</span>(<span class="built_in">reinterpret_cast</span>&lt;<span class="type">char</span>*&gt;(&amp;d), <span class="keyword">sizeof</span> d); <span class="comment">// binary input</span></span><br><span class="line">        <span class="type">int</span> n;</span><br><span class="line">        std::string s;</span><br><span class="line">        <span class="keyword">if</span> (istrm &gt;&gt; n &gt;&gt; s)                               <span class="comment">// text input</span></span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;read back from file: &quot;</span> &lt;&lt; d &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; n &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; s &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="std-ofstream">std::ofstream</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::string filename = <span class="string">&quot;Test.b&quot;</span>;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function">std::ofstream <span class="title">ostrm</span><span class="params">(filename, std::ios::binary)</span></span>;</span><br><span class="line">        <span class="type">double</span> d = <span class="number">3.14</span>;</span><br><span class="line">        ostrm.<span class="built_in">write</span>(<span class="built_in">reinterpret_cast</span>&lt;<span class="type">char</span>*&gt;(&amp;d), <span class="keyword">sizeof</span> d); <span class="comment">// binary output</span></span><br><span class="line">        ostrm &lt;&lt; <span class="number">123</span> &lt;&lt; <span class="string">&quot;abc&quot;</span> &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;                      <span class="comment">// text output</span></span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// read back</span></span><br><span class="line">    <span class="function">std::ifstream <span class="title">istrm</span><span class="params">(filename, std::ios::binary)</span></span>;</span><br><span class="line">    <span class="type">double</span> d;</span><br><span class="line">    istrm.<span class="built_in">read</span>(<span class="built_in">reinterpret_cast</span>&lt;<span class="type">char</span>*&gt;(&amp;d), <span class="keyword">sizeof</span> d);</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    std::string s;</span><br><span class="line">    istrm &gt;&gt; n &gt;&gt; s;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot; read back: &quot;</span> &lt;&lt; d &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; n &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; s &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="std-fstream">std::fstream</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::string filename&#123; <span class="string">&quot;test.bin&quot;</span> &#125;;</span><br><span class="line">	std::fstream s&#123; filename, s.binary | s.trunc | s.in | s.out &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!s.<span class="built_in">is_open</span>())</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;failed to open &quot;</span> &lt;&lt; filename &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// write</span></span><br><span class="line">		<span class="type">double</span> d&#123; <span class="number">3.14</span> &#125;;</span><br><span class="line">		s.<span class="built_in">write</span>(<span class="built_in">reinterpret_cast</span>&lt;<span class="type">char</span>*&gt;(&amp;d), <span class="keyword">sizeof</span> d); <span class="comment">// binary output</span></span><br><span class="line">		s &lt;&lt; <span class="number">123</span> &lt;&lt; <span class="string">&quot;abc&quot;</span>;                              <span class="comment">// text output</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">// for fstream, this moves the file position pointer (both put and get)</span></span><br><span class="line">		s.<span class="built_in">seekp</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// read</span></span><br><span class="line">		d = <span class="number">2.71828</span>;</span><br><span class="line">		s.<span class="built_in">read</span>(<span class="built_in">reinterpret_cast</span>&lt;<span class="type">char</span>*&gt;(&amp;d), <span class="keyword">sizeof</span> d); <span class="comment">// binary input</span></span><br><span class="line">		<span class="type">int</span> n;</span><br><span class="line">		std::string str;</span><br><span class="line">		<span class="keyword">if</span> (s &gt;&gt; n &gt;&gt; str)                             <span class="comment">// text input</span></span><br><span class="line">			std::cout &lt;&lt; <span class="string">&quot;read back from file: &quot;</span> &lt;&lt; d &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; n &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; str &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="文本模式与二进制模式">文本模式与二进制模式</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>文本模式：将数据转成字符串，再输出</p>
+</li>
+<li class="lvl-2">
+<p>二进制模式：直接输出数据的二进制</p>
+</li>
+</ul>
+<p>例如：123 int</p>
+<p>文本模式输出是“123”。</p>
+<p>二进制模式输出是0x0000007B。也就是int类型在本系统里，内存的直接布局输出。</p>
+<h2 id="与write">&lt;&lt;与write</h2>
+<p>write是将数据直接以二进制输出，给定数据的起始地址和大小。</p>
+<p>&lt;&lt;是将数据以文本格式输出，会将数据格式化为字符串然后输出。</p>
+<h2 id="与read">&gt;&gt;与read</h2>
+<p>read是将数据直接以二进制读入，给定buffer和大小。</p>
+<p><code>&gt;&gt;</code>是将数据以文本格式输入，会将文件中的数据以字符的形式读入，然后根据给定类型进行转换。</p>
+<h2 id="文件位置指示器（File-Position-Indicator）">文件位置指示器（File Position Indicator）</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>每个文件流（如 <code>ifstream</code>、<code>ofstream</code> 和 <code>fstream</code>）都有一个与之关联的文件位置指示器。这个指示器跟踪当前在文件中的位置，即下一个将被读取或写入的点。</p>
+</li>
+<li class="lvl-2">
+<p>使用 <code>tellg()</code>（对于输入流）或 <code>tellp()</code>（对于输出流）来获取当前位置，也可以使用 <code>seekg()</code> 和 <code>seekp()</code> 来移动这个指示器。</p>
+</li>
+</ul>
+<p><strong>案例：获取文件大小</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">std::ifstream <span class="title">file</span><span class="params">(<span class="string">&quot;example.txt&quot;</span>, std::ios::binary)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (file) &#123;</span><br><span class="line">        <span class="comment">// 移动到文件末尾</span></span><br><span class="line">        file.<span class="built_in">seekg</span>(<span class="number">0</span>, std::ios::end);</span><br><span class="line">        <span class="comment">// 获取文件大小</span></span><br><span class="line">        std::streampos size = file.<span class="built_in">tellg</span>();</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;File size: &quot;</span> &lt;&lt; size &lt;&lt; <span class="string">&quot; bytes&quot;</span> &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">        file.<span class="built_in">close</span>();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Unable to open file.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="练习">练习</h2>
+<p>传入一个文件名，获取文件的信息，列出来</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>文件名</p>
+</li>
+<li class="lvl-2">
+<p>文件大小</p>
+</li>
+<li class="lvl-2">
+<p>文件内容</p>
+</li>
+</ul>
+<h2 id="参考资料">参考资料</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/io/basic_fstream">std::basic_fstream - cppreference.com</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/io/basic_ifstream">std::basic_ifstream - cppreference.com</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/io/basic_ofstream">std::basic_ofstream - cppreference.com</a></p>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>05 memory_order_release &amp; memory_order_acquire | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>05 memory_order_release &amp; memory_order_acquire</h1>
+    </header>
+
+    <section>
+      <h1>memory_order_release &amp; memory_order_acquire</h1>
+<h2 id="1-memory-order-release保证写不后">1. memory_order_release保证写不后</h2>
+<span id="more"></span>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::atomic&lt;<span class="type">bool</span>&gt; has_release;</span><br><span class="line"></span><br><span class="line"><span class="comment">// thread_2 </span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">release_software</span><span class="params">(<span class="type">int</span> *data)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">100</span>;                <span class="comment">// line 1</span></span><br><span class="line">    <span class="type">int</span> c = <span class="number">200</span>;                <span class="comment">// line 2</span></span><br><span class="line">    <span class="keyword">if</span> (!data) &#123;</span><br><span class="line">        data = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">100</span>];    <span class="comment">// line 3</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    has_release.<span class="built_in">store</span>(<span class="literal">true</span>, std::memory_order_release); <span class="comment">// line 4</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>std::memory_order_release功能如果用一句比较长的话来说，就是：在本行代码之前，有任何写内存的操作，都是不能放到本行语句之后的。</p>
+<p>简单地说，就是<strong>写不后</strong>。即，写语句不能调到本条语句之后。</p>
+<p>以这种形式通知编译器/CPU保证真正执行的时候，写语句不会放到has_release.store(true, std::memory_order_relese)之后。</p>
+<h2 id="2-memory-order-acquire保证读不前">2. memory_order_acquire保证读不前</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::atomic&lt;<span class="type">bool</span>&gt; has_release;</span><br><span class="line"><span class="type">int</span> *data = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// thread_1</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">releae_software</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!data) &#123;</span><br><span class="line">        data = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">100</span>];                            <span class="comment">// line 1</span></span><br><span class="line">    &#125;</span><br><span class="line">    has_release.<span class="built_in">store</span>(<span class="literal">true</span>, std::memory_order_release); <span class="comment">// line 2</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//.... do something other.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// thread_use</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">use_software</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 检查是否已经发布了，并且保证读操作在这之后进行</span></span><br><span class="line">    <span class="keyword">while</span> (!has_release.<span class="built_in">load</span>(std::memory_order_acquire));</span><br><span class="line">    <span class="comment">// 即然已经发布，那么就从里面取值</span></span><br><span class="line">    <span class="type">int</span> x = *data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>std::memory_order_acquire表示的是，后续的读操作都不能放到这条指令之前。简单地可以写成读不前。</p>
+<h2 id="3-std-memory-order-acq-rel同时保证两者">3. std::memory_order_acq_rel同时保证两者</h2>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

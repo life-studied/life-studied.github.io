@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>00 cmu15445环境搭建说明 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>00 cmu15445环境搭建说明</h1>
+    </header>
+
+    <section>
+      <h1>cmu15445环境搭建说明</h1>
+<h2 id="1-安装WSL">1. 安装WSL</h2>
+<span id="more"></span>
+<p>​	见下面参考链接</p>
+<h2 id="2-WSL配置git">2. WSL配置git</h2>
+<p>​	[Git之生成SSH密钥 - 知乎 (<a target="_blank" rel="noopener" href="http://zhihu.com">zhihu.com</a>)](<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/312460868#:~:text=%E7%94%9F%E6%88%90">https://zhuanlan.zhihu.com/p/312460868#:~:text=生成</a> SSH 密钥 1 1. 配置 Git 的用户名和邮箱,3 3. 查看公钥 %24 cat ~%2F.ssh%2Fid_rsa.pub 至此，密钥生成成功。 END)</p>
+<h2 id="3-安装必要的C-插件">3. 安装必要的C++插件</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>cmake</p>
+</li>
+<li class="lvl-2">
+<p>g++</p>
+</li>
+<li class="lvl-2">
+<p>gdb</p>
+</li>
+</ul>
+<h2 id="4-clone仓库">4. clone仓库</h2>
+<p>​	见b站链接</p>
+<h2 id="5-checkout到2021-11的commit">5. checkout到2021.11的commit</h2>
+<p>​	见b站链接</p>
+<h2 id="6-安装clang">6. 安装clang</h2>
+<h2 id="7-安装valgrind">7. 安装valgrind</h2>
+<h2 id="8-编写starter-test-h">8. 编写starter_test.h</h2>
+<h2 id="9-make测试starter-test">9. make测试starter_test</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake ..</span><br><span class="line">make starter_test</span><br></pre></td></tr></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1VP4y1H7TL/">https://www.bilibili.com/video/BV1VP4y1H7TL/</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ke411P7E4/">https://www.bilibili.com/video/BV1ke411P7E4/</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://sirlis.gitee.io/posts/linux-WSL/">在 Windows 中部署和使用 WSL 并进行跨平台 C/C++ 开发 | SIRLIS (gitee.io)</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/J__M__C/article/details/129858032">CMU15445（2023 Spring） lab - 环境配置_cmu的15445的lab-CSDN博客</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_62355896/article/details/134458330">使用WSL2时控制台输出“wsl: 检测到 localhost 代理配置，但未镜像到 WSL。NAT 模式下的 WSL 不支持 localhost 代理“_wsl: 检测到 localhost 代理配置,但未镜像到 wsl。nat 模式下的 wsl 不支持-CSDN博客</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/647388977">在 Ubuntu Linux 上安装 Clang - 知乎 (zhihu.com)</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/g241893312/article/details/124796995">Ubuntu20.04安装valgrind_ubuntu安装valgrind-CSDN博客</a></p>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

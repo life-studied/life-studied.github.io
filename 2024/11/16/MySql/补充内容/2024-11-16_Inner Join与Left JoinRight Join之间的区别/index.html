@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Inner Join与Left JoinRight Join之间的区别 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>Inner Join与Left JoinRight Join之间的区别</h1>
+    </header>
+
+    <section>
+      <h1>Inner Join与Left Join/Right Join之间的区别</h1>
+<p>一直没搞懂这三者之间的区别，用的时候只知道用left join。这两天突然想到，查了一下，发现虽然都是取笛卡尔积，但是只有inner join是才是真正的交集。</p>
+<span id="more"></span>
+<p>而left join在左边表中，找不到右边匹配的行也会显示出来，只是右边相关数据展示为NULL。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    c.country_name, c.country_id, l.country_id, l.street_address, l.city</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    countries c</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> locations l <span class="keyword">ON</span> l.country_id <span class="operator">=</span> c.country_id</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    c.country_id <span class="keyword">IN</span> (<span class="string">&#x27;US&#x27;</span>, <span class="string">&#x27;UK&#x27;</span>, <span class="string">&#x27;CN&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+------------+-------------------------+------------+</span></span><br><span class="line"><span class="operator">|</span> country_name  <span class="operator">|</span> country_id <span class="operator">|</span> l.country_id <span class="operator">|</span> street_address        <span class="operator">|</span> city   	 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+------------+-------------------------+------------+</span></span><br><span class="line"><span class="operator">|</span> 美国          <span class="operator">|</span> US         <span class="operator">|</span> US         <span class="operator">|</span> <span class="number">2014</span> Jabberwocky Rd     <span class="operator">|</span> Southlake  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 美国          <span class="operator">|</span> US         <span class="operator">|</span> US         <span class="operator">|</span> <span class="number">2011</span> Interios Blvd      <span class="operator">|</span> South San Francisco </span><br><span class="line"><span class="operator">|</span> 美国          <span class="operator">|</span> US         <span class="operator">|</span> US         <span class="operator">|</span> <span class="number">2004</span> Charade Rd         <span class="operator">|</span> Seattle    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 英国          <span class="operator">|</span> UK         <span class="operator">|</span> UK         <span class="operator">|</span> <span class="number">8204</span> Arthur St          <span class="operator">|</span> London     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 英国          <span class="operator">|</span> UK         <span class="operator">|</span> UK         <span class="operator">|</span> Magdalen Centre, The Oxford Science Park <span class="operator">|</span> Oxford</span><br><span class="line"><span class="operator">|</span> 中国          <span class="operator">|</span> CN         <span class="operator">|</span> <span class="keyword">NULL</span>       <span class="operator">|</span> <span class="keyword">NULL</span>                    <span class="operator">|</span> <span class="keyword">NULL</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------+------------+-------------------------+------------+</span></span><br></pre></td></tr></table></figure>
+<p>right join同理。</p>
+<img src="./assets/image-20241101235443371.png" alt="image-20241101235443371" style="zoom:50%;" />
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

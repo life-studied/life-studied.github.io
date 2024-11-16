@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>1-4 挖掘CPU资源 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>1-4 挖掘CPU资源</h1>
+    </header>
+
+    <section>
+      <h1>挖掘CPU资源</h1>
+<h2 id="多道程序（multiprogramming）">多道程序（multiprogramming）</h2>
+<span id="more"></span>
+<p>早期计算机的CPU在读写硬盘时就会空闲。为了利用这部分的CPU资源，监控程序会把正在等待CPU资源的程序启动。</p>
+<p>这种方法提高了CPU的利用率，但是也导致了问题：程序之间没有优先级，紧急的任务可能要等很长时间才有机会分配到CPU（例如用户交互任务）。</p>
+<h2 id="分时系统">分时系统</h2>
+<p>每个程序运行一段时间后都会出让CPU给其它程序。</p>
+<p>程序通过调用Yield、GetMessage、PeekMessage这几个系统调用，将CPU主动出让给其它程序。但是如果程序陷入了while(1)的死循环，则整个系统都会停止。</p>
+<h2 id="多任务系统">多任务系统</h2>
+<p>操作系统：操作系统接管了所有的硬件资源，并且本身运行在一个受硬件保护的级别。</p>
+<p>进程：每个进程都有独立的地址空间，彼此之间互相隔离。</p>
+<p>CPU：CPU由操作系统统一进行分配，每个进程根据进程优先级的高低都有机会得到CPU，同时运行超出一定时间会被操作系统暂停，这种方式被称为抢占式。</p>
+<p>操作系统可以强制剥夺CPU资源并且分配给它认为当前最需要的进程。如果每个进程分配到的时间都很短，就会造成很多进程同时运行的假象。</p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

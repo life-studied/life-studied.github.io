@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>08 优先使用nullptr而不是0或者NULL | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>08 优先使用nullptr而不是0或者NULL</h1>
+    </header>
+
+    <section>
+      <h1>08 优先使用nullptr而不是0或者NULL</h1>
+<p>​	 <strong>0 和 NULL 都不属于指针类型</strong>。 在 C++98 中，这意味着传递 0 或者 NULL 作为参数给重载函数永远不会调用指针重载的那个函数：</p>
+<span id="more"></span>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">int</span>)</span></span>; <span class="comment">// 函数f的三个重载</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">bool</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">void</span>*)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">f</span>(<span class="number">0</span>); 		<span class="comment">// 调用 f(int)，而非f(void*)</span></span><br><span class="line"><span class="built_in">f</span>(<span class="literal">NULL</span>); 	<span class="comment">// 可能无法编译，但是调用f(int)</span></span><br><span class="line">			<span class="comment">// 不可能调用 f(void*)</span></span><br></pre></td></tr></table></figure>
+<p>​	如果 <code>NULL</code> 被定为 <code>0L</code> （即 <code>0</code> 作为一个 <code>long</code> 整形），函数的调用是有歧义的，因为 <code>long</code> 转化为 <code>int</code> ， <code>long</code> 转化为 <code>bool</code> ， 0L 转换为 <code>void*</code> 都被认为是同样可行的。</p>
+<p>​	注意：使用NULL进行函数调用，在<strong>源代码的语义和它的实际情况存在着冲突</strong>。这种违背直觉的行为正是 C++98 程序员不被允许重载指针和整数类型的原因。</p>
+<hr>
+<p>​	<code>nullptr</code> 的优势是它不再是一个整数类型。诚实的讲，它也不是一个指针类型，但是你可以把它想象成一个可以指向任意类型的指针。 <code>nullptr</code> 的类型实际上是 <code>std::nullptr_t</code> ， <code>std::nullptr_t</code> 定义为 <code>nullptr</code> 的类型，这是一个完美的循环定义。</p>
+<p>​	<code>std::nullptr_t</code> 可以隐式的转换为所有的原始的指针类型，这使得 <code>nullptr</code> 表现的像可 以指向任意类型的指针。</p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

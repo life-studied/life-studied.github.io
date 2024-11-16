@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Windows%20API/2024-11-16_7-UDP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/">7-UDP网络编程服务器</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="UDP网络编程服务器">UDP网络编程服务器</h2>
+<blockquote>
+<p>与TCP相比，UDP无需listen，服务器直接在recvfrom处阻塞，等待客户端连接</p>
+</blockquote>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Windows%20API/2024-11-16_7-UDP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Windows%20API/2024-11-16_8-UDP%E5%AE%A2%E6%88%B7%E7%AB%AF/">8-UDP客户端</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="UDP客户端">UDP客户端</h2>
+<h4 id="1-初始化网络库">1.初始化网络库</h4>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Windows%20API/2024-11-16_8-UDP%E5%AE%A2%E6%88%B7%E7%AB%AF/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Windows%20API/2024-11-16_9-%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E6%88%AA%E5%8F%96%EF%BC%9A%E6%96%87%E4%BB%B6%E9%81%8D%E5%8E%86/">9-网络文件截取：文件遍历</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows-API/">Windows API</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="网络文件截取：文件遍历">网络文件截取：文件遍历</h2>
+<h4 id="1-window下的文件结构体：WIN32-FIND-DATA">1.window下的文件结构体：WIN32_FIND_DATA</h4>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Windows%20API/2024-11-16_9-%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E6%88%AA%E5%8F%96%EF%BC%9A%E6%96%87%E4%BB%B6%E9%81%8D%E5%8E%86/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Windows%E4%B8%8BC%E7%9A%84%E6%9F%90%E4%BA%9B%E7%89%B9%E6%80%A7/2024-11-16_1WinMain%E4%B8%8Emain%E7%9A%84%E5%8C%BA%E5%88%AB/">1WinMain与main的区别</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows%E4%B8%8BC%E7%9A%84%E6%9F%90%E4%BA%9B%E7%89%B9%E6%80%A7/">Windows下C的某些特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h4 id="WinMain与main的区别">WinMain与main的区别</h4>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2024-11-16_2-6%20%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E7%BC%96%E5%86%99/">2-6 第一个程序的创建与编写</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/">Windows游戏编程（逐梦旅程读书笔记）</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="第一个程序的创建与编写">第一个程序的创建与编写</h2>
+<h4 id="2-6-1创建工程">2.6.1创建工程</h4>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2024-11-16_2-6%20%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E7%BC%96%E5%86%99/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2024-11-16_3-10%20%E5%96%84%E5%90%8E%E5%B7%A5%E4%BD%9C%E2%80%94%E2%80%94%E7%AA%97%E5%8F%A3%E7%B1%BB%E7%9A%84%E6%B3%A8%E9%94%80/">3-10 善后工作——窗口类的注销</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/">Windows游戏编程（逐梦旅程读书笔记）</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="善后工作——窗口类的注销">善后工作——窗口类的注销</h2>
+<blockquote>
+<p>在WinMain结束之前，最好做一次窗口类的注销。</p>
+</blockquote>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2024-11-16_3-10%20%E5%96%84%E5%90%8E%E5%B7%A5%E4%BD%9C%E2%80%94%E2%80%94%E7%AA%97%E5%8F%A3%E7%B1%BB%E7%9A%84%E6%B3%A8%E9%94%80/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2024-11-16_3-3%20WinMain%E5%87%BD%E6%95%B0/">3-3 WinMain函数</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/">Windows游戏编程（逐梦旅程读书笔记）</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="WinMain函数">WinMain函数</h2>
+<h4 id="3-3-1-WinMain函数">3.3.1 WinMain函数</h4>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2024-11-16_3-3%20WinMain%E5%87%BD%E6%95%B0/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2024-11-16_3-7%20%E5%88%9B%E5%BB%BA%E7%AA%97%E5%8F%A3%E5%9B%9B%E9%83%A8%E6%9B%B2/">3-7 创建窗口四部曲</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/">Windows游戏编程（逐梦旅程读书笔记）</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="创建窗口四部曲">创建窗口四部曲</h2>
+<ul class="lvl-0">
+<li class="lvl-2">设计窗口类</li>
+<li class="lvl-2">注册窗口类</li>
+</ul>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2024-11-16_3-7%20%E5%88%9B%E5%BB%BA%E7%AA%97%E5%8F%A3%E5%9B%9B%E9%83%A8%E6%9B%B2/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2024-11-16_3-8%20%E4%B8%A4%E5%A5%97%E6%B6%88%E6%81%AF%E5%BE%AA%E7%8E%AF%E4%BD%93%E7%B3%BB/">3-8 两套消息循环体系</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/">Windows游戏编程（逐梦旅程读书笔记）</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="两套消息循环体系">两套消息循环体系</h2>
+<h4 id="1-GetMessage——阻塞式">1.GetMessage——阻塞式</h4>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2024-11-16_3-8%20%E4%B8%A4%E5%A5%97%E6%B6%88%E6%81%AF%E5%BE%AA%E7%8E%AF%E4%BD%93%E7%B3%BB/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2024-11-16_3-9%20%E7%AA%97%E5%8F%A3%E8%BF%87%E7%A8%8B%E5%87%BD%E6%95%B0/">3-9 窗口过程函数</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/">Windows游戏编程（逐梦旅程读书笔记）</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="窗口过程函数">窗口过程函数</h2>
+<blockquote>
+<p>窗口过程函数是一个回调函数，用于创建窗口时将函数地址传进去处理消息。</p>
+</blockquote>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Windows%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E9%80%90%E6%A2%A6%E6%97%85%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%89/2024-11-16_3-9%20%E7%AA%97%E5%8F%A3%E8%BF%87%E7%A8%8B%E5%87%BD%E6%95%B0/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/15/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/91/">91</a><a class="extend next" rel="next" href="/page/17/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

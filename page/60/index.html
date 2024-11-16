@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/3rdparty/protobuf/2024-11-16_04%20%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">04 序列化与反序列化</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/">3rdparty</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/protobuf/">protobuf</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>序列化与反序列化</h1>
+<h2 id="1-quick-start">1. quick start</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/3rdparty/protobuf/2024-11-16_04%20%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/3rdparty/protobuf/2024-11-16_05%20%E5%AF%BC%E5%85%A5%E5%85%B6%E5%AE%83proto%E6%96%87%E4%BB%B6/">05 导入其它proto文件</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/">3rdparty</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/protobuf/">protobuf</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>导入其它proto文件</h1>
+<h2 id="1-quick-start">1. quick start</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/3rdparty/protobuf/2024-11-16_05%20%E5%AF%BC%E5%85%A5%E5%85%B6%E5%AE%83proto%E6%96%87%E4%BB%B6/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/3rdparty/protobuf/2024-11-16_06%20%E5%8C%85package/">06 包package</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/">3rdparty</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/protobuf/">protobuf</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>包package</h1>
+<p>在 Protobuf 中，可以使用package关键字来定义一个消息所属的包（package）。</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/3rdparty/protobuf/2024-11-16_06%20%E5%8C%85package/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/3rdparty/xlnt/2024-11-16_xlnt%E6%95%99%E7%A8%8B/">xlnt教程</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/">3rdparty</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/xlnt/">xlnt</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="xlnt教程">xlnt教程</h2>
+<p>[TOC]</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/3rdparty/xlnt/2024-11-16_xlnt%E6%95%99%E7%A8%8B/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/C++%E5%A4%9A%E7%BA%BF%E7%A8%8B/C++%20lock-free%E7%BC%96%E7%A8%8B/2024-11-16_01%20lock-free%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">01 lock-free基本概念</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%A4%9A%E7%BA%BF%E7%A8%8B/">C++多线程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%A4%9A%E7%BA%BF%E7%A8%8B/C-lock-free%E7%BC%96%E7%A8%8B/">C++ lock-free编程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1><strong>lock-free基本概念</strong></h1>
+<h2 id="1-非阻塞数据结构介绍"><strong>1. 非阻塞数据结构介绍</strong></h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/C++%E5%A4%9A%E7%BA%BF%E7%A8%8B/C++%20lock-free%E7%BC%96%E7%A8%8B/2024-11-16_01%20lock-free%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/C++%E5%A4%9A%E7%BA%BF%E7%A8%8B/C++%20lock-free%E7%BC%96%E7%A8%8B/2024-11-16_02%20C++%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E7%9A%84%E5%86%85%E5%AD%98%E9%A1%BA%E5%BA%8F/">02 C++原子操作的内存顺序</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%A4%9A%E7%BA%BF%E7%A8%8B/">C++多线程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%A4%9A%E7%BA%BF%E7%A8%8B/C-lock-free%E7%BC%96%E7%A8%8B/">C++ lock-free编程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>C++atomic中原子操作的内存顺序</h1>
+<p>​	这里有六个内存序列选项可应用于对原子类型的操作（来源于枚举类<code>std::memory_order</code>）：</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/C++%E5%A4%9A%E7%BA%BF%E7%A8%8B/C++%20lock-free%E7%BC%96%E7%A8%8B/2024-11-16_02%20C++%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E7%9A%84%E5%86%85%E5%AD%98%E9%A1%BA%E5%BA%8F/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/C++%E5%A4%9A%E7%BA%BF%E7%A8%8B/C++%E6%A0%87%E5%87%86%E5%A4%9A%E7%BA%BF%E7%A8%8B/2024-11-16_02%20%E4%BA%92%E6%96%A5%E9%87%8F%EF%BC%88mutex%EF%BC%89%E5%92%8C%E5%8E%9F%E5%AD%90%E5%8F%98%E9%87%8F%EF%BC%88atomic%EF%BC%89/">02 互斥量（mutex）和原子变量（atomic）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%A4%9A%E7%BA%BF%E7%A8%8B/">C++多线程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%A4%9A%E7%BA%BF%E7%A8%8B/C-%E6%A0%87%E5%87%86%E5%A4%9A%E7%BA%BF%E7%A8%8B/">C++标准多线程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="02-互斥量（mutex）和原子变量（atomic）">02 互斥量（mutex）和原子变量（atomic）</h2>
+<p>[TOC]</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/C++%E5%A4%9A%E7%BA%BF%E7%A8%8B/C++%E6%A0%87%E5%87%86%E5%A4%9A%E7%BA%BF%E7%A8%8B/2024-11-16_02%20%E4%BA%92%E6%96%A5%E9%87%8F%EF%BC%88mutex%EF%BC%89%E5%92%8C%E5%8E%9F%E5%AD%90%E5%8F%98%E9%87%8F%EF%BC%88atomic%EF%BC%89/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/C++%E5%A4%9A%E7%BA%BF%E7%A8%8B/C++%E6%A0%87%E5%87%86%E5%A4%9A%E7%BA%BF%E7%A8%8B/2024-11-16_04%20promise%E5%92%8Cfuture/">04 promise和future</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%A4%9A%E7%BA%BF%E7%A8%8B/">C++多线程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%A4%9A%E7%BA%BF%E7%A8%8B/C-%E6%A0%87%E5%87%86%E5%A4%9A%E7%BA%BF%E7%A8%8B/">C++标准多线程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="04-promise和future">04 promise和future</h2>
+<p>[TOC]</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/C++%E5%A4%9A%E7%BA%BF%E7%A8%8B/C++%E6%A0%87%E5%87%86%E5%A4%9A%E7%BA%BF%E7%A8%8B/2024-11-16_04%20promise%E5%92%8Cfuture/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/C++%E5%A4%9A%E7%BA%BF%E7%A8%8B/C++%E6%A0%87%E5%87%86%E5%A4%9A%E7%BA%BF%E7%A8%8B/2024-11-16_05%20packaged_task%E5%92%8Casync/">05 packaged_task和async</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%A4%9A%E7%BA%BF%E7%A8%8B/">C++多线程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%A4%9A%E7%BA%BF%E7%A8%8B/C-%E6%A0%87%E5%87%86%E5%A4%9A%E7%BA%BF%E7%A8%8B/">C++标准多线程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="05-packaged-task和async">05 packaged_task和async</h2>
+<p>[TOC]</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/C++%E5%A4%9A%E7%BA%BF%E7%A8%8B/C++%E6%A0%87%E5%87%86%E5%A4%9A%E7%BA%BF%E7%A8%8B/2024-11-16_05%20packaged_task%E5%92%8Casync/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/C++/Linux%E7%9B%B8%E5%85%B3/4CMake/2024-11-16_1-CMake%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/">1-CMake初次使用</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Linux%E7%9B%B8%E5%85%B3/">Linux相关</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/Linux%E7%9B%B8%E5%85%B3/4CMake/">4CMake</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="CMake初次使用">CMake初次使用</h2>
+<h4 id="1-构建CMakeLists-txt">1.构建CMakeLists.txt</h4>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/C++/Linux%E7%9B%B8%E5%85%B3/4CMake/2024-11-16_1-CMake%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/59/">« prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="page-number" href="/page/59/">59</a><span class="page-number current">60</span><a class="page-number" href="/page/61/">61</a><a class="page-number" href="/page/62/">62</a><span class="space">&hellip;</span><a class="page-number" href="/page/91/">91</a><a class="extend next" rel="next" href="/page/61/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

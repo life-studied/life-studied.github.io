@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>03 PageDTO解读 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>03 PageDTO解读</h1>
+    </header>
+
+    <section>
+      <h1>03 PageDTO解读</h1>
+<p>[TOC]</p>
+<span id="more"></span>
+<h2 id="解读说明">解读说明</h2>
+<p>​	PageDTO是对DTO的拓展，用于生成一页包含多行相同DTO的DTO对象。其中T表示一页中相同的一行DTO。</p>
+<p>​	注意，由于PageDTO不会在返回前将内部DTO再进行<code>Wrapper</code>序列化，因此在创建的时候每一行DTO都是以<code>DTO::Wrapper</code>的类型创建的。并且放入数据也是放入的Wrapper，而非直接DTO。</p>
+<h2 id="使用方法">使用方法</h2>
+<p>​	下面的继承类本质上就是进行了重命名，因此可以直接用<code>using SamplePageDTO = PageDTO&lt;SampleDTO::Wrapper&gt;;</code>来代替继承语法。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> OATPP_CODEGEN_BEGIN(DTO)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 示例传输对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SampleDTO</span> : <span class="keyword">public</span> oatpp::DTO</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">DTO_INIT</span>(SampleDTO, DTO);</span><br><span class="line">	<span class="comment">// 编号</span></span><br><span class="line">	<span class="built_in">DTO_FIELD</span>(UInt64, id);</span><br><span class="line">	<span class="built_in">DTO_FIELD_INFO</span>(id) &#123;</span><br><span class="line">		info-&gt;description = <span class="built_in">ZH_WORDS_GETTER</span>(<span class="string">&quot;sample.field.id&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 姓名</span></span><br><span class="line">	<span class="built_in">DTO_FIELD</span>(String, name);</span><br><span class="line">	<span class="built_in">DTO_FIELD_INFO</span>(name) &#123;</span><br><span class="line">		info-&gt;description = <span class="built_in">ZH_WORDS_GETTER</span>(<span class="string">&quot;sample.field.name&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 年龄</span></span><br><span class="line">	<span class="built_in">DTO_FIELD</span>(Int32, age);</span><br><span class="line">	<span class="built_in">DTO_FIELD_INFO</span>(age) &#123;</span><br><span class="line">		info-&gt;description = <span class="built_in">ZH_WORDS_GETTER</span>(<span class="string">&quot;sample.field.age&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 性别</span></span><br><span class="line">	<span class="built_in">DTO_FIELD</span>(String, sex);</span><br><span class="line">	<span class="built_in">DTO_FIELD_INFO</span>(sex) &#123;</span><br><span class="line">		info-&gt;description = <span class="built_in">ZH_WORDS_GETTER</span>(<span class="string">&quot;sample.field.sex&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 示例分页传输对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SamplePageDTO</span> : <span class="keyword">public</span> PageDTO&lt;SampleDTO::Wrapper&gt; </span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">DTO_INIT</span>(SamplePageDTO, PageDTO&lt;SampleDTO::Wrapper&gt;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> OATPP_CODEGEN_END(DTO)</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// !_SAMPLE_DTO_</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="类名：PageDTO-T">类名：PageDTO&lt;T&gt;</h2>
+<h3 id="字段">字段</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>pageIndex</strong></p>
+<ul class="lvl-2">
+<li class="lvl-4">类型: UInt64</li>
+<li class="lvl-4">默认值: 1</li>
+<li class="lvl-4">必需: 是</li>
+<li class="lvl-4">描述: 当前页码</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><strong>pageSize</strong></p>
+<ul class="lvl-2">
+<li class="lvl-4">类型: UInt64</li>
+<li class="lvl-4">默认值: 5</li>
+<li class="lvl-4">必需: 是</li>
+<li class="lvl-4">描述: 每页显示最大数据条数</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><strong>total</strong></p>
+<ul class="lvl-2">
+<li class="lvl-4">类型: Int64</li>
+<li class="lvl-4">默认值: 9</li>
+<li class="lvl-4">必需: 是</li>
+<li class="lvl-4">描述: 数据的总条数</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><strong>pages</strong></p>
+<ul class="lvl-2">
+<li class="lvl-4">类型: Int64</li>
+<li class="lvl-4">默认值: 2</li>
+<li class="lvl-4">必需: 是</li>
+<li class="lvl-4">描述: 数据的总页数</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><strong>rows</strong></p>
+<ul class="lvl-2">
+<li class="lvl-4">类型: <code>List&lt;T&gt;</code></li>
+<li class="lvl-4">默认值: 空列表</li>
+<li class="lvl-4">必需: 否</li>
+<li class="lvl-4">描述: 当前页数据列表</li>
+</ul>
+</li>
+</ul>
+<h3 id="构造函数">构造函数</h3>
+<p><strong>PageDTO()</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>描述：初始化一个空的<code>PageDTO</code>对象。</p>
+</li>
+<li class="lvl-2">
+<p>参数：无</p>
+</li>
+<li class="lvl-2">
+<p>返回值：无</p>
+</li>
+</ul>
+<h3 id="initAll方法">initAll方法</h3>
+<p><strong>void initAll(UInt64 pageIndex, UInt64 pageSize, Int64 total, Int64 pages, List<T> rows)</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>描述：初始化所有字段的值。</p>
+</li>
+<li class="lvl-2">
+<p>参数：</p>
+<ul class="lvl-2">
+<li class="lvl-4"><code>pageIndex</code> (UInt64): 当前页码。</li>
+<li class="lvl-4"><code>pageSize</code> (UInt64): 每页显示最大数据条数。</li>
+<li class="lvl-4"><code>total</code> (Int64): 数据的总条数。</li>
+<li class="lvl-4"><code>pages</code> (Int64): 数据的总页数。</li>
+<li class="lvl-4"><code>rows</code> (List<T>): 当前页数据列表。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>返回值：无</p>
+</li>
+</ul>
+<h3 id="calcPages方法">calcPages方法</h3>
+<p><strong>void calcPages()</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>描述：根据总条数和每页显示条数计算总页数。</p>
+</li>
+<li class="lvl-2">
+<p>参数：无</p>
+</li>
+<li class="lvl-2">
+<p>返回值：无</p>
+</li>
+</ul>
+<h3 id="addData方法">addData方法</h3>
+<p><strong>void addData(T one)</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>描述：向当前页数据列表中添加一条数据。</p>
+</li>
+<li class="lvl-2">
+<p>参数：</p>
+<ul class="lvl-2">
+<li class="lvl-4"><code>one</code> (T): 要添加的数据。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>返回值：无</p>
+</li>
+</ul>
+<h2 id="文件资料（PageDTO声明）">文件资料（PageDTO声明）</h2>
+<p>​	下面资料的主要注意点在于row变量，也就是<code>List&lt;T&gt;</code>。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> Copyright Zero One Star. All rights reserved.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> @Author: awei</span></span><br><span class="line"><span class="comment"> @Date: 2022/10/25 11:20:12</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></span><br><span class="line"><span class="comment"> you may not use this file except in compliance with the License.</span></span><br><span class="line"><span class="comment"> You may obtain a copy of the License at</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	  https://www.apache.org/licenses/LICENSE-2.0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> Unless required by applicable law or agreed to in writing, software</span></span><br><span class="line"><span class="comment"> distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></span><br><span class="line"><span class="comment"> WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></span><br><span class="line"><span class="comment"> See the License for the specific language governing permissions and</span></span><br><span class="line"><span class="comment"> limitations under the License.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> _PAGE_DTO_</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> _PAGE_DTO_</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/core/macro/codegen.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/core/Types.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> OATPP_CODEGEN_BEGIN(DTO)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 分页数据实体</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">PageDTO</span> : <span class="keyword">public</span> oatpp::DTO</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 初始化</span></span><br><span class="line">	<span class="built_in">DTO_INIT</span>(PageDTO, DTO);</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 当前页码</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="built_in">DTO_FIELD</span>(UInt64, pageIndex) = <span class="number">1</span>;</span><br><span class="line">	<span class="built_in">DTO_FIELD_INFO</span>(pageIndex) &#123;</span><br><span class="line">		info-&gt;required = <span class="literal">true</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> LINUX</span></span><br><span class="line">		info-&gt;description = <span class="string">u8&quot;当前页码&quot;</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">		info-&gt;description = <span class="string">&quot;page index&quot;</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 每页显示最大数据条数</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="built_in">DTO_FIELD</span>(UInt64, pageSize) = <span class="number">5</span>;</span><br><span class="line">	<span class="built_in">DTO_FIELD_INFO</span>(pageSize) &#123;</span><br><span class="line">		info-&gt;required = <span class="literal">true</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> LINUX</span></span><br><span class="line">		info-&gt;description = <span class="string">u8&quot;每页数据条数&quot;</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">		info-&gt;description = <span class="string">&quot;page size&quot;</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 数据的总条数</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="built_in">DTO_FIELD</span>(Int64, total) = <span class="number">9</span>;</span><br><span class="line">	<span class="built_in">DTO_FIELD_INFO</span>(total) &#123;</span><br><span class="line">		info-&gt;required = <span class="literal">true</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> LINUX</span></span><br><span class="line">		info-&gt;description = <span class="string">u8&quot;数据的总条数&quot;</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">		info-&gt;description = <span class="string">&quot;total&quot;</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 数据的总页数</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="built_in">DTO_FIELD</span>(Int64, pages) = <span class="number">2</span>;</span><br><span class="line">	<span class="built_in">DTO_FIELD_INFO</span>(pages) &#123;</span><br><span class="line">		info-&gt;required = <span class="literal">true</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> LINUX</span></span><br><span class="line">		info-&gt;description = <span class="string">u8&quot;数据的总页数&quot;</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">		info-&gt;description = <span class="string">&quot;pages&quot;</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 当前页数据列表</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="built_in">DTO_FIELD</span>(List&lt;T&gt;, rows) = &#123;&#125;;</span><br><span class="line">	<span class="built_in">DTO_FIELD_INFO</span>(rows) &#123;</span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> LINUX</span></span><br><span class="line">		info-&gt;description = <span class="string">u8&quot;当前页数据列表&quot;</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">		info-&gt;description = <span class="string">&quot;page data list&quot;</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">PageDTO</span>() &#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;total = <span class="built_in">v_int64</span>(<span class="number">0</span>);</span><br><span class="line">		<span class="keyword">this</span>-&gt;pages = <span class="built_in">v_int64</span>(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 初始化所有内容</span></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">initAll</span><span class="params">(UInt64 pageIndex, UInt64 pageSize, Int64 total, Int64 pages, List&lt;T&gt; rows)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;pageIndex = pageIndex;</span><br><span class="line">		<span class="keyword">this</span>-&gt;pageSize = pageSize;</span><br><span class="line">		<span class="keyword">this</span>-&gt;total = total;</span><br><span class="line">		<span class="keyword">this</span>-&gt;pages = pages;</span><br><span class="line">		<span class="keyword">this</span>-&gt;rows = rows;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 计算总页数</span></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">calcPages</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;pages = total.<span class="built_in">getValue</span>(<span class="number">0</span>) / pageSize.<span class="built_in">getValue</span>(<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">this</span>-&gt;pages = total.<span class="built_in">getValue</span>(<span class="number">0</span>) % pageSize.<span class="built_in">getValue</span>(<span class="number">1</span>) == <span class="number">0</span> ? <span class="keyword">this</span>-&gt;pages.<span class="built_in">getValue</span>(<span class="number">0</span>) : <span class="keyword">this</span>-&gt;pages.<span class="built_in">getValue</span>(<span class="number">0</span>) + <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 添加一条数据</span></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">addData</span><span class="params">(T one)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;rows-&gt;<span class="built_in">push_back</span>(one);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> OATPP_CODEGEN_END(DTO)</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// !_PAGE_DTO_</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

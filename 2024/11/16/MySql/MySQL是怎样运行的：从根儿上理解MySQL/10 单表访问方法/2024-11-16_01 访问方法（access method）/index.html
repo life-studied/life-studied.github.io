@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>01 访问方法（access method） | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>01 访问方法（access method）</h1>
+    </header>
+
+    <section>
+      <h1>访问方法（access method）</h1>
+<h2 id="概念">概念</h2>
+<span id="more"></span>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>概念</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>const</td>
+<td>通过主键或者唯一二级索引列与常数的等值比较来定位一条记录是像坐火箭一样快的，所以把这种通过主键或者唯一二级索引列来定位一条记录的访问方法定义为：const，意思是常数级别的，代价是可以忽略不计的。</td>
+<td><code>SELECT * FROM single_table WHERE key2 = 3841;</code></td>
+</tr>
+<tr>
+<td>ref</td>
+<td>搜索条件为二级索引列与常数等值比较，采用二级索引来执行查询的访问方法称为：ref。</td>
+<td><code>SELECT * FROM single_table WHERE key1 = 'abc';</code></td>
+</tr>
+<tr>
+<td>ref_or_null</td>
+<td>在ref的基础上增加对NULL的搜索条件。</td>
+<td><code>SELECT * FROM single_demo WHERE key1 = 'abc' OR key1 IS NULL;</code></td>
+</tr>
+<tr>
+<td>range</td>
+<td>利用索引进行范围匹配的访问方法称之为：range。</td>
+<td><code>SELECT * FROM single_table WHERE key2 IN (1438, 6328) OR (key2 &gt;= 38 AND key2 &lt;= 79);</code></td>
+</tr>
+<tr>
+<td>index</td>
+<td>采用只遍历二级索引/联合索引记录的执行方式称之为：index（即二级/联合索引记录了足够所需的信息）</td>
+<td><code>SELECT key_part1, key_part2, key_part3 FROM single_table WHERE key_part2 = 'abc';</code></td>
+</tr>
+<tr>
+<td>all</td>
+<td>全表扫描</td>
+<td><code>SELECT * FROM single_table WHERE key1 = 'abc' AND key2 &gt; 1000;</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="图示">图示</h2>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>图示</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>const</td>
+<td><img src="./assets/image-20241114220925831.png" alt="image-20241114220925831" style="zoom:50%;" /></td>
+<td>通过唯一索引等值查询</td>
+</tr>
+<tr>
+<td>ref</td>
+<td><img src="./assets/image-20241114221130543.png" alt="image-20241114221130543" style="zoom:50%;" /></td>
+<td>通过不唯一索引等值查询</td>
+</tr>
+<tr>
+<td>ref_or_null</td>
+<td><img src="./assets/image-20241114221337817.png" alt="image-20241114221337817" style="zoom:50%;" /></td>
+<td>通过不唯一索引等值查询<br />+NULL查询</td>
+</tr>
+<tr>
+<td>range</td>
+<td><img src="./assets/image-20241114221531099.png" alt="image-20241114221531099" style="zoom:50%;" /></td>
+<td>通过索引进行范围查询<br />需要<strong>比较全表扫描与range+回表</strong>的成本</td>
+</tr>
+<tr>
+<td>index</td>
+<td></td>
+<td>查询的列都在二级索引或联合索引中，无需再回表。</td>
+</tr>
+</tbody>
+</table>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>stdref和stdreference | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>stdref和stdreference</h1>
+    </header>
+
+    <section>
+      <h1>std::ref和std::reference</h1>
+<p>​	<code>std::ref</code>用于传递引用，用于不能显式地使用<code>&amp;</code>进行传递的情况。例如，在创建<code>std::thread</code>时，总是会先复制一份参数再传递引用，而不是根据函数的参数列表直接传递需要的引用类型。为了解决这种不能直接传递引用的情况，可以使用<code>std::ref</code>来实现。</p>
+<span id="more"></span>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span><span class="params">(<span class="type">int</span> &amp;a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> b;</span><br><span class="line"><span class="function">std::thread <span class="title">t</span><span class="params">(func, std::ref(b))</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="1-如何实现std-ref">1. 如何实现<code>std::ref</code></h2>
+<p>​	std::ref是一个模板函数，具有三种实现，分别对应了其最常用的构建方法，拷贝运算和（删除）移动运算。</p>
+<p>​	可以看到，其实现主要是生成了一个<code>std::reference_wrapper&lt;_Ty&gt;</code>的模板辅助类。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">_EXPORT_STD <span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">_Ty</span>&gt;</span><br><span class="line"><span class="function">_NODISCARD _CONSTEXPR20 reference_wrapper&lt;_Ty&gt; <span class="title">ref</span><span class="params">(_Ty&amp; _Val)</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">reference_wrapper</span>&lt;_Ty&gt;(_Val);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">_EXPORT_STD <span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">_Ty</span>&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ref</span><span class="params">(<span class="type">const</span> _Ty&amp;&amp;)</span> </span>= <span class="keyword">delete</span>;</span><br><span class="line"></span><br><span class="line">_EXPORT_STD <span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">_Ty</span>&gt;</span><br><span class="line"><span class="function">_NODISCARD _CONSTEXPR20 reference_wrapper&lt;_Ty&gt; <span class="title">ref</span><span class="params">(reference_wrapper&lt;_Ty&gt; _Val)</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> _Val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-std-reference-wrapper-T">2. <code>std::reference_wrapper&lt;T&gt;</code></h2>
+<p>​	<code>std::reference_wrapper&lt;T&gt;</code>的实现很简单，其本质就是接收并保存了指向实际数据的指针，以及定义了隐式转换函数（<code>operator type()</code>）用于从这种类转换为原本传递进来的类型的引用。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">reference_wrapper</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="comment">// 类型</span></span><br><span class="line">  <span class="keyword">using</span> type = T;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">// 构造/复制/销毁</span></span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">U</span>, <span class="keyword">class</span> = <span class="keyword">decltype</span>(</span><br><span class="line">    detail::<span class="built_in">FUN</span>&lt;T&gt;(std::<span class="built_in">declval</span>&lt;U&gt;()),</span><br><span class="line">    std::<span class="type">enable_if_t</span>&lt;!std::is_same_v&lt;reference_wrapper, std::<span class="type">remove_cvref_t</span>&lt;U&gt;&gt;&gt;()</span><br><span class="line">  )&gt;</span><br><span class="line">  <span class="keyword">constexpr</span> <span class="built_in">reference_wrapper</span>(U&amp;&amp; u) <span class="built_in">noexcept</span>(<span class="built_in">noexcept</span>(detail::<span class="built_in">FUN</span>&lt;T&gt;(std::forward&lt;U&gt;(u))))</span><br><span class="line">    : _ptr(std::<span class="built_in">addressof</span>(detail::<span class="built_in">FUN</span>&lt;T&gt;(std::forward&lt;U&gt;(u)))) &#123;&#125;</span><br><span class="line">  <span class="built_in">reference_wrapper</span>(<span class="type">const</span> reference_wrapper&amp;) <span class="keyword">noexcept</span> = <span class="keyword">default</span>;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">// 赋值</span></span><br><span class="line">  reference_wrapper&amp; <span class="keyword">operator</span>=(<span class="type">const</span> reference_wrapper&amp; x) <span class="keyword">noexcept</span> = <span class="keyword">default</span>;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">// 访问</span></span><br><span class="line">  <span class="keyword">constexpr</span> <span class="keyword">operator</span> T&amp; () <span class="type">const</span> <span class="keyword">noexcept</span> &#123; <span class="keyword">return</span> *_ptr; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">constexpr</span> T&amp; <span class="title">get</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">noexcept</span> </span>&#123; <span class="keyword">return</span> *_ptr; &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="function"><span class="keyword">template</span>&lt; <span class="keyword">class</span>... ArgTypes &gt;</span></span><br><span class="line"><span class="function">  <span class="keyword">constexpr</span> std::<span class="type">invoke_result_t</span>&lt;T&amp;, ArgTypes...&gt;</span></span><br><span class="line"><span class="function">    <span class="title">operator</span><span class="params">()</span> <span class="params">( ArgTypes&amp;&amp;... args )</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> std::<span class="built_in">invoke</span>(<span class="built_in">get</span>(), std::forward&lt;ArgTypes&gt;(args)...);</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  T* _ptr;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="3-总结">3. 总结</h2>
+<p>​	对于<code>std::ref</code>，其本质是返回一个引用包裹，里面有一个指向实际数据的成员指针。当需要被隐式转换为该指针所指向的引用类型时，会调用<code>operator type&amp;()</code>的转换函数用于隐式转换。因此，整个结构看起来像是显式传递了引用一样。但是实际上是通过上述机制来实现的。</p>
+<p>​	例如，对于<code>std::thread</code>类型，通过下面的代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span><span class="params">(<span class="type">int</span> &amp;a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> b;</span><br><span class="line"><span class="function">std::thread <span class="title">t</span><span class="params">(func, std::ref(b))</span></span>;</span><br></pre></td></tr></table></figure>
+<p>​	在传递b参数前就构造了一份<code>std::reference_wrapper</code>类型的结构体指向b，即使<code>std::thread</code>强制复制一份该结构体，也不影响真正的指向是正确的。</p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

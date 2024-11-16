@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>8-Docker容器数据卷 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>8-Docker容器数据卷</h1>
+    </header>
+
+    <section>
+      <h2 id="Docker容器数据卷">Docker容器数据卷</h2>
+<h4 id="1-创建数据卷和示意图">1.创建数据卷和示意图</h4>
+<span id="more"></span>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d -p 5000:5000 -v /krisswen/myregistry/:/tmp/registry --privileged=true registry</span><br></pre></td></tr></table></figure>
+<p>​	上述命令中，<code>-v</code>参数是volume，表示数据卷，意为将主机的目录作为容器目录的数据卷挂载。下面是数据卷挂载的示意图：</p>
+<p><img src="assets/GR08U4%7BRBP%25HC()E08Y%25CX.png" alt="容器数据卷挂载示意图"></p>
+<p>​	为了防止容器挂掉导致的数据丢失，因此将容器中的数据映射到宿主机中，完成数据的持久化。</p>
+<h4 id="2-数据卷的优点">2.数据卷的优点</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>实现容器之间的数据共享：两个容器挂载到宿主机的同一目录下，就能实现容器间数据共享</p>
+</li>
+<li class="lvl-2">
+<p>容器挂掉，数据不丢失</p>
+</li>
+</ul>
+<h4 id="3-数据卷注意">3.数据卷注意</h4>
+<p>​	容器内目录和宿主机的目录下所有文件是互相映射的，也就是说：宿主机创建文件，容器里也会有；容器中创建文件，宿主机里也会有。</p>
+<h4 id="4-查看容器挂载信息">4.查看容器挂载信息</h4>
+<p>​	使用以下命令查看容器的挂载情况：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker inspect 容器ID</span><br></pre></td></tr></table></figure>
+<p>​	在<code>Mounts</code>中查看挂载的信息。</p>
+<h4 id="5-容器只能读数据卷-方法">5.容器只能读数据卷 方法</h4>
+<p>加上**<code>ro</code>标识**(read only)：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d -p 5000:5000 -v /krisswen/myregistry/:/tmp/registry:ro --privileged=true registry</span><br></pre></td></tr></table></figure>
+<h4 id="6-继承并共享数据卷">6.继承并共享数据卷</h4>
+<p>​	可以让另一个容器继承某个容器的<strong>数据卷规则</strong>来实现共享，而不是再写一遍规则（防止出错）：<code>--volumes-from 父容器</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d -p 5000:5000 --name=u1 -v /krisswen/myregistry/:/tmp/registry:ro --privileged=true registry		#容器1</span><br><span class="line"></span><br><span class="line">docker run -d -p 5000:5000 --name=u2 --volumes-from u1 --privileged=true registry	#容器2</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

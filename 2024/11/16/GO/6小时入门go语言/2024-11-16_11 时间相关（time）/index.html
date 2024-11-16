@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>11 时间相关（time） | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>11 时间相关（time）</h1>
+    </header>
+
+    <section>
+      <h1>11 时间相关（time）</h1>
+<p>​	下面的代码介绍了：</p>
+<span id="more"></span>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>时间格式的指定字符串（<code>const</code>）</p>
+</li>
+<li class="lvl-2">
+<p>如何获取当前时间</p>
+</li>
+<li class="lvl-2">
+<p>如何获取时间的差值</p>
+</li>
+<li class="lvl-2">
+<p>如何在当前时间的基础上加上一个时间</p>
+</li>
+<li class="lvl-2">
+<p>如何将一个Time类型转换为指定格式的字符串</p>
+</li>
+<li class="lvl-2">
+<p>如何将一个时间字符串解析为一个Time类型</p>
+</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Package main -----------------------------</span></span><br><span class="line"><span class="comment">// @file      : time.go</span></span><br><span class="line"><span class="comment">// @author    : Yunyin</span></span><br><span class="line"><span class="comment">// @contact   : yunyin_jayyi@qq.com</span></span><br><span class="line"><span class="comment">// @time      : 2023/7/27 23:34</span></span><br><span class="line"><span class="comment">// -------------------------------------------</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	DATE = <span class="string">&quot;2006-01-02&quot;</span>          <span class="comment">//YYYY-mm-dd</span></span><br><span class="line">	TIME = <span class="string">&quot;2006-01-02 15:04:05&quot;</span> <span class="comment">//YYYY-mm-dd HH:MM:ss</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	t0 := time.Now()       <span class="comment">//time.Time</span></span><br><span class="line">	fmt.Println(t0.Unix()) <span class="comment">//时间戳</span></span><br><span class="line">	time.Sleep(<span class="number">50</span> * time.Millisecond)</span><br><span class="line"></span><br><span class="line">	t1 := time.Now()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Time - Time = Duration</span></span><br><span class="line">	diff := t1.Sub(t0)</span><br><span class="line">	fmt.Println(diff.Milliseconds()) <span class="comment">//&lt;==&gt;fmt.Println(time.Since(t0).Milliseconds())</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Time + Duration = Time</span></span><br><span class="line">	d := time.Duration(<span class="number">2</span> * time.Second)</span><br><span class="line">	t2 := t0.Add(d)</span><br><span class="line">	fmt.Println(t2.Unix())</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Time格式化-&gt;字符串</span></span><br><span class="line">	fmt.Println(t0.Format(DATE))</span><br><span class="line">	fmt.Println(t0.Format(TIME))</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 时间字符串-&gt;Time</span></span><br><span class="line">	s := t0.Format(TIME)         <span class="comment">//loc,_:=time.LoadLocation(&quot;Asia/Shanghai&quot;)	定义时区后，使用ParseInLocation更保险</span></span><br><span class="line">	t3, _ := time.Parse(TIME, s) <span class="comment">//t3,_:=time.ParseInLocation(TIME,s,loc)</span></span><br><span class="line">	fmt.Println(t3.Unix())</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>04 推送并部署到服务器 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>04 推送并部署到服务器</h1>
+    </header>
+
+    <section>
+      <h1>推送并部署到服务器</h1>
+<h2 id="1-test">1. test</h2>
+<span id="more"></span>
+<p>​	推送时自动进行google test。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">name: C/C++ CI</span><br><span class="line"></span><br><span class="line">on:</span><br><span class="line"> push:</span><br><span class="line">  branches: [ main ]</span><br><span class="line"> pull_request:</span><br><span class="line">  branches: [ main ]</span><br><span class="line"></span><br><span class="line">jobs:</span><br><span class="line"> build-<span class="keyword">and</span>-test:</span><br><span class="line">   runs-on: ubuntu-latest</span><br><span class="line">   steps:</span><br><span class="line">   - uses: actions/checkout@v2</span><br><span class="line">   - name: install cppunit</span><br><span class="line">   run: sudo apt install -y libcppunit-dev</span><br><span class="line">   - name: configure</span><br><span class="line">   run: ./configure</span><br><span class="line">   - name: make</span><br><span class="line">   run: make</span><br><span class="line">   - name: make test</span><br><span class="line">   run: make test</span><br></pre></td></tr></table></figure>
+<h2 id="2-部署到服务器">2. 部署到服务器</h2>
+<p>​	实现方式为<code>push tag</code>的时候自动打包发布 release 版本，然后连接服务器，在服务器上拉取release解压，然后执行脚本。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">name: Publish And Deploy Demo # 自动部署的名称</span><br><span class="line">on:</span><br><span class="line">  push:</span><br><span class="line">    tags: # 当我们提交代码为tag 是以<span class="string">&#x27;v&#x27;</span>开头的时候才会触发自动部署到服务端 如 git push tag v0<span class="number">.1</span><span class="number">.0</span></span><br><span class="line">      - <span class="string">&#x27;v*&#x27;</span></span><br><span class="line"></span><br><span class="line">jobs:</span><br><span class="line">  build-<span class="keyword">and</span>-deploy:</span><br><span class="line">    runs-on: ubuntu-latest # 运行环境，告诉它运行在什么环境</span><br><span class="line">    steps: # 步骤</span><br><span class="line"></span><br><span class="line">    # 第一步：下载源码（CI/CD拉取代码到自己的本地）</span><br><span class="line">    - name: Checkout</span><br><span class="line">      uses: actions/checkout@master</span><br><span class="line"></span><br><span class="line">    # 第二步：打包构建</span><br><span class="line">    - name: Build</span><br><span class="line">      uses: actions/setup-node@master</span><br><span class="line">    - run: npm install # 安装第三方包</span><br><span class="line">    - run: npm run build # 打包</span><br><span class="line">    - run: tar -zcvf release.tgz .nuxt <span class="type">static</span> nuxt.config.js package.json package-lock.json pm2.config.json</span><br><span class="line">      # 把.nuxt、nuxt.config.js等文件，打包压缩为release.tgz</span><br><span class="line"></span><br><span class="line">    # 第三步：发布 Release</span><br><span class="line">    - name: Create Release # 创建Release，可以在仓库看到一个个版本</span><br><span class="line">      id: create_release</span><br><span class="line">      uses: actions/create-release@master</span><br><span class="line">      env:</span><br><span class="line">        GITHUB_TOKEN: $&#123;&#123; secrets.TOKEN &#125;&#125; # 之前GitHub添加的Token</span><br><span class="line">      with:</span><br><span class="line">        tag_name: $&#123;&#123; github.ref &#125;&#125; # (tag)标签名称</span><br><span class="line">        release_name: Release $&#123;&#123; github.ref &#125;&#125;</span><br><span class="line">        draft: <span class="literal">false</span> # 是否是草稿</span><br><span class="line">        prerelease: <span class="literal">false</span> # 是否是预发布</span><br><span class="line"></span><br><span class="line">    # 第四步：上传构建结果到 Release（把打包的tgz上传到Release）</span><br><span class="line">    - name: Upload Release Asset</span><br><span class="line">      id: upload-release-asset</span><br><span class="line">      uses: actions/upload-release-asset@master</span><br><span class="line">      env:</span><br><span class="line">        GITHUB_TOKEN: $&#123;&#123; secrets.TOKEN &#125;&#125;</span><br><span class="line">      with:</span><br><span class="line">        upload_url: $&#123;&#123; steps.create_release.outputs.upload_url &#125;&#125; # 上传地址，通过创建Release获取到的</span><br><span class="line">        asset_path: ./release.tgz # 要上传文件</span><br><span class="line">        asset_name: release.tgz # 上传后的文件名</span><br><span class="line">        asset_content_type: application/x-tgz</span><br><span class="line"></span><br><span class="line">    # 第五步：部署到服务器</span><br><span class="line">    - name: Deploy</span><br><span class="line">      uses: appleboy/ssh-action@master # 使用ssh链接服务器</span><br><span class="line">      with:</span><br><span class="line">        host: $&#123;&#123; secrets.HOST &#125;&#125;</span><br><span class="line">        username: $&#123;&#123; secrets.USERNAME &#125;&#125;</span><br><span class="line">        password: $&#123;&#123; secrets.PASSWORD &#125;&#125;</span><br><span class="line">        port: $&#123;&#123; secrets.PORT &#125;&#125;</span><br><span class="line">        script: | # 执行命令（运行到服务器）cd：要确保服务器有这个目录； wget：下载上一步的release到服务器； tar：解压； 安装依赖；启动服务</span><br><span class="line">          cd /root/realworld-nuxtjs</span><br><span class="line">          wget https:<span class="comment">//github.com/YuYun95/realworld-nuxtjs/releases/latest/download/release.tgz -O release.tgz</span></span><br><span class="line">          tar zxvf release.tgz</span><br><span class="line">          npm install --production</span><br><span class="line">          pm2 reload pm2.config.json</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

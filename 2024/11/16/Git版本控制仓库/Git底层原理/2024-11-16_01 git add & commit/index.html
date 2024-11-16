@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>01 git add &amp; commit | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>01 git add &amp; commit</h1>
+    </header>
+
+    <section>
+      <h1>git add &amp; commit</h1>
+<h2 id="1-git对象">1. git对象</h2>
+<span id="more"></span>
+<p>​	git保存数据，以git对象的形式。</p>
+<p>​	有三种git对象，分别对应了不同的struct。</p>
+<p><img src="./assets/image-20240324163642620.png" alt="image-20240324163642620"></p>
+<p><strong>案例</strong></p>
+<p>​	在一次commit中，存在一个根目录文件夹，其递归包含了文件夹和文件。</p>
+<p><img src="./assets/image-20240324163736582.png" alt="image-20240324163736582"></p>
+<h2 id="2-git对象如何保存">2. git对象如何保存</h2>
+<h3 id="保存位置">保存位置</h3>
+<p>​	其保存在<code>.git</code>下的<code>objects</code>中：</p>
+<img src="./assets/image-20240324164434979.png" alt="image-20240324164434979" style="zoom:33%;" />
+<h3 id="保存依据">保存依据</h3>
+<p>​	git对象依据文件实际数据进行hash计算，将计算出的hash值与对应的data保存进对应的object中。</p>
+<p>​	注意：如果多个文件存储的内容都一样，只会保存为一份object，因为计算出的hash值一致，从而节省空间。</p>
+<h3 id="查看objects对象的类型">查看objects对象的类型</h3>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git cat-file -t fad1	# 目录+hash前2位</span><br></pre></td></tr></table></figure>
+<img src="./assets/image-20240324164957965.png" alt="image-20240324164957965" style="zoom:50%;" />
+<img src="./assets/image-20240324164634691.png" alt="image-20240324164634691" style="zoom:50%;" />
+<img src="./assets/image-20240324164658316.png" alt="image-20240324164658316" style="zoom:50%;" />
+<h3 id="查看objects对象的内容">查看objects对象的内容</h3>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git cat-file -p fad1	# 目录+hash前2位</span><br></pre></td></tr></table></figure>
+<img src="./assets/image-20240324165012347.png" alt="image-20240324165012347" style="zoom:50%;" />
+<img src="./assets/image-20240324164745631.png" alt="image-20240324164745631" style="zoom:50%;" />
+<img src="./assets/image-20240324164806421.png" alt="image-20240324164806421" style="zoom:50%;" />
+<h3 id="解释说明">解释说明</h3>
+<p>​	可以看到：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>fad1中是git的commit对象，存储了本次提交的基本信息和根目录tree对象的指针（hash值）。</p>
+<p>（如果不是第一次commit，还会存有指向上一次commit的hash指针<code>parent</code>）。</p>
+</li>
+<li class="lvl-2">
+<p>87d3中是git的tree对象，即根目录对象，存储了包含的blob对象的指针（hash值）。</p>
+</li>
+<li class="lvl-2">
+<p>f7c6中是git的blob对象，存储了具体的数据信息。</p>
+</li>
+</ul>
+<h2 id="3-git-add-git-commit过程">3. git add &amp; git commit过程</h2>
+<h3 id="上一次commit后">上一次commit后</h3>
+<p>​	暂存区的根目录tree指针与代码仓库的根目录tree指针保持一致，都指向了上一次提交的文件数据。</p>
+<img src="./assets/image-20240324163944433.png" alt="image-20240324163944433" style="zoom: 33%;" />
+<h3 id="修改txt并add后">修改txt并add后</h3>
+<p>​	代码仓库直接存储了新的blob对象，并让暂存区的tree对象指向该对象。</p>
+<img src="./assets/image-20240324165917624.png" alt="image-20240324165917624" style="zoom: 33%;" />
+<h3 id="commit后">commit后</h3>
+<p>​	代码仓库会复制暂存区的tree，然后生成一次新的commit指向该tree，同时设置指针指向上一次commit。</p>
+<img src="./assets/image-20240324170137799.png" alt="image-20240324170137799" style="zoom:33%;" />
+<h2 id="4-相同文件处理">4. 相同文件处理</h2>
+<p>​	相同数据的文件只会保存一份blob的数据对象，在tree中有100个指针指向该blob对象。</p>
+<img src="./assets/image-20240324170406311.png" alt="image-20240324170406311" style="zoom:33%;" />
+<h2 id="参考资料">参考资料</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV11z4y1X79p/">【<em>原理</em>解析】让你完全搞明白<em>Git</em>是如何管理你的代码的</a></p>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

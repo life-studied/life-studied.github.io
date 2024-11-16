@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ Python语法 }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Python%E8%AF%AD%E6%B3%95/%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/2024-11-16_02%20%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%A4%8D%E5%88%B6%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%EF%BC%88venv%EF%BC%89/">02 保存与复制虚拟环境（venv）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/">Python语法</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/">虚拟环境</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>02 保存与复制虚拟环境</h1>
+<h2 id="导出虚拟环境">导出虚拟环境</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Python%E8%AF%AD%E6%B3%95/%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/2024-11-16_02%20%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%A4%8D%E5%88%B6%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%EF%BC%88venv%EF%BC%89/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Python%E8%AF%AD%E6%B3%95/%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/2024-11-16_03%20conda%EF%BC%88%E5%AE%9A%E5%88%B6python%E7%89%88%E6%9C%AC%E7%9A%84%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%EF%BC%89/">03 conda（定制python版本的虚拟环境）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/">Python语法</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/">虚拟环境</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>03 conda（定制python版本的虚拟环境）</h1>
+<h2 id="创建（cmd）">创建（cmd）</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Python%E8%AF%AD%E6%B3%95/%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/2024-11-16_03%20conda%EF%BC%88%E5%AE%9A%E5%88%B6python%E7%89%88%E6%9C%AC%E7%9A%84%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%EF%BC%89/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Python%E8%AF%AD%E6%B3%95/%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/2024-11-16_04%20%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%A4%8D%E5%88%B6%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%EF%BC%88conda%EF%BC%89/">04 保存与复制虚拟环境（conda）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/">Python语法</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/">虚拟环境</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>保存与复制虚拟环境（conda）</h1>
+<h2 id="导出环境">导出环境</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Python%E8%AF%AD%E6%B3%95/%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/2024-11-16_04%20%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%A4%8D%E5%88%B6%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%EF%BC%88conda%EF%BC%89/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Python%E8%AF%AD%E6%B3%95/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_import%E7%AD%96%E7%95%A5/">import策略</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/">Python语法</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>import策略</h1>
+<blockquote>
+<p>package代码使用相对导入，入口代码使用绝对导入。</p>
+</blockquote>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Python%E8%AF%AD%E6%B3%95/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_import%E7%AD%96%E7%95%A5/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Python%E8%AF%AD%E6%B3%95/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_package%E4%B8%8Emodule/">package与module</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/">Python语法</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>package与module</h1>
+<h2 id="从import开始">从import开始</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Python%E8%AF%AD%E6%B3%95/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_package%E4%B8%8Emodule/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Python%E8%AF%AD%E6%B3%95/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E5%85%B3%E4%BA%8Eif%20__name__%20==%20__main__/">关于if __name__ == __main__</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/">Python语法</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="关于if-name-main">关于<code>if __name__ == &quot;__main__&quot;</code></h2>
+<p>在python中，如果当前py文件作为程序入口文件，则该文件的隐含变量<code>__name__</code>的值为<code>“__main__”</code>。否则，为<code>包名.文件名</code>。</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Python%E8%AF%AD%E6%B3%95/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E5%85%B3%E4%BA%8Eif%20__name__%20==%20__main__/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Python%E8%AF%AD%E6%B3%95/%E8%AF%AD%E6%B3%95%E7%B3%96/python%20hint/2024-11-16_00%20%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8mypy/">00 安装与使用mypy</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/">Python语法</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/%E8%AF%AD%E6%B3%95%E7%B3%96/python-hint/">python hint</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>安装与使用mypy</h1>
+<h2 id="1-install">1. install</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Python%E8%AF%AD%E6%B3%95/%E8%AF%AD%E6%B3%95%E7%B3%96/python%20hint/2024-11-16_00%20%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8mypy/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Python%E8%AF%AD%E6%B3%95/%E8%AF%AD%E6%B3%95%E7%B3%96/python%20hint/2024-11-16_01%20%E6%A0%87%E6%B3%A8%E7%B1%BB%E5%9E%8B%EF%BC%9A%E5%8F%82%E6%95%B0%E4%B8%8E%E8%BF%94%E5%9B%9E%E5%80%BC/">01 标注类型：参数与返回值</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/">Python语法</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/%E8%AF%AD%E6%B3%95%E7%B3%96/python-hint/">python hint</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>标注类型：参数与返回值</h1>
+<h2 id="basic-type">basic type</h2>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Python%E8%AF%AD%E6%B3%95/%E8%AF%AD%E6%B3%95%E7%B3%96/python%20hint/2024-11-16_01%20%E6%A0%87%E6%B3%A8%E7%B1%BB%E5%9E%8B%EF%BC%9A%E5%8F%82%E6%95%B0%E4%B8%8E%E8%BF%94%E5%9B%9E%E5%80%BC/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Python%E8%AF%AD%E6%B3%95/%E8%AF%AD%E6%B3%95%E7%B3%96/python%20hint/2024-11-16_02%20%E6%A0%87%E6%B3%A8%E7%B1%BB%E5%9E%8B%EF%BC%9A%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%EF%BC%88python3-9%EF%BC%89/">02 标注类型：容器中的元素（python3-9）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/">Python语法</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/%E8%AF%AD%E6%B3%95%E7%B3%96/python-hint/">python hint</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>标注类型：容器中的元素（python3.9）</h1>
+<p>​	有时候需要对容器进行类型标注，来保证容器中的每个元素都是一样的类型。</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Python%E8%AF%AD%E6%B3%95/%E8%AF%AD%E6%B3%95%E7%B3%96/python%20hint/2024-11-16_02%20%E6%A0%87%E6%B3%A8%E7%B1%BB%E5%9E%8B%EF%BC%9A%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%EF%BC%88python3-9%EF%BC%89/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/11/16/Python%E8%AF%AD%E6%B3%95/%E8%AF%AD%E6%B3%95%E7%B3%96/python%20hint/2024-11-16_03%20Union%EF%BC%9A%E6%A0%87%E6%B3%A8%E5%8F%AF%E8%83%BD%E7%9A%84%E7%B1%BB%E5%9E%8B/">03 Union：标注可能的类型</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+    2024-11-16
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/">Python语法</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/Python%E8%AF%AD%E6%B3%95/%E8%AF%AD%E6%B3%95%E7%B3%96/python-hint/">python hint</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>Union：标注可能的类型</h1>
+<p>​	一个参数可能是多种类型，最常见的莫过于可能是None。</p>
+        
+          <div class="more-link">
+            <a href="/2024/11/16/Python%E8%AF%AD%E6%B3%95/%E8%AF%AD%E6%B3%95%E7%B3%96/python%20hint/2024-11-16_03%20Union%EF%BC%9A%E6%A0%87%E6%B3%A8%E5%8F%AF%E8%83%BD%E7%9A%84%E7%B1%BB%E5%9E%8B/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+  <section id="nav-wrapper">
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/categories/Python%E8%AF%AD%E6%B3%95/">« prev</a><a class="page-number" href="/categories/Python%E8%AF%AD%E6%B3%95/">1</a><span class="page-number current">2</span><a class="page-number" href="/categories/Python%E8%AF%AD%E6%B3%95/page/3/">3</a><a class="extend next" rel="next" href="/categories/Python%E8%AF%AD%E6%B3%95/page/3/">next »</a>
+    </nav>
+  </section>
+
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

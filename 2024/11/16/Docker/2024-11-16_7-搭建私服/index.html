@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>7-搭建私服 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>7-搭建私服</h1>
+    </header>
+
+    <section>
+      <h2 id="搭建本地私有仓库">搭建本地私有仓库</h2>
+<h4 id="1-下载Docker-Registry">1.下载Docker Registry</h4>
+<span id="more"></span>
+<p>​	<code>registry</code> 是一个开源的基于 Go 语言编写的Docker镜像仓库，它提供了存储和分发 Docker 镜像的功能。通过运行 <code>docker pull registry</code> 命令，可以将 <code>registry</code> 镜像下载到本地，并在本地运行一个 Docker 仓库。这样您就可以使用自己的私有仓库来管理和分发自己的镜像，而无需使用第三方的镜像仓库服务。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker pull registry</span><br></pre></td></tr></table></figure>
+<h4 id="2-运行私服容器">2.运行私服容器</h4>
+<p>​	运行私有库Registry，相当于本地有个私有Docker hub</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d -p 5000:5000 -v /krisswen/myregistry/:/tmp/registry --privileged=true registry</span><br></pre></td></tr></table></figure>
+<p>这个命令用于启动一个基于 <code>registry</code> 镜像的 Docker 仓库，并在本地的 5000 端口上监听请求。解释如下：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>docker run</code>: 运行 Docker 容器的命令。</p>
+</li>
+<li class="lvl-2">
+<p><code>-d</code>: 让容器在后台运行。</p>
+</li>
+<li class="lvl-2">
+<p><code>-p 5000:5000</code>: 将主机的 5000 端口映射到容器的 5000 端口，以便外部可以访问该 Docker 仓库服务。</p>
+</li>
+<li class="lvl-2">
+<p><code>-v /krisswen/myregistry/:/tmp/registry</code>: 将主机上 <code>/krisswen/myregistry/</code> 目录挂载到容器中的 <code>/tmp/registry</code> 目录，以便在主机和容器之间共享数据。</p>
+</li>
+<li class="lvl-2">
+<p><code>--privileged=true</code>: 赋予容器特权，以便它可以执行一些需要特权的操作。</p>
+</li>
+<li class="lvl-2">
+<p><code>registry</code>: 使用的镜像名称。</p>
+</li>
+</ul>
+<p>当容器启动后，您可以使用 <code>docker push</code> 和 <code>docker pull</code> 命令将 Docker 镜像推送到或从该 Docker 仓库服务拉取。通过 <code>-v</code> 参数指定的目录将存储在容器内的所有镜像文件保存到本地主机上。</p>
+<p><strong>我的示例</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d -p 5000:5000 -v /home/menu/myregistry/:/tmp/registry --privileged=true registry</span><br></pre></td></tr></table></figure>
+<h2 id="使用本地私有仓库">使用本地私有仓库</h2>
+<h4 id="1-创建一个镜像">1.创建一个镜像</h4>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker commit -m=&quot;new&quot; -a=&quot;yunyin&quot; 8b4bcfd9196e ubuntu1:1.1</span><br></pre></td></tr></table></figure>
+<h4 id="2-使用curl工具查看私服镜像">2.使用curl工具查看私服镜像</h4>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl -XGET http://192.168.10.145:5000/v2/_catalog</span><br></pre></td></tr></table></figure>
+<p><strong>我的示例</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl -XGET http://127.0.0.1:5000/v2/_catalog</span><br></pre></td></tr></table></figure>
+<h4 id="3-修改镜像tag">3.修改镜像tag</h4>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker tag ubuntu1:1.1 192.168.10.145:5000/ubuntu1:1.1</span><br></pre></td></tr></table></figure>
+<p>这个命令用于为一个本地的 Docker 镜像打标签（tag），以便将其推送到指定的 Docker 仓库。解释如下：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>docker tag</code>: 打标签的命令。</p>
+</li>
+<li class="lvl-2">
+<p><code>ubuntu1:1.1</code>: 要打标签的本地镜像名称和标签，其中 <code>ubuntu1</code> 是镜像名称，<code>1.1</code> 是标签。</p>
+</li>
+<li class="lvl-2">
+<p><code>192.168.10.145:5000/ubuntu1:1.1</code>: 新的镜像标签，其中 <code>192.168.10.145:5000</code> 是 Docker 仓库地址，<code>ubuntu1</code> 是镜像名称，<code>1.1</code> 是新的标签。</p>
+</li>
+</ul>
+<h4 id="4-使用http推送镜像">4.使用http推送镜像</h4>
+<p>​	docker默认禁用http推送镜像，而是建议使用https推送。https需要为docker引擎配置一个有效的证书，因此此处采用http推送。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /etc/docker/daemon.json		#修改docker配置文件，使支持http</span><br></pre></td></tr></table></figure>
+<p>添加以下内容：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&quot;insecure-registries&quot;: [&quot;192.168.10.145:5000&quot;]</span><br></pre></td></tr></table></figure>
+<p>重启docker：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+<h4 id="5-push到私有仓库">5.push到私有仓库</h4>
+<p>​	重启docker后，重新运行<code>registry</code>容器</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker start 容器ID</span><br></pre></td></tr></table></figure>
+<p>​	推送：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker push 192.168.10.145:5000/ubuntu1:1.1</span><br></pre></td></tr></table></figure>
+<p><strong>示例</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker start c2d0bd6cd0fd	#再次启动容器</span><br><span class="line">docker push 127.0.0.1:5000/ubuntu1:1.1	#推送到本地仓库</span><br></pre></td></tr></table></figure>
+<h4 id="6-从私有仓库pull镜像">6.从私有仓库pull镜像</h4>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker pull 127.0.0.1:5000/ubuntu1:1.1</span><br></pre></td></tr></table></figure>
+<h1></h1>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

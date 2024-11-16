@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>01 变量 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>01 变量</h1>
+    </header>
+
+    <section>
+      <h1>01 变量</h1>
+<p>​	下面的代码展示了变量声明和赋值的基本内容，同时展示了print的几个技巧。</p>
+<span id="more"></span>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">//变量的声明（指定变量的类型）</span></span><br><span class="line">	<span class="keyword">var</span> a <span class="type">int</span></span><br><span class="line">	<span class="keyword">var</span> b <span class="type">int</span></span><br><span class="line">	<span class="keyword">var</span> c <span class="type">int</span></span><br><span class="line">	<span class="keyword">var</span> age <span class="type">int</span></span><br><span class="line">	<span class="keyword">var</span> sex <span class="type">bool</span></span><br><span class="line">	<span class="keyword">var</span> price <span class="type">float64</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//变量的赋值</span></span><br><span class="line">	a = <span class="number">10</span></span><br><span class="line">	b = <span class="number">20</span></span><br><span class="line">	c = a + b <span class="comment">//30</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// :=声明和赋值在一行代码里完成</span></span><br><span class="line">	f := <span class="number">40.0</span>  <span class="comment">//自动推导出f是float64</span></span><br><span class="line">	g := a - c <span class="comment">//自动推导出g是int</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> h <span class="type">int</span> = <span class="number">4</span> <span class="comment">//声明和赋值在一行完成</span></span><br><span class="line">	<span class="keyword">var</span> m = <span class="number">4</span>     <span class="comment">//声明和赋值在一行完成，但是类型是推导出来的</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(c) <span class="comment">//ln	每行末尾追加换行符</span></span><br><span class="line">	fmt.Println(h, m)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//未显式赋值的变量，其值是默认”0“值</span></span><br><span class="line">	fmt.Printf(<span class="string">&quot;%d	%d	%t	%.2f\n&quot;</span>, c, age, sex, price) <span class="comment">//f	format</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//%T 打印变量类型</span></span><br><span class="line">	fmt.Printf(<span class="string">&quot;%T %T\n&quot;</span>, f, g) </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

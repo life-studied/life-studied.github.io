@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>1-2 并发控制（锁系统） | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>1-2 并发控制（锁系统）</h1>
+    </header>
+
+    <section>
+      <h1>1.2 并发控制</h1>
+<p>​	本章主要讨论服务层和存储引擎层的并发控制。</p>
+<span id="more"></span>
+<h2 id="1-2-1-读写锁">1.2.1 读写锁</h2>
+<blockquote>
+<p>并发控制通常通过一个由两种类型的锁组成的锁系统来解决。</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>共享锁（<strong>读锁</strong>）：读锁之间共享，即互不阻塞。但是会阻塞写锁。</p>
+</li>
+<li class="lvl-2">
+<p>排他锁（<strong>写锁</strong>）：写锁排斥其它读锁和写锁。</p>
+</li>
+</ul>
+<h2 id="1-2-2-锁粒度">1.2.2 锁粒度</h2>
+<p>​	如果要提高并发的能力，就要减小锁的粒度。锁定的数据或资源<strong>越少越精准</strong>，并发性越强。</p>
+<p>​	MySQL主要有下面两种锁粒度。</p>
+<h3 id="表锁（table-lock）">表锁（table lock）</h3>
+<blockquote>
+<p>最基本的锁策略，也是开销最小的锁策略。</p>
+</blockquote>
+<p>表锁在服务层和存储引擎层都有实现。</p>
+<p>锁策略：写操作获取写锁。读操作先获取写锁，写锁获取到后获取读锁。</p>
+<p>优先级：写锁请求会插入到读锁队列前。</p>
+<h3 id="行级锁（row-lock）">行级锁（row lock）</h3>
+<blockquote>
+<p>行级锁可以最大程度地支持并发处理，开销也是最大的。</p>
+</blockquote>
+<p>行级锁只在存储引擎层实现；服务层没有，也不了解存储引擎层的实现。</p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

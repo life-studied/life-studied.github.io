@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vscode网页版服务器安装 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>vscode网页版服务器安装</h1>
+    </header>
+
+    <section>
+      <h1>vscode网页版服务器安装</h1>
+<h2 id="新建目录-下载文件">新建目录|下载文件</h2>
+<span id="more"></span>
+<p>我们先新建一个文件夹vscode并进入到vscode文件夹里来：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> vscode</span><br><span class="line"><span class="built_in">ls</span></span><br><span class="line"><span class="built_in">cd</span> vscode</span><br></pre></td></tr></table></figure>
+<p>​	本地下载文件，使用xftp传到服务器上</p>
+<p>​	百度网盘：链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1QDcTRnGYvsw0MBPiNcJrOg">https://pan.baidu.com/s/1QDcTRnGYvsw0MBPiNcJrOg</a>  提取码：31ch</p>
+<h2 id="安装code-server">安装code server</h2>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">rpm</span> -ivh code-server-<span class="number">4</span>.<span class="number">1</span>.<span class="number">0</span>-amd64.rpm</span><br></pre></td></tr></table></figure>
+<h2 id="前台启动">前台启动</h2>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">export <span class="keyword">PASSWORD</span>=&quot;yaaJqH5034HLf9Wi&quot; &amp;&amp; code-<span class="keyword">server</span> <span class="comment">--host 0.0.0.0 --port 9999</span></span><br></pre></td></tr></table></figure>
+<h2 id="后台启动">后台启动</h2>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装screen</span></span><br><span class="line">yum install epel-release -y</span><br><span class="line">yum install<span class="built_in"> screen </span>-y</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动后台服务</span><span class="built_in"></span></span><br><span class="line"><span class="built_in">screen </span>-S codeserver</span><br><span class="line"><span class="built_in">export</span> <span class="attribute">PASSWORD</span>=<span class="string">&quot;yaaJqH5034HLf9Wi&quot;</span> &amp;&amp; code-server --host 0.0.0.0 --port 9999</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
+              2024-11-16
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>
