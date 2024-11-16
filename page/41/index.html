@@ -64,12 +64,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/2024-11-16_21%20Redis/">21 Redis</a>
+          <a href="/2023/11/27/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01%20%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/2023-11-27_02%20%E4%B8%8B%E8%BD%BDGLFW%E5%92%8CGLEW/">02 下载GLFW和GLEW</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -77,11 +77,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/GO/">GO</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/">游戏引擎</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/">6小时入门go语言</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/">ImGui</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/">01 准备工作</a> }
   </li>
 
 
@@ -92,11 +96,11 @@
     </header>
     <div>
       
-        <h1>21 Redis</h1>
-<h2 id="import">import</h2>
+        <h1>下载GLFW和GLEW</h1>
+<h2 id="GLFW（lib文件）">GLFW（lib文件）</h2>
         
           <div class="more-link">
-            <a href="/2024/11/16/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/2024-11-16_21%20Redis/#more">Read On »</a>
+            <a href="/2023/11/27/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/01%20%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/2023-11-27_02%20%E4%B8%8B%E8%BD%BDGLFW%E5%92%8CGLEW/#more">Read On »</a>
           </div>
         
       
@@ -110,12 +114,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/2024-11-16_22%20go%20context%E4%B8%8A%E4%B8%8B%E6%96%87/">22 go context上下文</a>
+          <a href="/2023/11/27/C++/3rdparty/botan/rsa/2023-11-27_01%20%E7%94%9F%E6%88%90%E5%85%AC%E9%92%A5%E5%92%8C%E7%A7%81%E9%92%A5/">01 生成公钥和私钥</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -123,11 +127,19 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/GO/">GO</a> }
+  { <a href="/categories/C/">C++</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/">6小时入门go语言</a> }
+  { <a href="/categories/C/3rdparty/">3rdparty</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/botan/">botan</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/botan/rsa/">rsa</a> }
   </li>
 
 
@@ -138,11 +150,111 @@
     </header>
     <div>
       
-        <h1>22 go context上下文</h1>
-<p>​	在 Goroutine 构成的树形结构中对信号进行同步以减少计算资源的浪费是<code>context.Context</code> 的最大作用。Go 服务的每一个请求都是通过单独的 Goroutine 处理的<a target="_blank" rel="noopener" href="https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-context/#fn:2">2</a>，HTTP/RPC 请求的处理器会启动新的 Goroutine 访问数据库和其他服务。</p>
+        <h1>01 生成公钥和私钥</h1>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;botan/auto_rng.h&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;botan/rsa.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;botan/pkcs8.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;botan/x509_key.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Botan::AutoSeeded_RNG rng;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 生成 RSA 密钥对</span></span><br><span class="line">        <span class="function">Botan::RSA_PrivateKey <span class="title">private_key</span><span class="params">(rng, <span class="number">2048</span>)</span></span>;  <span class="comment">// 2048 是密钥位数，你可以根据需要调整</span></span><br><span class="line">        Botan::RSA_PublicKey public_key = private_key;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出公钥和私钥</span></span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Public Key: &quot;</span> &lt;&lt; Botan::X509::<span class="built_in">PEM_encode</span>(public_key) &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Private Key: &quot;</span> &lt;&lt; Botan::PKCS8::<span class="built_in">PEM_encode</span>(private_key) &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (std::exception&amp; e) &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Error: &quot;</span> &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/11/27/C++/3rdparty/botan/rsa/2023-11-27_02%20%E4%BF%9D%E5%AD%98%E5%85%AC%E9%92%A5%E5%92%8C%E7%A7%81%E9%92%A5/">02 保存公钥和私钥</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/">3rdparty</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/botan/">botan</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/botan/rsa/">rsa</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>02 保存公钥和私钥</h1>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;botan/auto_rng.h&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;botan/rsa.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;botan/pkcs8.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;botan/x509_key.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">save_key_to_file</span><span class="params">(<span class="type">const</span> std::string&amp; filename, <span class="type">const</span> std::string&amp; key_data)</span> </span>&#123;</span><br><span class="line">    <span class="function">std::ofstream <span class="title">file</span><span class="params">(filename)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (file.<span class="built_in">is_open</span>()) &#123;</span><br><span class="line">        file &lt;&lt; key_data;</span><br><span class="line">        file.<span class="built_in">close</span>();</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Key saved to file: &quot;</span> &lt;&lt; filename &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">runtime_error</span>(<span class="string">&quot;Unable to open file for writing: &quot;</span> + filename);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Botan::AutoSeeded_RNG rng;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 生成 RSA 密钥对</span></span><br><span class="line">        <span class="function">Botan::RSA_PrivateKey <span class="title">private_key</span><span class="params">(rng, <span class="number">2048</span>)</span></span>;  <span class="comment">// 2048 是密钥位数，你可以根据需要调整</span></span><br><span class="line">        Botan::RSA_PublicKey public_key = private_key;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将公钥和私钥编码为 PEM 格式</span></span><br><span class="line">        std::string public_key_pem = Botan::X509::<span class="built_in">PEM_encode</span>(public_key);</span><br><span class="line">        std::string private_key_pem = Botan::PKCS8::<span class="built_in">PEM_encode</span>(private_key);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 保存公钥和私钥到文件</span></span><br><span class="line">        <span class="built_in">save_key_to_file</span>(<span class="string">&quot;public_key.pem&quot;</span>, public_key_pem);</span><br><span class="line">        <span class="built_in">save_key_to_file</span>(<span class="string">&quot;private_key.pem&quot;</span>, private_key_pem);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (std::exception&amp; e) &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Error: &quot;</span> &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/11/27/C++/3rdparty/botan/rsa/2023-11-27_03%20%E4%BB%8E%E6%96%87%E4%BB%B6%E4%B8%AD%E8%AF%BB%E5%8F%96%E5%85%AC%E9%92%A5%E5%92%8C%E7%A7%81%E9%92%A5/">03 从文件中读取公钥和私钥</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/">3rdparty</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/botan/">botan</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/botan/rsa/">rsa</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>03 从文件中读取公钥和私钥</h1>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
         
           <div class="more-link">
-            <a href="/2024/11/16/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/2024-11-16_22%20go%20context%E4%B8%8A%E4%B8%8B%E6%96%87/#more">Read On »</a>
+            <a href="/2023/11/27/C++/3rdparty/botan/rsa/2023-11-27_03%20%E4%BB%8E%E6%96%87%E4%BB%B6%E4%B8%AD%E8%AF%BB%E5%8F%96%E5%85%AC%E9%92%A5%E5%92%8C%E7%A7%81%E9%92%A5/#more">Read On »</a>
           </div>
         
       
@@ -156,12 +268,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/2024-11-16_23%20GIN%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">23 GIN网络编程</a>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-11-27_1-12-1%20%E5%9B%9B%E7%A7%8D%E5%A4%84%E7%90%86%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%8F%E5%85%B8%E7%94%A8%E6%B3%95/">1-12-1 四种处理错误的经典用法</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -169,11 +281,19 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/GO/">GO</a> }
+  { <a href="/categories/C/">C++</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/">6小时入门go语言</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
   </li>
 
 
@@ -184,11 +304,14 @@
     </header>
     <div>
       
-        <h1>23 GIN网络编程</h1>
-<h2 id="import">import</h2>
+        <h2 id="1-12-1-四种处理错误的经典用法">1.12-1 四种处理错误的经典用法</h2>
+<ul class="lvl-0">
+<li class="lvl-2">返回值处理错误</li>
+<li class="lvl-2">errno处理错误</li>
+</ul>
         
           <div class="more-link">
-            <a href="/2024/11/16/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/2024-11-16_23%20GIN%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/#more">Read On »</a>
+            <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-11-27_1-12-1%20%E5%9B%9B%E7%A7%8D%E5%A4%84%E7%90%86%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%8F%E5%85%B8%E7%94%A8%E6%B3%95/#more">Read On »</a>
           </div>
         
       
@@ -202,12 +325,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/2024-11-16_24%20GRPC%E5%BE%AE%E6%9C%8D%E5%8A%A1/">24 GRPC微服务</a>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-11-27_1-12-2%20%E5%88%9B%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%BC%82%E5%B8%B8%E7%B1%BB/">1-12-2 创建自己的异常类</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -215,11 +338,19 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/GO/">GO</a> }
+  { <a href="/categories/C/">C++</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/">6小时入门go语言</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
   </li>
 
 
@@ -230,13 +361,9 @@
     </header>
     <div>
       
-        <h1>24 GRPC微服务</h1>
-<p>​	IDL（Interface description Language）文件：通过一种中立的方式来描述接口，使得在不同平台上的不同的对象和不同语言编写的程序可以互相通信。</p>
-        
-          <div class="more-link">
-            <a href="/2024/11/16/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/2024-11-16_24%20GRPC%E5%BE%AE%E6%9C%8D%E5%8A%A1/#more">Read On »</a>
-          </div>
-        
+        <h2 id="1-12-2-创建自己的异常类">1.12-2 创建自己的异常类</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;exception&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Myexception</span> : <span class="keyword">public</span> logic_error</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">Myexception</span>(<span class="type">const</span> <span class="type">char</span> *s) : <span class="built_in">logic_error</span>(s) &#123;&#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">ThrowExcept</span><span class="params">()</span> <span class="title">throw</span><span class="params">(Myexception)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">Myexception</span>(<span class="string">&quot;my exception&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        MyClass mc;</span><br><span class="line">        mc.<span class="built_in">ThrowExcept</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (<span class="type">const</span> std::exception &amp;e)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
 </article>
@@ -248,12 +375,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/2024-11-16_25%20Socket%E7%BC%96%E7%A8%8B/">25 Socket编程</a>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-11-27_1-12-5%20%E5%BC%82%E5%B8%B8%E6%81%A2%E5%A4%8D/">1-12-5 异常恢复</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -261,11 +388,19 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/GO/">GO</a> }
+  { <a href="/categories/C/">C++</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/">6小时入门go语言</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
   </li>
 
 
@@ -276,13 +411,9 @@
     </header>
     <div>
       
-        <h1>Socket编程</h1>
-<p>​	go语言的Socket编程更简单，服务器用<code>Listen</code>函数监听端口，客户端用<code>Dial</code>函数连接端口，双方都用<code>Read</code>和<code>Write</code>来通信。</p>
-        
-          <div class="more-link">
-            <a href="/2024/11/16/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/2024-11-16_25%20Socket%E7%BC%96%E7%A8%8B/#more">Read On »</a>
-          </div>
-        
+        <h2 id="1-12-5-异常恢复">1.12-5 异常恢复</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;exception&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">newBad</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> i;</span><br><span class="line">    <span class="type">static</span> <span class="type">void</span> *p;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> *<span class="keyword">operator</span> <span class="title">new</span><span class="params">(<span class="type">size_t</span> sz)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        p = ::<span class="keyword">operator</span> <span class="built_in">new</span>(sz);</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;The newBad object number: &quot;</span> &lt;&lt; i + <span class="number">1</span> &lt;&lt; <span class="string">&quot; has been created&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">if</span> (++i &gt;= <span class="number">11</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="built_in">out_of_range</span>(<span class="string">&quot;the 11st object created failed.&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">releaseMemory</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (p)</span><br><span class="line">        &#123;</span><br><span class="line">            ::<span class="function"><span class="keyword">operator</span> <span class="title">delete</span><span class="params">(p)</span></span>;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;the &quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;st object was freed&quot;</span> &lt;&lt; endl;</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> newBad::i = <span class="number">0</span>;</span><br><span class="line"><span class="type">void</span> *newBad::p = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            newBad *mp = <span class="keyword">new</span> newBad;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">catch</span> (<span class="type">const</span> std::exception &amp;e)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cerr &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">            newBad::<span class="built_in">releaseMemory</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
       
     </div>
 </article>
@@ -294,12 +425,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/2024-11-16_26%20Go%E8%AF%AD%E8%A8%80%E7%9A%84%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0/">26 Go语言的哈希函数</a>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-11-27_1-12-6%20%E6%A0%88%E5%8F%8D%E8%A7%A3%E6%97%B6%E5%86%8D%E6%AC%A1%E5%BC%82%E5%B8%B8/">1-12-6 栈反解时再次异常</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -307,11 +438,19 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/GO/">GO</a> }
+  { <a href="/categories/C/">C++</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/">6小时入门go语言</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
   </li>
 
 
@@ -322,13 +461,9 @@
     </header>
     <div>
       
-        <h1>Go语言的哈希函数</h1>
-<h2 id="1-MD5">1.MD5</h2>
-        
-          <div class="more-link">
-            <a href="/2024/11/16/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/2024-11-16_26%20Go%E8%AF%AD%E8%A8%80%E7%9A%84%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0/#more">Read On »</a>
-          </div>
-        
+        <h2 id="1-12-6-栈反解时再次异常">1.12-6 栈反解时再次异常</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;exception&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BadIdea</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ~<span class="built_in">BadIdea</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">logic_error</span>(<span class="string">&quot;This is a bad exception&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">my_terminate</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;This is a bad Idea&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> *psource = (<span class="type">void</span> *)<span class="built_in">set_terminate</span>(my_terminate);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        BadIdea ba;</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">logic_error</span>(<span class="string">&quot;test&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (<span class="type">const</span> std::exception &amp;e)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
       
     </div>
 </article>
@@ -340,12 +475,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/2024-11-16_27%20Cgo%E8%AF%AD%E8%A8%80%E4%BA%A4%E4%BA%92/">27 Cgo语言交互</a>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-11-27_1-12-7%20%E5%BC%82%E5%B8%B8%E6%AD%A3%E5%B8%B8%E6%9E%90%E6%9E%84%E7%9A%84%E8%AF%81%E6%98%8E/">1-12-7 异常正常析构的证明</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -353,11 +488,19 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/GO/">GO</a> }
+  { <a href="/categories/C/">C++</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/">6小时入门go语言</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
   </li>
 
 
@@ -368,13 +511,9 @@
     </header>
     <div>
       
-        <h1>Cgo语言交互</h1>
-<h2 id="1-调用方法">1.调用方法</h2>
-        
-          <div class="more-link">
-            <a href="/2024/11/16/GO/6%E5%B0%8F%E6%97%B6%E5%85%A5%E9%97%A8go%E8%AF%AD%E8%A8%80/2024-11-16_27%20Cgo%E8%AF%AD%E8%A8%80%E4%BA%A4%E4%BA%92/#more">Read On »</a>
-          </div>
-        
+        <h2 id="1-12-7-异常正常析构的证明">1.12-7 异常正常析构的证明</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;exception&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyException</span> : <span class="keyword">public</span> logic_error</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">MyException</span>(<span class="type">const</span> <span class="type">char</span> *s) : <span class="built_in">logic_error</span>(s) &#123;&#125;</span><br><span class="line">    ~<span class="built_in">MyException</span>() &#123; cout &lt;&lt; <span class="string">&quot;the Exception has been destructed.&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">test</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">throwException</span><span class="params">()</span> </span>&#123; <span class="keyword">throw</span> <span class="built_in">MyException</span>(<span class="string">&quot;hello, this is MyException.&quot;</span>); &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        test t;</span><br><span class="line">        t.<span class="built_in">throwException</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (<span class="type">const</span> std::exception &amp;e)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
       
     </div>
 </article>
@@ -386,12 +525,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/GO/Go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/2024-11-16_2-1%E5%8F%98%E9%87%8F/">2-1变量</a>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-11-27_3-7-1%20%E9%80%86%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/">3-7-1 逆转字符串</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -399,11 +538,19 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/GO/">GO</a> }
+  { <a href="/categories/C/">C++</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/GO/Go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">Go语言编程笔记</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
   </li>
 
 
@@ -414,101 +561,8 @@
     </header>
     <div>
       
-        <h2 id="2-1变量">2.1变量</h2>
-<h4 id="2-1-1变量声明">2.1.1变量声明</h4>
-        
-          <div class="more-link">
-            <a href="/2024/11/16/GO/Go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/2024-11-16_2-1%E5%8F%98%E9%87%8F/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/11/16/GO/Go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/2024-11-16_2-2%E5%B8%B8%E9%87%8F/">2-2常量</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/GO/">GO</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/GO/Go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">Go语言编程笔记</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h2 id="2-2常量">2.2常量</h2>
-<blockquote>
-<p>常量是编译期间就已知且不可更改的值</p>
-</blockquote>
-        
-          <div class="more-link">
-            <a href="/2024/11/16/GO/Go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/2024-11-16_2-2%E5%B8%B8%E9%87%8F/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/11/16/GO/gvm/2024-11-16_gvm%20%E6%9B%B4%E6%96%B0go%E7%89%88%E6%9C%AC/">gvm 更新go版本</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/GO/">GO</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/GO/gvm/">gvm</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>gvm 更新go版本</h1>
+        <h2 id="3-7-1-逆转字符串">3.7-1 逆转字符串</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">reverse</span><span class="params">(string &amp;s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> size = s.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; size / <span class="number">2</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">char</span> temp = s[i];</span><br><span class="line">        s[i] = s[size - <span class="number">1</span> - i];</span><br><span class="line">        s[size - <span class="number">1</span> - i] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">string <span class="title">s</span><span class="params">(<span class="string">&quot;123456&quot;</span>)</span></span>;</span><br><span class="line">    cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">reverse</span>(s);</span><br><span class="line">    cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>

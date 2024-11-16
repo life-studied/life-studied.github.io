@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>02 模板编程 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>02 模板编程</h1>
+    </header>
+
+    <section>
+      <h1>02 模板编程</h1>
+<h2 id="模板函数">模板函数</h2>
+<span id="more"></span>
+<p>​	模板函数就是一种，能够将类型抽象出来的函数。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap</span><span class="params">(T&amp; lhs, T&amp; rhs)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    T temp;</span><br><span class="line">    temp = lhs;</span><br><span class="line">    lhs = rhs;</span><br><span class="line">    rhs = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a = <span class="number">1</span>, b = <span class="number">2</span>;</span><br><span class="line"><span class="built_in">swap</span>(a, b);</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(T1&amp; t1, T2&amp; t2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout &lt;&lt; t1 &lt;&lt; t2 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(a, b);</span><br><span class="line"><span class="type">double</span> c = <span class="number">2.2</span>;</span><br><span class="line"><span class="built_in">print</span>(a, c);</span><br></pre></td></tr></table></figure>
+<h2 id="模板类">模板类</h2>
+<p>​	模板类也是同样的道理。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span></span><br><span class="line">&#123;</span><br><span class="line">    T data;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setData</span><span class="params">(T _data)</span> </span>&#123; data = _data; &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; data &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//////////////////////////////</span></span><br><span class="line">A&lt;<span class="type">int</span>&gt; a_int;</span><br><span class="line">a_int.<span class="built_in">setData</span>(<span class="number">100</span>);</span><br><span class="line">a_int.<span class="built_in">print</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">//////////////////////////////</span></span><br><span class="line">A&lt;<span class="type">double</span>&gt; a_double;</span><br><span class="line">a_double.<span class="built_in">setData</span>(<span class="number">100</span>);</span><br><span class="line">a_double.<span class="built_in">print</span>();</span><br></pre></td></tr></table></figure>
+<h2 id="为什么要有模板？">为什么要有模板？</h2>
+<p>​	这个问题其实和为什么有函数是一样的。以前在没有函数的年代里，人们总是要写重复的代码，为了将重复的逻辑抽象出来，于是就有了函数。</p>
+<p>​	现在，人们同样是要写重复的逻辑，但是却因为只是类型不同而需要重写一个函数。比如一个int类型的快排和一个double类型的快排一样，它们的核心逻辑没有丝毫变换，仅仅是类型不同就要重写一个函数。于是人们就想要将类型抽象出来，也就变成了模板。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">partition</span><span class="params">(std::vector&lt;T&gt;&amp; arr, <span class="type">int</span> low, <span class="type">int</span> high)</span> </span>&#123;</span><br><span class="line">    T pivot = arr[high]; <span class="comment">// 选择最后一个元素作为基准</span></span><br><span class="line">    <span class="type">int</span> i = (low - <span class="number">1</span>); <span class="comment">// Index of smaller element</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = low; j &lt;= high - <span class="number">1</span>; j++) &#123;</span><br><span class="line">        <span class="comment">// 如果当前元素小于或等于pivot</span></span><br><span class="line">        <span class="keyword">if</span> (arr[j] &lt;= pivot) &#123;</span><br><span class="line">            i++; <span class="comment">// increment index of smaller element</span></span><br><span class="line">            std::<span class="built_in">swap</span>(arr[i], arr[j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    std::<span class="built_in">swap</span>(arr[i + <span class="number">1</span>], arr[high]);</span><br><span class="line">    <span class="keyword">return</span> (i + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">quickSort</span><span class="params">(std::vector&lt;T&gt;&amp; arr, <span class="type">int</span> low, <span class="type">int</span> high)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (low &lt; high) &#123;</span><br><span class="line">        <span class="type">int</span> pi = <span class="built_in">partition</span>(arr, low, high);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">quickSort</span>(arr, low, pi - <span class="number">1</span>);  <span class="comment">// Before pi</span></span><br><span class="line">        <span class="built_in">quickSort</span>(arr, pi + <span class="number">1</span>, high); <span class="comment">// After pi</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印数组</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">printArray</span><span class="params">(<span class="type">const</span> std::vector&lt;T&gt;&amp; arr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; arr.<span class="built_in">size</span>(); i++)</span><br><span class="line">        std::cout &lt;&lt; arr[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试模板版本的快速排序</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::vector&lt;<span class="type">int</span>&gt; intArray = &#123;<span class="number">10</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">5</span>&#125;;</span><br><span class="line">    std::vector&lt;<span class="type">double</span>&gt; doubleArray = &#123;<span class="number">10.5</span>, <span class="number">7.2</span>, <span class="number">8.9</span>, <span class="number">9.1</span>, <span class="number">1.5</span>, <span class="number">5.3</span>&#125;;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Original int array: &quot;</span>;</span><br><span class="line">    <span class="built_in">printArray</span>(intArray);</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Sorted int array: &quot;</span>;</span><br><span class="line">    <span class="built_in">quickSort</span>(intArray, <span class="number">0</span>, intArray.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printArray</span>(intArray);</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Original double array: &quot;</span>;</span><br><span class="line">    <span class="built_in">printArray</span>(doubleArray);</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Sorted double array: &quot;</span>;</span><br><span class="line">    <span class="built_in">quickSort</span>(doubleArray, <span class="number">0</span>, doubleArray.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printArray</span>(doubleArray);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="模板的某些应用">模板的某些应用</h2>
+<p>​	有时候模板也非常有用。比如我想要统一将传入的数据变成std::string类型：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function">std::string <span class="title">m_to_string</span><span class="params">(T&amp; t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> std::<span class="built_in">to_string</span>(t);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;&gt;		<span class="comment">// 模板特化</span></span><br><span class="line">std::string <span class="built_in">m_to_string</span>&lt;std::string&gt;(std::string&amp; t)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="练习">练习</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>写一个冒泡排序，要求支持模板。<code>template &lt;typename T&gt; void sort(T *arr, int size)&#123;xxxxxx&#125;</code></p>
+</li>
+<li class="lvl-2">
+<p>用vector完成一个任务：添加5个人的成绩，找到输入的那个成绩。</p>
+</li>
+<li class="lvl-2">
+<p>用map和list实现同样功能</p>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-07-23T16:00:00.000Z" itemprop="datePublished">
+              2024-07-24
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

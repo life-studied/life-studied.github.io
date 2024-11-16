@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>00 视频编码格式 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>00 视频编码格式</h1>
+    </header>
+
+    <section>
+      <h1>00 视频编码格式</h1>
+<h2 id="编码格式与封装格式">编码格式与封装格式</h2>
+<span id="more"></span>
+<p>视频文件扩展名和视频编码是两码事，与图片不同，看扩展名是无法看出视频编码的！一个MP4文件，它的视频H264/HEVC/AV1编码都是有可能的。</p>
+<h3 id="编码格式">编码格式</h3>
+<p>编码格式，也称为编解码器（Codec），是指将原始数据（如音频或视频）转换成数字信号的算法或程序。编码的目的是减少数据量，以便高效地存储和传输。</p>
+<h3 id="封装格式">封装格式</h3>
+<p>封装格式，也称为容器格式，是指将编码后的数据以及可能的元数据（如视频、音频、媒体信息、字幕等）封装在一起的格式。封装格式定义了各种数据在文件中的组织方式。</p>
+<h3 id="区别与联系">区别与联系</h3>
+<p>编码格式和封装格式可以独立选择，但它们之间需要兼容。例如，一个H.264编码的视频可以被封装在MP4或MKV容器中。选择哪种编码和封装格式通常取决于所需的视频质量、压缩效率、兼容性和目标平台。</p>
+<h3 id="对应表">对应表</h3>
+<table>
+<thead>
+<tr>
+<th>封装格式</th>
+<th>常见支持的编码格式示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WebM</td>
+<td>VP8, VP9</td>
+</tr>
+<tr>
+<td>MP4</td>
+<td>H.264, H.265, MPEG-4 (包括DivX, Xvid)</td>
+</tr>
+<tr>
+<td>AVI</td>
+<td>MPEG-2, H.264, DivX, Xvid, AC-3</td>
+</tr>
+<tr>
+<td>RM/RMVB</td>
+<td>RealVideo (RV), RealAudio (RA)</td>
+</tr>
+<tr>
+<td>MOV</td>
+<td>MPEG-2, H.264, MPEG-4</td>
+</tr>
+<tr>
+<td>TS/PS</td>
+<td>MPEG-2, H.264, MPEG-4</td>
+</tr>
+<tr>
+<td>WMV</td>
+<td>Windows Media Video (WMV), WMA</td>
+</tr>
+<tr>
+<td>MKV</td>
+<td>几乎所有视频编码格式（例如H.264, H.265, VP9等）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="转格式与转编码">转格式与转编码</h3>
+<p>转换格式：根据当前封装格式FA中使用的编码格式CA，查看目标格式FB是否支持当前的编码格式CA。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>兼容：如果支持则直接将CA内容复制过去，换一个外部组织格式FB（即目标封装格式）即可。</p>
+</li>
+<li class="lvl-2">
+<p>不兼容：如果不支持，则需要将编码CA先解码成原始信息RA，再使用目标编码CB进行编码，最后再使用目标封装格式FB进行封装。</p>
+</li>
+</ul>
+<h2 id="主流发展-编码格式">主流发展-编码格式</h2>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>编码格式</th>
+<th>公司</th>
+<th>用途</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1984</td>
+<td>h.120</td>
+<td>ITU-T</td>
+<td>电视</td>
+<td>最早的标准</td>
+</tr>
+<tr>
+<td>1988</td>
+<td>h.261</td>
+<td>ITU-T</td>
+<td>实时传输视频</td>
+<td>去除掉图像高频部分<br />划分宏块<br />关键帧I帧和预测帧P帧</td>
+</tr>
+<tr>
+<td>1991</td>
+<td>MPEG-1</td>
+<td>ISO/IEC</td>
+<td>VCD</td>
+<td>参考h.261<br />还引入了双向预测帧B帧<br />帧序列</td>
+</tr>
+<tr>
+<td>1994</td>
+<td>MPEG-2</td>
+<td>ISO</td>
+<td>DVD</td>
+<td></td>
+</tr>
+<tr>
+<td>1995</td>
+<td>h.263</td>
+<td>ITU-T</td>
+<td>实时传输视频</td>
+<td></td>
+</tr>
+<tr>
+<td>1999</td>
+<td>MPEG-4</td>
+<td>ISO</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2003</td>
+<td>h.264（MPEG-4/AVC）</td>
+<td>ISO+ITU-T</td>
+<td></td>
+<td>使用收取专利费（软件和硬件）</td>
+</tr>
+<tr>
+<td>2013</td>
+<td>h.265（MPEG-4/HEVC）</td>
+<td>ISO+ITU-T</td>
+<td></td>
+<td>使用收取专利费更贵（软件和硬件）</td>
+</tr>
+<tr>
+<td>2018</td>
+<td>AV1</td>
+<td>AOMedia（开放联盟）</td>
+<td></td>
+<td>免费且无专利问题！<br />比较新，暂时还没有很多支持</td>
+</tr>
+</tbody>
+</table>
+<h2 id="其它编码方式">其它编码方式</h2>
+<table>
+<thead>
+<tr>
+<th>编码方式</th>
+<th>公司</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RealMedia</td>
+<td>Real Networks</td>
+</tr>
+<tr>
+<td>WMV</td>
+<td>微软</td>
+</tr>
+<tr>
+<td>VC-1</td>
+<td>微软</td>
+</tr>
+<tr>
+<td>VP9（新且免费，但是可能有专利问题）</td>
+<td>谷歌</td>
+</tr>
+<tr>
+<td>Theora（较老压缩率差 | 2008，但是开源免费）</td>
+<td>xiph.org基金会</td>
+</tr>
+</tbody>
+</table>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-07-30T16:00:00.000Z" itemprop="datePublished">
+              2024-07-31
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

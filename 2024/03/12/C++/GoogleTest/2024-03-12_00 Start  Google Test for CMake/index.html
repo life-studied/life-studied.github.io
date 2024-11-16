@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>00 Start  Google Test for CMake | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>00 Start  Google Test for CMake</h1>
+    </header>
+
+    <section>
+      <h1>Start : Google Test for CMake</h1>
+<blockquote>
+<p>编译器必须支持C++14</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1-创建项目并依赖Google-Test（pull-from-remote）">1. 创建项目并依赖Google Test（pull from remote）</h2>
+<p>​	创建项目根目录：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir my_project &amp;&amp; cd my_project</span><br></pre></td></tr></table></figure>
+<p>​	创建<code>CMakeLists.txt</code>，本项目使用<code>FetchContent</code>来获取GoogleTest：</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.14</span>)</span><br><span class="line"><span class="keyword">project</span>(my_project)</span><br><span class="line"></span><br><span class="line"><span class="comment"># GoogleTest requires at least C++14</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">14</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD_REQUIRED <span class="keyword">ON</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span>(FetchContent)</span><br><span class="line">FetchContent_Declare(</span><br><span class="line">  googletest</span><br><span class="line">  URL https://github.com/google/googletest/archive/<span class="number">03597</span>a01ee50ed33e9dfd640b249b4be3799d395.zip</span><br><span class="line">)</span><br><span class="line"><span class="comment"># For Windows: Prevent overriding the parent project&#x27;s compiler/linker settings</span></span><br><span class="line"><span class="keyword">set</span>(gtest_force_shared_crt <span class="keyword">ON</span> CACHE BOOL <span class="string">&quot;&quot;</span> FORCE)</span><br><span class="line">FetchContent_MakeAvailable(googletest)</span><br></pre></td></tr></table></figure>
+<h2 id="2-使用GoogleTest编写测试">2. 使用GoogleTest编写测试</h2>
+<p>​	创建<code>hello_test.cc</code>：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;gtest/gtest.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Demonstrate some basic assertions.</span></span><br><span class="line"><span class="built_in">TEST</span>(HelloTest, BasicAssertions) &#123;</span><br><span class="line">  <span class="comment">// Expect two strings not to be equal.</span></span><br><span class="line">  <span class="built_in">EXPECT_STRNE</span>(<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;world&quot;</span>);</span><br><span class="line">  <span class="comment">// Expect equality.</span></span><br><span class="line">  <span class="built_in">EXPECT_EQ</span>(<span class="number">7</span> * <span class="number">6</span>, <span class="number">42</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​	补充<code>CMakeLists.txt</code>：</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enable_testing</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(</span><br><span class="line">  hello_test</span><br><span class="line">  hello_test.cc</span><br><span class="line">)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(</span><br><span class="line">  hello_test</span><br><span class="line">  GTest::gtest_main</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span>(GoogleTest)</span><br><span class="line">gtest_discover_tests(hello_test)</span><br></pre></td></tr></table></figure>
+<h2 id="3-执行测试">3. 执行测试</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cmake -S . -B build</span><br><span class="line">cmake --build build</span><br><span class="line">cd build &amp;&amp; ctest</span><br></pre></td></tr></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://google.github.io/googletest/quickstart-cmake.html">快速入门：使用 CMake 进行构建 |谷歌测试 (google.github.io)</a></p>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-03-11T16:00:00.000Z" itemprop="datePublished">
+              2024-03-12
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

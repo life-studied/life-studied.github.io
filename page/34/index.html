@@ -64,12 +64,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_03%20%E9%83%A8%E5%88%86%E5%AD%98%E5%82%A8%E5%AE%9A%E5%BA%8F%E6%A8%A1%E5%9E%8B/">03 部分存储定序模型</a>
+          <a href="/2023/11/29/C++/3rdparty/jsoncpp/2023-11-29_03%20Reader%EF%BC%9A%E8%A7%A3%E6%9E%90json%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB/">03 Reader：解析json字符串类</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-28T16:00:00.000Z" itemprop="datePublished">
+    2023-11-29
   </time>
   
   
@@ -81,7 +81,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory-order/">内存模型与memory_order</a> }
+  { <a href="/categories/C/3rdparty/">3rdparty</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/jsoncpp/">jsoncpp</a> }
   </li>
 
 
@@ -92,11 +96,11 @@
     </header>
     <div>
       
-        <h1>部分存储定序模型</h1>
-<p>TSO在store buffer的情况下已经带来了不小的性能提升，但是芯片设计人员并不满足于这一点，于是他们在TSO模型的基础上继续放宽内存访问限制，允许CPU以非FIFO来处理store buffer缓冲区中的指令。</p>
+        <h1>Reader：解析json字符串类</h1>
+<h2 id="1-从字符串中解析">1. 从字符串中解析</h2>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_03%20%E9%83%A8%E5%88%86%E5%AD%98%E5%82%A8%E5%AE%9A%E5%BA%8F%E6%A8%A1%E5%9E%8B/#more">Read On »</a>
+            <a href="/2023/11/29/C++/3rdparty/jsoncpp/2023-11-29_03%20Reader%EF%BC%9A%E8%A7%A3%E6%9E%90json%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB/#more">Read On »</a>
           </div>
         
       
@@ -110,12 +114,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_04%20%E5%AE%BD%E6%9D%BE%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/">04 宽松存储模型</a>
+          <a href="/2023/11/29/C++/3rdparty/jsoncpp/2023-11-29_04%20%E7%A4%BA%E4%BE%8B/">04 示例</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-28T16:00:00.000Z" itemprop="datePublished">
+    2023-11-29
   </time>
   
   
@@ -127,7 +131,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory-order/">内存模型与memory_order</a> }
+  { <a href="/categories/C/3rdparty/">3rdparty</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/jsoncpp/">jsoncpp</a> }
   </li>
 
 
@@ -138,11 +146,11 @@
     </header>
     <div>
       
-        <h1>宽松存储模型</h1>
-<p>为了获取更多的性能，在PSO的模型的基础上不仅允许store-load、store-store乱序，还进一步允许load-load乱序和load-store乱序。</p>
+        <h1>示例</h1>
+<h2 id="1-json文本">1. json文本</h2>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_04%20%E5%AE%BD%E6%9D%BE%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/#more">Read On »</a>
+            <a href="/2023/11/29/C++/3rdparty/jsoncpp/2023-11-29_04%20%E7%A4%BA%E4%BE%8B/#more">Read On »</a>
           </div>
         
       
@@ -156,12 +164,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_05%20memory_order_release%20&amp;%20memory_order_acquire/">05 memory_order_release &amp; memory_order_acquire</a>
+          <a href="/2023/11/29/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-29_12%20%E4%BD%BF%E7%94%A8override%E5%85%B3%E9%94%AE%E5%AD%97%E5%A3%B0%E6%98%8E%E8%A6%86%E7%9B%96%E7%9A%84%E5%87%BD%E6%95%B0/">12 使用override关键字声明覆盖的函数</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-28T16:00:00.000Z" itemprop="datePublished">
+    2023-11-29
   </time>
   
   
@@ -173,7 +181,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory-order/">内存模型与memory_order</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
   </li>
 
 
@@ -184,11 +196,11 @@
     </header>
     <div>
       
-        <h1>memory_order_release &amp; memory_order_acquire</h1>
-<h2 id="1-memory-order-release保证写不后">1. memory_order_release保证写不后</h2>
+        <h1>12 使用override关键字声明覆盖的函数</h1>
+<p>​	覆盖父类的虚函数的条件：</p>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_05%20memory_order_release%20&%20memory_order_acquire/#more">Read On »</a>
+            <a href="/2023/11/29/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-29_12%20%E4%BD%BF%E7%94%A8override%E5%85%B3%E9%94%AE%E5%AD%97%E5%A3%B0%E6%98%8E%E8%A6%86%E7%9B%96%E7%9A%84%E5%87%BD%E6%95%B0/#more">Read On »</a>
           </div>
         
       
@@ -202,12 +214,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_06%20memory_order_consume/">06 memory_order_consume</a>
+          <a href="/2023/11/29/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-29_13%20%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8const_iterator%E8%80%8C%E4%B8%8D%E6%98%AFiterator/">13 优先使用const_iterator而不是iterator</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-28T16:00:00.000Z" itemprop="datePublished">
+    2023-11-29
   </time>
   
   
@@ -219,7 +231,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory-order/">内存模型与memory_order</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
   </li>
 
 
@@ -230,11 +246,11 @@
     </header>
     <div>
       
-        <h1>memory_order_consume</h1>
-<p>std::memory_order_consume的语义是，所有后续对本原子类型的操作，必须在本操作完成之后才可以执行。简单点就是不得前。但是这个操作只能用来对读进行优化。也就是说release线程是不能使用这个的。也就是说，只能对读依赖的一方进行优化.</p>
+        <h1>13 优先使用const_iterator而不是iterator</h1>
+<p>​	在<code>C++98</code>中，如果使用<code>const_iterator</code>可能导致语义可行但是编译不过的情况：</p>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_06%20memory_order_consume/#more">Read On »</a>
+            <a href="/2023/11/29/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-29_13%20%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8const_iterator%E8%80%8C%E4%B8%8D%E6%98%AFiterator/#more">Read On »</a>
           </div>
         
       
@@ -248,12 +264,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_07%20memory_order_seq_cst/">07 memory_order_seq_cst</a>
+          <a href="/2023/11/29/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-29_14%20%E5%A6%82%E6%9E%9C%E5%87%BD%E6%95%B0%E4%B8%8D%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8%E8%AF%B7%E4%BD%BF%E7%94%A8noexcept/">14 如果函数不抛出异常请使用noexcept</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-28T16:00:00.000Z" itemprop="datePublished">
+    2023-11-29
   </time>
   
   
@@ -265,7 +281,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory-order/">内存模型与memory_order</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
   </li>
 
 
@@ -276,11 +296,11 @@
     </header>
     <div>
       
-        <h1>memory_order_seq_cst</h1>
-<p><code>std::memory_order_seq_cst</code>表示最强约束。</p>
+        <h1>14 如果函数不抛出异常请使用<code>noexcept</code></h1>
+<h2 id="1-展开调用栈方面的优化">1. 展开调用栈方面的优化</h2>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_07%20memory_order_seq_cst/#more">Read On »</a>
+            <a href="/2023/11/29/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-29_14%20%E5%A6%82%E6%9E%9C%E5%87%BD%E6%95%B0%E4%B8%8D%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8%E8%AF%B7%E4%BD%BF%E7%94%A8noexcept/#more">Read On »</a>
           </div>
         
       
@@ -294,12 +314,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_08%20memory%20order%E4%B8%8E%E4%B8%8B%E5%B1%82%E7%9A%84%E8%81%94%E7%B3%BB/">08 memory order与下层的联系</a>
+          <a href="/2023/11/28/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-28_06%20%E5%BD%93auto%E6%8E%A8%E5%AF%BC%E5%87%BA%E9%9D%9E%E9%A2%84%E6%9C%9F%E7%B1%BB%E5%9E%8B%E6%97%B6%E5%BA%94%E5%BD%93%E4%BD%BF%E7%94%A8%E6%98%BE%E5%BC%8F%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%88%9D%E5%A7%8B%E5%8C%96/">06 当auto推导出非预期类型时应当使用显式的类型初始化</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-27T16:00:00.000Z" itemprop="datePublished">
+    2023-11-28
   </time>
   
   
@@ -311,7 +331,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory-order/">内存模型与memory_order</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
   </li>
 
 
@@ -322,11 +346,11 @@
     </header>
     <div>
       
-        <h1>与下层的联系</h1>
-<h2 id="分层协议模型">分层协议模型</h2>
+        <h1>06 当auto推导出非预期类型时应当使用显式的类型初始化</h1>
+<h2 id="1-auto推导出非预期类型">1. auto推导出非预期类型</h2>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ememory_order/2024-11-16_08%20memory%20order%E4%B8%8E%E4%B8%8B%E5%B1%82%E7%9A%84%E8%81%94%E7%B3%BB/#more">Read On »</a>
+            <a href="/2023/11/28/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-28_06%20%E5%BD%93auto%E6%8E%A8%E5%AF%BC%E5%87%BA%E9%9D%9E%E9%A2%84%E6%9C%9F%E7%B1%BB%E5%9E%8B%E6%97%B6%E5%BA%94%E5%BD%93%E4%BD%BF%E7%94%A8%E6%98%BE%E5%BC%8F%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%88%9D%E5%A7%8B%E5%8C%96/#more">Read On »</a>
           </div>
         
       
@@ -340,12 +364,112 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E5%8A%A0%E5%AF%86%E4%B8%8E%E8%A7%A3%E5%AF%86/2024-11-16_rsa%E7%AE%97%E6%B3%95/">rsa算法</a>
+          <a href="/2023/11/28/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-28_08%20%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8nullptr%E8%80%8C%E4%B8%8D%E6%98%AF0%E6%88%96%E8%80%85NULL/">08 优先使用nullptr而不是0或者NULL</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-27T16:00:00.000Z" itemprop="datePublished">
+    2023-11-28
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>08 优先使用nullptr而不是0或者NULL</h1>
+<p>​	 <strong>0 和 NULL 都不属于指针类型</strong>。 在 C++98 中，这意味着传递 0 或者 NULL 作为参数给重载函数永远不会调用指针重载的那个函数：</p>
+        
+          <div class="more-link">
+            <a href="/2023/11/28/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-28_08%20%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8nullptr%E8%80%8C%E4%B8%8D%E6%98%AF0%E6%88%96%E8%80%85NULL/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/11/28/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-28_09%20%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8%E5%A3%B0%E6%98%8E%E5%88%AB%E5%90%8D%E8%80%8C%E4%B8%8D%E6%98%AF%20typedef/">09 优先使用声明别名而不是 typedef</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-11-27T16:00:00.000Z" itemprop="datePublished">
+    2023-11-28
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>09 优先使用声明别名而不是 typedef</h1>
+<h2 id="1-using更好理解函数指针">1. using更好理解函数指针</h2>
+        
+          <div class="more-link">
+            <a href="/2023/11/28/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-28_09%20%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8%E5%A3%B0%E6%98%8E%E5%88%AB%E5%90%8D%E8%80%8C%E4%B8%8D%E6%98%AF%20typedef/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/11/27/C++/%E5%8A%A0%E5%AF%86%E4%B8%8E%E8%A7%A3%E5%AF%86/2023-11-27_rsa%E7%AE%97%E6%B3%95/">rsa算法</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -372,7 +496,7 @@
 <h2 id="加密与解密过程">加密与解密过程</h2>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E5%8A%A0%E5%AF%86%E4%B8%8E%E8%A7%A3%E5%AF%86/2024-11-16_rsa%E7%AE%97%E6%B3%95/#more">Read On »</a>
+            <a href="/2023/11/27/C++/%E5%8A%A0%E5%AF%86%E4%B8%8E%E8%A7%A3%E5%AF%86/2023-11-27_rsa%E7%AE%97%E6%B3%95/#more">Read On »</a>
           </div>
         
       
@@ -386,12 +510,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E6%A0%87%E5%87%86%E5%BA%93/2024-11-16_find_if%EF%BC%88+advance%EF%BC%89/">find_if（+advance）</a>
+          <a href="/2023/11/27/C++/%E6%A0%87%E5%87%86%E5%BA%93/2023-11-27_find_if%EF%BC%88+advance%EF%BC%89/">find_if（+advance）</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -418,99 +542,7 @@
 <p>​	可以配合<code>lambda</code>表达式和<code>std::advance</code>使用。</p>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E6%A0%87%E5%87%86%E5%BA%93/2024-11-16_find_if%EF%BC%88+advance%EF%BC%89/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/11/16/C++/%E6%A0%87%E5%87%86%E5%BA%93/2024-11-16_random/">random</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>random</h1>
-<h2 id="1-简介">1.简介</h2>
-        
-          <div class="more-link">
-            <a href="/2024/11/16/C++/%E6%A0%87%E5%87%86%E5%BA%93/2024-11-16_random/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/11/16/C++/%E6%A0%87%E5%87%86%E5%BA%93/2024-11-16_regex/">regex</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>regex</h1>
-<h2 id="1-简介">1. 简介</h2>
-        
-          <div class="more-link">
-            <a href="/2024/11/16/C++/%E6%A0%87%E5%87%86%E5%BA%93/2024-11-16_regex/#more">Read On »</a>
+            <a href="/2023/11/27/C++/%E6%A0%87%E5%87%86%E5%BA%93/2023-11-27_find_if%EF%BC%88+advance%EF%BC%89/#more">Read On »</a>
           </div>
         
       

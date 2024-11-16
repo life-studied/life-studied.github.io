@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>01 二分查找 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>01 二分查找</h1>
+    </header>
+
+    <section>
+      <h2 id="二分查找">二分查找</h2>
+<h4 id="704-二分查找">704. 二分查找</h4>
+<span id="more"></span>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">search</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> left&#123;&#125;, right = nums.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> mid&#123;&#125;;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)</span><br><span class="line">        &#123;</span><br><span class="line">            mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &gt; target)</span><br><span class="line">                right = mid - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(nums[mid] &lt; target)</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="35-搜索插入位置">35.搜索插入位置</h4>
+<p>​	思路：使用二分查找找到该元素，如果找不到，则应该插入在<code>right+1</code>的位置。</p>
+<p>​	解释：因为二分查找中，<code>right</code>找到的是小于等于<code>target</code>的下标。等于时直接返回<code>mid</code>，小于时返回<code>right+1</code>。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">searchInsert</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> left&#123;&#125;, right = nums.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> mid&#123;&#125;;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)</span><br><span class="line">        &#123;</span><br><span class="line">            mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &lt; target)</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target)</span><br><span class="line">                right = mid - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> right + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>​	stl库解法：使用lower_bound函数。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">searchInsert</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">auto</span> beginIter = nums.<span class="built_in">begin</span>();</span><br><span class="line">        <span class="keyword">return</span> std::<span class="built_in">distance</span>(beginIter, <span class="built_in">lower_bound</span>(beginIter, nums.<span class="built_in">end</span>(), target));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="34-在排序数组中查找元素的第一个和最后一个位置">34.在排序数组中查找元素的第一个和最后一个位置</h4>
+<p>​	思路：使用二分查找获取左边界和右边界。</p>
+<p>​	如果左边界和有边界的值相差小于2，则不存在。</p>
+<p>​	否则返回<code>左边界+1</code>和<code>有边界-1</code>。</p>
+<p>​	核心代码：对二分中的<code>target==nums[mid]</code>进行合并。</p>
+<p>​	如果合并到<code>left+1</code>，则最终会逼近右边界。</p>
+<p>​	如果合并到<code>right+1</code>，则最终会逼近左边界。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">searchLowIndex</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> left&#123;&#125;, right = nums.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> mid&#123;&#125;;</span><br><span class="line">        <span class="type">int</span> leftBord = <span class="number">-2</span>;      <span class="comment">//test if in range</span></span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)</span><br><span class="line">        &#123;</span><br><span class="line">            mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &lt; target)</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                leftBord = right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> leftBord;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">searchHighIndex</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> left&#123;&#125;, right = nums.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> mid&#123;&#125;;</span><br><span class="line">        <span class="type">int</span> rightBord = <span class="number">-2</span>;     <span class="comment">//test if in range</span></span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)</span><br><span class="line">        &#123;</span><br><span class="line">            mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &gt; target)</span><br><span class="line">                right = mid - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                rightBord = left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> rightBord;   </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">searchRange</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> leftIndex = <span class="built_in">searchLowIndex</span>(nums, target);</span><br><span class="line">        <span class="type">int</span> rightIndex = <span class="built_in">searchHighIndex</span>(nums, target);</span><br><span class="line">        <span class="keyword">if</span>(leftIndex == <span class="number">-2</span> || rightIndex == <span class="number">-2</span>)     <span class="comment">//out of range</span></span><br><span class="line">            <span class="keyword">return</span> &#123;<span class="number">-1</span>, <span class="number">-1</span>&#125;;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(rightIndex - leftIndex &gt;= <span class="number">2</span>)        <span class="comment">//in range and find left and right</span></span><br><span class="line">            <span class="keyword">return</span> &#123;leftIndex + <span class="number">1</span>, rightIndex - <span class="number">1</span>&#125;;</span><br><span class="line">        <span class="keyword">else</span>                                        <span class="comment">//in range but not find</span></span><br><span class="line">            <span class="keyword">return</span> &#123;<span class="number">-1</span>, <span class="number">-1</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>​	直接使用库函数：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>std::lower_bound</code>函数返回一个指向大于或等于给定值的第一个元素的迭代器。如果没有找到符合条件的元素，它将返回指向容器末尾的迭代器。</p>
+</li>
+<li class="lvl-2">
+<p><code>std::upper_bound</code>函数返回一个指向大于给定值的第一个元素的迭代器。如果没有找到符合条件的元素，它将返回指向容器末尾的迭代器。</p>
+</li>
+</ul>
+<p>​	注意：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>这两个函数，只能保证找到目标值位置或者能插入目标值的位置，因此需要增加一个检验：<code>|| *startIter != target</code>来保证目标值至少存在。</p>
+</li>
+<li class="lvl-2">
+<p>lower_bound找到了返回该元素的迭代器，upper_bound找到了返回该元素后面的一个迭代器。也就是说，这个区间是一个左闭右开的区间。</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">searchRange</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        std::vector&lt;<span class="type">int</span>&gt; result = &#123; <span class="number">-1</span>, <span class="number">-1</span> &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 查找起始下标</span></span><br><span class="line">        <span class="keyword">auto</span> startIter = std::<span class="built_in">lower_bound</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>(), target);</span><br><span class="line">        <span class="keyword">if</span> (startIter == nums.<span class="built_in">end</span>() || *startIter != target) &#123;</span><br><span class="line">            <span class="keyword">return</span> result;  <span class="comment">// 没有找到目标值，返回&#123;-1, -1&#125;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> startIndex = std::<span class="built_in">distance</span>(nums.<span class="built_in">begin</span>(), startIter);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 查找终止下标</span></span><br><span class="line">        <span class="keyword">auto</span> endIter = std::<span class="built_in">upper_bound</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>(), target);</span><br><span class="line">        <span class="type">int</span> endIndex = std::<span class="built_in">distance</span>(nums.<span class="built_in">begin</span>(), endIter) - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 更新结果</span></span><br><span class="line">        result[<span class="number">0</span>] = startIndex;</span><br><span class="line">        result[<span class="number">1</span>] = endIndex;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="69-x-的平方根">69.x 的平方根</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">mySqrt</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//特殊值</span></span><br><span class="line">        <span class="keyword">if</span>(x == <span class="number">0</span>)  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(x == <span class="number">1</span>)  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> left&#123;&#125;, right = x;</span><br><span class="line">        <span class="type">int</span> mid&#123;&#125;;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)</span><br><span class="line">        &#123;</span><br><span class="line">            mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(mid &lt;= x / mid)</span><br><span class="line">                <span class="keyword">if</span>((mid + <span class="number">1</span>) &gt; x / (mid + <span class="number">1</span>))</span><br><span class="line">                    <span class="keyword">return</span> mid;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    left = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> mid;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-07-21T16:00:00.000Z" itemprop="datePublished">
+              2023-07-22
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

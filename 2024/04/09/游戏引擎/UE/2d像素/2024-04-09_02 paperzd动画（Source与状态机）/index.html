@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>02 paperzd动画（Source与状态机） | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>02 paperzd动画（Source与状态机）</h1>
+    </header>
+
+    <section>
+      <h1>paperzd动画（Source与状态机）.md</h1>
+<p>[TOC]</p>
+<span id="more"></span>
+<h2 id="1-Animation-Source">1. Animation Source</h2>
+<p><img src="./assets/image-20240323193755072.png" alt="image-20240323193755072"></p>
+<h3 id="添加动画序列">添加动画序列</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>添加新的动画序列</p>
+</li>
+<li class="lvl-2">
+<p>修改名字</p>
+</li>
+<li class="lvl-2">
+<p>选择对应的纸片序列</p>
+</li>
+</ul>
+<p><img src="./assets/image-20240323193905179.png" alt="image-20240323193905179"></p>
+<h2 id="2-动画状态机（PaperZD-AnimBP）">2. 动画状态机（PaperZD AnimBP）</h2>
+<p>​	需要选择从Source创建对应的AnimBP。</p>
+<p><img src="./assets/image-20240323194043326.png" alt="image-20240323194043326"></p>
+<h3 id="创建状态机">创建状态机</h3>
+<img src="./assets/image-20240325090621818.png" alt="image-20240325090621818" style="zoom:33%;" />
+<h3 id="创建state">创建state</h3>
+<img src="./assets/image-20240325090808158.png" alt="image-20240325090808158" style="zoom:33%;" />
+<h3 id="设置state的动画">设置state的动画</h3>
+<img src="./assets/image-20240325090838590.png" alt="image-20240325090838590" style="zoom:33%;" />
+<h3 id="创建新的state并设置状态转移条件">创建新的state并设置状态转移条件</h3>
+<img src="./assets/image-20240325091057354.png" alt="image-20240325091057354" style="zoom:33%;" />
+<p>​	在init时获取角色蓝图，方便在后续动画时进行判断：</p>
+<p><img src="./assets/image-20240325091337379.png" alt="image-20240325091337379"></p>
+<p>​	获取速度，作为状态变化的条件：</p>
+<p><img src="./assets/image-20240325093220791.png" alt="image-20240325093220791"></p>
+<h3 id="将animation配置到character上">将animation配置到character上</h3>
+<p><img src="./assets/image-20240325093335332.png" alt="image-20240325093335332"></p>
+<h3 id="设置sprite旋转方向">设置sprite旋转方向</h3>
+<p>​	如果需要根据玩家操作，使得角色动画转向不同的方向。可以通过在输入input中判断输入的值，获取角色的sprite对象，设置其z轴的相对旋转方向。</p>
+<p><img src="./assets/image-20240325115858459.png" alt="image-20240325115858459"></p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-04-08T16:00:00.000Z" itemprop="datePublished">
+              2024-04-09
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

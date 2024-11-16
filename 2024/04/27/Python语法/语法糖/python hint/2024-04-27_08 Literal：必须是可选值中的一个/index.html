@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>08 Literal：必须是可选值中的一个 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>08 Literal：必须是可选值中的一个</h1>
+    </header>
+
+    <section>
+      <h1>Literal：必须是可选值中的一个</h1>
+<h2 id="1-检查值是否符合">1. 检查值是否符合</h2>
+<span id="more"></span>
+<p>​	有时候不想使用enum来规定，但是需要对传入的参数进行检查：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> <span class="type">Literal</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params"></span></span><br><span class="line"><span class="params">    	self,</span></span><br><span class="line"><span class="params">    	name: <span class="built_in">str</span>,</span></span><br><span class="line"><span class="params">    	gender: <span class="type">Literal</span>[<span class="string">&quot;male&quot;</span>, <span class="string">&quot;female&quot;</span>]		<span class="comment"># check</span></span></span><br><span class="line"><span class="params">    </span>):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.gender = gender</span><br><span class="line"></span><br><span class="line">a = Person(<span class="string">&quot;Bob&quot;</span>, <span class="string">&quot;male&quot;</span>)</span><br><span class="line">b = Person(<span class="string">&quot;Bob&quot;</span>, <span class="string">&quot;woman&quot;</span>)	<span class="comment"># error</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-变量不符合Literal类型">2. 变量不符合Literal类型</h2>
+<p>​	直接传入字面量是可以的，但是如果使用变量就会出错：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> <span class="type">Literal</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params"></span></span><br><span class="line"><span class="params">    	self,</span></span><br><span class="line"><span class="params">    	name: <span class="built_in">str</span>,</span></span><br><span class="line"><span class="params">    	gender: <span class="type">Literal</span>[<span class="string">&quot;male&quot;</span>, <span class="string">&quot;female&quot;</span>]		<span class="comment"># check</span></span></span><br><span class="line"><span class="params">    </span>):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.gender = gender</span><br><span class="line"></span><br><span class="line">g = <span class="string">&quot;female&quot;</span></span><br><span class="line">a = Person(<span class="string">&quot;Bob&quot;</span>, g)	<span class="comment"># error, g is str, not Literal[&quot;male&quot;, &quot;female&quot;]</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-对变量进行Literal标注">3. 对变量进行Literal标注</h2>
+<p>​	为了解决上面的问题，对变量也需要标注相同的Literal类型：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> <span class="type">Literal</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params"></span></span><br><span class="line"><span class="params">    	self,</span></span><br><span class="line"><span class="params">    	name: <span class="built_in">str</span>,</span></span><br><span class="line"><span class="params">    	gender: <span class="type">Literal</span>[<span class="string">&quot;male&quot;</span>, <span class="string">&quot;female&quot;</span>]		<span class="comment"># check</span></span></span><br><span class="line"><span class="params">    </span>):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.gender = gender</span><br><span class="line"></span><br><span class="line">g: <span class="type">Literal</span>[<span class="string">&quot;male&quot;</span>, <span class="string">&quot;female&quot;</span>] = <span class="string">&quot;female&quot;</span></span><br><span class="line">a = Person(<span class="string">&quot;Bob&quot;</span>, g)		<span class="comment"># ok</span></span><br></pre></td></tr></table></figure>
+<h2 id="4-类型别名">4. 类型别名</h2>
+<p>​	更普遍意义上，为了保证代码的可用性，会对类型进行别名，在一处定义，多处使用：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> <span class="type">Literal</span></span><br><span class="line"></span><br><span class="line">GenderType = <span class="type">Literal</span>[<span class="string">&quot;male&quot;</span>, <span class="string">&quot;female&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params"></span></span><br><span class="line"><span class="params">    	self,</span></span><br><span class="line"><span class="params">    	name: <span class="built_in">str</span>,</span></span><br><span class="line"><span class="params">    	gender: GenderType		<span class="comment"># check</span></span></span><br><span class="line"><span class="params">    </span>):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.gender = gender</span><br><span class="line"></span><br><span class="line">g: GenderType = <span class="string">&quot;female&quot;</span></span><br><span class="line">a = Person(<span class="string">&quot;Bob&quot;</span>, g)		<span class="comment"># ok</span></span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-04-26T16:00:00.000Z" itemprop="datePublished">
+              2024-04-27
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

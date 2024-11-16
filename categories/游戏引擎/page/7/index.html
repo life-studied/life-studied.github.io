@@ -68,12 +68,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-11-16_vsconfig%E6%96%87%E4%BB%B6/">vsconfig文件</a>
+          <a href="/2023/12/17/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/03%20%E9%80%86%E5%90%91%E6%B3%A8%E5%85%A5/2023-12-17_00%20%E8%BF%9C%E7%A8%8B%E7%BA%BF%E7%A8%8B%E6%B3%A8%E5%85%A5dll%E6%80%9D%E8%B7%AF/">00 远程线程注入dll思路</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-12-16T16:00:00.000Z" itemprop="datePublished">
+    2023-12-17
   </time>
   
   
@@ -85,11 +85,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/">UE</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/">ImGui</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/">杂文</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/03-%E9%80%86%E5%90%91%E6%B3%A8%E5%85%A5/">03 逆向注入</a> }
   </li>
 
 
@@ -100,11 +100,14 @@
     </header>
     <div>
       
-        <h1>vsconfig文件</h1>
-<p>​	在UE创建时，会生成一个<code>.vsconfig</code>文件，用于保存这个UE工程需要用到的VS项目里的组件信息，即 <code>visual studio installer</code> 中出现的组件信息。</p>
+        <h1>远程线程注入dll思路</h1>
+<ul class="lvl-0">
+<li class="lvl-2">获取游戏进程句柄</li>
+<li class="lvl-2">给游戏分配远程空间（<code>VirtualAllocEx</code>），保存首地址</li>
+</ul>
         
           <div class="more-link">
-            <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-11-16_vsconfig%E6%96%87%E4%BB%B6/#more">Read On »</a>
+            <a href="/2023/12/17/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/ImGui/03%20%E9%80%86%E5%90%91%E6%B3%A8%E5%85%A5/2023-12-17_00%20%E8%BF%9C%E7%A8%8B%E7%BA%BF%E7%A8%8B%E6%B3%A8%E5%85%A5dll%E6%80%9D%E8%B7%AF/#more">Read On »</a>
           </div>
         
       
@@ -118,12 +121,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-11-16_%E5%8A%A8%E7%94%BB%E4%B8%8E%E8%92%99%E5%A4%AA%E5%A5%87/">动画与蒙太奇</a>
+          <a href="/2023/12/17/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-12-17_10-%20%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/">10- 动态代理</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-12-16T16:00:00.000Z" itemprop="datePublished">
+    2023-12-17
   </time>
   
   
@@ -139,7 +142,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/">杂文</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C-%E7%BC%96%E7%A8%8B/">C++编程</a> }
   </li>
 
 
@@ -150,11 +153,11 @@
     </header>
     <div>
       
-        <h1>动画与蒙太奇</h1>
-<p>​	动画蓝图是由状态机和插槽驱动的，以一种线性的方式输出。一般插槽用于插入蒙太奇蓝图，用于限制动画播放的优先级。</p>
+        <h1>10. 动态代理</h1>
+<h2 id="1-动态单播代理">1. 动态单播代理</h2>
         
           <div class="more-link">
-            <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-11-16_%E5%8A%A8%E7%94%BB%E4%B8%8E%E8%92%99%E5%A4%AA%E5%A5%87/#more">Read On »</a>
+            <a href="/2023/12/17/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-12-17_10-%20%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/#more">Read On »</a>
           </div>
         
       
@@ -168,12 +171,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-11-16_%E6%B5%85%E6%9E%90StaticClass%E7%9A%84%E5%AE%9E%E7%8E%B0/">浅析StaticClass的实现</a>
+          <a href="/2023/12/17/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-12-17_11-%20%E4%BB%A3%E7%90%86%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">11- 代理的原理与实现</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-12-16T16:00:00.000Z" itemprop="datePublished">
+    2023-12-17
   </time>
   
   
@@ -189,7 +192,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/">杂文</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C-%E7%BC%96%E7%A8%8B/">C++编程</a> }
   </li>
 
 
@@ -200,11 +203,11 @@
     </header>
     <div>
       
-        <h1>浅析StaticClass的实现</h1>
-<p>​	每一个继承自UObject的类，都可以通过<code>xxx::StaticClass()</code>获取到该类的UClass对象。本文主要研究该函数在何处定义以及实现方式。</p>
+        <h1>11. 代理的原理与实现</h1>
+<p>​	代理的本质就是<strong>函数指针</strong>：</p>
         
           <div class="more-link">
-            <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-11-16_%E6%B5%85%E6%9E%90StaticClass%E7%9A%84%E5%AE%9E%E7%8E%B0/#more">Read On »</a>
+            <a href="/2023/12/17/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-12-17_11-%20%E4%BB%A3%E7%90%86%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/#more">Read On »</a>
           </div>
         
       
@@ -218,12 +221,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-11-16_%E8%8E%B7%E5%8F%96%E5%BC%95%E6%93%8E%E7%89%88%E6%9C%AC%EF%BC%88%E4%BB%A3%E7%A0%81%EF%BC%89/">获取引擎版本（代码）</a>
+          <a href="/2023/12/17/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-12-17_12-%20GamePlay%E6%A1%86%E6%9E%B6%E5%9C%A8C++%E4%B8%AD%E5%A6%82%E4%BD%95%E5%A1%AB%E5%85%85/">12- GamePlay框架在C++中如何填充</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-12-16T16:00:00.000Z" itemprop="datePublished">
+    2023-12-17
   </time>
   
   
@@ -239,7 +242,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/">杂文</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C-%E7%BC%96%E7%A8%8B/">C++编程</a> }
   </li>
 
 
@@ -250,11 +253,11 @@
     </header>
     <div>
       
-        <h1>代码中获取引擎版本</h1>
-<p>​	文件：<code>Runtime\Core\Public\Misc\EngineVersion.h</code></p>
+        <h1>12. GamePlay框架在C++中如何填充</h1>
+<p>​	本说明目的在于讲清楚步骤。</p>
         
           <div class="more-link">
-            <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-11-16_%E8%8E%B7%E5%8F%96%E5%BC%95%E6%93%8E%E7%89%88%E6%9C%AC%EF%BC%88%E4%BB%A3%E7%A0%81%EF%BC%89/#more">Read On »</a>
+            <a href="/2023/12/17/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-12-17_12-%20GamePlay%E6%A1%86%E6%9E%B6%E5%9C%A8C++%E4%B8%AD%E5%A6%82%E4%BD%95%E5%A1%AB%E5%85%85/#more">Read On »</a>
           </div>
         
       
@@ -268,12 +271,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-11-16_%E8%93%9D%E5%9B%BE%E9%80%9A%E4%BF%A1%EF%BC%8811%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%89/">蓝图通信（11种方法）</a>
+          <a href="/2023/12/17/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-12-17_13-%20SubSystem%E4%BD%BF%E7%94%A8/">13- SubSystem使用</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-12-16T16:00:00.000Z" itemprop="datePublished">
+    2023-12-17
   </time>
   
   
@@ -289,7 +292,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/">杂文</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C-%E7%BC%96%E7%A8%8B/">C++编程</a> }
   </li>
 
 
@@ -300,11 +303,11 @@
     </header>
     <div>
       
-        <h1>蓝图通信（11种方法）</h1>
-<p>[TOC]</p>
+        <h1>13. SubSystem使用</h1>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/158717151">《InsideUE4》GamePlay架构（十一）Subsystems - 知乎 (zhihu.com)</a></p>
         
           <div class="more-link">
-            <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E6%9D%82%E6%96%87/2024-11-16_%E8%93%9D%E5%9B%BE%E9%80%9A%E4%BF%A1%EF%BC%8811%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%89/#more">Read On »</a>
+            <a href="/2023/12/17/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-12-17_13-%20SubSystem%E4%BD%BF%E7%94%A8/#more">Read On »</a>
           </div>
         
       
@@ -318,12 +321,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_01%20%E8%93%9D%E5%9B%BE%E8%8A%82%E7%82%B9/">01 蓝图节点</a>
+          <a href="/2023/12/17/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-12-17_5-%20UE4%E6%9E%9A%E4%B8%BE%E5%92%8C%E7%BB%93%E6%9E%84%E4%BD%93%E8%AF%B4%E6%98%8E/">5- UE4枚举和结构体说明</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-12-16T16:00:00.000Z" itemprop="datePublished">
+    2023-12-17
   </time>
   
   
@@ -339,7 +342,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/">蓝图编程</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C-%E7%BC%96%E7%A8%8B/">C++编程</a> }
   </li>
 
 
@@ -350,11 +353,11 @@
     </header>
     <div>
       
-        <h1>01 蓝图节点</h1>
-<h2 id="1-1-蓝图节点类型">1.1 蓝图节点类型</h2>
+        <h1>5. UE4枚举和结构体说明</h1>
+<h2 id="1-命名规范">1. 命名规范</h2>
         
           <div class="more-link">
-            <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_01%20%E8%93%9D%E5%9B%BE%E8%8A%82%E7%82%B9/#more">Read On »</a>
+            <a href="/2023/12/17/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-12-17_5-%20UE4%E6%9E%9A%E4%B8%BE%E5%92%8C%E7%BB%93%E6%9E%84%E4%BD%93%E8%AF%B4%E6%98%8E/#more">Read On »</a>
           </div>
         
       
@@ -368,12 +371,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_02%20%E5%8F%98%E9%87%8F/">02 变量</a>
+          <a href="/2023/12/17/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-12-17_6-%20Actor%E5%92%8CObject/">6- Actor和Object</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-12-16T16:00:00.000Z" itemprop="datePublished">
+    2023-12-17
   </time>
   
   
@@ -389,7 +392,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/">蓝图编程</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C-%E7%BC%96%E7%A8%8B/">C++编程</a> }
   </li>
 
 
@@ -400,11 +403,11 @@
     </header>
     <div>
       
-        <h1>02 变量</h1>
-<p>​	变量创建后都要先编译才能设置默认值。</p>
+        <h1>6. Actor和Object</h1>
+<h2 id="1-UObject功能（什么是UObject）">1. UObject功能（什么是UObject）</h2>
         
           <div class="more-link">
-            <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_02%20%E5%8F%98%E9%87%8F/#more">Read On »</a>
+            <a href="/2023/12/17/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-12-17_6-%20Actor%E5%92%8CObject/#more">Read On »</a>
           </div>
         
       
@@ -418,12 +421,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_03%20%E6%96%87%E6%9C%AC%E7%B1%BB%E5%9E%8B/">03 文本类型</a>
+          <a href="/2023/12/17/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-12-17_7-%20UE4%E5%B8%B8%E7%94%A8%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">7- UE4常用类型转换</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-12-16T16:00:00.000Z" itemprop="datePublished">
+    2023-12-17
   </time>
   
   
@@ -439,7 +442,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/">蓝图编程</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C-%E7%BC%96%E7%A8%8B/">C++编程</a> }
   </li>
 
 
@@ -450,11 +453,11 @@
     </header>
     <div>
       
-        <h1>03 文本类型</h1>
-<p>文本类型有三种：</p>
+        <h1>7. UE4常用类型转换</h1>
+<h2 id="1-FString-FName">1. FString&lt;-&gt;FName</h2>
         
           <div class="more-link">
-            <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_03%20%E6%96%87%E6%9C%AC%E7%B1%BB%E5%9E%8B/#more">Read On »</a>
+            <a href="/2023/12/17/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-12-17_7-%20UE4%E5%B8%B8%E7%94%A8%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/#more">Read On »</a>
           </div>
         
       
@@ -468,12 +471,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_04%20%E5%90%91%E9%87%8FVector/">04 向量Vector</a>
+          <a href="/2023/12/17/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-12-17_8-%20UE4%E4%BB%A3%E7%90%86%EF%BC%88%E5%8D%95%E6%92%AD%E4%BB%A3%E7%90%86%EF%BC%89/">8- UE4代理（单播代理）</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-12-16T16:00:00.000Z" itemprop="datePublished">
+    2023-12-17
   </time>
   
   
@@ -489,7 +492,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/">蓝图编程</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C-%E7%BC%96%E7%A8%8B/">C++编程</a> }
   </li>
 
 
@@ -500,11 +503,11 @@
     </header>
     <div>
       
-        <h1>04 向量Vector</h1>
-<p>​	向量是有长度和方向的值，由三个数字组成（X，Y，Z），用于表示位置，旋转和缩放等。</p>
+        <h1>8. UE4代理（单播代理）</h1>
+<p>​	<strong>代理</strong>相当于一个函数指针的类型，或者是Qt中的信号的类型，用于间接调用函数。</p>
         
           <div class="more-link">
-            <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_04%20%E5%90%91%E9%87%8FVector/#more">Read On »</a>
+            <a href="/2023/12/17/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-12-17_8-%20UE4%E4%BB%A3%E7%90%86%EF%BC%88%E5%8D%95%E6%92%AD%E4%BB%A3%E7%90%86%EF%BC%89/#more">Read On »</a>
           </div>
         
       
@@ -518,12 +521,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_05%20%E6%97%8B%E8%BD%AC%E4%BD%93retator/">05 旋转体retator</a>
+          <a href="/2023/12/17/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-12-17_9-%20UE4%E4%BB%A3%E7%90%86%EF%BC%88%E5%A4%9A%E6%92%AD%E4%BB%A3%E7%90%86%EF%BC%89/">9- UE4代理（多播代理）</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-12-16T16:00:00.000Z" itemprop="datePublished">
+    2023-12-17
   </time>
   
   
@@ -539,7 +542,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/">蓝图编程</a> }
+  { <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C-%E7%BC%96%E7%A8%8B/">C++编程</a> }
   </li>
 
 
@@ -550,11 +553,11 @@
     </header>
     <div>
       
-        <h1>05 旋转体retator</h1>
-<p>​	retator是与向量类似的一种数据类型。都有XYZ值。但是其表示的意义不同，向量修改X的值代表沿着X的方向移动，而旋转体修改X的值代表绕着X轴旋转。</p>
+        <h1>9. UE4代理（多播代理）</h1>
+<p>​	多播代理相比于单播代理，可以绑定多个函数，执行时也是执行多个函数。</p>
         
           <div class="more-link">
-            <a href="/2024/11/16/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/%E8%93%9D%E5%9B%BE%E7%BC%96%E7%A8%8B/2024-11-16_05%20%E6%97%8B%E8%BD%AC%E4%BD%93retator/#more">Read On »</a>
+            <a href="/2023/12/17/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E/UE/C++%E7%BC%96%E7%A8%8B/2023-12-17_9-%20UE4%E4%BB%A3%E7%90%86%EF%BC%88%E5%A4%9A%E6%92%AD%E4%BB%A3%E7%90%86%EF%BC%89/#more">Read On »</a>
           </div>
         
       

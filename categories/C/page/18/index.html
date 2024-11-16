@@ -68,12 +68,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_01%20%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">01 文件操作</a>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-11-27_1-12-6%20%E6%A0%88%E5%8F%8D%E8%A7%A3%E6%97%B6%E5%86%8D%E6%AC%A1%E5%BC%82%E5%B8%B8/">1-12-6 栈反解时再次异常</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -85,11 +85,15 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/">讲义</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/15-day/">15 day</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
   </li>
 
 
@@ -100,11 +104,161 @@
     </header>
     <div>
       
-        <h1>01 文件操作</h1>
-<p>流操作</p>
+        <h2 id="1-12-6-栈反解时再次异常">1.12-6 栈反解时再次异常</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;exception&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BadIdea</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ~<span class="built_in">BadIdea</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">logic_error</span>(<span class="string">&quot;This is a bad exception&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">my_terminate</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;This is a bad Idea&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> *psource = (<span class="type">void</span> *)<span class="built_in">set_terminate</span>(my_terminate);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        BadIdea ba;</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">logic_error</span>(<span class="string">&quot;test&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (<span class="type">const</span> std::exception &amp;e)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-11-27_1-12-7%20%E5%BC%82%E5%B8%B8%E6%AD%A3%E5%B8%B8%E6%9E%90%E6%9E%84%E7%9A%84%E8%AF%81%E6%98%8E/">1-12-7 异常正常析构的证明</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-12-7-异常正常析构的证明">1.12-7 异常正常析构的证明</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;exception&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyException</span> : <span class="keyword">public</span> logic_error</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">MyException</span>(<span class="type">const</span> <span class="type">char</span> *s) : <span class="built_in">logic_error</span>(s) &#123;&#125;</span><br><span class="line">    ~<span class="built_in">MyException</span>() &#123; cout &lt;&lt; <span class="string">&quot;the Exception has been destructed.&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">test</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">throwException</span><span class="params">()</span> </span>&#123; <span class="keyword">throw</span> <span class="built_in">MyException</span>(<span class="string">&quot;hello, this is MyException.&quot;</span>); &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        test t;</span><br><span class="line">        t.<span class="built_in">throwException</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (<span class="type">const</span> std::exception &amp;e)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-11-27_3-7-1%20%E9%80%86%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/">3-7-1 逆转字符串</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="3-7-1-逆转字符串">3.7-1 逆转字符串</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">reverse</span><span class="params">(string &amp;s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> size = s.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; size / <span class="number">2</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">char</span> temp = s[i];</span><br><span class="line">        s[i] = s[size - <span class="number">1</span> - i];</span><br><span class="line">        s[size - <span class="number">1</span> - i] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">string <span class="title">s</span><span class="params">(<span class="string">&quot;123456&quot;</span>)</span></span>;</span><br><span class="line">    cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">reverse</span>(s);</span><br><span class="line">    cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-11-27_3-7-18%20%E6%B5%8B%E8%AF%95string%E4%B8%ADat%E5%92%8C%5B%5D%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8%E6%9C%BA%E5%88%B6/">3-7-18 测试string中at和[]抛出异常机制</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="3-7-18-测试string中at和-抛出异常机制">3.7-18 测试string中at和[]抛出异常机制</h2>
+<p>经测试：</p>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_01%20%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/#more">Read On »</a>
+            <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-11-27_3-7-18%20%E6%B5%8B%E8%AF%95string%E4%B8%ADat%E5%92%8C%5B%5D%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8%E6%9C%BA%E5%88%B6/#more">Read On »</a>
           </div>
         
       
@@ -118,12 +272,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_02%20%E6%A8%A1%E6%9D%BF%E7%BC%96%E7%A8%8B/">02 模板编程</a>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-11-27_3-7-2%20%E6%B5%8B%E8%AF%95%E5%9B%9E%E6%96%87/">3-7-2 测试回文</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -135,11 +289,15 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/">讲义</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/15-day/">15 day</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
   </li>
 
 
@@ -150,11 +308,111 @@
     </header>
     <div>
       
-        <h1>02 模板编程</h1>
-<h2 id="模板函数">模板函数</h2>
+        <h2 id="3-7-2-测试回文">3.7-2 测试回文</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">reverse</span><span class="params">(string &amp;s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> size = s.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; size / <span class="number">2</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">char</span> temp = s[i];</span><br><span class="line">        s[i] = s[size - <span class="number">1</span> - i];</span><br><span class="line">        s[size - <span class="number">1</span> - i] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (argc &lt; <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;argc less than 2!&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">string <span class="title">s</span><span class="params">(argv[<span class="number">1</span>])</span></span>;</span><br><span class="line">    <span class="function">string <span class="title">s2</span><span class="params">(argv[<span class="number">1</span>])</span></span>;</span><br><span class="line">    <span class="built_in">reverse</span>(s);</span><br><span class="line">    cout &lt;&lt; (s == s2) &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-11-27_3-7-3%20%E6%97%A0%E8%A7%86%E5%A4%A7%E5%B0%8F%E5%86%99%E7%9A%84%E5%9B%9E%E6%96%87/">3-7-3 无视大小写的回文</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="3-7-3-无视大小写的回文">3.7-3 无视大小写的回文</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">reverse</span><span class="params">(string &amp;s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> size = s.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; size / <span class="number">2</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">char</span> temp = <span class="built_in">tolower</span>(s[i]);</span><br><span class="line">        s[i] = <span class="built_in">tolower</span>(s[size - <span class="number">1</span> - i]);</span><br><span class="line">        s[size - <span class="number">1</span> - i] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (argc &lt; <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;argc less than 2!&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">string <span class="title">s</span><span class="params">(argv[<span class="number">1</span>])</span></span>;</span><br><span class="line">    <span class="function">string <span class="title">s2</span><span class="params">(argv[<span class="number">1</span>])</span></span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;i : s2)</span><br><span class="line">        i = <span class="built_in">tolower</span>(i);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">reverse</span>(s);</span><br><span class="line">    cout &lt;&lt; (s == s2) &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-11-27_3-7-6%20%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E5%B9%B6%E6%9B%BF%E6%8D%A2%E6%8C%87%E5%AE%9A%E5%AD%97%E7%AC%A6%E4%B8%B2/">3-7-6 读取文件并替换指定字符串</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="3-7-6-读取文件并替换指定字符串">3.7-6 读取文件并替换指定字符串</h2>
+<h4 id="源代码">源代码</h4>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_02%20%E6%A8%A1%E6%9D%BF%E7%BC%96%E7%A8%8B/#more">Read On »</a>
+            <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-11-27_3-7-6%20%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E5%B9%B6%E6%9B%BF%E6%8D%A2%E6%8C%87%E5%AE%9A%E5%AD%97%E7%AC%A6%E4%B8%B2/#more">Read On »</a>
           </div>
         
       
@@ -168,12 +426,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_03%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/">03 多线程</a>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/2023-11-27_3-7-7%20%E6%97%A0%E8%A7%86%E5%A4%A7%E5%B0%8F%E5%86%99%E6%9B%BF%E6%8D%A2%E5%AD%97%E7%AC%A6%E4%B8%B2/">3-7-7 无视大小写替换字符串</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -185,11 +443,15 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/">讲义</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/15-day/">15 day</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/tasks/">tasks</a> }
   </li>
 
 
@@ -200,11 +462,57 @@
     </header>
     <div>
       
-        <h1>03 多线程</h1>
-<h2 id="练习">练习</h2>
+        <h2 id="3-7-7-无视大小写替换字符串">3.7-7 无视大小写替换字符串</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ichar_traits.h&quot;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function">istring <span class="title">getData</span><span class="params">(string filename)</span> <span class="title">throw</span><span class="params">(std::ifstream::failure)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">std::ifstream <span class="title">streamReader</span><span class="params">(filename, std::ios::binary)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (!streamReader.<span class="built_in">is_open</span>())</span><br><span class="line">        <span class="keyword">throw</span> std::ifstream::<span class="built_in">failure</span>(<span class="string">&quot;file couldn&#x27;t open&quot;</span>);</span><br><span class="line">    streamReader.<span class="built_in">seekg</span>(<span class="number">0</span>, std::ios::end);     <span class="comment">// 游标移到文件结尾</span></span><br><span class="line">    <span class="type">unsigned</span> filesize = streamReader.<span class="built_in">tellg</span>(); <span class="comment">// 获取游标当前位置 - 文件开始位置，此处为文件大小</span></span><br><span class="line">    <span class="type">char</span> *_data = <span class="keyword">new</span> <span class="type">char</span>[filesize];         <span class="comment">// 分配内存</span></span><br><span class="line">    streamReader.<span class="built_in">seekg</span>(<span class="number">0</span>, std::ios::beg);     <span class="comment">// 跳转回开始</span></span><br><span class="line">    streamReader.<span class="built_in">read</span>(_data, filesize);       <span class="comment">// 读取文件</span></span><br><span class="line">    streamReader.<span class="built_in">close</span>();</span><br><span class="line">    <span class="function">istring <span class="title">data</span><span class="params">(_data)</span></span>;</span><br><span class="line">    <span class="keyword">delete</span>[] _data;</span><br><span class="line">    <span class="keyword">return</span> std::<span class="built_in">move</span>(data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">istring &amp;<span class="title">replaceAll</span><span class="params">(istring &amp;context,</span></span></span><br><span class="line"><span class="params"><span class="function">                    <span class="type">const</span> istring &amp;from,</span></span></span><br><span class="line"><span class="params"><span class="function">                    <span class="type">const</span> istring &amp;to)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">size_t</span> lookHere = <span class="number">0</span>;</span><br><span class="line">    <span class="type">size_t</span> foundHere;</span><br><span class="line">    <span class="keyword">while</span> ((foundHere = context.<span class="built_in">find</span>(from, lookHere)) != istring::npos) <span class="comment">// find from lookHere</span></span><br><span class="line">    &#123;                                                                  <span class="comment">// to avoid the string</span></span><br><span class="line">        context.<span class="built_in">replace</span>(foundHere, from.<span class="built_in">size</span>(), to);                   <span class="comment">//&quot;to&quot; is the substr</span></span><br><span class="line">        lookHere = foundHere + to.<span class="built_in">size</span>();                              <span class="comment">// of &quot;from&quot;</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> SHOWREPLACE</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;stringNumber:&quot;</span> &lt;&lt; foundHere &lt;&lt; endl;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> context;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    istring fileTxt = <span class="built_in">getData</span>(<span class="string">&quot;Rparse.h&quot;</span>);</span><br><span class="line">    cout&lt;&lt;fileTxt&lt;&lt;endl;</span><br><span class="line">    <span class="built_in">replaceAll</span>(fileTxt,<span class="string">&quot;Size&quot;</span>,<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">    cout&lt;&lt;fileTxt&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/11/21/C++/C++%E5%A4%9A%E7%BA%BF%E7%A8%8B/C++%20lock-free%E7%BC%96%E7%A8%8B/2023-11-21_02%20C++%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E7%9A%84%E5%86%85%E5%AD%98%E9%A1%BA%E5%BA%8F/">02 C++原子操作的内存顺序</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-11-20T16:00:00.000Z" itemprop="datePublished">
+    2023-11-21
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%A4%9A%E7%BA%BF%E7%A8%8B/">C++多线程</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/C-%E5%A4%9A%E7%BA%BF%E7%A8%8B/C-lock-free%E7%BC%96%E7%A8%8B/">C++ lock-free编程</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>C++atomic中原子操作的内存顺序</h1>
+<p>​	这里有六个内存序列选项可应用于对原子类型的操作（来源于枚举类<code>std::memory_order</code>）：</p>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_03%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/#more">Read On »</a>
+            <a href="/2023/11/21/C++/C++%E5%A4%9A%E7%BA%BF%E7%A8%8B/C++%20lock-free%E7%BC%96%E7%A8%8B/2023-11-21_02%20C++%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E7%9A%84%E5%86%85%E5%AD%98%E9%A1%BA%E5%BA%8F/#more">Read On »</a>
           </div>
         
       
@@ -218,12 +526,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_04%20GDB/">04 GDB</a>
+          <a href="/2023/11/13/C++/C++%E5%A4%9A%E7%BA%BF%E7%A8%8B/2023-11-13_%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/">多线程学习路线</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-12T16:00:00.000Z" itemprop="datePublished">
+    2023-11-13
   </time>
   
   
@@ -235,11 +543,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/">讲义</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/15-day/">15 day</a> }
+  { <a href="/categories/C/C-%E5%A4%9A%E7%BA%BF%E7%A8%8B/">C++多线程</a> }
   </li>
 
 
@@ -250,317 +554,11 @@
     </header>
     <div>
       
-        <h1>04 GDB</h1>
-<h2 id="GDB调试命令">GDB调试命令</h2>
+        <h1>多线程学习路线</h1>
+<h2 id="1-从C-库开始">1. 从C++库开始</h2>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_04%20GDB/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_05%20cmake/">05 cmake</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/">讲义</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/15-day/">15 day</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>05 cmake</h1>
-<p>​	cmake是C++跨平台的构建工具。</p>
-        
-          <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_05%20cmake/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_06%20%E7%BD%91%E7%BB%9C1/">06 网络1</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/">讲义</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/15-day/">15 day</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>06 网络1</h1>
-<h2 id="socket">socket</h2>
-        
-          <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_06%20%E7%BD%91%E7%BB%9C1/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_07%20Android%20C++/">07 Android C++</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/">讲义</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/15-day/">15 day</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>07 Android C++</h1>
-        
-          <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_07%20Android%20C++/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_08%20%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA/">08 有限状态机</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/">讲义</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/15-day/">15 day</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>有限状态机</h1>
-<h2 id="API实现">API实现</h2>
-        
-          <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_08%20%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/C++%E6%A0%B8%E5%BF%83&amp;%E5%9F%BA%E7%A1%80/2024-11-16_0%20%E7%9B%AE%E5%BD%95/">0 目录</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/">讲义</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/C-%E6%A0%B8%E5%BF%83-%E5%9F%BA%E7%A1%80/">C++核心&amp;基础</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>目录</h1>
-<table>
-<thead>
-<tr>
-<th>内容</th>
-<th>信息量（分钟）</th>
-</tr>
-</thead>
-</table>
-        
-          <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/C++%E6%A0%B8%E5%BF%83&%E5%9F%BA%E7%A1%80/2024-11-16_0%20%E7%9B%AE%E5%BD%95/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/stl/2024-11-16_00%20STL%E5%85%A5%E9%97%A8/">00 STL入门</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/">讲义</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/stl/">stl</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>STL入门</h1>
-<p>​	<strong>标准模板库 STL</strong>（Standard Template Library），是 C++ 标准库的一部分，不需要单独安装，只需要#include 头文件。</p>
-        
-          <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/stl/2024-11-16_00%20STL%E5%85%A5%E9%97%A8/#more">Read On »</a>
+            <a href="/2023/11/13/C++/C++%E5%A4%9A%E7%BA%BF%E7%A8%8B/2023-11-13_%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/#more">Read On »</a>
           </div>
         
       

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>补充：catch2使用cmake示例 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>补充：catch2使用cmake示例</h1>
+    </header>
+
+    <section>
+      <h1>catch2使用cmake示例</h1>
+<h2 id="项目结构">项目结构</h2>
+<span id="more"></span>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">tree</span></span><br><span class="line">.</span><br><span class="line">├── CMakeLists.txt</span><br><span class="line">├── cmake</span><br><span class="line">│   └── catch2.cmake</span><br><span class="line">├── externals</span><br><span class="line">│   └── catch2</span><br><span class="line">└── test.cpp</span><br></pre></td></tr></table></figure>
+<h2 id="catch2-cmake">catch2.cmake</h2>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">include</span>(FetchContent)</span><br><span class="line"></span><br><span class="line">FetchContent_Declare(</span><br><span class="line">  Catch2</span><br><span class="line">  GIT_REPOSITORY git@github.com:catchorg/Catch2.git	<span class="comment"># use ssh instead of https</span></span><br><span class="line">  GIT_TAG        v3.<span class="number">5.3</span></span><br><span class="line">  SOURCE_DIR <span class="variable">$&#123;EXTERNAL_PROJECTS_DIR&#125;</span>/catch2		<span class="comment"># declared in root cmake</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">FetchContent_MakeAvailable(Catch2)</span><br></pre></td></tr></table></figure>
+<h2 id="project-cmake">project cmake</h2>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.20</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">17</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD_REQUIRED <span class="keyword">ON</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(catch2test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加externals相关变量</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_MODULE_PATH <span class="string">&quot;$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;/cmake;$&#123;CMAKE_MODULE_PATH&#125;&quot;</span>)</span><br><span class="line"><span class="keyword">set</span>(EXTERNAL_PROJECTS_DIR <span class="string">&quot;$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;/externals&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入catch2.cmake</span></span><br><span class="line"><span class="keyword">include</span>(catch2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启测试</span></span><br><span class="line"><span class="keyword">include</span>(CTest)</span><br><span class="line"><span class="keyword">include</span>(Catch)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(catch2test <span class="keyword">test</span>.cpp)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(catch2test PRIVATE Catch2::Catch2WithMain)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自动进行测试</span></span><br><span class="line">catch_discover_tests(catch2test)</span><br></pre></td></tr></table></figure>
+<h2 id="test-cpp">test.cpp</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;catch2/catch_test_macros.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdint&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">uint32_t</span> <span class="title">factorial</span><span class="params">( <span class="type">uint32_t</span> number )</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> number &lt;= <span class="number">1</span> ? number : <span class="built_in">factorial</span>(number<span class="number">-1</span>) * number;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">TEST_CASE</span>( <span class="string">&quot;Factorials are computed&quot;</span>, <span class="string">&quot;[factorial]&quot;</span> ) &#123;</span><br><span class="line">    <span class="built_in">REQUIRE</span>( <span class="built_in">factorial</span>( <span class="number">1</span>) == <span class="number">1</span> );</span><br><span class="line">    <span class="built_in">REQUIRE</span>( <span class="built_in">factorial</span>( <span class="number">2</span>) == <span class="number">2</span> );</span><br><span class="line">    <span class="built_in">REQUIRE</span>( <span class="built_in">factorial</span>( <span class="number">3</span>) == <span class="number">6</span> );</span><br><span class="line">    <span class="built_in">REQUIRE</span>( <span class="built_in">factorial</span>(<span class="number">10</span>) == <span class="number">3&#x27;628&#x27;800</span> );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-08-30T16:00:00.000Z" itemprop="datePublished">
+              2024-08-31
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

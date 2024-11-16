@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>import策略 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>import策略</h1>
+    </header>
+
+    <section>
+      <h1>import策略</h1>
+<blockquote>
+<p>package代码使用相对导入，入口代码使用绝对导入。</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="核心-sys-path">核心 sys.path</h2>
+<p>在python中，import一个包都是从<code>sys.path</code>中去寻找。查找顺序从前往后找，找到就结束。</p>
+<p>这个变量包含了三个路径：<strong>入口文件的路径</strong>、标准库与第三方库。</p>
+<blockquote>
+<p>一种简单粗暴的方式就是通过添加sys.path使得能找到需要路径下的module。</p>
+</blockquote>
+<h3 id="入口路径">入口路径</h3>
+<p>问题：下面的代码如果执行，则找不到moduleB，即使moduleA和moduleB在同一个路径下。</p>
+<blockquote>
+<p>原因正是sys.path并不包含moduleA的路径，<a target="_blank" rel="noopener" href="http://xn--start-ep5h02mtb649ovzotgcit2kuzvb.py">而是只有入口路径start.py</a></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># /start.py</span></span><br><span class="line"><span class="keyword">from</span> pkg.subPkg1 <span class="keyword">import</span> moduleA</span><br><span class="line"></span><br><span class="line"><span class="comment"># /pkg/subPkg1/moduleA</span></span><br><span class="line"><span class="keyword">import</span> moduleB</span><br><span class="line"></span><br><span class="line"><span class="comment"># sys.path:[&#x27;d:\\codeSpace\\bad_code\\t_py&#x27;, &#x27;D:\\ProgrammingSoftware\\Python3\\python311.zip&#x27;, &#x27;D:\\ProgrammingSoftware\\Python3\\DLLs&#x27;, &#x27;D:\\ProgrammingSoftware\\Python3\\Lib&#x27;, &#x27;D:\\ProgrammingSoftware\\Python3&#x27;, &#x27;C:\\Users\\10654\\AppData\\Roaming\\Python\\Python311\\site-packages&#x27;, &#x27;D:\\ProgrammingSoftware\\Python3\\Lib\\site-packages&#x27;, &#x27;D:\\ProgrammingSoftware\\Python3\\Lib\\site-packages\\win32&#x27;, &#x27;D:\\ProgrammingSoftware\\Python3\\Lib\\site-packages\\win32\\lib&#x27;, &#x27;D:\\ProgrammingSoftware\\Python3\\Lib\\site-packages\\Pythonwin&#x27;]</span></span><br></pre></td></tr></table></figure>
+<h2 id="相对导入">相对导入</h2>
+<h3 id="语法区分">语法区分</h3>
+<p>绝对导入是<code>import pkg.module</code>或者<code>from pkg.module import object</code>，总之就是可以根据一个确定的string来找到module。</p>
+<p>相对导入则是<code>from .module import object</code>，总之就是从一个已知的package路径+module名寻找object。</p>
+<p>原理是通过<code>__package__</code>拿到当前的绝对路径，加上相对导入的from的module名，转换成一个确定的string，再去sys.path中去做绝对导入。</p>
+<h3 id="避开sys-path">避开sys.path</h3>
+<p>使用相对导入可以避开<code>sys.path</code>中入口路径不固定的问题。</p>
+<p>即不管从哪个文件进入，都会从本module的<code>__package__</code>中去寻找。</p>
+<p>语法：<code>from 相对路径 import module</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># /start.py</span></span><br><span class="line"><span class="keyword">from</span> pkg.subPkg1 <span class="keyword">import</span> moduleA</span><br><span class="line"></span><br><span class="line"><span class="comment"># /pkg/subPkg1/moduleA</span></span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> moduleB</span><br><span class="line"><span class="keyword">from</span> ..subPkg2 <span class="keyword">import</span> moduleX</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;moduleA.__package__=<span class="subst">&#123;__package__&#125;</span>&quot;</span>)</span><br><span class="line"><span class="comment"># moduleA.py -&gt; None</span></span><br><span class="line"><span class="comment"># start.py	 -&gt; pkg.subPkg1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># /pkg/subPkg2/moduleX</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;This is moduleX&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>注意：入口文件的<code>__package__</code>会被设置为<code>None</code>，<code>__name__</code>会被设置为<code>__main__</code>。</p>
+<p>也就是说，库文件如果直接运行，则可能因为相对导入的方式，没有自己的<code>__package__</code>，进而无法导入其它module。正确的方法是在外面新建一个start来启动。</p>
+<h2 id="参考资料">参考资料</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1K24y1k7XA">https://www.bilibili.com/video/BV1K24y1k7XA</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1p3DVY6E5A">https://www.bilibili.com/video/BV1p3DVY6E5A</a></p>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-07T16:00:00.000Z" itemprop="datePublished">
+              2024-11-08
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

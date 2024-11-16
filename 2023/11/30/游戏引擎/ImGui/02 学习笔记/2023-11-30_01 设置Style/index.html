@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>01 设置Style | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>01 设置Style</h1>
+    </header>
+
+    <section>
+      <h1>01 设置Style</h1>
+<h2 id="1-内置style">1. 内置style</h2>
+<span id="more"></span>
+<p>​	<code>ImGui</code>内置了<strong>三种</strong>颜色风格供选择，也可以自定义：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Setup Dear ImGui style</span></span><br><span class="line">ImGui::<span class="built_in">StyleColorsDark</span>();</span><br><span class="line"><span class="comment">//ImGui::StyleColorsLight();</span></span><br><span class="line"><span class="comment">//ImGui::StyleColorsClassic();</span></span><br></pre></td></tr></table></figure>
+<p>​	其<strong>本质</strong>都是设置了一系列控件的表现颜色：</p>
+<img src="./assets/image-20231129125758492.png" alt="image-20231129125758492" style="zoom:33%;" />
+<h2 id="2-color内容">2. color内容</h2>
+<h3 id="设置代码">设置代码</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ImGuiStyle&amp; style = ImGui::<span class="built_in">GetStyle</span>();</span><br><span class="line">ImVec4* colors = style.Colors;</span><br><span class="line"><span class="comment">// 使用colors设置颜色</span></span><br></pre></td></tr></table></figure>
+<h3 id="设置获取（从DemoWindow）">设置获取（从DemoWindow）</h3>
+<h4 id="获取style-edit窗口">获取style edit窗口</h4>
+<img src="./assets/image-20231130005729928.png" alt="image-20231130005729928" style="zoom: 67%;" />
+<h4 id="导出到控制台">导出到控制台</h4>
+<img src="./assets/image-20231130005831369.png" alt="image-20231130005831369" style="zoom:50%;" />
+<h4 id="修改color后点击export">修改color后点击export</h4>
+<img src="./assets/image-20231130010539533.png" alt="image-20231130010539533" style="zoom: 50%;" />
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ImVec4* colors = ImGui::<span class="built_in">GetStyle</span>().Colors;</span><br><span class="line">colors[ImGuiCol_Text]                   = <span class="built_in">ImVec4</span>(<span class="number">0.92f</span>, <span class="number">0.60f</span>, <span class="number">0.60f</span>, <span class="number">1.00f</span>);</span><br><span class="line">colors[ImGuiCol_WindowBg]               = <span class="built_in">ImVec4</span>(<span class="number">0.04f</span>, <span class="number">0.04f</span>, <span class="number">0.10f</span>, <span class="number">0.94f</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="3-style内容">3. style内容</h2>
+<h2 id="4-实例">4. 实例</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//獲取風格</span></span><br><span class="line">ImGuiStyle&amp; style = ImGui::<span class="built_in">GetStyle</span>();</span><br><span class="line"><span class="comment">//從風格當中獲取顏色列表</span></span><br><span class="line">ImVec4* colors = style.Colors;</span><br><span class="line"> 	<span class="comment">//進行顏色配置</span></span><br><span class="line">colors[ImGuiCol_FrameBg] = <span class="built_in">ImVec4</span>(<span class="number">0.16f</span>, <span class="number">0.16f</span>, <span class="number">0.17f</span>, <span class="number">1.00f</span>);</span><br><span class="line">colors[ImGuiCol_FrameBgHovered] = <span class="built_in">ImVec4</span>(<span class="number">0.37f</span>, <span class="number">0.36f</span>, <span class="number">0.36f</span>, <span class="number">102.00f</span>);</span><br><span class="line">colors[ImGuiCol_FrameBgActive] = <span class="built_in">ImVec4</span>(<span class="number">0.10f</span>, <span class="number">0.10f</span>, <span class="number">0.10f</span>, <span class="number">171.00f</span>);</span><br><span class="line">colors[ImGuiCol_TitleBgActive] = <span class="built_in">ImVec4</span>(<span class="number">0.20f</span>, <span class="number">0.20f</span>, <span class="number">0.20f</span>, <span class="number">255.00f</span>);</span><br><span class="line">colors[ImGuiCol_CheckMark] = <span class="built_in">ImVec4</span>(<span class="number">0.61f</span>, <span class="number">0.61f</span>, <span class="number">0.61f</span>, <span class="number">1.00f</span>);</span><br><span class="line">colors[ImGuiCol_SliderGrab] = <span class="built_in">ImVec4</span>(<span class="number">0.64f</span>, <span class="number">0.64f</span>, <span class="number">0.64f</span>, <span class="number">1.00f</span>);</span><br><span class="line">colors[ImGuiCol_SliderGrabActive] = <span class="built_in">ImVec4</span>(<span class="number">0.31f</span>, <span class="number">0.31f</span>, <span class="number">0.31f</span>, <span class="number">1.00f</span>);</span><br><span class="line">colors[ImGuiCol_Button] = <span class="built_in">ImVec4</span>(<span class="number">0.22f</span>, <span class="number">0.22f</span>, <span class="number">0.22f</span>, <span class="number">0.40f</span>);</span><br><span class="line">colors[ImGuiCol_ButtonHovered] = <span class="built_in">ImVec4</span>(<span class="number">0.29f</span>, <span class="number">0.29f</span>, <span class="number">0.29f</span>, <span class="number">1.00f</span>);</span><br><span class="line">colors[ImGuiCol_ButtonActive] = <span class="built_in">ImVec4</span>(<span class="number">0.13f</span>, <span class="number">0.13f</span>, <span class="number">0.13f</span>, <span class="number">1.00f</span>);</span><br><span class="line">colors[ImGuiCol_Header] = <span class="built_in">ImVec4</span>(<span class="number">0.45f</span>, <span class="number">0.45f</span>, <span class="number">0.45f</span>, <span class="number">0.31f</span>);</span><br><span class="line">colors[ImGuiCol_HeaderHovered] = <span class="built_in">ImVec4</span>(<span class="number">0.55f</span>, <span class="number">0.55f</span>, <span class="number">0.55f</span>, <span class="number">0.80f</span>);</span><br><span class="line">colors[ImGuiCol_HeaderActive] = <span class="built_in">ImVec4</span>(<span class="number">0.09f</span>, <span class="number">0.09f</span>, <span class="number">0.09f</span>, <span class="number">1.00f</span>);</span><br><span class="line">colors[ImGuiCol_ResizeGrip] = <span class="built_in">ImVec4</span>(<span class="number">1.00f</span>, <span class="number">1.00f</span>, <span class="number">1.00f</span>, <span class="number">0.20f</span>);</span><br><span class="line">colors[ImGuiCol_ResizeGripHovered] = <span class="built_in">ImVec4</span>(<span class="number">0.46f</span>, <span class="number">0.46f</span>, <span class="number">0.46f</span>, <span class="number">0.67f</span>);</span><br><span class="line">colors[ImGuiCol_ResizeGripActive] = <span class="built_in">ImVec4</span>(<span class="number">0.17f</span>, <span class="number">0.17f</span>, <span class="number">0.17f</span>, <span class="number">0.95f</span>);</span><br><span class="line">colors[ImGuiCol_SeparatorActive] = <span class="built_in">ImVec4</span>(<span class="number">0.42f</span>, <span class="number">0.42f</span>, <span class="number">0.42f</span>, <span class="number">1.00f</span>);</span><br><span class="line">colors[ImGuiCol_SeparatorHovered] = <span class="built_in">ImVec4</span>(<span class="number">0.50f</span>, <span class="number">0.50f</span>, <span class="number">0.50f</span>, <span class="number">0.78f</span>);</span><br><span class="line">colors[ImGuiCol_TabHovered] = <span class="built_in">ImVec4</span>(<span class="number">0.45f</span>, <span class="number">0.45f</span>, <span class="number">0.45f</span>, <span class="number">0.80f</span>);</span><br><span class="line">colors[ImGuiCol_TabActive] = <span class="built_in">ImVec4</span>(<span class="number">0.28f</span>, <span class="number">0.28f</span>, <span class="number">0.28f</span>, <span class="number">1.00f</span>);</span><br><span class="line">colors[ImGuiCol_TabUnfocusedActive] = <span class="built_in">ImVec4</span>(<span class="number">0.19f</span>, <span class="number">0.19f</span>, <span class="number">0.19f</span>, <span class="number">1.00f</span>);</span><br><span class="line">colors[ImGuiCol_DockingPreview] = <span class="built_in">ImVec4</span>(<span class="number">0.51f</span>, <span class="number">0.51f</span>, <span class="number">0.51f</span>, <span class="number">0.70f</span>);</span><br><span class="line">colors[ImGuiCol_Tab] = <span class="built_in">ImVec4</span>(<span class="number">0.21f</span>, <span class="number">0.21f</span>, <span class="number">0.21f</span>, <span class="number">0.86f</span>);</span><br><span class="line">colors[ImGuiCol_TabUnfocused] = <span class="built_in">ImVec4</span>(<span class="number">0.15f</span>, <span class="number">0.15f</span>, <span class="number">0.15f</span>, <span class="number">0.97f</span>);</span><br><span class="line">colors[ImGuiCol_NavHighlight] = <span class="built_in">ImVec4</span>(<span class="number">1.00f</span>, <span class="number">0.40f</span>, <span class="number">0.13f</span>, <span class="number">1.00f</span>);</span><br><span class="line">colors[ImGuiCol_TextSelectedBg] = <span class="built_in">ImVec4</span>(<span class="number">0.45f</span>, <span class="number">1.00f</span>, <span class="number">0.85f</span>, <span class="number">0.35f</span>);</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-11-29T16:00:00.000Z" itemprop="datePublished">
+              2023-11-30
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

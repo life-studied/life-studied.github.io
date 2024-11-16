@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>02 星露谷操作bot | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>02 星露谷操作bot</h1>
+    </header>
+
+    <section>
+      <h1>星露谷操作bot</h1>
+<h2 id="代码目录">代码目录</h2>
+<span id="more"></span>
+<p>​	由于在游戏中编写代码不方便，建议直接在代码保存目录进行更改，在游戏中load即可。</p>
+<p>​	目录为：<code>C:\Users\10654\AppData\Roaming\StardewValley\Saves\云隐_370669801\strout.farmtronics\usrdisks\5936339997733495984</code></p>
+<h2 id="机器人module">机器人module</h2>
+<p>​	老版本中机器人为bot，在新版本中已经废弃，使用me来操作。</p>
+<h3 id="属性">属性</h3>
+<h4 id="可读写">可读写</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>machine name, used to distinguish it from others in code, chat, etc.</td>
+</tr>
+<tr>
+<td><code>screenColor</code></td>
+<td>color string</td>
+<td>background color of the screen</td>
+</tr>
+<tr>
+<td><code>currentToolIndex</code></td>
+<td>integer</td>
+<td>index of the inventory item the bot is holding: 0 for the first item, 1 for the second, etc.</td>
+</tr>
+<tr>
+<td><code>statusColor</code></td>
+<td>color string</td>
+<td>color of the bot status light, e.g. “#FFFF00” for yellow</td>
+</tr>
+</tbody>
+</table>
+<h4 id="只读">只读</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>isBot</code></td>
+<td>integer</td>
+<td>true (1) if this machine is a bot; false (0) if it’s the home computer</td>
+</tr>
+<tr>
+<td><code>owner</code></td>
+<td>string</td>
+<td>name of the player who owns this bot or computer</td>
+</tr>
+<tr>
+<td><code>position</code></td>
+<td>map</td>
+<td>current tile position: <code>x</code>, <code>y</code>, and <code>area</code> (a <code>Location</code>)</td>
+</tr>
+<tr>
+<td><code>facing</code></td>
+<td>integer</td>
+<td>direction bot is facing: 0=north, 1=east, 2=south, 3=west</td>
+</tr>
+<tr>
+<td><code>energy</code></td>
+<td>integer</td>
+<td>how much power the bot has left (0-270)</td>
+</tr>
+<tr>
+<td><code>inventory</code></td>
+<td>list</td>
+<td>what item is in each slot of the bot’s inventory</td>
+</tr>
+<tr>
+<td><code>here</code></td>
+<td>Location</td>
+<td>shortcut for <code>me.position.area</code></td>
+</tr>
+<tr>
+<td><code>ahead</code></td>
+<td>map</td>
+<td>tile information for the spot directly in front of the robot</td>
+</tr>
+</tbody>
+</table>
+<h3 id="函数">函数</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>forward</code></td>
+<td>moves bot forward 1 tile</td>
+</tr>
+<tr>
+<td><code>left</code></td>
+<td>turns bot 90° to the left</td>
+</tr>
+<tr>
+<td><code>right</code></td>
+<td>turns bot 90° to the right</td>
+</tr>
+<tr>
+<td><code>select</code> <em>toolNameOrIndex</em></td>
+<td>sets <code>currentToolIndex</code> to the corresponding item</td>
+</tr>
+<tr>
+<td><code>placeItem</code></td>
+<td>place the selected item down ahead of the robot</td>
+</tr>
+<tr>
+<td><code>takeItem</code> <em>n</em></td>
+<td>take an item from slot <em>n</em> of the chest/bot ahead</td>
+</tr>
+<tr>
+<td><code>swapItem</code> <em>idx1, idx2</em></td>
+<td>swap the inventory items in slots <em>idx1</em> and <em>idx2</em></td>
+</tr>
+<tr>
+<td><code>harvest</code></td>
+<td>harvest the crop/product in front of the bot (returns true on success)</td>
+</tr>
+<tr>
+<td><code>useTool</code></td>
+<td>applies current tool/item to the tile ahead of the bot</td>
+</tr>
+<tr>
+<td><code>clearAhead</code></td>
+<td>select and apply appropriate tool to clear tile ahead of the bot (Note 2)</td>
+</tr>
+<tr>
+<td><code>clearAndMove</code> <em>distance=1</em></td>
+<td>clear and move forward a given number of tiles (Note 2)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="参考资料">参考资料</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://github.com/JoeStrout/Farmtronics/wiki/API-Reference">API Reference · JoeStrout/Farmtronics Wiki (github.com)</a></p>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-04-08T16:00:00.000Z" itemprop="datePublished">
+              2024-04-09
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

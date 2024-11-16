@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>UHT解读 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>UHT解读</h1>
+    </header>
+
+    <section>
+      <h1>UHT解读</h1>
+<p>​	一般UBT会收集头文件中的信息，并传递给UHT，来生成对应的<code>classname.generated.h</code>。一般生成的地址不在和源代码同级，而是在<code>Intermediate\Build\Win64\UnrealEditor\Inc\MODULE_NAME\UHT</code>下。</p>
+<span id="more"></span>
+<h2 id="UHT生成的文件">UHT生成的文件</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>MODULE_NAMEClasses.h：无用</p>
+</li>
+<li class="lvl-2">
+<p>MyObject.generated.h：xxx的生成头文件</p>
+</li>
+<li class="lvl-2">
+<p>MyObject.gen.h：包含MyObject.h和xxx.generated.h</p>
+</li>
+<li class="lvl-2">
+<p>MyObject.generated.cpp：该项目的实现编译单元。</p>
+</li>
+</ul>
+<p>​	其生成的文件初看起来很多很复杂，但其实比较简单，不过就是一些宏替换而已。生成的函数大都也以<code>Z_</code>开头，笔者开始也在猜想<code>Z_</code>前缀的缩写含义，感谢NetFly向Epic的人求证之后的回答：</p>
+<blockquote>
+<p>The ‘Z_’ prefix is not part of any official naming convention, and it<br>
+doesn’t really mean anything. Some generated functions were named this way<br>
+to avoid name collisions and so that these functions will appear together at the<br>
+bottom of intelisense lists.</p>
+</blockquote>
+<p>简而言之，没什么特别含义，就是简单为了避免命名冲突，用Z是为了字母排序总是出现在智能感知的最下面，尽量隐藏起来。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/25098685">《InsideUE4》UObject（四）类型系统代码生成 - 知乎 (zhihu.com)</a></p>
+</li>
+</ul>
+<h2 id="UHT如何引入代码-GENERATE-BODY宏">UHT如何引入代码(GENERATE_BODY宏)</h2>
+<p>​	UHT一般根据收获的标记信息，生成对应的代码，一般是一堆宏定义。在头文件<code>include</code>的最后包含的就是生成文件，并通过<code>GENERATE_BODY()</code>宏引进生成的宏代码，引入的代码会自动内嵌在类的内部。该宏是重中之重，其他的<code>UCLASS</code>宏只是提供信息，不参与编译，而<code>GENERATED_BODY</code>正是把声明和元数据定义关联到一起的枢纽。</p>
+<p>​	关于<code>GENERATE_BODY()</code>宏：这个宏会根据所在文件和行数生成一个独有的ID宏，这个独有的ID宏实际将由UHT定义在<code>classname.generated.h</code>中。</p>
+<blockquote>
+<p>加了一个__LINE__宏的目的是为了支持在同一个文件内声明多个类，比如在MyClass.h里接着再声明UMyClass2，就可以支持生成不同的宏名称。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> GENERATED_BODY(...) BODY_MACRO_COMBINE(CURRENT_FILE_ID,_,__LINE__,_GENERATED_BODY);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// example: generated in UHT header</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FID_codeSpace_IDE_Project_UEProjects_MyProject_Source_MyProject_test_h_13_GENERATED_BODY \</span></span><br><span class="line"><span class="meta">...</span></span><br></pre></td></tr></table></figure>
+<h3 id="gen-h中的宏定义">gen.h中的宏定义</h3>
+<h4 id="CURRENT-FILE-ID-LINE-ENHANCED-CONSTRUCTORS">CURRENT_FILE_ID_LINE_ENHANCED_CONSTRUCTORS</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> FID_codeSpace_IDE_Project_UEProjects_Poison_Source_Poison_Public_MyObject_h_15_ENHANCED_CONSTRUCTORS \</span></span><br><span class="line"><span class="meta">	<span class="comment">/** Standard constructor, called after all reflected properties have been initialized */</span> \</span></span><br><span class="line"><span class="meta">	NO_API UMyObject(const FObjectInitializer&amp; ObjectInitializer = FObjectInitializer::Get()); \</span></span><br><span class="line"><span class="meta">private: \</span></span><br><span class="line"><span class="meta">	<span class="comment">/** Private move- and copy-constructors, should never be used */</span> \</span></span><br><span class="line"><span class="meta">    <span class="comment">/* 禁用了移动和拷贝构造函数*/</span>  \</span></span><br><span class="line"><span class="meta">	NO_API UMyObject(UMyObject&amp;&amp;); \</span></span><br><span class="line"><span class="meta">	NO_API UMyObject(const UMyObject&amp;); \</span></span><br><span class="line"><span class="meta">public: \</span></span><br><span class="line"><span class="meta">	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UMyObject); \</span></span><br><span class="line"><span class="meta">	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UMyObject); \</span></span><br><span class="line"><span class="meta">	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UMyObject) \</span></span><br><span class="line"><span class="meta">	NO_API virtual ~UMyObject();</span></span><br></pre></td></tr></table></figure>
+<p>​	它提供了以<code>FObjectInitializer</code>为参数的构造函数，同时禁用了移动和拷贝构造函数。</p>
+<p>​	继续查看<code>DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL</code>的定义：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(TClass) \</span></span><br><span class="line"><span class="meta">	static void __DefaultConstructor(const FObjectInitializer&amp; X) &#123; new((EInternal*)X.GetObj())TClass(X); &#125;</span></span><br></pre></td></tr></table></figure>
+<p>​	该声明定义了一个构造函数包装器。需要这么做的原因是，在根据名字反射创建对象的时候，需要调用该类的构造函数。可是类的构造函数并不能用函数指针指向，因此这里就用一个static函数包装一下，变成一个&quot;平凡&quot;的函数指针，而且所有类的签名一致，就可以在UClass里用一个函数指针里保存起来。（此处的<code>__DefaultConstructor</code>在《浅析StaticClass的实现》一文中提到）</p>
+<h4 id="CURRENT-FILE-ID-LINE-INCLASS-NO-PURE-DECLS">CURRENT_FILE_ID_LINE_INCLASS_NO_PURE_DECLS</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> FID_codeSpace_IDE_Project_UEProjects_Poison_Source_Poison_Public_MyObject_h_15_INCLASS_NO_PURE_DECLS \</span></span><br><span class="line"><span class="meta">private: \</span></span><br><span class="line"><span class="meta">	static void StaticRegisterNativesUMyObject(); \</span></span><br><span class="line"><span class="meta">	friend struct Z_Construct_UClass_UMyObject_Statics; \	<span class="comment">//一个构造该类UClass对象的辅助函数</span></span></span><br><span class="line"><span class="keyword">public</span>: \</span><br><span class="line">	<span class="built_in">DECLARE_CLASS</span>(UMyObject, UObject, <span class="built_in">COMPILED_IN_FLAGS</span>(<span class="number">0</span>), CASTCLASS_None, <span class="built_in">TEXT</span>(<span class="string">&quot;/Script/Poison&quot;</span>), NO_API) \	<span class="comment">//声明该类的一些通用基本函数</span></span><br><span class="line">	<span class="built_in">DECLARE_SERIALIZER</span>(UMyObject)	<span class="comment">//声明序列化函数</span></span><br></pre></td></tr></table></figure>
+<h5 id="DECALRE-CLASS宏">DECALRE_CLASS宏</h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> DECLARE_CLASS( TClass, TSuperClass, TStaticFlags, TStaticCastFlags, TPackage, TRequiredAPI  ) \</span></span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>TClass：类名</p>
+</li>
+<li class="lvl-2">
+<p>TSuperClass：基类名字</p>
+</li>
+<li class="lvl-2">
+<p>TStaticFlags：类的属性标记，这里是0，表示最默认，不带任何其他属性。读者可以查看EClassFlags枚举来查看其他定义。</p>
+</li>
+<li class="lvl-2">
+<p>TStaticCastFlags：指定了该类可以转换为哪些类，这里为0表示不能转为那些默认的类，读者可以自己查看EClassCastFlags声明来查看具体有哪些默认类转换。</p>
+</li>
+<li class="lvl-2">
+<p>TPackage：类所处于的包名</p>
+<ul class="lvl-2">
+<li class="lvl-4">所有的对象都必须处于一个包中，而每个包都具有一个名字，可以通过该名字来查找。</li>
+<li class="lvl-4">这里是&quot;/Script/Hello&quot;，指定是Script下的Hello，Script可以理解为用户自己的实现，不管是C++还是蓝图，都可以看作是引擎外的一种脚本，当然用这个名字也肯定有UE3时代UnrealScript的影子。Hello就是项目名字，该项目下定义的对象处于该包中。Package的概念涉及到后续Object的组织方式，目前可以简单理解为一个大的Object包含了其他子Object。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>TRequiredAPI：就是用来Dll导入导出的标记，这里是NO_API，因为是最终exe，不需要导出。</p>
+</li>
+</ul>
+<blockquote>
+<p>类型系统的实际创建见《浅析StaticClass的实现》。</p>
+</blockquote>
+<h2 id="UHT标记">UHT标记</h2>
+<p>​	简单判断是否是UHT标记的方法就是，检查这个标记的定义是否是空宏。(<code>Runtime\CoreUObject\Public\ObjectMacros.h</code>)</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Runtime\CoreUObject\Public\ObjectMacros.h</span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="comment">// These macros wrap metadata parsed by the Unreal Header Tool, and are otherwise</span></span><br><span class="line"><span class="comment">// ignored when code containing them is compiled by the C++ compiler</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPROPERTY(...)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UFUNCTION(...)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> USTRUCT(...)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UMETA(...)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPARAM(...)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UENUM(...)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UDELEGATE(...)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// This pair of macros is used to help implement GENERATED_BODY() and GENERATED_USTRUCT_BODY()</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> BODY_MACRO_COMBINE_INNER(A,B,C,D) A##B##C##D</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> BODY_MACRO_COMBINE(A,B,C,D) BODY_MACRO_COMBINE_INNER(A,B,C,D)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Include a redundant semicolon at the end of the generated code block, so that intellisense parsers can start parsing</span></span><br><span class="line"><span class="comment">// a new declaration if the line number/generated code is out of date.</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GENERATED_BODY_LEGACY(...) BODY_MACRO_COMBINE(CURRENT_FILE_ID,_,__LINE__,_GENERATED_BODY_LEGACY);</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GENERATED_BODY(...) BODY_MACRO_COMBINE(CURRENT_FILE_ID,_,__LINE__,_GENERATED_BODY);</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GENERATED_USTRUCT_BODY(...) GENERATED_BODY()</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GENERATED_UCLASS_BODY(...) GENERATED_BODY_LEGACY()</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GENERATED_UINTERFACE_BODY(...) GENERATED_BODY_LEGACY()</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GENERATED_IINTERFACE_BODY(...) GENERATED_BODY_LEGACY()</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> UE_BUILD_DOCS || defined(__INTELLISENSE__)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UCLASS(...)</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UCLASS(...) BODY_MACRO_COMBINE(CURRENT_FILE_ID,_,__LINE__,_PROLOG)</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UINTERFACE(...) UCLASS()</span></span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+<h2 id="UHT生成时机">UHT生成时机</h2>
+<p>​	相比于C++标准编译流程而言，UHT在<strong>所有的流程之前生成</strong>，也就是说，在<strong>预处理之前</strong>就已经完成了代码的生成。</p>
+<p>​	注意：因此，不能用宏来包含UHT的标记宏，例如<code>GENERATE_BODY()</code>，<code>UPROPERTY()</code>等。</p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-03-08T16:00:00.000Z" itemprop="datePublished">
+              2024-03-09
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

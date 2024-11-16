@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>02 算法（Matrix and vector） | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>02 算法（Matrix and vector）</h1>
+    </header>
+
+    <section>
+      <h1>算法（Matrix and vector）</h1>
+<p>[TOC]</p>
+<span id="more"></span>
+<h2 id="加法和减法">加法和减法</h2>
+<p>​	左侧和右侧必须具有相同的行数和列数。它们还必须具有相同的类型<code>Scalar</code>。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>二进制运算符 <code>+</code> 如<code>a+b</code></p>
+</li>
+<li class="lvl-2">
+<p>二进制运算符 <code>-</code> 如<code>a-b</code></p>
+</li>
+<li class="lvl-2">
+<p>一元运算符 <code>-</code> 如<code>-a</code></p>
+</li>
+<li class="lvl-2">
+<p>复合运算符 <code>+=</code> 如<code>a+=b</code></p>
+</li>
+<li class="lvl-2">
+<p>复合运算符 <code>-=</code> 如<code>a-=b</code></p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Eigen/Dense&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  Eigen::Matrix2d a;</span><br><span class="line">  a &lt;&lt; <span class="number">1</span>, <span class="number">2</span>,</span><br><span class="line">       <span class="number">3</span>, <span class="number">4</span>;</span><br><span class="line">  <span class="function">Eigen::MatrixXd <span class="title">b</span><span class="params">(<span class="number">2</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">  b &lt;&lt; <span class="number">2</span>, <span class="number">3</span>,</span><br><span class="line">       <span class="number">1</span>, <span class="number">4</span>;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;a + b =\n&quot;</span> &lt;&lt; a + b &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;a - b =\n&quot;</span> &lt;&lt; a - b &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;Doing a += b;&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">  a += b;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;Now a =\n&quot;</span> &lt;&lt; a &lt;&lt; std::endl;</span><br><span class="line">  <span class="function">Eigen::Vector3d <span class="title">v</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span></span>;</span><br><span class="line">  <span class="function">Eigen::Vector3d <span class="title">w</span><span class="params">(<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>)</span></span>;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;-v + w - v =\n&quot;</span> &lt;&lt; -v + w - v &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">a + b =</span></span><br><span class="line"><span class="comment">3 5</span></span><br><span class="line"><span class="comment">4 8</span></span><br><span class="line"><span class="comment">a - b =</span></span><br><span class="line"><span class="comment">-1 -1</span></span><br><span class="line"><span class="comment"> 2  0</span></span><br><span class="line"><span class="comment">Doing a += b;</span></span><br><span class="line"><span class="comment">Now a =</span></span><br><span class="line"><span class="comment">3 5</span></span><br><span class="line"><span class="comment">4 8</span></span><br><span class="line"><span class="comment">-v + w - v =</span></span><br><span class="line"><span class="comment">-1</span></span><br><span class="line"><span class="comment">-4</span></span><br><span class="line"><span class="comment">-6</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="标量乘法和除法">标量乘法和除法</h2>
+<p>​	标量的乘法和除法也非常简单。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>二进制运算符 <code>*</code> 如<code>matrix*scalar</code></p>
+</li>
+<li class="lvl-2">
+<p>二进制运算符 <code>*</code> 如<code>scalar*matrix</code></p>
+</li>
+<li class="lvl-2">
+<p>二进制运算符 <code>/</code> 如<code>matrix/scalar</code></p>
+</li>
+<li class="lvl-2">
+<p>复合运算符 <code>*=</code> 如<code>matrix*=scalar</code></p>
+</li>
+<li class="lvl-2">
+<p>复合运算符 <code>/=</code> 如<code>matrix/=scalar</code></p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Eigen/Dense&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  Eigen::Matrix2d a;</span><br><span class="line">  a &lt;&lt; <span class="number">1</span>, <span class="number">2</span>,</span><br><span class="line">       <span class="number">3</span>, <span class="number">4</span>;</span><br><span class="line">  <span class="function">Eigen::Vector3d <span class="title">v</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span></span>;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;a * 2.5 =\n&quot;</span> &lt;&lt; a * <span class="number">2.5</span> &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;0.1 * v =\n&quot;</span> &lt;&lt; <span class="number">0.1</span> * v &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;Doing v *= 2;&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">  v *= <span class="number">2</span>;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;Now v =\n&quot;</span> &lt;&lt; v &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">a * 2.5 =</span></span><br><span class="line"><span class="comment">2.5   5</span></span><br><span class="line"><span class="comment">7.5  10</span></span><br><span class="line"><span class="comment">0.1 * v =</span></span><br><span class="line"><span class="comment">0.1</span></span><br><span class="line"><span class="comment">0.2</span></span><br><span class="line"><span class="comment">0.3</span></span><br><span class="line"><span class="comment">Doing v *= 2;</span></span><br><span class="line"><span class="comment">Now v =</span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">4</span></span><br><span class="line"><span class="comment">6</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="转置、共轭和伴随矩阵">转置、共轭和伴随矩阵</h2>
+<p>​	通过成员函数以完成。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>转置：<a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/classEigen_1_1DenseBase.html#a43cbcd866a0737eb56642c2e992f0afd">transpose()</a></p>
+</li>
+<li class="lvl-2">
+<p>共轭：<a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/group__TutorialMatrixArithmetic.html">conjugate()</a></p>
+</li>
+<li class="lvl-2">
+<p>伴随：<a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/classEigen_1_1MatrixBase.html#afacca1f88da57e5cd87dd07c8ff926bb">adjoint()</a></p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">MatrixXcf a = MatrixXcf::<span class="built_in">Random</span>(<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Here is the matrix a\n&quot;</span> &lt;&lt; a &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Here is the matrix a^T\n&quot;</span> &lt;&lt; a.<span class="built_in">transpose</span>() &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Here is the conjugate of a\n&quot;</span> &lt;&lt; a.<span class="built_in">conjugate</span>() &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Here is the matrix a^*\n&quot;</span> &lt;&lt; a.<span class="built_in">adjoint</span>() &lt;&lt; endl;</span><br><span class="line"> </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Here is the matrix a</span></span><br><span class="line"><span class="comment"> (-0.211,0.68) (-0.605,0.823)</span></span><br><span class="line"><span class="comment"> (0.597,0.566)  (0.536,-0.33)</span></span><br><span class="line"><span class="comment">Here is the matrix a^T</span></span><br><span class="line"><span class="comment"> (-0.211,0.68)  (0.597,0.566)</span></span><br><span class="line"><span class="comment">(-0.605,0.823)  (0.536,-0.33)</span></span><br><span class="line"><span class="comment">Here is the conjugate of a</span></span><br><span class="line"><span class="comment"> (-0.211,-0.68) (-0.605,-0.823)</span></span><br><span class="line"><span class="comment"> (0.597,-0.566)    (0.536,0.33)</span></span><br><span class="line"><span class="comment">Here is the matrix a^*</span></span><br><span class="line"><span class="comment"> (-0.211,-0.68)  (0.597,-0.566)</span></span><br><span class="line"><span class="comment">(-0.605,-0.823)    (0.536,0.33)</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="不要在转置的同时赋值同一对象">不要在转置的同时赋值同一对象</h3>
+<p>​	因为会在结果写入的同时计算转置，结果与预期是不一致的。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Matrix2i a; a &lt;&lt; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>;</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Here is the matrix a:\n&quot;</span> &lt;&lt; a &lt;&lt; endl;</span><br><span class="line"> </span><br><span class="line">a = a.<span class="built_in">transpose</span>(); <span class="comment">// !!! do NOT do this !!!</span></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;and the result of the aliasing effect:\n&quot;</span> &lt;&lt; a &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Here is the matrix a:</span></span><br><span class="line"><span class="comment">1 2</span></span><br><span class="line"><span class="comment">3 4</span></span><br><span class="line"><span class="comment">and the result of the aliasing effect:</span></span><br><span class="line"><span class="comment">1 2</span></span><br><span class="line"><span class="comment">2 4</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用transposeInPlace-代替赋值">使用<a target="_blank" rel="noopener" href="https://eigen.tuxfamily.org/dox/classEigen_1_1DenseBase.html#ac501bd942994af7a95d95bee7a16ad2a">transposeInPlace()</a>代替赋值</h3>
+<p>​	如果需要对某一矩阵进行对应操作，应该使用InPlace函数。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">MatrixXf <span class="title">a</span><span class="params">(<span class="number">2</span>,<span class="number">3</span>)</span></span>; a &lt;&lt; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>;</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Here is the initial matrix a:\n&quot;</span> &lt;&lt; a &lt;&lt; endl;</span><br><span class="line"> </span><br><span class="line">a.<span class="built_in">transposeInPlace</span>();</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;and after being transposed:\n&quot;</span> &lt;&lt; a &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Here is the initial matrix a:</span></span><br><span class="line"><span class="comment">1 2 3</span></span><br><span class="line"><span class="comment">4 5 6</span></span><br><span class="line"><span class="comment">and after being transposed:</span></span><br><span class="line"><span class="comment">1 4</span></span><br><span class="line"><span class="comment">2 5</span></span><br><span class="line"><span class="comment">3 6</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="混叠问题">混叠问题</h2>
+<p>​	混叠问题是指，在原矩阵边写入某些元素的计算结果，边使用计算结果进行其它元素的计算。通常发生在对某一矩阵进行操作时，将其赋值给其本身。例如：转置操作，伴随操作等。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Matrix2i a; a &lt;&lt; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>;</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Here is the matrix a:\n&quot;</span> &lt;&lt; a &lt;&lt; endl;</span><br><span class="line"> </span><br><span class="line">a = a.<span class="built_in">transpose</span>(); <span class="comment">// !!! do NOT do this !!!</span></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;and the result of the aliasing effect:\n&quot;</span> &lt;&lt; a &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+<h3 id="乘法除外">乘法除外</h3>
+<p>​	乘法操作会被编译过程中使用一个临时变量存储以避免<strong>混叠问题</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">m = m * m;</span><br><span class="line"><span class="comment">// ==</span></span><br><span class="line">tmp = m * m;</span><br><span class="line">m = tmp;</span><br></pre></td></tr></table></figure>
+<h3 id="加速乘法">加速乘法</h3>
+<p>​	乘法为了防止混叠问题，有额外的开销。如果目标矩阵与计算矩阵无关，可以使用noalias()函数直接计算并赋值。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">c.<span class="built_in">noalias</span>() += a * b;</span><br><span class="line">c.<span class="built_in">noalias</span>() -= <span class="number">2</span> * a.<span class="built_in">adjoint</span>() * b;</span><br></pre></td></tr></table></figure>
+<h2 id="点乘和叉乘（dot-cross）">点乘和叉乘（dot&amp;cross）</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Eigen/Dense&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function">Eigen::Vector3d <span class="title">v</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span></span>;</span><br><span class="line">    <span class="function">Eigen::Vector3d <span class="title">w</span><span class="params">(<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line"> </span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Dot product: &quot;</span> &lt;&lt; v.<span class="built_in">dot</span>(w) &lt;&lt; std::endl;</span><br><span class="line">	<span class="type">double</span> dp = v.<span class="built_in">adjoint</span>()*w; <span class="comment">// automatic conversion of the inner product to a scalar</span></span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Dot product via a matrix product: &quot;</span> &lt;&lt; dp &lt;&lt; std::endl;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Cross product:\n&quot;</span> &lt;&lt; v.<span class="built_in">cross</span>(w) &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="基本算法操作">基本算法操作</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Eigen/Dense&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  Eigen::Matrix2d mat;</span><br><span class="line">  mat &lt;&lt; <span class="number">1</span>, <span class="number">2</span>,</span><br><span class="line">         <span class="number">3</span>, <span class="number">4</span>;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Here is mat.sum():       &quot;</span> &lt;&lt; mat.<span class="built_in">sum</span>()       &lt;&lt; endl;	<span class="comment">// 加和</span></span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Here is mat.prod():      &quot;</span> &lt;&lt; mat.<span class="built_in">prod</span>()      &lt;&lt; endl;	<span class="comment">// 乘积</span></span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Here is mat.mean():      &quot;</span> &lt;&lt; mat.<span class="built_in">mean</span>()      &lt;&lt; endl;	<span class="comment">// 平均</span></span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Here is mat.minCoeff():  &quot;</span> &lt;&lt; mat.<span class="built_in">minCoeff</span>()  &lt;&lt; endl;	<span class="comment">// 最小值</span></span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Here is mat.maxCoeff():  &quot;</span> &lt;&lt; mat.<span class="built_in">maxCoeff</span>()  &lt;&lt; endl;	<span class="comment">// 最大值</span></span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Here is mat.trace():     &quot;</span> &lt;&lt; mat.<span class="built_in">trace</span>()     &lt;&lt; endl;	<span class="comment">// 迹</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="获取最值元素及其位置">获取最值元素及其位置</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">  Matrix3f m = Matrix3f::<span class="built_in">Random</span>();</span><br><span class="line">  std::<span class="type">ptrdiff_t</span> i, j;</span><br><span class="line">  <span class="type">float</span> minOfM = m.<span class="built_in">minCoeff</span>(&amp;i,&amp;j);</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Here is the matrix m:\n&quot;</span> &lt;&lt; m &lt;&lt; endl;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Its minimum coefficient (&quot;</span> &lt;&lt; minOfM </span><br><span class="line">       &lt;&lt; <span class="string">&quot;) is at position (&quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; j &lt;&lt; <span class="string">&quot;)\n\n&quot;</span>;</span><br><span class="line"> </span><br><span class="line">  RowVector4i v = RowVector4i::<span class="built_in">Random</span>();</span><br><span class="line">  <span class="type">int</span> maxOfV = v.<span class="built_in">maxCoeff</span>(&amp;i);</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Here is the vector v: &quot;</span> &lt;&lt; v &lt;&lt; endl;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Its maximum coefficient (&quot;</span> &lt;&lt; maxOfV </span><br><span class="line">       &lt;&lt; <span class="string">&quot;) is at position &quot;</span> &lt;&lt; i &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Here is the matrix m:</span></span><br><span class="line"><span class="comment">  0.68  0.597  -0.33</span></span><br><span class="line"><span class="comment">-0.211  0.823  0.536</span></span><br><span class="line"><span class="comment"> 0.566 -0.605 -0.444</span></span><br><span class="line"><span class="comment">Its minimum coefficient (-0.605) is at position (2,1)</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Here is the vector v:  1  0  3 -3</span></span><br><span class="line"><span class="comment">Its maximum coefficient (3) is at position 2</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-03-01T16:00:00.000Z" itemprop="datePublished">
+              2024-03-02
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>06 进阶初始化 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>06 进阶初始化</h1>
+    </header>
+
+    <section>
+      <h1>进阶初始化</h1>
+<p>[TOC]</p>
+<span id="more"></span>
+<h2 id="逗号初始化">逗号初始化</h2>
+<h3 id="输入数据">输入数据</h3>
+<p>​	可以直接用逗号表达式输入数据。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Matrix3f m;</span><br><span class="line">m &lt;&lt; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>,</span><br><span class="line">     <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>,</span><br><span class="line">     <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>;</span><br><span class="line">std::cout &lt;&lt; m;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">1 2 3</span></span><br><span class="line"><span class="comment">4 5 6</span></span><br><span class="line"><span class="comment">7 8 9</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="输入矩阵">输入矩阵</h3>
+<p>​	也可以将矩阵作为数据进行输入。</p>
+<h4 id="输入向量">输入向量</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">RowVectorXd <span class="title">vec1</span><span class="params">(<span class="number">3</span>)</span></span>;</span><br><span class="line">vec1 &lt;&lt; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>;</span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;vec1 = &quot;</span> &lt;&lt; vec1 &lt;&lt; std::endl;</span><br><span class="line"> </span><br><span class="line"><span class="function">RowVectorXd <span class="title">vec2</span><span class="params">(<span class="number">4</span>)</span></span>;</span><br><span class="line">vec2 &lt;&lt; <span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>;</span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;vec2 = &quot;</span> &lt;&lt; vec2 &lt;&lt; std::endl;</span><br><span class="line"> </span><br><span class="line"><span class="function">RowVectorXd <span class="title">joined</span><span class="params">(<span class="number">7</span>)</span></span>;</span><br><span class="line">joined &lt;&lt; vec1, vec2;</span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;joined = &quot;</span> &lt;&lt; joined &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
+<h4 id="输入块矩阵">输入块矩阵</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">MatrixXf <span class="title">matA</span><span class="params">(<span class="number">2</span>, <span class="number">2</span>)</span></span>;</span><br><span class="line">matA &lt;&lt; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>;</span><br><span class="line"><span class="function">MatrixXf <span class="title">matB</span><span class="params">(<span class="number">4</span>, <span class="number">4</span>)</span></span>;</span><br><span class="line">matB &lt;&lt; matA, matA/<span class="number">10</span>, matA/<span class="number">10</span>, matA;</span><br><span class="line">std::cout &lt;&lt; matB &lt;&lt; std::endl;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  1   2 0.1 0.2</span></span><br><span class="line"><span class="comment">  3   4 0.3 0.4</span></span><br><span class="line"><span class="comment">0.1 0.2   1   2</span></span><br><span class="line"><span class="comment">0.3 0.4   3   4</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h4 id="输入行或列（row-col）">输入行或列（row/col）</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Matrix3f m;</span><br><span class="line">m.<span class="built_in">row</span>(<span class="number">0</span>) &lt;&lt; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>;</span><br><span class="line">m.<span class="built_in">block</span>(<span class="number">1</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">2</span>) &lt;&lt; <span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>;</span><br><span class="line">m.<span class="built_in">col</span>(<span class="number">2</span>).<span class="built_in">tail</span>(<span class="number">2</span>) &lt;&lt; <span class="number">6</span>, <span class="number">9</span>;                   </span><br><span class="line">std::cout &lt;&lt; m;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">1 2 3</span></span><br><span class="line"><span class="comment">4 5 6</span></span><br><span class="line"><span class="comment">7 8 9</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="特殊的矩阵和Array">特殊的矩阵和Array</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Zero()</p>
+</li>
+<li class="lvl-2">
+<p>Constant(value)</p>
+</li>
+<li class="lvl-2">
+<p>Random()</p>
+</li>
+<li class="lvl-2">
+<p>Identity()</p>
+</li>
+<li class="lvl-2">
+<p>LinSpaced(size, low, high)：仅用于向量或者一行/列，输入指定数目间隔的一组数</p>
+</li>
+</ul>
+<h3 id="Zero">Zero</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::cout &lt;&lt; <span class="string">&quot;A fixed-size array:\n&quot;</span>;</span><br><span class="line">Array33f a1 = Array33f::<span class="built_in">Zero</span>();</span><br><span class="line">std::cout &lt;&lt; a1 &lt;&lt; <span class="string">&quot;\n\n&quot;</span>;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;A one-dimensional dynamic-size array:\n&quot;</span>;</span><br><span class="line">ArrayXf a2 = ArrayXf::<span class="built_in">Zero</span>(<span class="number">3</span>);</span><br><span class="line">std::cout &lt;&lt; a2 &lt;&lt; <span class="string">&quot;\n\n&quot;</span>;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;A two-dimensional dynamic-size array:\n&quot;</span>;</span><br><span class="line">ArrayXXf a3 = ArrayXXf::<span class="built_in">Zero</span>(<span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line">std::cout &lt;&lt; a3 &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">A fixed-size array:</span></span><br><span class="line"><span class="comment">0 0 0</span></span><br><span class="line"><span class="comment">0 0 0</span></span><br><span class="line"><span class="comment">0 0 0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">A one-dimensional dynamic-size array:</span></span><br><span class="line"><span class="comment">0</span></span><br><span class="line"><span class="comment">0</span></span><br><span class="line"><span class="comment">0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">A two-dimensional dynamic-size array:</span></span><br><span class="line"><span class="comment">0 0 0 0</span></span><br><span class="line"><span class="comment">0 0 0 0</span></span><br><span class="line"><span class="comment">0 0 0 0</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="LinSpaced">LinSpaced</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">ArrayXXf <span class="title">table</span><span class="params">(<span class="number">10</span>, <span class="number">4</span>)</span></span>;</span><br><span class="line">table.<span class="built_in">col</span>(<span class="number">0</span>) = ArrayXf::<span class="built_in">LinSpaced</span>(<span class="number">10</span>, <span class="number">0</span>, <span class="number">90</span>);</span><br><span class="line">table.<span class="built_in">col</span>(<span class="number">1</span>) = M_PI / <span class="number">180</span> * table.<span class="built_in">col</span>(<span class="number">0</span>);</span><br><span class="line">table.<span class="built_in">col</span>(<span class="number">2</span>) = table.<span class="built_in">col</span>(<span class="number">1</span>).<span class="built_in">sin</span>();</span><br><span class="line">table.<span class="built_in">col</span>(<span class="number">3</span>) = table.<span class="built_in">col</span>(<span class="number">1</span>).<span class="built_in">cos</span>();</span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;  Degrees   Radians      Sine    Cosine\n&quot;</span>;</span><br><span class="line">std::cout &lt;&lt; table &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  Degrees   Radians      Sine    Cosine</span></span><br><span class="line"><span class="comment">        0         0         0         1</span></span><br><span class="line"><span class="comment">       10     0.175     0.174     0.985</span></span><br><span class="line"><span class="comment">       20     0.349     0.342      0.94</span></span><br><span class="line"><span class="comment">       30     0.524       0.5     0.866</span></span><br><span class="line"><span class="comment">       40     0.698     0.643     0.766</span></span><br><span class="line"><span class="comment">       50     0.873     0.766     0.643</span></span><br><span class="line"><span class="comment">       60      1.05     0.866       0.5</span></span><br><span class="line"><span class="comment">       70      1.22      0.94     0.342</span></span><br><span class="line"><span class="comment">       80       1.4     0.985     0.174</span></span><br><span class="line"><span class="comment">       90      1.57         1 -4.37e-08</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="Xx和SetXx">Xx和SetXx</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> size = <span class="number">6</span>;</span><br><span class="line"><span class="function">MatrixXd <span class="title">mat1</span><span class="params">(size, size)</span></span>;</span><br><span class="line">mat1.<span class="built_in">topLeftCorner</span>(size/<span class="number">2</span>, size/<span class="number">2</span>)     = MatrixXd::<span class="built_in">Zero</span>(size/<span class="number">2</span>, size/<span class="number">2</span>);</span><br><span class="line">mat1.<span class="built_in">topRightCorner</span>(size/<span class="number">2</span>, size/<span class="number">2</span>)    = MatrixXd::<span class="built_in">Identity</span>(size/<span class="number">2</span>, size/<span class="number">2</span>);</span><br><span class="line">mat1.<span class="built_in">bottomLeftCorner</span>(size/<span class="number">2</span>, size/<span class="number">2</span>)  = MatrixXd::<span class="built_in">Identity</span>(size/<span class="number">2</span>, size/<span class="number">2</span>);</span><br><span class="line">mat1.<span class="built_in">bottomRightCorner</span>(size/<span class="number">2</span>, size/<span class="number">2</span>) = MatrixXd::<span class="built_in">Zero</span>(size/<span class="number">2</span>, size/<span class="number">2</span>);</span><br><span class="line">std::cout &lt;&lt; mat1 &lt;&lt; std::endl &lt;&lt; std::endl;</span><br><span class="line"> </span><br><span class="line"><span class="function">MatrixXd <span class="title">mat2</span><span class="params">(size, size)</span></span>;</span><br><span class="line">mat2.<span class="built_in">topLeftCorner</span>(size/<span class="number">2</span>, size/<span class="number">2</span>).<span class="built_in">setZero</span>();</span><br><span class="line">mat2.<span class="built_in">topRightCorner</span>(size/<span class="number">2</span>, size/<span class="number">2</span>).<span class="built_in">setIdentity</span>();</span><br><span class="line">mat2.<span class="built_in">bottomLeftCorner</span>(size/<span class="number">2</span>, size/<span class="number">2</span>).<span class="built_in">setIdentity</span>();</span><br><span class="line">mat2.<span class="built_in">bottomRightCorner</span>(size/<span class="number">2</span>, size/<span class="number">2</span>).<span class="built_in">setZero</span>();</span><br><span class="line">std::cout &lt;&lt; mat2 &lt;&lt; std::endl &lt;&lt; std::endl;</span><br><span class="line"> </span><br><span class="line"><span class="function">MatrixXd <span class="title">mat3</span><span class="params">(size, size)</span></span>;</span><br><span class="line">mat3 &lt;&lt; MatrixXd::<span class="built_in">Zero</span>(size/<span class="number">2</span>, size/<span class="number">2</span>), MatrixXd::<span class="built_in">Identity</span>(size/<span class="number">2</span>, size/<span class="number">2</span>),</span><br><span class="line">        MatrixXd::<span class="built_in">Identity</span>(size/<span class="number">2</span>, size/<span class="number">2</span>), MatrixXd::<span class="built_in">Zero</span>(size/<span class="number">2</span>, size/<span class="number">2</span>);</span><br><span class="line">std::cout &lt;&lt; mat3 &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">0 0 0 1 0 0</span></span><br><span class="line"><span class="comment">0 0 0 0 1 0</span></span><br><span class="line"><span class="comment">0 0 0 0 0 1</span></span><br><span class="line"><span class="comment">1 0 0 0 0 0</span></span><br><span class="line"><span class="comment">0 1 0 0 0 0</span></span><br><span class="line"><span class="comment">0 0 1 0 0 0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">0 0 0 1 0 0</span></span><br><span class="line"><span class="comment">0 0 0 0 1 0</span></span><br><span class="line"><span class="comment">0 0 0 0 0 1</span></span><br><span class="line"><span class="comment">1 0 0 0 0 0</span></span><br><span class="line"><span class="comment">0 1 0 0 0 0</span></span><br><span class="line"><span class="comment">0 0 1 0 0 0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">0 0 0 1 0 0</span></span><br><span class="line"><span class="comment">0 0 0 0 1 0</span></span><br><span class="line"><span class="comment">0 0 0 0 0 1</span></span><br><span class="line"><span class="comment">1 0 0 0 0 0</span></span><br><span class="line"><span class="comment">0 1 0 0 0 0</span></span><br><span class="line"><span class="comment">0 0 1 0 0 0</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="临时对象（temp-obj）">临时对象（temp obj）</h2>
+<p>​	上述的Identity、Zero等静态函数成员看似是返回了一个矩阵，实则是返回的是一个<strong>表达式对象</strong>，这些对象在需要时计算结果为矩阵或数组，因此不存在任何开销。</p>
+<p>​	它们也可以用作<strong>临时对象</strong>来参与计算：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Eigen/Dense&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> Eigen::MatrixXd;</span><br><span class="line"><span class="keyword">using</span> Eigen::VectorXd;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  MatrixXd m = MatrixXd::<span class="built_in">Random</span>(<span class="number">3</span>,<span class="number">3</span>);</span><br><span class="line">  m = (m + MatrixXd::<span class="built_in">Constant</span>(<span class="number">3</span>,<span class="number">3</span>,<span class="number">1.2</span>)) * <span class="number">50</span>;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;m =&quot;</span> &lt;&lt; std::endl &lt;&lt; m &lt;&lt; std::endl;</span><br><span class="line">  <span class="function">VectorXd <span class="title">v</span><span class="params">(<span class="number">3</span>)</span></span>;</span><br><span class="line">  v &lt;&lt; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;m * v =&quot;</span> &lt;&lt; std::endl &lt;&lt; m * v &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​	<strong>逗号初始化</strong>的对象也可以作为<strong>临时对象</strong>参与计算：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">MatrixXf mat = MatrixXf::<span class="built_in">Random</span>(<span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">std::cout &lt;&lt; mat &lt;&lt; std::endl &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">mat = (<span class="built_in">MatrixXf</span>(<span class="number">2</span>,<span class="number">2</span>) &lt;&lt; <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>).<span class="built_in">finished</span>() * mat;		<span class="comment">// comma-initializer</span></span><br><span class="line"></span><br><span class="line">std::cout &lt;&lt; mat &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
+<p>​	此处的<code>finished</code>是必须的，来使得表达式生成对应的矩阵对象。</p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-03-08T16:00:00.000Z" itemprop="datePublished">
+              2024-03-09
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

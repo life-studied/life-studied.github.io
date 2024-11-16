@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>09 类型别名：更强的语义 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>09 类型别名：更强的语义</h1>
+    </header>
+
+    <section>
+      <h1>类型别名：更强的语义</h1>
+<h2 id="更强的语义">更强的语义</h2>
+<span id="more"></span>
+<p>​	除了自定义的类型，对基础类型可以进行别名，以形成一种更强的语义：</p>
+<h3 id="案例1">案例1</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">NameType = <span class="built_in">str</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params"></span></span><br><span class="line"><span class="params">        self,</span></span><br><span class="line"><span class="params">        name: NameType</span></span><br><span class="line"><span class="params">    </span>):</span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">a = Person(<span class="string">&quot;Bob&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="案例2">案例2</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> <span class="type">Optional</span></span><br><span class="line"></span><br><span class="line">ReturnType = <span class="built_in">tuple</span>[<span class="built_in">int</span>, Option[<span class="built_in">str</span>]]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">a</span>) -&gt; ReturnType:</span><br><span class="line">    <span class="keyword">if</span> a &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(a)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>, <span class="literal">None</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>, <span class="string">&quot;Input is &lt;= 0&quot;</span></span><br><span class="line">    </span><br><span class="line">retcode, errmsg = f(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="相同类型的别名可以兼容">相同类型的别名可以兼容</h2>
+<p>​	如果对同一个类型起了两个不同的别名，它们可以互相兼容。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">UserId = <span class="built_in">int</span></span><br><span class="line">OtherUserId = <span class="built_in">int</span></span><br><span class="line"></span><br><span class="line">id1: UserId = <span class="number">1</span></span><br><span class="line">id2: OtherUserId = id1</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-04-26T16:00:00.000Z" itemprop="datePublished">
+              2024-04-27
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

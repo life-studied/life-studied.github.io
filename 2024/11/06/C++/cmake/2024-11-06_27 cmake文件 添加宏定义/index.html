@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>27 cmake文件 添加宏定义 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>27 cmake文件 添加宏定义</h1>
+    </header>
+
+    <section>
+      <h1>cmake文件添加宏定义</h1>
+<h2 id="example">example</h2>
+<span id="more"></span>
+<h3 id="cmake">cmake</h3>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span>(project_name <span class="string">&quot;test_macro&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">target_compile_definitions</span>(<span class="variable">$&#123;project_name&#125;</span> PRIVATE TTF_FILE_PATH=<span class="string">&quot;$&#123;PROJECT_SOURCE_DIR&#125;/ttf/SmileySans-Oblique.ttf&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="init-cpp">init.cpp</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> TTF_FILE_PATH</span></span><br><span class="line"><span class="meta">#<span class="keyword">error</span> <span class="string">&quot;TTF_FILE_PATH not defined&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">io.Fonts-&gt;<span class="built_in">AddFontFromFileTTF</span>(TTF_FILE_PATH, <span class="number">28</span>, <span class="literal">nullptr</span>, io.Fonts-&gt;<span class="built_in">GetGlyphRangesChineseFull</span>());</span><br></pre></td></tr></table></figure>
+<h2 id="有参宏">有参宏</h2>
+<h3 id="add-definitions（早期版本不建议使用）">add_definitions（早期版本不建议使用）</h3>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">add_definitions</span>(-DNONE_VALUE_MACRO=<span class="number">0</span>x10000000)</span><br></pre></td></tr></table></figure>
+<h3 id="target-compile-definitions（为指定target添加宏）！！！">target_compile_definitions（为指定target添加宏）！！！</h3>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">target_compile_definitions</span>(myapp PRIVATE PI=<span class="number">3.1415926</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="无参宏">无参宏</h2>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">add_definitions</span>(-DNONE_VALUE_MACRO)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_compile_definitions</span>(NONE_VALUE_MACRO)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_compile_definitions</span>(myapp PRIVATE NONE_VALUE_MACRO)</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-05T16:00:00.000Z" itemprop="datePublished">
+              2024-11-06
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

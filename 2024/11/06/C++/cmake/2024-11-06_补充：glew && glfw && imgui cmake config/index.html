@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>补充：glew &amp;&amp; glfw &amp;&amp; imgui cmake config | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>补充：glew &amp;&amp; glfw &amp;&amp; imgui cmake config</h1>
+    </header>
+
+    <section>
+      <h1>glew &amp;&amp; glfw &amp;&amp; imgui cmake config</h1>
+<blockquote>
+<p>使用FetchContent模块</p>
+</blockquote>
+<span id="more"></span>
+<blockquote>
+<ul class="lvl-1">
+<li class="lvl-2">
+<p>二进制库：下载对应的zip链接，解压到对应的库</p>
+</li>
+<li class="lvl-2">
+<p>源码：下载对应的仓库地址到指定地址</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="目录">目录</h2>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── <span class="module-access"><span class="module"><span class="identifier">CMakeLists</span>.</span></span>txt</span><br><span class="line">├── <span class="module-access"><span class="module"><span class="identifier">Init</span>.</span></span>hpp</span><br><span class="line">├── cmake</span><br><span class="line">│   ├── <span class="module-access"><span class="module"><span class="identifier">Glew</span>.</span></span>cmake</span><br><span class="line">│   ├── <span class="module-access"><span class="module"><span class="identifier">Glfw</span>.</span></span>cmake</span><br><span class="line">│   └── <span class="module-access"><span class="module"><span class="identifier">Imgui</span>.</span></span>cmake</span><br><span class="line">├── externals</span><br><span class="line">├── test.cpp</span><br><span class="line">└── ttf</span><br><span class="line">    └── SmileySans-<span class="module-access"><span class="module"><span class="identifier">Oblique</span>.</span></span>ttf</span><br></pre></td></tr></table></figure>
+<h2 id="Glew-cmake">Glew.cmake</h2>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">include</span>(FetchContent)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置Glew的下载链接</span></span><br><span class="line"><span class="keyword">if</span>(WIN32)</span><br><span class="line">  <span class="keyword">set</span>(Glew_URL https://github.com/nigels-com/glew/releases/download/glew-<span class="number">2.2</span>.<span class="number">0</span>/glew-<span class="number">2.2</span>.<span class="number">0</span>-win32.zip)</span><br><span class="line"><span class="keyword">else</span>()</span><br><span class="line">  <span class="keyword">message</span>(FATAL_ERROR <span class="string">&quot;Unsupported platform&quot;</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取Glew的压缩包文件名</span></span><br><span class="line"><span class="keyword">get_filename_component</span>(Glew_ZIP_FILENAME <span class="string">&quot;$&#123;Glew_URL&#125;&quot;</span> NAME)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(Glew_FILENAME <span class="string">&quot;glew-2.2.0&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载Glew</span></span><br><span class="line">FetchContent_Declare(</span><br><span class="line">  Glew</span><br><span class="line">  URL <span class="variable">$&#123;Glew_URL&#125;</span></span><br><span class="line">  URL_HASH SHA256=ea6b14a1c6c968d0034e61ff6cb242cff2ce0ede79267a0f2b47b1b0b652c164</span><br><span class="line">  DOWNLOAD_DIR <span class="variable">$&#123;EXTERNAL_PROJECTS_DIR&#125;</span>/Glew</span><br><span class="line">  DOWNLOAD_EXTRACT_TIMESTAMP <span class="keyword">true</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">FetchContent_MakeAvailable(Glew)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压Glew</span></span><br><span class="line"><span class="keyword">execute_process</span>(<span class="keyword">COMMAND</span> <span class="variable">$&#123;CMAKE_COMMAND&#125;</span> -E tar xzf <span class="variable">$&#123;EXTERNAL_PROJECTS_DIR&#125;</span>/Glew/<span class="variable">$&#123;Glew_ZIP_FILENAME&#125;</span></span><br><span class="line">                    WORKING_DIRECTORY <span class="variable">$&#123;EXTERNAL_PROJECTS_DIR&#125;</span>/Glew)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置Glew的安装路径</span></span><br><span class="line"><span class="keyword">set</span>(Glew_INSTALL_DIR <span class="variable">$&#123;EXTERNAL_PROJECTS_DIR&#125;</span>/Glew/<span class="variable">$&#123;Glew_FILENAME&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加Glew的头文件路径</span></span><br><span class="line"><span class="keyword">target_include_directories</span>(<span class="variable">$&#123;project_name&#125;</span> PRIVATE <span class="variable">$&#123;Glew_INSTALL_DIR&#125;</span>/<span class="keyword">include</span>)</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;Glew_INCLUDE_DIR: $&#123;Glew_INSTALL_DIR&#125;/include&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加Glew的库文件路径</span></span><br><span class="line"><span class="keyword">set</span>(Glew_LIB_DIR <span class="variable">$&#123;Glew_INSTALL_DIR&#125;</span>/bin/Release/x64)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_directories</span>(<span class="variable">$&#123;project_name&#125;</span> PRIVATE <span class="variable">$&#123;Glew_LIB_DIR&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加Glew的库文件</span></span><br><span class="line"><span class="keyword">set</span>(Glew_DLLS glew32.dll)</span><br><span class="line"><span class="keyword">set</span>(Glew_LIBS glew32s.lib)</span><br></pre></td></tr></table></figure>
+<h2 id="Glfw-cmake">Glfw.cmake</h2>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">include</span>(FetchContent)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置Glfw的下载链接</span></span><br><span class="line"><span class="keyword">if</span>(WIN32)</span><br><span class="line">  <span class="keyword">set</span>(Glfw_URL https://github.com/glfw/glfw/releases/download/<span class="number">3.4</span>/glfw-<span class="number">3.4</span>.bin.WIN64.zip)</span><br><span class="line"><span class="keyword">else</span>()</span><br><span class="line">  <span class="keyword">message</span>(FATAL_ERROR <span class="string">&quot;Unsupported platform&quot;</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取Glfw的压缩包文件名</span></span><br><span class="line"><span class="keyword">get_filename_component</span>(Glfw_ZIP_FILENAME <span class="string">&quot;$&#123;Glfw_URL&#125;&quot;</span> NAME)</span><br><span class="line"></span><br><span class="line"><span class="keyword">string</span>(REGEX REPLACE <span class="string">&quot;\\.[^.]*$&quot;</span> <span class="string">&quot;&quot;</span> Glfw_FILENAME <span class="variable">$&#123;Glfw_ZIP_FILENAME&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载Glfw</span></span><br><span class="line">FetchContent_Declare(</span><br><span class="line">  Glfw</span><br><span class="line">  URL <span class="variable">$&#123;Glfw_URL&#125;</span></span><br><span class="line">  URL_HASH SHA256=<span class="number">54</span>efa829400f2a0537f742b2b3bdd74e437bb4f2f048e4b7d3c5557d11a611e6</span><br><span class="line">  DOWNLOAD_DIR <span class="variable">$&#123;EXTERNAL_PROJECTS_DIR&#125;</span>/glfw</span><br><span class="line">  DOWNLOAD_EXTRACT_TIMESTAMP <span class="keyword">true</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">FetchContent_MakeAvailable(Glfw)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压Glfw</span></span><br><span class="line"><span class="keyword">execute_process</span>(<span class="keyword">COMMAND</span> <span class="variable">$&#123;CMAKE_COMMAND&#125;</span> -E tar xzf <span class="variable">$&#123;EXTERNAL_PROJECTS_DIR&#125;</span>/glfw/<span class="variable">$&#123;Glfw_ZIP_FILENAME&#125;</span></span><br><span class="line">                    WORKING_DIRECTORY <span class="variable">$&#123;EXTERNAL_PROJECTS_DIR&#125;</span>/glfw)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置Glfw的安装路径</span></span><br><span class="line"><span class="keyword">set</span>(GLFW_INSTALL_DIR <span class="variable">$&#123;EXTERNAL_PROJECTS_DIR&#125;</span>/glfw/<span class="variable">$&#123;Glfw_FILENAME&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加Glfw的头文件路径</span></span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;GLFW_INSTALL_DIR&#125;</span>/<span class="keyword">include</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加Glfw的库文件路径</span></span><br><span class="line"><span class="keyword">if</span>(CMAKE_CXX_COMPILER_ID <span class="keyword">STREQUAL</span> <span class="string">&quot;GNU&quot;</span>)</span><br><span class="line">  <span class="keyword">set</span>(GLFW_LIB_DIR <span class="variable">$&#123;GLFW_INSTALL_DIR&#125;</span>/lib-mingw-w64)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;Compiling with MinGW, setting GLFW_LIB_DIR to $&#123;GLFW_LIB_DIR&#125;&quot;</span>)</span><br><span class="line"><span class="keyword">elseif</span>(CMAKE_CXX_COMPILER_ID <span class="keyword">STREQUAL</span> <span class="string">&quot;MSVC&quot;</span>)</span><br><span class="line">  <span class="keyword">set</span>(GLFW_LIB_DIR <span class="variable">$&#123;GLFW_INSTALL_DIR&#125;</span>/lib-vc2022)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;Compiling with MSVC, setting GLFW_LIB_DIR to $&#123;GLFW_LIB_DIR&#125;&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>()</span><br><span class="line">  <span class="keyword">message</span>(FATAL_ERROR <span class="string">&quot;Unsupported compiler&quot;</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_directories</span>(<span class="variable">$&#123;project_name&#125;</span> PRIVATE <span class="variable">$&#123;GLFW_LIB_DIR&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加Glfw的库文件</span></span><br><span class="line"><span class="keyword">set</span>(GLFW_DLLS glfw3.dll)</span><br><span class="line"><span class="keyword">set</span>(GLFW_LIBS glfw3.lib)</span><br></pre></td></tr></table></figure>
+<h2 id="Imgui-cmake">Imgui.cmake</h2>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">include</span>(FetchContent)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载ImGui</span></span><br><span class="line">FetchContent_Declare(</span><br><span class="line">  ImGui</span><br><span class="line">  GIT_REPOSITORY git@github.com:ocornut/imgui.git</span><br><span class="line">  GIT_TAG v1.<span class="number">91.4</span>-docking</span><br><span class="line">  SOURCE_DIR <span class="variable">$&#123;EXTERNAL_PROJECTS_DIR&#125;</span>/imgui</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">FetchContent_MakeAvailable(ImGui)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加ImGui的头文件路径</span></span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;EXTERNAL_PROJECTS_DIR&#125;</span>/imgui)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;EXTERNAL_PROJECTS_DIR&#125;</span>/imgui/backends)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加ImGui的源文件</span></span><br><span class="line"><span class="keyword">set</span>(IMGUI_SRCS</span><br><span class="line">    <span class="variable">$&#123;EXTERNAL_PROJECTS_DIR&#125;</span>/imgui/imgui_demo.cpp</span><br><span class="line">    <span class="variable">$&#123;EXTERNAL_PROJECTS_DIR&#125;</span>/imgui/imgui_draw.cpp</span><br><span class="line">    <span class="variable">$&#123;EXTERNAL_PROJECTS_DIR&#125;</span>/imgui/imgui_tables.cpp</span><br><span class="line">    <span class="variable">$&#123;EXTERNAL_PROJECTS_DIR&#125;</span>/imgui/imgui_widgets.cpp</span><br><span class="line">    <span class="variable">$&#123;EXTERNAL_PROJECTS_DIR&#125;</span>/imgui/imgui.cpp</span><br><span class="line">    <span class="variable">$&#123;EXTERNAL_PROJECTS_DIR&#125;</span>/imgui/backends/imgui_impl_glfw.cpp</span><br><span class="line">    <span class="variable">$&#123;EXTERNAL_PROJECTS_DIR&#125;</span>/imgui/backends/imgui_impl_opengl3.cpp</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h2 id="CmakeLists-txt">CmakeLists.txt</h2>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.20</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">17</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD_REQUIRED <span class="keyword">ON</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(project_name <span class="string">&quot;myglfwtest&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(<span class="variable">$&#123;project_name&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加externals相关变量</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_MODULE_PATH <span class="string">&quot;$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;/cmake;$&#123;CMAKE_MODULE_PATH&#125;&quot;</span>)</span><br><span class="line"><span class="keyword">set</span>(EXTERNAL_PROJECTS_DIR <span class="string">&quot;$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;/externals&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入ImGui</span></span><br><span class="line"><span class="keyword">include</span>(Imgui)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(<span class="variable">$&#123;project_name&#125;</span> <span class="keyword">test</span>.cpp Init.hpp <span class="variable">$&#123;IMGUI_SRCS&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入Glfw</span></span><br><span class="line"><span class="keyword">include</span>(Glfw)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入Glew</span></span><br><span class="line"><span class="keyword">include</span>(Glew)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(<span class="variable">$&#123;project_name&#125;</span> </span><br><span class="line">    PRIVATE <span class="variable">$&#123;GLEW_LIBS&#125;</span></span><br><span class="line">    PRIVATE <span class="variable">$&#123;GLFW_LIBS&#125;</span></span><br><span class="line">    PRIVATE Opengl32.lib</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(<span class="variable">$&#123;project_name&#125;</span></span><br><span class="line">    PRIVATE <span class="variable">$&#123;GLEW_DLLS&#125;</span></span><br><span class="line">    PRIVATE <span class="variable">$&#123;GLFW_DLLS&#125;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_compile_definitions</span>(<span class="variable">$&#123;project_name&#125;</span> PRIVATE TTF_FILE_PATH=<span class="string">&quot;$&#123;PROJECT_SOURCE_DIR&#125;/ttf/SmileySans-Oblique.ttf&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-05T16:00:00.000Z" itemprop="datePublished">
+              2024-11-06
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

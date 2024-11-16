@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>2-3-3 发现内存泄露 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>2-3-3 发现内存泄露</h1>
+    </header>
+
+    <section>
+      <h2 id="2-3-3-发现内存泄露">2.3.3 发现内存泄露</h2>
+<blockquote>
+<p>本部分未被标准接收，仅作为一个技巧。</p>
+</blockquote>
+<span id="more"></span>
+<p>​	做法：通过宏来重载new和new[]运算符。</p>
+<p>​	思路：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>new运算符使用一个数组记录每一次申请的内存以及所在代码的文件和行数。</p>
+</li>
+<li class="lvl-2">
+<p>delete运算符遍历该内存是否存在于数组中，如果不在就显示错误，在则正常删除，并移除数组元素。</p>
+</li>
+</ul>
+<h4 id="1-头文件">1.头文件</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//MemCheck.h</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> MEMCHECK_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MEMCHECK_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstddef&gt;</span>	<span class="comment">//std::size_t</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span>* <span class="keyword">operator</span> <span class="title">new</span><span class="params">(std::<span class="type">size_t</span>, <span class="type">const</span> <span class="type">char</span>*, <span class="type">long</span>)</span></span>;</span><br><span class="line"><span class="type">void</span>* <span class="keyword">operator</span> <span class="keyword">new</span>[](std::<span class="type">size_t</span>, <span class="type">const</span> <span class="type">char</span>*, <span class="type">long</span>);</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> new new (__FILE__, __LINE__)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="type">bool</span> traceFlag;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TRACE_ON() traceFlag = true</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TRACE_OFF() traceFlag = false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="type">bool</span> activeFlag;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MEM_ON() activeFlag = true</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MEM_OFF() activeFlag = false</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>注意：当需要跟踪动态存储区活动时，在<strong>最后</strong>一个头文件包含该文件。</p>
+<h4 id="2-实现文件">2.实现文件</h4>
+<p>文件结构：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>全局跟踪开关变量</p>
+</li>
+<li class="lvl-2">
+<p>匿名空间</p>
+<ul class="lvl-2">
+<li class="lvl-6">Info结构体</li>
+<li class="lvl-6">全局内存管理数组</li>
+<li class="lvl-6">查找和删除数组元素的api</li>
+<li class="lvl-6">自动析构以检测内存泄露的全局变量Sentinel</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>重载全局new和new[]</p>
+</li>
+<li class="lvl-2">
+<p>重载全局delete和delete[]</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//MemCheck.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstudio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstddef&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">undef</span> new</span></span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> traceFlag = <span class="literal">true</span>;		<span class="comment">//print the new and delete trace if true</span></span><br><span class="line"><span class="type">bool</span> activeFlag = <span class="literal">false</span>;	<span class="comment">//print the new and delete exception trace if true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> &#123;</span><br><span class="line">    <span class="comment">//memory map entry type</span></span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Info</span>&#123;</span><br><span class="line">        <span class="type">void</span>* ptr;				<span class="comment">//ptr to memory</span></span><br><span class="line">        <span class="type">const</span> <span class="type">char</span>* file;		<span class="comment">//file address</span></span><br><span class="line">        <span class="type">long</span> line;				<span class="comment">//line number</span></span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//memory map data</span></span><br><span class="line">    <span class="type">const</span> <span class="type">size_t</span> MAXPTRS = <span class="number">10000u</span>;</span><br><span class="line">    Info memMap[MAXPTRS];</span><br><span class="line">    <span class="type">size_t</span> nptrs = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Searchs the map for an address</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findPtr</span><span class="params">(<span class="type">void</span>* p)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">size_t</span> i = <span class="number">0</span>;i&lt;nptrs;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(memMap[i].ptr == p)</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Del the remove the ptr from vector</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">delPtr</span><span class="params">(<span class="type">void</span>* p)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> pos = <span class="built_in">findPtr</span>(p);</span><br><span class="line">        <span class="built_in">assert</span>(pos &gt;= <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">size_t</span> i = pos; i &lt; nptrs - <span class="number">1</span>;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            memMap[i] = memMap[i+<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        --nptrs;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Sentinel</span> &#123;</span><br><span class="line">		~<span class="built_in">Sentinel</span>()&#123;</span><br><span class="line">			<span class="keyword">if</span>(nptrs &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;Leaked memory at:\n&quot;</span>);</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">size_t</span> i = <span class="number">0</span>;i &lt; nptrs;i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;\t%p (file: %s, line: %ld)\n&quot;</span>,</span><br><span class="line">                          memMap[i].ptr, memMap[i].file, memMap[i].line);</span><br><span class="line">                &#125;</span><br><span class="line">			&#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;No user memory leaks!\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    Sentinel s;		<span class="comment">//auto destory when the program exit</span></span><br><span class="line">&#125;<span class="comment">//end of namespace</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//Overload scalar new and delete</span></span><br><span class="line"><span class="function"><span class="type">void</span>* <span class="keyword">operator</span> <span class="title">new</span><span class="params">(<span class="type">size_t</span> siz, <span class="type">const</span> <span class="type">char</span>* file, <span class="type">long</span> line)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">void</span>* p = <span class="built_in">malloc</span>(siz);</span><br><span class="line">    <span class="keyword">if</span>(activeFlag)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(nptrs == MAXPTRS)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;memory map too small! (increase MAXPTRS)\n&quot;</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">        memMap[nptrs].ptr = p;</span><br><span class="line">        memMap[nptrs].file = file;</span><br><span class="line">        memMap[nptrs].line = line;</span><br><span class="line">        ++nptrs;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span>* <span class="keyword">operator</span> <span class="keyword">new</span>[](<span class="type">size_t</span> siz, <span class="type">const</span> <span class="type">char</span>* file, <span class="type">long</span> line)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">operator</span> <span class="built_in">new</span>(siz, file, line);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="keyword">operator</span> <span class="title">delete</span><span class="params">(<span class="type">void</span>* p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">findPtr</span>(p) &gt;= <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">free</span>(p);</span><br><span class="line">        <span class="built_in">assert</span>(nptrs &gt; <span class="number">0</span>);</span><br><span class="line">        <span class="built_in">delPtr</span>(p);</span><br><span class="line">        <span class="keyword">if</span>(traceFlag)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;delete memory at address %p\n&quot;</span>, p);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(!p &amp;&amp; activeFlag)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;Attempt to delete unknown pointer: %p\n&quot;</span>, p);</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="keyword">operator</span> <span class="keyword">delete</span>[](<span class="type">void</span>* p)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">operator</span> <span class="title">delete</span><span class="params">(p)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-使用">3.使用</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>作为最后一个头文件出现</p>
+</li>
+<li class="lvl-2">
+<p>在main的开头使用MEM_ON()宏，结尾使用MEM_OFF()宏</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;MemCheck.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">MEM_ON</span>();</span><br><span class="line">  	...</span><br><span class="line">    <span class="built_in">MEM_OFF</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+              2023-11-27
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

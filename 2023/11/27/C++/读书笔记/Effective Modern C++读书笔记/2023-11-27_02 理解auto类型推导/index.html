@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>02 理解auto类型推导 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>02 理解auto类型推导</h1>
+    </header>
+
+    <section>
+      <h1>02 理解auto类型推导</h1>
+<p>​	<code>auto</code>的类型推导，与<strong>条款1的类型推导几乎一致</strong>。例如：</p>
+<span id="more"></span>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> x = <span class="number">27</span>; 		<span class="comment">// 情况3（x既不是指针也不是引用）</span></span><br><span class="line"><span class="type">const</span> <span class="keyword">auto</span> cx = x; 	<span class="comment">// 情况3（cx二者都不是）</span></span><br><span class="line"><span class="type">const</span> <span class="keyword">auto</span>&amp; rx = x; <span class="comment">// 情况1（rx是一个非通用的引用）</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span>&amp;&amp; uref1 = x; 	<span class="comment">// x是int并且是左值</span></span><br><span class="line">					<span class="comment">// 所以uref1的类型是int&amp;</span></span><br><span class="line"><span class="keyword">auto</span>&amp;&amp; uref2 = cx; 	<span class="comment">// cx是int并且是左值</span></span><br><span class="line">					<span class="comment">// 所以uref2的类型是const int&amp;</span></span><br><span class="line"><span class="keyword">auto</span>&amp;&amp; uref3 = <span class="number">27</span>; 	<span class="comment">// 27是int并且是右值</span></span><br><span class="line">					<span class="comment">// 所以uref3的类型是int&amp;&amp;</span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">char</span> name[] = <span class="comment">// name的类型是const char[13]</span></span><br><span class="line"><span class="string">&quot;R. N. Briggs&quot;</span>;</span><br><span class="line"><span class="keyword">auto</span> arr1 = name; 	<span class="comment">// arr1的类型是const char*</span></span><br><span class="line"><span class="keyword">auto</span>&amp; arr2 = name; 	<span class="comment">// arr2的类型是const char (&amp;)[13]</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">someFunc</span><span class="params">(<span class="type">int</span>, <span class="type">double</span>)</span></span>; <span class="comment">// someFunc是一个函数，类型是</span></span><br><span class="line">							<span class="comment">// void (*)(int, double)</span></span><br><span class="line"><span class="keyword">auto</span>&amp; func2 = someFunc; 	<span class="comment">// func1的类型是</span></span><br><span class="line">							<span class="comment">// void (&amp;)(int, double)</span></span><br></pre></td></tr></table></figure>
+<h2 id="唯一的例外——大括号初始化">唯一的例外——大括号初始化</h2>
+<p>​	唯一的例外在于，用<strong>大括号初始化</strong>会导致出现<code>initializer_list</code>的存在。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> x1 = <span class="number">27</span>; 		<span class="comment">// 类型时int，值是27</span></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">x2</span><span class="params">(<span class="number">27</span>)</span></span>; 		<span class="comment">// 同上</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> x3 = &#123; <span class="number">27</span> &#125;; 	<span class="comment">// 类型是std::intializer_list&lt;int&gt;</span></span><br><span class="line">					<span class="comment">// 值是&#123; 27 &#125;</span></span><br><span class="line"><span class="keyword">auto</span> x4&#123; <span class="number">27</span> &#125;; 		<span class="comment">// 同上</span></span><br></pre></td></tr></table></figure>
+<p>​	但是，这仅在声明变量时有效，而以下场景却无效：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>返回值auto推导：</p>
+<ul class="lvl-2">
+<li class="lvl-4">
+<pre><code class="language-C++">auto createInitList()
+&#123;
+	return &#123; 1, 2, 3 &#125;; // 编译错误：不能推导出&#123; 1, 2, 3 &#125;的类型
+&#125;
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">* lambda里函数参数<span class="keyword">auto</span>推导</span><br><span class="line"></span><br><span class="line">  * ```C++</span><br><span class="line">    std::vector&lt;<span class="type">int</span>&gt; v;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="keyword">auto</span> resetV = [&amp;v](<span class="type">const</span> <span class="keyword">auto</span>&amp; newValue) &#123; v = newValue; &#125; <span class="comment">// C++14</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="built_in">resetV</span>(&#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;); <span class="comment">// 编译错误，不能推导出&#123; 1, 2, 3 &#125;的类型</span></span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+              2023-11-27
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

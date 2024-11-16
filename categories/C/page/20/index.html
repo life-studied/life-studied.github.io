@@ -68,12 +68,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-11-16_13%20%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8const_iterator%E8%80%8C%E4%B8%8D%E6%98%AFiterator/">13 优先使用const_iterator而不是iterator</a>
+          <a href="/2023/09/19/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2023-09-19_stdmove%E5%AE%9E%E7%8E%B0/">stdmove实现</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-09-18T16:00:00.000Z" itemprop="datePublished">
+    2023-09-19
   </time>
   
   
@@ -85,11 +85,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
   </li>
 
 
@@ -100,11 +96,11 @@
     </header>
     <div>
       
-        <h1>13 优先使用const_iterator而不是iterator</h1>
-<p>​	在<code>C++98</code>中，如果使用<code>const_iterator</code>可能导致语义可行但是编译不过的情况：</p>
+        <h1>std::move实现</h1>
+<p>​	<code>std::move</code>是一个函数模板，返回值是一个右值引用，实现方法是通过一个中间结构体模板的辅助。</p>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-11-16_13%20%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8const_iterator%E8%80%8C%E4%B8%8D%E6%98%AFiterator/#more">Read On »</a>
+            <a href="/2023/09/19/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2023-09-19_stdmove%E5%AE%9E%E7%8E%B0/#more">Read On »</a>
           </div>
         
       
@@ -118,12 +114,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-11-16_14%20%E5%A6%82%E6%9E%9C%E5%87%BD%E6%95%B0%E4%B8%8D%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8%E8%AF%B7%E4%BD%BF%E7%94%A8noexcept/">14 如果函数不抛出异常请使用noexcept</a>
+          <a href="/2023/09/19/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2023-09-19_stdref%E5%92%8Cstdreference/">stdref和stdreference</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-09-18T16:00:00.000Z" itemprop="datePublished">
+    2023-09-19
   </time>
   
   
@@ -135,11 +131,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
   </li>
 
 
@@ -150,11 +142,11 @@
     </header>
     <div>
       
-        <h1>14 如果函数不抛出异常请使用<code>noexcept</code></h1>
-<h2 id="1-展开调用栈方面的优化">1. 展开调用栈方面的优化</h2>
+        <h1>std::ref和std::reference</h1>
+<p>​	<code>std::ref</code>用于传递引用，用于不能显式地使用<code>&amp;</code>进行传递的情况。例如，在创建<code>std::thread</code>时，总是会先复制一份参数再传递引用，而不是根据函数的参数列表直接传递需要的引用类型。为了解决这种不能直接传递引用的情况，可以使用<code>std::ref</code>来实现。</p>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-11-16_14%20%E5%A6%82%E6%9E%9C%E5%87%BD%E6%95%B0%E4%B8%8D%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8%E8%AF%B7%E4%BD%BF%E7%94%A8noexcept/#more">Read On »</a>
+            <a href="/2023/09/19/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2023-09-19_stdref%E5%92%8Cstdreference/#more">Read On »</a>
           </div>
         
       
@@ -168,12 +160,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-11-16_15%20%E5%B0%BD%E5%8F%AF%E8%83%BD%E7%9A%84%E4%BD%BF%E7%94%A8constexpr/">15 尽可能的使用constexpr</a>
+          <a href="/2023/09/19/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2023-09-19_%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%92%8C%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F/">可变参数和折叠表达式</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-09-18T16:00:00.000Z" itemprop="datePublished">
+    2023-09-19
   </time>
   
   
@@ -185,11 +177,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
+  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
   </li>
 
 
@@ -200,11 +188,11 @@
     </header>
     <div>
       
-        <h1>15 尽可能的使用<code>constexpr</code></h1>
-<p>​	<code>constexpr</code>和<code>const</code>一样，它们是编译期可知的。但是<code>const</code>不提供<code>constexpr</code>所能保证之事，因为<code>const</code>对象不需要在编译期初始化它的值。</p>
+        <h1>可变参数和折叠表达式</h1>
+<h2 id="1-sizeof…获取参数数量">1.sizeof…获取参数数量</h2>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-11-16_15%20%E5%B0%BD%E5%8F%AF%E8%83%BD%E7%9A%84%E4%BD%BF%E7%94%A8constexpr/#more">Read On »</a>
+            <a href="/2023/09/19/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2023-09-19_%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%92%8C%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F/#more">Read On »</a>
           </div>
         
       
@@ -218,12 +206,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-11-16_16%20%E8%AE%A9const%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/">16 让const成员函数线程安全</a>
+          <a href="/2023/08/27/C++/cmake/2023-08-27_14%20Cmake%E5%B8%B8%E7%94%A8%E9%A2%84%E5%AE%9A%E4%B9%89%E5%AE%8F/">14 Cmake常用预定义宏</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-08-26T16:00:00.000Z" itemprop="datePublished">
+    2023-08-27
   </time>
   
   
@@ -235,11 +223,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
+  { <a href="/categories/C/cmake/">cmake</a> }
   </li>
 
 
@@ -250,11 +234,11 @@
     </header>
     <div>
       
-        <h1>16 让<code>const</code>成员函数线程安全</h1>
-<p>​	这个条款是基于，多个线程可以同时在一个对象上执行一个<code>const</code>成员函数这个假设的。如果你可以<strong>保证</strong>在一个对象上永远不会有多个线程执行该成员函数——该函数的线程安全是无关紧要的。</p>
+        <h1>14 Cmake常用预定义宏</h1>
+<p>下面的列表中为大家整理了一些<code>CMake</code>中常用的宏：</p>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-11-16_16%20%E8%AE%A9const%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/#more">Read On »</a>
+            <a href="/2023/08/27/C++/cmake/2023-08-27_14%20Cmake%E5%B8%B8%E7%94%A8%E9%A2%84%E5%AE%9A%E4%B9%89%E5%AE%8F/#more">Read On »</a>
           </div>
         
       
@@ -268,12 +252,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-11-16_17%20%E7%90%86%E8%A7%A3%E7%89%B9%E6%AE%8A%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E7%94%9F%E6%88%90/">17 理解特殊成员函数的生成</a>
+          <a href="/2023/08/27/C++/oatpp/2023-08-27_03%20PageDTO%E8%A7%A3%E8%AF%BB/">03 PageDTO解读</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-08-26T16:00:00.000Z" itemprop="datePublished">
+    2023-08-27
   </time>
   
   
@@ -285,11 +269,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
+  { <a href="/categories/C/oatpp/">oatpp</a> }
   </li>
 
 
@@ -300,11 +280,11 @@
     </header>
     <div>
       
-        <h1>17 理解特殊成员函数的生成</h1>
-<p>​	移动构造和拷贝构造是编译器默认生成的内容，虽然移动构造在某些成员身上表现为拷贝构造。</p>
+        <h1>03 PageDTO解读</h1>
+<p>[TOC]</p>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-11-16_17%20%E7%90%86%E8%A7%A3%E7%89%B9%E6%AE%8A%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E7%94%9F%E6%88%90/#more">Read On »</a>
+            <a href="/2023/08/27/C++/oatpp/2023-08-27_03%20PageDTO%E8%A7%A3%E8%AF%BB/#more">Read On »</a>
           </div>
         
       
@@ -318,12 +298,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-11-16_18%20%E5%AF%B9%E4%BA%8E%E7%8B%AC%E5%8D%A0%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8stdunique_ptr/">18 对于独占资源使用stdunique_ptr</a>
+          <a href="/2023/08/27/C++/oatpp/2023-08-27_04%20MenuDTO%E8%A7%A3%E8%AF%BB/">04 MenuDTO解读</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-08-26T16:00:00.000Z" itemprop="datePublished">
+    2023-08-27
   </time>
   
   
@@ -335,11 +315,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
+  { <a href="/categories/C/oatpp/">oatpp</a> }
   </li>
 
 
@@ -350,7 +326,8 @@
     </header>
     <div>
       
-        <h1>18 对于独占资源使用<code>std::unique_ptr</code></h1>
+        <h1>04 MenuDTO解读</h1>
+<p>​	MenuDTO本质上是对</p>
 
       
     </div>
@@ -363,12 +340,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-11-16_1-1%20%E4%BC%A0%E7%BB%9F%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">1-1 传统的错误处理</a>
+          <a href="/2023/07/30/C++/cmake/2023-07-30_11%20%E6%97%A5%E5%BF%97/">11 日志</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-07-29T16:00:00.000Z" itemprop="datePublished">
+    2023-07-30
   </time>
   
   
@@ -380,11 +357,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  { <a href="/categories/C/cmake/">cmake</a> }
   </li>
 
 
@@ -395,11 +368,11 @@
     </header>
     <div>
       
-        <h2 id="1-1-传统的错误处理">1.1 传统的错误处理</h2>
-<h4 id="本书说明">本书说明</h4>
+        <h1>11 日志</h1>
+<p>​	在CMake中可以用用户显示一条消息，该命令的名字为<code>message</code>：</p>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-11-16_1-1%20%E4%BC%A0%E7%BB%9F%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/#more">Read On »</a>
+            <a href="/2023/07/30/C++/cmake/2023-07-30_11%20%E6%97%A5%E5%BF%97/#more">Read On »</a>
           </div>
         
       
@@ -413,12 +386,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-11-16_1-10%20%E4%BD%BF%E7%94%A8%E5%BC%82%E5%B8%B8%E9%80%A0%E6%88%90%E7%9A%84%E5%BC%80%E9%94%80/">1-10 使用异常造成的开销</a>
+          <a href="/2023/07/30/C++/%E6%A0%87%E5%87%86%E5%BA%93/2023-07-30_regex/">regex</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-07-29T16:00:00.000Z" itemprop="datePublished">
+    2023-07-30
   </time>
   
   
@@ -430,11 +403,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  { <a href="/categories/C/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a> }
   </li>
 
 
@@ -445,13 +414,11 @@
     </header>
     <div>
       
-        <h2 id="1-10-使用异常造成的开销">1.10 使用异常造成的开销</h2>
-<blockquote>
-<p>一个throw表达式就像是一个特殊的系统函数调用，它接收异常对象作为参数并且沿着执行调用链向上回溯。为了完成这项工作，编译器需要在栈上放置额外的信息，来辅助栈反解过程。</p>
-</blockquote>
+        <h1>regex</h1>
+<h2 id="1-简介">1. 简介</h2>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-11-16_1-10%20%E4%BD%BF%E7%94%A8%E5%BC%82%E5%B8%B8%E9%80%A0%E6%88%90%E7%9A%84%E5%BC%80%E9%94%80/#more">Read On »</a>
+            <a href="/2023/07/30/C++/%E6%A0%87%E5%87%86%E5%BA%93/2023-07-30_regex/#more">Read On »</a>
           </div>
         
       
@@ -465,12 +432,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-11-16_1-3%20%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8/">1-3 捕获异常</a>
+          <a href="/2023/07/22/C++/vcpkg/2023-07-22_vcpkg%E7%9A%84vs%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">vcpkg的vs使用方法</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-07-21T16:00:00.000Z" itemprop="datePublished">
+    2023-07-22
   </time>
   
   
@@ -482,11 +449,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  { <a href="/categories/C/vcpkg/">vcpkg</a> }
   </li>
 
 
@@ -497,11 +460,11 @@
     </header>
     <div>
       
-        <h2 id="1-3-捕获异常">1.3 捕获异常</h2>
-<h4 id="1-3-1-try块与exception-handler">1.3.1 try块与exception handler</h4>
+        <h2 id="vcpkg的vs使用方法">vcpkg的vs使用方法</h2>
+<h3 id="1-前置工具">1. 前置工具</h3>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-11-16_1-3%20%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8/#more">Read On »</a>
+            <a href="/2023/07/22/C++/vcpkg/2023-07-22_vcpkg%E7%9A%84vs%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/#more">Read On »</a>
           </div>
         
       
@@ -515,12 +478,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-11-16_1-4%20%E5%BC%82%E5%B8%B8%E5%8C%B9%E9%85%8D/">1-4 异常匹配</a>
+          <a href="/2023/07/22/C++/%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/2023-07-22_%E9%9D%99%E6%80%81%E5%BA%93/">静态库</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-07-21T16:00:00.000Z" itemprop="datePublished">
+    2023-07-22
   </time>
   
   
@@ -532,11 +495,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  { <a href="/categories/C/%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/">静态库与动态库</a> }
   </li>
 
 
@@ -547,11 +506,11 @@
     </header>
     <div>
       
-        <h2 id="1-4-异常匹配">1.4 异常匹配</h2>
-<h4 id="1-异常匹配不支持非派生的隐式转换">1. 异常匹配不支持非派生的隐式转换</h4>
+        <h2 id="静态库">静态库</h2>
+<p>[TOC]</p>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2024-11-16_1-4%20%E5%BC%82%E5%B8%B8%E5%8C%B9%E9%85%8D/#more">Read On »</a>
+            <a href="/2023/07/22/C++/%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/2023-07-22_%E9%9D%99%E6%80%81%E5%BA%93/#more">Read On »</a>
           </div>
         
       

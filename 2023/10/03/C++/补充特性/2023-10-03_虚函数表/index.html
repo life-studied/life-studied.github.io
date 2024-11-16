@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>虚函数表 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>虚函数表</h1>
+    </header>
+
+    <section>
+      <h1>虚函数表</h1>
+<p>​	虚函数表是存放虚函数的指针的一张表。</p>
+<span id="more"></span>
+<h2 id="1-虚函数表位置">1.虚函数表位置</h2>
+<p>​	在类实例的<strong>首部</strong>，有一个指针，指向该实例所对应的类型的虚函数表。父类对应父类的表，子类对应子类的表。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">f1</span><span class="params">()</span></span>&#123; cout &lt;&lt; <span class="string">&quot;A:f1&quot;</span> &lt;&lt; endl;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">f2</span><span class="params">()</span></span>&#123; cout &lt;&lt; <span class="string">&quot;A:f2&quot;</span> &lt;&lt; endl;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> : <span class="keyword">public</span> A</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">f1</span><span class="params">()</span></span>&#123; cout &lt;&lt; <span class="string">&quot;B:f1&quot;</span> &lt;&lt; endl;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">f2</span><span class="params">()</span></span>&#123; cout &lt;&lt; <span class="string">&quot;B:f2&quot;</span> &lt;&lt; endl;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">A* a = <span class="keyword">new</span> A;	<span class="comment">//A的实例</span></span><br><span class="line">B* b = <span class="keyword">new</span> B;	<span class="comment">//B的实例</span></span><br></pre></td></tr></table></figure>
+<img src="./assets/image-20230929224543910.png" alt="image-20230929224543910" style="zoom: 50%;" />
+<h2 id="2-虚函数表规则">2.虚函数表规则</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>一个类对应一个虚函数表</p>
+</li>
+<li class="lvl-2">
+<p>同一类的多个实例对应同一个虚函数表</p>
+</li>
+<li class="lvl-2">
+<p>虚函数表只能通过指针去调用（即<code>-&gt;</code>方式）</p>
+</li>
+<li class="lvl-2">
+<p>父类与子类的同名函数位置偏移一致</p>
+</li>
+</ul>
+<h2 id="3-修改虚函数表">3.修改虚函数表</h2>
+<p>​	通过WindowApi可以修改虚函数表，来验证上述规则。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">A* a1 = <span class="keyword">new</span> A;</span><br><span class="line">A* a2 = <span class="keyword">new</span> A;</span><br><span class="line"></span><br><span class="line"><span class="type">unsigned</span>* vtable = (<span class="type">unsigned</span>*)a1;		<span class="comment">//获取虚函数表地址</span></span><br><span class="line"><span class="type">unsigned</span>* func = (<span class="type">unsigned</span>*)vtable[<span class="number">0</span>];	<span class="comment">//获取第i个函数的地址</span></span><br><span class="line"><span class="built_in">VirturalProtect</span>(func1, <span class="number">8</span>, PAGE_EXCUTE_READWRITE, <span class="literal">NULL</span>);		<span class="comment">//修改虚函数内存对应的属性</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Hack</span><span class="params">()</span></span>&#123; cout &lt;&lt; <span class="string">&quot;in Hack&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line">func[<span class="number">0</span>] = (<span class="type">unsigned</span>)Hack;		<span class="comment">//修改虚函数表</span></span><br><span class="line"></span><br><span class="line">a1-&gt;<span class="built_in">f1</span>();	<span class="comment">//in Hack</span></span><br><span class="line">a2-&gt;<span class="built_in">f1</span>();	<span class="comment">//in Hack</span></span><br><span class="line"></span><br><span class="line">A tempA;</span><br><span class="line">tempA.<span class="built_in">f1</span>();	<span class="comment">//A:f1</span></span><br></pre></td></tr></table></figure>
+<p>​	可以看出，只修改了a1的虚函数表，但是a2也受到了影响，说明<strong>同一个类的实例对应的都是一个虚函数表</strong>。</p>
+<p>​	另外，如果用局部变量的方式去调用，则会发现不受影响，说明<strong>局部变量调用虚函数的方式不是通过虚函数表</strong>。</p>
+<h2 id="4-验证虚函数的偏移一致">4.验证虚函数的偏移一致</h2>
+<p>​	如果从反汇编的角度，可以直接看到父类和子类的同名函数，它们在自己的虚函数表中的偏移是一致的（<code>ebx+x</code>对应了指向的虚函数指针，x是偏移量）。</p>
+<p>​	原理是可以理解的：通过指针调用，由于多态的原因，它并不知道实际指向的对象类型，但是如果是同名虚函数，只需保证偏移一致，总能在虚函数表中调用正确的函数。</p>
+<p>​	下面给出了一个图例：<code>ptr</code>指针分别指向A和B的两个实例，如果想要调用<code>f1</code>函数，只需保证调用的函数在虚函数表中的偏移是0，不管指向的类型是哪个，都能正确调用正确的<code>f1</code>函数</p>
+<img src="./assets/image-20230929231022152.png" alt="image-20230929231022152" style="zoom:50%;" />
+<h2 id="4-虚函数表相关的内存问题">4.虚函数表相关的内存问题</h2>
+<h3 id="4-1-证明虚函数表的存在">4.1 证明虚函数表的存在</h3>
+<p>​	如何证明指向虚函数表的指针存在，并且就在类实例的首部呢？如果使用虚函数表，对该对象进行<code>sizeof</code>时就会发现，你的对象竟然凭空多出了4字节的大小（<code>x86</code>架构下）。并且对象的地址和对象第一个数据成员的地址竟相差了4字节，也就是一个指针的大小（<code>x86</code>架构下）。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> HP;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">Eat</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">Die</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> : <span class="keyword">public</span> A</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">Eat</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">Die</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    A a;</span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">sizeof</span>(a) &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; &amp;a &lt;&lt; std::endl &lt;&lt; &amp;a.HP &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="./assets/image-20230929232517096.png" alt="image-20230929232517096" style="zoom: 50%;" />
+<h3 id="4-2-虚函数表引发的内存对齐问题">4.2 虚函数表引发的内存对齐问题</h3>
+<p>​	在<code>x64</code>架构下，下面的代码会输出多少呢？</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">A a;</span><br><span class="line">std::cout &lt;&lt; <span class="built_in">sizeof</span>(a) &lt;&lt; std::endl;</span><br><span class="line">std::cout &lt;&lt; <span class="built_in">sizeof</span>(<span class="type">int</span>) &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
+<p><img src="./assets/image-20230929232747623.png" alt="image-20230929232747623"></p>
+<p>​	答案非常奇怪，为什么会多出12个字节的大小？即使加上虚函数表，在x64架构下，应该也就是多出8字节才对。没错，是内存对齐引发了多出的4个字节。</p>
+<p>​	如果你不知道内存对齐的规则了，可以这样理解：数据成员的偏移量以min(pack(n)，最大成员占用字节)的整数倍进行对齐。这时候，我们就可以使用<code>#pragma pack(n)</code>指令来强制指定内存对齐规则了。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> pack(1)</span></span><br></pre></td></tr></table></figure>
+<p>​	这时候，输出就符合常理了：</p>
+<p><img src="./assets/image-20230929233118684.png" alt="image-20230929233118684"></p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-10-02T16:00:00.000Z" itemprop="datePublished">
+              2023-10-03
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>编译期判断类是否存在成员函数 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>编译期判断类是否存在成员函数</h1>
+    </header>
+
+    <section>
+      <h1>编译期判断类是否存在成员函数</h1>
+<h2 id="1-检测类是否存在push-back">1. 检测类是否存在push_back</h2>
+<span id="more"></span>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>只能检测stl，因为用到了<code>T::value_type</code>，只在stl中存在</p>
+</li>
+<li class="lvl-2">
+<p>可以通过修改push_back的参数类型来判断其它类</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span>&gt;</span><br><span class="line"><span class="keyword">using</span> <span class="type">void_t</span> = <span class="type">void</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> V = <span class="type">void</span>&gt;</span><br><span class="line"><span class="keyword">struct</span> has_push_back:std::false_type &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">has_push_back</span>&lt;T, <span class="type">void_t</span>&lt;<span class="keyword">decltype</span>(std::<span class="built_in">declval</span>&lt;T&gt;().<span class="built_in">push_back</span>(std::<span class="built_in">declval</span>&lt;<span class="keyword">typename</span> T::value_type&gt;()))&gt;&gt;:std::true_type &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; has_push_back&lt;std::list&lt;<span class="type">int</span>&gt;&gt;::value &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; has_push_back&lt;std::map&lt;<span class="type">int</span>, <span class="type">int</span>&gt;&gt;::value &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; has_push_back&lt;std::set&lt;<span class="type">int</span>&gt;&gt;::value &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; has_push_back&lt;std::string&gt;::value &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; has_push_back&lt;std::vector&lt;<span class="type">int</span>&gt;&gt;::value &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-检测stringstream是否存在对应参数的重载函数">2. 检测stringstream是否存在对应参数的重载函数</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>注意：不能判断引用类型的参数，<strong>或者修改T为T&amp;</strong></p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span>&gt;</span><br><span class="line"><span class="keyword">using</span> <span class="type">void_t</span> = <span class="type">void</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> V = <span class="type">void</span>&gt;</span><br><span class="line"><span class="keyword">struct</span> has_ss_type : std::false_type &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">has_ss_type</span> &lt;T, <span class="type">void_t</span>&lt;<span class="keyword">decltype</span>(std::<span class="built_in">declval</span>&lt;std::stringstream&gt;().<span class="keyword">operator</span>&lt;&lt;(std::<span class="built_in">declval</span>&lt;T&gt;()))&gt;&gt; : std::true_type &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">template &lt;typename T&gt;</span></span><br><span class="line"><span class="comment">struct has_ss_type &lt;T, void_t&lt;decltype(std::declval&lt;std::stringstream&gt;().operator&lt;&lt;(std::declval&lt;T&amp;&gt;()))&gt;&gt; : std::true_type &#123;&#125;;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; has_ss_type&lt;<span class="type">int</span>&gt;::value &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; has_ss_type&lt;<span class="type">double</span>&gt;::value &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; has_ss_type&lt;std::string&gt;::value &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; has_ss_type&lt;std::vector&lt;<span class="type">int</span>&gt;&gt;::value &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-12-30T16:00:00.000Z" itemprop="datePublished">
+              2023-12-31
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

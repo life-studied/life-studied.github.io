@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>API库与选择 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>API库与选择</h1>
+    </header>
+
+    <section>
+      <h1>API库 | 选择</h1>
+<h2 id="API库">API库</h2>
+<span id="more"></span>
+<p>MySQL官方提供了很多种连接的方式：</p>
+<h3 id="1-MySQL-Connector-C-API">1. MySQL Connector/C++ API</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>概述</strong>：MySQL Connector/C++ 是一个库，适用于用 C 或 C++ 编写并与 MySQL 数据库服务器通信的应用程序。</p>
+</li>
+<li class="lvl-2">
+<p><strong>API类型</strong>：Connector/C++ 版本 9 实现了三种不同的 API：</p>
+<ul class="lvl-2">
+<li class="lvl-4">X DevAPI：适用于用 C++ 编写的应用程序。</li>
+<li class="lvl-4">X DevAPI for C：用于用纯 C 编写的应用程序。</li>
+<li class="lvl-4">基于 JDBC4 的经典 API：也在连接器的早期版本中实现。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><strong>X DevAPI 特点</strong>：X DevAPI 和 X DevAPI for C 允许访问实施文档存储的 MySQL。在内部，这些 API 使用 X 协议与 MySQL 服务器通信，因此只能与 MySQL Server 8 或更高版本一起使用。</p>
+</li>
+</ul>
+<h3 id="2-MySQL-C-API">2. MySQL C API</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>概述</strong>：MySQL C API 提供对 MySQL 客户端/服务器协议的低级访问，并使 C 程序能够访问数据库内容。C API 代码随 MySQL 一起分发。例如在<code>mysql-8.1.0-winx64</code>下的<code>include</code>中。</p>
+</li>
+<li class="lvl-2">
+<p><strong>API说明</strong>：这种API是C类型的较为底层的API。能实现非常精确的控制，但是使用起来比较低级。详细可以看<strong>Mysql连接池</strong>一文。</p>
+</li>
+</ul>
+<h2 id="选择API库">选择API库</h2>
+<p>如果选择第一种方式，可以通过下载mysql的连接库，或者使用vcpkg去安装集成到项目。</p>
+<p>如果选择第二种方式，可以通过下载mysql的服务端，里面就有对应的C API。</p>
+<p><img src="./assets/image-20241113201529789.png" alt="image-20241113201529789"></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>下载地址：<a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/mysql/">MySQL :: Download MySQL Community Server</a></p>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-14T16:00:00.000Z" itemprop="datePublished">
+              2024-11-15
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

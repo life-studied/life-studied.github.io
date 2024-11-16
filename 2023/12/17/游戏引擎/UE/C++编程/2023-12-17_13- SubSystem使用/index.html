@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>13- SubSystem使用 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>13- SubSystem使用</h1>
+    </header>
+
+    <section>
+      <h1>13. SubSystem使用</h1>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/158717151">《InsideUE4》GamePlay架构（十一）Subsystems - 知乎 (zhihu.com)</a></p>
+<span id="more"></span>
+<p>​	4.22版本引入该系统，4.24版本完善该系统。</p>
+<h2 id="1-SubSystem的必要性">1. SubSystem的必要性</h2>
+<p>​	在GameInstance中，如果所有的资源管理都由一堆单例管理类来完成，那么很容易写错，并且不能保证全局唯一。</p>
+<p>​	由此引入SubSystem系统来执行这些单例管理器类的职责。</p>
+<p>​	<strong>Subsystems是一套可以定义自动实例化和释放的类的框架。</strong></p>
+<p>​	下面说明的Subsystem的种类，并且Subsystem的生命周期一般与GameInstance同时创建卸载。</p>
+<h2 id="2-SubSystem的类型">2. SubSystem的类型</h2>
+<p>​	SubSystem有如下几类：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>UEngineSubsystem</code>:代表引擎，数量1，Editor或Runtime模式都是全局唯一，从进程开始创建，进程退出时销毁。</p>
+</li>
+<li class="lvl-2">
+<p><code>UEditorSubsystem</code>:代表编辑器，数量1，只在编辑器下存在且全局唯一，从编辑器启动开始创建，到编辑器退出时销毁。</p>
+</li>
+<li class="lvl-2">
+<p><code>UGameInstanceSubsystem</code>:代表一场游戏，数量1，从游戏启动开始创建，游戏退出时销毁。这里的一场游戏指的是Runtime或者PIE模式运行。一场游戏可能会创建多个World切换。</p>
+</li>
+<li class="lvl-2">
+<p><code>UWorldSubsystem</code>:代表一个世界，数量可能&gt;1，其生命周期跟归属的World有关。</p>
+</li>
+<li class="lvl-2">
+<p><code>ULocalPlayerSubsystem</code>:代表本地玩家，数量可能&gt;1。UE支持本地分屏多玩家类型的游戏，但往往最常见的只有一个。LocalPlayer虽然往往和PlayerController一起访问，但是其生命周期其实是跟UGameInstance一起的（即默认一开始就创建好一定数量的本地玩家），或者更准确地说，是跟LocalPlayer的具体数量挂钩的。</p>
+</li>
+</ul>
+<h2 id="3-Subsystem的使用">3. Subsystem的使用</h2>
+<p>​	创建一个Subsystem的C++类，并实现如下三个函数：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>ShouldCreateSubsystem：一般实现为调用父类（Super）的该方法，并返回true</p>
+</li>
+<li class="lvl-2">
+<p>Initialize：一般实现为调用父类（Super）的该方法，再进行自己的资源创建活动</p>
+</li>
+<li class="lvl-2">
+<p>Deinitialize：一般实现为调用父类（Super）的该方法，再进行自己的资源销毁活动</p>
+</li>
+</ul>
+<img src="./assets/image-20231214211622782.png" alt="image-20231214211622782" style="zoom:50%;" />
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-12-16T16:00:00.000Z" itemprop="datePublished">
+              2023-12-17
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

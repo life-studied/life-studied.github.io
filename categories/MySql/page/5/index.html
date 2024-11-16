@@ -68,12 +68,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/MySql/SQL%E7%BD%91%E8%AF%BE/2DML/2024-11-16_2-UPDATE/">2-UPDATE</a>
+          <a href="/2022/10/05/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/2022-10-05_7%E5%88%9B%E5%BB%BA%E8%AE%A1%E7%AE%97%E5%AD%97%E6%AE%B5/">7创建计算字段</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2022-10-04T16:00:00.000Z" itemprop="datePublished">
+    2022-10-05
   </time>
   
   
@@ -85,11 +85,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/">SQL网课</a> }
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/2DML/">2DML</a> }
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/">SELECT语句</a> }
   </li>
 
 
@@ -100,11 +100,11 @@
     </header>
     <div>
       
-        <h2 id="UPDATE">UPDATE</h2>
-<h4 id="1-WHERE子句">1.WHERE子句</h4>
+        <h2 id="创建计算字段">创建计算字段</h2>
+<h4 id="1-字段">1.字段</h4>
         
           <div class="more-link">
-            <a href="/2024/11/16/MySql/SQL%E7%BD%91%E8%AF%BE/2DML/2024-11-16_2-UPDATE/#more">Read On »</a>
+            <a href="/2022/10/05/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/2022-10-05_7%E5%88%9B%E5%BB%BA%E8%AE%A1%E7%AE%97%E5%AD%97%E6%AE%B5/#more">Read On »</a>
           </div>
         
       
@@ -118,12 +118,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/MySql/SQL%E7%BD%91%E8%AF%BE/%E6%A1%88%E4%BE%8B/2024-11-16_%E6%A1%88%E4%BE%8Bexercise-course/">案例exercise-course</a>
+          <a href="/2022/10/05/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/2022-10-05_8%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/">8数据处理函数</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2022-10-04T16:00:00.000Z" itemprop="datePublished">
+    2022-10-05
   </time>
   
   
@@ -135,11 +135,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/">SQL网课</a> }
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/%E6%A1%88%E4%BE%8B/">案例</a> }
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/">SELECT语句</a> }
   </li>
 
 
@@ -150,61 +150,13 @@
     </header>
     <div>
       
-        <h2 id="案例exercise-course">案例exercise-course</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 1. 在数据库exercise中创建课程表stu_course，包含字段课程编号(number)，类型为整数，长度为</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line">-- 11，是主键，自增长，非空、课程名称(name)，类型为字符串，长度为20，非空、学分(score)，类型</span><br><span class="line">-- 为浮点数，小数点后面保留2位有效数字， 长度为5，非空</span><br><span class="line">CREATE DATABASE IF NOT EXISTS exercise DEFAULT CHARACTER SET UTF8 COLLATE UTF8_GENERAL_CI;</span><br><span class="line"></span><br><span class="line">USE exercise;</span><br><span class="line"></span><br><span class="line">CREATE TABLE IF NOT EXISTS stu_course(</span><br><span class="line">	`number` INT(11) AUTO_INCREMENT PRIMARY KEY NOT NULL COMMENT &#x27;课程编号&#x27;,</span><br><span class="line">	name varchar(20) NOT NULL COMMENT &#x27;课程名称&#x27;,</span><br><span class="line">	score double(5,2) NOT NULL COMMENT &#x27;学号&#x27;</span><br><span class="line">)ENGINE=InnoDB CHARSET=UTF8 COMMENT &#x27;课程表&#x27;;</span><br><span class="line"></span><br><span class="line">-- 向课程表中插入一条数据</span><br><span class="line">INSERT INTO stu_course</span><br><span class="line">VALUES(1,&#x27;Maths&#x27;,60.50);</span><br><span class="line"></span><br><span class="line">-- 将课程表重命名为course</span><br><span class="line">ALTER TABLE stu_course RENAME AS course;</span><br><span class="line"></span><br><span class="line">-- 在课程表中添加字段学时(time)，类型为整数，长度为3，非空</span><br><span class="line">ALTER TABLE course ADD `time` INT(3) NOT NULL COMMENT &#x27;学时&#x27;;</span><br><span class="line"></span><br><span class="line">-- 修改课程表学分类型为浮点数，小数点后面保留1位有效数字，长度为3，非空</span><br><span class="line">ALTER TABLE course MODIFY score double(3,1) NOT NULL COMMENT &#x27;学分&#x27;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/11/16/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/1%E6%95%B0%E6%8D%AE%E5%BA%93/2024-11-16_4-%E5%85%B6%E5%AE%83%EF%BC%88SHOW%E3%80%81USE%EF%BC%89/">4-其它（SHOW、USE）</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/MySql/">MySql</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/">SQL网课</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/">1DDL</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/1%E6%95%B0%E6%8D%AE%E5%BA%93/">1数据库</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h2 id="其它（SHOW、USE）">其它（SHOW、USE）</h2>
-<h4 id="1-查看数据库">1.查看数据库</h4>
+        <h2 id="数据处理函数">数据处理函数</h2>
+<blockquote>
+<p>不同SQL使用不同函数，不具备可移植性</p>
+</blockquote>
         
           <div class="more-link">
-            <a href="/2024/11/16/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/1%E6%95%B0%E6%8D%AE%E5%BA%93/2024-11-16_4-%E5%85%B6%E5%AE%83%EF%BC%88SHOW%E3%80%81USE%EF%BC%89/#more">Read On »</a>
+            <a href="/2022/10/05/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/2022-10-05_8%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/#more">Read On »</a>
           </div>
         
       
@@ -218,12 +170,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/2%E6%95%B0%E6%8D%AE%E8%A1%A8/2024-11-16_2-ALTER/">2-ALTER</a>
+          <a href="/2022/10/05/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/2022-10-05_9%E6%B1%87%E6%80%BB%E6%95%B0%E6%8D%AE%E5%87%BD%E6%95%B0/">9汇总数据函数</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2022-10-04T16:00:00.000Z" itemprop="datePublished">
+    2022-10-05
   </time>
   
   
@@ -235,15 +187,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/">SQL网课</a> }
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/">1DDL</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/2%E6%95%B0%E6%8D%AE%E8%A1%A8/">2数据表</a> }
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/">SELECT语句</a> }
   </li>
 
 
@@ -254,11 +202,61 @@
     </header>
     <div>
       
-        <h2 id="ALTER">ALTER</h2>
-<h4 id="语法">语法</h4>
+        <h2 id="汇总数据">汇总数据</h2>
+<h4 id="1-聚集函数">1.聚集函数</h4>
         
           <div class="more-link">
-            <a href="/2024/11/16/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/2%E6%95%B0%E6%8D%AE%E8%A1%A8/2024-11-16_2-ALTER/#more">Read On »</a>
+            <a href="/2022/10/05/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/SELECT%E8%AF%AD%E5%8F%A5/2022-10-05_9%E6%B1%87%E6%80%BB%E6%95%B0%E6%8D%AE%E5%87%BD%E6%95%B0/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2022/10/05/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/UPDATE&amp;DELETE%E8%AF%AD%E5%8F%A5/2022-10-05_16%E6%9B%B4%E6%96%B0%E5%92%8C%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE/">16更新和删除数据</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2022-10-04T16:00:00.000Z" itemprop="datePublished">
+    2022-10-05
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/">MySQL必知必会笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/UPDATE-DELETE%E8%AF%AD%E5%8F%A5/">UPDATE&amp;DELETE语句</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="更新和删除数据">更新和删除数据</h2>
+<h4 id="1-更新数据">1.更新数据</h4>
+        
+          <div class="more-link">
+            <a href="/2022/10/05/MySql/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%AC%94%E8%AE%B0/UPDATE&DELETE%E8%AF%AD%E5%8F%A5/2022-10-05_16%E6%9B%B4%E6%96%B0%E5%92%8C%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE/#more">Read On »</a>
           </div>
         
       

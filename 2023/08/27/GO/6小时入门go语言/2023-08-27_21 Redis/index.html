@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>21 Redis | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>21 Redis</h1>
+    </header>
+
+    <section>
+      <h1>21 Redis</h1>
+<h2 id="import">import</h2>
+<span id="more"></span>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;github.com/redis/go-redis/v9&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="1-使用Redis-String">1. 使用Redis String</h2>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Package main -----------------------------</span></span><br><span class="line"><span class="comment">// @file      : redis.go</span></span><br><span class="line"><span class="comment">// @author    : Yunyin</span></span><br><span class="line"><span class="comment">// @contact   : yunyin_jayyi@qq.com</span></span><br><span class="line"><span class="comment">// @time      : 2023/8/2 12:22</span></span><br><span class="line"><span class="comment">// -------------------------------------------</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;context&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;github.com/redis/go-redis/v9&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	client := redis.NewClient(&amp;redis.Options&#123;</span><br><span class="line">		Addr:     <span class="string">&quot;172.16.136.8:6379&quot;</span>, <span class="comment">//ip:port</span></span><br><span class="line">		Password: <span class="string">&quot;123456&quot;</span>,</span><br><span class="line">		DB:       <span class="number">0</span>, <span class="comment">//默认创建0-15个DB，此处使用0号DB</span></span><br><span class="line">	&#125;)</span><br><span class="line">	ctx := context.TODO()</span><br><span class="line"></span><br><span class="line">	useRedisString(ctx, client)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">useRedisString</span><span class="params">(ctx context.Context, client *redis.Client)</span></span> &#123;</span><br><span class="line">	key := <span class="string">&quot;name&quot;</span></span><br><span class="line">	value := <span class="string">&quot;yunyin&quot;</span></span><br><span class="line">	err := client.Set(ctx, key, value, <span class="number">2</span>*time.Second).Err() <span class="comment">//设置过期时间为2s，如果为0则是永不过期</span></span><br><span class="line">	checkRedisErr(err)</span><br><span class="line"></span><br><span class="line">	v2, err := client.Get(ctx, key).Result()</span><br><span class="line">	checkRedisErr(err)</span><br><span class="line">	fmt.Println(v2)</span><br><span class="line"></span><br><span class="line">	client.Del(ctx, key)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">checkRedisErr</span><span class="params">(err <span class="type">error</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">&quot;ERR:&quot;</span>, err)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="2-使用Redis-List">2. 使用Redis List</h2>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Package main -----------------------------</span></span><br><span class="line"><span class="comment">// @file      : redis.go</span></span><br><span class="line"><span class="comment">// @author    : Yunyin</span></span><br><span class="line"><span class="comment">// @contact   : yunyin_jayyi@qq.com</span></span><br><span class="line"><span class="comment">// @time      : 2023/8/2 12:22</span></span><br><span class="line"><span class="comment">// -------------------------------------------</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;context&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;github.com/redis/go-redis/v9&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	client := redis.NewClient(&amp;redis.Options&#123;</span><br><span class="line">		Addr:     <span class="string">&quot;172.16.136.8:6379&quot;</span>, <span class="comment">//ip:port</span></span><br><span class="line">		Password: <span class="string">&quot;123456&quot;</span>,</span><br><span class="line">		DB:       <span class="number">0</span>, <span class="comment">//默认创建0-15个DB，此处使用0号DB</span></span><br><span class="line">	&#125;)</span><br><span class="line">	ctx := context.TODO()</span><br><span class="line"></span><br><span class="line">	useRedisList(ctx, client)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">useRedisList</span><span class="params">(ctx context.Context, client *redis.Client)</span></span> &#123;</span><br><span class="line">	key := <span class="string">&quot;ids&quot;</span></span><br><span class="line">	values := []<span class="keyword">interface</span>&#123;&#125;&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">&quot;hello&quot;</span>, <span class="string">&quot;你好&quot;</span>&#125;</span><br><span class="line">	<span class="comment">//使用...将切片转换成一个不定长参数</span></span><br><span class="line">	err := client.RPush(ctx, key, values...).Err() <span class="comment">//在key对应的list的尾部追加元素（list不存在则先创建一个空list）</span></span><br><span class="line">	checkRedisErr(err)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//读取list的一个区间，从[0,-1]，即全部元素</span></span><br><span class="line">	v2, err := client.LRange(ctx, key, <span class="number">0</span>, <span class="number">-1</span>).Result()</span><br><span class="line">	checkRedisErr(err)</span><br><span class="line">	fmt.Println(v2)</span><br><span class="line"></span><br><span class="line">	client.Del(ctx, key)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">checkRedisErr</span><span class="params">(err <span class="type">error</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">&quot;ERR:&quot;</span>, err)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="3-使用Redis-Hash">3. 使用Redis Hash</h2>
+<p>​	主要用途：存一个结构体数据。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Package main -----------------------------</span></span><br><span class="line"><span class="comment">// @file      : redis.go</span></span><br><span class="line"><span class="comment">// @author    : Yunyin</span></span><br><span class="line"><span class="comment">// @contact   : yunyin_jayyi@qq.com</span></span><br><span class="line"><span class="comment">// @time      : 2023/8/2 12:22</span></span><br><span class="line"><span class="comment">// -------------------------------------------</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;context&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;github.com/redis/go-redis/v9&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	client := redis.NewClient(&amp;redis.Options&#123;</span><br><span class="line">		Addr:     <span class="string">&quot;172.16.136.8:6379&quot;</span>, <span class="comment">//ip:port</span></span><br><span class="line">		Password: <span class="string">&quot;123456&quot;</span>,</span><br><span class="line">		DB:       <span class="number">0</span>, <span class="comment">//默认创建0-15个DB，此处使用0号DB</span></span><br><span class="line">	&#125;)</span><br><span class="line">	ctx := context.TODO()</span><br><span class="line"></span><br><span class="line">	useRedisString(ctx, client)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">userRedisHash</span><span class="params">(ctx context.Context, client *redis.Client)</span></span> &#123;</span><br><span class="line">	<span class="comment">//写入一个Hash，前两个参数是ctx和key，后续是不定长的键值对</span></span><br><span class="line">	err := client.HSet(ctx, <span class="string">&quot;学生ID1&quot;</span>, <span class="string">&quot;Name&quot;</span>, <span class="string">&quot;Jay&quot;</span>, <span class="string">&quot;Age&quot;</span>, <span class="number">18</span>, <span class="string">&quot;Height&quot;</span>, <span class="number">180.4</span>).Err()</span><br><span class="line">	checkRedisErr(err)</span><br><span class="line"></span><br><span class="line">	err = client.HSet(ctx, <span class="string">&quot;学生ID2&quot;</span>, <span class="string">&quot;Name&quot;</span>, <span class="string">&quot;John&quot;</span>, <span class="string">&quot;Age&quot;</span>, <span class="number">20</span>, <span class="string">&quot;Height&quot;</span>, <span class="number">173.5</span>).Err()</span><br><span class="line">	checkRedisErr(err)</span><br><span class="line"></span><br><span class="line">	age, err := client.HGet(ctx, <span class="string">&quot;学生ID1&quot;</span>, <span class="string">&quot;Age&quot;</span>).Result() <span class="comment">//获取key中对应字段的val</span></span><br><span class="line">	checkRedisErr(err)</span><br><span class="line">	fmt.Println(age)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//获取所有字段，返回一个map，里面包含键值对</span></span><br><span class="line">	<span class="keyword">for</span> field, value := <span class="keyword">range</span> client.HGetAll(ctx, <span class="string">&quot;学生ID2&quot;</span>).Val() &#123;</span><br><span class="line">		fmt.Println(field, value)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	client.Del(ctx, <span class="string">&quot;学生ID1&quot;</span>)</span><br><span class="line">	client.Del(ctx, <span class="string">&quot;学生ID2&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">checkRedisErr</span><span class="params">(err <span class="type">error</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">&quot;ERR:&quot;</span>, err)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-08-26T16:00:00.000Z" itemprop="datePublished">
+              2023-08-27
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

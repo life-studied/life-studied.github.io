@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>package与module | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>package与module</h1>
+    </header>
+
+    <section>
+      <h1>package与module</h1>
+<h2 id="从import开始">从import开始</h2>
+<span id="more"></span>
+<p>在python中，module和package都是<code>Python.Object</code>。</p>
+<p>区别在于，module一般代表一个文件，由import从文件中生成。而package代表一个文件夹，同样可以通过import生成。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># start.py</span></span><br><span class="line"><span class="keyword">import</span> pkg</span><br><span class="line"><span class="keyword">import</span> pkg.moduleA</span><br><span class="line"></span><br><span class="line"><span class="comment"># dictory: /pkg/moduleA.py</span></span><br></pre></td></tr></table></figure>
+<h2 id="import发生了什么">import发生了什么</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> test</span><br></pre></td></tr></table></figure>
+<ol>
+<li class="lvl-3">
+<p>查看缓存：根据<code>test字符串</code>查找是否存在这个module，如果有就结束</p>
+</li>
+<li class="lvl-3">
+<p>缓存未命中：从sys.path中寻找这个test.py文件</p>
+<ol>
+<li class="lvl-6">在test的独立命名空间中执行test.py里面的代码（对package则是<code>__init__.py</code>）</li>
+<li class="lvl-6">将该module缓存起来，存入到test这个变量中</li>
+</ol>
+</li>
+</ol>
+<h3 id="缓存机制">缓存机制</h3>
+<p>由于缓存机制的存在，所以即使import多次，module里的代码只会被执行一次：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> test</span><br><span class="line"><span class="keyword">import</span> test</span><br><span class="line"><span class="keyword">import</span> test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只执行一次：&quot;this is test&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="as和from">as和from</h3>
+<p>as是将最后一步的存入变量，变量名改成了我们想要的。</p>
+<p>from则是为了更细致的导入一个module中的部分</p>
+<h2 id="操作系统层面">操作系统层面</h2>
+<p>package就是一种特殊的module，它们的功能几乎一样，只是多了一个<code>__path__</code>属性。</p>
+<p>从操作系统层级来看，package下可以有subpackage和module，而module应该是最末端的东西。</p>
+<blockquote>
+<p>因此如果import一个package，做的事情<strong>与上面一致</strong>。唯一不同的是执行的是<code>__init__.py</code>下的代码。</p>
+</blockquote>
+<h2 id="参考资料">参考资料</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1K24y1k7XA">https://www.bilibili.com/video/BV1K24y1k7XA</a></p>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-07T16:00:00.000Z" itemprop="datePublished">
+              2024-11-08
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

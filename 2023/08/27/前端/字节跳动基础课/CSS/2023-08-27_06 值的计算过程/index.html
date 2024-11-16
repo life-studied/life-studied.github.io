@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>06 值的计算过程 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>06 值的计算过程</h1>
+    </header>
+
+    <section>
+      <h1>06 值的计算过程</h1>
+<p>CSS属性值的计算顺序和过程可以简单概括为以下几个步骤：</p>
+<span id="more"></span>
+<ol>
+<li class="lvl-3">
+<p>确定初始值：每个CSS属性都有一个初始值，当未指定具体值时将使用该初始值。例如，<code>margin</code>属性的初始值是<code>0</code>。</p>
+</li>
+<li class="lvl-3">
+<p>应用用户样式：浏览器首先会应用用户自定义的样式表（如用户自定义的CSS文件），这些样式会覆盖默认的初始值。</p>
+</li>
+<li class="lvl-3">
+<p>应用作者样式：接下来，浏览器会应用由网页作者提供的样式表。这包括嵌入式CSS样式表和外部链接的样式表。如果有多个样式规则应用到同一个元素上，浏览器将按照CSS选择器的特定顺序应用这些规则，并根据其优先级确定最终的属性值。</p>
+</li>
+<li class="lvl-3">
+<p>计算继承值：某些属性具有继承特性，这意味着它们的属性值会从父元素传递给子元素。对于继承属性，如果子元素没有指定特定的值，那么将使用父元素的属性值。</p>
+</li>
+<li class="lvl-3">
+<p>应用层叠顺序：当多个样式规则应用到同一个元素上时，可能存在冲突。在这种情况下，浏览器会根据层叠顺序（也称为层叠上下文）来确定最终的属性值。层叠顺序由多个因素决定，例如样式选择器的优先级、元素的位置等。</p>
+</li>
+<li class="lvl-3">
+<p>计算最终值：通过以上步骤，浏览器确定了每个CSS属性的优先级和继承关系，最终计算出它们的最终值。这些最终值将应用于渲染网页时的布局和样式。</p>
+</li>
+</ol>
+<p><img src="./assets/image-20230826014524914.png" alt="image-20230826014524914"></p>
+<p><img src="./assets/image-20230826014545832.png" alt="image-20230826014545832"></p>
+<p><img src="./assets/image-20230826014555498.png" alt="image-20230826014555498"></p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-08-26T16:00:00.000Z" itemprop="datePublished">
+              2023-08-27
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

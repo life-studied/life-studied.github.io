@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>04 Mysql使用案例（C API） | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>04 Mysql使用案例（C API）</h1>
+    </header>
+
+    <section>
+      <h1>04 Mysql使用案例（C API）</h1>
+<p>以上API对应的<code>MySQL</code>动态库：</p>
+<span id="more"></span>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Windows：<code>libmysql.dll</code></p>
+</li>
+<li class="lvl-2">
+<p>Linux：<code>libmysqlclient.so</code></p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mysql.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 1. 初始化连接环境</span></span><br><span class="line">    MYSQL* mysql = <span class="built_in">mysql_init</span>(<span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span>(mysql == <span class="literal">NULL</span>)\</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;mysql_init() error\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 连接数据库服务器</span></span><br><span class="line">    mysql = <span class="built_in">mysql_real_connect</span>(mysql, <span class="string">&quot;localhost&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;root&quot;</span>, </span><br><span class="line">                               <span class="string">&quot;scott&quot;</span>, <span class="number">0</span>, <span class="literal">NULL</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span>(mysql == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;mysql_real_connect() error\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;mysql api使用的默认编码: %s\n&quot;</span>, <span class="built_in">mysql_character_set_name</span>(mysql));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置编码为utf8</span></span><br><span class="line">    <span class="built_in">mysql_set_character_set</span>(mysql, <span class="string">&quot;utf8&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;mysql api使用的修改之后的编码: %s\n&quot;</span>, <span class="built_in">mysql_character_set_name</span>(mysql));</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;连接数据库服务器成功了...\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 执行一个sql语句</span></span><br><span class="line">    <span class="comment">// 查询scott数据库下的dept部门表</span></span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>* sql = <span class="string">&quot;select * from dept&quot;</span>;</span><br><span class="line">    <span class="comment">// 执行这个sql语句</span></span><br><span class="line">    <span class="type">int</span> ret = <span class="built_in">mysql_query</span>(mysql, sql);</span><br><span class="line">    <span class="keyword">if</span>(ret != <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;mysql_query() a失败了, 原因: %s\n&quot;</span>, <span class="built_in">mysql_error</span>(mysql));</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4. 取出结果集</span></span><br><span class="line">    MYSQL_RES* res = <span class="built_in">mysql_store_result</span>(mysql);</span><br><span class="line">    <span class="keyword">if</span>(res == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;mysql_store_result() 失败了, 原因: %s\n&quot;</span>, <span class="built_in">mysql_error</span>(mysql));</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 5. 得到结果集中的列数</span></span><br><span class="line">    <span class="type">int</span> num = <span class="built_in">mysql_num_fields</span>(res);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 6. 得到所有列的名字, 并且输出</span></span><br><span class="line">    MYSQL_FIELD * fields = <span class="built_in">mysql_fetch_fields</span>(res);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;num; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s\t\t&quot;</span>, fields[i].name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 7. 遍历结果集中所有的行</span></span><br><span class="line">    MYSQL_ROW row;</span><br><span class="line">    <span class="keyword">while</span>( (row = <span class="built_in">mysql_fetch_row</span>(res)) != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 将当前行中的每一列信息读出</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;num; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%s\t\t&quot;</span>, row[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 8. 释放资源 - 结果集</span></span><br><span class="line">    <span class="built_in">mysql_free_result</span>(res);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 9. 写数据库</span></span><br><span class="line">    <span class="comment">// 以下三条是一个完整的操作, 对应的是一个事务</span></span><br><span class="line">    <span class="comment">// 设置事务为手动提交</span></span><br><span class="line">    <span class="built_in">mysql_autocommit</span>(mysql, <span class="number">0</span>); </span><br><span class="line">    <span class="type">int</span> ret1 = <span class="built_in">mysql_query</span>(mysql, <span class="string">&quot;insert into dept values(61, &#x27;海军&#x27;, &#x27;圣地玛丽乔亚&#x27;)&quot;</span>);</span><br><span class="line">    <span class="type">int</span> ret2 = <span class="built_in">mysql_query</span>(mysql, <span class="string">&quot;insert into dept values(62, &#x27;七武海&#x27;, &#x27;世界各地&#x27;)&quot;</span>);</span><br><span class="line">    <span class="type">int</span> ret3 = <span class="built_in">mysql_query</span>(mysql, <span class="string">&quot;insert into dept values(63, &#x27;四皇&#x27;, &#x27;新世界&#x27;)&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ret1 = %d, ret2 = %d, ret3 = %d\n&quot;</span>, ret1, ret2, ret3);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(ret1==<span class="number">0</span> &amp;&amp; ret2==<span class="number">0</span> &amp;&amp; ret3==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 提交事务</span></span><br><span class="line">        <span class="built_in">mysql_commit</span>(mysql);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">mysql_rollback</span>(mysql);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 释放数据库资源</span></span><br><span class="line">    <span class="built_in">mysql_close</span>(mysql);</span><br><span class="line">    </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+              2023-11-27
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

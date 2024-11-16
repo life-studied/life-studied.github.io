@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>02 Client | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>02 Client</h1>
+    </header>
+
+    <section>
+      <h1>Client</h1>
+<ul class="lvl-0">
+<li class="lvl-2">通过<code>grpc::CreateChannel</code>传入IP string创建channel。</li>
+<li class="lvl-2">通过<code>ServiceName::NewStub</code>传入channel创建Stub</li>
+</ul>
+<span id="more"></span>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>通过Stub.xxx调用RPC服务。</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;grpcpp/grpcpp.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;mathtest.grpc.pb.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> grpc::Channel;</span><br><span class="line"><span class="keyword">using</span> grpc::ClientContext;</span><br><span class="line"><span class="keyword">using</span> grpc::Status;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> mathtest::MathTest;</span><br><span class="line"><span class="keyword">using</span> mathtest::MathRequest;</span><br><span class="line"><span class="keyword">using</span> mathtest::MathReply;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MathTestClient</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">MathTestClient</span>(std::shared_ptr&lt;Channel&gt; channel) : <span class="built_in">stub_</span>(MathTest::<span class="built_in">NewStub</span>(channel)) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">sendRequest</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">        MathRequest request;</span><br><span class="line"></span><br><span class="line">        request.<span class="built_in">set_a</span>(a);</span><br><span class="line">        request.<span class="built_in">set_b</span>(b);</span><br><span class="line"></span><br><span class="line">        MathReply reply;</span><br><span class="line"></span><br><span class="line">        ClientContext context;</span><br><span class="line"></span><br><span class="line">        Status status = stub_-&gt;<span class="built_in">sendRequest</span>(&amp;context, request, &amp;reply);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(status.<span class="built_in">ok</span>())&#123;</span><br><span class="line">            <span class="keyword">return</span> reply.<span class="built_in">result</span>();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            std::cout &lt;&lt; status.<span class="built_in">error_code</span>() &lt;&lt; <span class="string">&quot;: &quot;</span> &lt;&lt; status.<span class="built_in">error_message</span>() &lt;&lt; std::endl;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::unique_ptr&lt;MathTest::Stub&gt; stub_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">std::string <span class="title">address</span><span class="params">(<span class="string">&quot;0.0.0.0:5000&quot;</span>)</span></span>;</span><br><span class="line">    <span class="function">MathTestClient <span class="title">client</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">            grpc::CreateChannel(</span></span></span><br><span class="line"><span class="params"><span class="function">                    address,</span></span></span><br><span class="line"><span class="params"><span class="function">                    grpc::InsecureChannelCredentials()</span></span></span><br><span class="line"><span class="params"><span class="function">            )</span></span></span><br><span class="line"><span class="params"><span class="function">    )</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> response;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> a = <span class="number">5</span>;</span><br><span class="line">    <span class="type">int</span> b = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    response = client.<span class="built_in">sendRequest</span>(a, b);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Answer received: &quot;</span> &lt;&lt; a &lt;&lt; <span class="string">&quot; * &quot;</span> &lt;&lt; b &lt;&lt; <span class="string">&quot; = &quot;</span> &lt;&lt; response &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span></span>&#123;</span><br><span class="line">    <span class="built_in">Run</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-08-30T16:00:00.000Z" itemprop="datePublished">
+              2024-08-31
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

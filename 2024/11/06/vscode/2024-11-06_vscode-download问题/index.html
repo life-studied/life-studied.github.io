@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vscode-download问题 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>vscode-download问题</h1>
+    </header>
+
+    <section>
+      <h1>vscode-download问题</h1>
+<h2 id="情况">情况</h2>
+<span id="more"></span>
+<p>wsl经常性出现vscode-server需要更新版本，然后会根据某个commit-id进行下载。此时vscode卡在这里不能正常启动。</p>
+<p><img src="./assets/image-20241031185911642.png" alt="image-20241031185911642"></p>
+<h2 id="解决">解决</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>复制链接，从第三方下载渠道代下载（默认下载到<code>D:\DownLoad\stable</code>）</p>
+</li>
+<li class="lvl-2">
+<p>执行下面的脚本，传入commit-id</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查是否传入了参数</span></span><br><span class="line">if [ $# -eq 0 ]; then</span><br><span class="line">    echo &quot;错误：没有传入参数。&quot;</span><br><span class="line">    echo &quot;用法：$0 &lt;commit-id&gt;&quot;</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入VSCode服务器的bin目录</span></span><br><span class="line">cd ~/.vscode-server/bin</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查目录是否存在</span></span><br><span class="line">if [ ! -d &quot;$(pwd)&quot; ]; then</span><br><span class="line">    echo &quot;错误：VSCode服务器的bin目录不存在。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">移动下载的VSCode Server压缩包到VSCode服务器的bin目录</span></span><br><span class="line">mv /mnt/d/DownLoad/stable ~/.vscode-server/bin/temp.tar.gz</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查压缩包是否存在</span></span><br><span class="line">if [ ! -f &quot;./temp.tar.gz&quot; ]; then</span><br><span class="line">    echo &quot;错误：压缩包temp.tar.gz不存在。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解压压缩包</span></span><br><span class="line">tar -zxf temp.tar.gz</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查解压后的VSCode Server目录是否存在</span></span><br><span class="line">if [ ! -d &quot;vscode-server-linux-x64&quot; ]; then</span><br><span class="line">    echo &quot;错误：解压后的VSCode Server目录不存在。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将解压后的VSCode Server目录重命名为传入的第一个参数</span></span><br><span class="line">mv vscode-server-linux-x64 &quot;$1&quot;</span><br><span class="line"></span><br><span class="line">echo &quot;VSCode Server已成功重命名为：$1&quot;</span><br><span class="line"></span><br><span class="line">rm ~/.vscode-server/bin/temp.tar.gz</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-05T16:00:00.000Z" itemprop="datePublished">
+              2024-11-06
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

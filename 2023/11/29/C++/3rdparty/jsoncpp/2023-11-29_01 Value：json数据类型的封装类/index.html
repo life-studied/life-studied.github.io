@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>01 Value：json数据类型的封装类 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>01 Value：json数据类型的封装类</h1>
+    </header>
+
+    <section>
+      <h1>Value：json数据类型的封装类</h1>
+<p>​	Value对象创建时可以不指定类型，在使用时会根据操作自动指定类型。</p>
+<span id="more"></span>
+<h2 id="1-valueType枚举类">1. valueType枚举类</h2>
+<p>​	<code>valueType</code>是用于初始化<code>Value</code>类的枚举类，用于指定<code>Value</code>中的数据类型。</p>
+<table>
+<thead>
+<tr>
+<th>枚举类型</th>
+<th>说明</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nullValue</td>
+<td><code>null</code> value</td>
+<td>不表示任何数据，空值</td>
+</tr>
+<tr>
+<td>intValue</td>
+<td><code>signed integer</code> value</td>
+<td>表示有符号整数</td>
+</tr>
+<tr>
+<td>uintValue</td>
+<td><code>unsigned integer</code> value</td>
+<td>表示无符号整数</td>
+</tr>
+<tr>
+<td>realValue</td>
+<td><code>double</code> value</td>
+<td>表示浮点数</td>
+</tr>
+<tr>
+<td>stringValue</td>
+<td><code>UTF-8 string</code> value</td>
+<td>表示utf8格式的字符串</td>
+</tr>
+<tr>
+<td>booleanValue</td>
+<td><code>bool</code> value</td>
+<td>表示布尔数</td>
+</tr>
+<tr>
+<td>arrayValue</td>
+<td><code>array</code> value (ordered list)</td>
+<td>表示数组，即JSON串中的[]</td>
+</tr>
+<tr>
+<td>objectValue</td>
+<td><code>object</code> value (collection of name/value pairs)</td>
+<td>表示键值对，即JSON串中的{}</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-构造函数">2. 构造函数</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 因为Json::Value已经实现了各种数据类型的构造函数</span></span><br><span class="line"><span class="built_in">Value</span>(ValueType type = nullValue);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Value</span>(Int value);</span><br><span class="line"><span class="built_in">Value</span>(UInt value);</span><br><span class="line"><span class="built_in">Value</span>(Int64 value);</span><br><span class="line"><span class="built_in">Value</span>(UInt64 value);</span><br><span class="line"><span class="built_in">Value</span>(<span class="type">double</span> value);</span><br><span class="line"><span class="built_in">Value</span>(<span class="type">const</span> <span class="type">char</span>* value);</span><br><span class="line"><span class="built_in">Value</span>(<span class="type">const</span> <span class="type">char</span>* begin, <span class="type">const</span> <span class="type">char</span>* end);</span><br><span class="line"><span class="built_in">Value</span>(<span class="type">bool</span> value);</span><br><span class="line"><span class="built_in">Value</span>(<span class="type">const</span> Value&amp; other);</span><br><span class="line"><span class="built_in">Value</span>(Value&amp;&amp; other);</span><br></pre></td></tr></table></figure>
+<h2 id="3-检测与转换函数">3. 检测与转换函数</h2>
+<h3 id="3-1-检测类型">3.1 检测类型</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 检测保存的数据类型</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isNull</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isBool</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isInt</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isInt64</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isUInt</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isUInt64</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isIntegral</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isDouble</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isNumeric</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isString</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isArray</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isObject</span><span class="params">()</span> <span class="type">const</span></span>;</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-转换为类型">3.2 转换为类型</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Int <span class="title">asInt</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function">UInt <span class="title">asUInt</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function">Int64 <span class="title">asInt64</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function">UInt64 <span class="title">asUInt64</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function">LargestInt <span class="title">asLargestInt</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function">LargestUInt <span class="title">asLargestUInt</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function">JSONCPP_STRING <span class="title">asString</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function"><span class="type">float</span> <span class="title">asFloat</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">asDouble</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">asBool</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function"><span class="type">const</span> <span class="type">char</span>* <span class="title">asCString</span><span class="params">()</span> <span class="type">const</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="4-Json数组的操作">4. Json数组的操作</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">ArrayIndex <span class="title">size</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"></span><br><span class="line">Value&amp; <span class="keyword">operator</span>[](ArrayIndex index);</span><br><span class="line">Value&amp; <span class="keyword">operator</span>[](<span class="type">int</span> index);</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> Value&amp; <span class="keyword">operator</span>[](ArrayIndex index) <span class="type">const</span>;</span><br><span class="line"><span class="type">const</span> Value&amp; <span class="keyword">operator</span>[](<span class="type">int</span> index) <span class="type">const</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据下标的index返回这个位置的value值</span></span><br><span class="line"><span class="comment">// 如果没找到这个index对应的value, 返回第二个参数defaultValue</span></span><br><span class="line"><span class="function">Value <span class="title">get</span><span class="params">(ArrayIndex index, <span class="type">const</span> Value&amp; defaultValue)</span> <span class="type">const</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">Value&amp; <span class="title">append</span><span class="params">(<span class="type">const</span> Value&amp; value)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">const_iterator <span class="title">begin</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function">const_iterator <span class="title">end</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">iterator <span class="title">begin</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function">iterator <span class="title">end</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="5-json对象的操作">5. json对象的操作</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Value&amp; <span class="keyword">operator</span>[](<span class="type">const</span> <span class="type">char</span>* key);</span><br><span class="line"><span class="type">const</span> Value&amp; <span class="keyword">operator</span>[](<span class="type">const</span> <span class="type">char</span>* key) <span class="type">const</span>;</span><br><span class="line">Value&amp; <span class="keyword">operator</span>[](<span class="type">const</span> JSONCPP_STRING&amp; key);</span><br><span class="line"><span class="type">const</span> Value&amp; <span class="keyword">operator</span>[](<span class="type">const</span> JSONCPP_STRING&amp; key) <span class="type">const</span>;</span><br><span class="line">Value&amp; <span class="keyword">operator</span>[](<span class="type">const</span> StaticString&amp; key);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过key, 得到value值</span></span><br><span class="line"><span class="function">Value <span class="title">get</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* key, <span class="type">const</span> Value&amp; defaultValue)</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function">Value <span class="title">get</span><span class="params">(<span class="type">const</span> JSONCPP_STRING&amp; key, <span class="type">const</span> Value&amp; defaultValue)</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function">Value <span class="title">get</span><span class="params">(<span class="type">const</span> CppTL::ConstString&amp; key, <span class="type">const</span> Value&amp; defaultValue)</span> <span class="type">const</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 得到对象中所有的键值</span></span><br><span class="line"><span class="keyword">typedef</span> std::vector&lt;std::string&gt; Members;</span><br><span class="line"><span class="function">Members <span class="title">getMemberNames</span><span class="params">()</span> <span class="type">const</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="6-Value序列化-string">6. Value序列化-&gt;string</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 序列化得到的字符串有样式 -&gt; 带换行 -&gt; 方便阅读</span></span><br><span class="line"><span class="comment">// 写配置文件的时候</span></span><br><span class="line"><span class="function">std::string <span class="title">toStyledString</span><span class="params">()</span> <span class="type">const</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-11-28T16:00:00.000Z" itemprop="datePublished">
+              2023-11-29
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

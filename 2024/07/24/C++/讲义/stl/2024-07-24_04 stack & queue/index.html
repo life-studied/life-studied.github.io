@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>04 stack &amp; queue | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>04 stack &amp; queue</h1>
+    </header>
+
+    <section>
+      <h1>stack &amp; queue</h1>
+<p>​	栈与队列，是非常常见的数据结构。</p>
+<span id="more"></span>
+<p>​	一般讲的时候会把queue和stack放在一起讲，因为它们底层的数据结构都是双端队列deque，它允许左进左出，那就是stack，也允许右进右出，还是stack；还允许左进右出、右进左出，就是queue。</p>
+<h2 id="stack">stack</h2>
+<p>​	栈。先进后出。比较简单，用到的场景也比较简单。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line">std::stack&lt;<span class="type">int</span>&gt; s;</span><br></pre></td></tr></table></figure>
+<h3 id="插入">插入</h3>
+<p>​	插入一个到栈顶。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">s.<span class="built_in">push</span>(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="获取">获取</h3>
+<p>​	注意了，C++中的数据结构，一般不允许边获取边删除这种东西。</p>
+<p>​	获取就是获取，不会有额外的操作。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> data = s.<span class="built_in">top</span>();		<span class="comment">// return a ref -&gt; int&amp;</span></span><br></pre></td></tr></table></figure>
+<h3 id="删除">删除</h3>
+<p>​	删掉栈顶的元素。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">s.<span class="built_in">pop</span>();</span><br></pre></td></tr></table></figure>
+<h2 id="queue">queue</h2>
+<p>​	队列，先进后出，一般常用场景是树的层序遍历或者图的广搜，在工程上常用于多个线程或异步操作之间的资源管理和共享。用起来也很简单。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::queue&lt;<span class="type">int</span>&gt; q;</span><br></pre></td></tr></table></figure>
+<h3 id="插入-2">插入</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">q.<span class="built_in">push</span>(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="获取-2">获取</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> data = q.<span class="built_in">front</span>();		<span class="comment">// return a ref -&gt; int&amp;</span></span><br><span class="line">							<span class="comment">// 注意，queue是front，而stack是top</span></span><br><span class="line">							<span class="comment">// 因为逻辑模型上，queue是横着放的，stack是竖着放的（笑）</span></span><br></pre></td></tr></table></figure>
+<h3 id="删除-2">删除</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">q.<span class="built_in">pop</span>();</span><br></pre></td></tr></table></figure>
+<h2 id="priority-queue">priority_queue</h2>
+<p>​	优先级队列，放入数据后，自动在队列里排序。</p>
+<p>​	队首的是优先级最高的。优先级可以是大，也可以是小。</p>
+<p>​	底层数据结构是堆，堆是一种基于完全二叉树的数据结构，插入时在内部排序的操作被成为“堆化”。大的在前的叫做大顶堆，小的在前的叫做小顶堆。</p>
+<p>​	排序的时间复杂度是<code>O(logn)</code>。</p>
+<h3 id="Usage">Usage</h3>
+<p>​	使用方法与队列一样。除了获取是用<code>top</code>，因为它本质是一棵树，从树的顶上拿一个元素。</p>
+<p>​	优先级队列的创建，需要设计优先级规则。不写就是默认是大的优先级高，放在前面。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">priority_queue&lt;<span class="type">int</span>&gt; q;		<span class="comment">// default，大的在前</span></span><br><span class="line"></span><br><span class="line">priority_queue&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;, greater&lt;<span class="type">int</span>&gt;&gt; q1;	<span class="comment">// 小的在前</span></span><br><span class="line">priority_queue&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;, less&lt;<span class="type">int</span>&gt;&gt; q2;	<span class="comment">// 大的在前</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		q1.<span class="built_in">push</span>(i);</span><br><span class="line">		q2.<span class="built_in">push</span>(i);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; q1.<span class="built_in">top</span>();</span><br><span class="line">		q1.<span class="built_in">pop</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; q2.<span class="built_in">top</span>();</span><br><span class="line">		q2.<span class="built_in">pop</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="自定义">自定义</h2>
+<p>​	当代码写多了，自然会遇到需要自定义的情况。</p>
+<p>​	比如，我希望我有一个优先级队列，里面还是正常排序，但是，我希望每个元素里面除了优先级本身，还顺便挂载了一个我想存进去的东西，它只是和这个元素有关，但是不影响排序。</p>
+<p>​	这样一个东西，不适合存储在外部，所以只能和优先级一起存，取出来的时候也就能直接拿到了。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">package</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">package</span>(<span class="type">int</span> _l, <span class="type">double</span> _d) :<span class="built_in">level</span>(_l), <span class="built_in">data</span>(_d) &#123;&#125;</span><br><span class="line">	<span class="type">int</span> level;</span><br><span class="line">	<span class="type">double</span> data;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="keyword">operator</span>&lt;(<span class="type">const</span> package&amp; lhs, <span class="type">const</span> package&amp; rhs)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> lhs.data &lt; rhs.data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	priority_queue&lt;package, vector&lt;package&gt;, less&lt;package&gt;&gt; q;</span><br><span class="line">	q.<span class="built_in">push</span>(&#123;<span class="number">1</span>,<span class="number">2.0</span>&#125;);</span><br><span class="line">	<span class="keyword">auto</span> data = q.<span class="built_in">top</span>();</span><br><span class="line">	cout &lt;&lt; data.data;</span><br><span class="line">	q.<span class="built_in">pop</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-07-23T16:00:00.000Z" itemprop="datePublished">
+              2024-07-24
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

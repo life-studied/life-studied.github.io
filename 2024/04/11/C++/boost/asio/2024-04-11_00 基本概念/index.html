@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>00 基本概念 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>00 基本概念</h1>
+    </header>
+
+    <section>
+      <h1>基本概念</h1>
+<p>asio基于两个概念：</p>
+<span id="more"></span>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>I/O服务，抽象了操作系统的<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%BC%82%E6%AD%A5%E6%8E%A5%E5%8F%A3&amp;search_source=Entity&amp;hybrid_search_source=Entity&amp;hybrid_search_extra=%7B%22sourceType%22%3A%22article%22%2C%22sourceId%22%3A%22647804096%22%7D">异步接口</a> <code>boost::asio::io_service::service</code>：</p>
+<ul class="lvl-2">
+<li class="lvl-4"><code>boost::asio::io_service</code></li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>I/O对象，有多种对象 <code>boost::asio::basic_io_object</code>：</p>
+<ul class="lvl-2">
+<li class="lvl-4"><code>boost::asio::ip::tcp::socket</code></li>
+<li class="lvl-4"><code>boost::asio::ip::tcp::resolver</code></li>
+<li class="lvl-4"><code>boost::asio::ip::tcp::acceptor</code></li>
+<li class="lvl-4"><code>boost::asio::local::stream_protocol::socket</code> 本地连接</li>
+<li class="lvl-4"><code>boost::asio::posix::stream_descriptor</code> 面向流的<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6&amp;search_source=Entity&amp;hybrid_search_source=Entity&amp;hybrid_search_extra=%7B%22sourceType%22%3A%22article%22%2C%22sourceId%22%3A%22647804096%22%7D">文件描述符</a>，比如<code>stdout</code>, <code>stdin</code></li>
+<li class="lvl-4"><code>boost::asio::deadline_timer</code> 定时器</li>
+<li class="lvl-4"><code>boost::asio::signal_set</code> 信号处理</li>
+</ul>
+</li>
+</ul>
+<p>​	所有 I/O 对象通常都需要一个 I/O 服务作为它们的构造函数的第一个参数，比如：</p>
+<figure class="highlight rb"><table><tr><td class="code"><pre><span class="line">boost::asio::io_service io_service;</span><br><span class="line">boost::asio::deadline_timer timer(io_service, boost::posix_time::seconds(<span class="number">5</span>));</span><br></pre></td></tr></table></figure>
+<h2 id="层次关系">层次关系</h2>
+<h3 id="1-boost-asio">1. boost::asio</h3>
+<h4 id="io-context">io_context</h4>
+<p>​	而<code>asio</code>空间中，我们首先不可避免的就是类<code>io_service</code>或<code>io_context</code>。(<code>io_context</code>这个类是用来替代<code>io_service</code>的，建议以后直接使用<code>io_context</code>即可)</p>
+<p>​	这个类非常重要，它相当于我们程序与系统之间<code>I/O</code>操作的中介，我们所有的接受或发送数据操作，都是通过将需求提交给这个类，然后这个类再交给计算机来执行的。</p>
+<h4 id="buffer">buffer</h4>
+<p>​	除了<code>io_context</code>外，<code>asio</code>里面还有一个函数非常重要,那就是<code>buffer</code>函数，它的作用其实就是构造一个结构体,大致如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span>&#123;</span><br><span class="line">    <span class="type">void</span>* buf;</span><br><span class="line">    s_size len;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​	该网络模块中所有的收发数据操作，都不接受单独的字符串，而是这样一个结构体，分别为缓存区的首地址以及缓存区的大小。</p>
+<h3 id="2-boost-asio-ip">2. boost::asio::ip</h3>
+<p>​	asio里面进一步的命名空间ip，我们的TCP和UDP相关类，就在这个ip里面。</p>
+<table>
+<thead>
+<tr>
+<th>namespace</th>
+<th>class/function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boost::asio::ip</td>
+<td>address</td>
+</tr>
+<tr>
+<td>boost::asio::ip::tcp</td>
+<td>socket,acceptor,endpoint</td>
+</tr>
+<tr>
+<td>boost::asio::ip::udp</td>
+<td>socket,endpoint</td>
+</tr>
+</tbody>
+</table>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>address：网络中的ip地址，最常用的就是它的静态函数<code>from_string</code>，将十进制的ip地址转化为网络字节序。</p>
+</li>
+<li class="lvl-2">
+<p>socket：网络通信中的socket，用于read/write。</p>
+</li>
+<li class="lvl-2">
+<p>acceptor：服务器使用的监听器对象，内部封装了一个socket，用于接受客户端的socket连接</p>
+</li>
+<li class="lvl-2">
+<p>endpoint：存储了IP和端口的对象。</p>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-04-10T16:00:00.000Z" itemprop="datePublished">
+              2024-04-11
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

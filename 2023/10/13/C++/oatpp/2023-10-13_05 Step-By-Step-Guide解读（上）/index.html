@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>05 Step-By-Step-Guide解读（上） | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>05 Step-By-Step-Guide解读（上）</h1>
+    </header>
+
+    <section>
+      <h1>05 Step-By-Step-Guide解读（上）</h1>
+<p>​	Step-By-Step-Guide主要演示了两个层面的使用，从简单到复杂：</p>
+<span id="more"></span>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>简单使用：使用裸<code>HttpRequestHandler</code>为每个<code>Endpoint</code>创建</p>
+</li>
+<li class="lvl-2">
+<p>完整使用：使用<code>Api Controller</code>管理<code>Endpoint</code>。</p>
+</li>
+</ul>
+<h2 id="1-简单使用">1. 简单使用</h2>
+<h3 id="1-1-基础">1.1 基础</h3>
+<p>​	下面演示了如何创建一个基本的http服务，不带任何处理接口。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/web/server/HttpConnectionHandler.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/network/Server.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/network/tcp/server/ConnectionProvider.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 创建用于HTTP请求路由的路由器 */</span></span><br><span class="line">  <span class="keyword">auto</span> router = oatpp::web::server::HttpRouter::<span class="built_in">createShared</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 创建带有路由器的HTTP连接处理程序 */</span></span><br><span class="line">  <span class="keyword">auto</span> connectionHandler = oatpp::web::server::HttpConnectionHandler::<span class="built_in">createShared</span>(router);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 创建TCP连接提供者 */</span></span><br><span class="line">  <span class="keyword">auto</span> connectionProvider = oatpp::network::tcp::server::ConnectionProvider::<span class="built_in">createShared</span>(&#123;<span class="string">&quot;localhost&quot;</span>, <span class="number">8000</span>, oatpp::network::Address::IP_4&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 创建服务器，它接受提供的TCP连接并将它们传递给HTTP连接处理程序 */</span></span><br><span class="line">  oatpp::<span class="function">network::Server <span class="title">server</span><span class="params">(connectionProvider, connectionHandler)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 打印有关服务器端口的信息 */</span></span><br><span class="line">  <span class="built_in">OATPP_LOGI</span>(<span class="string">&quot;MyApp&quot;</span>, <span class="string">&quot;服务器运行在端口 %s&quot;</span>, connectionProvider-&gt;<span class="built_in">getProperty</span>(<span class="string">&quot;port&quot;</span>).<span class="built_in">getData</span>());</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 运行服务器 */</span></span><br><span class="line">  server.<span class="built_in">run</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 初始化oatpp环境 */</span></span><br><span class="line">  oatpp::base::Environment::<span class="built_in">init</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 运行应用程序 */</span></span><br><span class="line">  <span class="built_in">run</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 销毁oatpp环境 */</span></span><br><span class="line">  oatpp::base::Environment::<span class="built_in">destroy</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>代码中所使用的类：</p>
+<ul class="lvl-2">
+<li class="lvl-4">
+<p><a target="_blank" rel="noopener" href="https://oatpp.io/api/latest/oatpp/web/server/HttpRouter/">HttpRouter</a> - HTTP请求的路由器。它将URL映射到端点处理程序。由于我们的应用程序目前尚未声明任何端点，因此服务器将始终返回<code>404未找到</code>。</p>
+</li>
+<li class="lvl-4">
+<p><a target="_blank" rel="noopener" href="https://oatpp.io/api/latest/oatpp/web/server/HttpConnectionHandler/">HttpConnectionHandler</a> - 这是一个简单的HTTP连接处理程序。它以多线程方式处理传入连接，为每个连接创建一个线程。</p>
+</li>
+<li class="lvl-4">
+<p><a target="_blank" rel="noopener" href="https://oatpp.io/api/latest/oatpp/network/tcp/server/ConnectionProvider/">ConnectionProvider</a> - <code>TCP</code>连接的提供者。它绑定到指定的端口。</p>
+</li>
+<li class="lvl-4">
+<p><a target="_blank" rel="noopener" href="https://oatpp.io/api/latest/oatpp/network/Server/">Server</a> - 服务器运行一个循环，从<code>ConnectionProvider</code>接受连接并将它们传递给<code>ConnectionHandler</code>。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-0-响应工厂（ResponseFactory-hpp）">1.2.0 响应工厂（ResponseFactory.hpp）</h3>
+<p>​	从<code>class ResponseFactory</code>可以看出，可以有三种响应格式：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>状态码</p>
+</li>
+<li class="lvl-2">
+<p>状态码+文本</p>
+</li>
+<li class="lvl-2">
+<p>状态码+DTO+JSON序列化器</p>
+</li>
+</ul>
+<blockquote>
+<p>它们的本质都是将数据转换成文本响应。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ResponseFactory</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  </span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Create &amp;id:oatpp::web::protocol::http::outgoing::Response; without a &amp;id:oatpp::web::protocol::http::outgoing::Body;.</span></span><br><span class="line"><span class="comment">   * @param status - &amp;id:oatpp::web::protocol::http::Status;.</span></span><br><span class="line"><span class="comment">   * @return - `std::shared_ptr` to &amp;id:oatpp::web::protocol::http::outgoing::Response;.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="type">static</span> std::shared_ptr&lt;Response&gt; <span class="title">createResponse</span><span class="params">(<span class="type">const</span> Status &amp;status)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Create &amp;id:oatpp::web::protocol::http::outgoing::Response; with &amp;id:oatpp::web::protocol::http::outgoing::BufferBody;.</span></span><br><span class="line"><span class="comment">   * @param status - &amp;id:oatpp::web::protocol::http::Status;.</span></span><br><span class="line"><span class="comment">   * @param text - &amp;id:oatpp::String;.</span></span><br><span class="line"><span class="comment">   * @return - `std::shared_ptr` to &amp;id:oatpp::web::protocol::http::outgoing::Response;.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="type">static</span> std::shared_ptr&lt;Response&gt; <span class="title">createResponse</span><span class="params">(<span class="type">const</span> Status&amp; status, <span class="type">const</span> oatpp::String&amp; text)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Create &amp;id:oatpp::web::protocol::http::outgoing::Response; with &amp;id:oatpp::web::protocol::http::outgoing::DtoBody;.</span></span><br><span class="line"><span class="comment">   * @param status - &amp;id:oatpp::web::protocol::http::Status;.</span></span><br><span class="line"><span class="comment">   * @param dto - see [Data Transfer Object (DTO)](https://oatpp.io/docs/components/dto/).</span></span><br><span class="line"><span class="comment">   * @param objectMapper - &amp;id:oatpp::data::mapping::ObjectMapper;.</span></span><br><span class="line"><span class="comment">   * @return - `std::shared_ptr` to &amp;id:oatpp::web::protocol::http::outgoing::Response;.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="type">static</span> std::shared_ptr&lt;Response&gt; <span class="title">createResponse</span><span class="params">(<span class="type">const</span> Status&amp; status,</span></span></span><br><span class="line"><span class="params"><span class="function">                                                  <span class="type">const</span> oatpp::Void&amp; dto,</span></span></span><br><span class="line"><span class="params"><span class="function">                                                  <span class="type">const</span> std::shared_ptr&lt;data::mapping::ObjectMapper&gt;&amp; objectMapper)</span></span>;</span><br><span class="line">  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-返回文本格式响应">1.2 返回文本格式响应</h3>
+<p>​	新增<code>class Handler</code>和第27行代码。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/web/server/HttpConnectionHandler.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/network/Server.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/network/tcp/server/ConnectionProvider.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment"> * Custom Request Handler</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Handler</span> : <span class="keyword">public</span> oatpp::web::server::HttpRequestHandler &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Handle incoming request and return outgoing response.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function">std::shared_ptr&lt;OutgoingResponse&gt; <span class="title">handle</span><span class="params">(<span class="type">const</span> std::shared_ptr&lt;IncomingRequest&gt;&amp; request)</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ResponseFactory::<span class="built_in">createResponse</span>(Status::CODE_200, <span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Create Router for HTTP requests routing */</span></span><br><span class="line">  <span class="keyword">auto</span> router = oatpp::web::server::HttpRouter::<span class="built_in">createShared</span>();</span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* Route GET - &quot;/hello&quot; requests to Handler */</span></span><br><span class="line">  router-&gt;<span class="built_in">route</span>(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;/hello&quot;</span>, std::<span class="built_in">make_shared</span>&lt;Handler&gt;());</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Create HTTP connection handler with router */</span></span><br><span class="line">  <span class="keyword">auto</span> connectionHandler = oatpp::web::server::HttpConnectionHandler::<span class="built_in">createShared</span>(router);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Create TCP connection provider */</span></span><br><span class="line">  <span class="keyword">auto</span> connectionProvider = oatpp::network::tcp::server::ConnectionProvider::<span class="built_in">createShared</span>(&#123;<span class="string">&quot;localhost&quot;</span>, <span class="number">8000</span>, oatpp::network::Address::IP_4&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Create server which takes provided TCP connections and passes them to HTTP connection handler */</span></span><br><span class="line">  oatpp::<span class="function">network::Server <span class="title">server</span><span class="params">(connectionProvider, connectionHandler)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Priny info about server port */</span></span><br><span class="line">  <span class="built_in">OATPP_LOGI</span>(<span class="string">&quot;MyApp&quot;</span>, <span class="string">&quot;Server running on port %s&quot;</span>, connectionProvider-&gt;<span class="built_in">getProperty</span>(<span class="string">&quot;port&quot;</span>).<span class="built_in">getData</span>());</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Run server */</span></span><br><span class="line">  server.<span class="built_in">run</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Init oatpp Environment */</span></span><br><span class="line">  oatpp::base::Environment::<span class="built_in">init</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Run App */</span></span><br><span class="line">  <span class="built_in">run</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Destroy oatpp Environment */</span></span><br><span class="line">  oatpp::base::Environment::<span class="built_in">destroy</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="1-3-返回JSON格式响应">1.3 返回JSON格式响应</h3>
+<p>​	新增了DTO类。</p>
+<p>​	修改了handle返回的格式类型。</p>
+<p>​	修改了router-&gt;route的参数。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/parser/json/mapping/ObjectMapper.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/web/server/HttpConnectionHandler.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/network/Server.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/network/tcp/server/ConnectionProvider.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/core/macro/codegen.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Begin DTO code-generation */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> OATPP_CODEGEN_BEGIN(DTO)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Message Data-Transfer-Object</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MessageDto</span> : <span class="keyword">public</span> oatpp::DTO &#123;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">DTO_INIT</span>(MessageDto, DTO <span class="comment">/* Extends */</span>)</span><br><span class="line"></span><br><span class="line">  <span class="built_in">DTO_FIELD</span>(Int32, statusCode);   <span class="comment">// Status code field</span></span><br><span class="line">  <span class="built_in">DTO_FIELD</span>(String, message);     <span class="comment">// Message field</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* End DTO code-generation */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> OATPP_CODEGEN_END(DTO)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Custom Request Handler</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Handler</span> : <span class="keyword">public</span> oatpp::web::server::HttpRequestHandler &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  std::shared_ptr&lt;oatpp::data::mapping::ObjectMapper&gt; m_objectMapper;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Constructor with object mapper.</span></span><br><span class="line"><span class="comment">   * @param objectMapper - object mapper used to serialize objects.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="built_in">Handler</span>(<span class="type">const</span> std::shared_ptr&lt;oatpp::data::mapping::ObjectMapper&gt;&amp; objectMapper)</span><br><span class="line">    : <span class="built_in">m_objectMapper</span>(objectMapper)</span><br><span class="line">  &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Handle incoming request and return outgoing response.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function">std::shared_ptr&lt;OutgoingResponse&gt; <span class="title">handle</span><span class="params">(<span class="type">const</span> std::shared_ptr&lt;IncomingRequest&gt;&amp; request)</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> message = MessageDto::<span class="built_in">createShared</span>();</span><br><span class="line">    message-&gt;statusCode = <span class="number">1024</span>;</span><br><span class="line">    message-&gt;message = <span class="string">&quot;Hello DTO!&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> ResponseFactory::<span class="built_in">createResponse</span>(Status::CODE_200, message, m_objectMapper);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Create json object mapper */</span></span><br><span class="line">  <span class="keyword">auto</span> objectMapper = oatpp::parser::json::mapping::ObjectMapper::<span class="built_in">createShared</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Create Router for HTTP requests routing */</span></span><br><span class="line">  <span class="keyword">auto</span> router = oatpp::web::server::HttpRouter::<span class="built_in">createShared</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Route GET - &quot;/hello&quot; requests to Handler */</span></span><br><span class="line">  router-&gt;<span class="built_in">route</span>(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;/hello&quot;</span>, std::<span class="built_in">make_shared</span>&lt;Handler&gt;(objectMapper <span class="comment">/* json object mapper */</span> ));</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Create HTTP connection handler with router */</span></span><br><span class="line">  <span class="keyword">auto</span> connectionHandler = oatpp::web::server::HttpConnectionHandler::<span class="built_in">createShared</span>(router);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Create TCP connection provider */</span></span><br><span class="line">  <span class="keyword">auto</span> connectionProvider = oatpp::network::tcp::server::ConnectionProvider::<span class="built_in">createShared</span>(&#123;<span class="string">&quot;localhost&quot;</span>, <span class="number">8000</span>, oatpp::network::Address::IP_4&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Create server which takes provided TCP connections and passes them to HTTP connection handler */</span></span><br><span class="line">  oatpp::<span class="function">network::Server <span class="title">server</span><span class="params">(connectionProvider, connectionHandler)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Priny info about server port */</span></span><br><span class="line">  <span class="built_in">OATPP_LOGI</span>(<span class="string">&quot;MyApp&quot;</span>, <span class="string">&quot;Server running on port %s&quot;</span>, connectionProvider-&gt;<span class="built_in">getProperty</span>(<span class="string">&quot;port&quot;</span>).<span class="built_in">getData</span>());</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Run server */</span></span><br><span class="line">  server.<span class="built_in">run</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Init oatpp Environment */</span></span><br><span class="line">  oatpp::base::Environment::<span class="built_in">init</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Run App */</span></span><br><span class="line">  <span class="built_in">run</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Destroy oatpp Environment */</span></span><br><span class="line">  oatpp::base::Environment::<span class="built_in">destroy</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-10-12T16:00:00.000Z" itemprop="datePublished">
+              2023-10-13
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

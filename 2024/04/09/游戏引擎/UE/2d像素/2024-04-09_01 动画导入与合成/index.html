@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>01 动画导入与合成 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>01 动画导入与合成</h1>
+    </header>
+
+    <section>
+      <h1>动画导入与合成</h1>
+<p>[TOC]</p>
+<span id="more"></span>
+<h2 id="1-从png的图片序列导入">1. 从png的图片序列导入</h2>
+<p>​	美术在制作动画素材时，可能会选择导出为png的动画序列。</p>
+<p>​	可以直接将png拖入UE中，将其使用Sprite纹理设置后，进行批量取出。</p>
+<p>​	方法是：使用<strong>提取Sprite</strong>来将一个纹理中的序列进行提取。提取模式选择网格，在下方网格区域选择每个单元的宽度和高度，以及边缘信息等，一键提取。</p>
+<p><img src="./assets/image-20240323165048293.png" alt="image-20240323165048293"></p>
+<h2 id="2-提取后的Sprite">2. 提取后的Sprite</h2>
+<p>​	提取后的n个序列以Sprite的格式保存，命名统一为<code>xxx_i</code>的格式，如果要修改名字，不要改变序号，否则会导致制作动画的错误。</p>
+<h2 id="3-合成动画">3. 合成动画</h2>
+<p>​	选中提取出所有的Sprite，右击——创建图像序列。即可创建<code>纸片图像序列视图</code>。</p>
+<p><img src="./assets/image-20240323165425882.png" alt="image-20240323165425882"></p>
+<h3 id="调整频率（帧数）">调整频率（帧数）</h3>
+<p>​	在序列的界面的详细中可以通过每秒帧数来调整动画的频率。</p>
+<h2 id="4-调整动画的轴位置">4. 调整动画的轴位置</h2>
+<p>​	调整轴的位置，只需调整每个Sprite的轴的位置即可，双击可以某个Sprite可以看到轴的位置，右侧<strong>枢轴位置</strong>属性表示轴的位置。</p>
+<p>​	推荐调整到<strong>底部居中</strong>。方法：选中所有Sprite，右击——资产操作——使用属性矩阵进行批量编辑。</p>
+<p><img src="./assets/image-20240323174338150.png" alt="image-20240323174338150"></p>
+<p>​	设置枢轴位置：</p>
+<p><img src="./assets/image-20240323174515832.png" alt="image-20240323174515832"></p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-04-08T16:00:00.000Z" itemprop="datePublished">
+              2024-04-09
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

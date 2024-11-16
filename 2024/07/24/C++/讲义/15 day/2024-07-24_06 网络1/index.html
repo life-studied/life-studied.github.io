@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>06 网络1 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>06 网络1</h1>
+    </header>
+
+    <section>
+      <h1>06 网络1</h1>
+<h2 id="socket">socket</h2>
+<span id="more"></span>
+<h3 id="体系函数过程">体系函数过程</h3>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/35a5e7dc010b8ef4dcd71f411115f9cc.jpeg" alt="socket过程"></p>
+<h3 id="三次握手">三次握手</h3>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/a6018986d15eb8374d7ca49998749b58.png" alt="image"></p>
+<h3 id="四次挥手">四次挥手</h3>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/e89ab2786c3d4f0605e854ac4414c187.png" alt="image"></p>
+<h2 id="socket-api">socket api</h2>
+<h3 id="socket-2">socket</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>int socket(int domain, int type, int protocol)</code></p>
+<ul class="lvl-2">
+<li class="lvl-4"><strong>参数</strong>：
+<ul class="lvl-4">
+<li class="lvl-6"><code>domain</code>: 通信域，例如<code>AF_INET</code>表示IPv4</li>
+<li class="lvl-6"><code>type</code>: 套接字类型，例如<code>SOCK_STREAM</code>表示TCP</li>
+<li class="lvl-6"><code>protocol</code>: 协议，通常设为0，让系统选择默认协议</li>
+</ul>
+</li>
+<li class="lvl-4"><strong>返回值</strong>：成功时返回套接字描述符，失败时返回-1</li>
+</ul>
+</li>
+</ul>
+<h3 id="bind">bind</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen)</code></p>
+<ul class="lvl-2">
+<li class="lvl-4"><strong>参数</strong>：
+<ul class="lvl-4">
+<li class="lvl-6"><code>sockfd</code>: 套接字描述符</li>
+<li class="lvl-6"><code>addr</code>: 指向<code>sockaddr</code>结构的指针，包含服务器的地址信息</li>
+<li class="lvl-6"><code>addrlen</code>: <code>sockaddr</code>结构的大小</li>
+</ul>
+</li>
+<li class="lvl-4"><strong>返回值</strong>：成功时返回0，失败时返回-1</li>
+</ul>
+</li>
+</ul>
+<h3 id="listen">listen</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>int listen(int sockfd, int backlog)</code></p>
+<ul class="lvl-2">
+<li class="lvl-4"><strong>参数</strong>：
+<ul class="lvl-4">
+<li class="lvl-6"><code>sockfd</code>: 套接字描述符</li>
+<li class="lvl-6"><code>backlog</code>: 等待队列中的最大连接数</li>
+</ul>
+</li>
+<li class="lvl-4"><strong>返回值</strong>：成功时返回0，失败时返回-1</li>
+</ul>
+</li>
+</ul>
+<h3 id="accept">accept</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)</code></p>
+<ul class="lvl-2">
+<li class="lvl-4"><strong>参数</strong>：
+<ul class="lvl-4">
+<li class="lvl-6"><code>sockfd</code>: 套接字描述符</li>
+<li class="lvl-6"><code>addr</code>: 指向<code>sockaddr</code>结构的指针，用于存储客户端的地址信息</li>
+<li class="lvl-6"><code>addrlen</code>: 指向<code>sockaddr</code>结构大小的指针</li>
+</ul>
+</li>
+<li class="lvl-4"><strong>返回值</strong>：成功时返回一个新的套接字描述符，用于与客户端通信，失败时返回-1</li>
+</ul>
+</li>
+</ul>
+<h3 id="read">read</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>ssize_t read(int fd, void *buf, size_t count)</code></p>
+<ul class="lvl-2">
+<li class="lvl-4"><strong>参数</strong>：
+<ul class="lvl-4">
+<li class="lvl-6"><code>fd</code>: 套接字描述符</li>
+<li class="lvl-6"><code>buf</code>: 指向缓冲区的指针，用于存储读取的数据</li>
+<li class="lvl-6"><code>count</code>: 要读取的最大字节数</li>
+</ul>
+</li>
+<li class="lvl-4"><strong>返回值</strong>：成功时返回实际读取的字节数，失败时返回-1</li>
+</ul>
+</li>
+</ul>
+<h3 id="write">write</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>ssize_t write(int fd, const void *buf, size_t count)</code></p>
+<ul class="lvl-2">
+<li class="lvl-4"><strong>参数</strong>：
+<ul class="lvl-4">
+<li class="lvl-6"><code>fd</code>: 套接字描述符</li>
+<li class="lvl-6"><code>buf</code>: 指向要发送的数据的指针</li>
+<li class="lvl-6"><code>count</code>: 要发送的字节数</li>
+</ul>
+</li>
+<li class="lvl-4"><strong>返回值</strong>：成功时返回实际发送的字节数，失败时返回-1</li>
+</ul>
+</li>
+</ul>
+<h3 id="close">close</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>int close(int fd)</code></p>
+<ul class="lvl-2">
+<li class="lvl-4"><strong>参数</strong>：
+<ul class="lvl-4">
+<li class="lvl-6"><code>fd</code>: 套接字描述符</li>
+</ul>
+</li>
+<li class="lvl-4"><strong>返回值</strong>：成功时返回0，失败时返回-1</li>
+</ul>
+</li>
+</ul>
+<p>在提供的代码片段中，使用了以下socket API，这些API在之前的回答中没有列出：</p>
+<h3 id="inet-pton">inet_pton</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>int inet_pton(int af, const char *src, void *dst)</code></p>
+<ul class="lvl-2">
+<li class="lvl-4"><strong>参数</strong>：
+<ul class="lvl-4">
+<li class="lvl-6"><code>af</code>: 地址族，例如<code>AF_INET</code>表示IPv4</li>
+<li class="lvl-6"><code>src</code>: 要转换的地址字符串</li>
+<li class="lvl-6"><code>dst</code>: 指向存储转换结果的缓冲区的指针</li>
+</ul>
+</li>
+<li class="lvl-4"><strong>返回值</strong>：成功时返回1，如果输入无效返回0，失败时返回-1</li>
+</ul>
+</li>
+</ul>
+<h3 id="connect">connect</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen)</code></p>
+<ul class="lvl-2">
+<li class="lvl-4"><strong>参数</strong>：
+<ul class="lvl-4">
+<li class="lvl-6"><code>sockfd</code>: 套接字描述符</li>
+<li class="lvl-6"><code>addr</code>: 指向<code>sockaddr</code>结构的指针，包含服务器的地址信息</li>
+<li class="lvl-6"><code>addrlen</code>: <code>sockaddr</code>结构的大小</li>
+</ul>
+</li>
+<li class="lvl-4"><strong>返回值</strong>：成功时返回0，失败时返回-1</li>
+</ul>
+</li>
+</ul>
+<h3 id="send">send</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>ssize_t send(int sockfd, const void *buf, size_t len, int flags)</code></p>
+<ul class="lvl-2">
+<li class="lvl-4"><strong>参数</strong>：
+<ul class="lvl-4">
+<li class="lvl-6"><code>sockfd</code>: 套接字描述符</li>
+<li class="lvl-6"><code>buf</code>: 指向要发送的数据的指针</li>
+<li class="lvl-6"><code>len</code>: 要发送的字节数</li>
+<li class="lvl-6"><code>flags</code>: 套接字选项标志</li>
+</ul>
+</li>
+<li class="lvl-4"><strong>返回值</strong>：成功时返回实际发送的字节数，失败时返回-1</li>
+</ul>
+</li>
+</ul>
+<h3 id="recv">recv</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>ssize_t recv(int sockfd, void *buf, size_t len, int flags)</code></p>
+<ul class="lvl-2">
+<li class="lvl-4"><strong>参数</strong>：
+<ul class="lvl-4">
+<li class="lvl-6"><code>sockfd</code>: 套接字描述符</li>
+<li class="lvl-6"><code>buf</code>: 指向缓冲区的指针，用于存储接收的数据</li>
+<li class="lvl-6"><code>len</code>: 缓冲区的大小</li>
+<li class="lvl-6"><code>flags</code>: 套接字选项标志</li>
+</ul>
+</li>
+<li class="lvl-4"><strong>返回值</strong>：成功时返回实际接收的字节数，连接关闭时返回0，失败时返回-1</li>
+</ul>
+</li>
+</ul>
+<h2 id="socket-example-echo-server">socket example - echo server</h2>
+<h3 id="服务器代码">服务器代码</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mutex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;atomic&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cerrno&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PORT 12345</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_CLIENTS 5</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> BUFFER_SIZE 1024</span></span><br><span class="line"></span><br><span class="line"><span class="function">std::atomic&lt;<span class="type">bool</span>&gt; <span class="title">running</span><span class="params">(<span class="literal">true</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 线程安全的打印</span></span><br><span class="line">std::mutex cout_mutex;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">thread_safe_print</span><span class="params">(<span class="type">const</span> std::string &amp;msg)</span> </span>&#123;</span><br><span class="line">    <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(cout_mutex)</span></span>;</span><br><span class="line">    std::cout &lt;&lt; msg &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理客户端连接的函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">handle_client</span><span class="params">(<span class="type">int</span> client_socket)</span> </span>&#123;</span><br><span class="line">    <span class="type">char</span> buffer[BUFFER_SIZE];</span><br><span class="line">    <span class="type">ssize_t</span> bytes_read;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (running &amp;&amp; (bytes_read = <span class="built_in">read</span>(client_socket, buffer, BUFFER_SIZE)) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        buffer[bytes_read] = <span class="string">&#x27;\0&#x27;</span>; <span class="comment">// 确保字符串以空字符结尾</span></span><br><span class="line">        <span class="built_in">thread_safe_print</span>(<span class="string">&quot;Received: &quot;</span> + std::<span class="built_in">string</span>(buffer));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 发送响应</span></span><br><span class="line">        <span class="type">const</span> <span class="type">char</span> *response = buffer;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">write</span>(client_socket, response, <span class="built_in">strlen</span>(response)) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="built_in">thread_safe_print</span>(<span class="string">&quot;Failed to write to socket: &quot;</span> + std::<span class="built_in">to_string</span>(errno));</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">thread_safe_print</span>(<span class="string">&quot;Closing client socket&quot;</span>);</span><br><span class="line">    <span class="built_in">close</span>(client_socket);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> server_fd, client_fd;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">sockaddr_in</span> server_addr, client_addr;</span><br><span class="line">    <span class="type">socklen_t</span> client_len = <span class="built_in">sizeof</span>(client_addr);</span><br><span class="line">    std::vector&lt;std::thread&gt; threads;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建套接字</span></span><br><span class="line">    <span class="keyword">if</span> ((server_fd = <span class="built_in">socket</span>(AF_INET, SOCK_STREAM, <span class="number">0</span>)) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">perror</span>(<span class="string">&quot;socket creation failed&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化服务器地址结构</span></span><br><span class="line">    <span class="built_in">memset</span>(&amp;server_addr, <span class="number">0</span>, <span class="built_in">sizeof</span>(server_addr));</span><br><span class="line">    server_addr.sin_family = AF_INET;</span><br><span class="line">    server_addr.sin_addr.s_addr = INADDR_ANY;</span><br><span class="line">    server_addr.sin_port = <span class="built_in">htons</span>(PORT);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绑定套接字</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">bind</span>(server_fd, (<span class="keyword">struct</span> sockaddr *)&amp;server_addr, <span class="built_in">sizeof</span>(server_addr)) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">perror</span>(<span class="string">&quot;bind failed&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 监听</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">listen</span>(server_fd, MAX_CLIENTS) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">perror</span>(<span class="string">&quot;listen failed&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">thread_safe_print</span>(<span class="string">&quot;Server is listening on port &quot;</span> + std::<span class="built_in">to_string</span>(PORT));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (running) &#123;</span><br><span class="line">        <span class="comment">// 接受客户端连接</span></span><br><span class="line">        <span class="keyword">if</span> ((client_fd = <span class="built_in">accept</span>(server_fd, (<span class="keyword">struct</span> sockaddr *)&amp;client_addr, &amp;client_len)) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="built_in">perror</span>(<span class="string">&quot;accept failed&quot;</span>);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        threads.<span class="built_in">push_back</span>(std::<span class="built_in">thread</span>(handle_client, client_fd));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    running = <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">// 等待所有线程完成</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;th : threads) &#123;</span><br><span class="line">        <span class="keyword">if</span> (th.<span class="built_in">joinable</span>()) &#123;</span><br><span class="line">            th.<span class="built_in">join</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭服务器套接字</span></span><br><span class="line">    <span class="built_in">close</span>(server_fd);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="客户端代码">客户端代码</h3>
+<p>下面是一个简单的C++客户端socket使用案例，该客户端连接到服务器，发送一条消息，并接收服务器的响应。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span> <span class="comment">// for memset</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;arpa/inet.h&gt;</span> <span class="comment">// for inet_pton</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span> <span class="comment">// for close</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SERVER_IP <span class="string">&quot;127.0.0.1&quot;</span> <span class="comment">// 服务器IP地址</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PORT 12345            <span class="comment">// 服务器端口</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> BUFFER_SIZE 1024      <span class="comment">// 缓冲区大小</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> sock_fd; <span class="comment">// 套接字文件描述符</span></span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">sockaddr_in</span> server_addr;</span><br><span class="line">    <span class="type">char</span> buffer[BUFFER_SIZE];</span><br><span class="line">    std::string messageToSend; <span class="comment">// 要发送的消息</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建套接字</span></span><br><span class="line">    <span class="keyword">if</span> ((sock_fd = <span class="built_in">socket</span>(AF_INET, SOCK_STREAM, <span class="number">0</span>)) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Failed to create socket.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置服务器地址结构</span></span><br><span class="line">    <span class="built_in">memset</span>(&amp;server_addr, <span class="number">0</span>, <span class="built_in">sizeof</span>(server_addr));</span><br><span class="line">    server_addr.sin_family = AF_INET;</span><br><span class="line">    server_addr.sin_port = <span class="built_in">htons</span>(PORT);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将IP地址转换为网络字节序</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">inet_pton</span>(AF_INET, SERVER_IP, &amp;server_addr.sin_addr) &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Invalid address or Address family not supported.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="built_in">close</span>(sock_fd);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 连接到服务器</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">connect</span>(sock_fd, (<span class="keyword">struct</span> sockaddr *)&amp;server_addr, <span class="built_in">sizeof</span>(server_addr)) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Failed to connect to the server.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="built_in">close</span>(sock_fd);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Connected to the server.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Input your message:&quot;</span>;</span><br><span class="line">    std::cin &gt;&gt; messageToSend;</span><br><span class="line">    <span class="comment">// 发送消息到服务器</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">send</span>(sock_fd, messageToSend.<span class="built_in">c_str</span>(), messageToSend.<span class="built_in">size</span>(), <span class="number">0</span>) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Send failed.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="built_in">close</span>(sock_fd);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Message sent to the server.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 接收服务器的响应</span></span><br><span class="line">    <span class="type">int</span> bytesReceived = <span class="built_in">recv</span>(sock_fd, buffer, BUFFER_SIZE, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (bytesReceived &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Receive failed.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (bytesReceived == <span class="number">0</span>) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;The server closed the connection.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        buffer[bytesReceived] = <span class="string">&#x27;\0&#x27;</span>; <span class="comment">// 确保字符串以空字符结尾</span></span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Server response: &quot;</span> &lt;&lt; buffer &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭套接字</span></span><br><span class="line">    <span class="built_in">close</span>(sock_fd);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="练习">练习</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>socket写一个echo server以及一个client</p>
+</li>
+<li class="lvl-2">
+<p>file server：1024字节 - 分包粘包问题</p>
+<ul class="lvl-2">
+<li class="lvl-4">客户端发送文件名</li>
+<li class="lvl-4">服务器查找文件是否存在
+<ul class="lvl-4">
+<li class="lvl-6">如果存在，把文件里的内容读出来，发给客户端</li>
+<li class="lvl-6">如果不存在，发送“文件不存在”</li>
+</ul>
+</li>
+<li class="lvl-4">客户端接收信息
+<ul class="lvl-4">
+<li class="lvl-6">如果接收到文件，就存到本地</li>
+<li class="lvl-6">如果接收不到文件，接收到“文件不存在”，则在输出打印出来不存在，让用户重新输入文件名</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>在linux系统上使用CMakeLists.txt</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apt install cmake g++ gdb -y</span><br><span class="line"></span><br><span class="line">cmake -S . -B build &amp;&amp; cmake --build build</span><br></pre></td></tr></table></figure>
+<p>运行重定向</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./server &gt;&gt; log.txt</span><br><span class="line">./client</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-07-23T16:00:00.000Z" itemprop="datePublished">
+              2024-07-24
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

@@ -64,12 +64,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/Linux%E7%9B%B8%E5%85%B3/4CMake/2024-11-16_2-Cmake%E9%A1%B9%E7%9B%AE%E4%BD%BF%E7%94%A8/">2-Cmake项目使用</a>
+          <a href="/2023/02/23/MySql/SQL%E7%BD%91%E8%AF%BE/2DML/2023-02-23_2-UPDATE/">2-UPDATE</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-02-22T16:00:00.000Z" itemprop="datePublished">
+    2023-02-23
   </time>
   
   
@@ -77,15 +77,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
+  { <a href="/categories/MySql/">MySql</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/Linux%E7%9B%B8%E5%85%B3/">Linux相关</a> }
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/">SQL网课</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/Linux%E7%9B%B8%E5%85%B3/4CMake/">4CMake</a> }
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/2DML/">2DML</a> }
   </li>
 
 
@@ -96,11 +96,11 @@
     </header>
     <div>
       
-        <h2 id="Cmake项目使用">Cmake项目使用</h2>
-<h4 id="基本目录结构：">基本目录结构：</h4>
+        <h2 id="UPDATE">UPDATE</h2>
+<h4 id="1-WHERE子句">1.WHERE子句</h4>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/Linux%E7%9B%B8%E5%85%B3/4CMake/2024-11-16_2-Cmake%E9%A1%B9%E7%9B%AE%E4%BD%BF%E7%94%A8/#more">Read On »</a>
+            <a href="/2023/02/23/MySql/SQL%E7%BD%91%E8%AF%BE/2DML/2023-02-23_2-UPDATE/#more">Read On »</a>
           </div>
         
       
@@ -114,12 +114,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/boost/asio/2024-11-16_00%20%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">00 基本概念</a>
+          <a href="/2023/02/23/MySql/SQL%E7%BD%91%E8%AF%BE/%E6%A1%88%E4%BE%8B/2023-02-23_%E6%A1%88%E4%BE%8Bexercise-course/">案例exercise-course</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-02-22T16:00:00.000Z" itemprop="datePublished">
+    2023-02-23
   </time>
   
   
@@ -127,15 +127,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
+  { <a href="/categories/MySql/">MySql</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/boost/">boost</a> }
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/">SQL网课</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/boost/asio/">asio</a> }
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/%E6%A1%88%E4%BE%8B/">案例</a> }
   </li>
 
 
@@ -146,11 +146,61 @@
     </header>
     <div>
       
-        <h1>基本概念</h1>
-<p>asio基于两个概念：</p>
+        <h2 id="案例exercise-course">案例exercise-course</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 1. 在数据库exercise中创建课程表stu_course，包含字段课程编号(number)，类型为整数，长度为</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line">-- 11，是主键，自增长，非空、课程名称(name)，类型为字符串，长度为20，非空、学分(score)，类型</span><br><span class="line">-- 为浮点数，小数点后面保留2位有效数字， 长度为5，非空</span><br><span class="line">CREATE DATABASE IF NOT EXISTS exercise DEFAULT CHARACTER SET UTF8 COLLATE UTF8_GENERAL_CI;</span><br><span class="line"></span><br><span class="line">USE exercise;</span><br><span class="line"></span><br><span class="line">CREATE TABLE IF NOT EXISTS stu_course(</span><br><span class="line">	`number` INT(11) AUTO_INCREMENT PRIMARY KEY NOT NULL COMMENT &#x27;课程编号&#x27;,</span><br><span class="line">	name varchar(20) NOT NULL COMMENT &#x27;课程名称&#x27;,</span><br><span class="line">	score double(5,2) NOT NULL COMMENT &#x27;学号&#x27;</span><br><span class="line">)ENGINE=InnoDB CHARSET=UTF8 COMMENT &#x27;课程表&#x27;;</span><br><span class="line"></span><br><span class="line">-- 向课程表中插入一条数据</span><br><span class="line">INSERT INTO stu_course</span><br><span class="line">VALUES(1,&#x27;Maths&#x27;,60.50);</span><br><span class="line"></span><br><span class="line">-- 将课程表重命名为course</span><br><span class="line">ALTER TABLE stu_course RENAME AS course;</span><br><span class="line"></span><br><span class="line">-- 在课程表中添加字段学时(time)，类型为整数，长度为3，非空</span><br><span class="line">ALTER TABLE course ADD `time` INT(3) NOT NULL COMMENT &#x27;学时&#x27;;</span><br><span class="line"></span><br><span class="line">-- 修改课程表学分类型为浮点数，小数点后面保留1位有效数字，长度为3，非空</span><br><span class="line">ALTER TABLE course MODIFY score double(3,1) NOT NULL COMMENT &#x27;学分&#x27;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/02/23/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/1%E6%95%B0%E6%8D%AE%E5%BA%93/2023-02-23_4-%E5%85%B6%E5%AE%83%EF%BC%88SHOW%E3%80%81USE%EF%BC%89/">4-其它（SHOW、USE）</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-02-22T16:00:00.000Z" itemprop="datePublished">
+    2023-02-23
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/MySql/">MySql</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/">SQL网课</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/">1DDL</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/1%E6%95%B0%E6%8D%AE%E5%BA%93/">1数据库</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="其它（SHOW、USE）">其它（SHOW、USE）</h2>
+<h4 id="1-查看数据库">1.查看数据库</h4>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/boost/asio/2024-11-16_00%20%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/#more">Read On »</a>
+            <a href="/2023/02/23/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/1%E6%95%B0%E6%8D%AE%E5%BA%93/2023-02-23_4-%E5%85%B6%E5%AE%83%EF%BC%88SHOW%E3%80%81USE%EF%BC%89/#more">Read On »</a>
           </div>
         
       
@@ -164,12 +214,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/boost/asio/2024-11-16_01%20asio%20socket%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E8%BF%9E%E6%8E%A5/">01 asio socket的创建与连接</a>
+          <a href="/2023/02/23/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/2%E6%95%B0%E6%8D%AE%E8%A1%A8/2023-02-23_2-ALTER/">2-ALTER</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-02-22T16:00:00.000Z" itemprop="datePublished">
+    2023-02-23
   </time>
   
   
@@ -177,15 +227,19 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
+  { <a href="/categories/MySql/">MySql</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/boost/">boost</a> }
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/">SQL网课</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/boost/asio/">asio</a> }
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/">1DDL</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/2%E6%95%B0%E6%8D%AE%E8%A1%A8/">2数据表</a> }
   </li>
 
 
@@ -196,11 +250,11 @@
     </header>
     <div>
       
-        <h1>asio socket的创建与连接</h1>
-<h2 id="1-网络编程的基本流程">1. 网络编程的基本流程</h2>
+        <h2 id="ALTER">ALTER</h2>
+<h4 id="语法">语法</h4>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/boost/asio/2024-11-16_01%20asio%20socket%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E8%BF%9E%E6%8E%A5/#more">Read On »</a>
+            <a href="/2023/02/23/MySql/SQL%E7%BD%91%E8%AF%BE/1DDL/2%E6%95%B0%E6%8D%AE%E8%A1%A8/2023-02-23_2-ALTER/#more">Read On »</a>
           </div>
         
       
@@ -214,12 +268,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/boost/asio/2024-11-16_02%20asio%E5%90%8C%E6%AD%A5%E8%AF%BB%E5%86%99readwrite%EF%BC%88from%20buffer%EF%BC%89/">02 asio同步读写readwrite（from buffer）</a>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-2%E5%9F%BA%E6%9C%AC%E7%9A%84HTML%E9%A1%B5%E9%9D%A2/">1-2基本的HTML页面</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
   </time>
   
   
@@ -227,15 +281,11 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/boost/">boost</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/boost/asio/">asio</a> }
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
   </li>
 
 
@@ -246,11 +296,13 @@
     </header>
     <div>
       
-        <h1>asio同步读写read/write（from buffer）</h1>
-<p>​	读写是通过<code>socket</code>的成员函数或者全局函数完成的，总是会用到socket。</p>
+        <h2 id="1-2基本的HTML页面">1.2基本的HTML页面</h2>
+<blockquote>
+<p>HTML使用<code>&lt;</code>和<code>&gt;</code>包围HTML标签。开始标签用于标记元素的开始，结束标签用于标记元素的结束。部分元素没有结束标签。</p>
+</blockquote>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/boost/asio/2024-11-16_02%20asio%E5%90%8C%E6%AD%A5%E8%AF%BB%E5%86%99readwrite%EF%BC%88from%20buffer%EF%BC%89/#more">Read On »</a>
+            <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-2%E5%9F%BA%E6%9C%AC%E7%9A%84HTML%E9%A1%B5%E9%9D%A2/#more">Read On »</a>
           </div>
         
       
@@ -264,12 +316,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/boost/asio/2024-11-16_04%20echo%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E6%88%98/">04 echo服务器实战</a>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-3%E6%A0%87%E7%AD%BE%EF%BC%9A%E5%85%83%E7%B4%A0%E3%80%81%E5%B1%9E%E6%80%A7%E3%80%81%E5%80%BC/">1-3标签：元素、属性、值</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
   </time>
   
   
@@ -277,15 +329,11 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/boost/">boost</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/boost/asio/">asio</a> }
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
   </li>
 
 
@@ -296,11 +344,13 @@
     </header>
     <div>
       
-        <h1>echo服务器实战</h1>
-<h2 id="简单裸指针版本">简单裸指针版本</h2>
+        <h2 id="1-3标签：元素、属性、值">1.3标签：元素、属性、值</h2>
+<blockquote>
+<p>标签的组成：element、attribute、value。</p>
+</blockquote>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/boost/asio/2024-11-16_04%20echo%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E6%88%98/#more">Read On »</a>
+            <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-3%E6%A0%87%E7%AD%BE%EF%BC%9A%E5%85%83%E7%B4%A0%E3%80%81%E5%B1%9E%E6%80%A7%E3%80%81%E5%80%BC/#more">Read On »</a>
           </div>
         
       
@@ -314,12 +364,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/boost/asio/2024-11-16_05%20%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BBServer/">05 读写分离Server</a>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-4%E7%BD%91%E9%A1%B5%E7%9A%84%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9/">1-4网页的文本内容</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
   </time>
   
   
@@ -327,15 +377,11 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/boost/">boost</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/boost/asio/">asio</a> }
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
   </li>
 
 
@@ -346,14 +392,13 @@
     </header>
     <div>
       
-        <h1>读写分离的Server</h1>
-<h3 id="线程安全的队列写数据">线程安全的队列写数据</h3>
-<pre><code>使用读写分离的Server，通过队列来写数据。队列需要保证线程的安全性。
-</code></pre>
-<h3 id="Send">Send</h3>
+        <h2 id="1-4网页的文本内容">1.4网页的文本内容</h2>
+<blockquote>
+<p>网页中文本的多个空白符会被显示为单个空白。同时换行需要专门的换行符。<code>&lt;br&gt;</code></p>
+</blockquote>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/boost/asio/2024-11-16_05%20%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BBServer/#more">Read On »</a>
+            <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-4%E7%BD%91%E9%A1%B5%E7%9A%84%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9/#more">Read On »</a>
           </div>
         
       
@@ -367,12 +412,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/boost/asio/2024-11-16_06%20%E5%A4%84%E7%90%86%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98/">06 处理粘包问题</a>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-5%E9%93%BE%E6%8E%A5%E3%80%81%E5%9B%BE%E5%83%8F%E5%92%8C%E5%85%B6%E5%AE%83%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9/">1-5链接、图像和其它文本内容</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
   </time>
   
   
@@ -380,15 +425,11 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/boost/">boost</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/boost/asio/">asio</a> }
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
   </li>
 
 
@@ -399,12 +440,13 @@
     </header>
     <div>
       
-        <h1>处理粘包问题</h1>
-<p>常用的处理方式是，使用tlv协议，即<code>消息id+消息长度+消息内容</code>。简化的方案就是，消息长度+消息内容。</p>
-<h2 id="方案实现">方案实现</h2>
+        <h2 id="1-5链接、图像和其它文本内容">1.5链接、图像和其它文本内容</h2>
+<blockquote>
+<p>外部文件（例如图片）并没有保存在html中，而是单独保存，只是被页面所引用。</p>
+</blockquote>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/boost/asio/2024-11-16_06%20%E5%A4%84%E7%90%86%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98/#more">Read On »</a>
+            <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-5%E9%93%BE%E6%8E%A5%E3%80%81%E5%9B%BE%E5%83%8F%E5%92%8C%E5%85%B6%E5%AE%83%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9/#more">Read On »</a>
           </div>
         
       
@@ -418,12 +460,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_00%20%E7%9B%AE%E5%BD%95/">00 目录</a>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-6%E6%96%87%E4%BB%B6%E5%90%8D%E5%92%8C%E6%96%87%E4%BB%B6%E5%A4%B9%E5%90%8D/">1-6文件名和文件夹名</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
   </time>
   
   
@@ -431,15 +473,11 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/">讲义</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/15-day/">15 day</a> }
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
   </li>
 
 
@@ -450,11 +488,13 @@
     </header>
     <div>
       
-        <h1>目录</h1>
-<h2 id="前置知识">前置知识</h2>
+        <h2 id="1-6文件名和文件夹名">1.6文件名和文件夹名</h2>
+<blockquote>
+<p>文件名和文件夹名全部使用<strong>小写字母</strong>，用<strong>短横线</strong>分隔单词，用 .html 作为扩展名。混合使用大小写字母会增加访问者输入正确地址以及找到页面的难度。</p>
+</blockquote>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_00%20%E7%9B%AE%E5%BD%95/#more">Read On »</a>
+            <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-6%E6%96%87%E4%BB%B6%E5%90%8D%E5%92%8C%E6%96%87%E4%BB%B6%E5%A4%B9%E5%90%8D/#more">Read On »</a>
           </div>
         
       
@@ -468,12 +508,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_01%20%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">01 文件操作</a>
+          <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-7URL/">1-7URL</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-01-24T16:00:00.000Z" itemprop="datePublished">
+    2023-01-25
   </time>
   
   
@@ -481,15 +521,11 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/">讲义</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/15-day/">15 day</a> }
+  { <a href="/categories/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">HTML5和CSS3基础教程笔记</a> }
   </li>
 
 
@@ -500,61 +536,13 @@
     </header>
     <div>
       
-        <h1>01 文件操作</h1>
-<p>流操作</p>
+        <h2 id="1-7URL">1.7URL</h2>
+<blockquote>
+<p>URL是地址的别名，它包含文件的存储位置和浏览器如何处理它的信息。</p>
+</blockquote>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_01%20%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_02%20%E6%A8%A1%E6%9D%BF%E7%BC%96%E7%A8%8B/">02 模板编程</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/">讲义</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%AE%B2%E4%B9%89/15-day/">15 day</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>02 模板编程</h1>
-<h2 id="模板函数">模板函数</h2>
-        
-          <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%AE%B2%E4%B9%89/15%20day/2024-11-16_02%20%E6%A8%A1%E6%9D%BF%E7%BC%96%E7%A8%8B/#more">Read On »</a>
+            <a href="/2023/01/25/%E5%89%8D%E7%AB%AF/HTML5%E5%92%8CCSS3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/2023-01-25_1-7URL/#more">Read On »</a>
           </div>
         
       

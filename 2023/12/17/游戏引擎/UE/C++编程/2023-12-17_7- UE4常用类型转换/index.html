@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>7- UE4常用类型转换 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>7- UE4常用类型转换</h1>
+    </header>
+
+    <section>
+      <h1>7. UE4常用类型转换</h1>
+<h2 id="1-FString-FName">1. FString&lt;-&gt;FName</h2>
+<span id="more"></span>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// FString to FName</span></span><br><span class="line">FString str = <span class="built_in">TEXT</span>(<span class="string">&quot;TestStr&quot;</span>);</span><br><span class="line">FName name = <span class="built_in">FName</span>(*Str);</span><br><span class="line"></span><br><span class="line"><span class="comment">// FName to FString</span></span><br><span class="line">FString TargetStr = name.<span class="built_in">ToString</span>();</span><br></pre></td></tr></table></figure>
+<h2 id="2-std-string-FString">2. std::string &lt;-&gt; FString</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// std::string to FString </span></span><br><span class="line">std::string stdStr = <span class="string">&quot;TestStr&quot;</span>;</span><br><span class="line"><span class="function">FString <span class="title">MyStr</span><span class="params">(stdStr.c_str())</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// FString to char*</span></span><br><span class="line"><span class="type">char</span>* c = <span class="built_in">TCHAR_TO_UTF8</span>(*MyStr);</span><br><span class="line"></span><br><span class="line"><span class="comment">// FString to std::string</span></span><br><span class="line"><span class="function">std::string <span class="title">TargetStr</span><span class="params">(TCHAR_TO_UTF8(*MyStr))</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="3-FString-Int32">3. FString &lt;-&gt; Int32</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// FString to Int32</span></span><br><span class="line">FString Str = <span class="built_in">TEXT</span>(<span class="string">&quot;123&quot;</span>);</span><br><span class="line">int32 i = FCString::<span class="built_in">Atoi</span>(*Str);		<span class="comment">// 或者用: atoi(TCHAR_TO_UTF8(*Str));</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Int32 to FString</span></span><br><span class="line">FString TStr = FString::<span class="built_in">FromInt</span>(<span class="number">123</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="4-FString-float">4. FString &lt;-&gt; float</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// FString to float</span></span><br><span class="line"><span class="type">float</span> f = FCString::<span class="built_in">Atof</span>(*Str);		<span class="comment">// f = atof(TCHAR_TO_UTF8(*Str));</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// float to FString </span></span><br><span class="line">FString TStr2 = FString::<span class="built_in">SanitizeFloat</span>(<span class="number">36.32f</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="5-FString-bool">5. FString &lt;-&gt; bool</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// FString to bool</span></span><br><span class="line"><span class="type">bool</span> bNewbool = Str.<span class="built_in">ToBool</span>();</span><br></pre></td></tr></table></figure>
+<h2 id="6-FString-FText">6. FString &lt;-&gt; FText</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// FString to FText</span></span><br><span class="line">FText MyText = FText::<span class="built_in">FromString</span>(Str);</span><br></pre></td></tr></table></figure>
+<h2 id="7-FText-FName">7. FText &lt;-&gt; FName</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// FText to FName</span></span><br><span class="line">FName name = <span class="built_in">FName</span>(*MyText.<span class="built_in">ToString</span>());</span><br><span class="line"></span><br><span class="line"><span class="comment">// FName to FText</span></span><br><span class="line">FText text = FText::<span class="built_in">FromName</span>(name);</span><br></pre></td></tr></table></figure>
+<h2 id="8-FString-TArray-uint8">8. FString &lt;-&gt; <code>TArray&lt;uint8&gt;</code></h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">FString str = <span class="string">&quot;Hello UE4&quot;</span>;</span><br><span class="line">TArray&lt;uint8&gt; outputData;</span><br><span class="line"></span><br><span class="line">TCHAR* CharData = str.<span class="built_in">GetCharArray</span>().<span class="built_in">GetData</span>();</span><br><span class="line">int32 Len = FCString::<span class="built_in">Strlen</span>(CharData);</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i&lt;Len;i++)</span><br><span class="line">&#123;</span><br><span class="line">    uint8* dst = (uint8*)<span class="built_in">TCHAR_TO_UTF8</span>(CharData);</span><br><span class="line">    outputData.<span class="built_in">Add</span>(*dst);</span><br><span class="line">    CharData++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line">FBase64::<span class="built_in">Decode</span>(str, outputData);</span><br><span class="line"></span><br><span class="line"><span class="comment">// TArray&lt;uint8&gt; to FString</span></span><br><span class="line"><span class="function"><span class="type">const</span> std::string <span class="title">cstr</span><span class="params">(<span class="keyword">reinterpret_cast</span>&lt;<span class="type">const</span> <span class="type">char</span>*&gt;(outputData.GetData()), outputData.Num())</span></span>;</span><br><span class="line"><span class="function">FString <span class="title">myStr</span><span class="params">(cstr.c_str())</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line">FString DestStr = FBase64::<span class="built_in">Encode</span>(outputData);</span><br></pre></td></tr></table></figure>
+<h2 id="9-特殊：枚举-字符串（反射）">9. 特殊：枚举 &lt;-&gt; 字符串（反射）</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">ETempEnum</span></span><br><span class="line">&#123;</span><br><span class="line">	One,</span><br><span class="line">    Two,</span><br><span class="line">    Three</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 枚举 To 字符串</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 通过枚举类型的名称找到对应的COD</span></span><br><span class="line">    <span class="type">const</span> UEnum* EnumPtr = <span class="built_in">FindObject</span>&lt;UEnum&gt;(ANY_PACKAGE, <span class="built_in">TEXT</span>(<span class="string">&quot;ETempEnum&quot;</span>), <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//通过索引值获取对应的字符串名</span></span><br><span class="line">    <span class="keyword">if</span>(UEnumPtr)</span><br><span class="line">    &#123;</span><br><span class="line">        FString str = EnumPtr-&gt;<span class="built_in">GetNameStringByIndex</span>(ETempEnum::Two);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 字符串 To 枚举</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 通过枚举类型的名称找到对应的COD</span></span><br><span class="line">    <span class="type">const</span> UEnum* EnumPtr = <span class="built_in">FindObject</span>&lt;UEnum&gt;(ANY_PACKAGE, <span class="built_in">TEXT</span>(<span class="string">&quot;ETempEnum&quot;</span>), <span class="literal">true</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(UEnumPtr)</span><br><span class="line">    &#123;</span><br><span class="line">        ETempEnum OutEnum = (ETempEnum)EnumPtr-&gt;<span class="built_in">GetIndexByNameString</span>(<span class="built_in">TEXT</span>(<span class="string">&quot;Three&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-12-16T16:00:00.000Z" itemprop="datePublished">
+              2023-12-17
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

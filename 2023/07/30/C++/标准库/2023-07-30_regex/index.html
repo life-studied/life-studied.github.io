@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>regex | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>regex</h1>
+    </header>
+
+    <section>
+      <h1>regex</h1>
+<h2 id="1-简介">1. 简介</h2>
+<span id="more"></span>
+<p>​	C++有一个标准库提供了对正则表达式的支持。这个库叫做<code>&lt;regex&gt;</code>，它包含了一些类和函数，可以用于匹配、搜索、替换和分割字符串。</p>
+<p>以下是一些常用的<code>&lt;regex&gt;</code>库中的类和函数：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>std::regex</code>：表示一个正则表达式对象。</p>
+</li>
+<li class="lvl-2">
+<p><code>std::smatch</code>：保存匹配结果的对象。</p>
+</li>
+<li class="lvl-2">
+<p><code>std::regex_match()</code>：检查整个字符串是否与正则表达式匹配。</p>
+</li>
+<li class="lvl-2">
+<p><code>std::regex_search()</code>：在字符串中搜索满足正则表达式的子串。</p>
+</li>
+<li class="lvl-2">
+<p><code>std::regex_replace()</code>：用指定的替换字符串替换正则表达式匹配到的子串。</p>
+</li>
+<li class="lvl-2">
+<p><code>std::regex_iterator</code>：迭代器类，用于遍历字符串中的正则表达式匹配项。</p>
+</li>
+</ul>
+<h2 id="2-简单示例">2. 简单示例</h2>
+<p>下面是一个简单的示例，演示了如何使用正则表达式库来匹配电话号码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;regex&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::string input = <span class="string">&quot;My phone number is 123-456-7890.&quot;</span>;</span><br><span class="line">    <span class="function">std::regex <span class="title">regex</span><span class="params">(<span class="string">&quot;\\d&#123;3&#125;-\\d&#123;3&#125;-\\d&#123;4&#125;&quot;</span>)</span></span>; <span class="comment">// 匹配###-###-####格式的电话号码</span></span><br><span class="line"></span><br><span class="line">    std::smatch match;</span><br><span class="line">    <span class="keyword">if</span> (std::<span class="built_in">regex_search</span>(input, match, regex)) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Phone number found: &quot;</span> &lt;&lt; match.<span class="built_in">str</span>() &lt;&lt; std::endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;No phone number found.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​	上述代码使用正则表达式<code>\\d&#123;3&#125;-\\d&#123;3&#125;-\\d&#123;4&#125;</code>匹配字符串中的电话号码，并打印出匹配到的电话号码。请注意，在C++中，由于反斜杠在字符串中是转义字符，所以需要使用双反斜杠来表示一个普通的反斜杠。</p>
+<h2 id="3-详细介绍">3.详细介绍</h2>
+<p><code>&lt;regex&gt;</code>库是C++11引入的，它提供了对正则表达式的支持。使用这个库，你可以进行字符串的匹配、搜索、替换和分割等操作。</p>
+<p>以下是该库中一些重要的类和函数：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>std::regex</code>：表示一个正则表达式对象。你可以使用构造函数创建一个正则表达式实例，并且还可以使用正则表达式字面值（例如<code>R&quot;(\d&#123;3&#125;-\d&#123;3&#125;-\d&#123;4&#125;)&quot;</code>）来创建一个正则表达式。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">std::regex <span class="title">regex</span><span class="params">(<span class="string">&quot;\\d&#123;3&#125;-\\d&#123;3&#125;-\\d&#123;4&#125;&quot;</span>)</span></span>; <span class="comment">// 创建一个正则表达式对象来匹配###-###-####格式的电话号码</span></span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-2">
+<p><code>std::smatch</code>：保存匹配结果的对象。当你使用正则表达式对一个字符串进行匹配或搜索时，匹配结果将存储在<code>std::smatch</code>对象中。你可以通过索引或迭代器来访问匹配到的子串。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::string input = <span class="string">&quot;My phone number is 123-456-7890.&quot;</span>;</span><br><span class="line"><span class="function">std::regex <span class="title">regex</span><span class="params">(<span class="string">&quot;\\d&#123;3&#125;-\\d&#123;3&#125;-\\d&#123;4&#125;&quot;</span>)</span></span>;</span><br><span class="line">std::smatch match;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (std::<span class="built_in">regex_search</span>(input, match, regex)) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Phone number found: &quot;</span> &lt;&lt; match.<span class="built_in">str</span>() &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-2">
+<p><code>std::regex_match()</code>：用于检查整个字符串是否与正则表达式完全匹配。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::string input = <span class="string">&quot;123-456-7890&quot;</span>;</span><br><span class="line"><span class="function">std::regex <span class="title">regex</span><span class="params">(<span class="string">&quot;\\d&#123;3&#125;-\\d&#123;3&#125;-\\d&#123;4&#125;&quot;</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (std::<span class="built_in">regex_match</span>(input, regex)) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;The string is a valid phone number.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-2">
+<p><code>std::regex_search()</code>：在字符串中搜索满足正则表达式的子串。它会返回第一个匹配到的子串和它的位置。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::string input = <span class="string">&quot;My phone number is 123-456-7890.&quot;</span>;</span><br><span class="line"><span class="function">std::regex <span class="title">regex</span><span class="params">(<span class="string">&quot;\\d&#123;3&#125;-\\d&#123;3&#125;-\\d&#123;4&#125;&quot;</span>)</span></span>;</span><br><span class="line">std::smatch match;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (std::<span class="built_in">regex_search</span>(input, match, regex)) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Phone number found: &quot;</span> &lt;&lt; match.<span class="built_in">str</span>() &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-2">
+<p><code>std::regex_replace()</code>：用指定的替换字符串替换正则表达式匹配到的子串。它可以替换所有匹配项或只替换第一个匹配项。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::string input = <span class="string">&quot;Hello, World!&quot;</span>;</span><br><span class="line"><span class="function">std::regex <span class="title">regex</span><span class="params">(<span class="string">&quot;[aeiou]&quot;</span>)</span></span>; <span class="comment">// 匹配所有小写元音字母</span></span><br><span class="line">std::string replacement = <span class="string">&quot;*&quot;</span>;</span><br><span class="line"></span><br><span class="line">std::string result = std::<span class="built_in">regex_replace</span>(input, regex, replacement);</span><br><span class="line">std::cout &lt;&lt; result &lt;&lt; std::endl; <span class="comment">// 输出 &quot;H*ll*, W*rld!&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-2">
+<p><code>std::regex_iterator</code>：迭代器类，用于遍历字符串中的正则表达式匹配项。你可以使用它来逐个访问所有匹配到的子串。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::string input = <span class="string">&quot;Hello, World!&quot;</span>;</span><br><span class="line"><span class="function">std::regex <span class="title">regex</span><span class="params">(<span class="string">&quot;\\w+&quot;</span>)</span></span>; <span class="comment">// 匹配一个或多个单词字符</span></span><br><span class="line"><span class="function">std::sregex_iterator <span class="title">it</span><span class="params">(input.begin(), input.end(), regex)</span></span>;</span><br><span class="line">std::sregex_iterator end;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (it != end) &#123;</span><br><span class="line">    std::cout &lt;&lt; it-&gt;<span class="built_in">str</span>() &lt;&lt; std::endl;</span><br><span class="line">    ++it;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="4-其它">4. 其它</h2>
+<p>​	这只是<code>&lt;regex&gt;</code>库的一些基本用法，还有其他更高级的功能，例如捕获组、反向引用和自定义正则表达式标记等。可以参考C++的文档或其他资源，以获得更详细的了解和更复杂的用法。</p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-07-29T16:00:00.000Z" itemprop="datePublished">
+              2023-07-30
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

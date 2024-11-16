@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>02 string | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>02 string</h1>
+    </header>
+
+    <section>
+      <h1>string</h1>
+<p>​	string是C++中用于处理字符串的类。</p>
+<span id="more"></span>
+<h2 id="1-quick-to-start">1. quick to start</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::string s1&#123;<span class="string">&quot;hello&quot;</span>&#125;;</span><br><span class="line">    std::string s2&#123;<span class="string">&quot;world&quot;</span>&#125;;</span><br><span class="line">    std::string s = s1 + <span class="string">&#x27; &#x27;</span>  +  s2;</span><br><span class="line">    </span><br><span class="line">    <span class="type">size_t</span> index = s.<span class="built_in">find</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(index != std::string::npos)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;hello is at &quot;</span> &lt;&lt; index &lt;&lt; <span class="string">&quot; position&quot;</span> &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-遍历">2. 遍历</h2>
+<p>​	string作为STL的容器之一，也是有迭代器的。一样可以通过begin()和end()来获取。</p>
+<p>​	但是不常用。一般最常用的就是通过下标去遍历。如果有时候不需要用到下标，还可以用C++11的for-loop语法糖。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span>&amp; i : s)</span><br><span class="line">&#123;</span><br><span class="line">    std::cout &lt;&lt; i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-find">3. find</h2>
+<p>​	string的优点在于，find算法不用自己写，而是内置了一套find的函数族。</p>
+<p>​	在string中，有一个特殊的变量：<code>npos</code>表示未找到。</p>
+<h4 id="1-string的find函数族">1. string的find函数族</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>find</code>：在一个字符串中，查找一个指定的字符或字符串，返回首次匹配的开始位置</p>
+</li>
+<li class="lvl-2">
+<p><code>find_first_of</code>：在一个字符串中，查找一个字符组中任一字符，返回首次匹配的开始位置</p>
+</li>
+<li class="lvl-2">
+<p><code>find_last_of</code>：在一个字符串中，查找一个字符组中任一字符，返回最后一个匹配的位置</p>
+</li>
+<li class="lvl-2">
+<p><code>find_first_not_of</code>：在一个字符串中，查找与一个字符组中任一字符都不匹配的字符，返回首次不匹配的开始位置</p>
+</li>
+<li class="lvl-2">
+<p><code>find_last_not_of</code>：在一个字符串中，查找与一个字符组中任一字符都不匹配的字符，返回最后一次不匹配的位置</p>
+</li>
+<li class="lvl-2">
+<p><code>rfind</code>：find从后往前找</p>
+</li>
+</ul>
+<h3 id="2-substr">2. substr</h3>
+<p>​	通过substr，可以获取字符串的子字符串。</p>
+<p>​	参数：起始下标， 个数</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::string s = <span class="string">&quot;1234&quot;</span>;</span><br><span class="line"></span><br><span class="line">s.<span class="built_in">substr</span>(<span class="number">2</span>, <span class="number">2</span>);		<span class="comment">// 34</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-案例：">3. 案例：</h3>
+<h4 id="校验密码合法">校验密码合法</h4>
+<p>​	已知密码必须由大写，小写和数字组成，请校验密码的合法性：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isValid</span><span class="params">(std::string&amp; str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::string valid_str = <span class="string">&quot;1234567890&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">char</span> ch = <span class="string">&#x27;a&#x27;</span>; ch &lt;= <span class="string">&#x27;z&#x27;</span>; ch++)</span><br><span class="line">        valid_str += ch;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">char</span> ch = <span class="string">&#x27;A&#x27;</span>; ch &lt;= <span class="string">&#x27;Z&#x27;</span>; ch++)</span><br><span class="line">        valid_str += ch;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str.<span class="built_in">find_first_not_of</span>(valid_str) == std::string::npos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::string password = <span class="string">&quot;jfopanfpasherpofjawpofhHpohJOAPSDIJFOPSNDFOPASDJHFOJWEPFA2134DAS56F7SFDGBA8S9HF08QNNX0392QYNX0Q2976823CN90QNMX231N0NNnr8902q3n9c203m|x30-2497mcn&quot;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">auto</span> res = <span class="built_in">isValid</span>(password);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="分割字符串">分割字符串</h4>
+<p>​	下面演示了一个例子，分割由分号分隔的单词。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstddef&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> std::<span class="type">size_t</span>;</span><br><span class="line"><span class="keyword">using</span> std::string;</span><br><span class="line"><span class="keyword">using</span> std::vector;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RparseTest</span></span><br><span class="line">&#123;</span><br><span class="line">    vector&lt;string&gt; strings;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">parseForData</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="function">string <span class="title">s</span><span class="params">(<span class="string">&quot;now;sense;make;to;going;is;This&quot;</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> last = s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">size_t</span> current = s.<span class="built_in">rfind</span>(<span class="string">&#x27;;&#x27;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (current != string::npos)</span><br><span class="line">        &#123;</span><br><span class="line">            ++current;</span><br><span class="line">            strings.<span class="built_in">push_back</span>(s.<span class="built_in">substr</span>(current, last - current));</span><br><span class="line">            current -= <span class="number">2</span>;</span><br><span class="line">            last = current + <span class="number">1</span>;</span><br><span class="line">            current = s.<span class="built_in">rfind</span>(<span class="string">&#x27;;&#x27;</span>, current);</span><br><span class="line">        &#125;</span><br><span class="line">        strings.<span class="built_in">push_back</span>(s.<span class="built_in">substr</span>(<span class="number">0</span>, last));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; i : strings)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; i &lt;&lt; std::endl;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    RparseTest t;</span><br><span class="line">    t.<span class="built_in">parseForData</span>();</span><br><span class="line">    t.<span class="built_in">show</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-反转">4. 反转</h2>
+<p>​	字符串反转是常见的题目，与其它容器一样，一般用reverse来操作。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::string s = <span class="string">&quot;1234&quot;</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">reverse</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">end</span>());</span><br><span class="line">	std::cout &lt;&lt; s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>题目：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-words-in-a-string/description/?envType=study-plan-v2&amp;envId=top-interview-150">151. 反转字符串中的单词 - 力扣（LeetCode）</a></p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-07-23T16:00:00.000Z" itemprop="datePublished">
+              2024-07-24
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

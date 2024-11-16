@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>11 拖拽 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>11 拖拽</h1>
+    </header>
+
+    <section>
+      <h1>11 拖拽</h1>
+<p>​	拖拽事件创建在对应控件的后面。</p>
+<span id="more"></span>
+<h2 id="1-Begin-End">1. Begin &amp; End</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">size_t</span> i&#123;&#125;; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">	ImGui::<span class="built_in">Button</span>(std::<span class="built_in">to_string</span>(i).<span class="built_in">c_str</span>()); ImGui::<span class="built_in">SameLine</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (ImGui::<span class="built_in">BeginDragDropSource</span>())</span><br><span class="line">	&#123;</span><br><span class="line">		ImGui::<span class="built_in">Text</span>((<span class="string">&quot;Drag&quot;</span> + std::<span class="built_in">to_string</span>(i)).<span class="built_in">c_str</span>());</span><br><span class="line">		ImGui::<span class="built_in">EndDragDropSource</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-Payload-Target">2. Payload &amp; Target</h2>
+<p>​	拖拽可以放入拖拽的信息，在拖拽结束时检测目标。</p>
+<img src="./assets/image-20231201000109805.png" alt="image-20231201000109805" style="zoom: 50%;" />
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">static</span> std::vector&lt;<span class="type">int</span>&gt; DragList&#123;&#125;;</span><br><span class="line">ImGui::<span class="built_in">Begin</span>(<span class="string">&quot;Test&quot;</span>, &amp;isOpen, wflags);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">size_t</span> i&#123;&#125;; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">	ImGui::<span class="built_in">Button</span>(std::<span class="built_in">to_string</span>(i).<span class="built_in">c_str</span>()); ImGui::<span class="built_in">SameLine</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (ImGui::<span class="built_in">BeginDragDropSource</span>())</span><br><span class="line">	&#123;</span><br><span class="line">		ImGui::<span class="built_in">Text</span>((<span class="string">&quot;Drag&quot;</span> + std::<span class="built_in">to_string</span>(i)).<span class="built_in">c_str</span>());</span><br><span class="line">		ImGui::<span class="built_in">SetDragDropPayload</span>(<span class="string">&quot;DragButtonIndex&quot;</span>, &amp;i, <span class="built_in">sizeof</span>(i));	<span class="comment">// create drag payload</span></span><br><span class="line"></span><br><span class="line">		ImGui::<span class="built_in">EndDragDropSource</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ImGui::<span class="built_in">End</span>();</span><br><span class="line"></span><br><span class="line">ImGui::<span class="built_in">Begin</span>(<span class="string">&quot;Drag Window&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (ImGui::<span class="built_in">BeginDragDropTarget</span>())	<span class="comment">// start drag target</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">auto</span>* payload = (ImGui::<span class="built_in">AcceptDragDropPayload</span>(<span class="string">&quot;DragButtonIndex&quot;</span>));	<span class="comment">// get payload</span></span><br><span class="line">	<span class="keyword">if</span>(payload)	<span class="comment">// test payload</span></span><br><span class="line">		DragList.<span class="built_in">push_back</span>(*(<span class="type">int</span>*)(payload-&gt;Data));	<span class="comment">// get data, insert into vector</span></span><br><span class="line">	ImGui::<span class="built_in">EndDragDropTarget</span>();		<span class="comment">// end drag target</span></span><br><span class="line">&#125;	</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">size_t</span> i&#123;&#125;; i &lt; DragList.<span class="built_in">size</span>(); i++)</span><br><span class="line">&#123;</span><br><span class="line">	ImGui::<span class="built_in">Button</span>(std::<span class="built_in">to_string</span>(DragList[i]).<span class="built_in">c_str</span>()); ImGui::<span class="built_in">SameLine</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ImGui::<span class="built_in">End</span>();</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-11-30T16:00:00.000Z" itemprop="datePublished">
+              2023-12-01
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>27 Cgo语言交互 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>27 Cgo语言交互</h1>
+    </header>
+
+    <section>
+      <h1>Cgo语言交互</h1>
+<h2 id="1-调用方法">1.调用方法</h2>
+<span id="more"></span>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>用注释写C代码</p>
+</li>
+<li class="lvl-2">
+<p>完成后使用<code>import &quot;C&quot;</code>向编译器传递信号</p>
+</li>
+<li class="lvl-2">
+<p>调用时使用<code>C.xxx</code>调用</p>
+</li>
+</ul>
+<hr>
+<h2 id="2-调用案例">2.调用案例</h2>
+<p>​	下面是一个简单使用go调用C的例子。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">void hello() &#123;</span></span><br><span class="line"><span class="comment">    printf(&quot;Hello from C!\n&quot;);</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;C&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    C.hello()</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="3-类型映射">3.类型映射</h2>
+<p>​	go语言与C语言之间存在着类型互相映射的转换，便于使用。</p>
+<h3 id="3-1-基本类型映射">3.1 基本类型映射</h3>
+<table>
+<thead>
+<tr>
+<th>go语言类型</th>
+<th>C语言类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C.char</td>
+<td>char</td>
+</tr>
+<tr>
+<td>C.schar</td>
+<td>signed char</td>
+</tr>
+<tr>
+<td>C.uchar</td>
+<td>unsigned char</td>
+</tr>
+<tr>
+<td>C.short</td>
+<td>short</td>
+</tr>
+<tr>
+<td>C.ushort</td>
+<td>unsigned short</td>
+</tr>
+<tr>
+<td>C.int</td>
+<td>int</td>
+</tr>
+<tr>
+<td>C.uint</td>
+<td>unsigned int</td>
+</tr>
+<tr>
+<td>C.long</td>
+<td>long</td>
+</tr>
+<tr>
+<td>C.ulong</td>
+<td>unsigned long</td>
+</tr>
+<tr>
+<td>C.longlong</td>
+<td>long long</td>
+</tr>
+<tr>
+<td>C.ulonglong</td>
+<td>unsigned long long</td>
+</tr>
+<tr>
+<td>C.float</td>
+<td>float</td>
+</tr>
+<tr>
+<td>C.double</td>
+<td>double</td>
+</tr>
+<tr>
+<td>unsafe.Pointer</td>
+<td>void*</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-2-struct-enum-union映射">3.2 struct/enum/union映射</h3>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>go语言形式</th>
+<th>C语言</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>结构体</td>
+<td>C.struct_xxx</td>
+<td>xxx</td>
+</tr>
+<tr>
+<td>枚举</td>
+<td>C.enum_xxx</td>
+<td>xxx</td>
+</tr>
+<tr>
+<td>联合体</td>
+<td>C.union_xxx</td>
+<td>xxx</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-3-字符串映射">3.3 字符串映射</h3>
+<p>可以使用以下函数处理go语言string到C语言字符数组的转换。（有额外的内存开销）</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>C.CString()</p>
+</li>
+<li class="lvl-2">
+<p>C.GoString()</p>
+</li>
+<li class="lvl-2">
+<p>C.GoStringN()</p>
+</li>
+</ul>
+<p>注意：使用<code>C.free(unsafe.Pointer(cstr))</code>的方式释放字符数组的内存。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> gostr <span class="type">string</span></span><br><span class="line">gostr=<span class="string">&quot;xxxx&quot;</span></span><br><span class="line"></span><br><span class="line">cstr:=C.CString(gostr)</span><br><span class="line"><span class="keyword">defer</span> C.free(unsafe.Pointer(cstr))</span><br><span class="line"></span><br><span class="line">C.sprintf(cstr,<span class="string">&quot;content is: %d&quot;</span>,<span class="number">123</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="4-函数调用注意点">4.函数调用注意点</h2>
+<h3 id="4-1-错误码（第二参数返回）">4.1 错误码（第二参数返回）</h3>
+<p>​	go对常规C语言函数调用增加了一个err的返回值。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">n, err:= C.atoi(<span class="string">&quot;a234&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-数组传参">4.2 数组传参</h3>
+<p>​	go语言使用C语言传递数组类型参数，必须将第一个元素的地址作为整个数组的起始地址传入。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">n, err:= C.f(&amp;array[<span class="number">0</span>])		<span class="comment">//代替C语言中的f(array)</span></span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-08-26T16:00:00.000Z" itemprop="datePublished">
+              2023-08-27
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

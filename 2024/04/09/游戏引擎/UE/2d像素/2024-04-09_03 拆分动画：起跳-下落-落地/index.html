@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>03 拆分动画：起跳-下落-落地 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>03 拆分动画：起跳-下落-落地</h1>
+    </header>
+
+    <section>
+      <h1>拆分动画：起跳-下落-落地</h1>
+<p>[TOC]</p>
+<span id="more"></span>
+<p>​	跳跃动画包含了<code>起跳-下落-落地</code>三个动作，但是持续时间可能与游戏character需要的不符。虽然可以通过修改持续时间来适配，但是更好的方法是将三个动作拆分出来，作为三个状态加入到动画状态机中。</p>
+<h2 id="1-拆分与添加动画State">1. 拆分与添加动画State</h2>
+<h3 id="1-在sequence中拆分动画">1. 在sequence中拆分动画</h3>
+<p>​	将原来的jump序列拆分为三个序列，仅保留对应的帧。</p>
+<p><img src="./assets/image-20240325121138277.png" alt="image-20240325121138277"></p>
+<img src="./assets/image-20240325121218945.png" alt="image-20240325121218945" style="zoom:50%;" />
+<h3 id="2-添加到动画源（source）">2. 添加到动画源（source）</h3>
+<p><img src="./assets/image-20240325121327225.png" alt="image-20240325121327225"></p>
+<h3 id="3-在动画状态机中创建-跳转节点（Jump）">3. 在动画状态机中创建 跳转节点（Jump）</h3>
+<p><img src="./assets/image-20240325121613320.png" alt="image-20240325121613320"></p>
+<h3 id="4-添加三个状态">4. 添加三个状态</h3>
+<p>​	与之前类似，添加play动画，注意取消loop。</p>
+<p><img src="./assets/image-20240325121733098.png" alt="image-20240325121733098"></p>
+<p>​	设置转移条件：z轴方向速度小于0，可以从起跳进入到下落</p>
+<p><img src="./assets/image-20240325122057854.png" alt="image-20240325122057854"></p>
+<p>​	最终状态机如图：</p>
+<p><img src="./assets/image-20240325122957163.png" alt="image-20240325122957163"></p>
+<p>​	其中，land-&gt;run的条件是，当前动画播放完成。由于run与idle存在连接，因此不用再次添加land-&gt;idle。</p>
+<img src="./assets/image-20240326083048110.png" alt="image-20240326083048110" style="zoom:50%;" />
+<h2 id="2-调用动画（Character）">2. 调用动画（Character）</h2>
+<p>​	在character中通过animation组件，跳转到对应状态节点来调用对应的animation。</p>
+<h3 id="跳跃与离开平台">跳跃与离开平台</h3>
+<p>​	这两个都可以归入跳跃状态节点，它们都应该进入跳跃或者下落的状态。</p>
+<p><img src="./assets/image-20240326083638785.png" alt="image-20240326083638785"></p>
+<h3 id="落地">落地</h3>
+<p><img src="./assets/image-20240326084321659.png" alt="image-20240326084321659"></p>
+<h2 id="3-优化动画（落地滑行）">3. 优化动画（落地滑行）</h2>
+<p>​	落地后会有一段时间滑行，原因在于，落地动画还未播放完成，但是已经进入到地面，movement组件允许进行移动，所以出现了滑行的动作（落地动画的最后一帧）。</p>
+<p>​	针对此，解决方案有：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>在落地动画未完成不允许移动</p>
+<ul class="lvl-2">
+<li class="lvl-4">设置一个character中的bool变量，表示是否可以移动</li>
+<li class="lvl-4">默认可以移动</li>
+<li class="lvl-4">播放落地动画时设置角色停止移动，并设置bool为false</li>
+<li class="lvl-4">在动画机中，任何动画播放完成，设置该character的bool为true</li>
+</ul>
+</li>
+</ul>
+<p>在移动前检测是否可以移动：</p>
+<p><img src="./assets/image-20240326093524084.png" alt="image-20240326093524084"></p>
+<p>着陆后停止移动并设置变量：</p>
+<p><img src="./assets/image-20240326093641833.png" alt="image-20240326093641833"></p>
+<p>在动画播放完成后，设置角色can move：</p>
+<p><img src="./assets/image-20240326093843459.png" alt="image-20240326093843459"></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>更流畅设置：针对落地早些帧的广播——在落地的某一帧就通知全局，可以进行移动（而不是等动画完成再通知）</p>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-04-08T16:00:00.000Z" itemprop="datePublished">
+              2024-04-09
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>axmol安装 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>axmol安装</h1>
+    </header>
+
+    <section>
+      <h1>axmol安装</h1>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/168732477">【Axmol】基于Cocos2d-x 4.0的持续维护的游戏引擎介绍 - 知乎 (zhihu.com)</a></p>
+<span id="more"></span>
+<p>脚本：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">@echo off</span><br><span class="line"></span><br><span class="line">if &quot;%~1&quot;==&quot;&quot; (</span><br><span class="line">    echo 请提供参数作为TestProject的替换值。</span><br><span class="line">    exit /b</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">REM 保存原始的 Python 路径</span><br><span class="line">set ORIGINAL_PYTHONPATH=%PYTHONPATH%</span><br><span class="line">set ORIGINAL_PATH=%PATH%</span><br><span class="line"></span><br><span class="line">REM 设置要用的 Python 版本路径</span><br><span class="line">set PYTHONPATH=D:\ProgrammingSoftware\Python3</span><br><span class="line">set PATH=%PYTHONPATH%;%PATH%</span><br><span class="line"></span><br><span class="line">REM 设置项目名称</span><br><span class="line">set project_name=%~1</span><br><span class="line"></span><br><span class="line">call axmol new -p com.%project_name%.games -d . -l cpp --portrait %project_name%</span><br><span class="line"></span><br><span class="line">cd %project_name%</span><br><span class="line"></span><br><span class="line">pwsh .\build.ps1</span><br><span class="line">REM cmake .. -G&quot;Visual Studio 17 2022&quot; -A x64</span><br><span class="line"></span><br><span class="line">.\run.bat Debug</span><br><span class="line"></span><br><span class="line">REM 脚本退出后，恢复原始的 Python 路径</span><br><span class="line">set PYTHONPATH=%ORIGINAL_PYTHONPATH%</span><br><span class="line">set PATH=%ORIGINAL_PATH%</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-11-20T16:00:00.000Z" itemprop="datePublished">
+              2023-11-21
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

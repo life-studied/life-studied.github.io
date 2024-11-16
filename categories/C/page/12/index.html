@@ -68,12 +68,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_stdfilesystem/">stdfilesystem</a>
+          <a href="/2023/11/27/C++/%E6%A0%87%E5%87%86%E5%BA%93/2023-11-27_stdspan/">stdspan</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -85,7 +85,7 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  { <a href="/categories/C/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a> }
   </li>
 
 
@@ -96,53 +96,11 @@
     </header>
     <div>
       
-        <h1>std::filesystem</h1>
-<p>​	用于文件系统的一些内容</p>
-
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_stdis_integral/">stdis_integral</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/C/">C++</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h1>std::is_integral</h1>
-<p>​	用于判断是否是一个整数类型，包括bool类型。</p>
+        <h1>std::span</h1>
+<p>​	C++20引入了<code>std::span</code>作为一种语法糖，用于表示连续内存范围。它提供了一种轻量级的、非拥有式的、零开销的方式来引用数组或其他连续内存块。<code>std::span</code>可以用于传递数组片段给函数，或者在函数内部对连续内存进行操作，而无需进行内存拷贝。</p>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_stdis_integral/#more">Read On »</a>
+            <a href="/2023/11/27/C++/%E6%A0%87%E5%87%86%E5%BA%93/2023-11-27_stdspan/#more">Read On »</a>
           </div>
         
       
@@ -156,12 +114,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_stdmove%E5%AE%9E%E7%8E%B0/">stdmove实现</a>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-27_01%20%20%E7%90%86%E8%A7%A3%E6%A8%A1%E6%9D%BF%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC/">01  理解模板类型推导</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -173,7 +131,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
   </li>
 
 
@@ -184,11 +146,11 @@
     </header>
     <div>
       
-        <h1>std::move实现</h1>
-<p>​	<code>std::move</code>是一个函数模板，返回值是一个右值引用，实现方法是通过一个中间结构体模板的辅助。</p>
+        <h1>01  理解模板类型推导</h1>
+<h2 id="1-1-函数模板与衍生">1.1 函数模板与衍生</h2>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_stdmove%E5%AE%9E%E7%8E%B0/#more">Read On »</a>
+            <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-27_01%20%20%E7%90%86%E8%A7%A3%E6%A8%A1%E6%9D%BF%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC/#more">Read On »</a>
           </div>
         
       
@@ -202,12 +164,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_stdref%E5%92%8Cstdreference/">stdref和stdreference</a>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-27_02%20%E7%90%86%E8%A7%A3auto%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC/">02 理解auto类型推导</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -219,7 +181,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective-Modern-C-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Effective Modern C++读书笔记</a> }
   </li>
 
 
@@ -230,11 +196,11 @@
     </header>
     <div>
       
-        <h1>std::ref和std::reference</h1>
-<p>​	<code>std::ref</code>用于传递引用，用于不能显式地使用<code>&amp;</code>进行传递的情况。例如，在创建<code>std::thread</code>时，总是会先复制一份参数再传递引用，而不是根据函数的参数列表直接传递需要的引用类型。为了解决这种不能直接传递引用的情况，可以使用<code>std::ref</code>来实现。</p>
+        <h1>02 理解auto类型推导</h1>
+<p>​	<code>auto</code>的类型推导，与<strong>条款1的类型推导几乎一致</strong>。例如：</p>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_stdref%E5%92%8Cstdreference/#more">Read On »</a>
+            <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Effective%20Modern%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-27_02%20%E7%90%86%E8%A7%A3auto%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC/#more">Read On »</a>
           </div>
         
       
@@ -248,12 +214,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E4%BB%8E%E5%87%BD%E6%95%B0%E8%A7%92%E5%BA%A6%E5%BD%BB%E5%BA%95%E8%AE%A4%E8%AF%86%E6%A0%88/">从函数角度彻底认识栈</a>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-27_1-1%20%E4%BC%A0%E7%BB%9F%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">1-1 传统的错误处理</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -265,7 +231,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
   </li>
 
 
@@ -276,11 +246,11 @@
     </header>
     <div>
       
-        <h2 id="从函数角度彻底认识栈">从函数角度彻底认识栈</h2>
-<h4 id="栈和栈的意义">栈和栈的意义</h4>
+        <h2 id="1-1-传统的错误处理">1.1 传统的错误处理</h2>
+<h4 id="本书说明">本书说明</h4>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E4%BB%8E%E5%87%BD%E6%95%B0%E8%A7%92%E5%BA%A6%E5%BD%BB%E5%BA%95%E8%AE%A4%E8%AF%86%E6%A0%88/#more">Read On »</a>
+            <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-27_1-1%20%E4%BC%A0%E7%BB%9F%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/#more">Read On »</a>
           </div>
         
       
@@ -294,12 +264,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E4%BB%A3%E7%A0%81%E5%B5%8C%E5%85%A5%E6%8A%80%E5%B7%A7/">代码嵌入技巧</a>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-27_1-10%20%E4%BD%BF%E7%94%A8%E5%BC%82%E5%B8%B8%E9%80%A0%E6%88%90%E7%9A%84%E5%BC%80%E9%94%80/">1-10 使用异常造成的开销</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -311,7 +281,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
   </li>
 
 
@@ -322,11 +296,13 @@
     </header>
     <div>
       
-        <h1>代码嵌入技巧</h1>
-<h2 id="修改类模板成员实现">修改类模板成员实现</h2>
+        <h2 id="1-10-使用异常造成的开销">1.10 使用异常造成的开销</h2>
+<blockquote>
+<p>一个throw表达式就像是一个特殊的系统函数调用，它接收异常对象作为参数并且沿着执行调用链向上回溯。为了完成这项工作，编译器需要在栈上放置额外的信息，来辅助栈反解过程。</p>
+</blockquote>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E4%BB%A3%E7%A0%81%E5%B5%8C%E5%85%A5%E6%8A%80%E5%B7%A7/#more">Read On »</a>
+            <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-27_1-10%20%E4%BD%BF%E7%94%A8%E5%BC%82%E5%B8%B8%E9%80%A0%E6%88%90%E7%9A%84%E5%BC%80%E9%94%80/#more">Read On »</a>
           </div>
         
       
@@ -340,12 +316,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E4%BB%BF%E5%87%BD%E6%95%B0/">仿函数</a>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-27_1-3%20%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8/">1-3 捕获异常</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -357,7 +333,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
   </li>
 
 
@@ -368,11 +348,11 @@
     </header>
     <div>
       
-        <h2 id="仿函数">仿函数</h2>
-<p><strong>仿函数由来</strong></p>
+        <h2 id="1-3-捕获异常">1.3 捕获异常</h2>
+<h4 id="1-3-1-try块与exception-handler">1.3.1 try块与exception handler</h4>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E4%BB%BF%E5%87%BD%E6%95%B0/#more">Read On »</a>
+            <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-27_1-3%20%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8/#more">Read On »</a>
           </div>
         
       
@@ -386,12 +366,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E4%BD%8D%E5%9F%9F/">位域</a>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-27_1-4%20%E5%BC%82%E5%B8%B8%E5%8C%B9%E9%85%8D/">1-4 异常匹配</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -403,7 +383,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
   </li>
 
 
@@ -414,11 +398,11 @@
     </header>
     <div>
       
-        <h2 id="位域">位域</h2>
-<h4 id="引入">引入</h4>
+        <h2 id="1-4-异常匹配">1.4 异常匹配</h2>
+<h4 id="1-异常匹配不支持非派生的隐式转换">1. 异常匹配不支持非派生的隐式转换</h4>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E4%BD%8D%E5%9F%9F/#more">Read On »</a>
+            <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-27_1-4%20%E5%BC%82%E5%B8%B8%E5%8C%B9%E9%85%8D/#more">Read On »</a>
           </div>
         
       
@@ -432,12 +416,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E8%A7%84%E5%88%99/">内存对齐规则</a>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-27_1-6%20%E6%A0%87%E5%87%86%E5%BC%82%E5%B8%B8/">1-6 标准异常</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -449,7 +433,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
   </li>
 
 
@@ -460,11 +448,13 @@
     </header>
     <div>
       
-        <h2 id="内存对齐规则">内存对齐规则</h2>
-<h4 id="1-规则：">1.规则：</h4>
+        <h2 id="1-6-标准异常">1.6 标准异常</h2>
+<blockquote>
+<p>C++提供了标准异常类便于使用。可以据此派生自己的异常类。在<code>&lt;exception&gt;</code>库中定义。</p>
+</blockquote>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E8%A7%84%E5%88%99/#more">Read On »</a>
+            <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-27_1-6%20%E6%A0%87%E5%87%86%E5%BC%82%E5%B8%B8/#more">Read On »</a>
           </div>
         
       
@@ -478,12 +468,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%86%85%E5%AD%98%E5%BA%8F/">内存模型与内存序</a>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-27_1-5%20%E6%B8%85%E7%90%86/">1-5 清理</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
   </time>
   
   
@@ -495,7 +485,11 @@
   </li>
 
   <li class="meta-text">
-  { <a href="/categories/C/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/">补充特性</a> }
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
   </li>
 
 
@@ -506,11 +500,63 @@
     </header>
     <div>
       
-        <h1>内存模型与内存序</h1>
-<h2 id="std-atomic保证">std::atomic保证</h2>
+        <h2 id="1-5-清理">1.5 清理</h2>
+<h4 id="1-5-1-引入">1.5.1 引入</h4>
         
           <div class="more-link">
-            <a href="/2024/11/16/C++/%E8%A1%A5%E5%85%85%E7%89%B9%E6%80%A7/2024-11-16_%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%86%85%E5%AD%98%E5%BA%8F/#more">Read On »</a>
+            <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-27_1-5%20%E6%B8%85%E7%90%86/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-27_1-8%20%E5%BC%82%E5%B8%B8%E5%AE%89%E5%85%A8/">1-8 异常安全</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+    2023-11-27
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking-in-C-%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Thinking in C++第二卷读书笔记</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="1-8-异常安全">1.8 异常安全</h2>
+<blockquote>
+<p>异常安全的代码能够保持一致性并能避免资源泄露。</p>
+</blockquote>
+        
+          <div class="more-link">
+            <a href="/2023/11/27/C++/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/Thinking%20in%20C++%E7%AC%AC%E4%BA%8C%E5%8D%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/2023-11-27_1-8%20%E5%BC%82%E5%B8%B8%E5%AE%89%E5%85%A8/#more">Read On »</a>
           </div>
         
       

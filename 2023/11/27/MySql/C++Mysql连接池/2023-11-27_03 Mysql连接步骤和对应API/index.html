@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>03 Mysql连接步骤和对应API | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>03 Mysql连接步骤和对应API</h1>
+    </header>
+
+    <section>
+      <h1>03 Mysql连接步骤和对应API</h1>
+<p>[TOC]</p>
+<span id="more"></span>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>步骤</th>
+<th>C API</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>初始化连接环境</td>
+<td><code>mysql_init</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>连接Mysql服务器</td>
+<td><code>mysql_real_connect</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>执行sql语句</td>
+<td><code>mysql_query</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td>获取结果集</td>
+<td><code>mysql_store_result</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td>得到结果集的列数</td>
+<td><code>mysql_num_fields</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td>获取表头 -&gt; 列名(字段名)</td>
+<td><code>mysql_fetch_fields</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td>得到结果集中字段的长度</td>
+<td><code>mysql_fetch_lengths</code></td>
+</tr>
+<tr>
+<td>8</td>
+<td>遍历结果集</td>
+<td><code>mysql_fetch_row</code></td>
+</tr>
+<tr>
+<td>9</td>
+<td>资源回收</td>
+<td><code>mysql_free_result</code><br /><code>mysql_close</code></td>
+</tr>
+<tr>
+<td>10</td>
+<td>事务操作</td>
+<td><code>mysql_autocommit</code><br /><code>mysql_commit</code><br /><code>mysql_rollback</code></td>
+</tr>
+<tr>
+<td>11</td>
+<td>打印错误信息</td>
+<td><code>mysql_error</code><br /><code>mysql_errno</code></td>
+</tr>
+<tr>
+<td>12</td>
+<td>字符编码</td>
+<td><code>mysql_character_set_name</code><br /><code>mysql_set_character_set</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="1-初始化连接环境">1 初始化连接环境</h2>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 参数 mysql -&gt; null</span></span><br><span class="line"><span class="comment">// 返回值: 该函数将分配、初始化、并返回新对象</span></span><br><span class="line"><span class="comment">// 			通过返回的这个对象去连接MySQL的服务器</span></span><br><span class="line">MYSQL *<span class="title function_">mysql_init</span><span class="params">(MYSQL *mysql)</span> ;</span><br></pre></td></tr></table></figure>
+<h2 id="2-连接Mysql服务器">2 连接Mysql服务器</h2>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">返回值: </span></span><br><span class="line"><span class="comment">    成功: 返回MYSQL*连接句柄, 对于成功的连接，返回值与第1个参数的值相同。返回值指向的内存和第一个参数指针指向的内存一样</span></span><br><span class="line"><span class="comment">    失败，返回NULL。</span></span><br><span class="line"><span class="comment">    句柄: 是windows中的一个概念, 句柄可以理解为一个实例(或者对象)</span></span><br><span class="line"><span class="comment">*/</span> </span><br><span class="line">MYSQL *<span class="title function_">mysql_real_connect</span><span class="params">(</span></span><br><span class="line"><span class="params">    MYSQL *mysql,           <span class="comment">// mysql_init() 函数的返回值</span></span></span><br><span class="line"><span class="params">    <span class="type">const</span> <span class="type">char</span> *host,       <span class="comment">// mysql服务器的主机地址, 写IP地址即可</span></span></span><br><span class="line"><span class="params">                            <span class="comment">// localhost, null -&gt; 代表本地连接</span></span></span><br><span class="line"><span class="params">    <span class="type">const</span> <span class="type">char</span> *user,       <span class="comment">// 连接mysql服务器的用户名, 默认: root </span></span></span><br><span class="line"><span class="params">    <span class="type">const</span> <span class="type">char</span> *passwd,     <span class="comment">// 连接mysql服务器用户对应的密码, root用户的密码</span></span></span><br><span class="line"><span class="params">    <span class="type">const</span> <span class="type">char</span> *db,         <span class="comment">// 要使用的数据库的名字</span></span></span><br><span class="line"><span class="params">    <span class="type">unsigned</span> <span class="type">int</span> port,      <span class="comment">// 连接的mysql服务器监听的端口</span></span></span><br><span class="line"><span class="params">                            <span class="comment">// 如果==0, 使用mysql的默认端口3306, !=0, 使用指定的这个端口</span></span></span><br><span class="line"><span class="params">    <span class="type">const</span> <span class="type">char</span> *unix_socket,<span class="comment">// 本地套接字, 不使用指定为 NULL</span></span></span><br><span class="line"><span class="params">    <span class="type">unsigned</span> <span class="type">long</span> client_flag)</span>; <span class="comment">// 通常指定为0</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-执行sql语句">3 执行sql语句</h2>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 执行一个sql语句, 添删查改的sql语句都可以</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">mysql_query</span><span class="params">(MYSQL *mysql, <span class="type">const</span> <span class="type">char</span> *query)</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">参数:</span></span><br><span class="line"><span class="comment">    - mysql: mysql_real_connect() 的返回值</span></span><br><span class="line"><span class="comment">    - query: 一个可以执行的sql语句, 结尾的位置不需要加 ;</span></span><br><span class="line"><span class="comment">返回值: </span></span><br><span class="line"><span class="comment">    - 如果查询成功，返回0。如果是查询, 结果集在mysql 对象中</span></span><br><span class="line"><span class="comment">    - 如果出现错误，返回非0值。 </span></span><br><span class="line"><span class="comment">*/</span>    </span><br></pre></td></tr></table></figure>
+<h2 id="4-获取结果集">4 获取结果集</h2>
+<p>​	注意：不调用这个函数，查询结果存储在Mysql服务器里，只有获取后结果才会被存储到本地内存中。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 将结果集从 mysql(参数) 对象中取出</span></span><br><span class="line"><span class="comment">// MYSQL_RES 对应一块内存, 里边保存着这个查询之后得到的结果集</span></span><br><span class="line"><span class="comment">// 如何将行和列的数据从结果集中取出, 需要使用其他函数</span></span><br><span class="line"><span class="comment">// 返回值: 具有多个结果的MYSQL_RES结果集合。如果出现错误，返回NULL。 </span></span><br><span class="line">MYSQL_RES *<span class="title function_">mysql_store_result</span><span class="params">(MYSQL *mysql)</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="5-得到结果集的列数">5 得到结果集的列数</h2>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 从结果集中列的个数</span></span><br><span class="line"><span class="comment">// 参数: 调用 mysql_store_result() 得到的返回值</span></span><br><span class="line"><span class="comment">// 返回值: 结果集中的列数</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> <span class="title function_">mysql_num_fields</span><span class="params">(MYSQL_RES *result)</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="6-获取表头-列名-字段名">6   获取表头 -&gt; 列名(字段名)</h2>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 参数: 调用 mysql_store_result() 得到的返回值</span></span><br><span class="line"><span class="comment">// 返回值: MYSQL_FIELD* 指向一个结构体</span></span><br><span class="line"><span class="comment">// 通过查询官方文档, 返回是一个结构体的数组</span></span><br><span class="line"><span class="comment">// 通过这个函数得到结果集中所有列的名字</span></span><br><span class="line">MYSQL_FIELD *<span class="title function_">mysql_fetch_fields</span><span class="params">(MYSQL_RES *result)</span>;</span><br></pre></td></tr></table></figure>
+<p>​	返回值<code>MYSQL_FIELD</code>对应的是一个<strong>结构体</strong>，在<code>mysql.h</code>中定义如下:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// mysql.h</span></span><br><span class="line"><span class="comment">// 结果集中的每一个列对应一个 MYSQL_FIELD</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">st_mysql_field</span> &#123;</span></span><br><span class="line">  <span class="type">char</span> *name;                 <span class="comment">/* 列名-&gt; 字段的名字 */</span></span><br><span class="line">  <span class="type">char</span> *org_name;             <span class="comment">/* Original column name, if an alias */</span></span><br><span class="line">  <span class="type">char</span> *table;                <span class="comment">/* Table of column if column was a field */</span></span><br><span class="line">  <span class="type">char</span> *org_table;            <span class="comment">/* Org table name, if table was an alias */</span></span><br><span class="line">  <span class="type">char</span> *db;                   <span class="comment">/* Database for table */</span></span><br><span class="line">  <span class="type">char</span> *catalog;              <span class="comment">/* Catalog for table */</span></span><br><span class="line">  <span class="type">char</span> *def;                  <span class="comment">/* Default value (set by mysql_list_fields) */</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> length;       <span class="comment">/* Width of column (create length) */</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> max_length;   <span class="comment">/* Max width for selected set */</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> name_length;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> org_name_length;                                                                                        </span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> table_length;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> org_table_length;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> db_length;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> catalog_length;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> def_length;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> flags;         <span class="comment">/* Div flags */</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> decimals;      <span class="comment">/* Number of decimals in field */</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> charsetnr;     <span class="comment">/* Character set */</span></span><br><span class="line">  <span class="class"><span class="keyword">enum</span> <span class="title">enum_field_types</span> <span class="title">type</span>;</span> <span class="comment">/* Type of field. See mysql_com.h for types */</span></span><br><span class="line">  <span class="type">void</span> *extension;</span><br><span class="line">&#125; MYSQL_FIELD;</span><br></pre></td></tr></table></figure>
+<p>​	<strong>案例</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 得到存储头信息的数组的地址</span></span><br><span class="line">MYSQL_FIELD* fields = mysql_fetch_fields(res);</span><br><span class="line"><span class="comment">// 得到列数</span></span><br><span class="line"><span class="type">int</span> num = mysql_num_fields(res);</span><br><span class="line"><span class="comment">// 遍历得到每一列的列名</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;num; ++i)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;当前列的名字: %s\n&quot;</span>, fields[i].name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="7-得到结果集中字段的长度">7 得到结果集中字段的长度</h2>
+<p>​	注意：如果结果集包含<strong>二进制数据</strong>，必须使用该函数来确定数据的大小。原因在于，对于包含<code>\0</code>值字符的任何字段，strlen()将返回错误的结果。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">返回结果集内当前行的每个字段长度（数组）</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> *<span class="title function_">mysql_fetch_lengths</span><span class="params">(MYSQL_RES *result)</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">参数: </span></span><br><span class="line"><span class="comment">    - result: 通过查询得到的结果集</span></span><br><span class="line"><span class="comment">返回值:</span></span><br><span class="line"><span class="comment">    - 无符号长整数的数组表示各列的大小。如果出现错误，返回NULL。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="8-遍历结果集">8 遍历结果集</h2>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">char</span>** MYSQL_ROW;</span><br><span class="line"><span class="comment">// 遍历结果集的下一行 </span></span><br><span class="line"><span class="comment">// 如果想遍历整个结果集, 需要对该函数进行循环调用</span></span><br><span class="line"><span class="comment">// 返回值是二级指针, char** 指向一个什么类型的内存呢?</span></span><br><span class="line"><span class="comment">//    -- 指向一个指针数组, 类型是数组,里边的每个元素都是指针, char* 类型</span></span><br><span class="line"><span class="comment">//    -- char* []; 数组中的字符串对应的一列数据</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 需要对 MYSQL_ROW 遍历就可以得到每一列的值</span></span><br><span class="line"><span class="comment">// 如果要遍历整个结果集, 需要循环调用这个函数</span></span><br><span class="line">MYSQL_ROW <span class="title function_">mysql_fetch_row</span><span class="params">(MYSQL_RES *result)</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">参数: </span></span><br><span class="line"><span class="comment">    - result: 通过查询得到的结果集</span></span><br><span class="line"><span class="comment">返回值: </span></span><br><span class="line"><span class="comment">    - 成功: 得到了当前记录中每个字段的值</span></span><br><span class="line"><span class="comment">    - 失败: NULL, 说明数据已经读完了</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="9-资源回收">9 资源回收</h2>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 释放结果集</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">mysql_free_result</span><span class="params">(MYSQL_RES *result)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 关闭mysql实例</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">mysql_close</span><span class="params">(MYSQL *mysql)</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="10-事务操作">10 事务操作</h2>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// mysql中默认会进行事务的提交</span></span><br><span class="line"><span class="comment">// 因为自动提交事务, 会对我们的操作造成影响</span></span><br><span class="line"><span class="comment">// 如果我们操作的步骤比较多, 集合的开始和结束需要用户自己去设置, 需要改为手动方式提交事务</span></span><br><span class="line">my_bool <span class="title function_">mysql_autocommit</span><span class="params">(MYSQL *mysql, my_bool mode)</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">参数:</span></span><br><span class="line"><span class="comment">    如果模式为“1”，启用autocommit模式；如果模式为“0”，禁止autocommit模式。</span></span><br><span class="line"><span class="comment">返回值</span></span><br><span class="line"><span class="comment">    如果成功，返回0，如果出现错误，返回非0值。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 事务提交</span></span><br><span class="line">my_bool <span class="title function_">mysql_commit</span><span class="params">(MYSQL *mysql)</span>;</span><br><span class="line"><span class="comment">//返回值: 成功: 0, 失败: 非0</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">// 数据回滚</span></span><br><span class="line">my_bool <span class="title function_">mysql_rollback</span><span class="params">(MYSQL *mysql)</span> </span><br><span class="line"><span class="comment">//返回值: 成功: 0, 失败: 非0</span></span><br></pre></td></tr></table></figure>
+<h2 id="11-打印错误信息">11 打印错误信息</h2>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 返回错误的描述</span></span><br><span class="line"><span class="type">const</span> <span class="type">char</span> *<span class="title function_">mysql_error</span><span class="params">(MYSQL *mysql)</span>;</span><br><span class="line"><span class="comment">// 返回错误的编号</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> <span class="title function_">mysql_errno</span><span class="params">(MYSQL *mysql)</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="12-字符编码">12 字符编码</h2>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 获取api默认使用的字符编码</span></span><br><span class="line"><span class="comment">// 为当前连接返回默认的字符集。</span></span><br><span class="line"><span class="type">const</span> <span class="type">char</span> *<span class="title function_">mysql_character_set_name</span><span class="params">(MYSQL *mysql)</span> </span><br><span class="line"><span class="comment">// 返回值: 默认字符集。 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置api使用的字符集</span></span><br><span class="line"><span class="comment">// 第二个参数 csname 就是要设置的字符集 -&gt; 支持中文: utf8</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">mysql_set_character_set</span><span class="params">(MYSQL *mysql, <span class="type">char</span> *csname)</span>;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">
+              2023-11-27
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

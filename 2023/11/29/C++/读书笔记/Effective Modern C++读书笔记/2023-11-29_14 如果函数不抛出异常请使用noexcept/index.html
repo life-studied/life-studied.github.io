@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>14 如果函数不抛出异常请使用noexcept | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>14 如果函数不抛出异常请使用noexcept</h1>
+    </header>
+
+    <section>
+      <h1>14 如果函数不抛出异常请使用<code>noexcept</code></h1>
+<h2 id="1-展开调用栈方面的优化">1. 展开调用栈方面的优化</h2>
+<span id="more"></span>
+<p>​	考虑一个函数<code>f</code>，它保证调用者永远不会收到一个异常。两种表达方式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">f</span><span class="params">(<span class="type">int</span> x)</span> <span class="title">throw</span><span class="params">()</span></span>;   <span class="comment">//C++98风格，没有来自f的异常</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">f</span><span class="params">(<span class="type">int</span> x)</span> <span class="keyword">noexcept</span></span>;  <span class="comment">//C++11风格，没有来自f的异常</span></span><br></pre></td></tr></table></figure>
+<p>​	如果在运行时，<code>f</code>出现一个异常，那么就和<code>f</code>的异常说明冲突了。</p>
+<p>​	在C<ins>98的异常说明中，调用栈（the <em>call stack</em>）会展开至<code>f</code>的调用者，在一些与这地方不相关的动作后，程序被终止。C</ins>11异常说明的运行时行为有些不同：调用栈只是<strong>可能</strong>在程序终止前展开。</p>
+<p>​	在一个<code>noexcept</code>函数中，当异常可能传播到函数外时，优化器不需要保证运行时栈（the runtime stack）处于可展开状态；也不需要保证当异常离开<code>noexcept</code>函数时，<code>noexcept</code>函数中的对象按照构造的反序析构。而标注“<code>throw()</code>”异常声明的函数缺少这样的优化灵活性，没加异常声明的函数也一样。</p>
+<p>​	综上：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">RetType <span class="title">function</span><span class="params">(params)</span> <span class="keyword">noexcept</span></span>;  <span class="comment">//极尽所能优化</span></span><br><span class="line"><span class="function">RetType <span class="title">function</span><span class="params">(params)</span> <span class="title">throw</span><span class="params">()</span></span>;   <span class="comment">//较少优化</span></span><br><span class="line"><span class="function">RetType <span class="title">function</span><span class="params">(params)</span></span>;           <span class="comment">//较少优化</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-容器带来的优化（std-move）">2. 容器带来的优化（std::move）</h2>
+<p>​</p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-11-28T16:00:00.000Z" itemprop="datePublished">
+              2023-11-29
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

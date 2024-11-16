@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>21-Docker网络模式详解 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>21-Docker网络模式详解</h1>
+    </header>
+
+    <section>
+      <h2 id="Docker网络模式详解">Docker网络模式详解</h2>
+<h4 id="bridge下基本规则">bridge下基本规则</h4>
+<span id="more"></span>
+<p>​	在docker虚拟地址的网段下，容器产生时，ip被分配；容器停止，ip被收回（会被分配给接下来开启的容器）。</p>
+<h3 id="四种网络模式">四种网络模式</h3>
+<h4 id="1-bridge模式（默认模式）">1.bridge模式（默认模式）</h4>
+<p>​	Docker 服务默认会创建一个 docker0 网桥，它在内核层连通了其他的物理或虚拟网卡，这就将所有容器和本地主机都放到同一个物理网络。Docker 默认指定了 docker0 接口 的 IP 地址和子网掩码，让主机和容器之间可以通过网桥相互通信。</p>
+<p><img src="assets/image-20230425102844915.png" alt="image-20230425102844915"></p>
+<p>​	bridge模式也可以选择自己创建的网络作为网桥。只要在同一网络下，容器都能互相ping通。</p>
+<p><strong>关于bridge连接不上外网的问题的解决方案（开启宿主机的ipv4转发功能）</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改配置</span></span><br><span class="line">echo &quot;net.ipv4.ip_forward=1&quot; &gt;&gt; /etc/sysctl.conf</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启network</span></span><br><span class="line">systemctl restart network</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看 (0-&gt;标识未开启 1-&gt;标识开启)</span></span><br><span class="line">sysctl net.ipv4.ip_forward</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">net.ipv4.ip_forward = 1</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启docker</span></span><br><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+<h4 id="2-host模式（主机共享ip）">2.host模式（主机共享ip）</h4>
+<p>​	容器直接使用宿主机ip与外部进行通信。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -it --net=host tomcat /bin/bash</span><br></pre></td></tr></table></figure>
+<p><img src="assets/image-20230425104131859.png" alt="image-20230425104131859"></p>
+<h4 id="3-none模式（少见）">3.none模式（少见）</h4>
+<p>​	在none模式下，并不为Docker容器进行任何网络配置。 也就是说，这个Docker容器没有网卡、IP、路由等信息，只有一个lo需要我们自己为Docker容器添加网卡、配置IP等。</p>
+<h4 id="4-container模式（容器共享ip）">4.container模式（容器共享ip）</h4>
+<p>​	新建的容器和已经存在的一个容器共享一个网络ip配置而不是和宿主机共享。新创建的容器不会创建自己的网卡，配置自己的IP，而是和一个指定的容器共享IP、端口范围等。</p>
+<p><img src="assets/image-20230425104402069.png" alt="image-20230425104402069"></p>
+<p><strong>案例</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -it --name alpine1 alpine /bin/sh	#第一个容器</span><br><span class="line">docker run -it --network container:alpine1 --name alpine2 alpine /bin/sh	#第二个容器</span><br></pre></td></tr></table></figure>
+<h4 id="5-自定义网络模式">5.自定义网络模式</h4>
+<p>​	bridge基本规则中，如果一个容器停止，其ip会被分配给其它容器。不利于容器之间的通信时切换ip。因此采用自定义网络模式来通过容器名来访问同一网络下的容器。</p>
+<h5 id="5-1-创建网络">5.1 创建网络</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker network create yunyin_network</span><br></pre></td></tr></table></figure>
+<h5 id="5-2-使用新网络启动容器">5.2 使用新网络启动容器</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d -p 8081:8080 --network yunyin_network --name tomcat81 billygoo/tomcat8-jdk8</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">容器1</span></span><br><span class="line">docker run -d -p 8082:8080 --network yunyin_network --name tomcat82 billygoo/tomcat8-jdk8</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">容器2</span></span><br></pre></td></tr></table></figure>
+<h5 id="5-3-ping彼此的名字">5.3 ping彼此的名字</h5>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ping tomcat82</span><br><span class="line">ping tomcat81</span><br></pre></td></tr></table></figure>
+<p><strong>小结：自定义网络本身就维护好了主机名和ip的对应关系（ip和域名都能通）</strong></p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-06-09T16:00:00.000Z" itemprop="datePublished">
+              2023-06-10
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

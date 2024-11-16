@@ -64,12 +64,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/MFC/2024-11-16_6-%E6%96%87%E6%9C%AC%E7%9A%84%E6%8D%A2%E8%A1%8C%E5%A4%84%E7%90%86/">6-文本的换行处理</a>
+          <a href="/2024/08/31/C++/3rdparty/gRPC/2024-08-31_00%20proto/">00 proto</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2024-08-30T16:00:00.000Z" itemprop="datePublished">
+    2024-08-31
   </time>
   
   
@@ -77,7 +77,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/MFC/">MFC</a> }
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/">3rdparty</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/gRPC/">gRPC</a> }
   </li>
 
 
@@ -88,11 +96,59 @@
     </header>
     <div>
       
-        <h2 id="文本的换行处理">文本的换行处理</h2>
-<h4 id="1-默认消息的处理方法">1.默认消息的处理方法</h4>
+        <h1>proto</h1>
+<figure class="highlight protobuf"><table><tr><td class="code"><pre><span class="line">syntax = <span class="string">&quot;proto3&quot;</span>;</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">option</span> java_package = <span class="string">&quot;ex.grpc&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> mathtest;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Defines the service</span></span><br><span class="line"><span class="keyword">service </span><span class="title class_">MathTest</span> &#123;</span><br><span class="line">    <span class="comment">// Function invoked to send the request</span></span><br><span class="line">    <span class="function"><span class="keyword">rpc</span> sendRequest (MathRequest) <span class="keyword">returns</span> (MathReply) </span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// The request message containing requested numbers</span></span><br><span class="line"><span class="keyword">message </span><span class="title class_">MathRequest</span> &#123;</span><br><span class="line">    <span class="type">int32</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int32</span> b = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// The response message containing response</span></span><br><span class="line"><span class="keyword">message </span><span class="title class_">MathReply</span> &#123;</span><br><span class="line">    <span class="type">int32</span> result = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2024/08/31/C++/3rdparty/gRPC/2024-08-31_01%20Server/">01 Server</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2024-08-30T16:00:00.000Z" itemprop="datePublished">
+    2024-08-31
+  </time>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/">3rdparty</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/gRPC/">gRPC</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h1>Server</h1>
+<ul class="lvl-0">
+<li class="lvl-2">继承<code>ServiceName::Service</code>创建<code>serviceImplementation</code></li>
+<li class="lvl-2">覆盖RPC方法，实现逻辑</li>
+</ul>
         
           <div class="more-link">
-            <a href="/2024/11/16/MFC/2024-11-16_6-%E6%96%87%E6%9C%AC%E7%9A%84%E6%8D%A2%E8%A1%8C%E5%A4%84%E7%90%86/#more">Read On »</a>
+            <a href="/2024/08/31/C++/3rdparty/gRPC/2024-08-31_01%20Server/#more">Read On »</a>
           </div>
         
       
@@ -106,12 +162,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/MFC/2024-11-16_8-%E5%B7%A5%E5%85%B7%E6%A0%8F%E3%80%81MFC%E7%B1%BB%E8%A7%86%E5%9B%BE%E5%92%8C%E6%89%80%E6%9C%89%E7%9A%84%E7%B1%BB/">8-工具栏、MFC类视图和所有的类</a>
+          <a href="/2024/08/31/C++/3rdparty/gRPC/2024-08-31_02%20Client/">02 Client</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2024-08-30T16:00:00.000Z" itemprop="datePublished">
+    2024-08-31
   </time>
   
   
@@ -119,7 +175,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/MFC/">MFC</a> }
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/">3rdparty</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/gRPC/">gRPC</a> }
   </li>
 
 
@@ -130,11 +194,14 @@
     </header>
     <div>
       
-        <h2 id="工具栏、MFC类视图和所有的类">工具栏、MFC类视图和所有的类</h2>
-<h4 id="1-工具栏">1.工具栏</h4>
+        <h1>Client</h1>
+<ul class="lvl-0">
+<li class="lvl-2">通过<code>grpc::CreateChannel</code>传入IP string创建channel。</li>
+<li class="lvl-2">通过<code>ServiceName::NewStub</code>传入channel创建Stub</li>
+</ul>
         
           <div class="more-link">
-            <a href="/2024/11/16/MFC/2024-11-16_8-%E5%B7%A5%E5%85%B7%E6%A0%8F%E3%80%81MFC%E7%B1%BB%E8%A7%86%E5%9B%BE%E5%92%8C%E6%89%80%E6%9C%89%E7%9A%84%E7%B1%BB/#more">Read On »</a>
+            <a href="/2024/08/31/C++/3rdparty/gRPC/2024-08-31_02%20Client/#more">Read On »</a>
           </div>
         
       
@@ -148,12 +215,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/MFC/2024-11-16_9-MFC%E6%A1%86%E6%9E%B6%E7%90%86%E8%AE%BA/">9-MFC框架理论</a>
+          <a href="/2024/08/31/C++/3rdparty/protobuf/2024-08-31_00%20protobuf%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8CC++%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%AF%B9%E7%85%A7%E8%A1%A8/">00 protobuf数据类型和C++数据类型对照表</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2024-08-30T16:00:00.000Z" itemprop="datePublished">
+    2024-08-31
   </time>
   
   
@@ -161,7 +228,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/MFC/">MFC</a> }
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/">3rdparty</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/protobuf/">protobuf</a> }
   </li>
 
 
@@ -172,11 +247,19 @@
     </header>
     <div>
       
-        <h2 id="MFC框架理论">MFC框架理论</h2>
-<h4 id="1-CDocTemplate、CDocument、CView、CFrameWnd-关联关系：">1.CDocTemplate、CDocument、CView、CFrameWnd 关联关系：</h4>
+        <h1>protobuf数据类型和C++数据类型对照表</h1>
+<table>
+<thead>
+<tr>
+<th>Protobuf 类型</th>
+<th>C++ 类型</th>
+<th>备注</th>
+</tr>
+</thead>
+</table>
         
           <div class="more-link">
-            <a href="/2024/11/16/MFC/2024-11-16_9-MFC%E6%A1%86%E6%9E%B6%E7%90%86%E8%AE%BA/#more">Read On »</a>
+            <a href="/2024/08/31/C++/3rdparty/protobuf/2024-08-31_00%20protobuf%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8CC++%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%AF%B9%E7%85%A7%E8%A1%A8/#more">Read On »</a>
           </div>
         
       
@@ -190,12 +273,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2024-11-16_1-1%E5%9C%A8%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%A4%B4%E6%B7%BB%E5%8A%A0%E5%AF%B9%E8%AF%9D%E6%A1%86/">1-1在程序开头添加对话框</a>
+          <a href="/2024/08/31/C++/3rdparty/protobuf/2024-08-31_01%20%E7%AE%80%E5%8D%95%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%8E%E5%91%BD%E4%BB%A4%E7%94%9F%E6%88%90/">01 简单结构体与命令生成</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2024-08-30T16:00:00.000Z" itemprop="datePublished">
+    2024-08-31
   </time>
   
   
@@ -203,7 +286,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/">PE文件结构与应用</a> }
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/">3rdparty</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/protobuf/">protobuf</a> }
   </li>
 
 
@@ -214,11 +305,11 @@
     </header>
     <div>
       
-        <h2 id="在程序开头添加对话框">在程序开头添加对话框</h2>
-<h4 id="1-使用LordPE修改PE文件的属性">1.使用LordPE修改PE文件的属性</h4>
+        <h1>简单结构体与命令生成</h1>
+<h2 id="1-quick-start">1. quick start</h2>
         
           <div class="more-link">
-            <a href="/2024/11/16/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2024-11-16_1-1%E5%9C%A8%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%A4%B4%E6%B7%BB%E5%8A%A0%E5%AF%B9%E8%AF%9D%E6%A1%86/#more">Read On »</a>
+            <a href="/2024/08/31/C++/3rdparty/protobuf/2024-08-31_01%20%E7%AE%80%E5%8D%95%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%8E%E5%91%BD%E4%BB%A4%E7%94%9F%E6%88%90/#more">Read On »</a>
           </div>
         
       
@@ -232,12 +323,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2024-11-16_1-2PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E6%A6%82%E8%BF%B0/">1-2PE文件结构概述</a>
+          <a href="/2024/08/31/C++/3rdparty/protobuf/2024-08-31_02%20%E6%95%B0%E7%BB%84repeated/">02 数组repeated</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2024-08-30T16:00:00.000Z" itemprop="datePublished">
+    2024-08-31
   </time>
   
   
@@ -245,7 +336,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/">PE文件结构与应用</a> }
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/">3rdparty</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/protobuf/">protobuf</a> }
   </li>
 
 
@@ -256,11 +355,11 @@
     </header>
     <div>
       
-        <h2 id="PE文件结构概述">PE文件结构概述</h2>
-<h4 id="1-PE文件在内存中和磁盘中的映射关系（磁盘-内存）">1.PE文件在内存中和磁盘中的映射关系（磁盘-&gt;内存）</h4>
+        <h1>数组repeated</h1>
+<p>在使用Protobuf中，可以使用<code>repeated</code>关键字作为限定修饰符来表示一个字段可以有多个值，即重复出现的字段。<code>repeated</code>关键字可以用于以下数据类型：<code>基本数据类型</code>、<code>枚举类型</code>和<code>自定义消息类型</code>。</p>
         
           <div class="more-link">
-            <a href="/2024/11/16/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2024-11-16_1-2PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E6%A6%82%E8%BF%B0/#more">Read On »</a>
+            <a href="/2024/08/31/C++/3rdparty/protobuf/2024-08-31_02%20%E6%95%B0%E7%BB%84repeated/#more">Read On »</a>
           </div>
         
       
@@ -274,12 +373,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2024-11-16_1-3DOS%E5%A4%B4%E8%AF%A6%E8%A7%A3/">1-3DOS头详解</a>
+          <a href="/2024/08/31/C++/3rdparty/protobuf/2024-08-31_03%20%E6%9E%9A%E4%B8%BEenum/">03 枚举enum</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2024-08-30T16:00:00.000Z" itemprop="datePublished">
+    2024-08-31
   </time>
   
   
@@ -287,7 +386,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/">PE文件结构与应用</a> }
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/">3rdparty</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/protobuf/">protobuf</a> }
   </li>
 
 
@@ -298,11 +405,11 @@
     </header>
     <div>
       
-        <h2 id="DOS头详解">DOS头详解</h2>
-<p>DOS头是PE文件结构中的第一个头，用来保持对DOS系统的兼容，并且用于定位真正的PE头。</p>
+        <h1>枚举enum</h1>
+<h2 id="1-quick-start">1. quick start</h2>
         
           <div class="more-link">
-            <a href="/2024/11/16/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2024-11-16_1-3DOS%E5%A4%B4%E8%AF%A6%E8%A7%A3/#more">Read On »</a>
+            <a href="/2024/08/31/C++/3rdparty/protobuf/2024-08-31_03%20%E6%9E%9A%E4%B8%BEenum/#more">Read On »</a>
           </div>
         
       
@@ -316,12 +423,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2024-11-16_1-4%E4%BD%BF%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%88%A4%E6%96%ADPE%E6%96%87%E4%BB%B6%E6%9C%89%E6%95%88%E6%80%A7/">1-4使用程序判断PE文件有效性</a>
+          <a href="/2024/08/31/C++/3rdparty/protobuf/2024-08-31_04%20%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">04 序列化与反序列化</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2024-08-30T16:00:00.000Z" itemprop="datePublished">
+    2024-08-31
   </time>
   
   
@@ -329,7 +436,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/">PE文件结构与应用</a> }
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/">3rdparty</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/protobuf/">protobuf</a> }
   </li>
 
 
@@ -340,49 +455,11 @@
     </header>
     <div>
       
-        <h2 id="使用程序判断是否是PE文件">使用程序判断是否是PE文件</h2>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//function BottonClick</span></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">//从编辑框获取文件路径和文件名</span></span><br><span class="line"><span class="type">char</span> szFile[MAX_PATH] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"><span class="built_in">GetDlgItemText</span>(IDC_EDIT1,szFile,MAX_PATH);</span><br><span class="line"></span><br><span class="line"><span class="comment">//打开文件</span></span><br><span class="line">HANDLE hFile = <span class="built_in">CreateFile</span>(szFile,GENERIC_READ,FILE_SHARE_READ,<span class="literal">NULL</span>,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建一个内核映射对象</span></span><br><span class="line">HANDLE hMap = <span class="built_in">CreateFileMapping</span>(hFile,<span class="literal">NULL</span>,PAGE_READONLY,<span class="number">0</span>,<span class="number">0</span>,<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//把文件映射入内存</span></span><br><span class="line">LPVOID lpBase = <span class="built_in">MapViewOfFile</span>(hMap,FILE_MAP_READ,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//判断文件是否是有效PE文件</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//释放内存映射</span></span><br><span class="line"><span class="built_in">CloseHandle</span>(hMap);</span><br><span class="line"></span><br><span class="line"><span class="comment">//关闭文件</span></span><br><span class="line"><span class="built_in">CloseHandle</span>(hFile);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//function IsPeFile</span></span><br><span class="line"><span class="function">BOOL <span class="title">IsPeFile</span><span class="params">(LPVOID lpBase)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    PIMAGE_DOS_HEADER pimgDosHdr = <span class="literal">NULL</span>;</span><br><span class="line">    PIMAGE_NT_HEADERS pimgNtHdr = <span class="literal">NULL</span>;</span><br><span class="line">    </span><br><span class="line">    pimgDosHdr = (PIMAGE_DOS_HEADER)lpBase;</span><br><span class="line">    <span class="keyword">if</span>(pimgDosHdr-&gt;e_magic != IMAGE_DOS_SIGNATURE)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> FALSE;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    pimgNtHdr = (PIMAGE_NT_HEADERS)((DWORD)lpBase + (DWORD)pimgDosHdr-&gt;e_lfanew)</span><br><span class="line">    <span class="keyword">if</span>(pimgNtHdr-&gt;Signature != IMAGE_NT_SIGNATURE)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> FALSE;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> TRUE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2024/11/16/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2024-11-16_1-5%E6%96%87%E4%BB%B6%E5%A4%B4%E5%8F%8A%E7%BC%96%E7%A8%8B%E8%A7%A3%E6%9E%90/">1-5文件头及编程解析</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
-  </time>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/">PE文件结构与应用</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h2 id="文件头及编程解析">文件头及编程解析</h2>
-<p><img src="picture/PE%E5%A4%B4%E7%9A%84%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86.png" alt=""></p>
+        <h1>序列化与反序列化</h1>
+<h2 id="1-quick-start">1. quick start</h2>
         
           <div class="more-link">
-            <a href="/2024/11/16/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2024-11-16_1-5%E6%96%87%E4%BB%B6%E5%A4%B4%E5%8F%8A%E7%BC%96%E7%A8%8B%E8%A7%A3%E6%9E%90/#more">Read On »</a>
+            <a href="/2024/08/31/C++/3rdparty/protobuf/2024-08-31_04%20%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/#more">Read On »</a>
           </div>
         
       
@@ -396,12 +473,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2024-11-16_1-6%E5%8F%AF%E9%80%89%E5%A4%B4%E5%8F%8A%E7%BC%96%E7%A8%8B%E8%A7%A3%E6%9E%90/">1-6可选头及编程解析</a>
+          <a href="/2024/08/31/C++/3rdparty/protobuf/2024-08-31_05%20%E5%AF%BC%E5%85%A5%E5%85%B6%E5%AE%83proto%E6%96%87%E4%BB%B6/">05 导入其它proto文件</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2024-08-30T16:00:00.000Z" itemprop="datePublished">
+    2024-08-31
   </time>
   
   
@@ -409,7 +486,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/">PE文件结构与应用</a> }
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/">3rdparty</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/protobuf/">protobuf</a> }
   </li>
 
 
@@ -420,13 +505,11 @@
     </header>
     <div>
       
-        <h2 id="可选头及编程解析">可选头及编程解析</h2>
-<blockquote>
-<p>可选头是IMAGE_OPTIONAL_HEADER，指该结构体的部分数据在不同文件中是不同的。</p>
-</blockquote>
+        <h1>导入其它proto文件</h1>
+<h2 id="1-quick-start">1. quick start</h2>
         
           <div class="more-link">
-            <a href="/2024/11/16/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2024-11-16_1-6%E5%8F%AF%E9%80%89%E5%A4%B4%E5%8F%8A%E7%BC%96%E7%A8%8B%E8%A7%A3%E6%9E%90/#more">Read On »</a>
+            <a href="/2024/08/31/C++/3rdparty/protobuf/2024-08-31_05%20%E5%AF%BC%E5%85%A5%E5%85%B6%E5%AE%83proto%E6%96%87%E4%BB%B6/#more">Read On »</a>
           </div>
         
       
@@ -440,12 +523,12 @@
     <header class="title">
       
         <h1>
-          <a href="/2024/11/16/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2024-11-16_1-8%E6%89%8B%E5%8A%A8%E5%92%8C%E7%BC%96%E7%A8%8B%E6%B7%BB%E5%8A%A0%E8%8A%82/">1-8手动和编程添加节</a>
+          <a href="/2024/08/31/C++/3rdparty/protobuf/2024-08-31_06%20%E5%8C%85package/">06 包package</a>
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2024-11-15T16:00:00.000Z" itemprop="datePublished">
-    2024-11-16
+  <time datetime="2024-08-30T16:00:00.000Z" itemprop="datePublished">
+    2024-08-31
   </time>
   
   
@@ -453,7 +536,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/categories/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/">PE文件结构与应用</a> }
+  { <a href="/categories/C/">C++</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/">3rdparty</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/categories/C/3rdparty/protobuf/">protobuf</a> }
   </li>
 
 
@@ -464,11 +555,11 @@
     </header>
     <div>
       
-        <h2 id="手动和编程添加节">手动和编程添加节</h2>
-<p>增加节的步骤：</p>
+        <h1>包package</h1>
+<p>在 Protobuf 中，可以使用package关键字来定义一个消息所属的包（package）。</p>
         
           <div class="more-link">
-            <a href="/2024/11/16/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/2024-11-16_1-8%E6%89%8B%E5%8A%A8%E5%92%8C%E7%BC%96%E7%A8%8B%E6%B7%BB%E5%8A%A0%E8%8A%82/#more">Read On »</a>
+            <a href="/2024/08/31/C++/3rdparty/protobuf/2024-08-31_06%20%E5%8C%85package/#more">Read On »</a>
           </div>
         
       

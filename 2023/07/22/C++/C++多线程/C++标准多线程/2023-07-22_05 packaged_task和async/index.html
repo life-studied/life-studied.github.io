@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>05 packaged_task和async | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>05 packaged_task和async</h1>
+    </header>
+
+    <section>
+      <h2 id="05-packaged-task和async">05 packaged_task和async</h2>
+<p>[TOC]</p>
+<span id="more"></span>
+<p>​	关键字：packaged_task;async;future;</p>
+<h4 id="1-async">1. async</h4>
+<p>​	为了简化<code>promise</code>和<code>future</code>的使用，可以用<code>async</code>让函数直接返回值，并用<code>future</code>获取。</p>
+<p>​	注意：<code>async</code>不一定会创建一个线程，而是默认采用自动决定（<code>std::launch::deffered | std::launch::async</code>）的；可以使用第一个参数<code>std::launch::async/deffered</code>来强制决定<strong>开启一个线程</strong>还是<strong>延迟调用</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mutex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;condition_variable&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;future&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">task</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> ret_a = a * a;</span><br><span class="line">	<span class="type">int</span> ret_b = b * <span class="number">2</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> ret_a + ret_b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::future&lt;<span class="type">int</span>&gt; f = std::<span class="built_in">async</span>(<span class="comment">/*std::launch::async,*/</span> task, <span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;return value is &quot;</span> &lt;&lt; f.<span class="built_in">get</span>();		<span class="comment">//阻塞等待，直到返回值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-packaged-task">2. packaged_task</h4>
+<p>​	和async类似，packaged_task需要传入一个函数的返回值和形参列表来实例化模板，通过调用执行后，可以拿到future对象。</p>
+<p>​	注意：即使可以通过<code>std::bind</code>来打包函数和参数，也必须通过调用才能执行。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mutex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;condition_variable&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;future&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">task</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> ret_a = a * a;</span><br><span class="line">	<span class="type">int</span> ret_b = b * <span class="number">2</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> ret_a + ret_b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function">std::packaged_task&lt;<span class="title">int</span><span class="params">(<span class="type">int</span>, <span class="type">int</span>)</span>&gt; <span class="title">t</span><span class="params">(task)</span></span>;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">t</span>(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;return value is &quot;</span> &lt;&lt; t.<span class="built_in">get_future</span>().<span class="built_in">get</span>();		<span class="comment">//阻塞等待，直到返回值</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    std::packaged_task&lt;int()&gt; t(std::bind(task, 1, 2));</span></span><br><span class="line"><span class="comment">    t();</span></span><br><span class="line"><span class="comment">    std::cout &lt;&lt; &quot;return value is &quot; &lt;&lt; t.get_future().get();		//阻塞等待，直到返回值</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-07-21T16:00:00.000Z" itemprop="datePublished">
+              2023-07-22
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

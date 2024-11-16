@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>24 GRPC微服务 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>24 GRPC微服务</h1>
+    </header>
+
+    <section>
+      <h1>24 GRPC微服务</h1>
+<p>​	IDL（Interface description Language）文件：通过一种中立的方式来描述接口，使得在不同平台上的不同的对象和不同语言编写的程序可以互相通信。</p>
+<span id="more"></span>
+<p>​	下面使用proto作为IDL文件。</p>
+<h2 id="1-proto文件规则">1.proto文件规则</h2>
+<figure class="highlight protobuf"><table><tr><td class="code"><pre><span class="line">syntax=<span class="string">&quot;proto3&quot;</span>;		<span class="comment">//采用protobuffer V3版本的语法编写</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> idl;	<span class="comment">//等同于go语言的package功能</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">option</span> go_package = <span class="string">&quot;./idl/my_proto;student_service&quot;</span>;	<span class="comment">//分号前是生成的go文件所在路径，其中.是--go_out指定的路径</span></span><br><span class="line"><span class="comment">//分号后是生成的go文件的package名称，可省略</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;google/protobuf/timestamp.proto&quot;</span>;</span><br><span class="line"><span class="keyword">message </span><span class="title class_">Student</span> &#123;	<span class="comment">//等同与go语言的struct</span></span><br><span class="line">  <span class="type">string</span> name = <span class="number">1</span>;	<span class="comment">//变量名的驼峰形式就是go里的成员变量名，后面的数字用来作pb序列化，每个成员对应的数字需要唯一</span></span><br><span class="line">  <span class="keyword">repeated</span> <span class="type">string</span> Location = <span class="number">4</span>;	<span class="comment">//repeated表示list</span></span><br><span class="line">  map&lt;<span class="type">string</span>,<span class="type">float</span>&gt; Scores = <span class="number">3</span>;	<span class="comment">//map</span></span><br><span class="line">  <span class="type">bool</span> Gender = <span class="number">5</span>;</span><br><span class="line">  <span class="type">int32</span> Age = <span class="number">6</span>;		<span class="comment">//int32或int64</span></span><br><span class="line">  <span class="type">float</span> Height = <span class="number">7</span>;	<span class="comment">//转成go是float32</span></span><br><span class="line">  google.protobuf.Timestamp Birthday = <span class="number">8</span>;		<span class="comment">//需要go get google.golang.org/protobuf</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">message </span><span class="title class_">Request</span> &#123;</span><br><span class="line">  <span class="type">string</span> studentId = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">service </span><span class="title class_">StudentService</span> &#123;	<span class="comment">//等同于go语言的接口，可以定义多个函数</span></span><br><span class="line">  <span class="function"><span class="keyword">rpc</span> GetStudentInfo (Request) <span class="keyword">returns</span> (Student)</span>;	<span class="comment">//指定函数名，入参类型，出参类型</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​	通过以下命令（之一）把proto文件转为go文件：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">protoc --go_out=plugins=grpc:. --proto_path=./idl -I=./idl/third_proto student_service.proto	#go_out</span><br><span class="line">protoc --gogofaster_out=plugins=grpc:. --proto_path=./idl -I=./idl/third_proto student_service.proto #gogofaster_out</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>go_out</code>可以换成中的go可以换成gogofaster等其它指令</p>
+</li>
+<li class="lvl-2">
+<p><code>grpc:.</code>中的<code>.</code>表示基准地址，与文件中的<code>go_package</code>路径共同生成go文件的最终地址。</p>
+</li>
+<li class="lvl-2">
+<p><code>proto_path</code>用于指定原始的输入文件在哪个目录下</p>
+</li>
+<li class="lvl-2">
+<p><code>-I</code>用于指定引用的<code>proto</code>文件所在路径，再从文件中的<code>import</code>路径来共同引用到那个<code>proto</code>文件。</p>
+</li>
+</ul>
+<h2 id="2-实现proto生成的接口并注册服务">2.实现proto生成的接口并注册服务</h2>
+<p>​	在proto文件中定义了GetStudentInfo接口，你需要在自己的go文件中实现它。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>定义一个结构体（可以是空的，只要能实现接口即可）</p>
+</li>
+<li class="lvl-2">
+<p>利用这个结构体去实现接口</p>
+<ul class="lvl-2">
+<li class="lvl-4">入参增加一个context</li>
+<li class="lvl-4">出参增加一个error</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>Register这个接口（通过结构体类型来找到其成员函数（地址））</p>
+</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Package mainn -----------------------------</span></span><br><span class="line"><span class="comment">// @file      : grpc.go</span></span><br><span class="line"><span class="comment">// @author    : Yunyin</span></span><br><span class="line"><span class="comment">// @contact   : yunyin_jayyi@qq.com</span></span><br><span class="line"><span class="comment">// @time      : 2023/8/8 17:05</span></span><br><span class="line"><span class="comment">// -------------------------------------------</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;context&quot;</span></span><br><span class="line">	<span class="string">&quot;errors&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;github.com/redis/go-redis/v9&quot;</span></span><br><span class="line">	<span class="string">&quot;google.golang.org/grpc&quot;</span></span><br><span class="line">	student_service <span class="string">&quot;grpc/idl/my_proto&quot;</span></span><br><span class="line">	<span class="string">&quot;net&quot;</span></span><br><span class="line">	<span class="string">&quot;strconv&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetStudentInfo</span><span class="params">(studentId <span class="type">string</span>)</span></span> student_service.Student &#123;</span><br><span class="line">	client := redis.NewClient(&amp;redis.Options&#123;</span><br><span class="line">		Addr:     <span class="string">&quot;172.16.136.8:6379&quot;</span>, <span class="comment">//ip:port</span></span><br><span class="line">		Password: <span class="string">&quot;123456&quot;</span>,</span><br><span class="line">		DB:       <span class="number">0</span>, <span class="comment">//默认创建0-15个DB，此处使用0号DB</span></span><br><span class="line">	&#125;)</span><br><span class="line">	ctx := context.TODO()</span><br><span class="line">	stu := student_service.Student&#123;&#125;</span><br><span class="line">	<span class="keyword">for</span> field, value := <span class="keyword">range</span> client.HGetAll(ctx, studentId).Val() &#123;</span><br><span class="line">		<span class="keyword">if</span> field == <span class="string">&quot;Name&quot;</span> &#123;</span><br><span class="line">			stu.Name = value</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> field == <span class="string">&quot;Age&quot;</span> &#123;</span><br><span class="line">			age, err := strconv.Atoi(value)</span><br><span class="line">			<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">				stu.Age = <span class="type">int32</span>(age)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> field == <span class="string">&quot;Height&quot;</span> &#123;</span><br><span class="line">			height, err := strconv.ParseFloat(value, <span class="number">10</span>)</span><br><span class="line">			<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">				stu.Height = <span class="type">float32</span>(height)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> stu</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> StudentServer <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *StudentServer)</span></span> GetStudentInfo(ctx context.Context, request *student_service.Request) (*student_service.Student, <span class="type">error</span>) &#123; <span class="comment">// 实现接口，入参增加一个context，出参增加一个error</span></span><br><span class="line">	<span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">if</span> err := <span class="built_in">recover</span>(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Printf(<span class="string">&quot;接口出错:%v\n&quot;</span>, err)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;()</span><br><span class="line">	studentId := request.StudentId</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(studentId) == <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, errors.New(<span class="string">&quot;student id is empty&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	student := GetStudentInfo(studentId)</span><br><span class="line">	<span class="keyword">return</span> &amp;student, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	list, err := net.Listen(<span class="string">&quot;tcp&quot;</span>, <span class="string">&quot;:2346&quot;</span>) <span class="comment">//创建监听属性</span></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	server := grpc.NewServer()                                               <span class="comment">//创建服务端</span></span><br><span class="line">	student_service.RegisterStudentServiceServer(server, <span class="built_in">new</span>(StudentServer)) <span class="comment">//调用proto生成的register注册服务</span></span><br><span class="line">	err = server.Serve(list)                                                 <span class="comment">//服务启动</span></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="3-客户端测试rpc">3.客户端测试rpc</h2>
+<p>​	使用grpc的Dial去连接服务器。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Package main -----------------------------</span></span><br><span class="line"><span class="comment">// @file      : grpc_test.go</span></span><br><span class="line"><span class="comment">// @author    : Yunyin</span></span><br><span class="line"><span class="comment">// @contact   : yunyin_jayyi@qq.com</span></span><br><span class="line"><span class="comment">// @time      : 2023/8/8 20:27</span></span><br><span class="line"><span class="comment">// -------------------------------------------</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;context&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;google.golang.org/grpc&quot;</span></span><br><span class="line">	student_service <span class="string">&quot;grpc/idl/my_proto&quot;</span></span><br><span class="line">	<span class="string">&quot;testing&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestService</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	conn, err := grpc.Dial(<span class="string">&quot;127.0.0.1&quot;</span>, grpc.WithInsecure())</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">&quot;连接grpc服务器失败:%+v&quot;</span>, err)</span><br><span class="line">		t.Fail()</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> conn.Close()</span><br><span class="line">	client := student_service.NewStudentServiceClient(conn)	<span class="comment">//调用proto生成的NewClient函数创建client</span></span><br><span class="line">	resp, err := client.GetStudentInfo(context.TODO(), &amp;student_service.Request&#123;StudentId: <span class="string">&quot;学生1&quot;</span>&#125;)	<span class="comment">//rpc</span></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">&quot;调用grpc服务器失败:%+v&quot;</span>, err)</span><br><span class="line">		t.Fail()</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;Name %s Age %d Height %.1f\n&quot;</span>, resp.Name, resp.Age, resp.Height)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-08-26T16:00:00.000Z" itemprop="datePublished">
+              2023-08-27
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

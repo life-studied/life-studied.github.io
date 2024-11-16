@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>06 字符串（byte和rune） | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>06 字符串（byte和rune）</h1>
+    </header>
+
+    <section>
+      <h1>06 字符串（byte和rune）</h1>
+<h2 id="字符串本质">字符串本质</h2>
+<span id="more"></span>
+<p>​	字符串本质是不可修改的<code>byte</code>数组。<code>utf8</code>编码的大部分字符在<code>byte</code>数组里占位大于1，因此可以使用<code>rune</code>数组来统计其实际字符数。（强转为rune数组）</p>
+<p>​	下面的代码演示了：</p>
+<ol>
+<li class="lvl-3">
+<p>byte数组的len</p>
+</li>
+<li class="lvl-3">
+<p>rune数组的len</p>
+</li>
+<li class="lvl-3">
+<p>遍历数组</p>
+</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Package main -----------------------------</span></span><br><span class="line"><span class="comment">// @file      : string.go</span></span><br><span class="line"><span class="comment">// @author    : Yunyin</span></span><br><span class="line"><span class="comment">// @contact   : yunyin_jayyi@qq.com</span></span><br><span class="line"><span class="comment">// @time      : 2023/7/27 20:28</span></span><br><span class="line"><span class="comment">// -------------------------------------------</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	s := <span class="string">&quot;golang&quot;</span> <span class="comment">//字符串的本质是【不可修改的byte数组】</span></span><br><span class="line">	fmt.Println(s)</span><br><span class="line"></span><br><span class="line">	anotherString := <span class="string">&quot;golang你好&quot;</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;s ([]byte)长度\t&quot;</span>, <span class="built_in">len</span>(s))             <span class="comment">//6</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;as([]byte)长度\t&quot;</span>, <span class="built_in">len</span>(anotherString)) <span class="comment">//12，汉字占用3byte</span></span><br><span class="line"></span><br><span class="line">	arr := []<span class="type">rune</span>(anotherString)</span><br><span class="line">	fmt.Println(<span class="string">&quot;arr([]rune)长度\t&quot;</span>, <span class="built_in">len</span>(arr))</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> _, ele := <span class="keyword">range</span> arr &#123;</span><br><span class="line">		fmt.Printf(<span class="string">&quot;%d\t%c\n&quot;</span>, ele, ele)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">output:</span></span><br><span class="line"><span class="comment">golang</span></span><br><span class="line"><span class="comment">s ([]byte)长度   6</span></span><br><span class="line"><span class="comment">as([]byte)长度   12</span></span><br><span class="line"><span class="comment">arr([]rune)长度  8</span></span><br><span class="line"><span class="comment">103     g</span></span><br><span class="line"><span class="comment">111     o</span></span><br><span class="line"><span class="comment">108     l</span></span><br><span class="line"><span class="comment">97      a</span></span><br><span class="line"><span class="comment">110     n</span></span><br><span class="line"><span class="comment">103     g</span></span><br><span class="line"><span class="comment">/*</span></span><br></pre></td></tr></table></figure>
+<h2 id="多行字符串">多行字符串</h2>
+<p>​	使用反引号可以制作多行字符串。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">s:=<span class="string">`hello</span></span><br><span class="line"><span class="string">你好</span></span><br><span class="line"><span class="string">golang</span></span><br><span class="line"><span class="string">`</span></span><br></pre></td></tr></table></figure>
+<h2 id="字符串的拼接">字符串的拼接</h2>
+<p>​	字符串可以直接使用+进行拼接。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">s := <span class="string">&quot;hello&quot;</span></span><br><span class="line">a := <span class="string">&quot;golang&quot;</span></span><br><span class="line">b := s + a</span><br><span class="line">fmt.Println(b)</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-07-29T16:00:00.000Z" itemprop="datePublished">
+              2023-07-30
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Git Commit常用约定 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>Git Commit常用约定</h1>
+    </header>
+
+    <section>
+      <h1>Git Commit常用约定</h1>
+<ul class="lvl-0">
+<li class="lvl-2">使用关键字来表示这个提交的类型。
+<ul class="lvl-2">
+<li class="lvl-6">feat: 新功能</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+<pre><code>* fix: 修复 bug
+* docs: 文档改进
+* style: 代码风格改进，不影响代码含义
+* refactor: 重构代码，既不修复错误也不添加新功能
+* test: 增加或修改测试代码
+* chore: 构建过程或辅助工具的变动
+* perf：改进性能的代码更改
+* ci：更改我们的持续集成文件和脚本
+</code></pre>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如果需要，可以在提交信息中引用 issue（使用<code>#</code>来表示） 或 PR 编号（使用<code>!</code>来表示）。</p>
+</li>
+<li class="lvl-2">
+<p>如果有必要，可以附加详细的信息，比如代码变更的原因和影响。</p>
+</li>
+</ul>
+<h2 id="example">example</h2>
+<h3 id="1-修复bug，bug的issue编号为123">1.修复bug，bug的issue编号为123</h3>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git commit -m &quot;fix: resolve issue #123&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="2-提交pr，pr的编号为123">2.提交pr，pr的编号为123</h3>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git commit -m &quot;Add a new feature\n\nSee merge request !123&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="3-提交ci，引入新的测试框架">3.提交ci，引入新的测试框架</h3>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git commit -m &quot;ci: update TestSuite for easier testing&quot;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-06-09T16:00:00.000Z" itemprop="datePublished">
+              2023-06-10
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

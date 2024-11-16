@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>split string | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>split string</h1>
+    </header>
+
+    <section>
+      <h1>split string</h1>
+<h2 id="1-无法识别相邻分割字符（传入型）">1. 无法识别相邻分割字符（传入型）</h2>
+<span id="more"></span>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">split</span><span class="params">(<span class="type">const</span> string&amp; s, vector&lt;string&gt;&amp; tokens, <span class="type">const</span> string&amp; delimiters = <span class="string">&quot; &quot;</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	string::size_type lastPos = s.<span class="built_in">find_first_not_of</span>(delimiters, <span class="number">0</span>);</span><br><span class="line">	string::size_type pos = s.<span class="built_in">find_first_of</span>(delimiters, lastPos);</span><br><span class="line">	<span class="keyword">while</span> (string::npos != pos || string::npos != lastPos) &#123;</span><br><span class="line">		tokens.<span class="built_in">push_back</span>(s.<span class="built_in">substr</span>(lastPos, pos - lastPos));</span><br><span class="line">		lastPos = s.<span class="built_in">find_first_not_of</span>(delimiters, pos);</span><br><span class="line">		pos = s.<span class="built_in">find_first_of</span>(delimiters, lastPos);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-无法识别相邻分割字符（输出型）">2. 无法识别相邻分割字符（输出型）</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;string&gt; <span class="title">split</span><span class="params">(<span class="type">const</span> string&amp; s, <span class="type">const</span> string&amp; delimiters = <span class="string">&quot; &quot;</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vector&lt;string&gt; tokens&#123;&#125;;</span><br><span class="line">	string::size_type lastPos = s.<span class="built_in">find_first_not_of</span>(delimiters, <span class="number">0</span>);</span><br><span class="line">	string::size_type pos = s.<span class="built_in">find_first_of</span>(delimiters, lastPos);</span><br><span class="line">	<span class="keyword">while</span> (string::npos != pos || string::npos != lastPos) &#123;</span><br><span class="line">		tokens.<span class="built_in">push_back</span>(s.<span class="built_in">substr</span>(lastPos, pos - lastPos));</span><br><span class="line">		lastPos = s.<span class="built_in">find_first_not_of</span>(delimiters, pos);</span><br><span class="line">		pos = s.<span class="built_in">find_first_of</span>(delimiters, lastPos);</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> tokens;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-可以识别相邻分割字符（包括末尾空字符串）">3. 可以识别相邻分割字符（包括末尾空字符串）</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">std::vector&lt;std::string&gt; <span class="title">split</span><span class="params">(<span class="type">const</span> std::string&amp; s, <span class="type">const</span> std::string&amp; delimiters = <span class="string">&quot; &quot;</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::vector&lt;std::string&gt; tokens&#123;&#125;;</span><br><span class="line">	<span class="keyword">if</span> (s.<span class="built_in">size</span>() == <span class="number">0</span>) <span class="keyword">return</span> tokens;</span><br><span class="line">	std::string::size_type lastPos = <span class="number">0</span>;</span><br><span class="line">	std::string::size_type pos = s.<span class="built_in">find_first_of</span>(delimiters);</span><br><span class="line">	<span class="keyword">while</span> (std::string::npos != pos || std::string::npos != lastPos) &#123;</span><br><span class="line">		tokens.<span class="built_in">push_back</span>(s.<span class="built_in">substr</span>(lastPos, pos - lastPos));</span><br><span class="line">		lastPos = (pos == std::string::npos ? std::string::npos : pos + <span class="number">1</span>);</span><br><span class="line">		pos = s.<span class="built_in">find_first_of</span>(delimiters, lastPos);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> tokens;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1>split from</h1>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">std::vector&lt;std::string&gt; <span class="title">split_from</span><span class="params">(<span class="type">const</span> std::string&amp; str, <span class="type">const</span> std::vector&lt;std::string&gt;&amp; substrs)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::vector&lt;std::string&gt; results;</span><br><span class="line">    std::vector&lt;std::string&gt; final_results;</span><br><span class="line">    std::function&lt;<span class="type">void</span>(<span class="type">const</span> std::string&amp; str)&gt; split_from_helper = [&amp;](<span class="type">const</span> std::string&amp; str) &#123;</span><br><span class="line">        <span class="keyword">if</span> (str.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            final_results = results;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!final_results.<span class="built_in">empty</span>())</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; i : substrs)</span><br><span class="line">        &#123;</span><br><span class="line">			<span class="keyword">if</span> (i.<span class="built_in">empty</span>())</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span> (str.<span class="built_in">find</span>(i) == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                results.<span class="built_in">push_back</span>(i);</span><br><span class="line">                <span class="built_in">split_from_helper</span>(str.<span class="built_in">substr</span>(i.<span class="built_in">size</span>()));</span><br><span class="line">                results.<span class="built_in">pop_back</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">	<span class="built_in">split_from_helper</span>(str);</span><br><span class="line">    <span class="keyword">return</span> final_results;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-05T16:00:00.000Z" itemprop="datePublished">
+              2024-11-06
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>cocos2dx（4-0）安装 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>cocos2dx（4-0）安装</h1>
+    </header>
+
+    <section>
+      <h1>cocos2dx安装</h1>
+<h2 id="1-下载cocos2d-x压缩文件（选择4-0版本）">1. 下载cocos2d-x压缩文件（选择4.0版本）</h2>
+<span id="more"></span>
+<p><a target="_blank" rel="noopener" href="https://www.cocos.com/cocos2dx-download">Cocos2d-x - 成熟、轻量、开放的跨平台解决方案</a></p>
+<h2 id="2-下载python2-7-10">2. 下载python2.7.10</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>添加环境变量</p>
+</li>
+<li class="lvl-2">
+<p>记住bin目录，并填入下面的脚本中</p>
+</li>
+</ul>
+<h2 id="3-解压并安装cocos2d-x文件">3. 解压并安装cocos2d-x文件</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>将文件解压到某个目录下</p>
+</li>
+<li class="lvl-2">
+<p>在cmd中执行<code>python ./setup.py</code></p>
+</li>
+</ul>
+<h2 id="4-创建项目">4. 创建项目</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>选择一个项目目录（此时可以撤销python2.7环境变量，以免影响你的电脑中的高版本python）</p>
+</li>
+<li class="lvl-2">
+<p>创建一个<code>newCocos.bat</code>文件，里面放入以下代码，并修改python2.7的bin目录</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">@echo off</span><br><span class="line"></span><br><span class="line">if &quot;%~1&quot;==&quot;&quot; (</span><br><span class="line">    echo 请提供参数作为TestProject的替换值。</span><br><span class="line">    exit /b</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">REM 保存原始的 Python 路径</span><br><span class="line">set ORIGINAL_PYTHONPATH=%PYTHONPATH%</span><br><span class="line">set ORIGINAL_PATH=%PATH%</span><br><span class="line"></span><br><span class="line">REM 设置要用的 Python 版本路径（此处需要修改）</span><br><span class="line">set PYTHONPATH=D:\UsefulTools\Python2-7-10</span><br><span class="line">set PATH=%PYTHONPATH%;%PATH%</span><br><span class="line"></span><br><span class="line">REM 设置项目名称</span><br><span class="line">set project_name=%~1</span><br><span class="line"></span><br><span class="line">REM 使用call防止进程意外终止</span><br><span class="line">call cocos new %project_name% -l cpp -p com.%project_name%.games</span><br><span class="line"></span><br><span class="line">cd %project_name%</span><br><span class="line">cd proj.win32</span><br><span class="line"></span><br><span class="line">cmake .. -G&quot;Visual Studio 17 2022&quot; -A win32</span><br><span class="line"></span><br><span class="line">REM 脚本退出后，恢复原始的 Python 路径</span><br><span class="line">set PYTHONPATH=%ORIGINAL_PYTHONPATH%</span><br><span class="line">set PATH=%ORIGINAL_PATH%</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-2">
+<p>创建cocos项目（cmd中）</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">newCocos.bat helloworld</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-2">
+<p>打开项目：<code>proj.win32</code>下</p>
+</li>
+</ul>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2023-11-20T16:00:00.000Z" itemprop="datePublished">
+              2023-11-21
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

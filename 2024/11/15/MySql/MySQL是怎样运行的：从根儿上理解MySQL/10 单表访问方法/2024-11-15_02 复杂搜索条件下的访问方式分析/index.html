@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>02 复杂搜索条件下的访问方式分析 | Yunyin&#39;s blog</title>
+  
+    <link rel="icon" href="/assert/C++.jpg">
+  
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/assets/background.jpg)">
+        <div class='av-pic' style="background-image: url(/assets/C++.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>Yunyin&#39;s blog</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/categories/" class="Btn">
+              <li>Categories</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>02 复杂搜索条件下的访问方式分析</h1>
+    </header>
+
+    <section>
+      <h1>复杂搜索条件下的访问方式分析</h1>
+<h2 id="表结构">表结构</h2>
+<span id="more"></span>
+<p>对于这个表：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE TABLE single_table ( </span><br><span class="line">   id INT NOT NULL AUTO_INCREMENT, </span><br><span class="line">   key1 VARCHAR(100), </span><br><span class="line">   key2 INT, </span><br><span class="line">   key3 VARCHAR(100), </span><br><span class="line">   key_part1 VARCHAR(100), </span><br><span class="line">   key_part2 VARCHAR(100), </span><br><span class="line">   key_part3 VARCHAR(100), </span><br><span class="line">   common_field VARCHAR(100), </span><br><span class="line">   PRIMARY KEY (id), </span><br><span class="line">   KEY idx_key1 (key1), </span><br><span class="line">   UNIQUE KEY idx_key2 (key2), </span><br><span class="line">   KEY idx_key3 (key3), </span><br><span class="line">   KEY idx_key_part(key_part1, key_part2, key_part3) </span><br><span class="line">) Engine=InnoDB CHARSET=utf8;</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>id主键</p>
+</li>
+<li class="lvl-2">
+<p>key1是二级索引</p>
+</li>
+<li class="lvl-2">
+<p>key2是唯一二级索引</p>
+</li>
+<li class="lvl-2">
+<p>key3是二级索引</p>
+</li>
+<li class="lvl-2">
+<p>key_part1, key_part2, key_part3组成联合索引</p>
+</li>
+</ul>
+<h2 id="复杂sql分析方法">复杂sql分析方法</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT * FROM single_table WHERE  </span><br><span class="line">       (key1 &gt; &#x27;xyz&#x27; AND key2 = 748 ) OR </span><br><span class="line">       (key1 &lt; &#x27;abc&#x27; AND key1 &gt; &#x27;lmn&#x27;) OR </span><br><span class="line">       (key1 LIKE &#x27;%suf&#x27; AND key1 &gt; &#x27;zzz&#x27; AND (key2 &lt; 8000 OR common_field = &#x27;abc&#x27;)) ;</span><br></pre></td></tr></table></figure>
+<ol>
+<li class="lvl-3">
+<p>找出搜索涉及的列：key1、key2、common_field</p>
+</li>
+<li class="lvl-3">
+<p>找出可能用到的索引：idx_key1、idx_key2</p>
+</li>
+<li class="lvl-3">
+<p>对于每个可能用到的索引进行分析：</p>
+<ol>
+<li class="lvl-6">
+<p>假设使用idx_key1进行查询</p>
+<p>将用不到的查询条件替换成TRUE，原因是后续在回表后再用这些条件进行过滤，此时用不到：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(key1 &gt; &#x27;xyz&#x27; AND TRUE ) OR </span><br><span class="line">(key1 &lt; &#x27;abc&#x27; AND key1 &gt; &#x27;lmn&#x27;) OR </span><br><span class="line">(TRUE AND key1 &gt; &#x27;zzz&#x27; AND (TRUE OR TRUE))</span><br></pre></td></tr></table></figure>
+<p>化简后如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(key1 &gt; &#x27;xyz&#x27;) OR </span><br><span class="line">(key1 &lt; &#x27;abc&#x27; AND key1 &gt; &#x27;lmn&#x27;) OR </span><br><span class="line">(key1 &gt; &#x27;zzz&#x27;)</span><br><span class="line"></span><br><span class="line"># 继续化简（中间的条件永假，后面的条件与第一个取并集）</span><br><span class="line">(key1 &gt; &#x27;xyz&#x27;)</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-6">
+<p>假设使用idx_key2进行查询</p>
+<p>将用不到的查询条件替换成TRUE，原因是后续在回表后再用这些条件进行过滤，此时用不到：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(TRUE AND key2 = 748 ) OR </span><br><span class="line">(TRUE AND TRUE) OR </span><br><span class="line">(TRUE AND TRUE AND (key2 &lt; 8000 OR TRUE))</span><br></pre></td></tr></table></figure>
+<p>化简后如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">key2 = 748 OR TRUE</span><br><span class="line"></span><br><span class="line"># 即</span><br><span class="line">TRUE</span><br></pre></td></tr></table></figure>
+<p>因此相当于用二级索引进行全表扫描再回表，不如直接回表</p>
+</li>
+</ol>
+</li>
+<li class="lvl-3">
+<p>得出结论，可能会采用idx_key1的range+回表的方式，或者是全表扫描的方式进行。</p>
+</li>
+</ol>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2024-11-14T16:00:00.000Z" itemprop="datePublished">
+              2024-11-15
+            </time>
+          </div>
+          
+      </section>
+    
+    
+      <section>
+        <div id="disqus_thread"></div>
+        <script>
+          window.disqus_config = function () {
+            this.page.url = window.location.toString()
+            this.page.identifier = window.location.pathname
+          }
+          if (typeof DISQUS === 'undefined') {
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://YunyinBlog.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          } else {
+            DISQUS.reset({
+                reload: true,
+                config: window.disqus_config
+            })
+          }
+        </script>
+      </section>
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2024 - Yunyin </div>
+    <div>
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+        </span>
+        ,
+        <span>
+            Theme - <a target="_blank" rel="noopener" href="https://github.com/nameoverflow/hexo-theme-icalm">Icalm</a>
+        </span>
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/pager/dist/singlepager.js"></script>
+
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>
